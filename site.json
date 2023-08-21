@@ -1,8 +1,0 @@
-{
-  "siteId": 2176,
-  "namespace": "deco-sites/storefront",
-  "imports": [
-    "$live/live.gen.ts",
-    "deco-sites/std/live.gen.ts"
-  ]
-}
