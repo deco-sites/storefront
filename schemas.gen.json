@@ -79,10 +79,10 @@
               "$live/sections/PageInclude.tsx",
               "$live/sections/Slot.tsx",
               "$live/sections/UseSlot.tsx",
-              "deco-sites/start/sections/Hero.tsx",
-              "deco-sites/start/sections/ParagraphList.tsx",
-              "deco-sites/start/sections/SimpleTextList.tsx",
-              "deco-sites/start/sections/Theme.tsx",
+              "deco-sites/storefront/sections/Hero.tsx",
+              "deco-sites/storefront/sections/ParagraphList.tsx",
+              "deco-sites/storefront/sections/SimpleTextList.tsx",
+              "deco-sites/storefront/sections/Theme.tsx",
               "deco-sites/std/sections/Analytics.tsx",
               "deco-sites/std/sections/configButterCMS.global.tsx",
               "deco-sites/std/sections/configNuvemShop.tsx",
@@ -7703,7 +7703,7 @@
       "format": "image-uri",
       "title": "Image"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9IZXJvLnRzeA==@Link": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL0hlcm8udHN4@Link": {
       "type": "object",
       "properties": {
         "title": {
@@ -7721,7 +7721,7 @@
       ],
       "title": "{{{title}}} - {{{href}}}"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9IZXJvLnRzeA==@Props": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL0hlcm8udHN4@Props": {
       "type": "object",
       "properties": {
         "logo": {
@@ -7746,20 +7746,20 @@
         "links": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9IZXJvLnRzeA==@Link"
+            "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL0hlcm8udHN4@Link"
           },
           "title": "Links"
         }
       },
       "required": [],
-      "title": "deco-sites/start/sections/Hero.tsx@Props"
+      "title": "deco-sites/storefront/sections/Hero.tsx@Props"
     },
     "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy90eXBlcy50cw==@HTML": {
       "type": "string",
       "format": "html",
       "title": "HTML"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9QYXJhZ3JhcGhMaXN0LnRzeA==@Paragraph": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1BhcmFncmFwaExpc3QudHN4@Paragraph": {
       "type": "object",
       "properties": {
         "title": {
@@ -7777,7 +7777,7 @@
       ],
       "title": "{{{title}}}"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9QYXJhZ3JhcGhMaXN0LnRzeA==@Props": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1BhcmFncmFwaExpc3QudHN4@Props": {
       "type": "object",
       "properties": {
         "title": {
@@ -7790,15 +7790,15 @@
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9QYXJhZ3JhcGhMaXN0LnRzeA==@Paragraph"
+            "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1BhcmFncmFwaExpc3QudHN4@Paragraph"
           },
           "title": "Items"
         }
       },
       "required": [],
-      "title": "deco-sites/start/sections/ParagraphList.tsx@Props"
+      "title": "deco-sites/storefront/sections/ParagraphList.tsx@Props"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9TaW1wbGVUZXh0TGlzdC50c3g=@Item": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1NpbXBsZVRleHRMaXN0LnRzeA==@Item": {
       "type": "object",
       "properties": {
         "text": {
@@ -7811,7 +7811,7 @@
       ],
       "title": "{{{text}}}"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9TaW1wbGVUZXh0TGlzdC50c3g=@SimpleText": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1NpbXBsZVRleHRMaXN0LnRzeA==@SimpleText": {
       "type": "object",
       "properties": {
         "title": {
@@ -7821,7 +7821,7 @@
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9TaW1wbGVUZXh0TGlzdC50c3g=@Item"
+            "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1NpbXBsZVRleHRMaXN0LnRzeA==@Item"
           },
           "format": "textarea",
           "title": "Items"
@@ -7833,7 +7833,7 @@
       ],
       "title": "{{{title}}}"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9TaW1wbGVUZXh0TGlzdC50c3g=@Props": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1NpbXBsZVRleHRMaXN0LnRzeA==@Props": {
       "type": "object",
       "properties": {
         "title": {
@@ -7846,16 +7846,16 @@
         "items": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9TaW1wbGVUZXh0TGlzdC50c3g=@SimpleText"
+            "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1NpbXBsZVRleHRMaXN0LnRzeA==@SimpleText"
           },
           "format": "textarea",
           "title": "Items"
         }
       },
       "required": [],
-      "title": "deco-sites/start/sections/SimpleTextList.tsx@Props"
+      "title": "deco-sites/storefront/sections/SimpleTextList.tsx@Props"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@MainColors": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@MainColors": {
       "type": "object",
       "properties": {
         "base-100": {
@@ -7891,7 +7891,7 @@
       ],
       "title": "MainColors"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@BaseColorOptional": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@BaseColorOptional": {
       "type": "object",
       "properties": {
         "base-200": {
@@ -7922,7 +7922,7 @@
       "required": [],
       "title": "BaseColorOptional"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@PrimaryColorOptional": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@PrimaryColorOptional": {
       "type": "object",
       "properties": {
         "primary-focus": {
@@ -7945,7 +7945,7 @@
       "required": [],
       "title": "PrimaryColorOptional"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@SecondaryColorOptional": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@SecondaryColorOptional": {
       "type": "object",
       "properties": {
         "secondary-focus": {
@@ -7968,7 +7968,7 @@
       "required": [],
       "title": "SecondaryColorOptional"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@TertiaryColorOptional": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@TertiaryColorOptional": {
       "type": "object",
       "properties": {
         "tertiary-focus": {
@@ -7991,30 +7991,30 @@
       "required": [],
       "title": "TertiaryColorOptional"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@ComplementaryColors": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@ComplementaryColors": {
       "type": "object",
       "properties": {
         "base": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@BaseColorOptional",
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@BaseColorOptional",
           "title": "Base"
         },
         "primary": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@PrimaryColorOptional",
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@PrimaryColorOptional",
           "title": "Primary"
         },
         "secondary": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@SecondaryColorOptional",
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@SecondaryColorOptional",
           "title": "Secondary"
         },
         "tertiary": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@TertiaryColorOptional",
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@TertiaryColorOptional",
           "title": "Tertiary"
         }
       },
       "required": [],
       "title": "ComplementaryColors"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@Button": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@Button": {
       "type": "object",
       "properties": {
         "--border-btn": {
@@ -8165,7 +8165,7 @@
       ],
       "title": "Button"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@Font": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@Font": {
       "type": "object",
       "properties": {
         "fontFamily": {
@@ -8390,7 +8390,7 @@
       "required": [],
       "title": "Font"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@CustomFont": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@CustomFont": {
       "type": "object",
       "properties": {
         "fontFamily": {
@@ -8412,32 +8412,32 @@
       "required": [],
       "title": "CustomFont"
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@Props": {
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@Props": {
       "type": "object",
       "properties": {
         "mainColors": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@MainColors",
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@MainColors",
           "title": "Main Colors"
         },
         "complementaryColors": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@ComplementaryColors",
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@ComplementaryColors",
           "title": "Complementary Colors"
         },
         "buttonStyle": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@Button",
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@Button",
           "title": "Button Style"
         },
         "font": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@Font",
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@Font",
           "title": "Google font"
         },
         "customFont": {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@CustomFont",
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@CustomFont",
           "title": "Custom Font"
         }
       },
       "required": [],
-      "title": "deco-sites/start/sections/Theme.tsx@Props"
+      "title": "deco-sites/storefront/sections/Theme.tsx@Props"
     },
     "ZGVjby1zaXRlcy9zdGQvY29tcG9uZW50cy9BbmFseXRpY3MudHN4@Props": {
       "type": "object",
@@ -10999,12 +10999,12 @@
         }
       }
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9IZXJvLnRzeA==": {
-      "title": "deco-sites/start/sections/Hero.tsx",
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL0hlcm8udHN4": {
+      "title": "deco-sites/storefront/sections/Hero.tsx",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9IZXJvLnRzeA==@Props"
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL0hlcm8udHN4@Props"
         }
       ],
       "required": [
@@ -11014,18 +11014,18 @@
         "__resolveType": {
           "type": "string",
           "enum": [
-            "deco-sites/start/sections/Hero.tsx"
+            "deco-sites/storefront/sections/Hero.tsx"
           ],
-          "default": "deco-sites/start/sections/Hero.tsx"
+          "default": "deco-sites/storefront/sections/Hero.tsx"
         }
       }
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9QYXJhZ3JhcGhMaXN0LnRzeA==": {
-      "title": "deco-sites/start/sections/ParagraphList.tsx",
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1BhcmFncmFwaExpc3QudHN4": {
+      "title": "deco-sites/storefront/sections/ParagraphList.tsx",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9QYXJhZ3JhcGhMaXN0LnRzeA==@Props"
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1BhcmFncmFwaExpc3QudHN4@Props"
         }
       ],
       "required": [
@@ -11035,18 +11035,18 @@
         "__resolveType": {
           "type": "string",
           "enum": [
-            "deco-sites/start/sections/ParagraphList.tsx"
+            "deco-sites/storefront/sections/ParagraphList.tsx"
           ],
-          "default": "deco-sites/start/sections/ParagraphList.tsx"
+          "default": "deco-sites/storefront/sections/ParagraphList.tsx"
         }
       }
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9TaW1wbGVUZXh0TGlzdC50c3g=": {
-      "title": "deco-sites/start/sections/SimpleTextList.tsx",
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1NpbXBsZVRleHRMaXN0LnRzeA==": {
+      "title": "deco-sites/storefront/sections/SimpleTextList.tsx",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9TaW1wbGVUZXh0TGlzdC50c3g=@Props"
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1NpbXBsZVRleHRMaXN0LnRzeA==@Props"
         }
       ],
       "required": [
@@ -11056,18 +11056,18 @@
         "__resolveType": {
           "type": "string",
           "enum": [
-            "deco-sites/start/sections/SimpleTextList.tsx"
+            "deco-sites/storefront/sections/SimpleTextList.tsx"
           ],
-          "default": "deco-sites/start/sections/SimpleTextList.tsx"
+          "default": "deco-sites/storefront/sections/SimpleTextList.tsx"
         }
       }
     },
-    "ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=": {
-      "title": "deco-sites/start/sections/Theme.tsx",
+    "ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==": {
+      "title": "deco-sites/storefront/sections/Theme.tsx",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g=@Props"
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA==@Props"
         }
       ],
       "required": [
@@ -11077,9 +11077,9 @@
         "__resolveType": {
           "type": "string",
           "enum": [
-            "deco-sites/start/sections/Theme.tsx"
+            "deco-sites/storefront/sections/Theme.tsx"
           ],
-          "default": "deco-sites/start/sections/Theme.tsx"
+          "default": "deco-sites/storefront/sections/Theme.tsx"
         }
       }
     },
@@ -12285,16 +12285,16 @@
           "$ref": "#/definitions/JGxpdmUvc2VjdGlvbnMvVXNlU2xvdC50c3g="
         },
         {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9IZXJvLnRzeA=="
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL0hlcm8udHN4"
         },
         {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9QYXJhZ3JhcGhMaXN0LnRzeA=="
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1BhcmFncmFwaExpc3QudHN4"
         },
         {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9TaW1wbGVUZXh0TGlzdC50c3g="
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1NpbXBsZVRleHRMaXN0LnRzeA=="
         },
         {
-          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGFydC9zZWN0aW9ucy9UaGVtZS50c3g="
+          "$ref": "#/definitions/ZGVjby1zaXRlcy9zdG9yZWZyb250L3NlY3Rpb25zL1RoZW1lLnRzeA=="
         },
         {
           "$ref": "#/definitions/ZGVjby1zaXRlcy9zdGQvc2VjdGlvbnMvQW5hbHl0aWNzLnRzeA=="
