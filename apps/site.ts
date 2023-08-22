@@ -4,7 +4,7 @@ import commerce, { Props as CommerceProps } from "apps/commerce/mod.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
 
 export type Props = CommerceProps & {
-  // theme?: Section;
+  theme?: Section;
 };
 
 export default function Site(
