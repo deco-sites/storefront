@@ -2,7 +2,7 @@
   "imports": {
     "deco-sites/storefront/": "./",
     "$store/": "./",
-    "apps/": "https://denopkg.com/deco-cx/apps@0.0.2/",
+    "apps/": "https://denopkg.com/deco-cx/apps@3f18f5c8ab/",
     "$live/": "https://denopkg.com/deco-cx/deco@e82ae69ee853860ac29f76812724a1bd88d718f9/",
     "$fresh/": "https://denopkg.com/deco-cx/fresh@1.3.5/",
     "preact": "https://esm.sh/preact@10.15.1",
