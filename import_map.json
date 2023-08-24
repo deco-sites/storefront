@@ -3,7 +3,7 @@
     "deco-sites/storefront/": "./",
     "$store/": "./",
     "apps/": "https://denopkg.com/deco-cx/apps@0.0.3/",
-    "$live/": "https://denopkg.com/deco-cx/deco@1.30.1/",
+    "$live/": "https://denopkg.com/deco-cx/deco@93b559bd3d5/",
     "$fresh/": "https://denopkg.com/deco-cx/fresh@1.3.6/",
     "preact": "https://esm.sh/preact@10.15.1",
     "preact/": "https://esm.sh/preact@10.15.1/",
