@@ -3,7 +3,7 @@ import { Runtime } from "$store/runtime.ts";
 import type { JSX } from "preact";
 
 const subscribe = Runtime.vtex.create(
-  "apps/vtex/actions/newsletter/subscribe.ts",
+  "vtex/actions/newsletter/subscribe.ts",
 );
 
 export interface Form {

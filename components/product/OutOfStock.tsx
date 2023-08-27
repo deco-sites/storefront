@@ -7,7 +7,7 @@ export interface Props {
   productID: Product["productID"];
 }
 
-const notifyme = Runtime.vtex.create("apps/vtex/actions/notifyme.ts");
+const notifyme = Runtime.vtex.create("vtex/actions/notifyme.ts");
 
 function Notify({ productID }: Props) {
   const loading = useSignal(false);

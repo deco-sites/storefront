@@ -1,5 +1,5 @@
 import { forApp } from "$live/clients/withManifest.ts";
-import type site from "./apps/storefront.ts";
+import type site from "./apps/site.ts";
 import type vnda from "apps/vnda/mod.ts";
 import type vtex from "apps/vtex/mod.ts";
 
