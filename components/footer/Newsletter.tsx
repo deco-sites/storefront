@@ -2,10 +2,6 @@ import { useSignal } from "@preact/signals";
 import { Runtime } from "$store/runtime.ts";
 import type { JSX } from "preact";
 
-const subscribe = Runtime.vtex.create(
-  "vtex/actions/newsletter/subscribe.ts",
-);
-
 export interface Form {
   placeholder?: string;
   buttonText?: string;
@@ -40,7 +36,7 @@ function Newsletter(
       const email =
         (e.currentTarget.elements.namedItem("email") as RadioNodeList)?.value;
 
-      await subscribe({ email });
+      await Runtime.vtex.actions.newsletter.subscribe({ email });
     } finally {
       loading.value = false;
     }

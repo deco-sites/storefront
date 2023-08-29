@@ -7,8 +7,6 @@ export interface Props {
   productID: Product["productID"];
 }
 
-const notifyme = Runtime.vtex.create("vtex/actions/notifyme.ts");
-
 function Notify({ productID }: Props) {
   const loading = useSignal(false);
 
@@ -23,7 +21,7 @@ function Notify({ productID }: Props) {
       const email =
         (e.currentTarget.elements.namedItem("email") as RadioNodeList)?.value;
 
-      await notifyme({ skuId: productID, name, email });
+      await Runtime.vtex.actions.notifyme({ skuId: productID, name, email });
     } finally {
       loading.value = false;
     }

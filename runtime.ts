@@ -1,10 +1,6 @@
-import { forApp } from "$live/clients/withManifest.ts";
-import type site from "./apps/site.ts";
-import type vnda from "apps/vnda/mod.ts";
-import type vtex from "apps/vtex/mod.ts";
+import { proxy } from "$live/clients/withManifest.ts";
+import type { Manifest } from "./manifest.gen.ts";
+import type { Manifest as ManifestVNDA } from "apps/vnda/manifest.gen.ts";
+import type { Manifest as ManifestVTEX } from "apps/vtex/manifest.gen.ts";
 
-export const Runtime = {
-  "storefront": forApp<ReturnType<typeof site>>(),
-  "vnda": forApp<ReturnType<typeof vnda>>(),
-  "vtex": forApp<ReturnType<typeof vtex>>(),
-};
+export const Runtime = proxy<Manifest & ManifestVNDA & ManifestVTEX>();
