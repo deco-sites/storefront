@@ -7,9 +7,13 @@ export type Props = CommerceProps & {
   theme?: Section;
 };
 
+export let platform: undefined | CommerceProps["commerce"]["platform"];
+
 export default function Site(
   { theme, ...state }: Props,
 ): App<Manifest, Props, [ReturnType<typeof commerce>]> {
+  platform = state.commerce.platform;
+
   return {
     state,
     manifest,
