@@ -1,5 +1,5 @@
-import { Section } from "$live/blocks/section.ts";
-import { App } from "$live/mod.ts";
+import { Section } from "deco/blocks/section.ts";
+import { App } from "deco/mod.ts";
 import commerce, { Props as CommerceProps } from "apps/commerce/mod.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
 
