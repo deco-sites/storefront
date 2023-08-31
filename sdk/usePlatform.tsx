@@ -1,5 +1,5 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
-import { platform } from "$store/apps/site.ts";
+import { _platform } from "$store/apps/site.ts";
 
 if (IS_BROWSER) {
   throw new Error(
@@ -7,4 +7,4 @@ if (IS_BROWSER) {
   );
 }
 
-export const usePlatform = () => platform;
+export const usePlatform = () => _platform;
