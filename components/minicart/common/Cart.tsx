@@ -17,6 +17,7 @@ interface Props {
   currency: string;
   coupon?: string;
   freeShippingTarget: number;
+  checkoutHref: string;
   onAddCoupon: CouponProps["onAddCoupon"];
   onUpdateQuantity: ItemProps["onUpdateQuantity"];
   itemToAnalyticsItem: ItemProps["itemToAnalyticsItem"];
@@ -32,6 +33,7 @@ function Cart({
   currency,
   discounts,
   freeShippingTarget,
+  checkoutHref,
   itemToAnalyticsItem,
   onUpdateQuantity,
   onAddCoupon,
@@ -124,7 +126,7 @@ function Cart({
               </div>
 
               <div class="p-4">
-                <a class="inline-block w-full" href="/checkout">
+                <a class="inline-block w-full" href={checkoutHref}>
                   <Button
                     data-deco="buy-button"
                     class="btn-primary btn-block"

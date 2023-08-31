@@ -14,6 +14,7 @@ function Cart() {
   const locale = "pt-BR";
   const currency = "BRL";
   const coupon = cart.value?.orderForm?.coupon_code ?? undefined;
+  const token = cart.value?.orderForm?.token;
 
   return (
     <BaseCart
@@ -34,6 +35,7 @@ function Cart() {
       loading={loading.value}
       freeShippingTarget={1000}
       coupon={coupon}
+      checkoutHref={`/checkout/${token}`}
       onAddCoupon={(code) => updateCoupon({ code })}
       onUpdateQuantity={(quantity: number, index: number) =>
         updateItem({ quantity, itemId: items[index].id })}

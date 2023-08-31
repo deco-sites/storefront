@@ -38,6 +38,7 @@ function Cart() {
 
         return item && itemToAnalyticsItem({ ...item, coupon }, index);
       }}
+      checkoutHref="/checkout"
     />
   );
 }
