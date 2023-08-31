@@ -26,7 +26,8 @@ import * as $$$$$$20 from "./sections/Links/LinkTree.tsx";
 import * as $$$$$$21 from "./sections/Links/Shortcuts.tsx";
 import * as $$$$$$22 from "./sections/Newsletter/Newsletter.tsx";
 import * as $$$$$$23 from "./sections/Header/Header.tsx";
-import * as $$$$$$$$$$$0 from "./apps/site.ts";
+import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
+import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
 const manifest = {
   "sections": {
@@ -56,7 +57,8 @@ const manifest = {
     "deco-sites/storefront/sections/Theme/Theme.tsx": $$$$$$19,
   },
   "apps": {
-    "deco-sites/storefront/apps/site.ts": $$$$$$$$$$$0,
+    "deco-sites/storefront/apps/decohub.ts": $$$$$$$$$$$0,
+    "deco-sites/storefront/apps/site.ts": $$$$$$$$$$$1,
   },
   "name": "deco-sites/storefront",
   "baseUrl": import.meta.url,
