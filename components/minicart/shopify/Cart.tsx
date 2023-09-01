@@ -10,7 +10,7 @@ function Cart() {
   const currency = cart.value?.cart?.cost?.totalAmount.currencyCode ?? "BRL";
   const total = cart.value?.cart?.cost?.totalAmount.amount ?? 0;
   const subTotal = cart.value?.cart?.cost?.subtotalAmount.amount ?? 0;
-  const checkoutUrl = cart.value?.cart?.checkoutUrl ? new URL(cart.value?.cart?.checkoutUrl).pathname : ""
+  const checkoutHref = cart.value?.cart?.checkoutUrl ? new URL(cart.value?.cart?.checkoutUrl).pathname : ""
 
 
   return (
@@ -34,7 +34,7 @@ function Cart() {
       currency={currency}
       loading={loading.value}
       freeShippingTarget={1000}
-      checkoutUrl={checkoutUrl}
+      checkoutHref={checkoutHref}
       coupon={coupons && coupons[0]?.code}
       onAddCoupon={(text) => addCouponsToCart({ discountCodes: [text] })}
       onUpdateQuantity={(quantity, index) =>

@@ -29,7 +29,7 @@ function Cart() {
       currency={currency}
       loading={loading.value}
       freeShippingTarget={1000}
-      checkoutUrl={"/checkout"}
+      checkoutHref={"/checkout"}
       coupon={coupon}
       onAddCoupon={(text) => addCouponsToCart({ text })}
       onUpdateQuantity={(quantity, index) =>
