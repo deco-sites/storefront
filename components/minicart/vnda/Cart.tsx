@@ -34,7 +34,6 @@ function Cart() {
       currency={currency}
       loading={loading.value}
       freeShippingTarget={1000}
-      checkoutHref={"/checkout"}
       coupon={coupon}
       checkoutHref={`/checkout/${token}`}
       onAddCoupon={(code) => updateCoupon({ code })}
