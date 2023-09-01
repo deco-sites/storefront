@@ -13,7 +13,6 @@ await start(manifest, {
   plugins: [
     ...plugins({
       manifest: decoManifest,
-      site: { namespace: "deco-sites/shopify-demo" },
     }),
     partytownPlugin(),
   ],

@@ -4,7 +4,6 @@ import { usePlatform } from "$store/sdk/usePlatform.tsx";
 
 const CartVTEX = lazy(() => import("./vtex/Cart.tsx"));
 const CartVNDA = lazy(() => import("./vnda/Cart.tsx"));
-const CartShopify = lazy(() => import("./shopify/Cart.tsx"));
 
 export interface Props {
   platform: ReturnType<typeof usePlatform>;
@@ -17,10 +16,6 @@ function Cart({ platform }: Props) {
 
   if (platform === "vnda") {
     return <CartVNDA />;
-  }
-
-  if (platform === "shopify") {
-    return <CartShopify />;
   }
 
   return null;
