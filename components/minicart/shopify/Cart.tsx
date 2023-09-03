@@ -1,17 +1,17 @@
-import {  useCart, itemToAnalyticsItem } from "apps/shopify/hooks/useCart.ts";
+import { itemToAnalyticsItem, useCart } from "apps/shopify/hooks/useCart.ts";
 import BaseCart from "../common/Cart.tsx";
 
 function Cart() {
   const { cart, loading, updateItems, addCouponsToCart } = useCart();
-  console.log(cart.value)
   const items = cart.value?.cart?.lines?.nodes ?? [];
   const coupons = cart.value?.cart?.discountCodes;
   const locale = "pt-BR";
   const currency = cart.value?.cart?.cost?.totalAmount.currencyCode ?? "BRL";
   const total = cart.value?.cart?.cost?.totalAmount.amount ?? 0;
   const subTotal = cart.value?.cart?.cost?.subtotalAmount.amount ?? 0;
-  const checkoutHref = cart.value?.cart?.checkoutUrl ? new URL(cart.value?.cart?.checkoutUrl).pathname : ""
-
+  const checkoutHref = cart.value?.cart?.checkoutUrl
+    ? new URL(cart.value?.cart?.checkoutUrl).pathname
+    : "";
 
   return (
     <BaseCart
