@@ -3,14 +3,14 @@ import BaseCart from "../common/Cart.tsx";
 
 function Cart() {
   const { cart, loading, updateItems, addCouponsToCart } = useCart();
-  const items = cart.value?.cart?.lines?.nodes ?? [];
-  const coupons = cart.value?.cart?.discountCodes;
+  const items = cart.value?.lines?.nodes ?? [];
+  const coupons = cart.value?.discountCodes;
   const locale = "pt-BR";
-  const currency = cart.value?.cart?.cost?.totalAmount.currencyCode ?? "BRL";
-  const total = cart.value?.cart?.cost?.totalAmount.amount ?? 0;
-  const subTotal = cart.value?.cart?.cost?.subtotalAmount.amount ?? 0;
-  const checkoutHref = cart.value?.cart?.checkoutUrl
-    ? new URL(cart.value?.cart?.checkoutUrl).pathname
+  const currency = cart.value?.cost?.totalAmount.currencyCode ?? "BRL";
+  const total = cart.value?.cost?.totalAmount.amount ?? 0;
+  const subTotal = cart.value?.cost?.subtotalAmount.amount ?? 0;
+  const checkoutHref = cart.value?.checkoutUrl
+    ? new URL(cart.value?.checkoutUrl).pathname
     : "";
 
   return (
@@ -39,10 +39,10 @@ function Cart() {
       onAddCoupon={(text) => addCouponsToCart({ discountCodes: [text] })}
       onUpdateQuantity={(quantity, index) =>
         updateItems({
-          lines: {
+          lines: [{
             id: items[index].id,
             quantity: quantity,
-          },
+          }],
         })}
       itemToAnalyticsItem={(index) => {
         const item = items[index];
