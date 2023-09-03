@@ -3,9 +3,10 @@ import Button from "./common.tsx";
 
 function CartButton() {
   const { cart, loading } = useCart();
-  const items = cart.value?.cart?.lines?.nodes ?? [];
-  const currency = cart.value?.cart?.cost?.totalAmount.currencyCode ?? "BRL";
-  const total = cart.value?.cart?.cost?.totalAmount.amount ?? 0;
+  const items = cart.value?.lines?.nodes ?? [];
+  const currency = cart.value?.cost?.totalAmount.currencyCode ?? "BRL";
+  const total = cart.value?.cost?.totalAmount.amount ?? 0;
+
   return (
     <Button
       currency={currency}
