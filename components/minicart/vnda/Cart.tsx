@@ -5,7 +5,7 @@ const normalizeUrl = (url: string) =>
   url.startsWith("//") ? `https:${url}` : url;
 
 function Cart() {
-  const { cart, loading, updateItem, updateCoupon } = useCart();
+  const { cart, loading, updateItem, update } = useCart();
   const items = cart.value?.orderForm?.items ?? [];
 
   const total = cart.value?.orderForm?.total ?? 0;
@@ -36,7 +36,7 @@ function Cart() {
       freeShippingTarget={1000}
       coupon={coupon}
       checkoutHref={`/checkout/${token}`}
-      onAddCoupon={(code) => updateCoupon({ code })}
+      onAddCoupon={(code) => update({ coupon_code: code })}
       onUpdateQuantity={(quantity: number, index: number) =>
         updateItem({ quantity, itemId: items[index].id })}
       itemToAnalyticsItem={(index) => {

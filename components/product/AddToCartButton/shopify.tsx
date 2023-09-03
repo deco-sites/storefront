@@ -7,9 +7,9 @@ function AddToCartButton(props: Props) {
   const { addItems } = useCart();
   const onAddItem = () =>
     addItems({
-        lines: {
-          merchandiseId: props.productID,
-        },
+      lines: {
+        merchandiseId: props.productID,
+      },
     });
 
   return <Button onAddItem={onAddItem} {...props} />;
