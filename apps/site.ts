@@ -39,6 +39,8 @@ const getPlatformInfo = (
   };
 };
 
+let firstRun = true;
+
 export default function Site(
   { theme, ...state }: Props,
 ): App<Manifest, Props, [ReturnType<typeof commerce>]> {
@@ -46,11 +48,16 @@ export default function Site(
 
   const { account, platform } = getPlatformInfo(state.commerce);
 
-  console.info(
-    ` 🐁 ${rgb24("Storefront", 0x02f77d)} | ${platform} ${
-      account ? `- ${gray(account)}` : ""
-    }`,
-  );
+  // Prevent console.logging twice
+  if (!firstRun) {
+    console.info(
+      ` 🐁 ${rgb24("Storefront", 0x02f77d)} | ${platform} ${
+        account ? `- ${gray(account)}` : ""
+      }\n`,
+    );
+  } else {
+    firstRun = false;
+  }
 
   return {
     state,
