@@ -280,7 +280,8 @@ const useStableImages = (product: ProductDetailsPage["product"]) => {
   });
 };
 
-function Details({ page, layout }: { page: ProductDetailsPage } & Props) {
+function Details(props: { page: ProductDetailsPage } & Props) {
+  const { page, layout } = props;
   const { product } = page;
   const id = useId();
   const images = useStableImages(product);
@@ -367,7 +368,7 @@ function Details({ page, layout }: { page: ProductDetailsPage } & Props) {
 
           {/* Product Info */}
           <div class="px-4 sm:pr-0 sm:pl-6 sm:col-start-3 sm:col-span-1 sm:row-start-1">
-            <ProductInfo page={page} />
+            <ProductInfo {...props} />
           </div>
         </div>
         <SliderJS rootId={id}></SliderJS>
@@ -404,7 +405,7 @@ function Details({ page, layout }: { page: ProductDetailsPage } & Props) {
 
       {/* Product Info */}
       <div class="px-4 sm:pr-0 sm:pl-6">
-        <ProductInfo page={page} />
+        <ProductInfo {...props} />
       </div>
     </div>
   );
