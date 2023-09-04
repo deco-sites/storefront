@@ -3,13 +3,13 @@ import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { Product } from "apps/commerce/types.ts";
 
 interface Props {
+  /** @title Product Card layout props */
+  layout: Layout;
   /**
    * @title Test Product
    * @description This will only be used for previewing this component
    */
   products: Product[] | null;
-  /** @title Product Card layout props */
-  layout: Layout;
 }
 
 /** @title Product Card Layout */
@@ -19,7 +19,7 @@ export const Preview = (props: Props) => {
   const { layout, products } = props;
   const product = products?.[0];
 
-  console.info('FIXME', { props });
+  console.info("FIXME", { props });
 
   return (
     product
