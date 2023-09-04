@@ -20,16 +20,24 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 import Image from "apps/website/components/Image.tsx";
 import ProductSelector from "./ProductVariantSelector.tsx";
 
-export type Variant = "front-back" | "slider" | "auto";
-
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
-  /**
-   * @title Product view
-   * @description Ask for the developer to remove this option since this is here to help development only and should not be used in production
-   */
-  variant?: Variant;
+
+  layout?: {
+    /**
+     * @title Product Image
+     * @description How the main product image will be displayed
+     * @default slider
+     */
+    image?: "front-back" | "slider";
+    /**
+     * @title Product Name
+     * @description How product title will be displayed. Concat to concatenate product and sku names.
+     * @default product
+     */
+    name?: "concat" | "productGroup" | "product";
+  };
 }
 
 const WIDTH = 360;
@@ -52,7 +60,7 @@ function NotFound() {
   );
 }
 
-function ProductInfo({ page }: { page: ProductDetailsPage }) {
+function ProductInfo({ page, layout }: { page: ProductDetailsPage } & Props) {
   const platform = usePlatform();
   const {
     breadcrumbList,
@@ -86,20 +94,30 @@ function ProductInfo({ page }: { page: ProductDetailsPage }) {
       {/* Code and name */}
       <div class="mt-4 sm:mt-8">
         <div>
-          <span class="text-sm text-base-300">
-            Cod. {gtin}
-          </span>
+          {gtin && (
+            <span class="text-sm text-base-300">
+              Cod. {gtin}
+            </span>
+          )}
         </div>
         <h1>
-          <span class="font-medium text-xl">{name}</span>
+          <span class="font-medium text-xl capitalize">
+            {layout?.name === "concat"
+              ? `${isVariantOf?.name} ${name}`
+              : layout?.name === "productGroup"
+              ? isVariantOf?.name
+              : name}
+          </span>
         </h1>
       </div>
       {/* Prices */}
       <div class="mt-4">
         <div class="flex flex-row gap-2 items-center">
-          <span class="line-through text-base-300 text-xs">
-            {formatPrice(listPrice, offers!.priceCurrency!)}
-          </span>
+          {(listPrice ?? 0) > price && (
+            <span class="line-through text-base-300 text-xs">
+              {formatPrice(listPrice, offers!.priceCurrency!)}
+            </span>
+          )}
           <span class="font-medium text-xl text-secondary">
             {formatPrice(price, offers!.priceCurrency!)}
           </span>
@@ -262,13 +280,11 @@ const useStableImages = (product: ProductDetailsPage["product"]) => {
   });
 };
 
-function Details({
-  page,
-  variant,
-}: { page: ProductDetailsPage; variant: Variant }) {
+function Details({ page, layout }: { page: ProductDetailsPage } & Props) {
   const { product } = page;
   const id = useId();
   const images = useStableImages(product);
+  const variant = layout?.image ?? "slider";
 
   /**
    * Product slider variant
@@ -394,21 +410,10 @@ function Details({
   );
 }
 
-function ProductDetails({ page, variant: maybeVar = "auto" }: Props) {
-  /**
-   * Showcase the different product views we have on this template. In case there are less
-   * than two images, render a front-back, otherwhise render a slider
-   * Remove one of them and go with the best suited for your use case.
-   */
-  const variant = maybeVar === "auto"
-    ? page?.product.image?.length && page?.product.image?.length < 2
-      ? "front-back"
-      : "slider"
-    : maybeVar;
-
+function ProductDetails({ page, layout }: Props) {
   return (
     <div class="container py-0 sm:py-10">
-      {page ? <Details page={page} variant={variant} /> : <NotFound />}
+      {page ? <Details page={page} layout={layout} /> : <NotFound />}
     </div>
   );
 }
