@@ -3,12 +3,17 @@
 {
     "name": "Deno",
     "dockerFile": "Dockerfile",
-    "forwardPorts": [8000],
+    "forwardPorts": [
+        8000
+    ],
     // Set *default* container specific settings.json values on container create.
     "settings": {},
     // Add the IDs of extensions you want installed when the container is created.
     "extensions": [
-        "denoland.vscode-deno"
+        "denoland.vscode-deno",
+        "bradlc.vscode-tailwindcss",
+        "ecmel.vscode-html-css",
+        "Tobermory.es6-string-html"
     ],
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],
