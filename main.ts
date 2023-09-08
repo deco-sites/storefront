@@ -17,3 +17,4 @@ await start(manifest, {
     partytownPlugin(),
   ],
 });
+
