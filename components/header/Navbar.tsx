@@ -3,6 +3,7 @@ import Icon from "$store/components/ui/Icon.tsx";
 import { MenuButton, SearchButton } from "$store/islands/Header/Buttons.tsx";
 import CartButtonVDNA from "$store/islands/Header/Cart/vnda.tsx";
 import CartButtonVTEX from "$store/islands/Header/Cart/vtex.tsx";
+import CartButtonWake from "$store/islands/Header/Cart/wake.tsx";
 import CartButtonShopify from "$store/islands/Header/Cart/shopify.tsx";
 import Searchbar from "$store/islands/Header/Searchbar.tsx";
 import Image from "apps/website/components/Image.tsx";
@@ -85,6 +86,7 @@ function Navbar({ items, searchbar, logo }: {
           </a>
           {platform === "vtex" && <CartButtonVTEX />}
           {platform === "vnda" && <CartButtonVDNA />}
+          {platform === "wake" && <CartButtonWake />}
           {platform === "shopify" && <CartButtonShopify />}
         </div>
       </div>

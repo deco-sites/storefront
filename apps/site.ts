@@ -23,14 +23,20 @@ const getPlatformInfo = (
   if (commerce.platform === "vnda") {
     return {
       ...commerce,
-      platform: rgb24(commerce.platform, 0x0c29d0),
+      platform: rgb24(commerce.platform, 0x0C29D0),
     };
   }
 
   if (commerce.platform === "shopify") {
     return {
       account: commerce.storeName,
-      platform: rgb24(commerce.platform, 0x96bf48),
+      platform: rgb24(commerce.platform, 0x96BF48),
+    };
+  }
+
+  if (commerce.platform === "wake") {
+    return {
+      platform: rgb24(commerce.platform, 0xB600EE),
     };
   }
 
