@@ -20,6 +20,7 @@ const applySort = (e: JSX.TargetedEvent<HTMLSelectElement, Event>) => {
 
 export type Props = Pick<ProductListingPage, "sortOptions">;
 
+// TODO: move this to the loader
 const portugueseMappings = {
   "relevance:desc": "Relevância",
   "price:desc": "Maior Preço",
@@ -30,6 +31,7 @@ const portugueseMappings = {
   // "release:desc": "Relevância - Decrescente",
   "discount:desc": "Maior desconto",
 };
+
 function Sort({ sortOptions }: Props) {
   const sort = useSort();
 
@@ -42,7 +44,8 @@ function Sort({ sortOptions }: Props) {
     >
       {sortOptions.map(({ value, label }) => ({
         value,
-        label: portugueseMappings[label as keyof typeof portugueseMappings],
+        label: portugueseMappings[label as keyof typeof portugueseMappings] ??
+          label,
       })).filter(({ label }) => label).map(({ value, label }) => (
         <option key={value} value={value} selected={value === sort}>
           <span class="text-sm">{label}</span>
