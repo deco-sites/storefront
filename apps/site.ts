@@ -40,12 +40,6 @@ const getPlatformInfo = (
     };
   }
 
-  if (commerce.platform === "linx") {
-    return {
-      platform: rgb24(commerce.platform, 0xFF6A3B),
-    };
-  }
-
   return {
     platform: gray("unknown"),
   };
