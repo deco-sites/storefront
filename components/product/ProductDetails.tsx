@@ -6,6 +6,7 @@ import Slider from "$store/components/ui/Slider.tsx";
 import AddToCartButtonVNDA from "$store/islands/AddToCartButton/vnda.tsx";
 import AddToCartButtonVTEX from "$store/islands/AddToCartButton/vtex.tsx";
 import AddToCartButtonWake from "$store/islands/AddToCartButton/wake.tsx";
+import AddToCartButtonLinx from "$store/islands/AddToCartButton/linx.tsx";
 import AddToCartButtonShopify from "$store/islands/AddToCartButton/shopify.tsx";
 import OutOfStock from "$store/islands/OutOfStock.tsx";
 import ProductImageZoom from "$store/islands/ProductImageZoom.tsx";
@@ -155,6 +156,15 @@ function ProductInfo({ page, layout }: { page: ProductDetailsPage } & Props) {
               )}
               {platform === "wake" && (
                 <AddToCartButtonWake
+                  name={name}
+                  productID={productID}
+                  productGroupID={productGroupID}
+                  price={price}
+                  discount={discount}
+                />
+              )}
+              {platform === "linx" && (
+                <AddToCartButtonLinx
                   name={name}
                   productID={productID}
                   productGroupID={productGroupID}
