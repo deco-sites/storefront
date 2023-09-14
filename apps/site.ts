@@ -52,6 +52,10 @@ export default function Site(
 ): App<Manifest, Props, [ReturnType<typeof commerce>]> {
   _platform = state.commerce.platform;
 
+  if (state.commerce.platform === "vtex") {
+    state.commerce.account = "alssports";
+  }
+
   const { account, platform } = getPlatformInfo(state.commerce);
 
   // Prevent console.logging twice
