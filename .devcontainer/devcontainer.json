@@ -3,6 +3,9 @@
 {
     "name": "Deno",
     "dockerFile": "Dockerfile",
+    "appPort": [
+        8000
+    ], // Specify the ports you want to forward
     "forwardPorts": [
         8000
     ],
