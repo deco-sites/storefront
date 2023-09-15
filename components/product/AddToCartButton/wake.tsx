@@ -1,6 +1,7 @@
 import { useCart } from "apps/wake/hooks/useCart.ts";
 import Button, { Props as BtnProps } from "./common.tsx";
 
+// deno-lint-ignore no-empty-interface
 export interface Props extends Omit<BtnProps, "onAddItem" | "platform"> {
 }
 
