@@ -55,14 +55,13 @@ export default function Site(
   const { account, platform } = getPlatformInfo(state.commerce);
 
   // Prevent console.logging twice
-  if (!firstRun) {
+  if (firstRun) {
+    firstRun = false;
     console.info(
       ` 🐁 ${rgb24("Storefront", 0x02f77d)} | ${platform} ${
         account ? `- ${gray(account)}` : ""
       }\n`,
     );
-  } else {
-    firstRun = false;
   }
 
   return {
