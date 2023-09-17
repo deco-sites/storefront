@@ -26,7 +26,8 @@ import * as $$$$$$19 from "./sections/Theme/Theme.tsx";
 import * as $$$$$$20 from "./sections/Links/LinkTree.tsx";
 import * as $$$$$$21 from "./sections/Links/Shortcuts.tsx";
 import * as $$$$$$22 from "./sections/Newsletter/Newsletter.tsx";
-import * as $$$$$$23 from "./sections/Header/Header.tsx";
+import * as $$$$$$23 from "./sections/Login/Login.tsx";
+import * as $$$$$$24 from "./sections/Header/Header.tsx";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
@@ -42,13 +43,14 @@ const manifest = {
     "deco-sites/storefront/sections/Content/Logos.tsx": $$$$$$8,
     "deco-sites/storefront/sections/Content/Testimonials.tsx": $$$$$$7,
     "deco-sites/storefront/sections/Footer/Footer.tsx": $$$$$$0,
-    "deco-sites/storefront/sections/Header/Header.tsx": $$$$$$23,
+    "deco-sites/storefront/sections/Header/Header.tsx": $$$$$$24,
     "deco-sites/storefront/sections/Images/BannerGrid.tsx": $$$$$$4,
     "deco-sites/storefront/sections/Images/Carousel.tsx": $$$$$$6,
     "deco-sites/storefront/sections/Images/ImageGallery.tsx": $$$$$$5,
     "deco-sites/storefront/sections/Images/ShoppableBanner.tsx": $$$$$$3,
     "deco-sites/storefront/sections/Links/LinkTree.tsx": $$$$$$20,
     "deco-sites/storefront/sections/Links/Shortcuts.tsx": $$$$$$21,
+    "deco-sites/storefront/sections/Login/Login.tsx": $$$$$$23,
     "deco-sites/storefront/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$15,
     "deco-sites/storefront/sections/Miscellaneous/CookieConsent.tsx": $$$$$$16,
     "deco-sites/storefront/sections/Newsletter/Newsletter.tsx": $$$$$$22,
