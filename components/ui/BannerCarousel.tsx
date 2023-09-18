@@ -41,6 +41,45 @@ export interface Props {
   interval?: number;
 }
 
+const DEFAULT_PROPS = {
+  images: [
+    {
+      alt: "/feminino",
+      action: {
+        href: "https://www.deco.cx/",
+        label: "deco.cx",
+        title: "Demo Store",
+        subTitle: "Visit our site and start building now:"
+      },
+      mobile: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/24278f9e-412d-4a8a-b2d3-57353bb1b368",
+      desktop: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/afa2c07c-74f4-496d-8647-5cc58f48117b"
+    },
+    {
+      alt: "/feminino",
+      action: {
+        href: "https://www.deco.cx/",
+        label: "deco.cx",
+        title: "Demo Store",
+        subTitle: "Visit our site and start building now:"
+      },
+      mobile: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/eeaa624c-a3e1-45e8-a6fe-034233cfbcd0",
+      desktop: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/7949d031-9a79-4639-b85e-62fd90af85a9"
+    },
+    {
+      alt: "/feminino",
+      action: {
+        href: "https://www.deco.cx/",
+        label: "deco.cx",
+        title: "Demo Store",
+        subTitle: "Visit our site and start building now:"
+      },
+      mobile: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/ae89571c-4a7c-44bf-9aeb-a341fd049d19",
+      desktop: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/7ec121e4-5cfe-4b7b-b942-d1ed4493803d"
+    }
+  ],
+  preload: true
+}
+
 function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
   const {
     alt,
@@ -151,7 +190,9 @@ function Buttons() {
   );
 }
 
-function BannerCarousel({ images, preload, interval }: Props) {
+function BannerCarousel(props : Props) {
+  const { images, preload, interval } = {...DEFAULT_PROPS, ...props}
+
   const id = useId();
 
   return (

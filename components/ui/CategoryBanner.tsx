@@ -22,7 +22,25 @@ export interface Banner {
   };
 }
 
-function Banner({ banner }: SectionProps<ReturnType<typeof loader>>) {
+const DEFAULT_PROPS = {
+  banners: [
+    {
+      image: {
+        mobile: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/91102b71-4832-486a-b683-5f7b06f649af",
+        desktop: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/ec597b6a-dcf1-48ca-a99d-95b3c6304f96",
+        alt: "a"
+      },
+      title: "Woman",
+      matcher: "/*",
+      subtitle: "As"
+    }
+  ],
+}
+
+function Banner(props: SectionProps<ReturnType<typeof loader>>) {
+
+  const { banner } = props
+
   if (!banner) {
     return null;
   }
@@ -67,7 +85,10 @@ export interface Props {
   banners?: Banner[];
 }
 
-export const loader = ({ banners = [] }: Props, req: Request) => {
+export const loader = (props: Props, req: Request) => {
+
+  const { banners } = {...DEFAULT_PROPS, ...props}
+  
   const banner = banners.find(({ matcher }) =>
     new URLPattern({ pathname: matcher }).test(req.url)
   );
