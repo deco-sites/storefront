@@ -8,7 +8,8 @@ function AddToCartButton(props: Props) {
   const { addItem } = useCart();
   const onAddItem = () =>
     addItem({
-      productVariantId: Number(props.productID),
+      ProductID: Number(props.productGroupID),
+      SkuID: Number(props.productID),
       quantity: 1,
     });
 
