@@ -5,6 +5,7 @@ function Cart() {
   const { cart, loading, updateItems, addCouponsToCart } = useCart();
   const items = cart.value?.lines?.nodes ?? [];
   const coupons = cart.value?.discountCodes;
+  const coupon = coupons && coupons[0]?.applicable ? coupons[0].code : undefined;
   const locale = "pt-BR";
   const currency = cart.value?.cost?.totalAmount.currencyCode ?? "BRL";
   const total = cart.value?.cost?.totalAmount.amount ?? 0;
@@ -35,7 +36,7 @@ function Cart() {
       loading={loading.value}
       freeShippingTarget={1000}
       checkoutHref={checkoutHref}
-      coupon={coupons && coupons[0]?.code}
+      coupon={coupon}
       onAddCoupon={(text) => addCouponsToCart({ discountCodes: [text] })}
       onUpdateQuantity={(quantity, index) =>
         updateItems({
