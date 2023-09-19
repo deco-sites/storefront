@@ -8,15 +8,19 @@ import { App } from "deco/mod.ts";
 import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
 
-export type Props = CommerceProps & {
-  theme?: Section;
-  /**
-   * @title Active Commerce Platform
-   * @description Choose the active ecommerce platform
-   * @default custom
-   */
-  platform: Platform;
-};
+export type Props =
+  & {
+    /**
+     * @title Active Commerce Platform
+     * @description Choose the active ecommerce platform
+     * @default custom
+     */
+    platform: Platform;
+  }
+  & CommerceProps
+  & {
+    theme?: Section;
+  };
 
 type Platform = "vtex" | "vnda" | "shopify" | "wake" | "custom";
 
