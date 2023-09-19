@@ -1,48 +1,42 @@
 import commerce, { Props as CommerceProps } from "apps/commerce/mod.ts";
+import { color as shopify } from "apps/shopify/mod.ts";
+import { color as vnda } from "apps/vnda/mod.ts";
+import { color as vtex } from "apps/vtex/mod.ts";
+import { color as wake } from "apps/wake/mod.ts";
 import { Section } from "deco/blocks/section.ts";
 import { App } from "deco/mod.ts";
-import { gray, rgb24 } from "std/fmt/colors.ts";
+import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
 
 export type Props = CommerceProps & {
   theme?: Section;
+  /**
+   * @title Active Commerce Platform
+   * @description Choose the active ecommerce platform
+   * @default custom
+   */
+  platform: Platform;
 };
 
-export let _platform: undefined | CommerceProps["commerce"]["platform"];
+type Platform = "vtex" | "vnda" | "shopify" | "wake" | "custom";
 
-const getPlatformInfo = (
-  commerce: CommerceProps["commerce"],
-): { platform: string; account?: string } => {
-  if (commerce.platform === "vtex") {
-    return {
-      ...commerce,
-      platform: rgb24(commerce.platform, 0xF71963),
-    };
+export let _platform: Platform = "custom";
+
+const color = (platform: string) => {
+  switch (platform) {
+    case "vtex":
+      return vtex;
+    case "vnda":
+      return vnda;
+    case "wake":
+      return wake;
+    case "shopify":
+      return shopify;
+    case "deco":
+      return 0x02f77d;
+    default:
+      return 0x212121;
   }
-
-  if (commerce.platform === "vnda") {
-    return {
-      ...commerce,
-      platform: rgb24(commerce.platform, 0x0C29D0),
-    };
-  }
-
-  if (commerce.platform === "shopify") {
-    return {
-      account: commerce.storeName,
-      platform: rgb24(commerce.platform, 0x96BF48),
-    };
-  }
-
-  if (commerce.platform === "wake") {
-    return {
-      platform: rgb24(commerce.platform, 0xB600EE),
-    };
-  }
-
-  return {
-    platform: gray("unknown"),
-  };
 };
 
 let firstRun = true;
@@ -50,17 +44,15 @@ let firstRun = true;
 export default function Site(
   { theme, ...state }: Props,
 ): App<Manifest, Props, [ReturnType<typeof commerce>]> {
-  _platform = state.commerce.platform;
-
-  const { account, platform } = getPlatformInfo(state.commerce);
+  _platform = state.platform || state.commerce?.platform || "custom";
 
   // Prevent console.logging twice
   if (firstRun) {
     firstRun = false;
     console.info(
-      ` 🐁 ${rgb24("Storefront", 0x02f77d)} | ${platform} ${
-        account ? `- ${gray(account)}` : ""
-      }\n`,
+      ` 🐁 ${rgb24("Storefront", color("deco"))} | ${
+        rgb24(_platform, color(_platform))
+      } \n`,
     );
   }
 
