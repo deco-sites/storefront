@@ -68,6 +68,7 @@ function ProductCard(
     offers,
     isVariantOf,
   } = product;
+  const description = product.description || isVariantOf?.description;
   const id = `product-card-${productID}`;
   const productGroupID = isVariantOf?.productGroupID;
   const [front, back] = images ?? [];
@@ -229,20 +230,18 @@ function ProductCard(
           ? ""
           : (
             <div class="flex flex-col gap-0">
-              {l?.hide?.productName
-                ? ""
-                : (
-                  <h2 class="truncate text-base lg:text-lg text-base-content">
-                    {name}
-                  </h2>
-                )}
-              {l?.hide?.productDescription
-                ? ""
-                : (
-                  <p class="truncate text-sm lg:text-sm text-neutral">
-                    {product.description}
-                  </p>
-                )}
+              {l?.hide?.productName ? "" : (
+                <h2
+                  class="truncate text-base lg:text-lg text-base-content"
+                  dangerouslySetInnerHTML={{ __html: name ?? "" }}
+                />
+              )}
+              {l?.hide?.productDescription ? "" : (
+                <div
+                  class="truncate text-sm lg:text-sm text-neutral"
+                  dangerouslySetInnerHTML={{ __html: description ?? "" }}
+                />
+              )}
             </div>
           )}
         {l?.hide?.allPrices ? "" : (
@@ -259,10 +258,10 @@ function ProductCard(
                   l?.basics?.oldPriceSize === "Normal" ? "lg:text-xl" : ""
                 }`}
               >
-                {formatPrice(listPrice, offers!.priceCurrency!)}
+                {formatPrice(listPrice, offers?.priceCurrency)}
               </div>
               <div class="text-accent text-base lg:text-xl">
-                {formatPrice(price, offers!.priceCurrency!)}
+                {formatPrice(price, offers?.priceCurrency)}
               </div>
             </div>
             {l?.hide?.installments

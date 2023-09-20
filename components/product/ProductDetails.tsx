@@ -116,11 +116,11 @@ function ProductInfo({ page, layout }: { page: ProductDetailsPage } & Props) {
         <div class="flex flex-row gap-2 items-center">
           {(listPrice ?? 0) > price && (
             <span class="line-through text-base-300 text-xs">
-              {formatPrice(listPrice, offers!.priceCurrency!)}
+              {formatPrice(listPrice, offers?.priceCurrency)}
             </span>
           )}
           <span class="font-medium text-xl text-secondary">
-            {formatPrice(price, offers!.priceCurrency!)}
+            {formatPrice(price, offers?.priceCurrency)}
           </span>
         </div>
         <span class="text-sm text-base-300">
