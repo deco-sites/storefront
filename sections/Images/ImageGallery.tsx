@@ -121,7 +121,6 @@ const DEFAULT_PROPS: Props = {
   },
 };
 
-
 function Banner(
   props: Banner & {
     borderRadius?: {
