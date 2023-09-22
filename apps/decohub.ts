@@ -1,1 +1,1 @@
-export { default } from "apps/decohub/mod.ts";
+export { default, Preview } from "apps/decohub/mod.ts";
