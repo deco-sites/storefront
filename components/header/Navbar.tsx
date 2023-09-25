@@ -14,7 +14,7 @@ import { navbarHeight } from "./constants.ts";
 
 function Navbar({ items, searchbar, logo }: {
   items: INavItem[];
-  searchbar: SearchbarProps;
+  searchbar?: SearchbarProps;
   logo?: { src: string; alt: string };
 }) {
   const platform = usePlatform();

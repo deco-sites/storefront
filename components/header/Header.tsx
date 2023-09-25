@@ -34,31 +34,17 @@ export interface Props {
    */
   navItems?: NavItem[];
 
-  /**
-   * @title Product suggestions
-   * @description Product suggestions displayed on search
-   */
-  products?: Product[] | null;
-
-  /**
-   * @title Enable Top Search terms
-   */
-  suggestions?: Suggestion | null;
-
   /** @title Logo */
   logo?: { src: ImageWidget; alt: string };
 }
 
 function Header({
   alerts,
-  searchbar: _searchbar,
-  products,
+  searchbar,
   navItems = [],
-  suggestions,
   logo,
 }: Props) {
   const platform = usePlatform();
-  const searchbar = { ..._searchbar, products, suggestions };
 
   return (
     <>
