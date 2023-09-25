@@ -1,5 +1,5 @@
 import { useSignal } from "@preact/signals";
-import { Runtime } from "$store/runtime.ts";
+import { invoke } from "$store/runtime.ts";
 import type { Product } from "apps/commerce/types.ts";
 import type { JSX } from "preact";
 
@@ -21,7 +21,7 @@ function Notify({ productID }: Props) {
       const email =
         (e.currentTarget.elements.namedItem("email") as RadioNodeList)?.value;
 
-      await Runtime.vtex.actions.notifyme({ skuId: productID, name, email });
+      await invoke.vtex.actions.notifyme({ skuId: productID, name, email });
     } finally {
       loading.value = false;
     }
