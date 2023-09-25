@@ -7,6 +7,7 @@ interface Props {
   onClose?: () => void;
   open?: boolean;
   class?: string;
+  style?: string;
   children?: ComponentChildren;
   loading?: "eager" | "lazy";
 }
@@ -16,7 +17,6 @@ function Modal(props: Props) {
     children,
     open,
     onClose,
-    class: _class = "",
     loading = "lazy",
   } = props;
   const lazy = useSignal(loading === "lazy" && !open);
@@ -47,9 +47,7 @@ function Modal(props: Props) {
         onChange={(e) => e.currentTarget.checked === false && onClose?.()}
       />
       <div class="modal">
-        <div class={`modal-box ${_class}`}>
-          {!lazy.value && children}
-        </div>
+        {!lazy.value && children}
         <label class="modal-backdrop" for={id}>Close</label>
       </div>
     </>

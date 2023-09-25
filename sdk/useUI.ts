@@ -17,4 +17,14 @@ const state = {
   displaySearchDrawer,
 };
 
+// Keyboard event listeners
+addEventListener("keydown", (e: KeyboardEvent) => {
+  const isK = e.key === "k" || e.key === "K" || e.keyCode === 75;
+
+  // Open Searchbar on meta+k
+  if (e.metaKey === true && isK) {
+    displaySearchPopup.value = true;
+  }
+});
+
 export const useUI = () => state;
