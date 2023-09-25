@@ -64,12 +64,10 @@ function Searchbar({
   const hasTerms = Boolean(searches.length);
 
   useEffect(() => {
-    if (!searchInputRef.current) {
-      return;
+    if (displaySearchPopup.value === true) {
+      searchInputRef.current?.focus();
     }
-
-    searchInputRef.current.focus();
-  }, []);
+  }, [displaySearchPopup.value]);
 
   return (
     <div
