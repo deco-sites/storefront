@@ -1,5 +1,5 @@
 import { SendEventOnLoad } from "$store/components/Analytics.tsx";
-import { Layout as cardLayout } from "$store/components/product/ProductCard.tsx";
+import { Layout as CardLayout } from "$store/components/product/ProductCard.tsx";
 import Filters from "$store/components/search/Filters.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
 import SearchControls from "$store/islands/SearchControls.tsx";
@@ -16,14 +16,14 @@ export interface Layout {
   /**
    * @description Number of products per line on grid
    */
-  columns: Columns;
+  columns?: Columns;
 }
 
 export interface Props {
   /** @title Integration */
   page: ProductListingPage | null;
   layout?: Layout;
-  cardLayout?: cardLayout;
+  cardLayout?: CardLayout;
 }
 
 function NotFound() {
@@ -58,7 +58,10 @@ function Result({
             </aside>
           )}
           <div class="flex-grow">
-            <ProductGallery products={products} layout={cardLayout} />
+            <ProductGallery
+              products={products}
+              layout={{ card: cardLayout, columns: layout?.columns }}
+            />
           </div>
         </div>
 

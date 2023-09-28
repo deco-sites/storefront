@@ -10,9 +10,14 @@ const loading = signal<boolean>(false);
 let queue = Promise.resolve();
 let latestQuery = "";
 
+const NULLABLE: Resolved<null> = {
+  __resolveType: "resolved",
+  data: null,
+};
+
 const doFetch = async (
   query: string,
-  { __resolveType, ...extraProps }: Resolved<Suggestion | null>,
+  { __resolveType, ...extraProps }: Resolved<Suggestion | null> = NULLABLE,
 ) => {
   // Debounce query to API speed
   if (latestQuery !== query) return;

@@ -1,5 +1,5 @@
 import Icon from "$store/components/ui/Icon.tsx";
-import type { INavItem } from "./NavItem.tsx";
+import type { NavItem as INavItem } from "apps/commerce/types.ts";
 
 export interface Props {
   items: INavItem[];
@@ -9,11 +9,11 @@ function MenuItem({ item }: { item: INavItem }) {
   return (
     <div class="collapse collapse-plus">
       <input type="checkbox" />
-      <div class="collapse-title">{item.label}</div>
+      <div class="collapse-title">{item.name}</div>
       <div class="collapse-content">
         <ul>
           <li>
-            <a class="underline text-sm" href={item.href}>Ver todos</a>
+            <a class="underline text-sm" href={item.url}>Ver todos</a>
           </li>
           {item.children?.map((node) => (
             <li>

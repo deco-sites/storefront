@@ -1,36 +1,41 @@
-import type { Product } from "apps/commerce/types.ts";
+import type { ProductLeaf } from "apps/commerce/types.ts";
+
+export type Possibilities = Record<string, Record<string, string | undefined>>;
 
 export const useVariantPossibilities = (
-  { url: productUrl, isVariantOf }: Product,
-) => {
-  const allProperties = (isVariantOf?.hasVariant ?? [])
-    .flatMap(({ additionalProperty = [], url }) =>
-      additionalProperty.map((property) => ({ property, url }))
-    )
-    .filter((x) => x.url)
-    .filter((x) => x.property.valueReference === "SPECIFICATION") // Remove this line to allow other than specifications
-    .sort((a, b) => a.url! < b.url! ? -1 : a.url === b.url ? 0 : 1);
+  variants: ProductLeaf[],
+  selected: ProductLeaf,
+): Possibilities => {
+  const possibilities: Possibilities = {};
+  const selectedSpecs = new Map(
+    (selected.additionalProperty ?? [])
+      .map((s) => [s.name, s] as const),
+  );
 
-  const possibilities = allProperties.reduce((acc, { property, url }) => {
-    const { name = "", value = "" } = property;
+  for (const variant of variants) {
+    const { url, additionalProperty: specs = [] } = variant;
 
-    if (!acc[name]) {
-      acc[name] = {};
+    for (let it = 0; it < specs.length; it++) {
+      const name = specs[it].name!;
+      const value = specs[it].value!;
+
+      if (!possibilities[name]) {
+        possibilities[name] = {};
+      }
+
+      if (!possibilities[name][value]) {
+        possibilities[name][value] = it === 0 ? url : undefined;
+      }
+
+      const isSelectable = specs.every((s) =>
+        s.name === name || selectedSpecs.get(s.name)?.value === s.value
+      );
+
+      if (isSelectable) {
+        possibilities[name][value] = url;
+      }
     }
-
-    if (!acc[name][value]) {
-      acc[name][value] = [];
-    }
-
-    if (url) {
-      // prefer current url first to easy selector implementation
-      url === productUrl
-        ? acc[name][value].unshift(url)
-        : acc[name][value].push(url);
-    }
-
-    return acc;
-  }, {} as Record<string, Record<string, string[]>>);
+  }
 
   return possibilities;
 };
