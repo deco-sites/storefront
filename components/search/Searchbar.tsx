@@ -20,6 +20,7 @@ import { useUI } from "$store/sdk/useUI.ts";
 import { Suggestion } from "apps/commerce/types.ts";
 import { Resolved } from "deco/engine/core/resolver.ts";
 import { useEffect, useRef } from "preact/compat";
+import type { Platform } from "$store/apps/site.ts";
 
 // Editable props
 export interface Props {
@@ -47,6 +48,8 @@ export interface Props {
    * @todo: improve this typings ({query: string, count: number}) => Suggestions
    */
   loader: Resolved<Suggestion | null>;
+
+  platform?: Platform;
 }
 
 function Searchbar({
@@ -54,6 +57,7 @@ function Searchbar({
   action = "/s",
   name = "q",
   loader,
+  platform,
 }: Props) {
   const id = useId();
   const { displaySearchPopup } = useUI();
@@ -160,7 +164,7 @@ function Searchbar({
                   index={index}
                   class="carousel-item first:ml-4 last:mr-4 min-w-[200px] max-w-[200px]"
                 >
-                  <ProductCard product={product} platform={"vtex"} />
+                  <ProductCard product={product} platform={platform} />
                 </Slider.Item>
               ))}
             </Slider>

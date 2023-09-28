@@ -1,9 +1,9 @@
+import type { Platform } from "$store/apps/site.ts";
 import { SendEventOnClick } from "$store/components/Analytics.tsx";
 import Avatar from "$store/components/ui/Avatar.tsx";
 import WishlistButton from "$store/islands/WishlistButton.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
-import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
@@ -46,7 +46,7 @@ interface Props {
   itemListName?: string;
   layout?: Layout;
 
-  platform: ReturnType<typeof usePlatform>;
+  platform?: Platform;
 }
 
 const relative = (url: string) => {
@@ -68,12 +68,13 @@ function ProductCard(
     offers,
     isVariantOf,
   } = product;
-  const description = product.description || isVariantOf?.description;
   const id = `product-card-${productID}`;
+  const hasVariant = isVariantOf?.hasVariant ?? [];
   const productGroupID = isVariantOf?.productGroupID;
+  const description = product.description || isVariantOf?.description;
   const [front, back] = images ?? [];
   const { listPrice, price, installments } = useOffer(offers);
-  const possibilities = useVariantPossibilities(product);
+  const possibilities = useVariantPossibilities(hasVariant, product);
   const variants = Object.entries(Object.values(possibilities)[0] ?? {});
 
   const l = layout;
@@ -81,11 +82,11 @@ function ProductCard(
     !l?.basics?.contentAlignment || l?.basics?.contentAlignment == "Left"
       ? "left"
       : "center";
-  const skuSelector = variants.map(([value, [link]]) => (
+  const skuSelector = variants.map(([value, link]) => (
     <li>
       <a href={link}>
         <Avatar
-          variant={link === url ? "active" : "default"}
+          variant={link === url ? "active" : link ? "default" : "disabled"}
           content={value}
         />
       </a>
@@ -267,7 +268,7 @@ function ProductCard(
             {l?.hide?.installments
               ? ""
               : (
-                <div class="text-base-300 text-sm lg:text-base">
+                <div class="text-base-300 text-sm lg:text-base truncate">
                   ou {installments}
                 </div>
               )}

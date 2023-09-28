@@ -6,6 +6,7 @@ import Slider from "$store/components/ui/Slider.tsx";
 import AddToCartButtonVNDA from "$store/islands/AddToCartButton/vnda.tsx";
 import AddToCartButtonVTEX from "$store/islands/AddToCartButton/vtex.tsx";
 import AddToCartButtonWake from "$store/islands/AddToCartButton/wake.tsx";
+import AddToCartButtonLinx from "$store/islands/AddToCartButton/linx.tsx";
 import AddToCartButtonShopify from "$store/islands/AddToCartButton/shopify.tsx";
 import OutOfStock from "$store/islands/OutOfStock.tsx";
 import ProductImageZoom from "$store/islands/ProductImageZoom.tsx";
@@ -68,7 +69,6 @@ function ProductInfo({ page, layout }: { page: ProductDetailsPage } & Props) {
     product,
   } = page;
   const {
-    description,
     productID,
     offers,
     name = "",
@@ -76,6 +76,7 @@ function ProductInfo({ page, layout }: { page: ProductDetailsPage } & Props) {
     isVariantOf,
     additionalProperty = [],
   } = product;
+  const description = product.description || isVariantOf?.description;
   const {
     price = 0,
     listPrice,
@@ -162,6 +163,15 @@ function ProductInfo({ page, layout }: { page: ProductDetailsPage } & Props) {
                   discount={discount}
                 />
               )}
+              {platform === "linx" && (
+                <AddToCartButtonLinx
+                  name={name}
+                  productID={productID}
+                  productGroupID={productGroupID}
+                  price={price}
+                  discount={discount}
+                />
+              )}
               {platform === "vnda" && (
                 <AddToCartButtonVNDA
                   name={name}
@@ -203,7 +213,10 @@ function ProductInfo({ page, layout }: { page: ProductDetailsPage } & Props) {
           {description && (
             <details>
               <summary class="cursor-pointer">Descrição</summary>
-              <div class="ml-2 mt-2">{description}</div>
+              <div
+                class="ml-2 mt-2"
+                dangerouslySetInnerHTML={{ __html: description }}
+              />
             </details>
           )}
         </span>

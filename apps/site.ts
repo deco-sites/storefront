@@ -3,26 +3,23 @@ import { color as shopify } from "apps/shopify/mod.ts";
 import { color as vnda } from "apps/vnda/mod.ts";
 import { color as vtex } from "apps/vtex/mod.ts";
 import { color as wake } from "apps/wake/mod.ts";
+import { color as linx } from "apps/linx/mod.ts";
 import { Section } from "deco/blocks/section.ts";
 import { App } from "deco/mod.ts";
 import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
 
-export type Props =
-  & {
-    /**
-     * @title Active Commerce Platform
-     * @description Choose the active ecommerce platform
-     * @default custom
-     */
-    platform: Platform;
-  }
-  & CommerceProps
-  & {
-    theme?: Section;
-  };
+export type Props = {
+  /**
+   * @title Active Commerce Platform
+   * @description Choose the active ecommerce platform
+   * @default custom
+   */
+  platform: Platform;
+  theme?: Section;
+} & CommerceProps;
 
-type Platform = "vtex" | "vnda" | "shopify" | "wake" | "custom";
+export type Platform = "vtex" | "vnda" | "shopify" | "wake" | "linx" | "custom";
 
 export let _platform: Platform = "custom";
 
@@ -36,6 +33,8 @@ const color = (platform: string) => {
       return wake;
     case "shopify":
       return shopify;
+    case "linx":
+      return linx;
     case "deco":
       return 0x02f77d;
     default:
