@@ -1,8 +1,8 @@
-import type { NavItem as INavItem } from "apps/commerce/types.ts";
+import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { headerHeight } from "./constants.ts";
 
-function NavItem({ item }: { item: INavItem }) {
+function NavItem({ item }: { item: SiteNavigationElement }) {
   const { url, name, children } = item;
   const image = item?.image?.[0];
 
