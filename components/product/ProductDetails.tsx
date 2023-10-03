@@ -261,49 +261,51 @@ function Details(props: { page: ProductDetailsPage } & Props) {
           class="grid grid-cols-1 gap-4 sm:grid-cols-[max-content_40vw_40vw] sm:grid-rows-1 sm:justify-center"
         >
           {/* Image Slider */}
-          <div class="relative sm:col-start-2 sm:col-span-1 sm:row-start-1">
-            <Slider class="carousel carousel-center gap-6 w-screen sm:w-[40vw]">
-              {images.map((img, index) => (
-                <Slider.Item
-                  index={index}
-                  class="carousel-item w-full"
-                >
-                  <Image
-                    class="w-full"
-                    sizes="(max-width: 640px) 100vw, 40vw"
-                    style={{ aspectRatio: ASPECT_RATIO }}
-                    src={img.url!}
-                    alt={img.alternateName}
-                    width={WIDTH}
-                    height={HEIGHT}
-                    // Preload LCP image for better web vitals
-                    preload={index === 0}
-                    loading={index === 0 ? "eager" : "lazy"}
-                  />
-                </Slider.Item>
-              ))}
-            </Slider>
+          <div>
+            <div class="relative">
+              <Slider class="carousel carousel-center gap-6 w-screen sm:w-[40vw]">
+                {images.map((img, index) => (
+                  <Slider.Item
+                    index={index}
+                    class="carousel-item w-full"
+                  >
+                    <Image
+                      class="w-full"
+                      sizes="(max-width: 640px) 100vw, 40vw"
+                      style={{ aspectRatio: ASPECT_RATIO }}
+                      src={img.url!}
+                      alt={img.alternateName}
+                      width={WIDTH}
+                      height={HEIGHT}
+                      // Preload LCP image for better web vitals
+                      preload={index === 0}
+                      loading={index === 0 ? "eager" : "lazy"}
+                    />
+                  </Slider.Item>
+                ))}
+              </Slider>
 
-            <Slider.PrevButton
-              class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline"
-              disabled
-            >
-              <Icon size={24} id="ChevronLeft" strokeWidth={3} />
-            </Slider.PrevButton>
+              <Slider.PrevButton
+                class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline"
+                disabled
+              >
+                <Icon size={24} id="ChevronLeft" strokeWidth={3} />
+              </Slider.PrevButton>
 
-            <Slider.NextButton
-              class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline"
-              disabled={images.length < 2}
-            >
-              <Icon size={24} id="ChevronRight" strokeWidth={3} />
-            </Slider.NextButton>
+              <Slider.NextButton
+                class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline"
+                disabled={images.length < 2}
+              >
+                <Icon size={24} id="ChevronRight" strokeWidth={3} />
+              </Slider.NextButton>
 
-            <div class="absolute top-2 right-2 bg-base-100 rounded-full">
-              <ProductImageZoom
-                images={images}
-                width={700}
-                height={Math.trunc(700 * HEIGHT / WIDTH)}
-              />
+              <div class="absolute top-2 right-2 bg-base-100 rounded-full">
+                <ProductImageZoom
+                  images={images}
+                  width={700}
+                  height={Math.trunc(700 * HEIGHT / WIDTH)}
+                />
+              </div>
             </div>
           </div>
 
