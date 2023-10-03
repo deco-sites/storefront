@@ -1,34 +1,41 @@
+import type { Product } from "apps/commerce/types.ts";
+import Icon from "$store/components/ui/Icon.tsx";
+import Slider from "$store/components/ui/Slider.tsx";
+import SliderJS from "$store/islands/SliderJS.tsx";
 import { SendEventOnLoad } from "$store/components/Analytics.tsx";
+import { useId } from "preact/hooks";
+import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import { useOffer } from "$store/sdk/useOffer.ts";
+import { usePlatform } from "$store/sdk/usePlatform.tsx";
+import { buttonClasses, ButtonColor } from "$store/components/ui/Types.tsx";
 import ProductCard, {
   Layout as cardLayout,
 } from "$store/components/product/ProductCard.tsx";
-import Icon from "$store/components/ui/Icon.tsx";
-import Header from "$store/components/ui/SectionHeader.tsx";
-import Slider from "$store/components/ui/Slider.tsx";
-import SliderJS from "$store/islands/SliderJS.tsx";
-import { useId } from "$store/sdk/useId.ts";
-import { useOffer } from "$store/sdk/useOffer.ts";
-import { usePlatform } from "$store/sdk/usePlatform.tsx";
-import type { Product } from "apps/commerce/types.ts";
-import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import Container, {
+  ExtendedStyle as Style,
+  HeaderContent,
+  Layout,
+} from "$store/components/ui/Container.tsx";
 
 export interface Props {
   products: Product[] | null;
-  title?: string;
-  description?: string;
-  layout?: {
-    headerAlignment?: "center" | "left";
-    headerfontSize?: "Normal" | "Large";
-  };
+  header?: HeaderContent;
+  layout?: Layout;
+  style?: Style;
   cardLayout?: cardLayout;
+  sliderStyle?: {
+    controlsColor?: ButtonColor;
+    controlsOutline?: boolean;
+  };
 }
 
 function ProductShelf({
   products,
-  title,
-  description,
+  header,
   layout,
+  style,
   cardLayout,
+  sliderStyle,
 }: Props) {
   const id = useId();
   const platform = usePlatform();
@@ -37,44 +44,43 @@ function ProductShelf({
     return null;
   }
 
-  return (
-    <div class="w-full container  py-8 flex flex-col gap-12 lg:gap-16 lg:py-10">
-      <Header
-        title={title || ""}
-        description={description || ""}
-        fontSize={layout?.headerfontSize || "Large"}
-        alignment={layout?.headerAlignment || "center"}
-      />
+  const controlsClasses = `${
+    buttonClasses[sliderStyle?.controlsColor || "Default"]
+  } ${sliderStyle?.controlsOutline ? "btn-outline" : ""}`;
 
-      <div
-        id={id}
-        class="container grid grid-cols-[48px_1fr_48px] px-0 sm:px-5"
-      >
-        <Slider class="carousel carousel-center sm:carousel-end gap-6 col-span-full row-start-2 row-end-5">
+  return (
+    <Container header={header} layout={layout} style={style}>
+      <div id={id} class="relative grid grid-flow-col">
+        <Slider class="w-full carousel carousel-center sm:carousel-end gap-6 col-span-full pb-3">
           {products?.map((product, index) => (
             <Slider.Item
               index={index}
               class="carousel-item w-[270px] sm:w-[292px] first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-0"
             >
               <ProductCard
-                product={product}
-                itemListName={title}
-                layout={cardLayout}
                 platform={platform}
+                product={product}
+                itemListName={header?.title}
+                layout={cardLayout}
+                btnStyle={style?.button || {}}
               />
             </Slider.Item>
           ))}
         </Slider>
 
         <>
-          <div class="hidden relative sm:block z-10 col-start-1 row-start-3">
-            <Slider.PrevButton class="btn btn-circle btn-outline absolute right-1/2 bg-base-100">
-              <Icon size={24} id="ChevronLeft" strokeWidth={3} />
+          <div class="z-10 absolute -left-3 lg:-left-8 top-1/3">
+            <Slider.PrevButton
+              class={`${controlsClasses} btn btn-circle btn-sm lg:btn-md`}
+            >
+              <Icon size={24} id="ChevronLeft" />
             </Slider.PrevButton>
           </div>
-          <div class="hidden relative sm:block z-10 col-start-3 row-start-3">
-            <Slider.NextButton class="btn btn-circle btn-outline absolute left-1/2 bg-base-100">
-              <Icon size={24} id="ChevronRight" strokeWidth={3} />
+          <div class="z-10 absolute -right-3 lg:-right-8 top-1/3">
+            <Slider.NextButton
+              class={`${controlsClasses} btn btn-circle btn-sm lg:btn-md`}
+            >
+              <Icon size={24} id="ChevronRight" />
             </Slider.NextButton>
           </div>
         </>
@@ -83,7 +89,7 @@ function ProductShelf({
           event={{
             name: "view_item_list",
             params: {
-              item_list_name: title,
+              item_list_name: header?.title,
               items: products.map((product) =>
                 mapProductToAnalyticsItem({
                   product,
@@ -94,7 +100,7 @@ function ProductShelf({
           }}
         />
       </div>
-    </div>
+    </Container>
   );
 }
 
