@@ -1,6 +1,8 @@
 import type { SectionProps } from "deco/mod.ts";
 import Image from "apps/website/components/Image.tsx";
-import Header, { Props as HeaderProps} from "$store/components/ui/SectionHeader.tsx";
+import Header, {
+  Props as HeaderProps,
+} from "$store/components/ui/SectionHeader.tsx";
 
 export interface Layout {
   /** @description Default is 12 */
