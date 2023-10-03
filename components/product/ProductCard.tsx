@@ -285,11 +285,7 @@ function ProductCard(
               {!l?.show?.productDescription ? "" : (
                 <div
                   class="truncate text-sm lg:text-sm"
-                  dangerouslySetInnerHTML={{
-                    __html: description
-                      ? description.replace(/<[^>]+>/g, "")
-                      : "",
-                  }}
+                  dangerouslySetInnerHTML={{ __html: description ?? "" }}
                 />
               )}
             </div>
