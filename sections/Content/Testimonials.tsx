@@ -1,10 +1,15 @@
 import Icon from "$store/components/ui/Icon.tsx";
 import Image from "apps/website/components/Image.tsx";
-import Header from "$store/components/ui/SectionHeader.tsx";
 import Slider from "$store/components/ui/Slider.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
-import { useId } from "$store/sdk/useId.ts";
+import { useId } from "preact/hooks";
+import Container, {
+  ExtendedStyle as Style,
+  HeaderContent,
+  Layout,
+} from "$store/components/ui/Container.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import { buttonClasses, ButtonColor } from "$store/components/ui/Types.tsx";
 
 export interface Testimonial {
   text?: string;
@@ -21,21 +26,27 @@ export interface Testimonial {
 }
 
 export interface Props {
-  title?: string;
-  description?: string;
+  header?: HeaderContent;
   testimonials?: Testimonial[];
-  layout?: {
+  layout?: Layout;
+  style?: Style;
+  itemsLayout?: {
     variation?: "Grid" | "Slider";
-    headerAlignment?: "center" | "left";
+  };
+  sliderStyle?: {
+    controlsColor?: ButtonColor;
+    controlsOutline?: boolean;
   };
 }
 
 const DEFAULT_PROPS: Props = {
-  "title": "",
-  "description": "",
+  header: {
+    "title": "",
+    "description": "",
+  },
   "testimonials": [{
     "text":
-      "Fashion Store is my go-to online destination for all things stylish. Their vast collection of trendy clothes and accessories never disappoints. The quality is exceptional, and the prices are affordable. The website is easy to navigate, and their customer service team is friendly and responsive. I always feel like a fashionista when I shop here!",
+      "Fashion Store is my go-to online destination for all things stylish. Their vast collection of trendy clothes and accessories never disappoints. The quality is exceptional, and the prices are affordable.",
     "image": {
       "src":
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/e0fcbcae-0a21-4269-9605-7ef8708e58ad",
@@ -49,7 +60,7 @@ const DEFAULT_PROPS: Props = {
     },
   }, {
     "text":
-      "I can't praise Fashion Store enough! Their commitment to staying ahead of the fashion curve is evident in their diverse and up-to-date inventory. Whether I need a casual outfit or a glamorous dress, they have it all. The shopping experience is seamless, and my orders always arrive promptly. Fashion Store is a true fashion lover's paradise!",
+      "I can't praise Fashion Store enough! Their commitment to staying ahead of the fashion curve is evident in their diverse and up-to-date inventory. Whether I need a casual outfit or a glamorous dress, they have it all.",
     "image": {
       "src":
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/e0fcbcae-0a21-4269-9605-7ef8708e58ad",
@@ -63,7 +74,7 @@ const DEFAULT_PROPS: Props = {
     },
   }, {
     "text":
-      "Fashion Store has transformed my wardrobe. Their curated collection of clothing and accessories has helped me discover my personal style. The quality of their products is outstanding, and the prices are unbeatable. The website is visually appealing and easy to navigate. Fashion Store is my trusted companion for staying fashionable and feeling confident!",
+      "Fashion Store has transformed my wardrobe. Their curated collection of clothing and accessories has helped me discover my personal style. The quality of their products is outstanding, and the prices are unbeatable.",
     "image": {
       "src":
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/e0fcbcae-0a21-4269-9605-7ef8708e58ad",
@@ -76,10 +87,6 @@ const DEFAULT_PROPS: Props = {
       "company": "Sanlock",
     },
   }],
-  "layout": {
-    "variation": "Grid",
-    "headerAlignment": "center",
-  },
 };
 
 const Testimonal = ({ image, text, user }: Testimonial) => (
@@ -92,9 +99,9 @@ const Testimonal = ({ image, text, user }: Testimonial) => (
         height={100}
       />
     )}
-    <h3 class="text-xl lg:text-2xl">
+    <div class="text-xl lg:text-2xl">
       {text}
-    </h3>
+    </div>
     <div class="flex flex-col items-center gap-4">
       {user?.avatar && (
         <Image
@@ -127,57 +134,61 @@ export default function Testimonials(
   props: Props,
 ) {
   const id = useId();
-  const { title, description, testimonials, layout } = {
+  const { header, testimonials, layout, style, itemsLayout, sliderStyle } = {
     ...DEFAULT_PROPS,
     ...props,
   };
 
+  const variation = itemsLayout?.variation || "Grid";
+  const controlsClasses = `${
+    buttonClasses[sliderStyle?.controlsColor || "Default"]
+  } ${sliderStyle?.controlsOutline ? "btn-outline" : ""}`;
+
   return (
-    <div class="w-full container px-4 py-8 flex flex-col gap-14 lg:gap-20 lg:py-10 lg:px-0">
-      <Header
-        title={title}
-        description={description}
-        alignment={layout?.headerAlignment || "center"}
-      />
-
-      {layout?.variation === "Grid" && (
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          {testimonials?.map(({ image, text, user }) => (
-            <Testimonal image={image} text={text} user={user} />
-          ))}
-        </div>
-      )}
-
-      {layout?.variation !== "Grid" && (
-        <div
-          class="relative w-full px-8"
-          id={id}
-        >
-          <Slider class="carousel carousel-start gap-4 lg:gap-8 row-start-2 row-end-5 w-full">
-            {testimonials?.map(({ image, text, user }, index) => (
-              <Slider.Item
-                index={index}
-                class="flex flex-col gap-4 carousel-item w-full"
-              >
-                <Testimonal image={image} text={text} user={user} />
-              </Slider.Item>
+    <Container header={header} layout={layout} style={style}>
+      <>
+        {variation === "Grid" && (
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            {testimonials?.map(({ image, text, user }) => (
+              <Testimonal image={image} text={text} user={user} />
             ))}
-          </Slider>
-          <>
-            <div class="z-10 absolute -left-2 lg:-left-8 top-1/2">
-              <Slider.PrevButton class="btn btn-circle btn-outline">
-                <Icon size={24} id="ChevronLeft" strokeWidth={3} />
-              </Slider.PrevButton>
+          </div>
+        )}
+
+        {variation !== "Grid" && (
+          <div class="relative w-full lg:px-8">
+            <div id={id}>
+              <Slider class="carousel carousel-start row-start-2 row-end-5 w-full">
+                {testimonials?.map(({ image, text, user }, index) => (
+                  <Slider.Item
+                    index={index}
+                    class="flex carousel-item w-full"
+                  >
+                    <Testimonal image={image} text={text} user={user} />
+                  </Slider.Item>
+                ))}
+              </Slider>
+              <>
+                <div class="z-10 absolute -left-3 lg:-left-8 top-1/3">
+                  <Slider.PrevButton
+                    class={`${controlsClasses} btn btn-circle btn-sm lg:btn-md`}
+                  >
+                    <Icon size={24} id="ChevronLeft" />
+                  </Slider.PrevButton>
+                </div>
+                <div class="z-10 absolute -right-3 lg:-right-8 top-1/3">
+                  <Slider.NextButton
+                    class={`${controlsClasses} btn btn-circle btn-sm lg:btn-md`}
+                  >
+                    <Icon size={24} id="ChevronRight" />
+                  </Slider.NextButton>
+                </div>
+              </>
+              <SliderJS rootId={id} />
             </div>
-            <div class="z-10 absolute -right-2 lg:-right-8 top-1/2">
-              <Slider.NextButton class="btn btn-circle btn-outline">
-                <Icon size={24} id="ChevronRight" strokeWidth={3} />
-              </Slider.NextButton>
-            </div>
-          </>
-          <SliderJS rootId={id} />
-        </div>
-      )}
-    </div>
+          </div>
+        )}
+      </>
+    </Container>
   );
 }
