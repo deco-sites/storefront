@@ -1,9 +1,20 @@
-import Header from "$store/components/ui/SectionHeader.tsx";
+import type { ImageWidget } from "apps/admin/widgets.ts";
+import { useId } from "preact/hooks";
+import Icon from "$store/components/ui/Icon.tsx";
+import Image from "apps/website/components/Image.tsx";
 import Slider from "$store/components/ui/Slider.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
-import { useId } from "$store/sdk/useId.ts";
-import Image from "apps/website/components/Image.tsx";
-import type { ImageWidget } from "apps/admin/widgets.ts";
+import Container, {
+  ExtendedStyle as Style,
+  HeaderContent,
+  Layout,
+} from "$store/components/ui/Container.tsx";
+import {
+  buttonClasses,
+  ButtonColor,
+  getButtonClasses,
+  imgPh,
+} from "$store/components/ui/Types.tsx";
 
 export interface Category {
   tag?: string;
@@ -15,17 +26,17 @@ export interface Category {
 }
 
 export interface Props {
-  header?: {
-    title?: string;
-    description?: string;
-  };
+  header?: HeaderContent;
   list?: Category[];
-  layout?: {
-    headerAlignment?: "center" | "left";
-    categoryCard?: {
-      textPosition?: "top" | "bottom";
-      textAlignment?: "center" | "left";
-    };
+  layout?: Layout;
+  style?: Style;
+  cardStyle?: {
+    textPosition?: "Top" | "Bottom";
+    textAlignment?: "Center" | "Left";
+  };
+  sliderStyle?: {
+    controlsColor?: ButtonColor;
+    controlsOutline?: boolean;
   };
 }
 
@@ -34,13 +45,13 @@ function CardText(
     tag?: string;
     label?: string;
     description?: string;
-    alignment?: "center" | "left";
+    alignment?: "Center" | "Left";
   },
 ) {
   return (
     <div
       class={`flex flex-col ${
-        alignment === "center" ? "text-center" : "text-left"
+        alignment === "Center" ? "text-center" : "text-left"
       }`}
     >
       {tag && <div class="text-sm text-primary">{tag}</div>}
@@ -51,7 +62,7 @@ function CardText(
 }
 
 function CategoryList(props: Props) {
-  const id = useId();
+  const id = `category-list-${useId()}`;
   const {
     header = {
       title: "",
@@ -60,87 +71,139 @@ function CategoryList(props: Props) {
     list = [
       {
         tag: "10% off",
-        label: "Feminino",
-        description: "Moda feminina direto de Milão",
+        href: "/masculino",
+        image: imgPh["sq"],
+        label: "Dresses",
+        description: "Amazing",
+        buttonText: "View procucts",
+      },
+      {
+        tag: "10% off",
         href: "/feminino",
-        image:
-          "https://ik.imagekit.io/decocx/tr:w-680,h-680/https:/ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/fdcb3c8f-d629-485e-bf70-8060bd8a9f65",
-        buttonText: "Ver produtos",
+        image: imgPh["sq"],
+        label: "Bags",
+        description: "Bags",
+        buttonText: "View procucts",
+      },
+      {
+        tag: "10% off",
+        href: "/",
+        image: imgPh["sq"],
+        label: "Shoes",
+        description: "New deals",
+        buttonText: "View procucts",
+      },
+      {
+        tag: "10% off",
+        href: "/",
+        image: imgPh["sq"],
+        label: "Jackets",
+        description: "New colors",
+        buttonText: "View procucts",
+      },
+      {
+        tag: "10% off",
+        href: "/",
+        image: imgPh["sq"],
+        label: "Jeans",
+        description: "Amazing",
+        buttonText: "View procucts",
+      },
+      {
+        href: "/",
+        image: imgPh["sq"],
+        label: "Shorts",
+        description: "Summer",
+        buttonText: "View procucts",
       },
     ],
-    layout = {
-      headerAlignment: "center",
-      categoryCard: {
-        textPosition: "top",
-        textAlignment: "center",
-      },
-    },
+    layout,
+    style,
+    cardStyle,
+    sliderStyle,
   } = props;
 
+  const controlsClasses = `${
+    buttonClasses[sliderStyle?.controlsColor || "Default"]
+  } ${sliderStyle?.controlsOutline ? "btn-outline" : ""}`;
+
   return (
-    <div
-      id={id}
-      class="container py-8 flex flex-col gap-8 lg:gap-10 text-base-content  lg:py-10"
-    >
-      <Header
-        title={header.title}
-        description={header.description || ""}
-        alignment={layout.headerAlignment || "center"}
-      />
-
-      <Slider class="carousel carousel-start gap-4 lg:gap-8 row-start-2 row-end-5">
-        {list.map((
-          { tag, label, description, href, image, buttonText },
-          index,
-        ) => (
-          <Slider.Item
-            index={index}
-            class="flex flex-col gap-4 carousel-item first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-0"
-          >
-            <a
-              href={href}
-              class="flex flex-col gap-4 lg:w-[280px] w-40 lg:h-auto"
+    <Container header={header} layout={layout} style={style}>
+      <div id={id} class="w-full relative grid">
+        <Slider class="carousel carousel-start gap-4 lg:gap-8 row-start-2 row-end-5">
+          {list.map((
+            { tag, label, description, href, image, buttonText },
+            index,
+          ) => (
+            <Slider.Item
+              index={index}
+              class="flex flex-col gap-4 carousel-item"
             >
-              {layout.categoryCard?.textPosition === "top" &&
-                (
-                  <CardText
-                    tag={tag}
-                    label={label}
-                    description={description}
-                    alignment={layout?.categoryCard?.textAlignment}
-                  />
-                )}
-              {image &&
-                (
-                  <figure>
-                    <Image
-                      class="card w-full"
-                      src={image}
-                      alt={description || label || tag}
-                      width={160}
-                      height={195}
-                      loading="lazy"
+              <a
+                href={href}
+                class="flex flex-col gap-4 lg:w-[280px] w-40 lg:h-auto"
+              >
+                {cardStyle?.textPosition === "Top" &&
+                  (
+                    <CardText
+                      tag={tag}
+                      label={label}
+                      description={description}
+                      alignment={cardStyle?.textAlignment}
                     />
-                  </figure>
-                )}
-              {layout.categoryCard?.textPosition === "bottom" &&
+                  )}
+                {image &&
+                  (
+                    <figure>
+                      <Image
+                        class="card w-full"
+                        src={image}
+                        alt={description || label || tag}
+                        width={160}
+                        height={195}
+                        loading="lazy"
+                      />
+                    </figure>
+                  )}
+                {cardStyle?.textPosition === "Bottom" &&
+                  (
+                    <CardText
+                      tag={tag}
+                      label={label}
+                      description={description}
+                      alignment={cardStyle?.textAlignment}
+                    />
+                  )}
+              </a>
+              {buttonText &&
                 (
-                  <CardText
-                    tag={tag}
-                    label={label}
-                    description={description}
-                    alignment={layout?.categoryCard?.textAlignment}
-                  />
+                  <a href={href} class={getButtonClasses(style?.button || {})}>
+                    {buttonText}
+                  </a>
                 )}
-            </a>
-            {buttonText &&
-              <a href={href} class="btn">{buttonText}</a>}
-          </Slider.Item>
-        ))}
-      </Slider>
+            </Slider.Item>
+          ))}
+        </Slider>
+        <>
+          <div class="z-10 absolute -left-3 lg:-left-8 top-1/3">
+            <Slider.PrevButton
+              class={`${controlsClasses} btn btn-circle btn-sm lg:btn-md`}
+            >
+              <Icon size={24} id="ChevronLeft" />
+            </Slider.PrevButton>
+          </div>
+          <div class="z-10 absolute -right-3 lg:-right-8 top-1/3">
+            <Slider.NextButton
+              class={`${controlsClasses} btn btn-circle btn-sm lg:btn-md`}
+            >
+              <Icon size={24} id="ChevronRight" />
+            </Slider.NextButton>
+          </div>
+        </>
 
-      <SliderJS rootId={id} />
-    </div>
+        <SliderJS rootId={id} />
+      </div>
+    </Container>
   );
 }
 
