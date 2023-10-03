@@ -43,7 +43,11 @@ const manifest = {
     "deco-sites/storefront/sections/Content/Logos.tsx": $$$$$$8,
     "deco-sites/storefront/sections/Content/Testimonials.tsx": $$$$$$7,
     "deco-sites/storefront/sections/Footer/Footer.tsx": $$$$$$0,
+<<<<<<< HEAD
     "deco-sites/storefront/sections/Header/Header.tsx": $$$$$$24,
+=======
+    "deco-sites/storefront/sections/Header/Header.tsx": $$$$$$23,
+>>>>>>> f707a49 (Update image grid)
     "deco-sites/storefront/sections/Images/Carousel.tsx": $$$$$$6,
     "deco-sites/storefront/sections/Images/ImageGallery.tsx": $$$$$$5,
     "deco-sites/storefront/sections/Images/ImageGrid.tsx": $$$$$$4,
