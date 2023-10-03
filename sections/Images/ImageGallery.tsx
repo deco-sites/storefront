@@ -1,6 +1,11 @@
 import { Picture, Source } from "apps/website/components/Picture.tsx";
-import Header from "$store/components/ui/SectionHeader.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import Container, {
+  HeaderContent,
+  Layout,
+  Style,
+} from "$store/components/ui/Container.tsx";
+import { imgPh } from "$store/components/ui/Types.tsx";
 
 /**
  * @titleBy alt
@@ -8,13 +13,7 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 export interface Banner {
   srcMobile: ImageWidget;
   srcDesktop?: ImageWidget;
-  /**
-   * @description Image alt text
-   */
   alt: string;
-  /**
-   * @description Adicione um link
-   */
   href: string;
 }
 
@@ -28,28 +27,46 @@ export type BorderRadius =
   | "3xl"
   | "full";
 
+export interface Border {
+  /** @default none */
+  mobile?: BorderRadius;
+  /** @default none */
+  desktop?: BorderRadius;
+}
+
+export interface ItemsLayout {
+  autosizeMobile?: "Asymmetric" | "Symmetrical";
+  autosizeDesktop?: "Asymmetric" | "Symmetrical";
+  /**
+   * @description Item's border radius
+   */
+  borderRadius?: Border;
+}
+
+export interface Size {
+  height: number;
+  width: number;
+}
+
+export interface DeviceSize {
+  largerImage: Size;
+  smallerImage: Size;
+}
+
 export interface Props {
-  title?: string;
-  description?: string;
+  header?: HeaderContent;
   /**
    * @maxItems 4
    * @minItems 4
    */
   banners?: Banner[];
-  layout?: {
-    /**
-     * @description Aplique borda a sua imagem
-     */
-    borderRadius?: {
-      /** @default none */
-      mobile?: BorderRadius;
-      /** @default none */
-      desktop?: BorderRadius;
-    };
-    headerAlignment?: "center" | "left";
-    mobile?: "Asymmetric" | "Symmetrical";
-    desktop?: "Asymmetric" | "Symmetrical";
+  imagesSizes?: {
+    mobile?: DeviceSize;
+    desktop?: DeviceSize;
   };
+  layout?: Layout;
+  itemsLayout?: ItemsLayout;
+  style?: Style;
 }
 
 const RADIUS: Record<string, Record<BorderRadius, string>> = {
@@ -78,46 +95,33 @@ const RADIUS: Record<string, Record<BorderRadius, string>> = {
 const DEFAULT_PROPS: Props = {
   "banners": [
     {
-      "srcMobile":
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/b531631b-8523-4feb-ac37-5112873abad2",
-      "srcDesktop":
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/b531631b-8523-4feb-ac37-5112873abad2",
-      "alt": "Fashion",
+      "srcMobile": imgPh["sq"],
+      "alt": "Image 1",
       "href": "/",
     },
     {
-      "alt": "Fashion",
+      "alt": "Image 2",
       "href": "/",
-      "srcMobile":
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/1125d938-89ff-4aae-a354-63d4241394a6",
-      "srcDesktop":
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/1125d938-89ff-4aae-a354-63d4241394a6",
+      "srcMobile": imgPh["sq"],
     },
     {
-      "srcMobile":
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/dd1e2acb-ff80-49f9-8f56-1deac3b7a42d",
-      "srcDesktop":
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/dd1e2acb-ff80-49f9-8f56-1deac3b7a42d",
+      "srcMobile": imgPh["sq"],
       "href": "/",
-      "alt": "Fashion",
+      "alt": "Image 3",
     },
     {
-      "srcMobile":
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/0b85ba2d-48b1-4f5b-b619-7f4a7f50b455",
-      "srcDesktop":
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/0b85ba2d-48b1-4f5b-b619-7f4a7f50b455",
-      "alt": "Fashion",
+      "srcMobile": imgPh["sq"],
+      "alt": "Image 4",
       "href": "/",
     },
   ],
-  "layout": {
+  "itemsLayout": {
     "borderRadius": {
       "mobile": "3xl",
       "desktop": "2xl",
     },
-    "headerAlignment": "center",
-    "mobile": "Asymmetric",
-    "desktop": "Asymmetric",
+    "autosizeMobile": "Asymmetric",
+    "autosizeDesktop": "Asymmetric",
   },
 };
 
@@ -129,6 +133,11 @@ function Banner(
       /** @default none */
       desktop?: BorderRadius;
     };
+    type: string;
+    sizeMobile?: Size;
+    sizeDesktop?: Size;
+    mobile: string;
+    desktop: string;
   },
 ) {
   const { borderRadius, srcMobile, srcDesktop, alt } = props;
@@ -142,19 +151,31 @@ function Banner(
     >
       <Picture>
         <Source
-          width={190}
-          height={190}
+          width={props.sizeMobile ? props.sizeMobile.width : 400}
+          height={props.sizeMobile
+            ? props.sizeMobile.height
+            : props.type === "large"
+            ? 400
+            : props.mobile == "Symmetrical"
+            ? 400
+            : 220}
           media="(max-width: 767px)"
           src={srcMobile}
         />
         <Source
-          width={640}
-          height={420}
+          width={props.sizeDesktop ? props.sizeDesktop.width : 640}
+          height={props.sizeDesktop
+            ? props.sizeDesktop.height
+            : props.type === "large"
+            ? 640
+            : props.desktop == "Symmetrical"
+            ? 640
+            : 400}
           media="(min-width: 768px)"
           src={srcDesktop || srcMobile}
         />
         <img
-          class="w-full h-full object-cover"
+          class={`w-full object-cover"}`}
           src={srcMobile}
           alt={alt}
           decoding="async"
@@ -166,39 +187,57 @@ function Banner(
 }
 
 export default function Gallery(props: Props) {
-  const { title, description, banners, layout } = {
+  const { header, banners, imagesSizes, layout, itemsLayout, style } = {
     ...DEFAULT_PROPS,
     ...props,
   };
 
-  const mobileItemLayout = (index: number) =>
-    layout?.mobile === "Symmetrical"
-      ? "row-span-3"
-      : index === 0 || index === 3
-      ? "row-span-3"
-      : "row-span-2";
-
-  const desktopItemLayout = (index: number) =>
-    layout?.desktop === "Symmetrical"
-      ? "sm:row-span-3"
-      : index === 0 || index === 3
-      ? "sm:row-span-3"
-      : "sm:row-span-2";
-
   return (
-    <section class="container px-4 py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 lg:px-0">
-      <Header
-        title={title}
-        description={description}
-        alignment={layout?.headerAlignment || "center"}
-      />
-      <ul class="grid grid-flow-col grid-cols-2 grid-rows-6 gap-4 list-none">
-        {banners?.map((banner, index) => (
-          <li class={`${mobileItemLayout(index)} ${desktopItemLayout(index)}`}>
-            <Banner {...banner} borderRadius={props.layout?.borderRadius} />
-          </li>
-        ))}
-      </ul>
-    </section>
+    <Container header={header} layout={layout} style={style}>
+      <div class="flex gap-4">
+        <div class="flex flex-col gap-4 w-1/2">
+          {banners?.map((banner, index) => (
+            <>
+              {index < 2 && (
+                <Banner
+                  {...banner}
+                  borderRadius={itemsLayout?.borderRadius}
+                  type={index % 2 == 0 ? "large" : "small"}
+                  sizeMobile={index % 2 == 0
+                    ? imagesSizes?.mobile?.largerImage
+                    : imagesSizes?.mobile?.smallerImage}
+                  sizeDesktop={index % 2 == 0
+                    ? imagesSizes?.desktop?.largerImage
+                    : imagesSizes?.desktop?.smallerImage}
+                  mobile={itemsLayout?.autosizeMobile || "Asymmetric"}
+                  desktop={itemsLayout?.autosizeDesktop || "Asymmetric"}
+                />
+              )}
+            </>
+          ))}
+        </div>
+        <div class="flex flex-col gap-4 w-1/2">
+          {banners?.map((banner, index) => (
+            <>
+              {index >= 2 && (
+                <Banner
+                  {...banner}
+                  borderRadius={itemsLayout?.borderRadius}
+                  type={index % 2 != 0 ? "large" : "small"}
+                  sizeMobile={index % 2 != 0
+                    ? imagesSizes?.mobile?.largerImage
+                    : imagesSizes?.mobile?.smallerImage}
+                  sizeDesktop={index % 2 != 0
+                    ? imagesSizes?.desktop?.largerImage
+                    : imagesSizes?.desktop?.smallerImage}
+                  mobile={itemsLayout?.autosizeMobile || "Asymmetric"}
+                  desktop={itemsLayout?.autosizeDesktop || "Asymmetric"}
+                />
+              )}
+            </>
+          ))}
+        </div>
+      </div>
+    </Container>
   );
 }
