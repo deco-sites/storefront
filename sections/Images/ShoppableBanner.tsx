@@ -1,5 +1,6 @@
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import { imgPh } from "$store/components/ui/Types.tsx";
 
 export interface Props {
   image: {
@@ -38,9 +39,8 @@ const DEFAULT_PROPS: Props = {
   },
   pins: [],
   image: {
-    mobile:
-      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/cac2dc1c-48ac-4274-ad42-4016b0bbe947",
-    altText: "Fashion",
+    mobile: imgPh["sq"],
+    altText: "Image",
   },
 };
 
