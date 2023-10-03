@@ -63,7 +63,10 @@ export default function Site(
     state,
     manifest,
     dependencies: [
-      commerce({ ...state, global: theme ? [...(state.global ?? []), theme] : state.global }),
+      commerce({
+        ...state,
+        global: theme ? [...(state.global ?? []), theme] : state.global,
+      }),
     ],
   };
 }
