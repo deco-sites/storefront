@@ -7,7 +7,7 @@ export default function BackToTop(
   return (
     <>
       {children && (
-        <div class="w-full flex items-center justify-center mt-8 md:mt-4">
+        <div class="w-full flex items-center justify-center mt-8 md:mt-0">
           <a href="#top" class={`${getButtonClasses(style || {})} btn-sm`}>
             {children} <Icon id="ChevronUp" width={24} height={24} />
           </a>
