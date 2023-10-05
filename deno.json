@@ -1,4 +1,18 @@
 {
+  "imports": {
+    "$store/": "./",
+    "apps/": "https://denopkg.com/deco-cx/apps@0.12.7/",
+    "deco/": "https://denopkg.com/deco-cx/deco@1.40.0/",
+    "$fresh/": "https://denopkg.com/deco-cx/fresh@1.4.3/",
+    "preact": "https://esm.sh/preact@10.15.1",
+    "preact/": "https://esm.sh/preact@10.15.1/",
+    "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.2.1",
+    "@preact/signals": "https://esm.sh/*@preact/signals@1.1.3",
+    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.2.3",
+    "std/": "https://deno.land/std@0.190.0/",
+    "partytown/": "https://denopkg.com/deco-cx/partytown@0.4.7/",
+    "daisyui": "npm:daisyui@3.8.1"
+  },
   "tasks": {
     "start": "deno task bundle && deno run -A --unstable --watch=tailwind.css,sections/,functions/,loaders/,actions/,workflows/,accounts/,.env dev.ts",
     "gen": "deno run -A dev.ts --gen-only",
@@ -10,7 +24,9 @@
     "install": "deno eval 'import \"deco/scripts/apps/install.ts\"'",
     "uninstall": "deno eval 'import \"deco/scripts/apps/uninstall.ts\"'",
     "bundle": "deno eval 'import \"deco/scripts/apps/bundle.ts\"' deco-sites/storefront",
-    "cache_clean": "rm deno.lock; deno cache -r main.ts"
+    "cache_clean": "rm deno.lock; deno cache -r main.ts",
+    "build": "deno run -A dev.ts build",
+    "preview": "deno run -A main.ts"
   },
   "githooks": {
     "pre-commit": "check"
@@ -18,7 +34,8 @@
   "exclude": [
     "node_modules",
     "static/",
-    "README.md"
+    "README.md",
+    "_fresh"
   ],
   "lint": {
     "rules": {
@@ -29,7 +46,6 @@
     }
   },
   "nodeModulesDir": true,
-  "importMap": "./import_map.json",
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
