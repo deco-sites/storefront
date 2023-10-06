@@ -1,9 +1,9 @@
 {
   "imports": {
     "$store/": "./",
-    "apps/": "https://denopkg.com/deco-cx/apps@c7e4adf99870a9ad29bf9b81cc48a855f9da5c18/",
     "deco/": "https://denopkg.com/deco-cx/deco@1.40.0/",
-    "$fresh/": "https://denopkg.com/deco-cx/fresh@7f3b88e14ef4a01e82f9dc6a67ab167ed3b6ba64/",
+    "apps/": "https://denopkg.com/deco-cx/apps@fe00d38b13007703b6a79edfb73c148fd5977007/",
+    "$fresh/": "https://denopkg.com/deco-cx/fresh@1.4.4/",
     "preact": "https://esm.sh/preact@10.15.1",
     "preact/": "https://esm.sh/preact@10.15.1/",
     "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.2.1",
