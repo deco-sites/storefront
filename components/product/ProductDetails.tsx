@@ -40,6 +40,8 @@ export interface Props {
      */
     name?: "concat" | "productGroup" | "product";
   };
+
+  id?: string
 }
 
 const WIDTH = 360;
@@ -62,7 +64,7 @@ function NotFound() {
   );
 }
 
-function ProductInfo({ page, layout }: { page: ProductDetailsPage } & Props) {
+function ProductInfo({ page, layout, id }: { page: ProductDetailsPage } & Props) {
   const platform = usePlatform();
   const {
     breadcrumbList,
@@ -130,7 +132,7 @@ function ProductInfo({ page, layout }: { page: ProductDetailsPage } & Props) {
       </div>
       {/* Sku Selector */}
       <div class="mt-4 sm:mt-6">
-        <ProductSelector product={product} />
+        <ProductSelector product={product} id={id} />
       </div>
       {/* Add to Cart and Favorites button */}
       <div class="mt-4 sm:mt-10 flex flex-col gap-2">
@@ -372,10 +374,10 @@ function Details(props: { page: ProductDetailsPage } & Props) {
   );
 }
 
-function ProductDetails({ page, layout }: Props) {
+function ProductDetails({ page, layout, id }: Props) {
   return (
     <div class="container py-0 sm:py-10">
-      {page ? <Details page={page} layout={layout} /> : <NotFound />}
+      {page ? <Details page={page} layout={layout} id={id} /> : <NotFound />}
     </div>
   );
 }
