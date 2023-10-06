@@ -1,12 +1,14 @@
 import Avatar from "$store/components/ui/Avatar.tsx";
 import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
 import type { Product } from "apps/commerce/types.ts";
+import { usePartial } from "apps/website/hooks/usePartial.ts";
 
 interface Props {
   product: Product;
+  id?: string;
 }
 
-function VariantSelector({ product }: Props) {
+function VariantSelector({ product, id }: Props) {
   const { url, isVariantOf } = product;
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const possibilities = useVariantPossibilities(hasVariant, product);
@@ -17,20 +19,24 @@ function VariantSelector({ product }: Props) {
         <li class="flex flex-col gap-2">
           <span class="text-sm">{name}</span>
           <ul class="flex flex-row gap-3">
-            {Object.entries(possibilities[name]).map(([value, link]) => (
-              <li>
-                <a href={link}>
-                  <Avatar
-                    content={value}
-                    variant={link === url
-                      ? "active"
-                      : link
-                      ? "default"
-                      : "disabled"}
-                  />
-                </a>
-              </li>
-            ))}
+            {Object.entries(possibilities[name]).map(([value, link]) => {
+              const partial = usePartial({ id, href: link });
+
+              return (
+                <li>
+                  <button {...partial}>
+                    <Avatar
+                      content={value}
+                      variant={link === url
+                        ? "active"
+                        : link
+                        ? "default"
+                        : "disabled"}
+                    />
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         </li>
       ))}
