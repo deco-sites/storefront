@@ -8,7 +8,7 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 import { useOffer } from "$store/sdk/useOffer.ts";
 import { formatPrice } from "$store/sdk/format.ts";
 import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
-import { ButtonType, getButtonClasses } from "$store/components/ui/Types.tsx";
+import { ButtonType, getButtonClasses } from "../../constants.tsx";
 import {
   borderColorClasses2,
   BorderColors,
@@ -18,7 +18,8 @@ import {
   Colors,
   Shadow,
   shadowClasses,
-} from "$store/components/ui/Types.tsx";
+} from "../../constants.tsx";
+import { clx } from "$store/sdk/clx.ts";
 
 export interface Layout {
   basics?: {
@@ -91,7 +92,7 @@ function ProductCard(
     offers,
     isVariantOf,
   } = product;
-  console.log(product);
+
   const id = `product-card-${productID}`;
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const productGroupID = isVariantOf?.productGroupID;
@@ -132,24 +133,20 @@ function ProductCard(
   return (
     <div
       id={id}
-      class={`card card-compact group w-full border overflow-hidden
-        ${colorClasses[b?.bgColor ? b?.bgColor : "Transparent"]}
-        ${shadowClasses[b?.shadow ? b?.shadow : "None"]}
-        ${borderRadiusClasses[b?.borderRadius ? b?.borderRadius : "None"]}
-        ${borderColorClasses2[b?.borderColor ? b?.borderColor : "Transparent"]}
-        ${align === "center" ? "text-center" : "text-start"}
-        ${
-        l?.onMouseOver?.showCardShadow
-          ? "lg:hover:border-transparent lg:hover:shadow lg:hover:border-base-200"
-          : ""
-      }
-        ${
-        l?.onMouseOver?.card === "Move up"
-          ? "duration-500 transition-translate ease-in-out lg:hover:-translate-y-2"
-          : ""
-      }
-      `}
       data-deco="view-product"
+      class={clx(
+        "card card-compact group w-full border overflow-hidden",
+        "w-[270px] min-w-[270px] sm:w-[292px]",
+        colorClasses[b?.bgColor ? b?.bgColor : "Transparent"],
+        shadowClasses[b?.shadow ? b?.shadow : "None"],
+        borderRadiusClasses[b?.borderRadius ? b?.borderRadius : "None"],
+        borderColorClasses2[b?.borderColor ? b?.borderColor : "Transparent"],
+        align === "center" ? "text-center" : "text-start",
+        l?.onMouseOver?.showCardShadow &&
+          "lg:hover:border-transparent lg:hover:shadow lg:hover:border-base-200",
+        l?.onMouseOver?.card === "Move up" &&
+          "duration-500 transition-translate ease-in-out lg:hover:-translate-y-2",
+      )}
     >
       <SendEventOnClick
         id={id}

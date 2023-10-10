@@ -1,9 +1,4 @@
-import Container, {
-  HeaderContent,
-  Layout,
-  Style,
-} from "$store/components/ui/Container.tsx";
-import { getButtonClasses } from "$store/components/ui/Types.tsx";
+import { ButtonType, getButtonClasses } from "../../constants.tsx";
 
 export interface Question {
   question: string;
@@ -21,12 +16,13 @@ export interface Contact {
 }
 
 export interface Props {
-  header?: HeaderContent;
   questions?: Question[];
   contact?: Contact;
-  layout?: Layout;
-  itemsLayout?: {
+  layout?: {
     variation?: "Rows" | "Cols";
+  };
+  style?: {
+    button?: ButtonType;
   };
   style?: Style;
 }
@@ -79,7 +75,12 @@ function Question({ question, answer }: Question) {
   );
 }
 
-function Contact({ title, description, link, button }: Contact & Style) {
+function Contact({
+  title,
+  description,
+  link,
+  button,
+}: Contact & { button?: ButtonType }) {
   return (
     <div class="flex flex-col gap-6 items-center text-center">
       <div class="flex flex-col gap-2">
@@ -104,33 +105,22 @@ function Contact({ title, description, link, button }: Contact & Style) {
 export default function FAQ(props: Props) {
   const {
     questions = [],
-    header,
     contact,
     layout,
     style,
-    itemsLayout,
   } = { ...DEFAULT_PROPS, ...props };
 
-  const variation = itemsLayout?.variation || "Rows";
+  const variation = layout?.variation || "Rows";
 
   return (
-    <Container
-      header={header}
-      layout={layout}
-      style={style}
-      afterHeader={variation !== "Rows" && (
-        <Contact {...{ ...contact, ...style }} />
-      )}
+    <div
+      class={`flex gap-4 lg:gap-8 ${variation === "Rows" ? "flex-col" : ""}`}
     >
-      <div
-        class={`flex gap-4 lg:gap-8 ${variation === "Rows" ? "flex-col" : ""}`}
-      >
-        <div class="join join-vertical w-full rounded-none">
-          {questions.map((question) => <Question {...question} />)}
-        </div>
-
-        {variation === "Rows" && <Contact {...{ ...contact, ...style }} />}
+      <div class="join join-vertical w-full rounded-none">
+        {questions.map((question) => <Question {...question} />)}
       </div>
-    </Container>
+
+      {variation === "Rows" && <Contact {...contact} {...style} />}
+    </div>
   );
 }

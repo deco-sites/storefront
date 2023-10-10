@@ -1,9 +1,4 @@
-import { getButtonClasses } from "$store/components/ui/Types.tsx";
-import Container, {
-  ExtendedStyle,
-  HeaderContent,
-  Layout,
-} from "$store/components/ui/Container.tsx";
+import { ButtonType, getButtonClasses } from "../../constants.tsx";
 
 export interface Form {
   placeholder?: string;
@@ -13,17 +8,13 @@ export interface Form {
 }
 
 export interface Props {
-  header?: HeaderContent;
   form?: Form;
-  layout?: Layout;
-  style?: ExtendedStyle;
+  style?: {
+    button?: ButtonType;
+  };
 }
 
 const DEFAULT_PROPS: Props = {
-  header: {
-    title: "",
-    description: "",
-  },
   form: {
     placeholder: "Digite seu email",
     buttonText: "Inscrever",
@@ -32,31 +23,29 @@ const DEFAULT_PROPS: Props = {
 };
 
 export default function Newsletter(props: Props) {
-  const { header, form, layout, style } = { ...DEFAULT_PROPS, ...props };
+  const { form, style } = { ...DEFAULT_PROPS, ...props };
 
   return (
-    <Container header={header} layout={layout} style={style}>
-      <form action="/" class="flex flex-col gap-4">
-        <div class="flex flex-col lg:flex-row gap-3">
-          <input
-            class="input input-bordered lg:w-80"
-            type="text"
-            placeholder={form?.placeholder}
-          />
-          <button
-            class={getButtonClasses(style?.button || {})}
-            type="submit"
-          >
-            {form?.buttonText}
-          </button>
-        </div>
-        {form?.helpText && (
-          <div
-            class="text-sm"
-            dangerouslySetInnerHTML={{ __html: form?.helpText }}
-          />
-        )}
-      </form>
-    </Container>
+    <form action="/" class="flex flex-col gap-4">
+      <div class="flex flex-col lg:flex-row gap-3">
+        <input
+          class="input input-bordered lg:w-80"
+          type="text"
+          placeholder={form?.placeholder}
+        />
+        <button
+          class={getButtonClasses(style?.button || {})}
+          type="submit"
+        >
+          {form?.buttonText}
+        </button>
+      </div>
+      {form?.helpText && (
+        <div
+          class="text-sm"
+          dangerouslySetInnerHTML={{ __html: form?.helpText }}
+        />
+      )}
+    </form>
   );
 }

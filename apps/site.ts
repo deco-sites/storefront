@@ -1,4 +1,4 @@
-import commerce, { Props as CommerceProps } from "apps/commerce/mod.ts";
+import commerce, { Props as WebsiteProps } from "apps/website/mod.ts";
 import { color as shopify } from "apps/shopify/mod.ts";
 import { color as vnda } from "apps/vnda/mod.ts";
 import { color as vtex } from "apps/vtex/mod.ts";
@@ -17,7 +17,7 @@ export type Props = {
    */
   platform: Platform;
   theme?: Section;
-} & CommerceProps;
+} & WebsiteProps;
 
 export type Platform = "vtex" | "vnda" | "shopify" | "wake" | "linx" | "custom";
 
@@ -47,7 +47,7 @@ let firstRun = true;
 export default function Site(
   { theme, ...state }: Props,
 ): App<Manifest, Props, [ReturnType<typeof commerce>]> {
-  _platform = state.platform || state.commerce?.platform || "custom";
+  _platform = state.platform || "custom";
 
   // Prevent console.logging twice
   if (firstRun) {
