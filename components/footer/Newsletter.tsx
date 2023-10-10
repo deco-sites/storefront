@@ -1,7 +1,7 @@
 import { useSignal } from "@preact/signals";
 import { invoke } from "$store/runtime.ts";
 import type { JSX } from "preact";
-import { ButtonType, getButtonClasses } from "$store/components/ui/Types.tsx";
+import { ButtonType, getButtonClasses } from "../../constants.tsx";
 
 export interface Form {
   placeholder?: string;

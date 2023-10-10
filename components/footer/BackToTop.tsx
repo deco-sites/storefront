@@ -1,5 +1,5 @@
 import Icon from "$store/components/ui/Icon.tsx";
-import { ButtonType, getButtonClasses } from "$store/components/ui/Types.tsx";
+import { ButtonType, getButtonClasses } from "../../constants.tsx";
 
 export default function BackToTop(
   { children, style }: { children?: string; style?: ButtonType },

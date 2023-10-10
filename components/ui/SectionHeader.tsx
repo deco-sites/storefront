@@ -2,7 +2,7 @@ import {
   lineColorClasses,
   textColorClasses,
   TextColors,
-} from "$store/components/ui/Types.tsx";
+} from "../../constants.tsx";
 
 export interface Style {
   textColor?: TextColors;

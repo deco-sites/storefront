@@ -10,11 +10,7 @@ import Divider from "$store/components/footer/Divider.tsx";
 import BackToTop from "$store/components/footer/BackToTop.tsx";
 import PoweredByDeco from "apps/website/components/PoweredByDeco.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import Container, {
-  Layout,
-  Style,
-} from "$store/components/ui/SimpleContainer.tsx";
-import { lineColorClasses } from "$store/components/ui/Types.tsx";
+import { ButtonType, lineColorClasses } from "../../constants.tsx";
 
 export type Item = {
   label: string;
@@ -115,9 +111,13 @@ export interface Props {
   backToTheTop?: {
     text?: string;
   };
-  layout?: Layout;
   layoutOptions?: LayoutOptions;
-  style?: Style;
+  style?: {
+    button?: ButtonType;
+    content?: {
+      textColor?: keyof typeof lineColorClasses;
+    };
+  };
 }
 
 function Footer({
@@ -175,7 +175,6 @@ function Footer({
   regionOptions = { currency: [], language: [] },
   extraLinks = [],
   backToTheTop,
-  layout,
   layoutOptions = {
     variation: "Variation 1",
     show: {
@@ -233,138 +232,136 @@ function Footer({
   );
 
   return (
-    <Container layout={layout} style={style}>
-      <>
-        <footer class="lg:container lg:mx-auto">
-          {(!layoutOptions?.variation ||
-            layoutOptions?.variation == "Variation 1") && (
-            <div class="flex flex-col gap-10">
-              <div class="flex flex-col md:flex-row md:justify-between md:flex-wrap lg:flex-nowrap gap-8 lg:gap-12">
-                {_logo}
-                {_sectionLinks}
-                {_newsletter}
-              </div>
-              {_divider}
-              <div class="flex flex-col md:flex-row gap-10 md:gap-14 md:items-end">
-                {_payments}
-                {_social}
-                <div class="flex flex-col lg:flex-row gap-10 lg:gap-14 lg:items-end">
-                  {_apps}
-                  {_region}
-                </div>
-              </div>
-              {_divider}
-              <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10">
-                <PoweredByDeco />
-                {_links}
+    <>
+      <footer class="lg:container lg:mx-auto">
+        {(!layoutOptions?.variation ||
+          layoutOptions?.variation == "Variation 1") && (
+          <div class="flex flex-col gap-10">
+            <div class="flex flex-col md:flex-row md:justify-between md:flex-wrap lg:flex-nowrap gap-8 lg:gap-12">
+              {_logo}
+              {_sectionLinks}
+              {_newsletter}
+            </div>
+            {_divider}
+            <div class="flex flex-col md:flex-row gap-10 md:gap-14 md:items-end">
+              {_payments}
+              {_social}
+              <div class="flex flex-col lg:flex-row gap-10 lg:gap-14 lg:items-end">
+                {_apps}
+                {_region}
               </div>
             </div>
-          )}
-          {layoutOptions?.variation == "Variation 2" && (
-            <div class="flex flex-col gap-10">
-              <div class="flex flex-col md:flex-row gap-10">
-                <div class="flex flex-col gap-10 lg:w-1/2">
-                  {_logo}
-                  {_social}
+            {_divider}
+            <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10">
+              <PoweredByDeco />
+              {_links}
+            </div>
+          </div>
+        )}
+        {layoutOptions?.variation == "Variation 2" && (
+          <div class="flex flex-col gap-10">
+            <div class="flex flex-col md:flex-row gap-10">
+              <div class="flex flex-col gap-10 lg:w-1/2">
+                {_logo}
+                {_social}
+                {_payments}
+                {_apps}
+                {_region}
+              </div>
+              <div class="flex flex-col gap-10 lg:gap-20 lg:w-1/2 lg:pr-10">
+                {_newsletter}
+                {_sectionLinks}
+              </div>
+            </div>
+            {_divider}
+            <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10">
+              <PoweredByDeco />
+              {_links}
+            </div>
+          </div>
+        )}
+        {layoutOptions?.variation == "Variation 3" && (
+          <div class="flex flex-col gap-10">
+            {_logo}
+            <div class="flex flex-col lg:flex-row gap-14">
+              <div class="flex flex-col md:flex-row lg:flex-col md:justify-between lg:justify-normal gap-10 lg:w-2/5">
+                {_newsletter}
+                <div class="flex flex-col gap-10">
                   {_payments}
                   {_apps}
-                  {_region}
-                </div>
-                <div class="flex flex-col gap-10 lg:gap-20 lg:w-1/2 lg:pr-10">
-                  {_newsletter}
-                  {_sectionLinks}
                 </div>
               </div>
-              {_divider}
-              <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10">
-                <PoweredByDeco />
-                {_links}
+              <div class="flex flex-col gap-10 lg:gap-20 lg:w-3/5 lg:items-end">
+                <div class="flex flex-col md:flex-row gap-10">
+                  {_sectionLinks}
+                  {_social}
+                </div>
+                {_region}
               </div>
             </div>
-          )}
-          {layoutOptions?.variation == "Variation 3" && (
-            <div class="flex flex-col gap-10">
-              {_logo}
-              <div class="flex flex-col lg:flex-row gap-14">
-                <div class="flex flex-col md:flex-row lg:flex-col md:justify-between lg:justify-normal gap-10 lg:w-2/5">
-                  {_newsletter}
-                  <div class="flex flex-col gap-10">
+            {_divider}
+            <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10">
+              <PoweredByDeco />
+              {_links}
+            </div>
+          </div>
+        )}
+        {layoutOptions?.variation == "Variation 4" && (
+          <div class="flex flex-col gap-10">
+            {_newsletter}
+            {!layoutOptions?.show?.newsletter ? <></> : _divider}
+            <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between">
+              {_sectionLinks}
+              <div class="flex flex-col md:flex-row lg:flex-col gap-10 lg:gap-10 lg:w-2/5 lg:pl-10">
+                <div class="flex flex-col md:flex-row gap-10 lg:gap-20">
+                  <div class="lg:flex-auto">
                     {_payments}
-                    {_apps}
                   </div>
-                </div>
-                <div class="flex flex-col gap-10 lg:gap-20 lg:w-3/5 lg:items-end">
-                  <div class="flex flex-col md:flex-row gap-10">
-                    {_sectionLinks}
+                  <div class="lg:flex-auto">
                     {_social}
                   </div>
+                </div>
+                <div class="flex flex-col gap-10 lg:gap-10">
                   {_region}
-                </div>
-              </div>
-              {_divider}
-              <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10">
-                <PoweredByDeco />
-                {_links}
-              </div>
-            </div>
-          )}
-          {layoutOptions?.variation == "Variation 4" && (
-            <div class="flex flex-col gap-10">
-              {_newsletter}
-              {!layoutOptions?.show?.newsletter ? <></> : _divider}
-              <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between">
-                {_sectionLinks}
-                <div class="flex flex-col md:flex-row lg:flex-col gap-10 lg:gap-10 lg:w-2/5 lg:pl-10">
-                  <div class="flex flex-col md:flex-row gap-10 lg:gap-20">
-                    <div class="lg:flex-auto">
-                      {_payments}
-                    </div>
-                    <div class="lg:flex-auto">
-                      {_social}
-                    </div>
-                  </div>
-                  <div class="flex flex-col gap-10 lg:gap-10">
-                    {_region}
-                    {_apps}
-                  </div>
-                </div>
-              </div>
-              {_divider}
-              <div class="flex flex-col md:flex-row md:justify-between gap-10 md:items-center">
-                {_logo}
-                <PoweredByDeco />
-              </div>
-            </div>
-          )}
-          {layoutOptions?.variation == "Variation 5" && (
-            <div class="flex flex-col gap-10">
-              {_newsletter}
-              {!layoutOptions?.show?.newsletter ? <></> : _divider}
-              {_logo}
-              <div class="flex flex-col md:flex-row gap-10 lg:gap-20 md:justify-between">
-                {_sectionLinks}
-                <div class="flex flex-col gap-10 md:w-2/5 lg:pl-10">
-                  {_payments}
-                  {_social}
                   {_apps}
                 </div>
               </div>
-              {_divider}
-              <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10 md:items-center">
-                <PoweredByDeco />
-                <div class="flex flex-col md:flex-row gap-10 md:items-center">
-                  {_links}
-                  {_region}
-                </div>
+            </div>
+            {_divider}
+            <div class="flex flex-col md:flex-row md:justify-between gap-10 md:items-center">
+              {_logo}
+              <PoweredByDeco />
+            </div>
+          </div>
+        )}
+        {layoutOptions?.variation == "Variation 5" && (
+          <div class="flex flex-col gap-10">
+            {_newsletter}
+            {!layoutOptions?.show?.newsletter ? <></> : _divider}
+            {_logo}
+            <div class="flex flex-col md:flex-row gap-10 lg:gap-20 md:justify-between">
+              {_sectionLinks}
+              <div class="flex flex-col gap-10 md:w-2/5 lg:pl-10">
+                {_payments}
+                {_social}
+                {_apps}
               </div>
             </div>
-          )}
-        </footer>
-        {!layoutOptions?.show?.backToTheTop
-          ? <></>
-          : <BackToTop style={style?.button}>{backToTheTop?.text}</BackToTop>}
-      </>
-    </Container>
+            {_divider}
+            <div class="flex flex-col-reverse md:flex-row md:justify-between gap-10 md:items-center">
+              <PoweredByDeco />
+              <div class="flex flex-col md:flex-row gap-10 md:items-center">
+                {_links}
+                {_region}
+              </div>
+            </div>
+          </div>
+        )}
+      </footer>
+      {!layoutOptions?.show?.backToTheTop
+        ? <></>
+        : <BackToTop style={style?.button}>{backToTheTop?.text}</BackToTop>}
+    </>
   );
 }
 

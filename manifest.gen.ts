@@ -3,7 +3,12 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $$$0 from "./loaders/Layouts/ProductCard.tsx";
+import * as $$$1 from "./loaders/List/IconCards.tsx";
+import * as $$$2 from "./loaders/List/ProductCards.tsx";
+import * as $$$3 from "./loaders/List/ImageCards.tsx";
+import * as $$$4 from "./loaders/List/Banners.tsx";
 import * as $$$$$$0 from "./sections/Footer/Footer.tsx";
+<<<<<<< HEAD
 import * as $$$$$$1 from "./sections/Category/CategoryBanner.tsx";
 import * as $$$$$$2 from "./sections/Category/CategoryList.tsx";
 import * as $$$$$$3 from "./sections/Images/ShoppableBanner.tsx";
@@ -28,21 +33,43 @@ import * as $$$$$$21 from "./sections/Links/LinkTree.tsx";
 import * as $$$$$$22 from "./sections/Links/Shortcuts.tsx";
 import * as $$$$$$23 from "./sections/Newsletter/Newsletter.tsx";
 import * as $$$$$$24 from "./sections/Header/Header.tsx";
+=======
+import * as $$$$$$1 from "./sections/Images/ShoppableBanner.tsx";
+import * as $$$$$$2 from "./sections/Images/ImageGrid.tsx";
+import * as $$$$$$3 from "./sections/Layout/Slider.tsx";
+import * as $$$$$$4 from "./sections/Layout/Container.tsx";
+import * as $$$$$$5 from "./sections/Layout/Tab.tsx";
+import * as $$$$$$6 from "./sections/Layout/Grid.tsx";
+import * as $$$$$$7 from "./sections/Layout/Flex.tsx";
+import * as $$$$$$8 from "./sections/Content/Faq.tsx";
+import * as $$$$$$9 from "./sections/Product/Wishlist.tsx";
+import * as $$$$$$10 from "./sections/Product/SearchResult.tsx";
+import * as $$$$$$11 from "./sections/Product/ProductDetails.tsx";
+import * as $$$$$$12 from "./sections/Miscellaneous/CampaignTimer.tsx";
+import * as $$$$$$13 from "./sections/Miscellaneous/CookieConsent.tsx";
+import * as $$$$$$14 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$15 from "./sections/Social/InstagramPosts.tsx";
+import * as $$$$$$16 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$17 from "./sections/Links/LinkTree.tsx";
+import * as $$$$$$18 from "./sections/Links/Shortcuts.tsx";
+import * as $$$$$$19 from "./sections/Newsletter/Newsletter.tsx";
+import * as $$$$$$20 from "./sections/Header/Header.tsx";
+>>>>>>> a89d720 (add layouts and refactor sections)
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
 const manifest = {
   "loaders": {
     "deco-sites/storefront/loaders/Layouts/ProductCard.tsx": $$$0,
+    "deco-sites/storefront/loaders/List/Banners.tsx": $$$4,
+    "deco-sites/storefront/loaders/List/IconCards.tsx": $$$1,
+    "deco-sites/storefront/loaders/List/ImageCards.tsx": $$$3,
+    "deco-sites/storefront/loaders/List/ProductCards.tsx": $$$2,
   },
   "sections": {
-    "deco-sites/storefront/sections/Category/CategoryBanner.tsx": $$$$$$1,
-    "deco-sites/storefront/sections/Category/CategoryList.tsx": $$$$$$2,
-    "deco-sites/storefront/sections/Content/Benefits.tsx": $$$$$$10,
-    "deco-sites/storefront/sections/Content/Faq.tsx": $$$$$$9,
-    "deco-sites/storefront/sections/Content/Logos.tsx": $$$$$$8,
-    "deco-sites/storefront/sections/Content/Testimonials.tsx": $$$$$$7,
+    "deco-sites/storefront/sections/Content/Faq.tsx": $$$$$$8,
     "deco-sites/storefront/sections/Footer/Footer.tsx": $$$$$$0,
+<<<<<<< HEAD
 <<<<<<< HEAD
     "deco-sites/storefront/sections/Header/Header.tsx": $$$$$$24,
 =======
@@ -65,6 +92,27 @@ const manifest = {
     "deco-sites/storefront/sections/Social/InstagramPosts.tsx": $$$$$$19,
     "deco-sites/storefront/sections/Social/WhatsApp.tsx": $$$$$$18,
     "deco-sites/storefront/sections/Theme/Theme.tsx": $$$$$$20,
+=======
+    "deco-sites/storefront/sections/Header/Header.tsx": $$$$$$20,
+    "deco-sites/storefront/sections/Images/ImageGrid.tsx": $$$$$$2,
+    "deco-sites/storefront/sections/Images/ShoppableBanner.tsx": $$$$$$1,
+    "deco-sites/storefront/sections/Layout/Container.tsx": $$$$$$4,
+    "deco-sites/storefront/sections/Layout/Flex.tsx": $$$$$$7,
+    "deco-sites/storefront/sections/Layout/Grid.tsx": $$$$$$6,
+    "deco-sites/storefront/sections/Layout/Slider.tsx": $$$$$$3,
+    "deco-sites/storefront/sections/Layout/Tab.tsx": $$$$$$5,
+    "deco-sites/storefront/sections/Links/LinkTree.tsx": $$$$$$17,
+    "deco-sites/storefront/sections/Links/Shortcuts.tsx": $$$$$$18,
+    "deco-sites/storefront/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$12,
+    "deco-sites/storefront/sections/Miscellaneous/CookieConsent.tsx": $$$$$$13,
+    "deco-sites/storefront/sections/Newsletter/Newsletter.tsx": $$$$$$19,
+    "deco-sites/storefront/sections/Product/ProductDetails.tsx": $$$$$$11,
+    "deco-sites/storefront/sections/Product/SearchResult.tsx": $$$$$$10,
+    "deco-sites/storefront/sections/Product/Wishlist.tsx": $$$$$$9,
+    "deco-sites/storefront/sections/Social/InstagramPosts.tsx": $$$$$$15,
+    "deco-sites/storefront/sections/Social/WhatsApp.tsx": $$$$$$14,
+    "deco-sites/storefront/sections/Theme/Theme.tsx": $$$$$$16,
+>>>>>>> a89d720 (add layouts and refactor sections)
   },
   "apps": {
     "deco-sites/storefront/apps/decohub.ts": $$$$$$$$$$$0,
