@@ -5,10 +5,9 @@ import { usePartial } from "apps/website/hooks/usePartial.ts";
 
 interface Props {
   product: Product;
-  id?: string;
 }
 
-function VariantSelector({ product, id }: Props) {
+function VariantSelector({ product }: Props) {
   const { url, isVariantOf } = product;
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const possibilities = useVariantPossibilities(hasVariant, product);
@@ -20,7 +19,7 @@ function VariantSelector({ product, id }: Props) {
           <span class="text-sm">{name}</span>
           <ul class="flex flex-row gap-3">
             {Object.entries(possibilities[name]).map(([value, link]) => {
-              const partial = usePartial({ id, href: link });
+              const partial = usePartial({ href: link });
 
               return (
                 <li>
