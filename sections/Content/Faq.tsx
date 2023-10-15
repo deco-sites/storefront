@@ -1,4 +1,4 @@
-import Header from "$store/components/ui/SectionHeader.tsx";
+import { ButtonType, getButtonClasses } from "../../constants.tsx";
 
 export interface Question {
   question: string;
@@ -8,7 +8,6 @@ export interface Question {
 
 export interface Contact {
   title?: string;
-  /** @format html */
   description?: string;
   link?: {
     text: string;
@@ -17,44 +16,54 @@ export interface Contact {
 }
 
 export interface Props {
-  title?: string;
-  description?: string;
   questions?: Question[];
   contact?: Contact;
   layout?: {
-    variation?: "Compact" | "Full" | "Side to side";
-    headerAlignment?: "center" | "left";
+    variation?: "Rows" | "Cols";
   };
+  style?: {
+    button?: ButtonType;
+  };
+  style?: Style;
 }
 
 const DEFAULT_PROPS = {
-  title: "",
-  description: "",
-  questions: [
-    {
-      question: "Como faço para acompanhar o meu pedido?",
-      answer:
-        "Acompanhar o seu pedido é fácil! Assim que o seu pedido for enviado, enviaremos um e-mail de confirmação com um número de rastreamento. Basta clicar no número de rastreamento ou visitar o nosso site e inserir o número de rastreamento na seção designada para obter atualizações em tempo real sobre a localização e o status de entrega do seu pedido.",
-    },
-    {
-      question: "Qual é a política de devolução?",
-      answer:
-        "Oferecemos uma política de devolução sem complicações. Se você não estiver completamente satisfeito(a) com a sua compra, pode devolver o item em até 30 dias após a entrega para obter um reembolso total ou troca. Certifique-se de que o item esteja sem uso, na embalagem original e acompanhado do recibo. Entre em contato com a nossa equipe de atendimento ao cliente e eles o(a) orientarão pelo processo de devolução.",
-    },
-  ],
-  contact: {
+  header: {
     title: "",
     description: "",
-    button: {
-      text: "",
-      link: "",
-    },
   },
+  questions: [
+    {
+      "question": "How can I track my order?",
+      "answer":
+        "Tracking your order is easy! Once your order is shipped, we will send a confirmation email with a tracking number. Simply click on the tracking number or visit our website and enter the tracking number in the designated section to get real-time updates on the location and delivery status of your order.",
+    },
+    {
+      "question": "What is the return policy?",
+      "answer":
+        "We offer a hassle-free return policy. If you are not completely satisfied with your purchase, you can return the item within 30 days of delivery for a full refund or exchange. Please ensure that the item is unused, in its original packaging, and accompanied by the receipt. Contact our customer service team, and they will guide you through the return process.",
+    },
+    {
+      "question": "What payment methods are accepted?",
+      "answer":
+        "We accept various payment methods, including credit cards, debit cards, and bank transfers. When checking out, you can choose the payment option that best suits your preferences. We ensure that all transactions are secure and protected.",
+    },
+    {
+      "question": "How long does it take for my order to be delivered?",
+      "answer":
+        "The delivery time depends on your location. Generally, the estimated delivery timeframe is 5 to 10 business days after payment confirmation. However, this timeframe may vary due to unforeseen circumstances. After your order is shipped, we will send an email with tracking information so you can monitor the delivery.",
+    },
+    {
+      "question": "Do you offer free shipping?",
+      "answer":
+        "Yes, we offer free shipping for orders above a certain value. The minimum value to qualify for free shipping may vary, so please check the current conditions on our website. If your order meets the requirements, the shipping cost will be automatically adjusted to zero during the checkout process.",
+    },
+  ],
 };
 
 function Question({ question, answer }: Question) {
   return (
-    <details class="collapse collapse-arrow join-item border-t border-base-200">
+    <details class="collapse collapse-arrow join-item border-t">
       <summary class="collapse-title text-lg font-medium">
         {question}
       </summary>
@@ -66,7 +75,12 @@ function Question({ question, answer }: Question) {
   );
 }
 
-function Contact({ title, description, link }: Contact) {
+function Contact({
+  title,
+  description,
+  link,
+  button,
+}: Contact & { button?: ButtonType }) {
   return (
     <div class="flex flex-col gap-6 items-center text-center">
       <div class="flex flex-col gap-2">
@@ -79,7 +93,11 @@ function Contact({ title, description, link }: Contact) {
         )}
       </div>
       {link &&
-        <a href={link.href} class="btn">{link.text}</a>}
+        (
+          <a href={link.href} class={getButtonClasses(button || {})}>
+            {link.text}
+          </a>
+        )}
     </div>
   );
 }
@@ -87,67 +105,22 @@ function Contact({ title, description, link }: Contact) {
 export default function FAQ(props: Props) {
   const {
     questions = [],
-    title,
-    description,
     contact,
     layout,
+    style,
   } = { ...DEFAULT_PROPS, ...props };
 
+  const variation = layout?.variation || "Rows";
+
   return (
-    <>
-      {(!layout?.variation || layout?.variation === "Compact") && (
-        <div class="w-full container px-4 py-8 flex flex-col gap-4 lg:gap-8 lg:py-10 lg:px-40">
-          <div class="flex flex-col gap-8 lg:gap-10">
-            <Header
-              title={title || ""}
-              description={description || ""}
-              alignment={layout?.headerAlignment || "center"}
-            />
-            <div class="join join-vertical w-full">
-              {questions.map((question) => <Question {...question} />)}
-            </div>
-          </div>
+    <div
+      class={`flex gap-4 lg:gap-8 ${variation === "Rows" ? "flex-col" : ""}`}
+    >
+      <div class="join join-vertical w-full rounded-none">
+        {questions.map((question) => <Question {...question} />)}
+      </div>
 
-          <Contact {...contact} />
-        </div>
-      )}
-
-      {layout?.variation === "Full" && (
-        <div class="w-full container px-4 py-8 flex flex-col gap-4 lg:gap-8 lg:py-10 lg:px-0">
-          <div class="flex flex-col gap-8 lg:gap-10">
-            <Header
-              title={title || ""}
-              description={description || ""}
-              alignment={layout?.headerAlignment || "center"}
-            />
-            <div class="join join-vertical w-full">
-              {questions.map((question) => <Question {...question} />)}
-            </div>
-          </div>
-
-          <Contact {...contact} />
-        </div>
-      )}
-
-      {layout?.variation === "Side to side" && (
-        <div class="w-full container px-4 py-8 grid gap-8 grid-flow-row grid-cols-1 lg:grid-flow-col lg:grid-cols-2 lg:grid-rows-2 lg:py-10 lg:px-0">
-          <div class="order-1 lg:order-1">
-            <Header
-              title={title || ""}
-              description={description || ""}
-              alignment={layout?.headerAlignment || "center"}
-            />
-          </div>
-          <div class="order-2 lg:order-3 lg:row-span-2">
-            <div class="join join-vertical">
-              {questions.map((question) => <Question {...question} />)}
-            </div>
-          </div>
-          <div class="order-3 lg:order-2">
-            <Contact {...contact} />
-          </div>
-        </div>
-      )}
-    </>
+      {variation === "Rows" && <Contact {...contact} {...style} />}
+    </div>
   );
 }
