@@ -60,6 +60,7 @@ function Result({
           <div class="flex-grow">
             <ProductGallery
               products={products}
+              pageInfo={pageInfo}
               layout={{ card: cardLayout, columns: layout?.columns }}
             />
           </div>

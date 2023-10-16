@@ -61,6 +61,7 @@ function ProductShelf({
                 itemListName={title}
                 layout={cardLayout}
                 platform={platform}
+                index={index}
               />
             </Slider.Item>
           ))}
