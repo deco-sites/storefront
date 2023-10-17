@@ -40,6 +40,8 @@ function Result({
   cardLayout,
 }: Omit<Props, "page"> & { page: ProductListingPage }) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
+  const perPage = pageInfo.recordPerPage || products.length;
+  const offset = pageInfo.currentPage * perPage;
 
   return (
     <>
@@ -60,7 +62,7 @@ function Result({
           <div class="flex-grow">
             <ProductGallery
               products={products}
-              pageInfo={pageInfo}
+              offset={offset}
               layout={{ card: cardLayout, columns: layout?.columns }}
             />
           </div>
@@ -97,9 +99,10 @@ function Result({
             // TODO: get category name from search or cms setting
             item_list_name: "",
             item_list_id: "",
-            items: page.products?.map((product) =>
+            items: page.products?.map((product, index) =>
               mapProductToAnalyticsItem({
                 ...(useOffer(product.offers)),
+                index: offset + index,
                 product,
                 breadcrumbList: page.breadcrumb,
               })

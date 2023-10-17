@@ -2,19 +2,21 @@ import ProductCard, {
   Layout as CardLayout,
 } from "$store/components/product/ProductCard.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
-import { ProductListingPage } from "apps/commerce/types.ts";
+import { Product } from "apps/commerce/types.ts";
 
 export interface Columns {
   mobile?: 1 | 2;
   desktop?: 2 | 3 | 4 | 5;
 }
 
-export type Props = {
+export interface Props {
+  products: Product[] | null;
+  offset: number;
   layout?: {
     card?: CardLayout;
     columns?: Columns;
   };
-} & Pick<ProductListingPage, "products" | "pageInfo">;
+}
 
 const MOBILE_COLUMNS = {
   1: "grid-cols-1",
@@ -28,11 +30,8 @@ const DESKTOP_COLUMNS = {
   5: "sm:grid-cols-5",
 };
 
-function ProductGallery({ products, layout, pageInfo }: Props) {
+function ProductGallery({ products, layout, offset }: Props) {
   const platform = usePlatform();
-  const perPage = pageInfo.recordPerPage || products.length;
-  const offset = pageInfo.currentPage * perPage;
-
   const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
   const desktop = DESKTOP_COLUMNS[layout?.columns?.desktop ?? 4];
 
