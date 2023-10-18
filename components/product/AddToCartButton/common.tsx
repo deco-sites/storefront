@@ -44,8 +44,8 @@ const useAddToCart = ({
             item_url: url,
             item_name: name,
             discount: discount,
-            item_id: productGroupID,
-            item_variant: productID,
+            item_id: productID,
+            item_variant: name,
           }],
         },
       });
