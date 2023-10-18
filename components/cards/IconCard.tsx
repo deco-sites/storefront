@@ -5,17 +5,16 @@ export interface Props {
   label: string;
   icon: AvailableIcons;
   description: string;
-
-  layout: {
-    icon?: {
-      position?: "top" | "left";
-    };
-  };
+  iconPosition?: "Top" | "Left";
 }
 
-function BenefitCard({ icon, label, description }: Props) {
+export default function IconCard({ icon, label, description, iconPosition }: Props) {
   return (
-    <div class={clx()}>
+    <div class={`
+      flex gap-3
+      ${iconPosition === "Left" ? "flex-row" : "flex-col"}
+      ${clx()}
+    `}>
       <div class="flex-none">
         <Icon
           id={icon}
@@ -36,5 +35,3 @@ function BenefitCard({ icon, label, description }: Props) {
     </div>
   );
 }
-
-export default BenefitCard;
