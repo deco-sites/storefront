@@ -39,6 +39,7 @@ function ProductInfo({ page, layout }: Props) {
     product,
   } = page;
   const {
+    url,
     productID,
     offers,
     name = "",
@@ -110,6 +111,7 @@ function ProductInfo({ page, layout }: Props) {
               {platform === "vtex" && (
                 <>
                   <AddToCartButtonVTEX
+                    url={url || ""}
                     name={name}
                     productID={productID}
                     productGroupID={productGroupID}
@@ -126,6 +128,7 @@ function ProductInfo({ page, layout }: Props) {
               )}
               {platform === "wake" && (
                 <AddToCartButtonWake
+                  url={url || ""}
                   name={name}
                   productID={productID}
                   productGroupID={productGroupID}
@@ -135,6 +138,7 @@ function ProductInfo({ page, layout }: Props) {
               )}
               {platform === "linx" && (
                 <AddToCartButtonLinx
+                  url={url || ""}
                   name={name}
                   productID={productID}
                   productGroupID={productGroupID}
@@ -144,6 +148,7 @@ function ProductInfo({ page, layout }: Props) {
               )}
               {platform === "vnda" && (
                 <AddToCartButtonVNDA
+                  url={url || ""}
                   name={name}
                   productID={productID}
                   productGroupID={productGroupID}
@@ -154,6 +159,7 @@ function ProductInfo({ page, layout }: Props) {
               )}
               {platform === "shopify" && (
                 <AddToCartButtonShopify
+                  url={url || ""}
                   name={name}
                   productID={productID}
                   productGroupID={productGroupID}

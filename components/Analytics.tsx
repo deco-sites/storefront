@@ -12,9 +12,9 @@ export const SendEventOnClick = <E extends AnalyticsEvent>({ event, id }: {
     type="module"
     dangerouslySetInnerHTML={{
       __html:
-        `addEventListener("load", () => {const element = document.getElementById("${id}"); element && element.addEventListener("click", () => (${sendEvent})(${
+        `document.getElementById("${id}").addEventListener("click", () => (${sendEvent})(${
           JSON.stringify(event)
-        }));})`,
+        }));`,
     }}
   />
 );
@@ -29,9 +29,7 @@ export const SendEventOnLoad = <E extends AnalyticsEvent>(
   <script
     type="module"
     dangerouslySetInnerHTML={{
-      __html: `addEventListener("load", () => (${sendEvent})(${
-        JSON.stringify(event)
-      }))`,
+      __html: `(${sendEvent})(${JSON.stringify(event)});`,
     }}
   />
 );

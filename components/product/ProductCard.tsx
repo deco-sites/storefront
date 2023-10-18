@@ -44,8 +44,11 @@ interface Props {
 
   /** @description used for analytics event */
   itemListName?: string;
-  layout?: Layout;
 
+  /** @description index of the product card in the list */
+  index?: number;
+
+  layout?: Layout;
   platform?: Platform;
 }
 
@@ -58,7 +61,7 @@ const WIDTH = 200;
 const HEIGHT = 279;
 
 function ProductCard(
-  { product, preload, itemListName, layout, platform }: Props,
+  { product, preload, itemListName, layout, platform, index }: Props,
 ) {
   const {
     url,
@@ -126,6 +129,7 @@ function ProductCard(
                 product,
                 price,
                 listPrice,
+                index,
               }),
             ],
           },
