@@ -10,6 +10,7 @@ export interface Props {
   productGroupID: string;
   price: number;
   discount: number;
+  url: string;
   onAddItem: () => Promise<void>;
 }
 
@@ -19,6 +20,7 @@ const useAddToCart = ({
   discount,
   productGroupID,
   productID,
+  url,
   onAddItem,
 }: Props) => {
   const [loading, setLoading] = useState(false);
@@ -39,10 +41,11 @@ const useAddToCart = ({
           items: [{
             quantity: 1,
             price,
+            item_url: url,
             item_name: name,
             discount: discount,
-            item_id: productGroupID,
-            item_variant: productID,
+            item_id: productID,
+            item_variant: name,
           }],
         },
       });

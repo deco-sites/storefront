@@ -164,7 +164,11 @@ function Searchbar({
                   index={index}
                   class="carousel-item first:ml-4 last:mr-4 min-w-[200px] max-w-[200px]"
                 >
-                  <ProductCard product={product} platform={platform} />
+                  <ProductCard
+                    product={product}
+                    platform={platform}
+                    index={index}
+                  />
                 </Slider.Item>
               ))}
             </Slider>
