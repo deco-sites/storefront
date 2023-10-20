@@ -8,7 +8,7 @@ interface Tab {
 }
 
 export interface Props {
-  tabIndex?: number;
+  selectedTab?: number;
   tabs?: Tab[];
   id?: string;
 }
@@ -16,7 +16,7 @@ export interface Props {
 const useTabIndex = (maybeIndex = 0, size: number) =>
   Math.max(Math.min(maybeIndex, size), 0);
 
-function Section({ tabs = [], tabIndex: maybeTabIndex, id }: Props) {
+function Section({ tabs = [], selectedTab: maybeTabIndex, id }: Props) {
   const tabIndex = useTabIndex(maybeTabIndex, tabs.length);
   const tab = tabs[tabIndex];
 
