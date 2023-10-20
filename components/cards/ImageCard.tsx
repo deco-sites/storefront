@@ -29,12 +29,12 @@ function CardText(
   return (
     <div
       class={`flex flex-col ${
-        alignment === "Center" ? "text-center" : "text-left"
+        !alignment || alignment === "Center" ? "items-center" : "items-start"
       }`}
     >
-      {tag && <div class="text-sm text-primary">{tag}</div>}
-      {label && <h3 class="text-lg text-base-content">{label}</h3>}
-      {description && <div class="text-sm text-neutral">{description}</div>}
+      {tag && <div class="text-sm bg-primary text-content-primary px-2 rounded mb-2">{tag}</div>}
+      {label && <h3 class="text-xl">{label}</h3>}
+      {description && <div class="text-sm">{description}</div>}
     </div>
   );
 }
@@ -45,8 +45,8 @@ function Card(
   const position = style?.textPosition === "Bottom" ? "Bottom" : "Top";
   const alignment = style?.textAlignment === "Left" ? "Left" : "Center";
   return (
-    <div>
-      <a href={href} class="flex flex-col gap-4 lg:w-[280px] w-40 lg:h-auto">
+    <div class="flex flex-col gap-4 justify-center">
+      <a href={href} class="flex flex-col gap-4 lg:w-full w-full lg:h-auto">
         {position === "Top" && (
           <CardText
             tag={tag}
