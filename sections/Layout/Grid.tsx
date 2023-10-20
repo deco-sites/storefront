@@ -64,7 +64,7 @@ function Section({ layout, children }: Props) {
   return (
     <div
       class={clx(
-        "grid",
+        "w-full grid",
         layout?.gap?.mobile && grid.gap.mobile[layout.gap.mobile],
         layout?.gap?.desktop && grid.gap.desktop[layout.gap.desktop],
         layout?.cols?.mobile && grid.cols.mobile[layout.cols.mobile],
