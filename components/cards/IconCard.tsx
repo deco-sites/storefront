@@ -1,20 +1,28 @@
 import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
 import { clx } from "$store/sdk/clx.ts";
+import { flex } from "../../constants.tsx";
 
 export interface Props {
   label: string;
   icon: AvailableIcons;
   description: string;
-  iconPosition?: "Top" | "Left";
+  layout?: {
+    iconPosition?: "Top" | "Left";
+    flex?: {
+      mobile?: "1" | "Auto" | "Initial" | "None",
+      desktop?: "1" | "Auto" | "Initial" | "None",
+    } 
+  }
 }
 
-export default function IconCard({ icon, label, description, iconPosition }: Props) {
+export default function IconCard({ icon, label, description, layout }: Props) {
   return (
-    <div class={`
-      flex gap-3
-      ${iconPosition === "Left" ? "flex-row" : "flex-col"}
-      ${clx()}
-    `}>
+    <div class={clx(
+      "flex gap-3",
+      layout?.iconPosition === "Left" ? "flex-row" : "flex-col",
+      layout?.flex?.mobile ? flex.item.mobile[layout.flex.mobile] : "flex-1",
+      layout?.flex?.desktop ? flex.item.mobile[layout.flex.desktop] : "sm:flex-1",
+    )}>
       <div class="flex-none">
         <Icon
           id={icon}
