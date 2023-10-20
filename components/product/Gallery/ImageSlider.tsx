@@ -75,7 +75,7 @@ export default function GallerySlider(props: Props) {
           <Slider class="carousel carousel-center gap-6 w-screen sm:w-[40vw]">
             {images.map((img, index) => (
               <Slider.Item
-                index={2}
+                index={index}
                 class="carousel-item w-full"
               >
                 <Image
