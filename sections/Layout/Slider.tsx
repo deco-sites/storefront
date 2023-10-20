@@ -1,6 +1,6 @@
 import Icon from "$store/components/ui/Icon.tsx";
 import Slider from "$store/components/ui/Slider.tsx";
-import { buttonClasses, ButtonColor, VNode } from "../../constants.tsx";
+import { buttonClasses, ButtonColor, grid, VNode } from "../../constants.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
 import { clx } from "$store/sdk/clx.ts";
 import type { Section } from "deco/blocks/section.ts";
@@ -10,7 +10,15 @@ import { useId } from "preact/hooks";
 export interface Props {
   children: VNode[] | null;
   interval?: number;
+  /** @description For desktop in px. */
   layout?: {
+    itemWidth?: number;
+    gap?: {
+      /** @default 2 */
+      mobile?: "1" | "2" | "4" | "8" | "12" | "16";
+      /** @default 4 */
+      desktop?: "1" | "2" | "4" | "8" | "12" | "16";
+    };
     dots?: boolean;
     controls?: boolean;
   };
@@ -39,9 +47,13 @@ function Section({ interval = 0, layout, style, children }: Props) {
         id={id}
         class="grid grid-cols-[48px_1fr_48px] sm:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px]"
       >
-        <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
+        <Slider class={clx(
+          "carousel carousel-center w-full col-span-full row-span-full",
+          layout?.gap?.mobile ? grid.gap.mobile[layout.gap.mobile] : grid.gap.mobile[2],
+          layout?.gap?.desktop ? grid.gap.desktop[layout.gap.desktop] : grid.gap.mobile[4],
+        )}>
           {items?.map((item, index) => (
-            <Slider.Item index={index} class="carousel-item">
+            <Slider.Item index={index} class="carousel-item max-sm:!w-48" style={{width: layout?.itemWidth || "auto" }}>
               {item}
             </Slider.Item>
           ))}
