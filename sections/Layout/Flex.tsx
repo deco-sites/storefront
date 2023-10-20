@@ -36,7 +36,7 @@ function Section({ layout, children }: Props) {
   return (
     <div
       class={clx(
-        "flex",
+        "w-full flex",
         layout?.gap?.mobile && flex.gap.mobile[layout.gap.mobile],
         layout?.gap?.desktop && flex.gap.desktop[layout.gap.desktop],
         layout?.direction?.mobile &&
