@@ -26,6 +26,12 @@
     overflow: hidden;
     height: 100vh;
   }
+
+  @property --dot-progress {
+    syntax: '<percentage>';
+    inherits: false;
+    initial-value: 0%;
+  }
 }
 
 .group:disabled .group-disabled\:animate-progress {

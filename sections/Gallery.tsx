@@ -12,4 +12,13 @@ function Gallery({ children: { Component, props } }: Props) {
   );
 }
 
+// TODO: Fix preview for components who have preview enabled
+export function Preview({ children: { Component, props } }: Props) {
+  return (
+    <>
+      <Component {...props} />
+    </>
+  );
+}
+
 export default Gallery;

@@ -25,7 +25,7 @@ interface Props {
         | "10"
         | "11"
         | "12"
-        | "none";
+        | "None";
       desktop?:
         | "1"
         | "2"
@@ -39,23 +39,23 @@ interface Props {
         | "10"
         | "11"
         | "12"
-        | "none";
+        | "None";
     };
     rows?: {
-      mobile?: "1" | "2" | "3" | "4" | "5" | "6" | "none";
-      desktop?: "1" | "2" | "3" | "4" | "5" | "6" | "none";
+      mobile?: "1" | "2" | "3" | "4" | "5" | "6" | "None";
+      desktop?: "1" | "2" | "3" | "4" | "5" | "6" | "None";
     };
     flow?: {
       /** @default row */
-      mobile?: "col" | "row" | "dense" | "col-dense" | "row-dense";
+      mobile?: "Col" | "Row" | "Dense" | "Col-dense" | "Row-dense";
       /** @default row */
-      desktop?: "col" | "row" | "dense" | "col-dense" | "row-dense";
+      desktop?: "Col" | "Row" | "Dense" | "Col-dense" | "Row-dense";
     };
     placeItems?: {
       /** @default center */
-      mobile?: "center" | "start" | "end" | "baseline" | "stretch";
+      mobile?: "Center" | "Start" | "End" | "Baseline" | "Stretch";
       /** @default center */
-      desktop?: "center" | "start" | "end" | "baseline" | "stretch";
+      desktop?: "Center" | "Start" | "End" | "Baseline" | "Stretch";
     };
   };
 }
@@ -64,7 +64,7 @@ function Section({ layout, children }: Props) {
   return (
     <div
       class={clx(
-        "grid",
+        "w-full grid",
         layout?.gap?.mobile && grid.gap.mobile[layout.gap.mobile],
         layout?.gap?.desktop && grid.gap.desktop[layout.gap.desktop],
         layout?.cols?.mobile && grid.cols.mobile[layout.cols.mobile],

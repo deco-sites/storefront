@@ -13,21 +13,21 @@ interface Props {
     };
     direction?: {
       /** @default row */
-      mobile?: "col" | "row";
+      mobile?: "Col" | "Row";
       /** @default row */
-      desktop?: "col" | "row";
+      desktop?: "Col" | "Row";
     };
     justify?: {
       /** @default center */
-      mobile?: "center" | "start" | "end";
+      mobile?: "Center" | "Start" | "End" | "Between";
       /** @default center */
-      desktop?: "center" | "start" | "end";
+      desktop?: "Center" | "Start" | "End" | "Between";
     };
     wrap?: {
       /** @default wrap */
-      mobile?: "wrap" | "nowrap" | "wrap-reverse";
+      mobile?: "Wrap" | "Nowrap" | "Wrap-reverse";
       /** @default wrap */
-      desktop?: "wrap" | "nowrap" | "wrap-reverse";
+      desktop?: "Wrap" | "Nowrap" | "Wrap-reverse";
     };
   };
 }
@@ -36,7 +36,7 @@ function Section({ layout, children }: Props) {
   return (
     <div
       class={clx(
-        "flex",
+        "w-full flex",
         layout?.gap?.mobile && flex.gap.mobile[layout.gap.mobile],
         layout?.gap?.desktop && flex.gap.desktop[layout.gap.desktop],
         layout?.direction?.mobile &&

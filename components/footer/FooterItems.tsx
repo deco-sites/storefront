@@ -1,5 +1,3 @@
-import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
-
 export type Item = {
   label: string;
   href: string;
@@ -24,21 +22,19 @@ export default function FooterItems(
             }`}
           >
             {sections.map((section) => (
-              <li>
-                <div class="flex flex-col gap-2">
-                  <span class="font-medium text-lg">
-                    {section.label}
-                  </span>
-                  <ul class={`flex flex-col gap-2 flex-wrap text-sm`}>
-                    {section.items?.map((item) => (
-                      <li>
-                        <a href={item.href} class="block py-1 link link-hover">
-                          {item.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <li class="flex flex-col gap-2">
+                <span class="font-medium text-lg">
+                  {section.label}
+                </span>
+                <ul class={`flex flex-col gap-2 flex-wrap text-sm`}>
+                  {section.items?.map((item) => (
+                    <li>
+                      <a href={item.href} class="block py-1 link link-hover">
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </li>
             ))}
           </ul>
@@ -47,28 +43,22 @@ export default function FooterItems(
           <ul class="flex flex-col md:hidden gap-4">
             {sections.map((section) => (
               <li>
-                <div class="collapse collapse-arrow ">
-                  <input type="checkbox" class="min-h-[0]" />
-                  <div class="collapse-title min-h-[0] !p-0 flex gap-2">
-                    <span>{section.label}</span>
-                  </div>
-                  <div class="collapse-content">
-                    <ul
-                      class={`flex flex-col gap-1 pl-5 pt-2`}
-                    >
-                      {section.items?.map((item) => (
-                        <li>
-                          <a
-                            href={item.href}
-                            class="block py-1 link link-hover"
-                          >
-                            {item.label}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
+                <details class="collapse collapse-arrow join-item">
+                  <summary class="collapse-title p-0 min-h-0">
+                    {section.label}
+                  </summary>
+                  <ul
+                    class={`flex flex-col pl-0 pt-2 collapse-content`}
+                  >
+                    {section.items?.map((item) => (
+                      <li>
+                        <a href={item.href} class="block py-1 link link-hover">
+                          {item.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
               </li>
             ))}
           </ul>

@@ -1,6 +1,6 @@
 import ProductCard, {
   Layout as CardLayout,
-} from "$store/components/product/ProductCard.tsx";
+} from "../cards/ProductCard.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { Product } from "apps/commerce/types.ts";
 

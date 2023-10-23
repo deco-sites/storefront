@@ -24,7 +24,7 @@ function Cart({ platform }: Props) {
   if (platform === "wake") {
     return <CartWake />;
   }
-  
+
   if (platform === "linx") {
     return <CartLinx />;
   }
