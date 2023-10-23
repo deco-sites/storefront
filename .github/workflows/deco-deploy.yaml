@@ -12,6 +12,7 @@ jobs:
         site:
           [
             "storefront",
+            "storefront-vnda",
             "storefront-vtex",
             "storefront-linx",
             "store-shopify",
