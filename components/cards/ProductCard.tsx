@@ -1,25 +1,26 @@
 import type { Platform } from "$store/apps/site.ts";
-import type { Product } from "apps/commerce/types.ts";
-import Image from "apps/website/components/Image.tsx";
+import { SendEventOnClick } from "$store/components/Analytics.tsx";
 import Avatar from "$store/components/ui/Avatar.tsx";
 import WishlistIcon from "$store/islands/WishlistButton.tsx";
-import { SendEventOnClick } from "$store/components/Analytics.tsx";
-import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import { useOffer } from "$store/sdk/useOffer.ts";
+import { clx } from "$store/sdk/clx.ts";
 import { formatPrice } from "$store/sdk/format.ts";
+import { useOffer } from "$store/sdk/useOffer.ts";
 import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
-import { ButtonType, getButtonClasses } from "../../constants.tsx";
+import type { Product } from "apps/commerce/types.ts";
+import Image from "apps/website/components/Image.tsx";
 import {
   borderColorClasses2,
   BorderColors,
   BorderRadius,
   borderRadiusClasses,
+  ButtonType,
   colorClasses,
   Colors,
+  getButtonClasses,
   Shadow,
   shadowClasses,
 } from "../../constants.tsx";
-import { clx } from "$store/sdk/clx.ts";
+import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 
 export interface Layout {
   basics?: {
@@ -73,6 +74,7 @@ interface Props {
   index?: number;
 
   layout?: Layout;
+  btnStyle?: ButtonType;
   platform?: Platform;
 }
 
@@ -91,6 +93,7 @@ function ProductCard({
   layout,
   platform,
   index,
+  btnStyle,
 }: Props) {
   const {
     url,
@@ -132,7 +135,7 @@ function ProductCard({
     <a
       href={url && relative(url)}
       aria-label="view product"
-      class={`${getButtonClasses(btnStyle)} btn-block`}
+      class={clx("btn-block", btnStyle && getButtonClasses(btnStyle))}
     >
       {l?.basics?.ctaText || "Ver produto"}
     </a>

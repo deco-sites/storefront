@@ -1,5 +1,5 @@
-import { usePartial } from "apps/website/hooks/usePartial.ts";
-import type { Section } from "deco/blocks/section.ts";
+import { type Section } from "deco/blocks/section.ts";
+import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 
 /** @titleBy title */
 interface Tab {
@@ -10,13 +10,12 @@ interface Tab {
 export interface Props {
   selectedTab?: number;
   tabs?: Tab[];
-  id?: string;
 }
 
 const useTabIndex = (maybeIndex = 0, size: number) =>
   Math.max(Math.min(maybeIndex, size), 0);
 
-function Section({ tabs = [], selectedTab: maybeTabIndex, id }: Props) {
+function Section({ tabs = [], selectedTab: maybeTabIndex }: Props) {
   const tabIndex = useTabIndex(maybeTabIndex, tabs.length);
   const tab = tabs[tabIndex];
 
@@ -28,7 +27,9 @@ function Section({ tabs = [], selectedTab: maybeTabIndex, id }: Props) {
             {tabs.map((tab, index) => (
               <button
                 class={`tab tab-lg ${index === tabIndex ? "tab-active" : ""}`}
-                {...usePartial({ id, props: { tabIndex: index } })}
+                {...usePartialSection<typeof Section>({
+                  props: { selectedTab: index },
+                })}
               >
                 {tab.title}
               </button>
