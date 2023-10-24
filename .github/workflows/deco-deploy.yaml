@@ -6,29 +6,20 @@ on:
     branches: [main]
 
 jobs:
-  set-vars:
+  set_vars:
     runs-on: ubuntu-latest
     outputs:
-      site-matrix: ${{ steps.set-vars.outputs.site-matrix }}
+      site_matrix: ${{ steps.set_vars.outputs.site_matrix }}
     steps:
       - name: Set site matrix
-        id: set-vars
+        id: set_vars
         shell: bash
         run: |
-<<<<<<< HEAD
-          echo "site-matrix=[${{ vars.SITES || github.event.repository.name }}]" >> $GITHUB_OUTPUT
+          echo "site_matrix={site: [${{ vars.SITES || github.event.repository.name }}] }" >> $GITHUB_OUTPUT
   deploy:
-    needs: set-vars
+    needs: set_vars
     strategy:
-      matrix:
-        site: ${{ fromJson(${{ needs.set-vars.outputs.site-matrix }})) }}
-=======
-          echo "site-matrix=${{ vars.SITES || github.event.repository.name }}" >> $GITHUB_OUTPUT
-  deploy:
-    strategy:
-      matrix:
-        site: fromJson(${{ jobs.set-vars.outputs.site-matrix }}))
->>>>>>> aa63586 (Fix site matrix)
+      matrix: ${{ fromJson(needs.set_vars.outputs.site_matrix) }}
     name: Deploy
     runs-on: ubuntu-latest
 
