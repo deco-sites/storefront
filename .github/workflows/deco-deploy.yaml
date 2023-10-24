@@ -1,4 +1,8 @@
 name: Deploy
+
+concurrency:
+  group: environment-${{ github.head_ref || github.ref }}
+
 on:
   push:
     branches: [main]
@@ -36,6 +40,16 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Deco Deploy
+        id: decoDeployStep
+        continue-on-error: true
+        uses: deco-cx/deploy@v0
+        with:
+          site: ${{ matrix.site }}
+
+      - name: Retry Deco Deploy
+        id: denoDeployRetryStep
+        if: steps.decoDeployStep.outcome == 'failure'
+        continue-on-error: true
         uses: deco-cx/deploy@v0
         with:
           site: ${{ matrix.site }}
