@@ -47,7 +47,7 @@ jobs:
           site: ${{ matrix.site }}
 
       - name: Retry Deco Deploy
-        id: denoDeployRetryStep
+        id: decoDeployRetryStep
         if: steps.decoDeployStep.outcome == 'failure'
         uses: deco-cx/deploy@v0
         with:
