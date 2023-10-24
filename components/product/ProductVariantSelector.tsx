@@ -19,12 +19,11 @@ function VariantSelector({ product }: Props) {
           <span class="text-sm">{name}</span>
           <ul class="flex flex-row gap-3">
             {Object.entries(possibilities[name]).map(([value, link]) => {
-              // TODO: bring it back on fresh 1.5.3
-              // const partial = usePartialSection({ href: link });
+              const partial = usePartialSection({ href: link });
 
               return (
                 <li>
-                  <a href={link}>
+                  <button {...partial}>
                     <Avatar
                       content={value}
                       variant={link === url
@@ -33,7 +32,7 @@ function VariantSelector({ product }: Props) {
                         ? "default"
                         : "disabled"}
                     />
-                  </a>
+                  </button>
                 </li>
               );
             })}
