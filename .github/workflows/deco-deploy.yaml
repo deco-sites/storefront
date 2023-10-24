@@ -15,7 +15,11 @@ jobs:
         id: set_vars
         shell: bash
         run: |
-          echo "site_matrix={site: [${{ vars.SITES || github.event.repository.name }}] }" >> $GITHUB_OUTPUT
+          if [ ${{ vars.SITES }} == "" ]; then
+            echo "site_matrix={site: [\"${{ github.event.repository.name }}\"] }" >> $GITHUB_OUTPUT
+          else
+            echo "site_matrix={site: ${{ vars.SITES }} }" >> $GITHUB_OUTPUT
+          fi
   deploy:
     needs: set_vars
     strategy:
