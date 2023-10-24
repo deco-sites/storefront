@@ -1,0 +1,54 @@
+name: Deploy
+
+concurrency:
+  group: environment-${{ github.head_ref || github.ref }}
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  set_vars:
+    runs-on: ubuntu-latest
+    outputs:
+      site_matrix: ${{ steps.set_vars.outputs.site_matrix }}
+    steps:
+      - name: Set site matrix
+        id: set_vars
+        shell: bash
+        run: |
+          if [ -z ${{ vars.SITES }} ]; then
+            echo "site_matrix={site: [\"${{ github.event.repository.name }}\"] }" >> $GITHUB_OUTPUT
+          else
+            echo "site_matrix={site: ${{ vars.SITES }} }" >> $GITHUB_OUTPUT
+          fi
+  deploy:
+    needs: set_vars
+    strategy:
+      matrix: ${{ fromJson(needs.set_vars.outputs.site_matrix) }}
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write # Needed for auth with Deno Deploy
+      contents: read # Needed to clone the repository
+
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Deco Deploy
+        id: decoDeployStep
+        continue-on-error: true
+        uses: deco-cx/deploy@v0
+        with:
+          site: ${{ matrix.site }}
+
+      - name: Retry Deco Deploy
+        id: decoDeployRetryStep
+        if: steps.decoDeployStep.outcome == 'failure'
+        uses: deco-cx/deploy@v0
+        with:
+          site: ${{ matrix.site }}
