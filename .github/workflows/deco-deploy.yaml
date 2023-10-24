@@ -15,12 +15,20 @@ jobs:
         id: set-vars
         shell: bash
         run: |
+<<<<<<< HEAD
           echo "site-matrix=[${{ vars.SITES || github.event.repository.name }}]" >> $GITHUB_OUTPUT
   deploy:
     needs: set-vars
     strategy:
       matrix:
         site: ${{ fromJson(${{ needs.set-vars.outputs.site-matrix }})) }}
+=======
+          echo "site-matrix=${{ vars.SITES || github.event.repository.name }}" >> $GITHUB_OUTPUT
+  deploy:
+    strategy:
+      matrix:
+        site: fromJson(${{ jobs.set-vars.outputs.site-matrix }}))
+>>>>>>> aa63586 (Fix site matrix)
     name: Deploy
     runs-on: ubuntu-latest
 
