@@ -1,4 +1,4 @@
-// deno-lint-ignore-file
+
 import Icon from "$store/components/ui/Icon.tsx";
 import Slider from "$store/components/ui/Slider.tsx";
 import ProductImageZoom from "$store/islands/ProductImageZoom.tsx";
@@ -21,6 +21,8 @@ type NewType = {
   width: number;
   height: number;
 };
+
+
 
 // type CheckPosition<T extends NewType> = T['thumb'] extends "image" ? Position : null;
 

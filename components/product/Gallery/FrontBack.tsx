@@ -4,6 +4,7 @@ import Slider from "$store/components/ui/Slider.tsx";
 import Image from "apps/website/components/Image.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
+import ProductImageZoom from "$store/islands/ProductImageZoom.tsx";
 
 export interface Props {
   /** @title Integration */
@@ -12,7 +13,12 @@ export interface Props {
   layout: {
     width: number;
     height: number;
+
+    onMouseOver?: {
+      image?: "Disable" | "Zoom image" | "Modal zoom";
+    }
   };
+  
 }
 
 /**
@@ -28,7 +34,7 @@ function GalleryFrontBack(props: Props) {
 
   const {
     page: { product: { image: images = [] } },
-    layout: { width, height },
+    layout: { width, height }, layout,
   } = props;
   const aspectRatio = `${width} / ${height}`;
 
@@ -42,7 +48,11 @@ function GalleryFrontBack(props: Props) {
               class="carousel-item w-2/5"
             >
               <Image
-                class="w-screen"
+                class={`w-screen ${
+                  layout?.onMouseOver?.image == "Zoom image"
+                    ? "duration-100 transition-scale hover:scale-150 hover:cursor-zoom-in"
+                    : ""
+                }`}
                 sizes="(max-width: 640px) 100vw"
                 style={{ aspectRatio }}
                 src={img.url!}
@@ -69,6 +79,14 @@ function GalleryFrontBack(props: Props) {
         >
           <Icon size={24} id="ChevronRight" strokeWidth={3} />
         </Slider.NextButton>
+
+        {layout?.onMouseOver?.image === "Modal zoom" ? <div class="absolute top-2 right-2 bg-base-100 rounded-full">
+          <ProductImageZoom
+            images={images}
+            width={700}
+            height={Math.trunc(700 * height / width)}
+          />
+        </div> : <></>}
 
         {/* Dots */}
         <ul class="carousel carousel-center px-4 sm:px-0 sm:flex-row gap-4 order-2 sm:order-2 absolute bottom-2 right-2/4">
