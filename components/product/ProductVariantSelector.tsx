@@ -1,7 +1,6 @@
 import Avatar from "$store/components/ui/Avatar.tsx";
 import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
 import type { Product } from "apps/commerce/types.ts";
-import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 
 interface Props {
   product: Product;
@@ -18,24 +17,20 @@ function VariantSelector({ product }: Props) {
         <li class="flex flex-col gap-2">
           <span class="text-sm">{name}</span>
           <ul class="flex flex-row gap-3">
-            {Object.entries(possibilities[name]).map(([value, link]) => {
-              const partial = usePartialSection({ href: link });
-
-              return (
-                <li>
-                  <button {...partial}>
-                    <Avatar
-                      content={value}
-                      variant={link === url
-                        ? "active"
-                        : link
-                        ? "default"
-                        : "disabled"}
-                    />
-                  </button>
-                </li>
-              );
-            })}
+            {Object.entries(possibilities[name]).map(([value, link]) => (
+              <li>
+                <button f-partial={link} f-client-nav>
+                  <Avatar
+                    content={value}
+                    variant={link === url
+                      ? "active"
+                      : link
+                      ? "default"
+                      : "disabled"}
+                  />
+                </button>
+              </li>
+            ))}
           </ul>
         </li>
       ))}
