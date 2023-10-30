@@ -3,7 +3,6 @@ import { ProductDetailsPage } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import ProductImageZoom from "$store/islands/ProductImageZoom.tsx";
 
-
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;

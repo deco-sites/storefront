@@ -5,6 +5,7 @@ import Image from "apps/website/components/Image.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
 import ProductImageZoom from "$store/islands/ProductImageZoom.tsx";
+import ProductInfo from "$store/islands/ProductInfo.tsx";
 
 export interface Props {
   /** @title Integration */
@@ -15,7 +16,7 @@ export interface Props {
     height: number;
 
     onMouseOver?: {
-      image?: "Disable" | "Zoom image" | "Modal zoom";
+      imageZoom?: "Disable" | "Zoom image" | "Modal zoom";
     }
   };
   
@@ -23,9 +24,9 @@ export interface Props {
 
 /**
  * @title Product Image Front Back
- * @description Renders two images side by side both on mobile and on desktop. On mobile, the overflow is reached causing a scrollbar to be rendered.
+ * @description Renders a slider images full width on desktop. On mobile, the overflow is reached causing a scrollbar to be rendered.
  */
-function GalleryFrontBack(props: Props) {
+function GalleryFullWidth(props: Props) {
   const id = useId();
 
   if (props.page === null) {
@@ -49,7 +50,7 @@ function GalleryFrontBack(props: Props) {
             >
               <Image
                 class={`w-screen ${
-                  layout?.onMouseOver?.image == "Zoom image"
+                  layout?.onMouseOver?.imageZoom == "Zoom image"
                     ? "duration-100 transition-scale hover:scale-150 hover:cursor-zoom-in"
                     : ""
                 }`}
@@ -80,7 +81,7 @@ function GalleryFrontBack(props: Props) {
           <Icon size={24} id="ChevronRight" strokeWidth={3} />
         </Slider.NextButton>
 
-        {layout?.onMouseOver?.image === "Modal zoom" ? <div class="absolute top-2 right-2 bg-base-100 rounded-full">
+        {layout?.onMouseOver?.imageZoom === "Modal zoom" ? <div class="absolute top-2 right-2 bg-base-100 rounded-full">
           <ProductImageZoom
             images={images}
             width={700}
@@ -89,7 +90,7 @@ function GalleryFrontBack(props: Props) {
         </div> : <></>}
 
         {/* Dots */}
-        <ul class="carousel carousel-center px-4 sm:px-0 sm:flex-row gap-4 order-2 sm:order-2 absolute bottom-2 right-2/4">
+        <ul class="carousel carousel-center px-4 sm:px-0 sm:flex-row gap-4 order-2 sm:order-2 absolute bottom-2 right-2/4 translate-x[-50%]">
           {images.map((img, index) => (
             <li class="carousel-item ">
               <Slider.Dot index={index}>
@@ -98,11 +99,11 @@ function GalleryFrontBack(props: Props) {
             </li>
           ))}
         </ul>
-
+        <ProductInfo />
       </div>
       <SliderJS rootId={id} />
     </div>
   );
 }
 
-export default GalleryFrontBack;
+export default GalleryFullWidth;

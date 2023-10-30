@@ -26,7 +26,7 @@ import * as $$$$$$18 from "./sections/Links/Shortcuts.tsx";
 import * as $$$$$$19 from "./sections/Miscellaneous/CampaignTimer.tsx";
 import * as $$$$$$20 from "./sections/Miscellaneous/CookieConsent.tsx";
 import * as $$$$$$21 from "./sections/Newsletter/Newsletter.tsx";
-import * as $$$$$$22 from "./sections/Product/ImageGalleryFrontBack.tsx";
+import * as $$$$$$22 from "./sections/Product/ImageGalleryFullWidth.tsx";
 import * as $$$$$$23 from "./sections/Product/imageGalleryGrid.tsx";
 import * as $$$$$$24 from "./sections/Product/ImageGallerySlider.tsx";
 import * as $$$$$$25 from "./sections/Product/NotFound.tsx";
@@ -70,7 +70,7 @@ const manifest = {
     "deco-sites/storefront/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$19,
     "deco-sites/storefront/sections/Miscellaneous/CookieConsent.tsx": $$$$$$20,
     "deco-sites/storefront/sections/Newsletter/Newsletter.tsx": $$$$$$21,
-    "deco-sites/storefront/sections/Product/ImageGalleryFrontBack.tsx":
+    "deco-sites/storefront/sections/Product/ImageGalleryFullWidth.tsx":
       $$$$$$22,
     "deco-sites/storefront/sections/Product/imageGalleryGrid.tsx": $$$$$$23,
     "deco-sites/storefront/sections/Product/ImageGallerySlider.tsx": $$$$$$24,

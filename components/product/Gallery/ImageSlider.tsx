@@ -20,11 +20,8 @@ type NewType = {
   position:Position;
   width: number;
   height: number;
-};
+}
 
-
-
-// type CheckPosition<T extends NewType> = T['thumb'] extends "image" ? Position : null;
 
 export interface Props {
   /** @title Integration */
@@ -132,7 +129,6 @@ export default function GallerySlider(props: Props) {
         <SliderJS rootId={id} />
       </div>
     )
-
   }
 
   return (
