@@ -16,7 +16,7 @@ const ITEMS: CardProps[] = new Array(4).fill({
 export default function IconCards({ items = ITEMS, grid }: Props) {
     return (
       <Grid {...grid}>
-        <IconCard label="test" description="testeee" icon="Deco" />
+        { items?.map((item) => <IconCard {...item} />) ?? null }
       </Grid>
   )
 }
