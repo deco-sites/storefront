@@ -1,9 +1,11 @@
 import { Section } from "deco/blocks/section.ts";
 import { grid, VNode } from "../../constants.tsx";
 import { clx } from "../../sdk/clx.ts";
+import Container, { Props as ContainerProps } from "$store/sections/Layout/Container.tsx"
 
-interface Props {
-  children: VNode[] | null;
+export interface Props {
+  container?: ContainerProps;
+  children: VNode;
   layout?: {
     gap?: {
       /** @default 2 */
@@ -60,25 +62,27 @@ interface Props {
   };
 }
 
-function Section({ layout, children }: Props) {
+function Section({ layout, children, container }: Props) {
   return (
-    <div
-      class={clx(
-        "w-full grid",
-        layout?.gap?.mobile && grid.gap.mobile[layout.gap.mobile],
-        layout?.gap?.desktop && grid.gap.desktop[layout.gap.desktop],
-        layout?.cols?.mobile && grid.cols.mobile[layout.cols.mobile],
-        layout?.cols?.desktop && grid.cols.desktop[layout.cols.desktop],
-        layout?.flow?.mobile && grid.flow.mobile[layout.flow.mobile],
-        layout?.flow?.desktop && grid.flow.desktop[layout.flow.desktop],
-        layout?.placeItems?.mobile &&
-          grid.placeItems.mobile[layout.placeItems.mobile],
-        layout?.placeItems?.desktop &&
-          grid.placeItems.desktop[layout.placeItems.desktop],
-      )}
-    >
-      {children}
-    </div>
+    <Container {...container}>
+      <div
+        class={clx(
+          "w-full grid",
+          layout?.gap?.mobile && grid.gap.mobile[layout.gap.mobile],
+          layout?.gap?.desktop && grid.gap.desktop[layout.gap.desktop],
+          layout?.cols?.mobile && grid.cols.mobile[layout.cols.mobile],
+          layout?.cols?.desktop && grid.cols.desktop[layout.cols.desktop],
+          layout?.flow?.mobile && grid.flow.mobile[layout.flow.mobile],
+          layout?.flow?.desktop && grid.flow.desktop[layout.flow.desktop],
+          layout?.placeItems?.mobile &&
+            grid.placeItems.mobile[layout.placeItems.mobile],
+          layout?.placeItems?.desktop &&
+            grid.placeItems.desktop[layout.placeItems.desktop],
+        )}
+      >
+        {children}
+      </div>
+    </Container>
   );
 }
 

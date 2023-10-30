@@ -251,16 +251,32 @@ export const flex = {
   },
   justify: {
     mobile: {
-      "Center": "justify-center",
       "Start": "justify-start",
+      "Center": "justify-center",
       "End": "justify-end",
       "Between": "justify-between",
     },
     desktop: {
-      "Center": "sm:justify-center",
       "Start": "sm:justify-start",
+      "Center": "sm:justify-center",
       "End": "sm:justify-end",
       "Between": "sm:justify-between",
+    },
+  },
+  align: {
+    mobile: {
+      "Start": "items-start",
+      "Center": "items-center",
+      "End": "items-end",
+      "Baseline": "items-baseline",
+      "Stretch": "items-stretch",
+    },
+    desktop: {
+      "Start": "sm:items-start",
+      "Center": "sm:items-center",
+      "End": "sm:items-end",
+      "Baseline": "sm:items-baseline",
+      "Stretch": "sm:items-stretch",
     },
   },
   wrap: {
@@ -342,6 +358,21 @@ export type ButtonColor =
 export interface ButtonType {
   color?: ButtonColor;
   outline?: boolean;
+}
+
+export type BorderWidth =
+  | "None"
+  | "1"
+  | "2"
+  | "4"
+  | "8";
+
+export const borderWidthClasses = {
+  "None": "border-none",
+  "1": "border",
+  "2": "border-2",
+  "4": "border-4",
+  "8": "border-8",
 }
 
 export const borderRadiusClasses = {

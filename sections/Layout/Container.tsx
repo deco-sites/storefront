@@ -1,3 +1,4 @@
+import type { VNode } from "preact";
 import Header, {
   Content as IHeader,
   Style as HeaderStyle,
@@ -27,7 +28,7 @@ export interface SectionStyle {
 export interface Style {
   section?: SectionStyle;
   content?: {
-    alignment?: "Center" | "Left" | "Side to side top" | "Side to side middle";
+    alignment?: "Stretch" | "Center" | "Left" | "Side to side top" | "Side to side middle";
     bgColor?: Colors;
     bgImage?: ImageWidget;
     textColor?: TextColors;
@@ -40,15 +41,16 @@ export interface Props {
   header?: IHeader;
   layout?: Layout;
   style?: Style;
-  children: Section;
+  children: Section | VNode;
 }
 
 const contentClasses = {
-  "Center": "items-stretch",
+  "Stretch": "items-stretch",
+  "Center": "items-center",
   "Left": "",
   "Side to side top": "justify-between lg:grid lg:grid-flow-col",
   "Side to side middle":
-    "justify-between items-center lg:flex-row lg:flex-nowrap",
+    "justify-between lg:items-center lg:flex-row lg:flex-nowrap",
 };
 
 export default function Container({ children, ...props }: Props) {
@@ -82,7 +84,7 @@ export default function Container({ children, ...props }: Props) {
           layoutClasses[layout?.innerContentWidth || "Contained"],
           contentBgColor && colorClasses[contentBgColor],
           style?.content?.bgImage && "bg-cover bg-center",
-          contentClasses[style?.content?.alignment || "Center"],
+          contentClasses[style?.content?.alignment || "Stretch"],
           textColorClasses[style?.content?.textColor || "Auto"],
         )}
         style={{
@@ -101,9 +103,7 @@ export default function Container({ children, ...props }: Props) {
         <div
           class={clx(
             "flex flex-col w-full",
-            style?.content?.alignment == "Center"
-              ? "items-center"
-              : "items-left",
+            style?.content?.alignment && ["Center", "Left"].indexOf(style?.content?.alignment) !== -1 ? contentClasses[style?.content?.alignment] : contentClasses["Stretch"],
           )}
         >
           <children.Component {...children.props} />

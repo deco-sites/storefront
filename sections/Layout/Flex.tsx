@@ -17,11 +17,17 @@ interface Props {
       /** @default row */
       desktop?: "Col" | "Row";
     };
+    align?: {
+      /** @default center */
+      mobile?: "Start" | "Center" | "End" | "Baseline" | "Stretch";
+      /** @default center */
+      desktop?: "Start" | "Center" | "End" | "Baseline" | "Stretch";
+    };
     justify?: {
       /** @default center */
-      mobile?: "Center" | "Start" | "End" | "Between";
+      mobile?: "Start" | "Center" | "End" | "Between";
       /** @default center */
-      desktop?: "Center" | "Start" | "End" | "Between";
+      desktop?: "Start" | "Center" | "End" | "Between";
     };
     wrap?: {
       /** @default wrap */
@@ -43,6 +49,9 @@ function Section({ layout, children }: Props) {
           flex.direction.mobile[layout.direction.mobile],
         layout?.direction?.desktop &&
           flex.direction.desktop[layout.direction.desktop],
+        layout?.align?.mobile && flex.align.mobile[layout.align.mobile],
+        layout?.align?.desktop &&
+          flex.align.desktop[layout.align.desktop],
         layout?.justify?.mobile && flex.justify.mobile[layout.justify.mobile],
         layout?.justify?.desktop &&
           flex.justify.desktop[layout.justify.desktop],
