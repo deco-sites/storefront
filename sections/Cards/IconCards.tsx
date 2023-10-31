@@ -7,7 +7,8 @@ import Layout, {
 type Props = {
   items?: CardProps[];
   container?: ContainerProps;
-} & LayoutProps;
+  layoutType?: LayoutProps;
+}
 
 const ITEMS: CardProps[] = new Array(4).fill({
   label: "Placeholder",
@@ -15,13 +16,13 @@ const ITEMS: CardProps[] = new Array(4).fill({
   icon: "Deco",
 });
 
-function Section({ items = ITEMS, container, ...rest }: Props) {
+function Section({ items = ITEMS, container, layoutType }: Props) {
   const allItems = items.length === 0 ? ITEMS : items;
 
   return (
     <Layout
       container={container}
-      layout={{ ...rest }}
+      layout={{ ...layoutType }}
       items={allItems.map((item) => <Card {...item} />)}
     />
   );
