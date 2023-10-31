@@ -1,9 +1,3 @@
-import type { ImageWidget } from "apps/admin/widgets.ts";
-
-// TODO: Support Preact's VNode
-// deno-lint-ignore no-explicit-any
-export type VNode = any;
-
 export const grid = {
   gap: {
     mobile: {
@@ -304,7 +298,7 @@ export const flex = {
       "Initial": "sm:flex-inicial",
       "None": "sm:flex-none",
     },
-  }
+  },
 };
 
 export type Colors =
@@ -373,7 +367,7 @@ export const borderWidthClasses = {
   "2": "border-2",
   "4": "border-4",
   "8": "border-8",
-}
+};
 
 export const borderRadiusClasses = {
   "None": "rounded-none",

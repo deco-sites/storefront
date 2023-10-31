@@ -1,14 +1,17 @@
 import Icon from "$store/components/ui/Icon.tsx";
 import Slider from "$store/components/ui/Slider.tsx";
-import { buttonClasses, ButtonColor, grid, VNode } from "../../constants.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
 import { clx } from "$store/sdk/clx.ts";
 import type { Section } from "deco/blocks/section.ts";
-import { toChildArray } from "preact";
+import { ComponentChildren, toChildArray } from "preact";
 import { useId } from "preact/hooks";
+import { buttonClasses, ButtonColor, grid } from "../../constants.tsx";
 
+/**
+ * @title Slider
+ */
 export interface Props {
-  children: VNode[] | null;
+  children?: ComponentChildren;
   interval?: number;
   /** @description For desktop in px. */
   layout?: {

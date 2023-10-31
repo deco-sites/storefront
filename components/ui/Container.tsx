@@ -1,4 +1,4 @@
-import type { VNode } from "preact";
+import type { ComponentChildren, VNode } from "preact";
 import Header, {
   Content,
   Style as HeaderStyle,
@@ -46,7 +46,7 @@ export interface Props {
   header?: HeaderContent;
   layout?: Layout;
   style?: ExtendedStyle;
-  children: VNode;
+  children: ComponentChildren;
   afterHeader?: VNode | false;
 }
 

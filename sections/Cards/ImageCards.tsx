@@ -1,13 +1,12 @@
-import Card, { Props as CardProps } from "../../components/cards/IconCard.tsx";
+import Card, { Props as CardProps } from "../../components/cards/ImageCard.tsx";
 import Layout, {
-  CP as ContainerProps,
-  Layout as LayoutProps,
+  Props as LayoutProps,
 } from "../../components/SectionLayout.tsx";
 
 interface Props {
   items?: CardProps[];
-  layout?: LayoutProps;
-  container?: ContainerProps;
+  layout?: Omit<LayoutProps["layout"], "children">;
+  container?: LayoutProps["container"];
 }
 
 const ITEMS: CardProps[] = new Array(4).fill({

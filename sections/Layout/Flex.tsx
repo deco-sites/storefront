@@ -1,9 +1,13 @@
 import { clx } from "$store/sdk/clx.ts";
 import { Section } from "deco/blocks/section.ts";
-import { flex, VNode } from "../../constants.tsx";
+import type { ComponentChildren } from "preact";
+import { flex } from "../../constants.tsx";
 
-interface Props {
-  children: VNode[] | null;
+/**
+ * @title Flex
+ */
+export interface Props {
+  children?: ComponentChildren;
   layout?: {
     gap?: {
       /** @default 2 */

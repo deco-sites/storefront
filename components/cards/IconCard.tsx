@@ -35,7 +35,7 @@ export interface Props {
   }
 }
 
-export default function IconCard({ icon, label, description, layout, style }: Props) {
+export default function Card({ icon, label, description, layout, style }: Props) {
   const bgColor = style?.background?.bgColor || "Transparent";
 
   const hasPadding = (bgColor && bgColor !== "Transparent") || (style?.border?.width && style.border.width !== "None");
