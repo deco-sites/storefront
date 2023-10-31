@@ -10,7 +10,9 @@ function Sections({ sections }: Props): VNode[] | null {
     return null;
   }
 
-  return sections.map(({ Component, props }) => <Component {...props} />);
+  return sections.map(({ Component, props }, index) => (
+    <Component key={index} {...props} />
+  ));
 }
 
 export default Sections;
