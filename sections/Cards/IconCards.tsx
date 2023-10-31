@@ -4,11 +4,10 @@ import Layout, {
   Layout as LayoutProps,
 } from "../../components/SectionLayout.tsx";
 
-interface Props {
+type Props = {
   items?: CardProps[];
-  layout?: LayoutProps;
   container?: ContainerProps;
-}
+} & LayoutProps;
 
 const ITEMS: CardProps[] = new Array(4).fill({
   label: "Placeholder",
@@ -16,13 +15,13 @@ const ITEMS: CardProps[] = new Array(4).fill({
   icon: "Deco",
 });
 
-function Section({ items = ITEMS, layout, container }: Props) {
+function Section({ items = ITEMS, container, ...rest }: Props) {
   const allItems = items.length === 0 ? ITEMS : items;
 
   return (
     <Layout
       container={container}
-      layout={layout}
+      layout={{ ...rest }}
       items={allItems.map((item) => <Card {...item} />)}
     />
   );
