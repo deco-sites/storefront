@@ -1,4 +1,4 @@
-import type { Section } from "deco/blocks/section.ts";
+import type { Flex } from "deco/blocks/section.ts";
 import type { ProductDetailsPage } from "apps/commerce/types.ts";
 
 export interface Props {
@@ -6,10 +6,10 @@ export interface Props {
   page: ProductDetailsPage | null;
 
   /** @title On Product Found */
-  children: Section;
+  children: Flex;
 
   /** @title On Product Not Found */
-  fallback: Section;
+  fallback: Flex;
 }
 
 function NotFoundChallenge({ page, children, fallback }: Props) {

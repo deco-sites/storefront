@@ -1,6 +1,5 @@
-import { LayoutContext, useLayoutContext } from "$store/components/Layout.tsx";
 import { clx } from "$store/sdk/clx.ts";
-import { Section } from "deco/blocks/section.ts";
+import { context } from "deco/mod.ts";
 import { flex, VNode } from "../../constants.tsx";
 
 interface Props {
@@ -33,9 +32,8 @@ interface Props {
   };
 }
 
-function Section({ layout, children }: Props) {
-  const { isPreview } = useLayoutContext();
-  const items = isPreview && !children?.length
+function Flex({ layout, children }: Props) {
+  const items = !context.isDeploy && !children?.length
     ? new Array(4).fill(0).map(() => <ItemPreview />)
     : children;
 
@@ -58,14 +56,6 @@ function Section({ layout, children }: Props) {
   );
 }
 
-export function Preview(props: Props) {
-  return (
-    <LayoutContext.Provider value={{ isPreview: true }}>
-      <Section {...props} />
-    </LayoutContext.Provider>
-  );
-}
-
 const ItemPreview = () => (
   <div class="card w-48 h-48 bg-base-100 shadow">
     <div class="card-body items-center justify-center text-base-300 text-sm">
@@ -74,4 +64,4 @@ const ItemPreview = () => (
   </div>
 );
 
-export default Section;
+export default Flex;

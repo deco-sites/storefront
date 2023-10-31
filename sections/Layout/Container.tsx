@@ -1,5 +1,5 @@
 import { Section } from "deco/blocks/section.ts";
-import { LayoutContext, useLayoutContext } from "$store/components/Layout.tsx";
+import { context } from "deco/mod.ts";
 
 interface Props {
   children?: Section;
@@ -13,13 +13,11 @@ function Placeholder() {
   );
 }
 
-function Section({ children }: Props) {
-  const { isPreview } = useLayoutContext();
-
-  if (isPreview && typeof children?.Component !== "function") {
+function Container({ children }: Props) {
+  if (!context.isDeploy && typeof children?.Component !== "function") {
     return (
       <div class="bg-primary bg-opacity-5 p-4">
-        <Section children={{ Component: Placeholder, props: {} }} />
+        <Container children={{ Component: Placeholder, props: {} }} />
       </div>
     );
   }
@@ -35,12 +33,4 @@ function Section({ children }: Props) {
   );
 }
 
-export function Preview(props: Props) {
-  return (
-    <LayoutContext.Provider value={{ isPreview: true }}>
-      <Section {...props} />
-    </LayoutContext.Provider>
-  );
-}
-
-export default Section;
+export default Container;
