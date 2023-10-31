@@ -19,10 +19,10 @@ export interface Props {
       desktop?: "1" | "Auto" | "Initial" | "None",
     } 
     contentAlign?: {
-      /** @default center */
-      mobile?: "Start" | "Center" | "End" | "Baseline" | "Stretch";
-      /** @default center */
-      desktop?: "Start" | "Center" | "End" | "Baseline" | "Stretch";
+      /** @default Center */
+      mobile?: "Center" | "Start" | "End" | "Baseline" | "Stretch";
+      /** @default Center */
+      desktop?: "Center" | "Start" | "End" | "Baseline" | "Stretch";
     };
   }
   style?: {
