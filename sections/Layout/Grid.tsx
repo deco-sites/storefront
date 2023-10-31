@@ -49,15 +49,15 @@ export interface Props {
     desktop?: "1" | "2" | "3" | "4" | "5" | "6" | "None";
   };
   flow?: {
-    /** @default row */
-    mobile?: "Col" | "Row" | "Dense" | "Col-dense" | "Row-dense";
-    /** @default row */
-    desktop?: "Col" | "Row" | "Dense" | "Col-dense" | "Row-dense";
+    /** @default Row */
+    mobile?: "Row" | "Col" | "Dense" | "Col-dense" | "Row-dense";
+    /** @default Row */
+    desktop?: "Row" | "Col" | "Dense" | "Col-dense" | "Row-dense";
   };
   placeItems?: {
-    /** @default center */
+    /** @default Center */
     mobile?: "Center" | "Start" | "End" | "Baseline" | "Stretch";
-    /** @default center */
+    /** @default Center */
     desktop?: "Center" | "Start" | "End" | "Baseline" | "Stretch";
   };
 }
