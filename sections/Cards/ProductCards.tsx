@@ -12,13 +12,14 @@ type Props = {
   items?: Product[] | null;
   cardLayout?: CardLayout;
   container?: ContainerProps;
-} & LayoutProps;
+  layoutType?: LayoutProps;
+};
 
-function Section({ items, container, ...rest }: Props) {
+function Section({ items, container, layoutType }: Props) {
   return (
     <Layout
       container={container}
-      layout={{ ...rest }}
+      layout={layoutType}
       items={items?.map((item) => (
         <Card product={item} platform={usePlatform()} />
       ))}

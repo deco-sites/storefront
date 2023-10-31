@@ -22,7 +22,7 @@ function Section({ items = ITEMS, container, layoutType }: Props) {
   return (
     <Layout
       container={container}
-      layout={{ ...layoutType }}
+      layout={layoutType}
       items={allItems.map((item) => <Card {...item} />)}
     />
   );
