@@ -15,25 +15,25 @@ export interface Props {
     desktop?: "1" | "2" | "4" | "8" | "12" | "16";
   };
   direction?: {
-    /** @default row */
-    mobile?: "Col" | "Row";
-    /** @default row */
-    desktop?: "Col" | "Row";
+    /** @default Row */
+    mobile?: "Row" | "Col";
+    /** @default Row */
+    desktop?: "Row" | "Col";
   };
   align?: {
-    /** @default center */
-    mobile?: "Start" | "Center" | "End" | "Baseline" | "Stretch";
-    /** @default center */
-    desktop?: "Start" | "Center" | "End" | "Baseline" | "Stretch";
+    /** @default Center */
+    mobile?: "Center" | "Start" | "End" | "Baseline" | "Stretch";
+    /** @default Center */
+    desktop?: "Center" | "Start" | "End" | "Baseline" | "Stretch";
   };
   justify?: {
-    /** @default center */
-    mobile?: "Start" | "Center" | "End" | "Between";
-    /** @default center */
-    desktop?: "Start" | "Center" | "End" | "Between";
+    /** @default Center */
+    mobile?: "Center" | "Start" | "End" | "Between";
+    /** @default Center */
+    desktop?: "Center" | "Start" | "End" | "Between";
   };
   wrap?: {
-    /** @default wrap */
+    /** @default Wrap */
     mobile?: "Wrap" | "Nowrap" | "Wrap-reverse";
     /** @default wrap */
     desktop?: "Wrap" | "Nowrap" | "Wrap-reverse";
