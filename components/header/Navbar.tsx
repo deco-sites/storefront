@@ -90,6 +90,7 @@ function Navbar({ items, searchbar, logo }: {
           {platform === "wake" && <CartButtonWake />}
           {platform === "linx" && <CartButtonLinx />}
           {platform === "shopify" && <CartButtonShopify />}
+          {platform === "nuvemshop" && <CartButtonShopify />}
         </div>
       </div>
     </>

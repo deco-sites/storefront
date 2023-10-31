@@ -19,7 +19,14 @@ export type Props = {
   theme?: Section;
 } & CommerceProps;
 
-export type Platform = "vtex" | "vnda" | "shopify" | "wake" | "linx" | "custom";
+export type Platform =
+  | "vtex"
+  | "vnda"
+  | "shopify"
+  | "wake"
+  | "linx"
+  | "nuvemshop"
+  | "custom";
 
 export let _platform: Platform = "custom";
 

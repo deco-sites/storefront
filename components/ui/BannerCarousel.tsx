@@ -16,8 +16,7 @@ import { Picture, Source } from "apps/website/components/Picture.tsx";
 export interface Banner {
   /** @description desktop otimized image */
   desktop: ImageWidget;
-  /** @description mobile otimized image */
-  mobile: ImageWidget;
+
   /** @description Image's alt text */
   alt: string;
   action?: {
