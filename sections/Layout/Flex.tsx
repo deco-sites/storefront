@@ -1,3 +1,4 @@
+import { LayoutContext, useLayoutContext } from "$store/components/Layout.tsx";
 import { clx } from "$store/sdk/clx.ts";
 import { Section } from "deco/blocks/section.ts";
 import { flex, VNode } from "../../constants.tsx";
@@ -33,6 +34,11 @@ interface Props {
 }
 
 function Section({ layout, children }: Props) {
+  const { isPreview } = useLayoutContext();
+  const items = isPreview && !children?.length
+    ? new Array(4).fill(0).map(() => <ItemPreview />)
+    : children;
+
   return (
     <div
       class={clx(
@@ -47,10 +53,16 @@ function Section({ layout, children }: Props) {
         flex.wrap.desktop[layout?.wrap?.desktop ?? "wrap"],
       )}
     >
-      {children?.length
-        ? children
-        : new Array(4).fill(0).map(() => <ItemPreview />)}
+      {items}
     </div>
+  );
+}
+
+export function Preview(props: Props) {
+  return (
+    <LayoutContext.Provider value={{ isPreview: true }}>
+      <Section {...props} />
+    </LayoutContext.Provider>
   );
 }
 

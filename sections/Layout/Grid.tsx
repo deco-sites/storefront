@@ -1,6 +1,7 @@
 import { Section } from "deco/blocks/section.ts";
 import { grid, VNode } from "../../constants.tsx";
 import { clx } from "../../sdk/clx.ts";
+import { LayoutContext, useLayoutContext } from "$store/components/Layout.tsx";
 
 interface Props {
   children?: VNode[] | null;
@@ -65,6 +66,11 @@ interface Props {
 }
 
 function Section({ layout, children }: Props) {
+  const { isPreview } = useLayoutContext();
+  const items = isPreview && !children?.length
+    ? new Array(12).fill(0).map(() => <ItemPreview />)
+    : children;
+
   return (
     <div
       class={clx(
@@ -81,10 +87,16 @@ function Section({ layout, children }: Props) {
         grid.placeItems.desktop[layout?.placeItems?.desktop ?? "center"],
       )}
     >
-      {children?.length
-        ? children
-        : new Array(12).fill(0).map(() => <ItemPreview />)}
+      {items}
     </div>
+  );
+}
+
+export function Preview(props: Props) {
+  return (
+    <LayoutContext.Provider value={{ isPreview: true }}>
+      <Section {...props} />
+    </LayoutContext.Provider>
   );
 }
 
