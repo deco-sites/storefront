@@ -1,8 +1,8 @@
-import type { Section } from "deco/blocks/section.ts";
+import type { Flex } from "deco/blocks/section.ts";
 import type { VNode } from "../../constants.tsx";
 
 interface Props {
-  sections: Section[] | null;
+  sections: Flex[] | null;
 }
 
 function Sections({ sections }: Props): VNode[] | null {
@@ -10,7 +10,9 @@ function Sections({ sections }: Props): VNode[] | null {
     return null;
   }
 
-  return sections.map(({ Component, props }) => <Component {...props} />);
+  return sections.map(({ Component, props }, index) => (
+    <Component key={index} {...props} />
+  ));
 }
 
 export default Sections;

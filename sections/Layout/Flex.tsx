@@ -1,21 +1,21 @@
 import { clx } from "$store/sdk/clx.ts";
-import { Section } from "deco/blocks/section.ts";
+import { context } from "deco/mod.ts";
 import { flex, VNode } from "../../constants.tsx";
 
 interface Props {
-  children: VNode[] | null;
+  children?: VNode[] | null;
   layout?: {
     gap?: {
-      /** @default 2 */
-      mobile?: "1" | "2" | "4" | "8" | "12" | "16";
       /** @default 4 */
+      mobile?: "1" | "2" | "4" | "8" | "12" | "16";
+      /** @default 8 */
       desktop?: "1" | "2" | "4" | "8" | "12" | "16";
     };
     direction?: {
+      /** @default col */
+      mobile?: "row" | "col";
       /** @default row */
-      mobile?: "col" | "row";
-      /** @default row */
-      desktop?: "col" | "row";
+      desktop?: "row" | "col";
     };
     justify?: {
       /** @default center */
@@ -32,27 +32,36 @@ interface Props {
   };
 }
 
-function Section({ layout, children }: Props) {
+function Flex({ layout, children }: Props) {
+  const items = !context.isDeploy && !children?.length
+    ? new Array(4).fill(0).map(() => <ItemPreview />)
+    : children;
+
   return (
     <div
       class={clx(
         "flex",
-        layout?.gap?.mobile && flex.gap.mobile[layout.gap.mobile],
-        layout?.gap?.desktop && flex.gap.desktop[layout.gap.desktop],
-        layout?.direction?.mobile &&
-          flex.direction.mobile[layout.direction.mobile],
-        layout?.direction?.desktop &&
-          flex.direction.desktop[layout.direction.desktop],
-        layout?.justify?.mobile && flex.justify.mobile[layout.justify.mobile],
-        layout?.justify?.desktop &&
-          flex.justify.desktop[layout.justify.desktop],
-        layout?.wrap?.mobile && flex.wrap.mobile[layout.wrap.mobile],
-        layout?.wrap?.desktop && flex.wrap.desktop[layout.wrap.desktop],
+        flex.gap.mobile[layout?.gap?.mobile ?? "4"],
+        flex.gap.desktop[layout?.gap?.desktop ?? "8"],
+        flex.direction.mobile[layout?.direction?.mobile ?? "col"],
+        flex.direction.desktop[layout?.direction?.desktop ?? "row"],
+        flex.justify.mobile[layout?.justify?.mobile ?? "center"],
+        flex.justify.desktop[layout?.justify?.desktop ?? "center"],
+        flex.wrap.mobile[layout?.wrap?.mobile ?? "wrap"],
+        flex.wrap.desktop[layout?.wrap?.desktop ?? "wrap"],
       )}
     >
-      {children}
+      {items}
     </div>
   );
 }
 
-export default Section;
+const ItemPreview = () => (
+  <div class="card w-48 h-48 bg-base-100 shadow">
+    <div class="card-body items-center justify-center text-base-300 text-sm">
+      flex
+    </div>
+  </div>
+);
+
+export default Flex;

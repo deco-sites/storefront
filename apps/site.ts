@@ -6,6 +6,7 @@ import { color as wake } from "apps/wake/mod.ts";
 import { color as linx } from "apps/linx/mod.ts";
 import { color as salesforce } from "apps/salesforce/mod.ts";
 import { Section } from "deco/blocks/section.ts";
+import { Flex } from "deco/blocks/section.ts";
 import { App } from "deco/mod.ts";
 import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
@@ -17,7 +18,7 @@ export type Props = {
    * @default custom
    */
   platform: Platform;
-  theme?: Section;
+  theme?: Flex;
 } & CommerceProps;
 
 export type Platform =
