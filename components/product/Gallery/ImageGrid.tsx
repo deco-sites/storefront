@@ -43,7 +43,7 @@ export default function GalleryImageGrid(props: Props) {
   
   return (
     <ul
-      class={`flex flex-wrap ${layout?.image == "alterning" ? "[&>*:nth-child(3)]:w-full" : ""}`}
+      class={`flex flex-wrap relative ${layout?.image == "alterning" ? "[&>*:nth-child(3)]:w-full" : ""}`}
     >
       {images.map((img, index) => (
         <li class={`overflow-hidden ${layout?.image == "one" ? "" : "w-2/4"}`}>
@@ -54,7 +54,7 @@ export default function GalleryImageGrid(props: Props) {
                 : ""
             }`}
             id="zoom-image"
-            sizes="100vw, 24vw"
+            sizes="100vw, 40vw"
             style={{ aspectRatio }}
             src={img.url!}
             alt={img.alternateName}

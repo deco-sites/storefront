@@ -17,15 +17,25 @@ export interface Props {
 
     onMouseOver?: {
       imageZoom?: "Disable" | "Zoom image" | "Modal zoom";
-    }
+    },
+    
+    positionInfo : "left" | "right";
   };
-
 }
-
 /**
  * @title Product Image Front Back
  * @description Renders a slider images full width on desktop. On mobile, the overflow is reached causing a scrollbar to be rendered.
  */
+const variantsInfo = {
+  left: "sm:left-12",
+  right:"sm:right-10",
+};
+
+const variantsArrows = {
+  left: "sm:right-24 mr-16",
+  right:"sm:left-24 ml-16",
+};
+
 function GalleryFullWidth(props: Props) {
   const id = useId();
 
@@ -38,6 +48,7 @@ function GalleryFullWidth(props: Props) {
     layout: { width, height }, layout,
   } = props;
   const aspectRatio = `${width} / ${height}`;
+  const variantInfo = layout?.positionInfo ?? "right";
 
   return (
     <div id={id} class="grid grid-flow-row sm:grid-flow-col">
@@ -68,14 +79,14 @@ function GalleryFullWidth(props: Props) {
             ))}
           </Slider>
           <Slider.PrevButton
-            class="no-animation hidden lg:flex absolute left-24 bottom-5 btn btn-circle btn-outline"
+            class={`no-animation hidden lg:flex absolute bottom-5 btn btn-circle btn-outline ${variantsArrows[variantInfo]} !ml-0`}
             disabled
           >
             <Icon size={24} id="ChevronLeft" strokeWidth={3} />
           </Slider.PrevButton>
 
           <Slider.NextButton
-            class="no-animation hidden lg:flex absolute left-40 bottom-5 btn btn-circle btn-outline"
+            class={`no-animation hidden lg:flex absolute bottom-5 btn btn-circle btn-outline ${variantsArrows[variantInfo]} !mr-0`}
             disabled={images.length < 2}
           >
             <Icon size={24} id="ChevronRight" strokeWidth={3} />
@@ -100,7 +111,7 @@ function GalleryFullWidth(props: Props) {
             ))}
           </ul>
         </div>
-        <div class="static lg:absolute right-10 bg-white padding px-5 py-4 bottom-3 w-full lg:w-[28%] rounded-2xl shadow-xl ">
+        <div class={`static lg:absolute bg-white padding px-5 py-4 bottom-3 w-full lg:w-[28%] rounded-2xl shadow-xl ${variantsInfo[variantInfo]}`}>
           <ProductInfo page={props.page} layout={{}} />
         </div>
       </div>
