@@ -3,15 +3,16 @@ import Button from "./common.tsx";
 
 function CartButton() {
   const { cart, loading } = useCart();
-  const items = cart.value?.lines?.nodes ?? [];
-  const currency = cart.value?.cost?.totalAmount.currencyCode ?? "BRL";
-  const total = cart.value?.cost?.totalAmount.amount ?? 0;
+  console.log(cart);
+  const items = cart.value?.products ?? [];
+  const currency = cart.value?.currency ?? "BRL";
+  const total = cart.value?.total ?? 0;
 
   return (
     <Button
       currency={currency}
       loading={loading.value}
-      total={total}
+      total={Number(total)}
       items={items.map((item, index) => itemToAnalyticsItem(item, index))}
     />
   );
