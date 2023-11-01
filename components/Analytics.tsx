@@ -23,7 +23,7 @@ const snippet = (id: string, event: AnalyticsEvent) => {
 export const SendEventOnClick = <E extends AnalyticsEvent>({ event, id }: {
   event: E;
   id: string;
-}) => <script defer src={scriptAsDataURI(snippet, id, event)} />;
+}) => null;
 
 /**
  * This componente should be used when want to send event for rendered componentes.
@@ -31,4 +31,4 @@ export const SendEventOnClick = <E extends AnalyticsEvent>({ event, id }: {
  */
 export const SendEventOnLoad = <E extends AnalyticsEvent>(
   { event }: { event: E },
-) => <script defer src={scriptAsDataURI(sendEvent, event)} />;
+) => null;
