@@ -8,11 +8,11 @@ import { clx } from "../../sdk/clx.ts";
  */
 export interface Props {
   children?: ComponentChildren;
-  gap?: {
-    /** @default 2 */
-    mobile?: "1" | "2" | "4" | "8" | "12" | "16";
-    /** @default 4 */
-    desktop?: "1" | "2" | "4" | "8" | "12" | "16";
+  flow?: {
+    /** @default Row */
+    mobile?: "Row" | "Col" | "Dense" | "Col-dense" | "Row-dense";
+    /** @default Row */
+    desktop?: "Row" | "Col" | "Dense" | "Col-dense" | "Row-dense";
   };
   cols?: {
     mobile?:
@@ -48,11 +48,11 @@ export interface Props {
     mobile?: "1" | "2" | "3" | "4" | "5" | "6" | "None";
     desktop?: "1" | "2" | "3" | "4" | "5" | "6" | "None";
   };
-  flow?: {
-    /** @default Row */
-    mobile?: "Row" | "Col" | "Dense" | "Col-dense" | "Row-dense";
-    /** @default Row */
-    desktop?: "Row" | "Col" | "Dense" | "Col-dense" | "Row-dense";
+  gap?: {
+    /** @default 2 */
+    mobile?: "1" | "2" | "4" | "8" | "12" | "16";
+    /** @default 4 */
+    desktop?: "1" | "2" | "4" | "8" | "12" | "16";
   };
   placeItems?: {
     /** @default Center */
