@@ -1,4 +1,4 @@
-import { Section } from "deco/blocks/section.ts";
+import { context } from "deco/mod.ts";
 import { grid, VNode } from "../../constants.tsx";
 import { clx } from "../../sdk/clx.ts";
 
@@ -64,7 +64,11 @@ interface Props {
   };
 }
 
-function Section({ layout, children }: Props) {
+function Grid({ layout, children }: Props) {
+  const items = !context.isDeploy && !children?.length
+    ? new Array(12).fill(0).map(() => <ItemPreview />)
+    : children;
+
   return (
     <div
       class={clx(
@@ -81,9 +85,7 @@ function Section({ layout, children }: Props) {
         grid.placeItems.desktop[layout?.placeItems?.desktop ?? "center"],
       )}
     >
-      {children?.length
-        ? children
-        : new Array(12).fill(0).map(() => <ItemPreview />)}
+      {items}
     </div>
   );
 }
@@ -96,4 +98,4 @@ const ItemPreview = () => (
   </div>
 );
 
-export default Section;
+export default Grid;

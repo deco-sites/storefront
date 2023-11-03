@@ -71,3 +71,5 @@ import_map.local.json
 .config.json
 # Fresh build directory
 _fresh/
+
+deno.lock

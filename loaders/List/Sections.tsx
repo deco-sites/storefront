@@ -1,8 +1,8 @@
-import type { Section } from "deco/blocks/section.ts";
+import type { Flex } from "deco/blocks/section.ts";
 import type { VNode } from "../../constants.tsx";
 
 interface Props {
-  sections: Section[] | null;
+  sections: Flex[] | null;
 }
 
 function Sections({ sections }: Props): VNode[] | null {
