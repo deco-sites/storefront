@@ -16,7 +16,7 @@ type NewType = {
      * @description How the main product image will be displayed
      * @default bullets
   */
-  thumb?: "bullets" | "image";
+  thumb?: "bullets" | "sticks" | "image";
   position:Position;
   width: number;
   height: number;
@@ -48,6 +48,10 @@ const variantsCol = {
   bottom: "sm:flex-col",
   up: "sm:flex-col-reverse"
 };
+const variantBullets = {
+  bullets: "w-4 h-4",
+  sticks: "w-8 h-2",
+};
 
 export default function GallerySlider(props: Props) {
   const id = useId();
@@ -66,7 +70,7 @@ export default function GallerySlider(props: Props) {
   const variant2 = layout?.position ?? "left";
   
 
-  if (variant === "bullets") {
+  if (variant === "bullets" || variant === "sticks") {
     return (
       <div id={id} class="grid grid-flow-row sm:grid-flow-col">
         {/* Image Slider */}
@@ -115,11 +119,11 @@ export default function GallerySlider(props: Props) {
             />
           </div>
           {/* Dots */}
-          <ul class="carousel carousel-center px-4 sm:px-0 sm:flex-row gap-4 order-2 sm:order-2 absolute bottom-2 right-2/4">
+          <ul class="carousel carousel-center px-4 sm:px-0 sm:flex-row gap-4 order-2 sm:order-2 absolute bottom-2 right-2/4 translate-x-2/4">
             {images.map((img, index) => (
               <li class="carousel-item ">
                 <Slider.Dot index={index}>
-                  <div class="w-4 h-4 rounded-full bg-[#292929]"></div>
+                  <div class={`${variantBullets[variant]} rounded-full bg-[#292929]`}></div>
                 </Slider.Dot>
               </li>
             ))}

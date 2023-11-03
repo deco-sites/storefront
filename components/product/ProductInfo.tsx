@@ -59,7 +59,7 @@ function ProductInfo({ page, layout }: Props) {
   const discount = price && listPrice ? listPrice - price : 0;
 
   return (
-    <div class="flex flex-col">
+    <div class="flex flex-col mx-2 sm:mx-0">
       {/* Breadcrumb */}
       <Breadcrumb
         itemListElement={breadcrumbList?.itemListElement.slice(0, -1)}

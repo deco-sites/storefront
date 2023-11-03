@@ -52,7 +52,7 @@ function GalleryFullWidth(props: Props) {
 
   return (
     <div id={id} class="grid grid-flow-row sm:grid-flow-col">
-      <div class="lg:relative order-1 sm:order-2 mb-1 lg:mb-12">
+      <div class="lg:relative order-1 sm:order-2 mb-1 lg:mb-28 xl:mb-20 2xl:mb-10">
         <div class="relative lg:static">
           <Slider class="carousel carousel-center gap-3 w-[99vw]">
             {images.map((img, index) => (
@@ -111,7 +111,7 @@ function GalleryFullWidth(props: Props) {
             ))}
           </ul>
         </div>
-        <div class={`static lg:absolute bg-white padding px-5 py-4 bottom-3 w-full lg:w-[28%] rounded-2xl shadow-xl ${variantsInfo[variantInfo]}`}>
+        <div class={`static lg:absolute bg-white padding px-5 py-4 top-16 w-full lg:w-[28%] rounded-2xl shadow-xl ${variantsInfo[variantInfo]}`}>
           <ProductInfo page={props.page} layout={{}} />
         </div>
       </div>
