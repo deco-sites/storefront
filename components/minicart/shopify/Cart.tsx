@@ -20,8 +20,8 @@ function Cart() {
     <BaseCart
       items={items?.map((item) => ({
         image: {
-          src: item.merchandise.image.url,
-          alt: item.merchandise.image.altText,
+          src: item.merchandise.image?.url ?? "",
+          alt: item.merchandise.image?.altText ?? "",
         },
         quantity: item.quantity,
         name: item.merchandise.product.title,

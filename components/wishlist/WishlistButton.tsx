@@ -16,9 +16,10 @@ function WishlistButton({
   productID,
 }: Props) {
   const { user } = useUser();
-  const item = { sku: productID, productId: productGroupID };
   const { loading, addItem, removeItem, getItem } = useWishlist();
-  const listItem = useComputed(() => getItem(item));
+  const listItem = useComputed(() =>
+    getItem({ sku: productID, productId: productGroupID })
+  );
   const fetching = useSignal(false);
 
   const isUserLoggedIn = Boolean(user.value?.email);
@@ -47,9 +48,12 @@ function WishlistButton({
 
         try {
           fetching.value = true;
-          inWishlist
-            ? await removeItem({ id: listItem.value!.id }!)
-            : await addItem(item);
+
+          if (inWishlist) {
+            await removeItem({ id: listItem.value!.id }!);
+          } else if (productID && productGroupID) {
+            await addItem({ sku: productID, productId: productGroupID });
+          }
         } finally {
           fetching.value = false;
         }
