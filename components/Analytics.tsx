@@ -6,15 +6,15 @@ const snippet = (id: string, event: AnalyticsEvent) => {
   const element = document.getElementById(id);
 
   if (!element) {
-    console.warn(
+    return console.warn(
       `Could not find element ${id}. Click event will not be send. This will cause loss in analytics`,
     );
-  } else {
-    element.addEventListener(
-      "click",
-      () => window.DECO.events.dispatch(event),
-    );
   }
+
+  element.addEventListener("click", () => {
+    console.log(JSON.stringify(event, null, 2));
+    window.DECO.events.dispatch(event);
+  });
 };
 
 /**
@@ -30,5 +30,5 @@ export const SendEventOnClick = <E extends AnalyticsEvent>({ event, id }: {
  * This behavior is usefull for view_* events.
  */
 export const SendEventOnLoad = <E extends AnalyticsEvent>(
-  { event }: { event: E },
+  { event }: { event: E; id?: string },
 ) => <script defer src={scriptAsDataURI(sendEvent, event)} />;

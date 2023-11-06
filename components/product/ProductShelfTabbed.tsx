@@ -29,7 +29,6 @@ export interface Props {
   };
   cardLayout?: cardLayout;
   tabIndex?: number;
-  id?: string;
 }
 
 function TabbedProductShelf({
@@ -39,7 +38,6 @@ function TabbedProductShelf({
   layout,
   cardLayout,
   tabIndex,
-  id: sectionId,
 }: Props) {
   const id = useId();
   const platform = usePlatform();
@@ -113,8 +111,9 @@ function TabbedProductShelf({
             name: "view_item_list",
             params: {
               item_list_name: title,
-              items: products.map((product) =>
+              items: products.map((product, index) =>
                 mapProductToAnalyticsItem({
+                  index,
                   product,
                   ...(useOffer(product.offers)),
                 })

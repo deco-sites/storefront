@@ -85,8 +85,9 @@ function ProductShelf({
             name: "view_item_list",
             params: {
               item_list_name: title,
-              items: products.map((product) =>
+              items: products.map((product, index) =>
                 mapProductToAnalyticsItem({
+                  index,
                   product,
                   ...(useOffer(product.offers)),
                 })

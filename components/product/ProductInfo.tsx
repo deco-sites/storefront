@@ -46,6 +46,7 @@ function ProductInfo({ page, layout }: Props) {
     gtin,
     isVariantOf,
     additionalProperty = [],
+    brand,
   } = product;
   const description = product.description || isVariantOf?.description;
   const {
@@ -57,13 +58,26 @@ function ProductInfo({ page, layout }: Props) {
   } = useOffer(offers);
   const productGroupID = isVariantOf?.productGroupID ?? "";
   const discount = price && listPrice ? listPrice - price : 0;
+  const breadcrumb = {
+    ...breadcrumbList,
+    itemListElement: breadcrumbList?.itemListElement.slice(0, -1),
+    numberOfItems: breadcrumbList.numberOfItems - 1,
+  };
+
+  const eventItem = {
+    item_list_id: "product",
+    item_list_name: "Product",
+    ...mapProductToAnalyticsItem({
+      product,
+      breadcrumbList: breadcrumb,
+      price,
+      listPrice,
+    }),
+  };
 
   return (
     <div class="flex flex-col">
-      {/* Breadcrumb */}
-      <Breadcrumb
-        itemListElement={breadcrumbList?.itemListElement.slice(0, -1)}
-      />
+      <Breadcrumb itemListElement={breadcrumb.itemListElement} />
       {/* Code and name */}
       <div class="mt-4 sm:mt-8">
         <div>
@@ -111,8 +125,11 @@ function ProductInfo({ page, layout }: Props) {
               {platform === "vtex" && (
                 <>
                   <AddToCartButtonVTEX
+                    eventParams={{ items: [eventItem] }}
                     url={url || ""}
                     name={name}
+                    groupName={isVariantOf?.name ?? ""}
+                    brand={brand?.name ?? ""}
                     productID={productID}
                     productGroupID={productGroupID}
                     price={price}
@@ -128,8 +145,11 @@ function ProductInfo({ page, layout }: Props) {
               )}
               {platform === "wake" && (
                 <AddToCartButtonWake
+                  eventParams={{ items: [eventItem] }}
                   url={url || ""}
                   name={name}
+                  groupName={isVariantOf?.name ?? ""}
+                  brand={brand?.name ?? ""}
                   productID={productID}
                   productGroupID={productGroupID}
                   price={price}
@@ -138,8 +158,11 @@ function ProductInfo({ page, layout }: Props) {
               )}
               {platform === "linx" && (
                 <AddToCartButtonLinx
+                  eventParams={{ items: [eventItem] }}
                   url={url || ""}
                   name={name}
+                  groupName={isVariantOf?.name ?? ""}
+                  brand={brand?.name ?? ""}
                   productID={productID}
                   productGroupID={productGroupID}
                   price={price}
@@ -148,8 +171,11 @@ function ProductInfo({ page, layout }: Props) {
               )}
               {platform === "vnda" && (
                 <AddToCartButtonVNDA
+                  eventParams={{ items: [eventItem] }}
                   url={url || ""}
                   name={name}
+                  groupName={isVariantOf?.name ?? ""}
+                  brand={brand?.name ?? ""}
                   productID={productID}
                   productGroupID={productGroupID}
                   price={price}
@@ -159,8 +185,11 @@ function ProductInfo({ page, layout }: Props) {
               )}
               {platform === "shopify" && (
                 <AddToCartButtonShopify
+                  eventParams={{ items: [eventItem] }}
                   url={url || ""}
                   name={name}
+                  groupName={isVariantOf?.name ?? ""}
+                  brand={brand?.name ?? ""}
                   productID={productID}
                   productGroupID={productGroupID}
                   price={price}
@@ -202,14 +231,9 @@ function ProductInfo({ page, layout }: Props) {
         event={{
           name: "view_item",
           params: {
-            items: [
-              mapProductToAnalyticsItem({
-                product,
-                breadcrumbList,
-                price,
-                listPrice,
-              }),
-            ],
+            item_list_id: "product",
+            item_list_name: "Product",
+            items: [eventItem],
           },
         }}
       />
