@@ -18,7 +18,7 @@ export type Props = {
    * @default custom
    */
   platform: Platform;
-  theme?: Flex;
+  theme?: Section;
 } & CommerceProps;
 
 export type Platform =

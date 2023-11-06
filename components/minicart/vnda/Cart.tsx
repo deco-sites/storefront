@@ -19,7 +19,10 @@ function Cart() {
   return (
     <BaseCart
       items={items.map((item) => ({
-        image: { src: normalizeUrl(item.image_url), alt: item.product_name },
+        image: {
+          src: normalizeUrl(item.image_url ?? ""),
+          alt: item.product_name,
+        },
         quantity: item.quantity,
         name: item.variant_name,
         price: {
@@ -37,8 +40,13 @@ function Cart() {
       coupon={coupon}
       checkoutHref={`/checkout/${token}`}
       onAddCoupon={(code) => update({ coupon_code: code })}
-      onUpdateQuantity={(quantity: number, index: number) =>
-        updateItem({ quantity, itemId: items[index].id })}
+      onUpdateQuantity={async (quantity: number, index: number) => {
+        const item = items[index];
+
+        if (!item || typeof item.id === "undefined") return;
+
+        return await updateItem({ quantity, itemId: item.id });
+      }}
       itemToAnalyticsItem={(index) => {
         const item = items[index];
 

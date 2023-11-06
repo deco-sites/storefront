@@ -4,6 +4,7 @@ concurrency:
   group: environment-${{ github.head_ref || github.ref }}
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
   pull_request:
