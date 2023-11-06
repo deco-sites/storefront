@@ -107,8 +107,6 @@ function CartItem(
           quantity={quantity}
           onChange={withLoading(async (quantity) => {
             const analyticsItem = itemToAnalyticsItem(index);
-            console.log(quantity);
-            console.log(item.quantity);
             const diff = quantity - item.quantity;
 
             await onUpdateQuantity(quantity, index);

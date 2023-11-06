@@ -3,11 +3,7 @@ import BaseCart from "../common/Cart.tsx";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 
 function Cart() {
-  console.log("cart");
   const { cart, loading, updateItems } = useCart();
-  if (IS_BROWSER) {
-    console.log(cart.value);
-  }
 
   const items = cart.value?.products ?? [];
   const coupons = cart.value?.coupon;
