@@ -6,6 +6,7 @@ import CartButtonShopify from "$store/islands/Header/Cart/shopify.tsx";
 import CartButtonVDNA from "$store/islands/Header/Cart/vnda.tsx";
 import CartButtonVTEX from "$store/islands/Header/Cart/vtex.tsx";
 import CartButtonWake from "$store/islands/Header/Cart/wake.tsx";
+import CartButtonSalesforce from "$store/islands/Header/Cart/salesforce.tsx";
 import Searchbar from "$store/islands/Header/Searchbar.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
@@ -90,6 +91,7 @@ function Navbar({ items, searchbar, logo }: {
           {platform === "wake" && <CartButtonWake />}
           {platform === "linx" && <CartButtonLinx />}
           {platform === "shopify" && <CartButtonShopify />}
+          {platform === "salesforce" && <CartButtonSalesforce />}
         </div>
       </div>
     </>

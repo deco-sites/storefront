@@ -4,6 +4,7 @@ import AddToCartButtonLinx from "$store/islands/AddToCartButton/linx.tsx";
 import AddToCartButtonShopify from "$store/islands/AddToCartButton/shopify.tsx";
 import AddToCartButtonVNDA from "$store/islands/AddToCartButton/vnda.tsx";
 import AddToCartButtonVTEX from "$store/islands/AddToCartButton/vtex.tsx";
+import AddToCartButtonSalesforce from "$store/islands/AddToCartButton/salesforce.tsx";
 import AddToCartButtonWake from "$store/islands/AddToCartButton/wake.tsx";
 import OutOfStock from "$store/islands/OutOfStock.tsx";
 import ShippingSimulation from "$store/islands/ShippingSimulation.tsx";
@@ -159,6 +160,16 @@ function ProductInfo({ page, layout }: Props) {
               )}
               {platform === "shopify" && (
                 <AddToCartButtonShopify
+                  url={url || ""}
+                  name={name}
+                  productID={productID}
+                  productGroupID={productGroupID}
+                  price={price}
+                  discount={discount}
+                />
+              )}
+              {platform === "salesforce" && (
+                <AddToCartButtonSalesforce
                   url={url || ""}
                   name={name}
                   productID={productID}
