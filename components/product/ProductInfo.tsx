@@ -160,12 +160,8 @@ function ProductInfo({ page, layout }: Props) {
               )}
               {platform === "nuvemshop" && (
                 <AddToCartButtonNuvemshop
-                  url={url || ""}
-                  name={name}
-                  productID={productID}
                   productGroupID={productGroupID}
-                  price={price}
-                  discount={discount}
+                  eventParams={{ items: [eventItem] }}
                   additionalProperty={additionalProperty}
                 />
               )}

@@ -4,6 +4,7 @@ import { PropertyValue } from "apps/commerce/types.ts";
 
 export interface Props extends Omit<BtnProps, "onAddItem" | "platform"> {
   additionalProperty: PropertyValue[];
+  productGroupID: string;
 }
 
 function AddToCartButton(props: Props) {
