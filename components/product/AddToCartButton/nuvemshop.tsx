@@ -14,9 +14,11 @@ function AddToCartButton(props: Props) {
       quantity: 1,
       itemId: Number(props.productGroupID),
       add_to_cart_enhanced: "1",
-      attributes: props.additionalProperty ?  Object.fromEntries(
-        props.additionalProperty?.map(({ name, value }) => [name, value]),
-      ) : undefined,
+      attributes: props.additionalProperty
+        ? Object.fromEntries(
+          props.additionalProperty?.map(({ name, value }) => [name, value]),
+        )
+        : undefined,
     });
 
   return <Button onAddItem={onAddItem} {...props} />;

@@ -52,7 +52,6 @@ function Result({
   const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
   const offset = zeroIndexedOffsetPage * perPage;
 
-
   return (
     <>
       <div class="container px-4 sm:py-10">
