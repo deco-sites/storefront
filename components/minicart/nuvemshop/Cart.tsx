@@ -1,6 +1,5 @@
 import { itemToAnalyticsItem, useCart } from "apps/nuvemshop/hooks/useCart.ts";
 import BaseCart from "../common/Cart.tsx";
-import { IS_BROWSER } from "$fresh/runtime.ts";
 
 function Cart() {
   const { cart, loading, updateItems } = useCart();
