@@ -1,4 +1,4 @@
-import { SendEventOnLoad } from "$store/components/Analytics.tsx";
+import { SendEventOnView } from "$store/components/Analytics.tsx";
 import ProductCard, {
   Layout as cardLayout,
 } from "$store/components/product/ProductCard.tsx";
@@ -106,7 +106,8 @@ function TabbedProductShelf({
           </div>
         </>
         <SliderJS rootId={id} />
-        <SendEventOnLoad
+        <SendEventOnView
+          id={id}
           event={{
             name: "view_item_list",
             params: {

@@ -6,7 +6,7 @@ export type Props = Omit<BtnProps, "onAddItem"> & {
   productGroupID: string;
 };
 
-function AddToCartButton({ productGroupID, productID }: Props) {
+function AddToCartButton({ productGroupID, productID, eventParams }: Props) {
   const { addItem } = useCart();
 
   return (

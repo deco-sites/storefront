@@ -1,8 +1,9 @@
-import { SendEventOnLoad } from "$store/components/Analytics.tsx";
+import { SendEventOnView } from "$store/components/Analytics.tsx";
 import { Layout as CardLayout } from "$store/components/product/ProductCard.tsx";
 import Filters from "$store/components/search/Filters.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
 import SearchControls from "$store/islands/SearchControls.tsx";
+import { useId } from "$store/sdk/useId.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
@@ -42,6 +43,7 @@ function Result({
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
   const perPage = pageInfo.recordPerPage || products.length;
   const offset = pageInfo.currentPage * perPage;
+  const id = useId();
 
   return (
     <>
@@ -59,7 +61,7 @@ function Result({
               <Filters filters={filters} />
             </aside>
           )}
-          <div class="flex-grow">
+          <div class="flex-grow" id={id}>
             <ProductGallery
               products={products}
               offset={offset}
@@ -92,13 +94,14 @@ function Result({
           </div>
         </div>
       </div>
-      <SendEventOnLoad
+      <SendEventOnView
+        id={id}
         event={{
           name: "view_item_list",
           params: {
             // TODO: get category name from search or cms setting
-            item_list_name: "",
-            item_list_id: "",
+            item_list_name: breadcrumb.itemListElement?.at(-1)?.name,
+            item_list_id: breadcrumb.itemListElement?.at(-1)?.item,
             items: page.products?.map((product, index) =>
               mapProductToAnalyticsItem({
                 ...(useOffer(product.offers)),

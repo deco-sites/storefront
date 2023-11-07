@@ -1,7 +1,6 @@
 import { useCart } from "apps/wake/hooks/useCart.ts";
 import Button, { Props as BtnProps } from "./common.tsx";
 
-
 export interface Props extends Omit<BtnProps, "onAddItem"> {
   productID: string;
 }

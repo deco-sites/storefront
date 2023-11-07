@@ -1,4 +1,4 @@
-import { SendEventOnLoad } from "$store/components/Analytics.tsx";
+import { SendEventOnView } from "$store/components/Analytics.tsx";
 import Breadcrumb from "$store/components/ui/Breadcrumb.tsx";
 import AddToCartButtonLinx from "$store/islands/AddToCartButton/linx.tsx";
 import AddToCartButtonShopify from "$store/islands/AddToCartButton/shopify.tsx";
@@ -9,6 +9,7 @@ import OutOfStock from "$store/islands/OutOfStock.tsx";
 import ShippingSimulation from "$store/islands/ShippingSimulation.tsx";
 import WishlistButton from "$store/islands/WishlistButton.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
+import { useId } from "$store/sdk/useId.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
@@ -29,6 +30,7 @@ interface Props {
 
 function ProductInfo({ page, layout }: Props) {
   const platform = usePlatform();
+  const id = useId();
 
   if (page === null) {
     throw new Error("Missing Product Details Page Info");
@@ -39,14 +41,12 @@ function ProductInfo({ page, layout }: Props) {
     product,
   } = page;
   const {
-    url,
     productID,
     offers,
     name = "",
     gtin,
     isVariantOf,
     additionalProperty = [],
-    brand,
   } = product;
   const description = product.description || isVariantOf?.description;
   const {
@@ -57,26 +57,21 @@ function ProductInfo({ page, layout }: Props) {
     availability,
   } = useOffer(offers);
   const productGroupID = isVariantOf?.productGroupID ?? "";
-  const discount = price && listPrice ? listPrice - price : 0;
   const breadcrumb = {
     ...breadcrumbList,
     itemListElement: breadcrumbList?.itemListElement.slice(0, -1),
     numberOfItems: breadcrumbList.numberOfItems - 1,
   };
 
-  const eventItem = {
-    item_list_id: "product",
-    item_list_name: "Product",
-    ...mapProductToAnalyticsItem({
-      product,
-      breadcrumbList: breadcrumb,
-      price,
-      listPrice,
-    }),
-  };
+  const eventItem = mapProductToAnalyticsItem({
+    product,
+    breadcrumbList: breadcrumb,
+    price,
+    listPrice,
+  });
 
   return (
-    <div class="flex flex-col">
+    <div class="flex flex-col" id={id}>
       <Breadcrumb itemListElement={breadcrumb.itemListElement} />
       {/* Code and name */}
       <div class="mt-4 sm:mt-8">
@@ -126,14 +121,7 @@ function ProductInfo({ page, layout }: Props) {
                 <>
                   <AddToCartButtonVTEX
                     eventParams={{ items: [eventItem] }}
-                    url={url || ""}
-                    name={name}
-                    groupName={isVariantOf?.name ?? ""}
-                    brand={brand?.name ?? ""}
                     productID={productID}
-                    productGroupID={productGroupID}
-                    price={price}
-                    discount={discount}
                     seller={seller}
                   />
                   <WishlistButton
@@ -146,54 +134,27 @@ function ProductInfo({ page, layout }: Props) {
               {platform === "wake" && (
                 <AddToCartButtonWake
                   eventParams={{ items: [eventItem] }}
-                  url={url || ""}
-                  name={name}
-                  groupName={isVariantOf?.name ?? ""}
-                  brand={brand?.name ?? ""}
                   productID={productID}
-                  productGroupID={productGroupID}
-                  price={price}
-                  discount={discount}
                 />
               )}
               {platform === "linx" && (
                 <AddToCartButtonLinx
                   eventParams={{ items: [eventItem] }}
-                  url={url || ""}
-                  name={name}
-                  groupName={isVariantOf?.name ?? ""}
-                  brand={brand?.name ?? ""}
                   productID={productID}
                   productGroupID={productGroupID}
-                  price={price}
-                  discount={discount}
                 />
               )}
               {platform === "vnda" && (
                 <AddToCartButtonVNDA
                   eventParams={{ items: [eventItem] }}
-                  url={url || ""}
-                  name={name}
-                  groupName={isVariantOf?.name ?? ""}
-                  brand={brand?.name ?? ""}
                   productID={productID}
-                  productGroupID={productGroupID}
-                  price={price}
-                  discount={discount}
                   additionalProperty={additionalProperty}
                 />
               )}
               {platform === "shopify" && (
                 <AddToCartButtonShopify
                   eventParams={{ items: [eventItem] }}
-                  url={url || ""}
-                  name={name}
-                  groupName={isVariantOf?.name ?? ""}
-                  brand={brand?.name ?? ""}
                   productID={productID}
-                  productGroupID={productGroupID}
-                  price={price}
-                  discount={discount}
                 />
               )}
             </>
@@ -227,7 +188,8 @@ function ProductInfo({ page, layout }: Props) {
         </span>
       </div>
       {/* Analytics Event */}
-      <SendEventOnLoad
+      <SendEventOnView
+        id={id}
         event={{
           name: "view_item",
           params: {
