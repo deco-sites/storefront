@@ -7,6 +7,7 @@ const CartVNDA = lazy(() => import("./vnda/Cart.tsx"));
 const CartWake = lazy(() => import("./wake/Cart.tsx"));
 const CartLinx = lazy(() => import("./linx/Cart.tsx"));
 const CartShopify = lazy(() => import("./shopify/Cart.tsx"));
+const CartNuvemshop = lazy(() => import("./nuvemshop/Cart.tsx"));
 
 export interface Props {
   platform: ReturnType<typeof usePlatform>;
@@ -31,6 +32,10 @@ function Cart({ platform }: Props) {
 
   if (platform === "shopify") {
     return <CartShopify />;
+  }
+
+  if (platform === "nuvemshop") {
+    return <CartNuvemshop />;
   }
 
   return null;

@@ -18,7 +18,7 @@ interface Props {
   coupon?: string;
   freeShippingTarget: number;
   checkoutHref: string;
-  onAddCoupon: CouponProps["onAddCoupon"];
+  onAddCoupon?: CouponProps["onAddCoupon"];
   onUpdateQuantity: ItemProps["onUpdateQuantity"];
   itemToAnalyticsItem: ItemProps["itemToAnalyticsItem"];
 }
@@ -109,7 +109,9 @@ function Cart({
                     {formatPrice(subtotal, currency, locale)}
                   </span>
                 </div>
-                <Coupon onAddCoupon={onAddCoupon} coupon={coupon} />
+                {onAddCoupon && (
+                  <Coupon onAddCoupon={onAddCoupon} coupon={coupon} />
+                )}
               </div>
 
               {/* Total */}

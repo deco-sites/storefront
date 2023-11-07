@@ -25,6 +25,9 @@ export interface Props {
   page: ProductListingPage | null;
   layout?: Layout;
   cardLayout?: CardLayout;
+
+  /** @description 0 for ?page=0 as your first page */
+  startingPage?: 0 | 1;
 }
 
 function NotFound() {
@@ -39,11 +42,15 @@ function Result({
   page,
   layout,
   cardLayout,
+  startingPage = 0,
 }: Omit<Props, "page"> & { page: ProductListingPage }) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
   const perPage = pageInfo.recordPerPage || products.length;
-  const offset = pageInfo.currentPage * perPage;
+
   const id = useId();
+
+  const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
+  const offset = zeroIndexedOffsetPage * perPage;
 
   return (
     <>
@@ -81,7 +88,7 @@ function Result({
               <Icon id="ChevronLeft" size={24} strokeWidth={2} />
             </a>
             <span class="btn btn-ghost join-item">
-              Page {pageInfo.currentPage + 1}
+              Page {zeroIndexedOffsetPage + 1}
             </span>
             <a
               aria-label="next page link"
