@@ -11,6 +11,10 @@ function GlobalTags() {
 
       {/* Web Manifest */}
       <link rel="manifest" href={asset("/site.webmanifest")} />
+
+      <script>
+        {`window.dataLayer = window.dataLayer || [];`}
+      </script>
     </Head>
   );
 }

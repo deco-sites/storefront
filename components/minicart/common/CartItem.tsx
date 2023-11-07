@@ -1,3 +1,8 @@
+import type {
+  ToAddToCart,
+  ToRemoveFromCart,
+} from "$store/sdk/ga4/types/index.ts";
+
 import Button from "$store/components/ui/Button.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
 import QuantitySelector from "$store/components/ui/QuantitySelector.tsx";
@@ -6,6 +11,7 @@ import { formatPrice } from "$store/sdk/format.ts";
 import { AnalyticsItem } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { useCallback, useState } from "preact/hooks";
+import { toAnalytics } from "$store/sdk/ga4/transform/index.ts";
 
 export interface Item {
   image: {
@@ -26,6 +32,7 @@ export interface Props {
 
   locale: string;
   currency: string;
+  analytics?: ToAddToCart | ToRemoveFromCart;
 
   onUpdateQuantity: (quantity: number, index: number) => Promise<void>;
   itemToAnalyticsItem: (index: number) => AnalyticsItem | null | undefined;
@@ -37,8 +44,8 @@ function CartItem(
     index,
     locale,
     currency,
+    analytics,
     onUpdateQuantity,
-    itemToAnalyticsItem,
   }: Props,
 ) {
   const { image, name, price: { sale, list }, quantity } = item;
@@ -80,14 +87,24 @@ function CartItem(
             loading={loading}
             class="btn-ghost btn-square"
             onClick={withLoading(async () => {
-              const analyticsItem = itemToAnalyticsItem(index);
-
               await onUpdateQuantity(0, index);
 
-              analyticsItem && sendEvent({
-                name: "remove_from_cart",
-                params: { items: [analyticsItem] },
-              });
+              if (analytics) {
+                const analyticsItem = analytics.items[index];
+
+                const remove_from_cart = toAnalytics({
+                  type: "remove_from_cart",
+                  data: {
+                    items: [analyticsItem],
+                    extended: {
+                      ...analytics.extended,
+                      quantity,
+                    },
+                  },
+                });
+
+                sendEvent(remove_from_cart);
+              }
             })}
           >
             <Icon id="Trash" size={24} />
@@ -106,18 +123,25 @@ function CartItem(
           disabled={loading || isGift}
           quantity={quantity}
           onChange={withLoading(async (quantity) => {
-            const analyticsItem = itemToAnalyticsItem(index);
             const diff = quantity - item.quantity;
 
             await onUpdateQuantity(quantity, index);
 
-            if (analyticsItem) {
-              analyticsItem.quantity = diff;
+            if (analytics) {
+              const analyticsItem = analytics.items[index];
 
-              sendEvent({
-                name: diff < 0 ? "remove_from_cart" : "add_to_cart",
-                params: { items: [analyticsItem] },
+              const add_to_cart_or_remove_from_cart = toAnalytics({
+                type: diff < 0 ? "remove_from_cart" : "add_to_cart",
+                data: {
+                  items: [analyticsItem],
+                  extended: {
+                    ...analytics.extended,
+                    quantity: Math.abs(diff),
+                  },
+                },
               });
+
+              sendEvent(add_to_cart_or_remove_from_cart);
             }
           })}
         />

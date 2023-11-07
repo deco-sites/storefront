@@ -1,10 +1,14 @@
+import type { ImageWidget } from "apps/admin/widgets.ts";
+import type { AnalyticsEvent } from "apps/commerce/types.ts";
+
 import Button from "$store/components/ui/Button.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
 import Slider from "$store/components/ui/Slider.tsx";
 import SliderJS from "$store/islands/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
-import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
+import { SendEventOnClick } from "$store/components/Analytics.tsx";
+import { toAnalytics } from "$store/sdk/ga4/transform/index.ts";
 
 /**
  * @titleBy alt
@@ -86,7 +90,14 @@ const DEFAULT_PROPS = {
   preload: true,
 };
 
-function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
+function BannerItem(
+  { image, lcp, analytics, index }: {
+    image: Banner;
+    lcp?: boolean;
+    index?: number;
+    analytics?: AnalyticsEvent;
+  },
+) {
   const {
     alt,
     mobile,
@@ -94,12 +105,16 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
     action,
   } = image;
 
+  const id = `main-banner-item-${index}`;
+
   return (
     <a
+      id={id}
       href={action?.href ?? "#"}
       aria-label={action?.label}
       class="relative h-[600px] overflow-y-hidden w-full"
     >
+      {analytics && <SendEventOnClick id={id} event={analytics} />}
       <Picture preload={lcp}>
         <Source
           media="(max-width: 767px)"
@@ -207,11 +222,27 @@ function BannerCarousel(props: Props) {
       class="grid grid-cols-[48px_1fr_48px] sm:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px]"
     >
       <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
-        {images?.map((image, index) => (
-          <Slider.Item index={index} class="carousel-item w-full">
-            <BannerItem image={image} lcp={index === 0 && preload} />
-          </Slider.Item>
-        ))}
+        {images?.map((image, index) => {
+          // Very good, receive the name of the promotion in the props and send it for each image that is clicked
+          const analytics = toAnalytics({
+            type: "select_promotion",
+            data: {
+              promotion_id: "vtex",
+              promotion_name: `Visit Store Nº ${index}`,
+            },
+          });
+
+          return (
+            <Slider.Item index={index} class="carousel-item w-full">
+              <BannerItem
+                image={image}
+                lcp={index === 0 && preload}
+                analytics={analytics}
+                index={index}
+              />
+            </Slider.Item>
+          );
+        })}
       </Slider>
 
       <Buttons />

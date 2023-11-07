@@ -14,6 +14,7 @@ import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductSelector from "./ProductVariantSelector.tsx";
+import { toAnalytics } from "$store/sdk/ga4/transform/index.ts";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -34,10 +35,7 @@ function ProductInfo({ page, layout }: Props) {
     throw new Error("Missing Product Details Page Info");
   }
 
-  const {
-    breadcrumbList,
-    product,
-  } = page;
+  const { breadcrumbList, product } = page;
   const {
     url,
     productID,
@@ -46,6 +44,10 @@ function ProductInfo({ page, layout }: Props) {
     gtin,
     isVariantOf,
     additionalProperty = [],
+    sku,
+    inProductGroupWithID,
+    brand,
+    category,
   } = product;
   const description = product.description || isVariantOf?.description;
   const {
@@ -58,6 +60,35 @@ function ProductInfo({ page, layout }: Props) {
   const productGroupID = isVariantOf?.productGroupID ?? "";
   const discount = price && listPrice ? listPrice - price : 0;
 
+  const analytics = {
+    items: [
+      {
+        sku,
+        inProductGroupWithID: inProductGroupWithID ?? "",
+        name,
+        seller,
+        listPrice: listPrice!,
+        price: price!,
+        url: url!,
+        brand: brand?.name ?? "",
+        category: category ?? "",
+      },
+    ],
+    extended: {
+      view: {
+        id: "product_page",
+        name: "Product Page",
+      },
+      index: 0,
+      quantity: 1,
+    },
+  };
+
+  const view_item = toAnalytics({
+    type: "view_item",
+    data: analytics,
+  });
+
   return (
     <div class="flex flex-col">
       {/* Breadcrumb */}
@@ -67,11 +98,7 @@ function ProductInfo({ page, layout }: Props) {
       {/* Code and name */}
       <div class="mt-4 sm:mt-8">
         <div>
-          {gtin && (
-            <span class="text-sm text-base-300">
-              Cod. {gtin}
-            </span>
-          )}
+          {gtin && <span class="text-sm text-base-300">Cod. {gtin}</span>}
         </div>
         <h1>
           <span class="font-medium text-xl capitalize">
@@ -95,9 +122,7 @@ function ProductInfo({ page, layout }: Props) {
             {formatPrice(price, offers?.priceCurrency)}
           </span>
         </div>
-        <span class="text-sm text-base-300">
-          {installments}
-        </span>
+        <span class="text-sm text-base-300">{installments}</span>
       </div>
       {/* Sku Selector */}
       <div class="mt-4 sm:mt-6">
@@ -118,6 +143,7 @@ function ProductInfo({ page, layout }: Props) {
                     price={price}
                     discount={discount}
                     seller={seller}
+                    analytics={analytics}
                   />
                   <WishlistButton
                     variant="full"
@@ -175,11 +201,13 @@ function ProductInfo({ page, layout }: Props) {
       <div class="mt-8">
         {platform === "vtex" && (
           <ShippingSimulation
-            items={[{
-              id: Number(product.sku),
-              quantity: 1,
-              seller: seller,
-            }]}
+            items={[
+              {
+                id: Number(product.sku),
+                quantity: 1,
+                seller: seller,
+              },
+            ]}
           />
         )}
       </div>
@@ -198,21 +226,7 @@ function ProductInfo({ page, layout }: Props) {
         </span>
       </div>
       {/* Analytics Event */}
-      <SendEventOnLoad
-        event={{
-          name: "view_item",
-          params: {
-            items: [
-              mapProductToAnalyticsItem({
-                product,
-                breadcrumbList,
-                price,
-                listPrice,
-              }),
-            ],
-          },
-        }}
-      />
+      <SendEventOnLoad event={view_item} />
     </div>
   );
 }

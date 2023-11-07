@@ -11,8 +11,33 @@ function Cart() {
   const currency = cart.value?.storePreferencesData.currencyCode ?? "BRL";
   const coupon = cart.value?.marketingData?.coupon ?? undefined;
 
+  const analyticsItems = items.map((item) => ({
+    sku: item.id,
+    inProductGroupWithID: item.productId,
+    name: item.name,
+    seller: item.seller,
+    listPrice: parseFloat((item.listPrice / 100).toFixed(2)),
+    price: parseFloat((item.price / 100).toFixed(2)),
+    url: `${self?.location.host}${item.detailUrl}`,
+    brand: item.additionalInfo.brandName ?? "",
+    category: Object.values(item.productCategories).join('>') ?? "",
+  }));
+
+  const analytics = {
+    items: analyticsItems,
+    extended: {
+      view: {
+        id: "mini_cart",
+        name: "Mini Cart",
+      },
+      index: 0,
+      quantity: 1,
+    },
+  };
+
   return (
     <BaseCart
+      analytics={analytics}
       items={items.map((item) => ({
         image: { src: item.imageUrl, alt: item.skuName },
         quantity: item.quantity,

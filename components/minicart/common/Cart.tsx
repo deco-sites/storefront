@@ -1,3 +1,5 @@
+import type { ToAddToCart } from "$store/sdk/ga4/types/index.ts";
+
 import Button from "$store/components/ui/Button.tsx";
 import { sendEvent } from "$store/sdk/analytics.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
@@ -15,6 +17,7 @@ interface Props {
   discounts: number;
   locale: string;
   currency: string;
+  analytics?: ToAddToCart;
   coupon?: string;
   freeShippingTarget: number;
   checkoutHref: string;
@@ -31,6 +34,7 @@ function Cart({
   coupon,
   loading,
   currency,
+  analytics,
   discounts,
   freeShippingTarget,
   checkoutHref,
@@ -84,6 +88,7 @@ function Cart({
                     index={index}
                     locale={locale}
                     currency={currency}
+                    analytics={analytics}
                     onUpdateQuantity={onUpdateQuantity}
                     itemToAnalyticsItem={itemToAnalyticsItem}
                   />

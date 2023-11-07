@@ -1,7 +1,10 @@
+import type { ToAddToCart } from "$store/sdk/ga4/types/index.ts";
+
 import Button from "$store/components/ui/Button.tsx";
 import { sendEvent } from "$store/sdk/analytics.tsx";
 import { useUI } from "$store/sdk/useUI.ts";
 import { useState } from "preact/hooks";
+import { toAnalytics } from "$store/sdk/ga4/transform/index.ts";
 
 export interface Props {
   /** @description: sku name */
@@ -12,6 +15,7 @@ export interface Props {
   discount: number;
   url: string;
   onAddItem: () => Promise<void>;
+  analytics?: ToAddToCart;
 }
 
 const useAddToCart = ({
@@ -22,6 +26,7 @@ const useAddToCart = ({
   productID,
   url,
   onAddItem,
+  analytics,
 }: Props) => {
   const [loading, setLoading] = useState(false);
   const { displayCart } = useUI();
@@ -35,20 +40,14 @@ const useAddToCart = ({
 
       await onAddItem();
 
-      sendEvent({
-        name: "add_to_cart",
-        params: {
-          items: [{
-            quantity: 1,
-            price,
-            item_url: url,
-            item_name: name,
-            discount: discount,
-            item_id: productID,
-            item_variant: name,
-          }],
-        },
-      });
+      if (analytics) {
+        const add_to_cart = toAnalytics({
+          type: "add_to_cart",
+          data: analytics,
+        });
+
+        sendEvent(add_to_cart);
+      }
 
       displayCart.value = true;
     } finally {
