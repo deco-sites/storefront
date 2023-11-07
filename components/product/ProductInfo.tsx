@@ -166,6 +166,7 @@ function ProductInfo({ page, layout }: Props) {
                   productGroupID={productGroupID}
                   price={price}
                   discount={discount}
+                  additionalProperty={additionalProperty}
                 />
               )}
             </>
