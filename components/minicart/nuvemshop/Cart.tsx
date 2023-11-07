@@ -7,9 +7,7 @@ function Cart() {
 
   const items = cart.value?.products ?? [];
   const coupons = cart.value?.coupon;
-  const coupon = coupons && coupons[0]?.applicable
-    ? coupons[0].code
-    : undefined;
+  const coupon = coupons && coupons[0];
   const locale = "pt-BR";
   const currency = cart.value?.currency ?? "BRL";
   const total = cart.value?.total ?? 0;
@@ -22,13 +20,13 @@ function Cart() {
       items={items?.map((item) => ({
         image: {
           src: item.image.src,
-          alt: item.image.alt[0],
+          alt: item.image.alt[0] as string,
         },
         quantity: item.quantity,
         name: item.name,
         price: {
-          sale: item.price,
-          list: item.compare_at_price,
+          sale: Number(item.price),
+          list: Number(item.compare_at_price),
         },
       }))}
       total={Number(total)}
@@ -39,7 +37,7 @@ function Cart() {
       loading={loading.value}
       freeShippingTarget={1000}
       checkoutHref={checkoutHref}
-      coupon={coupon}
+      coupon={coupon as string}
       onUpdateQuantity={(quantity, index) =>
         updateItems({
           quantity: quantity,
