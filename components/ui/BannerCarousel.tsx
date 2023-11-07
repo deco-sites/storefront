@@ -1,3 +1,7 @@
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "$store/components/Analytics.tsx";
 import Button from "$store/components/ui/Button.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
 import Slider from "$store/components/ui/Slider.tsx";
@@ -86,7 +90,9 @@ const DEFAULT_PROPS = {
   preload: true,
 };
 
-function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
+function BannerItem(
+  { image, lcp, id }: { image: Banner; lcp?: boolean; id: string },
+) {
   const {
     alt,
     mobile,
@@ -96,6 +102,7 @@ function BannerItem({ image, lcp }: { image: Banner; lcp?: boolean }) {
 
   return (
     <a
+      id={id}
       href={action?.href ?? "#"}
       aria-label={action?.label}
       class="relative h-[600px] overflow-y-hidden w-full"
@@ -197,9 +204,8 @@ function Buttons() {
 }
 
 function BannerCarousel(props: Props) {
-  const { images, preload, interval } = { ...DEFAULT_PROPS, ...props };
-
   const id = useId();
+  const { images, preload, interval } = { ...DEFAULT_PROPS, ...props };
 
   return (
     <div
@@ -207,11 +213,27 @@ function BannerCarousel(props: Props) {
       class="grid grid-cols-[48px_1fr_48px] sm:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px]"
     >
       <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
-        {images?.map((image, index) => (
-          <Slider.Item index={index} class="carousel-item w-full">
-            <BannerItem image={image} lcp={index === 0 && preload} />
-          </Slider.Item>
-        ))}
+        {images?.map((image, index) => {
+          const params = { promotion_name: image.alt };
+
+          return (
+            <Slider.Item index={index} class="carousel-item w-full">
+              <BannerItem
+                image={image}
+                lcp={index === 0 && preload}
+                id={`${id}::${index}`}
+              />
+              <SendEventOnClick
+                id={`${id}::${index}`}
+                event={{ name: "select_promotion", params }}
+              />
+              <SendEventOnView
+                id={`${id}::${index}`}
+                event={{ name: "view_promotion", params }}
+              />
+            </Slider.Item>
+          );
+        })}
       </Slider>
 
       <Buttons />

@@ -168,6 +168,7 @@ function Searchbar({
                     product={product}
                     platform={platform}
                     index={index}
+                    itemListName="Suggeestions"
                   />
                 </Slider.Item>
               ))}

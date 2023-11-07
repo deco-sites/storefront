@@ -1,18 +1,21 @@
 import { useCart } from "apps/linx/hooks/useCart.ts";
 import Button, { Props as BtnProps } from "./common.tsx";
 
-export type Props = Omit<BtnProps, "onAddItem" | "platform">;
+export type Props = Omit<BtnProps, "onAddItem"> & {
+  productID: string;
+  productGroupID: string;
+};
 
-function AddToCartButton(props: Props) {
+function AddToCartButton({ productGroupID, productID, eventParams }: Props) {
   const { addItem } = useCart();
 
   return (
     <Button
-      {...props}
+      eventParams={eventParams}
       onAddItem={() =>
         addItem({
-          ProductID: props.productGroupID,
-          SkuID: props.productID,
+          ProductID: productGroupID,
+          SkuID: productID,
           Quantity: 1,
         })}
     />

@@ -3,6 +3,7 @@ import Icon from "$store/components/ui/Icon.tsx";
 import Button from "$store/components/ui/Button.tsx";
 import { useWishlist } from "apps/vtex/hooks/useWishlist.ts";
 import { useUser } from "apps/vtex/hooks/useUser.ts";
+import { sendEvent } from "$store/sdk/analytics.tsx";
 
 export interface Props {
   productID: string;
@@ -53,6 +54,17 @@ function WishlistButton({
             await removeItem({ id: listItem.value!.id }!);
           } else if (productID && productGroupID) {
             await addItem({ sku: productID, productId: productGroupID });
+
+            sendEvent({
+              name: "add_to_wishlist",
+              params: {
+                items: [{
+                  item_id: productID,
+                  item_group_id: productGroupID,
+                  quantity: 1,
+                }],
+              },
+            });
           }
         } finally {
           fetching.value = false;

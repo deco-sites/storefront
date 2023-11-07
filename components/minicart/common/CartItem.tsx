@@ -112,11 +112,11 @@ function CartItem(
             await onUpdateQuantity(quantity, index);
 
             if (analyticsItem) {
-              analyticsItem.quantity = diff;
-
               sendEvent({
                 name: diff < 0 ? "remove_from_cart" : "add_to_cart",
-                params: { items: [analyticsItem] },
+                params: {
+                  items: [{ ...analyticsItem, quantity: Math.abs(diff) }],
+                },
               });
             }
           })}

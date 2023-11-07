@@ -3,8 +3,12 @@ import Button from "./common.tsx";
 
 function CartButton() {
   const { loading, cart } = useCart();
-  const { totalizers = [], items = [], marketingData, storePreferencesData } =
-    cart.value ?? {};
+  const {
+    totalizers = [],
+    items = [],
+    marketingData,
+    storePreferencesData,
+  } = cart.value ?? {};
   const coupon = marketingData?.coupon ?? undefined;
   const currency = storePreferencesData?.currencyCode ?? "BRL";
   const total = totalizers.find((item) => item.id === "Items")?.value ?? 0;

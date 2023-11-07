@@ -1,4 +1,4 @@
-import { SendEventOnLoad } from "$store/components/Analytics.tsx";
+import { SendEventOnView } from "$store/components/Analytics.tsx";
 import Breadcrumb from "$store/components/ui/Breadcrumb.tsx";
 import AddToCartButtonLinx from "$store/islands/AddToCartButton/linx.tsx";
 import AddToCartButtonShopify from "$store/islands/AddToCartButton/shopify.tsx";
@@ -9,6 +9,7 @@ import OutOfStock from "$store/islands/OutOfStock.tsx";
 import ShippingSimulation from "$store/islands/ShippingSimulation.tsx";
 import WishlistButton from "$store/islands/WishlistButton.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
+import { useId } from "$store/sdk/useId.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
@@ -29,6 +30,7 @@ interface Props {
 
 function ProductInfo({ page, layout }: Props) {
   const platform = usePlatform();
+  const id = useId();
 
   if (page === null) {
     throw new Error("Missing Product Details Page Info");
@@ -39,7 +41,6 @@ function ProductInfo({ page, layout }: Props) {
     product,
   } = page;
   const {
-    url,
     productID,
     offers,
     name = "",
@@ -56,14 +57,22 @@ function ProductInfo({ page, layout }: Props) {
     availability,
   } = useOffer(offers);
   const productGroupID = isVariantOf?.productGroupID ?? "";
-  const discount = price && listPrice ? listPrice - price : 0;
+  const breadcrumb = {
+    ...breadcrumbList,
+    itemListElement: breadcrumbList?.itemListElement.slice(0, -1),
+    numberOfItems: breadcrumbList.numberOfItems - 1,
+  };
+
+  const eventItem = mapProductToAnalyticsItem({
+    product,
+    breadcrumbList: breadcrumb,
+    price,
+    listPrice,
+  });
 
   return (
-    <div class="flex flex-col">
-      {/* Breadcrumb */}
-      <Breadcrumb
-        itemListElement={breadcrumbList?.itemListElement.slice(0, -1)}
-      />
+    <div class="flex flex-col" id={id}>
+      <Breadcrumb itemListElement={breadcrumb.itemListElement} />
       {/* Code and name */}
       <div class="mt-4 sm:mt-8">
         <div>
@@ -111,12 +120,8 @@ function ProductInfo({ page, layout }: Props) {
               {platform === "vtex" && (
                 <>
                   <AddToCartButtonVTEX
-                    url={url || ""}
-                    name={name}
+                    eventParams={{ items: [eventItem] }}
                     productID={productID}
-                    productGroupID={productGroupID}
-                    price={price}
-                    discount={discount}
                     seller={seller}
                   />
                   <WishlistButton
@@ -128,43 +133,28 @@ function ProductInfo({ page, layout }: Props) {
               )}
               {platform === "wake" && (
                 <AddToCartButtonWake
-                  url={url || ""}
-                  name={name}
+                  eventParams={{ items: [eventItem] }}
                   productID={productID}
-                  productGroupID={productGroupID}
-                  price={price}
-                  discount={discount}
                 />
               )}
               {platform === "linx" && (
                 <AddToCartButtonLinx
-                  url={url || ""}
-                  name={name}
+                  eventParams={{ items: [eventItem] }}
                   productID={productID}
                   productGroupID={productGroupID}
-                  price={price}
-                  discount={discount}
                 />
               )}
               {platform === "vnda" && (
                 <AddToCartButtonVNDA
-                  url={url || ""}
-                  name={name}
+                  eventParams={{ items: [eventItem] }}
                   productID={productID}
-                  productGroupID={productGroupID}
-                  price={price}
-                  discount={discount}
                   additionalProperty={additionalProperty}
                 />
               )}
               {platform === "shopify" && (
                 <AddToCartButtonShopify
-                  url={url || ""}
-                  name={name}
+                  eventParams={{ items: [eventItem] }}
                   productID={productID}
-                  productGroupID={productGroupID}
-                  price={price}
-                  discount={discount}
                 />
               )}
             </>
@@ -198,18 +188,14 @@ function ProductInfo({ page, layout }: Props) {
         </span>
       </div>
       {/* Analytics Event */}
-      <SendEventOnLoad
+      <SendEventOnView
+        id={id}
         event={{
           name: "view_item",
           params: {
-            items: [
-              mapProductToAnalyticsItem({
-                product,
-                breadcrumbList,
-                price,
-                listPrice,
-              }),
-            ],
+            item_list_id: "product",
+            item_list_name: "Product",
+            items: [eventItem],
           },
         }}
       />

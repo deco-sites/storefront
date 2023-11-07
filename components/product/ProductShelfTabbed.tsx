@@ -1,4 +1,4 @@
-import { SendEventOnLoad } from "$store/components/Analytics.tsx";
+import { SendEventOnView } from "$store/components/Analytics.tsx";
 import ProductCard, {
   Layout as cardLayout,
 } from "$store/components/product/ProductCard.tsx";
@@ -29,7 +29,6 @@ export interface Props {
   };
   cardLayout?: cardLayout;
   tabIndex?: number;
-  id?: string;
 }
 
 function TabbedProductShelf({
@@ -39,7 +38,6 @@ function TabbedProductShelf({
   layout,
   cardLayout,
   tabIndex,
-  id: sectionId,
 }: Props) {
   const id = useId();
   const platform = usePlatform();
@@ -108,13 +106,15 @@ function TabbedProductShelf({
           </div>
         </>
         <SliderJS rootId={id} />
-        <SendEventOnLoad
+        <SendEventOnView
+          id={id}
           event={{
             name: "view_item_list",
             params: {
               item_list_name: title,
-              items: products.map((product) =>
+              items: products.map((product, index) =>
                 mapProductToAnalyticsItem({
+                  index,
                   product,
                   ...(useOffer(product.offers)),
                 })
