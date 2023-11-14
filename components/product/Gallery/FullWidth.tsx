@@ -7,20 +7,21 @@ import { useId } from "$store/sdk/useId.ts";
 import ProductImageZoom from "$store/islands/ProductImageZoom.tsx";
 import ProductInfo from "$store/components/product/ProductInfo.tsx";
 
+export interface Layout {
+  width?: number;
+  height?: number;
+
+  onMouseOver?: {
+    imageZoom?: "Disable" | "Zoom image" | "Modal zoom";
+  },
+  
+  positionInfo?: "left" | "right";
+}
+
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
-
-  layout: {
-    width: number;
-    height: number;
-
-    onMouseOver?: {
-      imageZoom?: "Disable" | "Zoom image" | "Modal zoom";
-    },
-    
-    positionInfo : "left" | "right";
-  };
+  layout?: Layout;
 }
 /**
  * @title Product Image Front Back
@@ -45,8 +46,14 @@ function GalleryFullWidth(props: Props) {
 
   const {
     page: { product: { image: images = [] } },
-    layout: { width, height }, layout,
+    layout = {
+      width: 1000,
+      height: 1000,
+      positionInfo: "left",
+    },
   } = props;
+  const width = layout.width;
+  const height = layout.height;
   const aspectRatio = `${width} / ${height}`;
   const variantInfo = layout?.positionInfo ?? "right";
 

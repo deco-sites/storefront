@@ -10,16 +10,16 @@ import Image from "apps/website/components/Image.tsx";
 
 type Position = "left" | "right" | "bottom" | "up";
 
-type NewType = {
+export type Layout = {
   /**
      * @title Product Image
      * @description How the main product image will be displayed
      * @default bullets
   */
   thumb?: "bullets" | "sticks" | "image";
-  position:Position;
-  width: number;
-  height: number;
+  position?: Position;
+  width?: number;
+  height?: number;
 }
 
 
@@ -27,7 +27,7 @@ export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
 
-  layout: NewType
+  layout: Layout
 }
 /**
  * @title Product Image Slider
@@ -63,8 +63,10 @@ export default function GallerySlider(props: Props) {
 
   const {
     page: { product: { image: images = [] } },
-    layout: { width, height }, layout,
+    layout = { width: 300, height: 370 },
   } = props;
+  const width = layout.width;
+  const height = layout.height;
   const aspectRatio = `${width} / ${height}`;
   const variant = layout?.thumb ?? "bullets";
   const variant2 = layout?.position ?? "left";
