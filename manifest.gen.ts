@@ -39,8 +39,9 @@ import * as $$$$$$31 from "./sections/Links/LinkTree.tsx";
 import * as $$$$$$32 from "./sections/Links/Shortcuts.tsx";
 import * as $$$$$$33 from "./sections/Newsletter/Newsletter.tsx";
 import * as $$$$$$34 from "./sections/PDP/PDPGalleryFull.tsx";
-import * as $$$$$$35 from "./sections/PDP/PDPGallerySlider.tsx";
-import * as $$$$$$36 from "./sections/Header/Header.tsx";
+import * as $$$$$$35 from "./sections/PDP/PDPGalleryGrid.tsx";
+import * as $$$$$$36 from "./sections/PDP/PDPGallerySlider.tsx";
+import * as $$$$$$37 from "./sections/Header/Header.tsx";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
@@ -58,7 +59,7 @@ const manifest = {
     "deco-sites/storefront/sections/Content/Testimonials.tsx": $$$$$$12,
     "deco-sites/storefront/sections/Footer/Footer.tsx": $$$$$$1,
     "deco-sites/storefront/sections/Gallery.tsx": $$$$$$0,
-    "deco-sites/storefront/sections/Header/Header.tsx": $$$$$$36,
+    "deco-sites/storefront/sections/Header/Header.tsx": $$$$$$37,
     "deco-sites/storefront/sections/Images/BannerGrid.tsx": $$$$$$5,
     "deco-sites/storefront/sections/Images/Carousel.tsx": $$$$$$7,
     "deco-sites/storefront/sections/Images/ImageGallery.tsx": $$$$$$6,
@@ -73,7 +74,8 @@ const manifest = {
     "deco-sites/storefront/sections/Miscellaneous/CookieConsent.tsx": $$$$$$27,
     "deco-sites/storefront/sections/Newsletter/Newsletter.tsx": $$$$$$33,
     "deco-sites/storefront/sections/PDP/PDPGalleryFull.tsx": $$$$$$34,
-    "deco-sites/storefront/sections/PDP/PDPGallerySlider.tsx": $$$$$$35,
+    "deco-sites/storefront/sections/PDP/PDPGalleryGrid.tsx": $$$$$$35,
+    "deco-sites/storefront/sections/PDP/PDPGallerySlider.tsx": $$$$$$36,
     "deco-sites/storefront/sections/Product/ImageGalleryFullWidth.tsx":
       $$$$$$22,
     "deco-sites/storefront/sections/Product/imageGalleryGrid.tsx": $$$$$$25,

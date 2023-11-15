@@ -3,26 +3,28 @@ import { ProductDetailsPage } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import ProductImageZoom from "$store/islands/ProductImageZoom.tsx";
 
+export interface Layout {
+  /**
+   * @title Product Image
+   * @description How the main product image will be displayed
+   * @default one
+   */
+
+  image?: "two" | "one" | "alterning";
+
+  onMouseOver?: {
+    image?: "Disable" | "Zoom image" | "Modal zoom";
+  }
+
+  width?: number;
+  height?: number;
+}
+
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
 
-  layout?: {
-    /**
-     * @title Product Image
-     * @description How the main product image will be displayed
-     * @default one
-     */
-
-    image?: "two" | "one" | "alterning";
-
-    onMouseOver?: {
-      image?: "Disable" | "Zoom image" | "Modal zoom";
-    }
-
-    width?: number;
-    height?: number;
-  };
+  layout?: Layout;
 }
 
 /**
