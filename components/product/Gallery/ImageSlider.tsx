@@ -27,7 +27,7 @@ export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
 
-  layout: Layout
+  layout?: Layout
 }
 /**
  * @title Product Image Slider

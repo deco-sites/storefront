@@ -7,7 +7,7 @@ export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
 
-  layout: {
+  layout?: {
     /**
      * @title Product Image
      * @description How the main product image will be displayed
@@ -20,8 +20,8 @@ export interface Props {
       image?: "Disable" | "Zoom image" | "Modal zoom";
     }
 
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
   };
 }
 
@@ -36,9 +36,10 @@ export default function GalleryImageGrid(props: Props) {
 
   const {
     page: { product: { image: images = [] } },
-    layout: { width, height },
-    layout,
+    layout = { width: 1000, height: 1000 },
   } = props;
+  const width = layout.width;
+  const height = layout.height;
   const aspectRatio = `${width} / ${height}`;
   
   return (
