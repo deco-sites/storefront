@@ -1,5 +1,6 @@
 {
   "imports": {
+    "https://deno.land/x/gfm@0.2.5/": "https://denopkg.com/mcandeia/deno-gfm@1ea9a7d1d8a4a5348aefa5bf2386edee01b21d23/",
     "$store/": "./",
     "deco/": "https://denopkg.com/deco-cx/deco@1.46.0/",
     "apps/": "https://denopkg.com/deco-cx/apps@0.23.1/",
@@ -49,5 +50,6 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact"
-  }
+  },
+  "importMap": "./vendor/import_map.json"
 }

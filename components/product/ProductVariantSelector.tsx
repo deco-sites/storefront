@@ -17,20 +17,26 @@ function VariantSelector({ product }: Props) {
         <li class="flex flex-col gap-2">
           <span class="text-sm">{name}</span>
           <ul class="flex flex-row gap-3">
-            {Object.entries(possibilities[name]).map(([value, link]) => (
-              <li>
-                <button f-partial={link} f-client-nav>
-                  <Avatar
-                    content={value}
-                    variant={link === url
-                      ? "active"
-                      : link
-                      ? "default"
-                      : "disabled"}
-                  />
-                </button>
-              </li>
-            ))}
+            {Object.entries(possibilities[name]).map(([value, link]) => {
+              const linkUrl = link ? new URL(link) : undefined;
+              const linkPath = linkUrl
+                ? `${linkUrl.pathname}${linkUrl.search}`
+                : undefined;
+              return (
+                <li>
+                  <button f-partial={linkPath} f-client-nav>
+                    <Avatar
+                      content={value}
+                      variant={link === url
+                        ? "active"
+                        : link
+                        ? "default"
+                        : "disabled"}
+                    />
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         </li>
       ))}
