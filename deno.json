@@ -1,8 +1,8 @@
 {
   "imports": {
     "$store/": "./",
-    "deco/": "https://denopkg.com/deco-cx/deco@1.46.0/",
-    "apps/": "https://denopkg.com/deco-cx/apps@0.23.1/",
+    "deco/": "https://denopkg.com/deco-cx/deco@1.46.4/",
+    "apps/": "https://denopkg.com/deco-cx/apps@0.23.8/",
     "$fresh/": "https://denopkg.com/denoland/fresh@7ad4610e3a42aba42638cbc1041b96ee58a9b29e/",
     "preact": "https://esm.sh/preact@10.15.1",
     "preact/": "https://esm.sh/preact@10.15.1/",
