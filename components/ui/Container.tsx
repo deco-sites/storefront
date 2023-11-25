@@ -46,7 +46,7 @@ export interface Props {
   header?: HeaderContent;
   layout?: Layout;
   style?: ExtendedStyle;
-  children: ComponentChildren;
+  children?: VNode;
   afterHeader?: VNode | false;
 }
 

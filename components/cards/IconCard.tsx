@@ -14,16 +14,6 @@ export interface Props {
   description: string;
   layout?: {
     iconPosition?: "Top" | "Left";
-    flex?: {
-      mobile?: "1" | "Auto" | "Initial" | "None",
-      desktop?: "1" | "Auto" | "Initial" | "None",
-    } 
-    contentAlign?: {
-      /** @default Center */
-      mobile?: "Center" | "Start" | "End" | "Baseline" | "Stretch";
-      /** @default Center */
-      desktop?: "Center" | "Start" | "End" | "Baseline" | "Stretch";
-    };
   }
   style?: {
     background?: Bg;
@@ -35,8 +25,14 @@ export interface Props {
   }
 }
 
-export default function Card({ icon, label, description, layout, style }: Props) {
-  const bgColor = style?.background?.bgColor || "Transparent";
+export default function Card({
+  icon = "Deco",
+  label = "Item",
+  description = "A text describing this item",
+  layout,
+  style
+}: Props) {
+  const bgColor = style?.background?.bgColor || "Primary";
 
   const hasPadding = (bgColor && bgColor !== "Transparent") || (style?.border?.width && style.border.width !== "None");
 
@@ -44,18 +40,19 @@ export default function Card({ icon, label, description, layout, style }: Props)
     <div class={clx(
       "flex gap-3",
       layout?.iconPosition === "Left" ? "flex-row" : "flex-col",
-      layout?.flex?.mobile ? flex.item.mobile[layout.flex.mobile] : "flex-1",
-      layout?.flex?.desktop ? flex.item.mobile[layout.flex.desktop] : "lg:flex-1",
-      layout?.contentAlign?.mobile && flex.align.mobile[layout.contentAlign.mobile],
-      layout?.contentAlign?.desktop && flex.align.desktop[layout.contentAlign.desktop],
-      layout?.contentAlign?.mobile == "Center" && "text-center",
-      layout?.contentAlign?.desktop == "Center" && "lg:text-center",
       bgColor && colorClasses[bgColor],
       hasPadding && "p-4 lg:p-8",
       style?.border?.color && borderColorClasses2[style.border.color],
       style?.border?.width && borderWidthClasses[style.border.width],
       style?.border?.radius && borderRadiusClasses[style.border.radius],
-  )}>
+      style?.background?.bgImage ? "bg-cover bg-center" : ""
+    )}
+      style={{
+        "background-image": style?.background?.bgImage
+          ? `url(${style?.background?.bgImage})`
+          : "",
+      }}
+    >
       <div class="flex-none">
         <Icon
           id={icon}

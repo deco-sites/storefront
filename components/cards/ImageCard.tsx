@@ -2,37 +2,43 @@ import { ButtonType, getButtonClasses } from "../../constants.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 
-/** @titleBy label */
-export interface Props {
-  tag?: string;
-  label: string;
-  description?: string;
-  href?: string;
-  image?: ImageWidget;
-  buttonText?: string;
-
-  style?: {
-    textPosition?: "Top" | "Bottom";
-    textAlignment?: "Center" | "Left";
-    button?: ButtonType;
-  };
+interface Style {
+  /** @description In px */
+  width?: number;
+  textPosition?: "Top" | "Bottom";
+  textAlignment?: "Center" | "Left";
+  button?: ButtonType;
 }
 
-function CardText(
-  { tag, label, description, alignment }: {
-    tag?: string;
-    label?: string;
-    description?: string;
-    alignment?: "Center" | "Left";
-  },
-) {
+/** @titleBy label */
+export interface Props {
+  image?: ImageWidget;
+  label: string;
+  description?: string;
+  tag?: string;
+  href?: string;
+  buttonText?: string;
+  style?: Style;
+}
+
+function CardText({
+  label = "Item",
+  description = "A text describing this item",
+  tag = "Tag",
+  alignment
+}: {
+  label?: string;
+  description?: string;
+  tag?: string;
+  alignment?: "Center" | "Left";
+}) {
   return (
     <div
       class={`flex flex-col ${
         !alignment || alignment === "Center" ? "items-center" : "items-start"
       }`}
     >
-      {tag && <div class="text-sm bg-primary text-content-primary px-2 rounded mb-2">{tag}</div>}
+      {tag && <div class="text-xs bg-primary text-primary-content py-1 px-2 rounded mb-2">{tag}</div>}
       {label && <h3 class="text-xl">{label}</h3>}
       {description && <div class="text-sm">{description}</div>}
     </div>
@@ -40,12 +46,20 @@ function CardText(
 }
 
 function Card(
-  { href, tag, label, description, buttonText, style, image }: Props,
+  {
+    href,
+    tag,
+    label,
+    description,
+    buttonText = "Button",
+    style,
+    image = "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2753/b2278d2d-2270-482b-98d4-f09d5f05ba97",
+  }: Props,
 ) {
   const position = style?.textPosition === "Bottom" ? "Bottom" : "Top";
   const alignment = style?.textAlignment === "Left" ? "Left" : "Center";
   return (
-    <div class="flex flex-col gap-4 justify-center">
+    <div class="flex flex-col gap-4 justify-center" style={{width: style?.width || "auto" }}>
       <a href={href} class="flex flex-col gap-4 lg:w-full w-full lg:h-auto">
         {position === "Top" && (
           <CardText
