@@ -5,6 +5,9 @@ interface Props {
   sections: Section[] | null;
 }
 
+/**
+ * @ignoreAI true
+ */
 function Sections({ sections }: Props): VNode[] | null {
   if (sections === null) {
     return null;
