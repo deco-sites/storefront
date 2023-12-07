@@ -18,7 +18,7 @@ export interface ThemeColors {
   /** @format color */
   "secondary"?: string;
   /**
-   * @title Accent 
+   * @title Accent
    * @format color */
   "tertiary"?: string;
   /** @format color */
