@@ -1,8 +1,8 @@
 {
   "imports": {
     "$store/": "./",
-    "deco/": "https://denopkg.com/deco-cx/deco@1.47.2/",
-    "apps/": "https://denopkg.com/deco-cx/apps@0.24.1/",
+    "deco/": "https://denopkg.com/deco-cx/deco@1.47.3/",
+    "apps/": "https://denopkg.com/deco-cx/apps@0.24.2/",
     "$fresh/": "https://deno.land/x/fresh@1.5.2/",
     "preact": "https://esm.sh/preact@10.18.1",
     "preact/": "https://esm.sh/preact@10.18.1/",
@@ -28,9 +28,27 @@
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts"
   },
-  "githooks": { "pre-commit": "check" },
-  "exclude": ["node_modules", "static/", "README.md", "_fresh", "**/_fresh/*"],
-  "lint": { "rules": { "tags": ["fresh", "recommended"] } },
+  "githooks": {
+    "pre-commit": "check"
+  },
+  "exclude": [
+    "node_modules",
+    "static/",
+    "README.md",
+    "_fresh",
+    "**/_fresh/*"
+  ],
+  "lint": {
+    "rules": {
+      "tags": [
+        "fresh",
+        "recommended"
+      ]
+    }
+  },
   "nodeModulesDir": true,
-  "compilerOptions": { "jsx": "react-jsx", "jsxImportSource": "preact" }
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact"
+  }
 }
