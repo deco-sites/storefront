@@ -2,59 +2,60 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $0 from "./routes/_app.tsx";
-import * as $$0 from "./islands/AddToCartButton/linx.tsx";
-import * as $$1 from "./islands/AddToCartButton/nuvemshop.tsx";
-import * as $$2 from "./islands/AddToCartButton/shopify.tsx";
-import * as $$3 from "./islands/AddToCartButton/vnda.tsx";
-import * as $$4 from "./islands/AddToCartButton/vtex.tsx";
-import * as $$5 from "./islands/AddToCartButton/wake.tsx";
-import * as $$6 from "./islands/Header/Buttons.tsx";
-import * as $$7 from "./islands/Header/Cart/linx.tsx";
-import * as $$8 from "./islands/Header/Cart/nuvemshop.tsx";
-import * as $$9 from "./islands/Header/Cart/shopify.tsx";
-import * as $$10 from "./islands/Header/Cart/vnda.tsx";
-import * as $$11 from "./islands/Header/Cart/vtex.tsx";
-import * as $$12 from "./islands/Header/Cart/wake.tsx";
-import * as $$13 from "./islands/Header/Drawers.tsx";
-import * as $$14 from "./islands/Header/Searchbar.tsx";
-import * as $$15 from "./islands/Newsletter.tsx";
-import * as $$16 from "./islands/OutOfStock.tsx";
-import * as $$17 from "./islands/ProductImageZoom.tsx";
-import * as $$18 from "./islands/SearchControls.tsx";
-import * as $$19 from "./islands/ShippingSimulation.tsx";
-import * as $$20 from "./islands/SliderJS.tsx";
-import * as $$21 from "./islands/WishlistButton.tsx";
+import * as $_app from "./routes/_app.tsx";
+import * as $AddToCartButton_linx from "./islands/AddToCartButton/linx.tsx";
+import * as $AddToCartButton_nuvemshop from "./islands/AddToCartButton/nuvemshop.tsx";
+import * as $AddToCartButton_shopify from "./islands/AddToCartButton/shopify.tsx";
+import * as $AddToCartButton_vnda from "./islands/AddToCartButton/vnda.tsx";
+import * as $AddToCartButton_vtex from "./islands/AddToCartButton/vtex.tsx";
+import * as $AddToCartButton_wake from "./islands/AddToCartButton/wake.tsx";
+import * as $Header_Buttons from "./islands/Header/Buttons.tsx";
+import * as $Header_Cart_linx from "./islands/Header/Cart/linx.tsx";
+import * as $Header_Cart_nuvemshop from "./islands/Header/Cart/nuvemshop.tsx";
+import * as $Header_Cart_shopify from "./islands/Header/Cart/shopify.tsx";
+import * as $Header_Cart_vnda from "./islands/Header/Cart/vnda.tsx";
+import * as $Header_Cart_vtex from "./islands/Header/Cart/vtex.tsx";
+import * as $Header_Cart_wake from "./islands/Header/Cart/wake.tsx";
+import * as $Header_Drawers from "./islands/Header/Drawers.tsx";
+import * as $Header_Searchbar from "./islands/Header/Searchbar.tsx";
+import * as $Newsletter from "./islands/Newsletter.tsx";
+import * as $OutOfStock from "./islands/OutOfStock.tsx";
+import * as $ProductImageZoom from "./islands/ProductImageZoom.tsx";
+import * as $SearchControls from "./islands/SearchControls.tsx";
+import * as $ShippingSimulation from "./islands/ShippingSimulation.tsx";
+import * as $SliderJS from "./islands/SliderJS.tsx";
+import * as $WishlistButton from "./islands/WishlistButton.tsx";
+import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
   routes: {
-    "./routes/_app.tsx": $0,
+    "./routes/_app.tsx": $_app,
   },
   islands: {
-    "./islands/AddToCartButton/linx.tsx": $$0,
-    "./islands/AddToCartButton/nuvemshop.tsx": $$1,
-    "./islands/AddToCartButton/shopify.tsx": $$2,
-    "./islands/AddToCartButton/vnda.tsx": $$3,
-    "./islands/AddToCartButton/vtex.tsx": $$4,
-    "./islands/AddToCartButton/wake.tsx": $$5,
-    "./islands/Header/Buttons.tsx": $$6,
-    "./islands/Header/Cart/linx.tsx": $$7,
-    "./islands/Header/Cart/nuvemshop.tsx": $$8,
-    "./islands/Header/Cart/shopify.tsx": $$9,
-    "./islands/Header/Cart/vnda.tsx": $$10,
-    "./islands/Header/Cart/vtex.tsx": $$11,
-    "./islands/Header/Cart/wake.tsx": $$12,
-    "./islands/Header/Drawers.tsx": $$13,
-    "./islands/Header/Searchbar.tsx": $$14,
-    "./islands/Newsletter.tsx": $$15,
-    "./islands/OutOfStock.tsx": $$16,
-    "./islands/ProductImageZoom.tsx": $$17,
-    "./islands/SearchControls.tsx": $$18,
-    "./islands/ShippingSimulation.tsx": $$19,
-    "./islands/SliderJS.tsx": $$20,
-    "./islands/WishlistButton.tsx": $$21,
+    "./islands/AddToCartButton/linx.tsx": $AddToCartButton_linx,
+    "./islands/AddToCartButton/nuvemshop.tsx": $AddToCartButton_nuvemshop,
+    "./islands/AddToCartButton/shopify.tsx": $AddToCartButton_shopify,
+    "./islands/AddToCartButton/vnda.tsx": $AddToCartButton_vnda,
+    "./islands/AddToCartButton/vtex.tsx": $AddToCartButton_vtex,
+    "./islands/AddToCartButton/wake.tsx": $AddToCartButton_wake,
+    "./islands/Header/Buttons.tsx": $Header_Buttons,
+    "./islands/Header/Cart/linx.tsx": $Header_Cart_linx,
+    "./islands/Header/Cart/nuvemshop.tsx": $Header_Cart_nuvemshop,
+    "./islands/Header/Cart/shopify.tsx": $Header_Cart_shopify,
+    "./islands/Header/Cart/vnda.tsx": $Header_Cart_vnda,
+    "./islands/Header/Cart/vtex.tsx": $Header_Cart_vtex,
+    "./islands/Header/Cart/wake.tsx": $Header_Cart_wake,
+    "./islands/Header/Drawers.tsx": $Header_Drawers,
+    "./islands/Header/Searchbar.tsx": $Header_Searchbar,
+    "./islands/Newsletter.tsx": $Newsletter,
+    "./islands/OutOfStock.tsx": $OutOfStock,
+    "./islands/ProductImageZoom.tsx": $ProductImageZoom,
+    "./islands/SearchControls.tsx": $SearchControls,
+    "./islands/ShippingSimulation.tsx": $ShippingSimulation,
+    "./islands/SliderJS.tsx": $SliderJS,
+    "./islands/WishlistButton.tsx": $WishlistButton,
   },
   baseUrl: import.meta.url,
-};
+} satisfies Manifest;
 
 export default manifest;
