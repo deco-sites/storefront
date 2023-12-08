@@ -3,7 +3,7 @@
     "$store/": "./",
     "deco/": "https://denopkg.com/deco-cx/deco@1.47.3/",
     "apps/": "https://denopkg.com/deco-cx/apps@0.24.2/",
-    "$fresh/": "https://deno.land/x/fresh@1.5.2/",
+    "$fresh/": "https://deno.land/x/fresh@1.6.1/",
     "preact": "https://esm.sh/preact@10.18.1",
     "preact/": "https://esm.sh/preact@10.18.1/",
     "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.2.2",
@@ -48,7 +48,7 @@
   },
   "nodeModulesDir": true,
   "compilerOptions": {
-    "jsx": "react-jsx",
+    "jsx": "precompile",
     "jsxImportSource": "preact"
   }
 }
