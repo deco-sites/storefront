@@ -40,7 +40,10 @@ function Animation(
 
   return (
     <>
-      <style dangerouslySetInnerHTML={{__html: animationByType[animationType]}}></style>
+      <style
+        dangerouslySetInnerHTML={{ __html: animationByType[animationType] }}
+      >
+      </style>
       <div
         id={id}
         class="opacity-0"
@@ -73,7 +76,7 @@ function Animation(
 export default Animation;
 
 const animationByType = {
-    "fade-in": `    
+  "fade-in": `    
         @keyframes fade-in {
             from {
                 opacity: 0;
@@ -86,7 +89,7 @@ const animationByType = {
             animation: fade-in 1s ease-out;
         }
     `,
-    "fade-in-bottom": `
+  "fade-in-bottom": `
         @keyframes fade-in-bottom {
             from {
                 opacity: 0;
@@ -104,7 +107,7 @@ const animationByType = {
             animation: fade-in-bottom 1s ease-out;
         }
     `,
-    "slide-left": `
+  "slide-left": `
         @keyframes slide-left {
             from {
                 transform: translateX(100%);
@@ -118,7 +121,7 @@ const animationByType = {
             animation: slide-left 1s ease-out;
         }
     `,
-    "slide-right": `
+  "slide-right": `
         @keyframes slide-right {
             from {
                 transform: translateX(-100%);
@@ -132,7 +135,7 @@ const animationByType = {
             animation: slide-right 1s ease-out;
         }
     `,
-    "zoom-in": `
+  "zoom-in": `
         @keyframes zoom-in {
             from {
                 transform: scale(0);
@@ -147,5 +150,5 @@ const animationByType = {
         .animate-zoom-in {
             animation: zoom-in 1s ease-out;
         }
-    `
+    `,
 };
