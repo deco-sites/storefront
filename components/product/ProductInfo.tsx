@@ -49,7 +49,10 @@ function ProductInfo({ page, layout }: Props) {
     isVariantOf,
     additionalProperty = [],
   } = product;
+
+  const descriptionHtml = additionalProperty.find(o => o['name'] == "descriptionHtml")?.value;
   const description = product.description || isVariantOf?.description;
+
   const {
     price = 0,
     listPrice,
@@ -189,7 +192,7 @@ function ProductInfo({ page, layout }: Props) {
               <summary class="cursor-pointer">Descrição</summary>
               <div
                 class="ml-2 mt-2"
-                dangerouslySetInnerHTML={{ __html: description }}
+                dangerouslySetInnerHTML={{ __html: descriptionHtml ?? description }}
               />
             </details>
           )}
