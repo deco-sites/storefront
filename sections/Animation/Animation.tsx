@@ -1,6 +1,14 @@
 import { Section } from "deco/blocks/section.ts";
 import { useId } from "$store/sdk/useId.ts";
 
+const animationClasses = {
+  "fade-in": "animate-fade-in",
+  "fade-in-bottom": "animate-fade-in-bottom",
+  "slide-left": "animate-slide-left",
+  "slide-right": "animate-slide-right",
+  "zoom-in": "animate-zoom-in",
+};
+
 interface Children {
   label?: string;
   section: Section;
@@ -28,14 +36,6 @@ function Animation(
   const { Component, props } = section;
   const id = useId();
 
-  const animationClasses = {
-    "fade-in": "animate-fade-in",
-    "fade-in-bottom": "animate-fade-in-bottom",
-    "slide-left": "animate-slide-left",
-    "slide-right": "animate-slide-right",
-    "zoom-in": "animate-zoom-in",
-  };
-
   const animationClass = animationClasses[animationType];
 
   return (
@@ -52,6 +52,7 @@ function Animation(
         <Component {...props} />
       </div>
       <script
+        async={true}
         dangerouslySetInnerHTML={{
           __html: `
                 var observer = new IntersectionObserver(function(entries) {
