@@ -1,6 +1,7 @@
 import { useId } from "$store/sdk/useId.ts";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
+import { Script } from "$store/components/Script.tsx";
 
 export interface Props {
   /**
@@ -177,10 +178,11 @@ function CampaignTimer({
           </div>
         </div>
       </div>
-      <script
-        type="module"
-        src={scriptAsDataURI(snippet, expiresAt, id)}
-      />
+      <Script>
+        <script
+          src={scriptAsDataURI(snippet, expiresAt, id)}
+        />
+      </Script>
     </>
   );
 }
