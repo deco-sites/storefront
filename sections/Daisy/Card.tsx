@@ -1,7 +1,7 @@
 import Image from "apps/website/components/Image.tsx";
 
 export interface Props {
-  image?:  { src: string; alt: string };
+  image?: { src: string; alt: string };
   title: string;
   subtitle: string;
   callToAction?: {
@@ -13,12 +13,22 @@ export interface Props {
   imageOnSide?: boolean;
 }
 
-
-
 export default function Card(props: Props) {
-  const { image, title, subtitle, callToAction, imageOnBottom, glass,imageOnSide } = props;
+  const {
+    image,
+    title,
+    subtitle,
+    callToAction,
+    imageOnBottom,
+    glass,
+    imageOnSide,
+  } = props;
   return (
-    <div className={`card ${imageOnSide ? "card-side": "w-96"} bg-base-100 shadow-xl`}>
+    <div
+      className={`card ${
+        imageOnSide ? "card-side" : "w-96"
+      } bg-base-100 shadow-xl`}
+    >
       {(!imageOnBottom || imageOnSide) && <CardImage image={image} />}
       <div className="card-body">
         <h2 className="card-title">{title}</h2>
@@ -36,7 +46,7 @@ export default function Card(props: Props) {
   );
 }
 
-function CardImage({image}: {image?:{ src: string; alt: string }}) {
+function CardImage({ image }: { image?: { src: string; alt: string } }) {
   return (
     <>
       {image && (

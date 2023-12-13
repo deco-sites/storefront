@@ -1,10 +1,10 @@
 export interface Props {
-  children: Child[]
+  children: Child[];
 }
 
 interface Child {
-    title: string;
-    subtitle: string;
+  title: string;
+  subtitle: string;
 }
 
 export default function Accordion(props: Props) {
@@ -18,7 +18,7 @@ export default function Accordion(props: Props) {
             <div className="collapse-title text-xl font-medium">{c.title}</div>
             <div className="collapse-content">{c.subtitle}</div>
           </div>
-        )
+        );
       })}
     </>
   );
