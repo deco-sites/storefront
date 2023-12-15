@@ -1,5 +1,5 @@
 import Container, { Props as ContainerProps } from "../../components/ui/Container.tsx";
-import IconCardsCarousel, { Props as CarouselProps } from "$store/components/cards/IconCardsCarousel.tsx";
+import ImageCardsCarousel, { Props as CarouselProps } from "$store/components/cards/ImageCardsCarousel.tsx";
 
 type Props = {
   container?: ContainerProps;
@@ -9,7 +9,7 @@ type Props = {
 export default function Section({ container, carousel }: Props) {
   return (
     <Container {...container}>
-      <IconCardsCarousel {...carousel} />
+      <ImageCardsCarousel {...carousel} />
     </Container>
   );
 }

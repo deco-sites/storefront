@@ -1,24 +1,15 @@
-import Card, { Props as CardProps } from "../../components/cards/ImageCard.tsx";
-import Grid, { GridMobile, GridDesktop } from "../Layout/Grid.tsx"
 import Container, { Props as ContainerProps } from "../../components/ui/Container.tsx";
+import ImageCardsGrid, { Props as GridProps } from "$store/components/cards/ImageCardsGrid.tsx";
 
 type Props = {
-  items?: CardProps[];
   container?: ContainerProps;
-  gridMobile?: GridMobile;
-  gridDesktop?: GridDesktop;
+  grid?: GridProps;
 }
 
-const ITEMS: CardProps[] = new Array(5).fill({});
-
-function Section({ items = ITEMS, container, gridMobile, gridDesktop }: Props) {
-  const allItems = items.length === 0 ? ITEMS : items;
-
+export default function Section({ container, grid }: Props) {
   return (
     <Container {...container}>
-      <Grid mobile={gridMobile} desktop={gridDesktop} children={allItems.map((item) => <Card {...item} />)} />
+      <ImageCardsGrid {...grid} />
     </Container>
   );
 }
-
-export default Section;

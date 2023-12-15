@@ -299,6 +299,10 @@ export const flex = {
       "None": "lg:flex-none",
     },
   },
+  position: {
+    "Left": "",
+    "Right": "lg:flex-row-reverse"
+  }
 };
 
 export type Colors =

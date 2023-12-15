@@ -14,6 +14,7 @@ import {
   TextColors,
 } from "$store/components/ui/Types.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import { clx } from "$store/sdk/clx.ts";
 
 export type Layout = SectionLayout;
 export type HeaderContent = Content;
@@ -72,6 +73,7 @@ export default function Container({ children, ...props }: Props) {
 
   const hasPadding =
     (contentBgColor !== "Transparent" && sectionBgColor !== contentBgColor) ||
+    (style?.section?.bgImage !== undefined && contentBgColor !== "Transparent") ||
     style?.content?.bgImage !== undefined;
 
   const contentClasses = {
@@ -86,11 +88,12 @@ export default function Container({ children, ...props }: Props) {
 
   return (
     <div
-      class={`
-      ${containerBgColorClasses}
-      ${layoutClasses[layout?.sectionWidth || "100%"]}
-      ${hasPadding ? "p-4 lg:p-16" : ""}
-      ${style?.section?.bgImage ? "bg-cover bg-center" : ""}`}
+      class={clx(
+        containerBgColorClasses,
+        layoutClasses[layout?.sectionWidth || "100%"],
+        hasPadding ? "p-4 lg:p-16" : "",
+        style?.section?.bgImage ? "bg-cover bg-center" : ""
+      )}
       style={{
         "background-image": style?.section?.bgImage
           ? `url(${style?.section?.bgImage})`
@@ -98,16 +101,16 @@ export default function Container({ children, ...props }: Props) {
       }}
     >
       <div
-        class={`
-          flex flex-col flex-wrap gap-6 lg:gap-12
-          ${afterHeader ? "lg:grid lg:grid-cols-2" : ""}
-          ${hasPadding ? "p-4 lg:p-10" : "px-4 py-8 lg:py-16"}
-          ${layoutClasses[layout?.innerContentWidth || "Contained"]}
-          ${contentBgColorClasses}
-          ${style?.content?.bgImage ? "bg-cover bg-center" : ""}
-          ${contentClasses[style?.content?.alignment || "Center"]}
-          ${textColorClasses[style?.content?.textColor || "Auto"]}
-        `}
+        class={clx(
+          "flex flex-col flex-wrap gap-6 lg:gap-12",
+          afterHeader ? "lg:grid lg:grid-cols-2" : "",
+          hasPadding ? "p-4 lg:p-10" : "px-4 py-8 lg:py-16",
+          layoutClasses[layout?.innerContentWidth || "Contained"],
+          contentBgColorClasses,
+          style?.content?.bgImage ? "bg-cover bg-center" : "",
+          contentClasses[style?.content?.alignment || "Center"],
+          textColorClasses[style?.content?.textColor || "Auto"],
+        )}
         style={{
           "background-image": style?.content?.bgImage
             ? `url(${style?.content?.bgImage})`
