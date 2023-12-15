@@ -21,7 +21,7 @@ function Section({ items, container, layoutType }: Props) {
       container={container}
       layout={layoutType}
       items={items?.map((item) => (
-        <Card product={item} platform={usePlatform()} />
+        <Card product={item} platform={usePlatform()} /> 
       ))}
     />
   );
