@@ -7,7 +7,6 @@ interface Tab {
   content: string;
 }
 
-//TODO: UPDATE DAISY UI TO VERSION 4
 export default function Tabs(props: Props) {
   const { tabs } = props;
 

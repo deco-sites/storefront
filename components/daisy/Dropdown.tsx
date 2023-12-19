@@ -8,7 +8,6 @@ interface Item {
   href: string;
 }
 
-//TODO: UPDATE DAISY UI TO VERSION 4
 export default function Dropdown(props: Props) {
   const { label, items } = props;
 

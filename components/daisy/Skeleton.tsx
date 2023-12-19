@@ -34,7 +34,6 @@ function RectangleSkeleton() {
   );
 }
 
-//TODO: UPDATE DAISY UI TO VERSION 4
 export default function Skeleton(props: Props) {
   const { skeletonType } = props;
 

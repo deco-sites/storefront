@@ -3,7 +3,6 @@ export interface Props {
   newImage: { src: string; alt: string };
 }
 
-//TODO: UPDATE DAISY UI TO VERSION 4
 export default function Diff(props: Props) {
   const { oldImage, newImage } = props;
 
