@@ -1,5 +1,11 @@
 export interface Props {
-  style: "loading-spinner" | "loading-dots" | "loading-ring" | "loading-ball" | "loading-bars" | "loading-infinity";
+  style:
+    | "loading-spinner"
+    | "loading-dots"
+    | "loading-ring"
+    | "loading-ball"
+    | "loading-bars"
+    | "loading-infinity";
   size: "loading-xs" | "loading-sm" | "loading-md" | "loading-lg";
 }
 
