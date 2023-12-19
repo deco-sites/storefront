@@ -19,7 +19,7 @@ export default function Dropdown(props: Props) {
         {items.map((item) => {
           return (
             <li>
-              <a href={item.href}>{item.text} </a>
+              <a href={item.href}>{item.text}</a>
             </li>
           );
         })}

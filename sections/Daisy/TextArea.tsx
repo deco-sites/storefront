@@ -24,7 +24,8 @@ export default function TextArea(props: Props) {
       <textarea
         className="textarea textarea-bordered h-24"
         placeholder={placeholder}
-      ></textarea>
+      >
+      </textarea>
       <div className="label">
         <span className="label-text-alt">{bottomLeftlabel}</span>
         <span className="label-text-alt">{bottomRightlabel}</span>
