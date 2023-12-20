@@ -16,38 +16,28 @@ type Size =
 
 export default function Artboard(props: Props) {
   const { size, image, horizontal } = props;
-  const { w, h, p } = getBoardSize(size, horizontal);
+  const { width, height, phone } = getBoardSize(size, horizontal);
 
   return (
     <div
-      className={`artboard phone-${p} ${
+      className={`artboard phone-${phone} ${
         horizontal ? "artboard-horizontal" : ""
       } `}
     >
       <Image
         src={image.src}
         alt={image.alt}
-        width={w}
-        height={h}
+        width={width}
+        height={height}
         class="rounded object-cover"
-        style={{ width: `${w}px`, height: `${h}px` }}
+        style={{ width: `${width}px`, height: `${height}px` }}
       />
     </div>
   );
 }
 
 const getBoardSize = (size: Size, horizontal: boolean | undefined) => {
-  let width = parseInt(`${size[0]}${size[1]}${size[2]}`, 10);
-  let height = parseInt(`${size[4]}${size[5]}${size[6]}`, 10);
-
-  if (horizontal) {
-    const auxWidth = width;
-    const auxHeight = height;
-
-    width = auxHeight;
-    height = auxWidth;
-  }
-
+  let [width, height] = size.split("x").map((dim) => parseInt(dim, 10));
   let phone;
 
   switch (height) {
@@ -71,5 +61,9 @@ const getBoardSize = (size: Size, horizontal: boolean | undefined) => {
       break;
   }
 
-  return { w: width, h: height, p: phone };
+  if (horizontal) {
+    [width, height] = [height, width];
+  }
+
+  return { width, height, phone };
 };

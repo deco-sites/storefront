@@ -3,7 +3,7 @@ export interface Props {
   rightContent: string;
   dividerText?: string;
 }
-
+//lista ao inves de left e right
 export default function Divider(props: Props) {
   const { leftContent, rightContent, dividerText } = props;
 

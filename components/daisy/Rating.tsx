@@ -1,10 +1,11 @@
 export interface Props {
-  rating?: 1 | 2 | 3 | 4 | 5;
+  rating?: number;
+  maxRating: number;
 }
 
 export default function Rating(props: Props) {
-  const { rating } = props;
-  const stars = [1, 2, 3, 4, 5];
+  const { rating, maxRating } = props;
+  const stars = Array.from({ length: maxRating }, (_, index) => index + 1);
 
   return (
     <div className="rating">

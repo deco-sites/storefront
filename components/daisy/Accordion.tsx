@@ -14,7 +14,7 @@ export default function Accordion(props: Props) {
       {children.map((c) => {
         return (
           <div className="collapse collapse-arrow bg-base-200">
-            <input type="radio" name="my-accordion-2" />
+            <input type="radio" />
             <div className="collapse-title text-xl font-medium">{c.title}</div>
             <div className="collapse-content">{c.subtitle}</div>
           </div>
