@@ -10,9 +10,9 @@ export default function RangeSlider(props: Props) {
   return (
     <input
       type="range"
-      min={min || 0}
-      max={`${max}` || "100"}
-      value={`${value || min}`}
+      min={min ?? 0}
+      max={max ?? 100}
+      value={value ?? min}
       className="range"
     />
   );

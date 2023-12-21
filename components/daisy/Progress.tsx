@@ -8,8 +8,8 @@ export default function Progress(props: Props) {
   return (
     <progress
       className="progress w-full"
-      value={`${value}`}
-      max={`${max}`}
+      value={value}
+      max={max}
     >
     </progress>
   );

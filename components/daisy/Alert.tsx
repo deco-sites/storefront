@@ -18,9 +18,9 @@ export default function Alert(props: Props) {
     <div role="alert" className="alert">
       <Icon
         id={type}
-        class={type === "Alert"
-          ? "stroke-info shrink-0 w-6 h-6"
-          : "stroke-current shrink-0 w-6 h-6"}
+        class={`shrink-0 w-6 h-6 ${
+          type === "Alert" ? "stroke-info" : "stroke-current"
+        }`}
       />
       <span>{text}</span>
     </div>
