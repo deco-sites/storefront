@@ -31,6 +31,7 @@ jobs:
       matrix: ${{ fromJson(needs.set_vars.outputs.site_matrix) }}
     name: Deploy
     runs-on: ubuntu-latest
+    timeout-minutes: 15  # Set your desired timeout for this job
 
     permissions:
       id-token: write # Needed for auth with Deno Deploy
