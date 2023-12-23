@@ -11,7 +11,6 @@ in minutes.
 ## Features
 
 This starter brings:
-
 <ul>
   <li>Home, product and listing pages</li>
   <li>Content editable via CMS</li>
