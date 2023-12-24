@@ -9,6 +9,7 @@ in minutes.
 </div>
 
 ## Features
+
 This starter brings:
 
 <ul>
