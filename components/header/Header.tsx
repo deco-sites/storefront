@@ -7,6 +7,19 @@ import Alert from "./Alert.tsx";
 import Navbar from "./Navbar.tsx";
 import { headerHeight } from "./constants.ts";
 
+export interface Logo {
+  src: ImageWidget;
+  alt: string;
+  width?: number;
+  height?: number;
+}
+export interface Buttons {
+  hideSearchButton?: boolean;
+  hideAccountButton?: boolean;
+  hideWishlistButton?: boolean;
+  hideCartButton?: boolean;
+}
+
 export interface Props {
   alerts: string[];
 
@@ -20,7 +33,9 @@ export interface Props {
   navItems?: SiteNavigationElement[] | null;
 
   /** @title Logo */
-  logo?: { src: ImageWidget; alt: string };
+  logo?: Logo;
+
+  buttons: Buttons;
 }
 
 function Header({
@@ -28,6 +43,7 @@ function Header({
   searchbar,
   navItems,
   logo,
+  buttons,
 }: Props) {
   const platform = usePlatform();
   const items = navItems ?? [];
@@ -41,11 +57,12 @@ function Header({
           platform={platform}
         >
           <div class="bg-base-100 fixed w-full z-50">
-            <Alert alerts={alerts} />
+            {alerts.length > 0 && <Alert alerts={alerts} />}
             <Navbar
               items={items}
               searchbar={searchbar && { ...searchbar, platform }}
               logo={logo}
+              buttons={buttons}
             />
           </div>
         </Drawers>

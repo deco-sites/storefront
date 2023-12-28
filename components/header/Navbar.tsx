@@ -13,11 +13,13 @@ import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import NavItem from "./NavItem.tsx";
 import { navbarHeight } from "./constants.ts";
+import { Buttons, Logo } from "$store/components/header/Header.tsx";
 
-function Navbar({ items, searchbar, logo }: {
+function Navbar({ items, searchbar, logo, buttons }: {
   items: SiteNavigationElement[];
   searchbar?: SearchbarProps;
-  logo?: { src: string; alt: string };
+  logo?: Logo;
+  buttons: Buttons;
 }) {
   const platform = usePlatform();
 
@@ -37,7 +39,12 @@ function Navbar({ items, searchbar, logo }: {
             style={{ minHeight: navbarHeight }}
             aria-label="Store logo"
           >
-            <Image src={logo.src} alt={logo.alt} width={126} height={16} />
+            <Image
+              src={logo.src}
+              alt={logo.alt}
+              width={logo.width || 126}
+              height={logo.height || 16}
+            />
           </a>
         )}
 
@@ -57,7 +64,12 @@ function Navbar({ items, searchbar, logo }: {
               aria-label="Store logo"
               class="block px-4 py-3 w-[160px]"
             >
-              <Image src={logo.src} alt={logo.alt} width={126} height={16} />
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                width={logo.width || 126}
+                height={logo.height || 16}
+              />
             </a>
           )}
         </div>
@@ -65,33 +77,37 @@ function Navbar({ items, searchbar, logo }: {
           {items.map((item) => <NavItem item={item} />)}
         </div>
         <div class="flex-none w-44 flex items-center justify-end gap-2">
-          <SearchButton />
+          {!buttons?.hideSearchButton && <SearchButton />}
+
           <Searchbar searchbar={searchbar} />
-          <a
-            class="btn btn-circle btn-sm btn-ghost"
-            href="/login"
-            aria-label="Log in"
-          >
-            <Icon id="User" size={24} strokeWidth={0.4} />
-          </a>
-          <a
-            class="btn btn-circle btn-sm btn-ghost"
-            href="/wishlist"
-            aria-label="Wishlist"
-          >
-            <Icon
-              id="Heart"
-              size={24}
-              strokeWidth={2}
-              fill="none"
-            />
-          </a>
-          {platform === "vtex" && <CartButtonVTEX />}
-          {platform === "vnda" && <CartButtonVDNA />}
-          {platform === "wake" && <CartButtonWake />}
-          {platform === "linx" && <CartButtonLinx />}
-          {platform === "shopify" && <CartButtonShopify />}
-          {platform === "nuvemshop" && <CartButtonNuvemshop />}
+          {!buttons?.hideAccountButton && (
+            <a
+              class="btn btn-circle btn-sm btn-ghost"
+              href="/account"
+              aria-label="Account"
+            >
+              <Icon id="User" size={24} strokeWidth={0.4} />
+            </a>
+          )}
+          {!buttons?.hideWishlistButton && (
+            <a
+              class="btn btn-circle btn-sm btn-ghost"
+              href="/wishlist"
+              aria-label="Wishlist"
+            >
+              <Icon id="Heart" size={24} strokeWidth={0.4} />
+            </a>
+          )}
+          {!buttons?.hideCartButton && (
+            <>
+              {platform === "vtex" && <CartButtonVTEX />}
+              {platform === "vnda" && <CartButtonVDNA />}
+              {platform === "wake" && <CartButtonWake />}
+              {platform === "linx" && <CartButtonLinx />}
+              {platform === "shopify" && <CartButtonShopify />}
+              {platform === "nuvemshop" && <CartButtonNuvemshop />}
+            </>
+          )}
         </div>
       </div>
     </>
