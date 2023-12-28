@@ -16,6 +16,7 @@ import * as $$$$$$8 from "./sections/Layout/Container.tsx";
 import * as $$$$$$9 from "./sections/Layout/Grid.tsx";
 import * as $$$$$$10 from "./sections/Layout/Flex.tsx";
 import * as $$$$$$11 from "./sections/Layout/GridItem.tsx";
+<<<<<<< HEAD
 import * as $$$$$$12 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$13 from "./sections/Content/RichText.tsx";
 import * as $$$$$$14 from "./sections/Content/Testimonials.tsx";
@@ -40,6 +41,49 @@ import * as $$$$$$33 from "./sections/Links/LinkTree.tsx";
 import * as $$$$$$34 from "./sections/Links/Shortcuts.tsx";
 import * as $$$$$$35 from "./sections/Newsletter/Newsletter.tsx";
 import * as $$$$$$36 from "./sections/Header/Header.tsx";
+=======
+import * as $$$$$$12 from "./sections/Cards/IconCardsGrid.tsx";
+import * as $$$$$$13 from "./sections/Cards/ProductCards.tsx";
+import * as $$$$$$14 from "./sections/Cards/ImageCardsCarousel.tsx";
+import * as $$$$$$15 from "./sections/Cards/IconCardsGridTabs.tsx";
+import * as $$$$$$16 from "./sections/Cards/ImageCardsGrid.tsx";
+import * as $$$$$$17 from "./sections/Cards/ImageCardsGridWithImage.tsx";
+import * as $$$$$$18 from "./sections/Cards/IconCardsCarouselWithImage.tsx";
+import * as $$$$$$19 from "./sections/Cards/ImageCardsCarouselWithImage.tsx";
+import * as $$$$$$20 from "./sections/Cards/IconCardsGridWithImage.tsx";
+import * as $$$$$$21 from "./sections/Cards/IconCardsGridMatrix.tsx";
+import * as $$$$$$22 from "./sections/Cards/ImageCardsGridTabs.tsx";
+import * as $$$$$$23 from "./sections/Cards/IconCardsCarousel.tsx";
+import * as $$$$$$24 from "./sections/Animation/Animation.tsx";
+import * as $$$$$$25 from "./sections/Content/TextCapture.tsx";
+import * as $$$$$$26 from "./sections/Content/Benefits2.tsx";
+import * as $$$$$$27 from "./sections/Content/Benefits1.tsx";
+import * as $$$$$$28 from "./sections/Content/AboutDeco.tsx";
+import * as $$$$$$29 from "./sections/Content/Intro.tsx";
+import * as $$$$$$30 from "./sections/Content/Services.tsx";
+import * as $$$$$$31 from "./sections/Content/Testimonials.tsx";
+import * as $$$$$$32 from "./sections/Content/Logos.tsx";
+import * as $$$$$$33 from "./sections/Content/HeroCompose.tsx";
+import * as $$$$$$34 from "./sections/Content/Faq.tsx";
+import * as $$$$$$35 from "./sections/Product/Wishlist.tsx";
+import * as $$$$$$36 from "./sections/Product/NotFoundChallenge.tsx";
+import * as $$$$$$37 from "./sections/Product/SearchResult.tsx";
+import * as $$$$$$38 from "./sections/Product/ProductInfo.tsx";
+import * as $$$$$$39 from "./sections/Product/ProductShelf.tsx";
+import * as $$$$$$40 from "./sections/Product/ImageGallerySlider.tsx";
+import * as $$$$$$41 from "./sections/Product/ImageGalleryFrontBack.tsx";
+import * as $$$$$$42 from "./sections/Product/ProductShelfTabbed.tsx";
+import * as $$$$$$43 from "./sections/Product/NotFound.tsx";
+import * as $$$$$$44 from "./sections/Miscellaneous/CampaignTimer.tsx";
+import * as $$$$$$45 from "./sections/Miscellaneous/CookieConsent.tsx";
+import * as $$$$$$46 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$47 from "./sections/Social/InstagramPosts.tsx";
+import * as $$$$$$48 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$49 from "./sections/Links/LinkTree.tsx";
+import * as $$$$$$50 from "./sections/Links/Shortcuts.tsx";
+import * as $$$$$$51 from "./sections/Newsletter/Newsletter.tsx";
+import * as $$$$$$52 from "./sections/Header/Header.tsx";
+>>>>>>> 624afa2 (Add Cards sections)
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
@@ -49,9 +93,25 @@ const manifest = {
     "deco-sites/storefront/loaders/List/Sections.tsx": $$$1,
   },
   "sections": {
-    "deco-sites/storefront/sections/Animation/Animation.tsx": $$$$$$12,
+    "deco-sites/storefront/sections/Animation/Animation.tsx": $$$$$$24,
+    "deco-sites/storefront/sections/Cards/IconCardsCarousel.tsx": $$$$$$23,
+    "deco-sites/storefront/sections/Cards/IconCardsCarouselWithImage.tsx":
+      $$$$$$18,
+    "deco-sites/storefront/sections/Cards/IconCardsGrid.tsx": $$$$$$12,
+    "deco-sites/storefront/sections/Cards/IconCardsGridMatrix.tsx": $$$$$$21,
+    "deco-sites/storefront/sections/Cards/IconCardsGridTabs.tsx": $$$$$$15,
+    "deco-sites/storefront/sections/Cards/IconCardsGridWithImage.tsx": $$$$$$20,
+    "deco-sites/storefront/sections/Cards/ImageCardsCarousel.tsx": $$$$$$14,
+    "deco-sites/storefront/sections/Cards/ImageCardsCarouselWithImage.tsx":
+      $$$$$$19,
+    "deco-sites/storefront/sections/Cards/ImageCardsGrid.tsx": $$$$$$16,
+    "deco-sites/storefront/sections/Cards/ImageCardsGridTabs.tsx": $$$$$$22,
+    "deco-sites/storefront/sections/Cards/ImageCardsGridWithImage.tsx":
+      $$$$$$17,
+    "deco-sites/storefront/sections/Cards/ProductCards.tsx": $$$$$$13,
     "deco-sites/storefront/sections/Category/CategoryBanner.tsx": $$$$$$2,
     "deco-sites/storefront/sections/Category/CategoryList.tsx": $$$$$$3,
+<<<<<<< HEAD
     "deco-sites/storefront/sections/Content/Benefits.tsx": $$$$$$16,
     "deco-sites/storefront/sections/Content/Faq.tsx": $$$$$$15,
     "deco-sites/storefront/sections/Content/Logos.tsx": $$$$$$14,
@@ -59,6 +119,21 @@ const manifest = {
     "deco-sites/storefront/sections/Footer/Footer.tsx": $$$$$$1,
     "deco-sites/storefront/sections/Gallery.tsx": $$$$$$0,
     "deco-sites/storefront/sections/Header/Header.tsx": $$$$$$34,
+=======
+    "deco-sites/storefront/sections/Content/AboutDeco.tsx": $$$$$$28,
+    "deco-sites/storefront/sections/Content/Benefits1.tsx": $$$$$$27,
+    "deco-sites/storefront/sections/Content/Benefits2.tsx": $$$$$$26,
+    "deco-sites/storefront/sections/Content/Faq.tsx": $$$$$$34,
+    "deco-sites/storefront/sections/Content/HeroCompose.tsx": $$$$$$33,
+    "deco-sites/storefront/sections/Content/Intro.tsx": $$$$$$29,
+    "deco-sites/storefront/sections/Content/Logos.tsx": $$$$$$32,
+    "deco-sites/storefront/sections/Content/Services.tsx": $$$$$$30,
+    "deco-sites/storefront/sections/Content/Testimonials.tsx": $$$$$$31,
+    "deco-sites/storefront/sections/Content/TextCapture.tsx": $$$$$$25,
+    "deco-sites/storefront/sections/Footer/Footer1.tsx": $$$$$$1,
+    "deco-sites/storefront/sections/Gallery.tsx": $$$$$$0,
+    "deco-sites/storefront/sections/Header/Header.tsx": $$$$$$52,
+>>>>>>> 624afa2 (Add Cards sections)
     "deco-sites/storefront/sections/Images/BannerGrid.tsx": $$$$$$5,
     "deco-sites/storefront/sections/Images/Carousel.tsx": $$$$$$7,
     "deco-sites/storefront/sections/Images/ImageGallery.tsx": $$$$$$6,
@@ -67,6 +142,7 @@ const manifest = {
     "deco-sites/storefront/sections/Layout/Flex.tsx": $$$$$$10,
     "deco-sites/storefront/sections/Layout/Grid.tsx": $$$$$$9,
     "deco-sites/storefront/sections/Layout/GridItem.tsx": $$$$$$11,
+<<<<<<< HEAD
     "deco-sites/storefront/sections/Links/LinkTree.tsx": $$$$$$31,
     "deco-sites/storefront/sections/Links/Shortcuts.tsx": $$$$$$32,
     "deco-sites/storefront/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$26,
@@ -85,6 +161,26 @@ const manifest = {
     "deco-sites/storefront/sections/Social/InstagramPosts.tsx": $$$$$$29,
     "deco-sites/storefront/sections/Social/WhatsApp.tsx": $$$$$$28,
     "deco-sites/storefront/sections/Theme/Theme.tsx": $$$$$$30,
+=======
+    "deco-sites/storefront/sections/Links/LinkTree.tsx": $$$$$$49,
+    "deco-sites/storefront/sections/Links/Shortcuts.tsx": $$$$$$50,
+    "deco-sites/storefront/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$44,
+    "deco-sites/storefront/sections/Miscellaneous/CookieConsent.tsx": $$$$$$45,
+    "deco-sites/storefront/sections/Newsletter/Newsletter.tsx": $$$$$$51,
+    "deco-sites/storefront/sections/Product/ImageGalleryFrontBack.tsx":
+      $$$$$$41,
+    "deco-sites/storefront/sections/Product/ImageGallerySlider.tsx": $$$$$$40,
+    "deco-sites/storefront/sections/Product/NotFound.tsx": $$$$$$43,
+    "deco-sites/storefront/sections/Product/NotFoundChallenge.tsx": $$$$$$36,
+    "deco-sites/storefront/sections/Product/ProductInfo.tsx": $$$$$$38,
+    "deco-sites/storefront/sections/Product/ProductShelf.tsx": $$$$$$39,
+    "deco-sites/storefront/sections/Product/ProductShelfTabbed.tsx": $$$$$$42,
+    "deco-sites/storefront/sections/Product/SearchResult.tsx": $$$$$$37,
+    "deco-sites/storefront/sections/Product/Wishlist.tsx": $$$$$$35,
+    "deco-sites/storefront/sections/Social/InstagramPosts.tsx": $$$$$$47,
+    "deco-sites/storefront/sections/Social/WhatsApp.tsx": $$$$$$46,
+    "deco-sites/storefront/sections/Theme/Theme.tsx": $$$$$$48,
+>>>>>>> 624afa2 (Add Cards sections)
   },
   "apps": {
     "deco-sites/storefront/apps/decohub.ts": $$$$$$$$$$$0,
