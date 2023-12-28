@@ -85,24 +85,29 @@
 		<path fill-rule="evenodd" clip-rule="evenodd" d="M40.2424 10.2684L42.6128 21.9066H39.891L39.5396 20.2061H35.7635L35.1501 21.9066H32.0769L36.4663 11.1637C36.642 10.6268 37.1691 10.2684 37.6962 10.2684H40.2424ZM39.0122 17.7887L38.1353 13.4025L36.554 17.7887H39.0122Z"/>
 	</symbol>
 
-	<symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="Alert">
+	<symbol id="Alert" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
     </symbol>
 
-	<symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="AlertInfo">
+	<symbol id="AlertInfo" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
     </symbol>
 
-	<symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="AlertSuccess">
+	<symbol id="AlertSuccess" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
     </symbol>
 
-	<symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="AlertWarning">
+	<symbol id="AlertWarning" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
     </symbol>
 
-	<symbol xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="AlertError">
+	<symbol id="AlertError" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </symbol>
+
+	<symbol id="share" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M6 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+		<path d="M18 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path><path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path><path d="M8.7 10.7l6.6 -3.4"></path>
+		<path d="M8.7 13.3l6.6 3.4"></path>
     </symbol>
 
 </svg>

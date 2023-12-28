@@ -1,76 +1,265 @@
-import Icon from "$store/components/ui/Icon.tsx";
-import type { ImageWidget } from "apps/admin/widgets.ts";
+import { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
+import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
+import type { ComponentChildren } from "preact";
+
+export interface Props {
+  header: Header;
+  links: Links;
+  social?: Social[];
+  background: Background;
+  footer?: Footer;
+}
+
+export interface Header {
+  /** @description 150px x 150px image recommended */
+  logo?: Logo;
+  /** @format textarea */
+  title?: string;
+  /** @format textarea */
+  description?: string;
+  /**
+   * @format color
+   * @description color to be used in title and description
+   */
+  textColor: string;
+}
+
+export interface Logo {
+  img?: ImageWidget;
+  /** @description alternative text */
+  alt?: string;
+  width?: number;
+  height?: number;
+  /** @description external link on logo */
+  link?: string;
+}
+
+export interface Links {
+  items?: Link[];
+  style: Style;
+}
 
 export interface Link {
+  /** @description 20px transparent png recommended */
+  icon?: AvailableIcons;
   label: string;
+  /** @format textarea */
   href: string;
+}
+
+export interface Style {
+  /**
+   * @format color
+   * @description color to be used in link's text
+   */
+  textColor: string;
+  gradientColors: Gradient;
+}
+
+export interface Gradient {
+  /** @description multiple colors will create a gradient effect */
+  neutral: Neutral[];
+}
+
+export interface Neutral {
+  /**  @format color */
+  color: string;
 }
 
 export interface Social {
-  label: "Instagram" | "Facebook";
   href: string;
+  label:
+    | "Instagram"
+    | "Facebook"
+    | "Linkedin"
+    | "WhatsApp"
+    | "Discord"
+    | "Tiktok";
+  /** @format color */
+  iconColor?: string;
+  /** @description width of the SVG line */
+  strokeWidth?: number;
 }
 
-export interface Props {
-  title?: string;
-  description?: string;
-  links?: Link[];
-  bgImage?: ImageWidget;
-  avatar?: ImageWidget;
-  social?: Social[];
+export interface Background {
+  /** @description an image will override any background color */
+  image?: ImageWidget;
+  /** @format color */
+  backgroundColor?: string;
 }
 
-function LinkTree({
-  bgImage,
-  avatar,
-  title = "",
-  description = "",
-  links,
-  social,
-}: Props) {
+export interface Footer {
+  url?: string;
+  image?: ImageWidget;
+  /** @description alternative text */
+  alt?: string;
+  width?: number;
+  height?: number;
+  text?: string;
+}
+
+function Links(props: Props) {
+  const { header, background, links, social } = props;
+  const logo = (
+    <Image
+      decoding="async"
+      src={header.logo?.img || ""}
+      alt={header.logo?.alt}
+      width={header.logo?.width || 171}
+      height={header.logo?.height || 60}
+    />
+  );
+
+  const maybeLink = header?.logo?.link
+    ? <a href={header?.logo?.link!} target="_blank">{logo}</a>
+    : logo;
+
+  const ColorsNeutralAndHover = {
+    color: links.style?.textColor,
+    backgroundImage: `linear-gradient(to right, ${
+      links.style?.gradientColors.neutral.map((color) => color.color).join(
+        ", ",
+      )
+    })`,
+  };
+
   return (
-    <div
-      class="flex flex-col justify-start items-center gap-10 bg-base-content p-10 h-screen overflow-y-hidden"
-      style={bgImage ? { background: `url(${bgImage})` } : undefined}
-    >
+    <BaseContainer background={background}>
       <header class="flex flex-col justify-center items-center gap-4">
-        <div class="rounded-full w-min bg-base-100 p-4">
-          {avatar && <Image src={avatar} width={150} height={150} />}
-        </div>
-        <span class="font-medium text-xl text-base-100">{title}</span>
-        <span class="text-base-100">{description}</span>
+        {header?.logo?.img && (
+          <div class="rounded-full p-4">
+            {maybeLink}
+          </div>
+        )}
+
+        {header?.title && (
+          <h1
+            class="text-5xl font-bold text-center"
+            style={{ color: header.textColor }}
+          >
+            {header?.title}
+          </h1>
+        )}
+
+        {header?.description && (
+          <p
+            style={{ color: header.textColor }}
+          >
+            {header?.description}
+          </p>
+        )}
       </header>
-      <main class="w-full max-w-[80%] sm:max-w-[50%]">
+
+      <main class="w-full">
         <ul class="flex flex-col justify-center items-center gap-4">
-          {links?.map((link) => (
+          {links?.items?.map((link) => (
             <li class="w-full">
               <a
+                target="_blank"
                 href={link.href}
-                class="text-base-100 rounded-3xl text-center w-full flex justify-center items-center min-h-[36px] hover:bg-base-100 hover:text-base-content border border-base-100"
+                class="group h-[52px] px-6 rounded-full flex justify-start items-center font-bold gap-4"
+                style={ColorsNeutralAndHover}
               >
-                {link.label}
+                {Boolean(link.icon) && (
+                  <Icon
+                    size={20}
+                    id={link.icon!}
+                    strokeWidth={2.5}
+                  />
+                )}
+
+                <span class="w-full text-center text-sm">
+                  {link.label}
+                </span>
+
+                <Icon
+                  size={20}
+                  id="share"
+                  strokeWidth={2}
+                  class="opacity-0 group-hover:opacity-100"
+                />
               </a>
             </li>
           ))}
         </ul>
       </main>
-      <footer>
-        <ul class="flex flex-row gap-4">
+
+      <footer class="flex flex-1 flex-col">
+        <ul class="flex flex-row gap-4 mb-10 justify-center items-center">
           {social?.map((link) => (
             <li>
               <a
+                target="_blank"
                 href={link.href}
-                class="text-base-100 block rounded-full hover:text-base-content hover:bg-base-100 p-2"
+                title={link.label}
+                class="text-white block rounded"
               >
-                <Icon id={link.label} size={36} strokeWidth={0.8} />
+                <Icon
+                  size={20}
+                  id={link.label}
+                  strokeWidth={link.strokeWidth || 2}
+                  fill={link.iconColor}
+                  style={{ color: link.iconColor }}
+                />
               </a>
             </li>
           ))}
         </ul>
+
+        {props.footer && (props.footer.image || props.footer.text) && (
+          <div class="mt-auto">
+            <a
+              href={props.footer.url}
+              class="text-xs flex flex-row items-center justify-center gap-1"
+              target="_blank"
+            >
+              {props.footer.text && (
+                <p
+                  style={{ color: header.textColor }}
+                >
+                  {props.footer.text}
+                </p>
+              )}
+              {props.footer.image && (
+                <Image
+                  src={props.footer.image || ""}
+                  alt={props.footer.alt}
+                  width={props.footer.width || 50}
+                  height={props.footer.height || 20}
+                />
+              )}
+            </a>
+          </div>
+        )}
       </footer>
+    </BaseContainer>
+  );
+}
+
+function BaseContainer(props: {
+  children?: ComponentChildren;
+  background?: Props["background"];
+}) {
+  const { image } = props?.background ?? {};
+  const baseClasses = "flex justify-center w-full min-h-screen";
+  const inlineStyle = image ? { background: `url(${image})` } : undefined;
+  const backgroundColors = props?.background?.backgroundColor;
+  const containerClasses = `${baseClasses}`;
+
+  return (
+    <div
+      class={containerClasses}
+      style={{
+        ...inlineStyle,
+        backgroundColor: backgroundColors ? backgroundColors : undefined,
+      }}
+    >
+      <div class="flex flex-col items-center gap-12 p-10 max-w-[640px] w-full">
+        {props.children}
+      </div>
     </div>
   );
 }
 
-export default LinkTree;
+export default Links;
