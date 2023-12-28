@@ -77,10 +77,10 @@ function Navbar({ items, searchbar, logo, buttons }: {
           {items.map((item) => <NavItem item={item} />)}
         </div>
         <div class="flex-none w-44 flex items-center justify-end gap-2">
-          {!buttons.hideSearchButton && <SearchButton />}
+          {!buttons?.hideSearchButton && <SearchButton />}
 
           <Searchbar searchbar={searchbar} />
-          {!buttons.hideAccountButton && (
+          {!buttons?.hideAccountButton && (
             <a
               class="btn btn-circle btn-sm btn-ghost"
               href="/account"
@@ -89,7 +89,7 @@ function Navbar({ items, searchbar, logo, buttons }: {
               <Icon id="User" size={24} strokeWidth={0.4} />
             </a>
           )}
-          {!buttons.hideWishlistButton && (
+          {!buttons?.hideWishlistButton && (
             <a
               class="btn btn-circle btn-sm btn-ghost"
               href="/wishlist"
@@ -98,7 +98,7 @@ function Navbar({ items, searchbar, logo, buttons }: {
               <Icon id="Heart" size={24} strokeWidth={0.4} />
             </a>
           )}
-          {!buttons.hideCartButton && (
+          {!buttons?.hideCartButton && (
             <>
               {platform === "vtex" && <CartButtonVTEX />}
               {platform === "vnda" && <CartButtonVDNA />}
