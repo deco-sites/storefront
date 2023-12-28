@@ -7,7 +7,12 @@ import Alert from "./Alert.tsx";
 import Navbar from "./Navbar.tsx";
 import { headerHeight } from "./constants.ts";
 
-export interface Logo { src: ImageWidget; alt: string; width?: number; height?: number }
+export interface Logo {
+  src: ImageWidget;
+  alt: string;
+  width?: number;
+  height?: number;
+}
 export interface Buttons {
   hideSearchButton?: boolean;
   hideAccountButton?: boolean;
@@ -30,7 +35,7 @@ export interface Props {
   /** @title Logo */
   logo?: Logo;
 
-  buttons: Buttons
+  buttons: Buttons;
 }
 
 function Header({
@@ -38,7 +43,7 @@ function Header({
   searchbar,
   navItems,
   logo,
-  buttons
+  buttons,
 }: Props) {
   const platform = usePlatform();
   const items = navItems ?? [];

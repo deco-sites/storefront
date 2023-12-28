@@ -72,7 +72,13 @@ export default function SimpleTextList({
           return (
             <div class="flex flex-col md:flex-row md:pb-8 lg:border-b gap-2 md:gap-4 lg:gap-16">
               <h3 class="flex-none font-bold md:w-2/5 lg:w-52">{item.title}</h3>
-              <div class="flex-auto grid grid-cols-1 gap-x-10" style={{gridTemplateColumns:`repeat(${item.items.length}, minmax(0, 1fr))`}}>
+              <div
+                class="flex-auto grid grid-cols-1 gap-x-10"
+                style={{
+                  gridTemplateColumns:
+                    `repeat(${item.items.length}, minmax(0, 1fr))`,
+                }}
+              >
                 {item.items.map((item) => {
                   return (
                     <div>
