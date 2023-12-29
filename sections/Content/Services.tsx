@@ -21,9 +21,9 @@ export default function Services({
   services = [
     {
       type: "Service",
-      label: "Implementação e Customização de Lojas Online",
+      label: "Your Title Here",
       description:
-        "Desde a criação de lojas virtuais personalizadas, design de UX/UI, até ajustes finos em plataformas existentes, nossos parceiros oferecem soluções completas.",
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, diam id tincidunt dapibus, elit arcu ultricies massa, quis ornare nisl libero vitae urna.",
       image:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/3290/488e5dc5-9a24-48c9-9795-09b97394fb5f",
       placement: "left",
