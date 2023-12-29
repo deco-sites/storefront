@@ -63,12 +63,6 @@ export interface Layout {
     | "Accent"
     | "Base 100"
     | "Base 100 inverted";
-  variation?:
-    | "Variation 1"
-    | "Variation 2"
-    | "Variation 3"
-    | "Variation 4"
-    | "Variation 5";
   hide?: {
     logo?: boolean;
     newsletter?: boolean;
@@ -80,6 +74,15 @@ export interface Layout {
     extraLinks?: boolean;
     backToTheTop?: boolean;
   };
+}
+
+export interface Variations {
+  variation?:
+    | "Variation 1"
+    | "Variation 2"
+    | "Variation 3"
+    | "Variation 4"
+    | "Variation 5";
 }
 
 export interface Props {
@@ -112,6 +115,7 @@ export interface Props {
 }
 
 function Footer({
+  variation,
   logo,
   newsletter = {
     title: "Newsletter",
@@ -164,8 +168,7 @@ function Footer({
   extraLinks = [],
   backToTheTop,
   layout = {
-    backgroundColor: "Primary",
-    variation: "Variation 1",
+    backgroundColor: "Base 100",
     hide: {
       logo: false,
       newsletter: false,
@@ -178,27 +181,27 @@ function Footer({
       backToTheTop: false,
     },
   },
-}: Props) {
+}: Variations & Props) {
   const _logo = layout?.hide?.logo ? <></> : <Logo logo={logo} />;
   const _newsletter = layout?.hide?.newsletter ? <></> : (
     <Newsletter
       content={newsletter}
       layout={{
-        tiled: layout?.variation == "Variation 4" ||
-          layout?.variation == "Variation 5",
+        tiled: variation == "Variation 4" ||
+          variation == "Variation 5",
       }}
     />
   );
   const _sectionLinks = layout?.hide?.sectionLinks ? <></> : (
     <FooterItems
       sections={sections}
-      justify={layout?.variation == "Variation 2" ||
-        layout?.variation == "Variation 3"}
+      justify={variation == "Variation 2" ||
+        variation == "Variation 3"}
     />
   );
   const _social = layout?.hide?.socialLinks
     ? <></>
-    : <Social content={social} vertical={layout?.variation == "Variation 3"} />;
+    : <Social content={social} vertical={variation == "Variation 3"} />;
   const _payments = layout?.hide?.paymentMethods
     ? <></>
     : <PaymentMethods content={payments} />;
@@ -219,7 +222,7 @@ function Footer({
       }`}
     >
       <div class="lg:container mx-6 lg:mx-auto">
-        {(!layout?.variation || layout?.variation == "Variation 1") && (
+        {(!variation || variation == "Variation 1") && (
           <div class="flex flex-col gap-10">
             <div class="flex flex-col md:flex-row md:justify-between md:flex-wrap lg:flex-nowrap gap-8 lg:gap-12">
               {_logo}
@@ -242,7 +245,7 @@ function Footer({
             </div>
           </div>
         )}
-        {layout?.variation == "Variation 2" && (
+        {variation == "Variation 2" && (
           <div class="flex flex-col gap-10">
             <div class="flex flex-col md:flex-row gap-10">
               <div class="flex flex-col gap-10 lg:w-1/2">
@@ -264,7 +267,7 @@ function Footer({
             </div>
           </div>
         )}
-        {layout?.variation == "Variation 3" && (
+        {variation == "Variation 3" && (
           <div class="flex flex-col gap-10">
             {_logo}
             <div class="flex flex-col lg:flex-row gap-14">
@@ -290,7 +293,7 @@ function Footer({
             </div>
           </div>
         )}
-        {layout?.variation == "Variation 4" && (
+        {variation == "Variation 4" && (
           <div class="flex flex-col gap-10">
             {_newsletter}
             {layout?.hide?.newsletter ? <></> : <Divider />}
@@ -318,7 +321,7 @@ function Footer({
             </div>
           </div>
         )}
-        {layout?.variation == "Variation 5" && (
+        {variation == "Variation 5" && (
           <div class="flex flex-col gap-10">
             {_newsletter}
             {layout?.hide?.newsletter ? <></> : <Divider />}
