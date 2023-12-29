@@ -8,6 +8,7 @@ import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
+import { relative } from "$store/sdk/url.ts";
 
 export interface Layout {
   basics?: {
@@ -52,11 +53,6 @@ interface Props {
   platform?: Platform;
 }
 
-const relative = (url: string) => {
-  const link = new URL(url);
-  return `${link.pathname}${link.search}`;
-};
-
 const WIDTH = 200;
 const HEIGHT = 279;
 
@@ -85,16 +81,24 @@ function ProductCard(
     !l?.basics?.contentAlignment || l?.basics?.contentAlignment == "Left"
       ? "left"
       : "center";
-  const skuSelector = variants.map(([value, link]) => (
-    <li>
-      <a href={link}>
-        <Avatar
-          variant={link === url ? "active" : link ? "default" : "disabled"}
-          content={value}
-        />
-      </a>
-    </li>
-  ));
+  const relativeUrl = relative(url);
+  const skuSelector = variants.map(([value, link]) => {
+    const relativeLink = relative(link);
+    return (
+      <li>
+        <a href={relativeLink}>
+          <Avatar
+            variant={relativeLink === relativeUrl
+              ? "active"
+              : relativeLink
+              ? "default"
+              : "disabled"}
+            content={value}
+          />
+        </a>
+      </li>
+    );
+  });
   const cta = (
     <a
       href={url && relative(url)}
