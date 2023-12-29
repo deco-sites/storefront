@@ -1,8 +1,6 @@
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
-import BannerCarousel, {
-  Banner,
-} from "$store/components/ui/BannerCarousel.tsx";
+import BannerCarousel from "$store/components/ui/BannerCarousel.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 
@@ -11,7 +9,7 @@ export interface BannerProps {
   mobile?: ImageWidget;
   /**  @title Image Desktop */
   desktop?: ImageWidget;
-  alt?: string;
+
   title?: string;
   description?: string;
 }
@@ -19,16 +17,15 @@ export interface BannerProps {
 export interface CTAProps {
   href: string;
   text: string;
-  label?: AvailableIcons;
+  icon?: AvailableIcons;
   variants?: "Normal" | "Reverse" | "Border none";
   hide?: {
-    cta?: boolean;
-    label?: boolean;
+    icon?: boolean;
   };
 }
 
 export interface BannerTextGenericProps {
-  title: string;
+  title?: string;
 
   /** @format html */
   description?: string;
@@ -38,36 +35,44 @@ export interface BannerTextGenericProps {
   banners?: BannerProps[];
 
   /**  @title Hide Components */
-  hide: {
-    cta: boolean;
+  hide?: {
+    cta?: boolean;
   };
 
   layout?: {
     alignment?: "Row" | "Column" | "Row reverse" | "Column reverse";
     image?: "Background" | "Front";
-    variants?: {
-      section?: "Normal" | "Reverse";
-    };
   };
 }
 
 export default function BannerTextGeneric(
-  { title, description, ctaList, layout, hide, banners }:
+  {
+    title = "Title",
+    description = "Description text. Description text. Description text. Description text. Description text. Description text. Description text.",
+    ctaList = [
+      { href: "/", text: "CTA 1" },
+      { href: "/", text: "CTA 2" },
+      { href: "/", text: "CTA 3" },
+    ],
+    layout,
+    hide = {
+      cta: false,
+    },
+    banners
+  }:
     BannerTextGenericProps,
 ) {
   const ALIGNMENT_LAST_CHILD = {
     "Row": "col-start-2 row-start-1",
     "Column": "",
-    "Row reverse": banners && banners?.length > 0
-      ? "col-start-1 row-start-1"
-      : "",
+    "Row reverse": banners?.length > 0 ? "col-start-1 row-start-1" : "",
     "Column reverse": "",
   };
 
   const ALIGNMENT_FIRST_CHILD = {
     "Row": "col-start-1 row-start-1",
     "Column": "",
-    "Row reverse": banners && banners?.length > 0
+    "Row reverse": banners?.length > 0
       ? "col-start-2 row-start-1"
       : "col-start-1 row-start-1",
     "Column reverse": "",
@@ -86,22 +91,22 @@ export default function BannerTextGeneric(
   };
 
   const ALIGNMENT_CONTAINER = {
-    "Row": banners && banners?.length > 0
+    "Row": banners?.length > 0
       ? "grid grid-cols-2 grid-rows-1"
       : "grid grid-cols-1 grid-rows-1",
     "Column": "flex flex-col items-center",
-    "Row reverse": banners && banners?.length > 0
+    "Row reverse": banners?.length > 0
       ? "grid grid-cols-2 grid-rows-1"
       : "grid grid-cols-1 grid-rows-1",
     "Column reverse": "flex flex-col-reverse items-center",
   };
 
-  const CtaButton = ({ href, text, label, hide, variants }: CTAProps) =>
-    hide?.cta ? <></> : (
+  const CtaButton = ({ href, text, icon, hide, variants }: CTAProps) =>
+    (
       <a
         href={href ?? "#"}
         class={`block rounded-full duration-200 normal-case px-6 py-3  ${
-          !hide?.label ? "pr-3" : "pr-4"
+          !hide?.icon ? "pr-3" : "pr-4"
         } transition-colors duration-200 flex items-center gap-2 ${
           BACKGROUND_CTA[variants ?? "Normal"]
         }`}
@@ -110,7 +115,7 @@ export default function BannerTextGeneric(
           {text}
         </span>
         <span class="h-full flex justify-center items-center">
-          {!hide?.label && label ? <Icon id={label} size={30} /> : ""}
+          {!hide?.icon && icon ? <Icon id={icon} size={30} /> : ""}
         </span>
       </a>
     );
@@ -162,7 +167,7 @@ export default function BannerTextGeneric(
               hide?.cta ? "hidden" : "flex flex-col lg:flex-row"
             } items-center gap-4`}
           >
-            {ctaList?.map((itemBtn) => CtaButton(itemBtn))}
+            {ctaList.map((itemBtn) => CtaButton(itemBtn))}
           </div>
         </div>
       </div>
@@ -170,7 +175,9 @@ export default function BannerTextGeneric(
   );
 
   return (
-    <section class="w-full py-10 md:py-24">
+    <section
+      class="w-full py-10 md:py-24"
+    >
       <div
         class={`relative z-0 ${
           layout?.image === "Background" && banners?.length
@@ -252,7 +259,7 @@ export default function BannerTextGeneric(
                     : null}
                 </div>
               )
-              : <BannerCarousel images={banners as Banner[]} />}
+              : <BannerCarousel images={banners} />}
           </div>
         </div>
       </div>
