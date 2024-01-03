@@ -68,7 +68,7 @@ const DEFAULT_PROPS = {
       mobile:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/58feb76c-5946-4ffb-80a9-57a6013c0acc",
       desktop:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/58feb76c-5946-4ffb-80a9-57a6013c0acc",
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5",
     },
     {
       alt: "/feminino",
@@ -81,7 +81,7 @@ const DEFAULT_PROPS = {
       mobile:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/58feb76c-5946-4ffb-80a9-57a6013c0acc",
       desktop:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/58feb76c-5946-4ffb-80a9-57a6013c0acc",
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5",
     },
     {
       alt: "/feminino",
@@ -94,7 +94,7 @@ const DEFAULT_PROPS = {
       mobile:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/58feb76c-5946-4ffb-80a9-57a6013c0acc",
       desktop:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/58feb76c-5946-4ffb-80a9-57a6013c0acc",
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5",
     },
   ],
   preload: true,
@@ -115,10 +115,10 @@ function BannerItem(
       id={id}
       href={action?.href ?? "#"}
       aria-label={action?.label}
-      class="relative h-[600px] overflow-y-hidden w-full grid sm:grid-cols-2 grid-cols-1"
+      class="relative h-[600px] overflow-y-hidden w-full"
     >
       {action && (
-        <div class="flex flex-col justify-end gap-4 p-12 bg-warning">
+        <div class="absolute top-0 bottom-0 m-auto left-0 right-0 sm:right-auto max-w-[407px] flex flex-col justify-end gap-4 p-8">
           <span class="text-2xl font-light text-base-100">
             {action.title}
           </span>
@@ -142,10 +142,10 @@ function BannerItem(
           height={600}
         />
         <Source
-          media="(min-width: 574px)"
+          media="(min-width: 768px)"
           fetchPriority={lcp ? "high" : "auto"}
           src={desktop}
-          width={720}
+          width={1440}
           height={600}
         />
         <img
