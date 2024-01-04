@@ -66,7 +66,7 @@ const DEFAULT_PROPS = {
         href: "/",
       },
       mobile:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/58feb76c-5946-4ffb-80a9-57a6013c0acc",
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
       desktop:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5",
     },
@@ -79,7 +79,7 @@ const DEFAULT_PROPS = {
         href: "/",
       },
       mobile:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/58feb76c-5946-4ffb-80a9-57a6013c0acc",
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
       desktop:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5",
     },
@@ -92,7 +92,7 @@ const DEFAULT_PROPS = {
         href: "/",
       },
       mobile:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/58feb76c-5946-4ffb-80a9-57a6013c0acc",
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
       desktop:
         "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5",
     },
@@ -115,10 +115,10 @@ function BannerItem(
       id={id}
       href={action?.href ?? "#"}
       aria-label={action?.label}
-      class="relative h-[600px] overflow-y-hidden w-full"
+      class="relative md:h-[600px] overflow-y-hidden w-full"
     >
       {action && (
-        <div class="absolute top-0 bottom-0 m-auto left-0 right-0 sm:right-auto max-w-[407px] flex flex-col justify-end gap-4 p-8">
+        <div class="absolute top-0 md:bottom-0 bottom-1/2 left-0 right-0 sm:right-auto max-w-[407px] flex flex-col justify-end gap-4 px-8 py-12">
           <span class="text-2xl font-light text-base-100">
             {action.title}
           </span>
@@ -133,13 +133,13 @@ function BannerItem(
           </Button>
         </div>
       )}
-      <Picture preload={lcp} class="max-h-[600px]">
+      <Picture preload={lcp} class="md:max-h-[600px] h-full">
         <Source
           media="(max-width: 767px)"
           fetchPriority={lcp ? "high" : "auto"}
           src={mobile}
-          width={360}
-          height={600}
+          width={430}
+          height={590}
         />
         <Source
           media="(min-width: 768px)"
