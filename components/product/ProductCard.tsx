@@ -27,6 +27,7 @@ export interface Layout {
     installments?: boolean;
     skuSelector?: boolean;
     cta?: boolean;
+    favoriteIcon?: boolean;
   };
   onMouseOver?: {
     image?: "Change image" | "Zoom image";
@@ -144,27 +145,42 @@ function ProductCard(
         style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
       >
         {/* Wishlist button */}
+
         <div
-          class={`absolute top-2 z-10
-          ${
+          class={`absolute top-2 z-10 flex items-center
+            ${
             l?.elementsPositions?.favoriteIcon === "Top left"
               ? "left-2"
               : "right-2"
           }
-          ${
-            l?.onMouseOver?.showFavoriteIcon
-              ? "lg:hidden lg:group-hover:block"
-              : "lg:hidden"
-          }
-        `}
+            
+          `}
         >
-          {platform === "vtex" && (
-            <WishlistButton
-              productGroupID={productGroupID}
-              productID={productID}
-            />
-          )}
+          <div
+            class={`${
+              l?.onMouseOver?.showFavoriteIcon
+                ? "lg:hidden lg:group-hover:block"
+                : "lg:hidden"
+            }`}
+          >
+            {l?.hide?.favoriteIcon && platform === "vtex" ? "" : (
+              <WishlistButton
+                productGroupID={productGroupID}
+                productID={productID}
+              />
+            )}
+          </div>
+          {/* Discount % */}
+          <div class="text-sm bg-base-100 p-[10px]">
+            <span class="text-base-content font-bold">
+              {listPrice && price
+                ? `${Math.round((listPrice - price) / listPrice * 100)}% `
+                : ""}
+            </span>
+            OFF
+          </div>
         </div>
+
         {/* Product Images */}
         <a
           href={url && relative(url)}
@@ -218,7 +234,7 @@ function ProductCard(
         </figcaption>
       </figure>
       {/* Prices & Name */}
-      <div class="flex-auto flex flex-col p-2 gap-3 lg:gap-4">
+      <div class="flex-auto flex flex-col p-2 gap-3 lg:gap-2">
         {/* SKU Selector */}
         {(!l?.elementsPositions?.skuSelector ||
           l?.elementsPositions?.skuSelector === "Top") && (
@@ -241,7 +257,7 @@ function ProductCard(
             <div class="flex flex-col gap-0">
               {l?.hide?.productName ? "" : (
                 <h2
-                  class="truncate text-base lg:text-lg text-base-content"
+                  class="truncate text-base lg:text-lg text-base-content uppercase font-normal"
                   dangerouslySetInnerHTML={{ __html: name ?? "" }}
                 />
               )}
@@ -258,46 +274,45 @@ function ProductCard(
             <div
               class={`flex flex-col gap-0 ${
                 l?.basics?.oldPriceSize === "Normal"
-                  ? "lg:flex-row lg:gap-2"
+                  ? "lg:flex-row-reverse lg:gap-2"
                   : ""
-              } ${align === "center" ? "justify-center" : "justify-start"}`}
+              } ${align === "center" ? "justify-center" : "justify-end"}`}
             >
               <div
-                class={`line-through text-base-300 text-xs ${
-                  l?.basics?.oldPriceSize === "Normal" ? "lg:text-xl" : ""
+                class={`line-through text-base-300 text-xs font-light ${
+                  l?.basics?.oldPriceSize === "Normal" ? "lg:text-sm" : ""
                 }`}
               >
                 {formatPrice(listPrice, offers?.priceCurrency)}
               </div>
-              <div class="text-accent text-base lg:text-xl">
+              <div class="text-base-content lg:text-sm font-light">
                 {formatPrice(price, offers?.priceCurrency)}
               </div>
             </div>
-            {l?.hide?.installments
-              ? ""
-              : (
-                <div class="text-base-300 text-sm lg:text-base truncate">
-                  ou {installments}
-                </div>
-              )}
           </div>
         )}
 
         {/* SKU Selector */}
         {l?.elementsPositions?.skuSelector === "Bottom" && (
           <>
-            {l?.hide?.skuSelector ? "" : (
-              <ul
-                class={`flex items-center gap-2 w-full ${
-                  align === "center" ? "justify-center" : "justify-start"
-                } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
-              >
-                {skuSelector}
-              </ul>
-            )}
+            <ul
+              class={`flex items-center gap-2 w-full ${
+                align === "center" ? "justify-center" : "justify-between"
+              } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
+            >
+              {l?.hide?.installments
+                ? ""
+                : (
+                  <div class="text-base-300 font-light text-sm truncate">
+                    ou {installments}
+                  </div>
+                )}
+              {l?.hide?.skuSelector
+                ? ""
+                : <div class="flex items-center gap-2">{skuSelector}</div>}
+            </ul>
           </>
         )}
-
         {!l?.hide?.cta
           ? (
             <div
