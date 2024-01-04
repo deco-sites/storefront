@@ -6,7 +6,20 @@ import { clx } from "../../sdk/clx.ts";
 export interface GridMobile {
   /** @default Col */
   flow?: "Row" | "Col";
-  cols?: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "None"
+  cols?:
+    | "1"
+    | "2"
+    | "3"
+    | "4"
+    | "5"
+    | "6"
+    | "7"
+    | "8"
+    | "9"
+    | "10"
+    | "11"
+    | "12"
+    | "None";
   rows?: "1" | "2" | "3" | "4" | "5" | "6" | "None";
   /** @default 8 */
   gap?: "1" | "2" | "4" | "8" | "12" | "16";
@@ -17,7 +30,20 @@ export interface GridMobile {
 export interface GridDesktop {
   /** @default Row */
   flow?: "Row" | "Col";
-  cols?: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "None"
+  cols?:
+    | "1"
+    | "2"
+    | "3"
+    | "4"
+    | "5"
+    | "6"
+    | "7"
+    | "8"
+    | "9"
+    | "10"
+    | "11"
+    | "12"
+    | "None";
   rows?: "1" | "2" | "3" | "4" | "5" | "6" | "None";
   /** @default 8 */
   gap?: "1" | "2" | "4" | "8" | "12" | "16";
@@ -45,7 +71,9 @@ function Section({ mobile, desktop, children }: Props) {
         mobile?.placeItems && grid.placeItems.mobile[mobile.placeItems],
         desktop?.gap ? grid.gap.desktop[desktop.gap] : grid.gap.desktop[8],
         desktop?.cols && grid.cols.desktop[desktop.cols],
-        desktop?.flow ? grid.flow.desktop[desktop.flow] : grid.flow.desktop["Col"],
+        desktop?.flow
+          ? grid.flow.desktop[desktop.flow]
+          : grid.flow.desktop["Col"],
         desktop?.placeItems && grid.placeItems.desktop[desktop.placeItems],
       )}
     >

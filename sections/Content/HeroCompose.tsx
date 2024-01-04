@@ -1,4 +1,6 @@
-import Container, { Props as ContainerProps } from "$store/sections/Layout/Container.tsx";
+import Container, {
+  Props as ContainerProps,
+} from "$store/sections/Layout/Container.tsx";
 import BannerTextGeneric, {
   BannerTextGenericProps,
 } from "$store/components/ui/BannerTextGeneric.tsx";

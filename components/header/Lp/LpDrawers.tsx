@@ -59,7 +59,7 @@ function Drawers({ menu, children }: Props) {
   if (!menu) return null;
 
   return (
-    <Drawer 
+    <Drawer
       open={displayMenu.value}
       onClose={() => {
         displayMenu.value = false;

@@ -1,4 +1,6 @@
-import Container, { Props as ContainerProps } from "$store/sections/Layout/Container.tsx";
+import Container, {
+  Props as ContainerProps,
+} from "$store/sections/Layout/Container.tsx";
 import Partners, {
   Props as PartnerProps,
 } from "$store/components/ui/Partners.tsx";

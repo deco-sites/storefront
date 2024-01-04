@@ -48,7 +48,8 @@ export interface BannerTextGenericProps {
 export default function BannerTextGeneric(
   {
     title = "Title",
-    description = "Description text. Description text. Description text. Description text. Description text. Description text. Description text.",
+    description =
+      "Description text. Description text. Description text. Description text. Description text. Description text. Description text.",
     ctaList = [
       { href: "/", text: "CTA 1" },
       { href: "/", text: "CTA 2" },
@@ -58,9 +59,8 @@ export default function BannerTextGeneric(
     hide = {
       cta: false,
     },
-    banners
-  }:
-    BannerTextGenericProps,
+    banners,
+  }: BannerTextGenericProps,
 ) {
   const ALIGNMENT_LAST_CHILD = {
     "Row": "col-start-2 row-start-1",
@@ -101,24 +101,23 @@ export default function BannerTextGeneric(
     "Column reverse": "flex flex-col-reverse items-center",
   };
 
-  const CtaButton = ({ href, text, icon, hide, variants }: CTAProps) =>
-    (
-      <a
-        href={href ?? "#"}
-        class={`block rounded-full duration-200 normal-case px-6 py-3  ${
-          !hide?.icon ? "pr-3" : "pr-4"
-        } transition-colors duration-200 flex items-center gap-2 ${
-          BACKGROUND_CTA[variants ?? "Normal"]
-        }`}
-      >
-        <span class="h-full flex justify-center items-center">
-          {text}
-        </span>
-        <span class="h-full flex justify-center items-center">
-          {!hide?.icon && icon ? <Icon id={icon} size={30} /> : ""}
-        </span>
-      </a>
-    );
+  const CtaButton = ({ href, text, icon, hide, variants }: CTAProps) => (
+    <a
+      href={href ?? "#"}
+      class={`block rounded-full duration-200 normal-case px-6 py-3  ${
+        !hide?.icon ? "pr-3" : "pr-4"
+      } transition-colors duration-200 flex items-center gap-2 ${
+        BACKGROUND_CTA[variants ?? "Normal"]
+      }`}
+    >
+      <span class="h-full flex justify-center items-center">
+        {text}
+      </span>
+      <span class="h-full flex justify-center items-center">
+        {!hide?.icon && icon ? <Icon id={icon} size={30} /> : ""}
+      </span>
+    </a>
+  );
 
   const textContainer = (
     <>
@@ -175,9 +174,7 @@ export default function BannerTextGeneric(
   );
 
   return (
-    <section
-      class="w-full py-10 md:py-24"
-    >
+    <section class="w-full py-10 md:py-24">
       <div
         class={`relative z-0 ${
           layout?.image === "Background" && banners?.length

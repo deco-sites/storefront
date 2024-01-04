@@ -1,5 +1,9 @@
-import Container, { Props as ContainerProps } from "../../components/ui/Container.tsx";
-import ImageCardsGrid, { Props as GridProps } from "$store/components/cards/ImageCardsGrid.tsx";
+import Container, {
+  Props as ContainerProps,
+} from "../../components/ui/Container.tsx";
+import ImageCardsGrid, {
+  Props as GridProps,
+} from "$store/components/cards/ImageCardsGrid.tsx";
 import { type Section } from "deco/blocks/section.ts";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 

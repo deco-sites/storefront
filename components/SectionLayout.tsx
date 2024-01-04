@@ -40,7 +40,9 @@ function SectionLayout({ container, layout, items }: Props) {
       <>
         {layout?.display === "grid" && <Grid {...layout} children={items} />}
         {layout?.display === "flex" && <Flex {...layout} children={items} />}
-        {layout?.display === "carousel" && <Carousel {...layout} children={items} />}
+        {layout?.display === "carousel" && (
+          <Carousel {...layout} children={items} />
+        )}
       </>
     </Container>
   );

@@ -55,16 +55,28 @@ function Section({ interval = 0, layout, style, children }: Props) {
         id={id}
         class={clx(
           "grid grid-rows-[1fr_48px_1fr_40px]",
-          !layout?.hide?.controls ? "grid-cols-[48px_1fr_48px] sm:grid-cols-[48px_1fr_48px]" : "grid-cols-[0_1fr_0]"
+          !layout?.hide?.controls
+            ? "grid-cols-[48px_1fr_48px] sm:grid-cols-[48px_1fr_48px]"
+            : "grid-cols-[0_1fr_0]",
         )}
       >
-        <Slider class={clx(
-          "relative carousel carousel-center col-start-2 col-end-2 row-start-1 row-end-4",
-          layout?.gap?.mobile ? grid.gap.mobile[layout.gap.mobile] : grid.gap.mobile[2],
-          layout?.gap?.desktop ? grid.gap.desktop[layout.gap.desktop] : grid.gap.mobile[4],
-        )}>
+        <Slider
+          class={clx(
+            "relative carousel carousel-center col-start-2 col-end-2 row-start-1 row-end-4",
+            layout?.gap?.mobile
+              ? grid.gap.mobile[layout.gap.mobile]
+              : grid.gap.mobile[2],
+            layout?.gap?.desktop
+              ? grid.gap.desktop[layout.gap.desktop]
+              : grid.gap.mobile[4],
+          )}
+        >
           {items?.map((item, index) => (
-            <Slider.Item index={index} class="carousel-item" style={{width: layout?.itemWidth || "auto" }}>
+            <Slider.Item
+              index={index}
+              class="carousel-item"
+              style={{ width: layout?.itemWidth || "auto" }}
+            >
               {item}
             </Slider.Item>
           ))}

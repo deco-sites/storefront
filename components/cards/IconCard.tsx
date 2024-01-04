@@ -1,6 +1,16 @@
 import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
 import { clx } from "$store/sdk/clx.ts";
-import { flex, Colors, colorClasses, BorderColors, borderColorClasses2, BorderWidth, borderWidthClasses, BorderRadius, borderRadiusClasses } from "../../constants.tsx";
+import {
+  borderColorClasses2,
+  BorderColors,
+  BorderRadius,
+  borderRadiusClasses,
+  BorderWidth,
+  borderWidthClasses,
+  colorClasses,
+  Colors,
+  flex,
+} from "../../constants.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
 export interface Bg {
@@ -14,15 +24,15 @@ export interface Props {
   description: string;
   layout?: {
     iconPosition?: "Top" | "Left";
-  }
+  };
   style?: {
     background?: Bg;
     border?: {
       width?: BorderWidth;
       color?: BorderColors;
       radius?: BorderRadius;
-    }
-  }
+    };
+  };
 }
 
 export default function Card({
@@ -30,23 +40,25 @@ export default function Card({
   label = "Item",
   description = "A text describing this item",
   layout,
-  style
+  style,
 }: Props) {
   const bgColor = style?.background?.bgColor || "Primary";
 
-  const hasPadding = (bgColor && bgColor !== "Transparent") || (style?.border?.width && style.border.width !== "None");
+  const hasPadding = (bgColor && bgColor !== "Transparent") ||
+    (style?.border?.width && style.border.width !== "None");
 
   return (
-    <div class={clx(
-      "flex gap-3",
-      layout?.iconPosition === "Left" ? "flex-row" : "flex-col",
-      bgColor && colorClasses[bgColor],
-      hasPadding && "p-4 lg:p-8",
-      style?.border?.color && borderColorClasses2[style.border.color],
-      style?.border?.width && borderWidthClasses[style.border.width],
-      style?.border?.radius && borderRadiusClasses[style.border.radius],
-      style?.background?.bgImage ? "bg-cover bg-center" : ""
-    )}
+    <div
+      class={clx(
+        "flex gap-3",
+        layout?.iconPosition === "Left" ? "flex-row" : "flex-col",
+        bgColor && colorClasses[bgColor],
+        hasPadding && "p-4 lg:p-8",
+        style?.border?.color && borderColorClasses2[style.border.color],
+        style?.border?.width && borderWidthClasses[style.border.width],
+        style?.border?.radius && borderRadiusClasses[style.border.radius],
+        style?.background?.bgImage ? "bg-cover bg-center" : "",
+      )}
       style={{
         "background-image": style?.background?.bgImage
           ? `url(${style?.background?.bgImage})`

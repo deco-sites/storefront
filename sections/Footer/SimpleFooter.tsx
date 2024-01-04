@@ -63,24 +63,34 @@ function SubMenu({ menu }: { menu: Menu[] }) {
 
 export default function Footer({
   logo = {
-    image: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2753/d5181010-6489-4f8c-9ba9-7b615971215f",
+    image:
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2753/d5181010-6489-4f8c-9ba9-7b615971215f",
     description: "© 2023 All rights reserved",
   },
   menu = [
     {
       label: "Menu item 1",
       href: "/",
-      submenu: [ { label: "SubItem 1", href: "/" }, { label: "SubItem 2", href: "/" }, { label: "SubItem 3", href: "/" }, ]
+      submenu: [{ label: "SubItem 1", href: "/" }, {
+        label: "SubItem 2",
+        href: "/",
+      }, { label: "SubItem 3", href: "/" }],
     },
     {
       label: "Menu item 2",
       href: "/",
-      submenu: [ { label: "SubItem 1", href: "/" }, { label: "SubItem 2", href: "/" }, { label: "SubItem 3", href: "/" }, ]
+      submenu: [{ label: "SubItem 1", href: "/" }, {
+        label: "SubItem 2",
+        href: "/",
+      }, { label: "SubItem 3", href: "/" }],
     },
     {
       label: "Menu item 3",
       href: "/",
-      submenu: [ { label: "SubItem 1", href: "/" }, { label: "SubItem 2", href: "/" }, { label: "SubItem 3", href: "/" }, ]
+      submenu: [{ label: "SubItem 1", href: "/" }, {
+        label: "SubItem 2",
+        href: "/",
+      }, { label: "SubItem 3", href: "/" }],
     },
   ],
   social = {

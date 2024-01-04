@@ -73,7 +73,8 @@ export default function Container({ children, ...props }: Props) {
 
   const hasPadding =
     (contentBgColor !== "Transparent" && sectionBgColor !== contentBgColor) ||
-    (style?.section?.bgImage !== undefined && contentBgColor !== "Transparent") ||
+    (style?.section?.bgImage !== undefined &&
+      contentBgColor !== "Transparent") ||
     style?.content?.bgImage !== undefined;
 
   const contentClasses = {
@@ -92,7 +93,7 @@ export default function Container({ children, ...props }: Props) {
         containerBgColorClasses,
         layoutClasses[layout?.sectionWidth || "100%"],
         hasPadding ? "p-4 lg:p-16" : "",
-        style?.section?.bgImage ? "bg-cover bg-center" : ""
+        style?.section?.bgImage ? "bg-cover bg-center" : "",
       )}
       style={{
         "background-image": style?.section?.bgImage

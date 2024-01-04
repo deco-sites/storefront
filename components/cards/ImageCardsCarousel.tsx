@@ -12,6 +12,10 @@ export default function Section({ placeholderItems, items, slider }: Props) {
   const allItems = !items || items?.length === 0 ? ITEMS : items;
 
   return (
-    <Carousel layout={{itemWidth: 200}} {...slider} children={allItems.map((item) => <Card {...item} />)} />
+    <Carousel
+      layout={{ itemWidth: 200 }}
+      {...slider}
+      children={allItems.map((item) => <Card {...item} />)}
+    />
   );
 }

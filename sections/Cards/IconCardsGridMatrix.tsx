@@ -1,5 +1,9 @@
-import Container, { Props as ContainerProps } from "../../components/ui/Container.tsx";
-import IconCardsGrid, { Props as GridProps } from "$store/components/cards/IconCardsGrid.tsx";
+import Container, {
+  Props as ContainerProps,
+} from "../../components/ui/Container.tsx";
+import IconCardsGrid, {
+  Props as GridProps,
+} from "$store/components/cards/IconCardsGrid.tsx";
 import { type Section } from "deco/blocks/section.ts";
 
 export interface Props {
@@ -20,9 +24,7 @@ function Section({ container, lines = [], selectedTab: maybeTabIndex }: Props) {
       <div class="flex flex-col gap-2 sm:gap-8">
         {allLines.length > 1 && (
           <>
-            {allLines.map((line) => (
-              <IconCardsGrid {...line} />
-            ))}
+            {allLines.map((line) => <IconCardsGrid {...line} />)}
           </>
         )}
       </div>

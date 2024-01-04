@@ -16,8 +16,10 @@ export default function AboutDeco(
     title = "Title",
     description = "Description",
     image = {
-      srcMobile: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3983f8b7-31a1-4e26-a2bb-3d7261a34265",
-      srcDesktop: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3983f8b7-31a1-4e26-a2bb-3d7261a34265",
+      srcMobile:
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3983f8b7-31a1-4e26-a2bb-3d7261a34265",
+      srcDesktop:
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3983f8b7-31a1-4e26-a2bb-3d7261a34265",
     },
   }: AboutDecoProps,
 ) {

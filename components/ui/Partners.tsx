@@ -45,9 +45,7 @@ function Partners(props: Props) {
   return (
     <div class="w-full pb-16">
       <div class="flex flex-col gap-10 lg:gap-16">
-        {title && (
-          <p class="text-[18px] font-bold text-center">{title}</p>
-        )}
+        {title && <p class="text-[18px] font-bold text-center">{title}</p>}
 
         <div class="w-full text-center items-center relative">
           <div class="overflow-hidden pt-2 px-1">
