@@ -58,9 +58,9 @@ export interface Props {
   sectionChildrens?: Section[];
   mobile?: GridMobile;
   desktop?: GridDesktop;
-};
+}
 
-function Grid({ mobile, desktop, sectionChildrens, children }: Props ) {
+function Grid({ mobile, desktop, sectionChildrens, children }: Props) {
   return (
     <div
       class={clx(
