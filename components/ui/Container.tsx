@@ -1,7 +1,6 @@
-import type { ComponentChildren, VNode } from "preact";
+import type { VNode } from "preact";
 import Header, {
-  Content,
-  Style as HeaderStyle,
+  Props as HeaderProps,
 } from "$store/components/ui/SectionHeader.tsx";
 import {
   ButtonType,
@@ -9,37 +8,25 @@ import {
   Colors,
   Layout as SectionLayout,
   layoutClasses,
-  Section,
+  SectionBackGround,
   textColorClasses,
   TextColors,
 } from "$store/components/ui/Types.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { clx } from "$store/sdk/clx.ts";
+import { Section } from "deco/blocks/section.ts";
 
 export type Layout = SectionLayout;
-export type HeaderContent = Content;
-
-export interface Style {
-  section?: Section;
-  content?: {
-    alignment?: "Center" | "Left";
-    bgColor?: Colors;
-    bgImage?: ImageWidget;
-    textColor?: TextColors;
-  };
-  header?: HeaderStyle;
-  button?: ButtonType;
-}
+export type HeaderContent = HeaderProps;
 
 export interface ExtendedStyle {
-  section?: Section;
+  section?: SectionBackGround;
   content?: {
     alignment?: "Center" | "Left" | "Side to side top" | "Side to side middle";
     bgColor?: Colors;
     bgImage?: ImageWidget;
     textColor?: TextColors;
   };
-  header?: HeaderStyle;
   button?: ButtonType;
 }
 
@@ -47,7 +34,9 @@ export interface Props {
   header?: HeaderContent;
   layout?: Layout;
   style?: ExtendedStyle;
+  /** @ignore */
   children?: VNode;
+  childrenSection?: Section;
   afterHeader?: VNode | false;
 }
 
@@ -55,12 +44,15 @@ const DEFAULT_PROPS: Props = {
   header: {
     title: "",
     description: "",
+    alignment: "center",
   },
-  children: <></>,
 };
 
 export default function Container({ children, ...props }: Props) {
-  const { header, layout, style, afterHeader } = { ...DEFAULT_PROPS, ...props };
+  const { header, layout, style, afterHeader, childrenSection } = {
+    ...DEFAULT_PROPS,
+    ...props,
+  };
 
   const sectionBgColor = style?.section?.bgColor || "Transparent";
   const contentBgColor = style?.content?.bgColor || "Transparent";
@@ -84,8 +76,6 @@ export default function Container({ children, ...props }: Props) {
     "Side to side middle":
       "justify-between items-center lg:flex-row lg:flex-nowrap",
   };
-
-  const _header = <Header content={header} style={style?.header} />;
 
   return (
     <div
@@ -121,7 +111,7 @@ export default function Container({ children, ...props }: Props) {
         {header?.title || header?.description || afterHeader
           ? (
             <div class="flex flex-col gap-6 lg:gap-10 lg:min-w-[22rem]">
-              <Header content={header} style={style?.header} />
+              <Header {...header} />
               {afterHeader}
             </div>
           )
@@ -134,6 +124,9 @@ export default function Container({ children, ...props }: Props) {
           }`}
         >
           {children}
+          {childrenSection && (
+            <childrenSection.Component {...childrenSection.props} />
+          )}
         </div>
       </div>
     </div>

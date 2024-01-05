@@ -8,6 +8,7 @@ import { flex } from "../../constants.tsx";
  */
 export interface Props {
   children?: ComponentChildren;
+  sectionChildrens?: Section[];
   gap?: {
     /** @default 2 */
     mobile?: "1" | "2" | "4" | "8" | "12" | "16";
@@ -40,7 +41,9 @@ export interface Props {
   };
 }
 
-function Section({ gap, direction, align, justify, wrap, children }: Props) {
+function Section(
+  { gap, direction, align, justify, wrap, children, sectionChildrens }: Props,
+) {
   return (
     <div
       class={clx(
@@ -62,6 +65,10 @@ function Section({ gap, direction, align, justify, wrap, children }: Props) {
       )}
     >
       {children}
+      {sectionChildrens &&
+        sectionChildrens.map((section) => (
+          <section.Component {...section.props} />
+        ))}
     </div>
   );
 }

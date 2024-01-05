@@ -5,7 +5,7 @@ export interface Layout {
   innerContentWidth?: "Contained" | "2/3" | "100%";
 }
 
-export interface Section {
+export interface SectionBackGround {
   bgColor?: Colors;
   bgImage?: ImageWidget;
 }

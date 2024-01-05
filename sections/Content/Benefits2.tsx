@@ -1,6 +1,6 @@
 import Container, {
   Props as ContainerProps,
-} from "$store/sections/Layout/Container.tsx";
+} from "$store/components/ui/Container.tsx";
 import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
 import { textColorClasses, TextColors } from "$store/components/ui/Types.tsx";
 

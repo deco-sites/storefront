@@ -56,11 +56,12 @@ export interface GridDesktop {
  */
 export type Props = {
   children?: ComponentChildren;
+  sectionChildrens?: Section[];
   mobile?: GridMobile;
   desktop?: GridDesktop;
 };
 
-function Section({ mobile, desktop, children }: Props) {
+function Section({ mobile, desktop, children, sectionChildrens }: Props) {
   return (
     <div
       class={clx(
@@ -78,6 +79,10 @@ function Section({ mobile, desktop, children }: Props) {
       )}
     >
       {children}
+      {sectionChildrens &&
+        sectionChildrens.map((section) => (
+          <section.Component {...section.props} />
+        ))}
     </div>
   );
 }

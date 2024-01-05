@@ -1,6 +1,6 @@
 import Container, {
   Props as ContainerProps,
-} from "$store/sections/Layout/Container.tsx";
+} from "$store/components/ui/Container.tsx";
 import Partners, {
   Props as PartnerProps,
 } from "$store/components/ui/Partners.tsx";
