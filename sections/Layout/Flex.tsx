@@ -1,67 +1,76 @@
 import { clx } from "$store/sdk/clx.ts";
-import { context } from "deco/mod.ts";
-import { flex, VNode } from "../../constants.tsx";
+import { Section } from "deco/blocks/section.ts";
+import type { ComponentChildren } from "preact";
+import { flex } from "../../constants.tsx";
 
-interface Props {
-  children?: VNode[] | null;
-  layout?: {
-    gap?: {
-      /** @default 4 */
-      mobile?: "1" | "2" | "4" | "8" | "12" | "16";
-      /** @default 8 */
-      desktop?: "1" | "2" | "4" | "8" | "12" | "16";
-    };
-    direction?: {
-      /** @default col */
-      mobile?: "row" | "col";
-      /** @default row */
-      desktop?: "row" | "col";
-    };
-    justify?: {
-      /** @default center */
-      mobile?: "center" | "start" | "end";
-      /** @default center */
-      desktop?: "center" | "start" | "end";
-    };
-    wrap?: {
-      /** @default wrap */
-      mobile?: "wrap" | "nowrap" | "wrap-reverse";
-      /** @default wrap */
-      desktop?: "wrap" | "nowrap" | "wrap-reverse";
-    };
+/**
+ * @title Flex
+ */
+export interface Props {
+  children?: ComponentChildren | null;
+  sectionChildrens?: Section[];
+  gap?: {
+    /** @default 2 */
+    mobile?: "1" | "2" | "4" | "8" | "12" | "16";
+    /** @default 4 */
+    desktop?: "1" | "2" | "4" | "8" | "12" | "16";
+  };
+  direction?: {
+    /** @default Row */
+    mobile?: "Row" | "Col";
+    /** @default Row */
+    desktop?: "Row" | "Col";
+  };
+  align?: {
+    /** @default Center */
+    mobile?: "Center" | "Start" | "End" | "Baseline" | "Stretch";
+    /** @default Center */
+    desktop?: "Center" | "Start" | "End" | "Baseline" | "Stretch";
+  };
+  justify?: {
+    /** @default Center */
+    mobile?: "Center" | "Start" | "End" | "Between";
+    /** @default Center */
+    desktop?: "Center" | "Start" | "End" | "Between";
+  };
+  wrap?: {
+    /** @default Wrap */
+    mobile?: "Wrap" | "Nowrap" | "Wrap-reverse";
+    /** @default wrap */
+    desktop?: "Wrap" | "Nowrap" | "Wrap-reverse";
   };
 }
 
-function Flex({ layout, children }: Props) {
-  const items = !context.isDeploy && !children?.length
-    ? new Array(4).fill(0).map(() => <ItemPreview />)
-    : children;
-
+function Section(
+  { gap, direction, align, justify, wrap, children, sectionChildrens }: Props,
+) {
   return (
     <div
       class={clx(
-        "flex",
-        flex.gap.mobile[layout?.gap?.mobile ?? "4"],
-        flex.gap.desktop[layout?.gap?.desktop ?? "8"],
-        flex.direction.mobile[layout?.direction?.mobile ?? "col"],
-        flex.direction.desktop[layout?.direction?.desktop ?? "row"],
-        flex.justify.mobile[layout?.justify?.mobile ?? "center"],
-        flex.justify.desktop[layout?.justify?.desktop ?? "center"],
-        flex.wrap.mobile[layout?.wrap?.mobile ?? "wrap"],
-        flex.wrap.desktop[layout?.wrap?.desktop ?? "wrap"],
+        "w-full flex",
+        gap?.mobile && flex.gap.mobile[gap.mobile],
+        gap?.desktop && flex.gap.desktop[gap.desktop],
+        direction?.mobile &&
+          flex.direction.mobile[direction.mobile],
+        direction?.desktop &&
+          flex.direction.desktop[direction.desktop],
+        align?.mobile && flex.align.mobile[align.mobile],
+        align?.desktop &&
+          flex.align.desktop[align.desktop],
+        justify?.mobile && flex.justify.mobile[justify.mobile],
+        justify?.desktop &&
+          flex.justify.desktop[justify.desktop],
+        wrap?.mobile && flex.wrap.mobile[wrap.mobile],
+        wrap?.desktop && flex.wrap.desktop[wrap.desktop],
       )}
     >
-      {items}
+      {children}
+      {sectionChildrens &&
+        sectionChildrens.map((section) => (
+          <section.Component {...section.props} />
+        ))}
     </div>
   );
 }
 
-const ItemPreview = () => (
-  <div class="card w-48 h-48 bg-base-100 shadow">
-    <div class="card-body items-center justify-center text-base-300 text-sm">
-      flex
-    </div>
-  </div>
-);
-
-export default Flex;
+export default Section;

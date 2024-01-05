@@ -39,6 +39,16 @@ export interface Props {
    */
   preload?: boolean;
   /**
+   * @title Show arrows
+   * @description show arrows to navigate through the images
+   */
+  arrows?: boolean;
+  /**
+   * @title Show dots
+   * @description show dots to navigate through the images
+   */
+  dots?: boolean;
+  /**
    * @title Autoplay interval
    * @description time (in seconds) to start the carousel autoplay
    */
@@ -50,41 +60,41 @@ const DEFAULT_PROPS = {
     {
       alt: "/feminino",
       action: {
-        href: "https://www.deco.cx/",
-        label: "deco.cx",
-        title: "Demo Store",
-        subTitle: "Visit our site and start building now:",
+        title: "New collection",
+        subTitle: "Main title",
+        label: "Explore collection",
+        href: "/",
       },
       mobile:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/24278f9e-412d-4a8a-b2d3-57353bb1b368",
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
       desktop:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/afa2c07c-74f4-496d-8647-5cc58f48117b",
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5",
     },
     {
       alt: "/feminino",
       action: {
-        href: "https://www.deco.cx/",
-        label: "deco.cx",
-        title: "Demo Store",
-        subTitle: "Visit our site and start building now:",
+        title: "New collection",
+        subTitle: "Main title",
+        label: "Explore collection",
+        href: "/",
       },
       mobile:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/eeaa624c-a3e1-45e8-a6fe-034233cfbcd0",
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
       desktop:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/7949d031-9a79-4639-b85e-62fd90af85a9",
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5",
     },
     {
       alt: "/feminino",
       action: {
-        href: "https://www.deco.cx/",
-        label: "deco.cx",
-        title: "Demo Store",
-        subTitle: "Visit our site and start building now:",
+        title: "New collection",
+        subTitle: "Main title",
+        label: "Explore collection",
+        href: "/",
       },
       mobile:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/ae89571c-4a7c-44bf-9aeb-a341fd049d19",
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
       desktop:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/7ec121e4-5cfe-4b7b-b942-d1ed4493803d",
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5",
     },
   ],
   preload: true,
@@ -105,15 +115,31 @@ function BannerItem(
       id={id}
       href={action?.href ?? "#"}
       aria-label={action?.label}
-      class="relative h-[600px] overflow-y-hidden w-full"
+      class="relative md:h-[600px] overflow-y-hidden w-full"
     >
-      <Picture preload={lcp}>
+      {action && (
+        <div class="absolute top-0 md:bottom-0 bottom-1/2 left-0 right-0 sm:right-auto max-w-[407px] flex flex-col justify-end gap-4 px-8 py-12">
+          <span class="text-2xl font-light text-base-100">
+            {action.title}
+          </span>
+          <span class="font-normal text-4xl text-base-100">
+            {action.subTitle}
+          </span>
+          <Button
+            class="bg-base-100 text-sm font-light py-4 px-6 w-fit"
+            aria-label={action.label}
+          >
+            {action.label}
+          </Button>
+        </div>
+      )}
+      <Picture preload={lcp} class="md:max-h-[600px] h-full">
         <Source
           media="(max-width: 767px)"
           fetchPriority={lcp ? "high" : "auto"}
           src={mobile}
-          width={360}
-          height={600}
+          width={430}
+          height={590}
         />
         <Source
           media="(min-width: 768px)"
@@ -129,17 +155,6 @@ function BannerItem(
           alt={alt}
         />
       </Picture>
-      {action && (
-        <div class="absolute h-min top-0 bottom-0 m-auto left-0 right-0 sm:right-auto sm:left-[12%] max-h-min max-w-[400px] flex flex-col gap-4 p-4 rounded glass">
-          <span class="text-6xl font-medium text-base-100">
-            {action.title}
-          </span>
-          <span class="font-medium text-xl text-base-100">
-            {action.subTitle}
-          </span>
-          <Button class="glass">{action.label}</Button>
-        </div>
-      )}
     </a>
   );
 }
@@ -158,7 +173,7 @@ function Dots({ images, interval = 0 }: Props) {
           `,
         }}
       />
-      <ul class="carousel justify-center col-span-full gap-4 z-10 row-start-4">
+      <ul class="carousel justify-center col-span-full gap-6 z-10 row-start-4">
         {images?.map((_, index) => (
           <li class="carousel-item">
             <Slider.Dot index={index}>
@@ -236,9 +251,9 @@ function BannerCarousel(props: Props) {
         })}
       </Slider>
 
-      <Buttons />
+      {props.arrows && <Buttons />}
 
-      <Dots images={images} interval={interval} />
+      {props.dots && <Dots images={images} interval={interval} />}
 
       <SliderJS rootId={id} interval={interval && interval * 1e3} infinite />
     </div>
