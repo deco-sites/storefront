@@ -1,8 +1,8 @@
-export interface Props {
+interface Props {
   title?: string;
   fontSize?: "Normal" | "Large";
   description?: string;
-  alignment?: "center" | "left";
+  alignment: "center" | "left";
   colorReverse?: boolean;
 }
 
@@ -35,11 +35,9 @@ function Header(props: Props) {
               (
                 <h2
                   class={`
-                  font-light leading-6 lg:leading-8
+                  leading-6 lg:leading-8
                   ${
-                    props.colorReverse
-                      ? "text-primary-content"
-                      : "text-base-content"
+                    props.colorReverse ? "text-primary-content" : "text-neutral"
                   }
                   ${props.fontSize === "Normal" ? "lg:text-xl" : "lg:text-2xl"}
                 `}
