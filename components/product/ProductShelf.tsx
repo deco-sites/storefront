@@ -22,7 +22,7 @@ export interface Props {
       desktop?: 1 | 2 | 3 | 4 | 5;
     };
     headerAlignment?: "center" | "left";
-    headerfontSize?: "Normal" | "Large";
+    headerfontSize?: "Normal" | "Large" | "Small";
     showArrows?: boolean;
   };
   cardLayout?: cardLayout;
@@ -57,7 +57,7 @@ function ProductShelf({
     5: "w-1/5",
   };
   return (
-    <div class="w-full container py-8 flex flex-col gap-12 lg:gap-16 lg:py-10">
+    <div class="w-full container py-8 flex flex-col gap-6 lg:py-10">
       <Header
         title={title || ""}
         description={description || ""}
@@ -68,7 +68,7 @@ function ProductShelf({
       <div
         id={id}
         class={`grid ${
-          layout?.showArrows ? "md:grid-cols-[48px_1fr_48px]" : ""
+          layout?.showArrows ? "grid-cols-[48px_1fr_48px]" : ""
         } px-0 md:px-5 container`}
       >
         <Slider class="carousel carousel-center sm:carousel-end sm:gap-1 row-start-2 row-end-5">
@@ -92,13 +92,13 @@ function ProductShelf({
 
         {layout?.showArrows && (
           <>
-            <div class="hidden relative md:block z-10 col-start-1 row-start-3">
-              <Slider.PrevButton class="btn btn-circle btn-outline absolute bg-base-100">
-                <Icon size={24} id="ChevronLeft" strokeWidth={3} />
+            <div class="relative block z-10 col-start-1 row-start-3">
+              <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
+                <Icon size={24} id="ChevronLeft" strokeWidth={3} class="w-5" />
               </Slider.PrevButton>
             </div>
-            <div class="hidden relative md:block z-10 col-start-3 row-start-3">
-              <Slider.NextButton class="btn btn-circle btn-outline absolute  bg-base-100">
+            <div class="relative block z-10 col-start-3 row-start-3">
+              <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center">
                 <Icon size={24} id="ChevronRight" strokeWidth={3} />
               </Slider.NextButton>
             </div>

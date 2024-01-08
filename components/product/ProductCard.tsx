@@ -24,6 +24,7 @@ export interface Layout {
     productName?: boolean;
     productDescription?: boolean;
     allPrices?: boolean;
+    discount?: boolean;
     installments?: boolean;
     skuSelector?: boolean;
     cta?: boolean;
@@ -171,14 +172,16 @@ function ProductCard(
             )}
           </div>
           {/* Discount % */}
-          <div class="text-sm bg-base-100 p-[10px]">
-            <span class="text-base-content font-bold">
-              {listPrice && price
-                ? `${Math.round((listPrice - price) / listPrice * 100)}% `
-                : ""}
-            </span>
-            OFF
-          </div>
+          {!l?.hide?.discount && (
+            <div class="text-sm bg-base-100 p-[10px]">
+              <span class="text-base-content font-bold">
+                {listPrice && price
+                  ? `${Math.round((listPrice - price) / listPrice * 100)}% `
+                  : ""}
+              </span>
+              OFF
+            </div>
+          )}
         </div>
 
         {/* Product Images */}
