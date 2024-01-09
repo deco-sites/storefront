@@ -158,13 +158,11 @@ function ProductCard(
           `}
         >
           <div
-            class={`${
-              l?.onMouseOver?.showFavoriteIcon
-                ? "lg:hidden lg:group-hover:block"
-                : "lg:hidden"
+            class={`${l?.hide?.favoriteIcon ? "hidden" : "block"} ${
+              l?.onMouseOver?.showFavoriteIcon ? "lg:group-hover:block" : ""
             }`}
           >
-            {l?.hide?.favoriteIcon && platform === "vtex" ? "" : (
+            {platform === "vtex" && (
               <WishlistButton
                 productGroupID={productGroupID}
                 productID={productID}

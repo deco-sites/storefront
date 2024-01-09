@@ -3,23 +3,23 @@ import { clx } from "../../sdk/clx.ts";
 import { grid } from "../../constants.tsx";
 
 interface Props {
-  children: Section;
+  children?: Section;
   layout?: {
     rowStart?: {
-      mobile?: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "auto";
-      desktop?: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "auto";
+      mobile?: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "Auto";
+      desktop?: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "Auto";
     };
     rowSpan?: {
-      mobile?: "1" | "2" | "3" | "4" | "5" | "6" | "full";
-      desktop?: "1" | "2" | "3" | "4" | "5" | "6" | "full";
+      mobile?: "1" | "2" | "3" | "4" | "5" | "6" | "Full";
+      desktop?: "1" | "2" | "3" | "4" | "5" | "6" | "Full";
     };
     colStart?: {
-      mobile?: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "auto";
-      desktop?: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "auto";
+      mobile?: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "Auto";
+      desktop?: "1" | "2" | "3" | "4" | "5" | "6" | "7" | "Auto";
     };
     colSpan?: {
-      mobile?: "1" | "2" | "3" | "4" | "5" | "6" | "full";
-      desktop?: "1" | "2" | "3" | "4" | "5" | "6" | "full";
+      mobile?: "1" | "2" | "3" | "4" | "5" | "6" | "Full";
+      desktop?: "1" | "2" | "3" | "4" | "5" | "6" | "Full";
     };
   };
 }
@@ -44,7 +44,7 @@ function GridItem({ children, layout }: Props) {
           grid.colSpan.desktop[layout.colSpan.desktop],
       )}
     >
-      <children.Component {...children.props} />
+      {children && <children.Component {...children.props} />}
     </div>
   );
 }

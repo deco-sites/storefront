@@ -9,8 +9,8 @@ interface Props {
 const fontSizeClasses = {
   "Small": "lg:text-2xl",
   "Normal": "lg:text-3xl",
-  "Large": "lg:text-4xl"
-}
+  "Large": "lg:text-4xl",
+};
 
 function Header(props: Props) {
   return (
