@@ -1,10 +1,16 @@
-export interface Props {
+interface Props {
   title?: string;
-  fontSize?: "Normal" | "Large";
+  fontSize?: "Small" | "Normal" | "Large";
   description?: string;
-  alignment?: "center" | "left";
+  alignment: "center" | "left";
   colorReverse?: boolean;
 }
+
+const fontSizeClasses = {
+  "Small": "lg:text-2xl",
+  "Normal": "lg:text-3xl",
+  "Large": "lg:text-4xl",
+};
 
 function Header(props: Props) {
   return (
@@ -19,13 +25,13 @@ function Header(props: Props) {
             {props.title &&
               (
                 <h1
-                  class={`text-4xl font-light leading-8 lg:leading-10
+                  class={`text-2xl font-light leading-8 lg:leading-10
                   ${
                     props.colorReverse
                       ? "text-primary-content"
                       : "text-base-content"
                   }
-                  ${props.fontSize === "Normal" ? "lg:text-3xl" : "lg:text-4xl"}
+                  ${fontSizeClasses[props.fontSize || "Normal"]}
                 `}
                 >
                   {props.title}
@@ -35,13 +41,11 @@ function Header(props: Props) {
               (
                 <h2
                   class={`
-                  font-light leading-6 lg:leading-8
+                  leading-6 lg:leading-8
                   ${
-                    props.colorReverse
-                      ? "text-primary-content"
-                      : "text-base-content"
+                    props.colorReverse ? "text-primary-content" : "text-neutral"
                   }
-                  ${props.fontSize === "Normal" ? "lg:text-xl" : "lg:text-2xl"}
+                  ${fontSizeClasses[props.fontSize || "Normal"]}
                 `}
                 >
                   {props.description}
