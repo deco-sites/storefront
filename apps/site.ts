@@ -6,9 +6,11 @@ import { color as wake } from "apps/wake/mod.ts";
 import { color as linx } from "apps/linx/mod.ts";
 import { color as nuvemshop } from "apps/nuvemshop/mod.ts";
 import { Section } from "deco/blocks/section.ts";
-import { App } from "deco/mod.ts";
+import { App, FnContext } from "deco/mod.ts";
 import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
+
+export type AppContext = FnContext<Props, Manifest>;
 
 export type Props = {
   /**
@@ -18,6 +20,14 @@ export type Props = {
    */
   platform: Platform;
   theme?: Section;
+  shopify_custom?: {
+    /**
+     * @description Shopify store name.
+     */
+    storeName: string;
+    /** @description Disable password protection on the store */
+    storefrontDigestCookie?: string;
+  };
 } & CommerceProps;
 
 export type Platform =
