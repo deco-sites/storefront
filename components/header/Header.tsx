@@ -20,6 +20,7 @@ export interface Buttons {
   hideCartButton?: boolean;
 }
 
+
 export interface Props {
   alerts?: string[];
 
@@ -35,6 +36,8 @@ export interface Props {
   /** @title Logo */
   logo?: Logo;
 
+  logoPosition?: "left" | "center";
+
   buttons?: Buttons;
 }
 
@@ -43,6 +46,7 @@ function Header({
   searchbar,
   navItems,
   logo,
+  logoPosition,
   buttons,
 }: Props) {
   const platform = usePlatform();
@@ -62,6 +66,7 @@ function Header({
               items={items}
               searchbar={searchbar && { ...searchbar, platform }}
               logo={logo}
+              logoPosition={logoPosition}
               buttons={buttons}
             />
           </div>
