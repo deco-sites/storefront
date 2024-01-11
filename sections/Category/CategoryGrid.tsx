@@ -76,7 +76,7 @@ function CategoryGrid(props: Props) {
   return (
     <div
       id={id}
-      class="max-w-[1440px] mx-auto mt-16"
+      class="container mt-16"
     >
       <Header
         title={header.title}
@@ -105,6 +105,7 @@ function CategoryGrid(props: Props) {
                 (
                   <figure>
                     <Image
+                      class="w-full"
                       src={image}
                       alt={label}
                       width={720}
