@@ -3,7 +3,7 @@ import SliderJS from "$store/islands/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
 
 export interface Props {
-  alerts: string[];
+  alerts?: string[];
   /**
    * @title Autoplay interval
    * @description time (in seconds) to start the carousel autoplay

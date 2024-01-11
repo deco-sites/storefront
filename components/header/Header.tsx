@@ -21,7 +21,7 @@ export interface Buttons {
 }
 
 export interface Props {
-  alerts: string[];
+  alerts?: string[];
 
   /** @title Search Bar */
   searchbar?: Omit<SearchbarProps, "platform">;
@@ -35,7 +35,7 @@ export interface Props {
   /** @title Logo */
   logo?: Logo;
 
-  buttons: Buttons;
+  buttons?: Buttons;
 }
 
 function Header({
@@ -57,7 +57,7 @@ function Header({
           platform={platform}
         >
           <div class="bg-base-100 fixed w-full z-50">
-            {alerts.length > 0 && <Alert alerts={alerts} />}
+            {alerts && alerts.length > 0 && <Alert alerts={alerts} />}
             <Navbar
               items={items}
               searchbar={searchbar && { ...searchbar, platform }}
