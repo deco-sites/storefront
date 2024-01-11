@@ -19,7 +19,7 @@ function Navbar({ items, searchbar, logo, buttons }: {
   items: SiteNavigationElement[];
   searchbar?: SearchbarProps;
   logo?: Logo;
-  buttons: Buttons;
+  buttons?: Buttons;
 }) {
   const platform = usePlatform();
 
@@ -28,21 +28,20 @@ function Navbar({ items, searchbar, logo, buttons }: {
       {/* Mobile Version */}
       <div
         style={{ height: navbarHeight }}
-        class="md:hidden flex flex-row justify-between items-center border-b border-base-200 w-full pl-2 pr-6 gap-2"
+        class="lg:hidden flex flex-row justify-between items-center border-b border-base-200 w-full p-6 gap-2"
       >
         <MenuButton />
-
         {logo && (
           <a
             href="/"
-            class="flex-grow inline-flex items-center"
+            class="flex-grow inline-flex items-center justify-center"
             style={{ minHeight: navbarHeight }}
             aria-label="Store logo"
           >
             <Image
               src={logo.src}
               alt={logo.alt}
-              width={logo.width || 126}
+              width={logo.width || 100}
               height={logo.height || 16}
             />
           </a>
@@ -52,61 +51,77 @@ function Navbar({ items, searchbar, logo, buttons }: {
           <SearchButton />
           {platform === "vtex" && <CartButtonVTEX />}
           {platform === "vnda" && <CartButtonVDNA />}
+          {platform === "wake" && <CartButtonWake />}
+          {platform === "linx" && <CartButtonLinx />}
+          {platform === "shopify" && <CartButtonShopify />}
+          {platform === "nuvemshop" && <CartButtonNuvemshop />}
         </div>
       </div>
 
       {/* Desktop Version */}
-      <div class="hidden md:flex flex-row justify-between items-center border-b border-base-200 w-full pl-2 pr-6">
-        <div class="flex-none w-44">
+      <div class="hidden lg:grid lg:grid-cols-3 items-center border-b border-base-200 w-full px-6">
+        <div class="flex items-center gap-6 col-span-1">
+          <MenuButton />
+          {items.map((item) => <NavItem item={item} />)}
+        </div>
+        <div class="flex justify-center">
           {logo && (
             <a
               href="/"
               aria-label="Store logo"
-              class="block px-4 py-3 w-[160px]"
+              class="block"
             >
               <Image
                 src={logo.src}
                 alt={logo.alt}
-                width={logo.width || 126}
+                width={logo.width || 100}
                 height={logo.height || 16}
               />
             </a>
           )}
         </div>
-        <div class="flex-auto flex justify-center">
-          {items.map((item) => <NavItem item={item} />)}
-        </div>
-        <div class="flex-none w-44 flex items-center justify-end gap-2">
-          {!buttons?.hideSearchButton && <SearchButton />}
+        <div class="flex-none flex items-center justify-end gap-6 col-span-1">
+          {!buttons?.hideSearchButton && (
+            <div class="flex items-center text-xs font-thin gap-2">
+              <SearchButton />SEARCH
+            </div>
+          )}
 
           <Searchbar searchbar={searchbar} />
           {!buttons?.hideAccountButton && (
-            <a
-              class="btn btn-circle btn-sm btn-ghost"
-              href="/account"
-              aria-label="Account"
-            >
-              <Icon id="User" size={24} strokeWidth={0.4} />
-            </a>
+            <div class="flex items-center text-xs font-thin gap-2">
+              <a
+                class="btn btn-circle btn-sm btn-ghost"
+                href="/account"
+                aria-label="Account"
+              >
+                <Icon id="User" size={24} strokeWidth={0.4} />
+              </a>
+              ACCOUNT
+            </div>
           )}
           {!buttons?.hideWishlistButton && (
-            <a
-              class="btn btn-circle btn-sm btn-ghost"
-              href="/wishlist"
-              aria-label="Wishlist"
-            >
-              <Icon id="Heart" size={24} strokeWidth={0.4} />
-            </a>
+            <div class="flex items-center text-xs font-thin gap-2">
+              <a
+                class="btn btn-circle btn-sm btn-ghost"
+                href="/wishlist"
+                aria-label="Wishlist"
+              >
+                <Icon id="Heart" size={24} strokeWidth={0.4} />
+              </a>
+              WISHLIST
+            </div>
           )}
           {!buttons?.hideCartButton && (
-            <>
+            <div class="flex items-center text-xs font-thin gap-2">
               {platform === "vtex" && <CartButtonVTEX />}
               {platform === "vnda" && <CartButtonVDNA />}
               {platform === "wake" && <CartButtonWake />}
               {platform === "linx" && <CartButtonLinx />}
               {platform === "shopify" && <CartButtonShopify />}
               {platform === "nuvemshop" && <CartButtonNuvemshop />}
-            </>
+              CART
+            </div>
           )}
         </div>
       </div>
