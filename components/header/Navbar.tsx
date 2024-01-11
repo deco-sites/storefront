@@ -15,11 +15,12 @@ import NavItem from "./NavItem.tsx";
 import { navbarHeight } from "./constants.ts";
 import { Buttons, Logo } from "$store/components/header/Header.tsx";
 
-function Navbar({ items, searchbar, logo, buttons }: {
+function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
   items: SiteNavigationElement[];
   searchbar?: SearchbarProps;
   logo?: Logo;
   buttons?: Buttons;
+  logoPosition?: "left" | "center";
 }) {
   const platform = usePlatform();
 
@@ -60,11 +61,10 @@ function Navbar({ items, searchbar, logo, buttons }: {
 
       {/* Desktop Version */}
       <div class="hidden lg:grid lg:grid-cols-3 items-center border-b border-base-200 w-full px-6">
-        <div class="flex items-center gap-6 col-span-1">
-          <MenuButton />
+        <div class={`flex gap-6 col-span-1 ${logoPosition === "left" ? "justify-center" : "justify-start" }`}>
           {items.map((item) => <NavItem item={item} />)}
         </div>
-        <div class="flex justify-center">
+        <div class={`flex ${logoPosition === "left" ? "justify-start -order-1" : "justify-center"}`}>
           {logo && (
             <a
               href="/"
@@ -75,52 +75,55 @@ function Navbar({ items, searchbar, logo, buttons }: {
                 src={logo.src}
                 alt={logo.alt}
                 width={logo.width || 100}
-                height={logo.height || 16}
+                height={logo.height || 13}
               />
             </a>
           )}
         </div>
         <div class="flex-none flex items-center justify-end gap-6 col-span-1">
           {!buttons?.hideSearchButton && (
-            <div class="flex items-center text-xs font-thin gap-2">
-              <SearchButton />SEARCH
+            <div class="flex items-center text-xs font-thin gap-1">
+              <SearchButton/>SEARCH
             </div>
           )}
 
           <Searchbar searchbar={searchbar} />
           {!buttons?.hideAccountButton && (
-            <div class="flex items-center text-xs font-thin gap-2">
-              <a
-                class="btn btn-circle btn-sm btn-ghost"
-                href="/account"
-                aria-label="Account"
+            <a
+              class="flex items-center text-xs font-thin"
+              href="/account"
+              aria-label="Account"
+            >
+              <div
+                class="flex btn btn-circle btn-sm btn-ghost gap-1"
               >
-                <Icon id="User" size={24} strokeWidth={0.4} />
-              </a>
+                <Icon id="User" size={20} strokeWidth={0.4} />
+              </div>
               ACCOUNT
-            </div>
+            </a>
           )}
           {!buttons?.hideWishlistButton && (
-            <div class="flex items-center text-xs font-thin gap-2">
-              <a
-                class="btn btn-circle btn-sm btn-ghost"
-                href="/wishlist"
-                aria-label="Wishlist"
+            <a 
+              class="flex items-center text-xs font-thin"
+              href="/wishlist"
+              aria-label="Wishlist"
+            >
+              <div
+                class="flex btn btn-circle btn-sm btn-ghost gap-1"
               >
                 <Icon id="Heart" size={24} strokeWidth={0.4} />
-              </a>
+              </div>
               WISHLIST
-            </div>
+            </a>
           )}
           {!buttons?.hideCartButton && (
-            <div class="flex items-center text-xs font-thin gap-2">
+            <div class="flex items-center text-xs font-thin">
               {platform === "vtex" && <CartButtonVTEX />}
               {platform === "vnda" && <CartButtonVDNA />}
               {platform === "wake" && <CartButtonWake />}
               {platform === "linx" && <CartButtonLinx />}
               {platform === "shopify" && <CartButtonShopify />}
               {platform === "nuvemshop" && <CartButtonNuvemshop />}
-              CART
             </div>
           )}
         </div>
