@@ -20,7 +20,6 @@ export interface Buttons {
   hideCartButton?: boolean;
 }
 
-
 export interface Props {
   alerts?: string[];
 
