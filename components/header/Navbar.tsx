@@ -43,7 +43,7 @@ function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
               src={logo.src}
               alt={logo.alt}
               width={logo.width || 100}
-              height={logo.height || 16}
+              height={logo.height || 13}
             />
           </a>
         )}
