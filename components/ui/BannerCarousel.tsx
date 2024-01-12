@@ -115,7 +115,7 @@ function BannerItem(
       id={id}
       href={action?.href ?? "#"}
       aria-label={action?.label}
-      class="relative md:h-[600px] overflow-y-hidden w-full"
+      class="relative overflow-y-hidden w-full"
     >
       {action && (
         <div class="absolute top-0 md:bottom-0 bottom-1/2 left-0 right-0 sm:right-auto max-w-[407px] flex flex-col justify-end gap-4 px-8 py-12">
@@ -133,7 +133,7 @@ function BannerItem(
           </Button>
         </div>
       )}
-      <Picture preload={lcp} class="md:max-h-[600px] h-full">
+      <Picture preload={lcp}>
         <Source
           media="(max-width: 767px)"
           fetchPriority={lcp ? "high" : "auto"}
@@ -225,7 +225,7 @@ function BannerCarousel(props: Props) {
   return (
     <div
       id={id}
-      class="grid grid-cols-[48px_1fr_48px] sm:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px]"
+      class="grid grid-cols-[48px_1fr_48px] sm:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min min-h-[660px]"
     >
       <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
         {images?.map((image, index) => {
