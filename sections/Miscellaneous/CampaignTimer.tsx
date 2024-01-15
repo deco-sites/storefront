@@ -4,7 +4,7 @@ import type { HTMLWidget } from "apps/admin/widgets.ts";
 export interface Props {
   /**
    * @title Text
-   * @default Time left for a campaign to end wth a link
+   * @default Time left for a campaign to end with a link
    */
   text?: HTMLWidget;
 
@@ -15,31 +15,10 @@ export interface Props {
   expiresAt?: string;
 
   labels?: {
-    /**
-     * @title Text to show when expired
-     */
-    expired?: string;
     days?: string;
     hours?: string;
     minutes?: string;
     seconds?: string;
-  };
-
-  link?: {
-    /**
-     * @title Link Text
-     * @default button
-     */
-    text: string;
-    /**
-     * @title Link href
-     * @default #
-     */
-    href: string;
-  };
-
-  layout?: {
-    textPosition?: "Before counter" | "After counter";
   };
 }
 
@@ -99,15 +78,12 @@ const snippet = (expiresAt: string, rootId: string) => {
 function CampaignTimer({
   expiresAt = `${new Date()}`,
   labels = {
-    expired: "",
     days: "days",
     hours: "hours",
     minutes: "minutes",
     seconds: "seconds",
   },
   text = "",
-  link,
-  layout,
 }: Props) {
   const id = useId();
   interface TimeComponentProps {
@@ -134,21 +110,13 @@ function CampaignTimer({
 
   return (
     <>
-      <div class="bg-accent-content">
+      <div>
         <div class="container mx-auto flex flex-col lg:flex-row lg:items-center lg:justify-center lg:gap-16 py-16 sm:px-10 gap-4">
-          {layout?.textPosition !== "After counter" &&
-            (
-              <div
-                class="text-sm text-center lg:text-xl lg:text-left lg:max-w-lg"
-                dangerouslySetInnerHTML={{ __html: text }}
-              >
-              </div>
-            )}
           <div
             id={`${id}::expired`}
             class="hidden text-sm text-center lg:text-xl lg:text-left lg:max-w-lg"
+            dangerouslySetInnerHTML={{ __html: text || "Expired!" }}
           >
-            {labels?.expired || "Expired!"}
           </div>
           <div class="flex flex-wrap gap-8 lg:gap-16 items-center justify-center lg:justify-normal">
             <div id={`${id}::counter`}>
@@ -159,33 +127,7 @@ function CampaignTimer({
                 <TimeComponent id={id} label={labels?.seconds} time="seconds" />
               </div>
             </div>
-            <div
-              class={`hidden text-sm text-center lg:text-xl lg:text-left lg:max-w-lg ${
-                layout?.textPosition === "After counter"
-                  ? "lg:block"
-                  : "lg:hidden"
-              }`}
-              dangerouslySetInnerHTML={{ __html: text }}
-            >
-            </div>
-            {link && (
-              <a
-                class="btn"
-                aria-label={link?.text}
-                href={link?.href}
-              >
-                {link?.text}
-              </a>
-            )}
           </div>
-          {layout?.textPosition === "After counter" &&
-            (
-              <div
-                class="text-sm text-center lg:text-xl lg:text-left lg:max-w-lg"
-                dangerouslySetInnerHTML={{ __html: text }}
-              >
-              </div>
-            )}
         </div>
       </div>
       <script
