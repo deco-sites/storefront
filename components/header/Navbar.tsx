@@ -29,7 +29,7 @@ function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
       {/* Mobile Version */}
       <div
         style={{ height: navbarHeight }}
-        class="lg:hidden flex flex-row justify-between items-center border-b border-base-200 w-full p-6 gap-2"
+        class="lg:hidden grid grid-cols-3 justify-between items-center border-b border-base-200 w-full px-6 pb-6 gap-2"
       >
         <MenuButton />
         {logo && (
@@ -48,7 +48,7 @@ function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
           </a>
         )}
 
-        <div class="flex gap-1">
+        <div class="flex justify-end gap-1">
           <SearchButton />
           {platform === "vtex" && <CartButtonVTEX />}
           {platform === "vnda" && <CartButtonVDNA />}
