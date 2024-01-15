@@ -10,7 +10,7 @@ export default function MenuButton() {
       class="btn btn-circle md:btn-sm btn-xs btn-ghost"
       aria-label="open menu"
       onClick={() => {
-        displayMenu.value = true;
+        displayMenu.value = !displayMenu.value;
       }}
     >
       <Icon id="Bars3" size={20} strokeWidth={0.01} />
