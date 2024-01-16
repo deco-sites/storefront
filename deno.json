@@ -3,7 +3,7 @@
     "$store/": "./",
     "deco/": "https://denopkg.com/deco-cx/deco@1.52.0/",
     "apps/": "https://denopkg.com/deco-cx/apps@0.30.4/",
-    "$fresh/": "https://deno.land/x/fresh@1.6.1/",
+    "$fresh/": "https://deno.land/x/fresh@1.6.3/",
     "preact": "https://esm.sh/preact@10.18.1",
     "preact/": "https://esm.sh/preact@10.18.1/",
     "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.2.2",
