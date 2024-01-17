@@ -22,10 +22,7 @@ export default defineApp(async (_req, ctx) => {
         <meta name="view-transition" content="same-origin" />
 
         {/* Tailwind v3 CSS file */}
-        <link
-          href={asset(`/styles.css?revision=${revision}`)}
-          rel="stylesheet"
-        />
+        <link href={asset(`/styles/${revision}/main.css`)} rel="stylesheet" />
 
         {/* Web Manifest */}
         <link rel="manifest" href={asset("/site.webmanifest")} />
