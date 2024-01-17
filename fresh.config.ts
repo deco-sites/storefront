@@ -1,5 +1,5 @@
 import { defineConfig } from "$fresh/server.ts";
-import plugins from "https://denopkg.com/deco-sites/std@30f5806aee40ffc079c5718c6db6dd94daa4b9ca/plugins/mod.ts";
+import plugins from "https://denopkg.com/deco-sites/std@4d254969c1e70303115095d5cd7d3912071b9286/plugins/mod.ts";
 import manifest from "./manifest.gen.ts";
 import tailwind from "./tailwind.config.ts";
 
