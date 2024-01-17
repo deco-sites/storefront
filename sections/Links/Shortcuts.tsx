@@ -12,7 +12,36 @@ export interface Props {
   onHover?: "Show label" | "Show tooltip";
 }
 
-export default function Shortcuts({ shortcuts, onHover }: Props) {
+export default function Shortcuts({
+  shortcuts = [
+    {
+      label: "WhatsApp",
+      icon: "WhatsApp",
+      link: "/",
+    },
+    {
+      label: "Chat",
+      icon: "Message",
+      link: "/",
+    },
+    {
+      label: "Measurements",
+      icon: "Ruler",
+      link: "/",
+    },
+    {
+      label: "Shipping",
+      icon: "Truck",
+      link: "/",
+    },
+    {
+      label: "Returns",
+      icon: "ArrowsPointingOut",
+      link: "/",
+    },
+  ],
+  onHover = "Show label",
+}: Props) {
   return (
     <div class="group fixed flex flex-col top-1/2 right-0 z-20">
       {shortcuts?.map((shortcut) => {
