@@ -1,5 +1,5 @@
 import { defineConfig } from "$fresh/server.ts";
-import plugins from "https://denopkg.com/deco-sites/std@7a4ceac0bdf413c6cf8775e62e8ad73f9041ff94/plugins/mod.ts";
+import plugins from "https://denopkg.com/deco-sites/std@ffc12592249d06b06867ec19a9f4fa2226a5236f/plugins/mod.ts";
 import manifest from "./manifest.gen.ts";
 
 export default defineConfig({
