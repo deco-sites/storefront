@@ -11,7 +11,13 @@ export interface Props {
 }
 
 export default function Slide({
-  content,
+  content = [
+    {
+      label: "Label",
+      repeat: 30,
+      icon: "ChevronRight",
+    },
+  ],
 }: Props) {
   const slideContent = content?.map(({ label, icon, repeat = 1 }) => {
     return (
