@@ -1,30 +1,30 @@
-import { useComputed, useSignal } from "@preact/signals";
+import { useSignal } from "@preact/signals";
 import Icon from "$store/components/ui/Icon.tsx";
 import Button from "$store/components/ui/Button.tsx";
-import { useWishlist } from "apps/vtex/hooks/useWishlist.ts";
-import { useUser } from "apps/vtex/hooks/useUser.ts";
 import { sendEvent } from "$store/sdk/analytics.tsx";
 
 export interface Props {
   productID: string;
   productGroupID?: string;
   variant?: "icon" | "full";
+  removeItem: () => Promise<void>;
+  addItem: () => Promise<void>;
+  loading: boolean;
+  inWishlist: boolean;
+  isUserLoggedIn: boolean;
 }
 
-function WishlistButton({
+function ButtonCommon({
   variant = "icon",
   productGroupID,
   productID,
+  loading,
+  inWishlist,
+  isUserLoggedIn,
+  removeItem,
+  addItem,
 }: Props) {
-  const { user } = useUser();
-  const { loading, addItem, removeItem, getItem } = useWishlist();
-  const listItem = useComputed(() =>
-    getItem({ sku: productID, productId: productGroupID })
-  );
   const fetching = useSignal(false);
-
-  const isUserLoggedIn = Boolean(user.value?.email);
-  const inWishlist = Boolean(listItem.value);
 
   return (
     <Button
@@ -43,7 +43,7 @@ function WishlistButton({
           return;
         }
 
-        if (loading.value) {
+        if (loading) {
           return;
         }
 
@@ -51,18 +51,20 @@ function WishlistButton({
           fetching.value = true;
 
           if (inWishlist) {
-            await removeItem({ id: listItem.value!.id }!);
+            await removeItem();
           } else if (productID && productGroupID) {
-            await addItem({ sku: productID, productId: productGroupID });
+            await addItem();
 
             sendEvent({
               name: "add_to_wishlist",
               params: {
-                items: [{
-                  item_id: productID,
-                  item_group_id: productGroupID,
-                  quantity: 1,
-                }],
+                items: [
+                  {
+                    item_id: productID,
+                    item_group_id: productGroupID,
+                    quantity: 1,
+                  },
+                ],
               },
             });
           }
@@ -82,4 +84,4 @@ function WishlistButton({
   );
 }
 
-export default WishlistButton;
+export default ButtonCommon;
