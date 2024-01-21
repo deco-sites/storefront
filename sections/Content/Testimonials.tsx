@@ -2,7 +2,6 @@ import Icon from "$store/components/ui/Icon.tsx";
 import Image from "apps/website/components/Image.tsx";
 import Header from "$store/components/ui/SectionHeader.tsx";
 import Slider from "$store/components/ui/Slider.tsx";
-import SliderJS from "../../islands-old/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
@@ -175,7 +174,7 @@ export default function Testimonials(
               </Slider.NextButton>
             </div>
           </>
-          <SliderJS rootId={id} />
+          <Slider.Script rootId={id} />
         </div>
       )}
     </div>

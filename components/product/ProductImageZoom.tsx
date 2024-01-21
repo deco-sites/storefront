@@ -2,7 +2,6 @@ import Button from "$store/components/ui/Button.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
 import Modal from "$store/components/ui/Modal.tsx";
 import Slider from "$store/components/ui/Slider.tsx";
-import SliderJS from "../../islands-old/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
 import { useSignal } from "@preact/signals";
 import type { ImageObject } from "apps/commerce/types.ts";
@@ -59,7 +58,7 @@ function ProductImageZoom({ images, width, height }: Props) {
               <Icon size={24} id="ChevronRight" strokeWidth={3} />
             </Slider.NextButton>
 
-            <SliderJS rootId={id} />
+            <Slider.Script rootId={id} />
           </div>
         </Modal>
       </div>

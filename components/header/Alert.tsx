@@ -1,5 +1,4 @@
 import Slider from "$store/components/ui/Slider.tsx";
-import SliderJS from "../../islands-old/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
 
 export interface Props {
@@ -26,7 +25,7 @@ function Alert({ alerts = [], interval = 5 }: Props) {
         ))}
       </Slider>
 
-      <SliderJS rootId={id} interval={interval && interval * 1e3} />
+      <Slider.Script rootId={id} interval={interval && interval * 1e3} />
     </div>
   );
 }
