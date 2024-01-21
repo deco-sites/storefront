@@ -4,45 +4,52 @@ import { useUI } from "$store/sdk/useUI.ts";
 import { AddToCartParams } from "apps/commerce/types.ts";
 import { useState } from "preact/hooks";
 
+
 export interface Props {
   /** @description: sku name */
   eventParams: AddToCartParams;
   onAddItem: () => Promise<void>;
+
+  [htmx: `hx-${string}`]: string
 }
 
-const useAddToCart = ({ eventParams, onAddItem }: Props) => {
-  const [loading, setLoading] = useState(false);
-  const { displayCart } = useUI();
+// const useAddToCart = ({ eventParams, onAddItem }: Props) => {
+//   const [loading, setLoading] = useState(false);
+//   const { displayCart } = useUI();
 
-  const onClick = async (e: MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+//   const onClick = async (e: MouseEvent) => {
+//     e.preventDefault();
+//     e.stopPropagation();
 
-    try {
-      setLoading(true);
+//     try {
+//       setLoading(true);
 
-      await onAddItem();
+//       await onAddItem();
 
-      sendEvent({
-        name: "add_to_cart",
-        params: eventParams,
-      });
+//       sendEvent({
+//         name: "add_to_cart",
+//         params: eventParams,
+//       });
 
-      displayCart.value = true;
-    } finally {
-      setLoading(false);
-    }
-  };
+//       displayCart.value = true;
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
 
-  return { onClick, loading, "data-deco": "add-to-cart" };
-};
+//   return { onClick, loading, "data-deco": "add-to-cart" };
+// };
 
 export default function AddToCartButton(props: Props) {
-  const btnProps = useAddToCart(props);
+  // const btnProps = useAddToCart(props);
 
   return (
-    <Button {...btnProps} class="btn-primary">
-      Adicionar à Sacola
+    <Button
+      class="btn-primary" // {...btnProps}
+      {...props}
+    >
+      <span class="htmx-indicator loading loading-spinner" />
+      <span>Adicionar à Sacola</span>
     </Button>
   );
 }

@@ -1,3 +1,4 @@
+import { useSection } from "deco/hooks/usePartialSection.ts";
 import Button from "../ui/Button.tsx";
 
 interface Props {
@@ -5,11 +6,14 @@ interface Props {
   disabled?: boolean;
   loading?: boolean;
   onChange?: (quantity: number) => void;
+  id: string;
 }
 
 const QUANTITY_MAX_VALUE = 100;
 
-function QuantitySelector({ onChange, quantity, disabled, loading }: Props) {
+function QuantitySelector(
+  { onChange, quantity, disabled, loading, id }: Props,
+) {
   const decrement = () => onChange?.(Math.max(0, quantity - 1));
 
   const increment = () =>
@@ -22,6 +26,20 @@ function QuantitySelector({ onChange, quantity, disabled, loading }: Props) {
         onClick={decrement}
         disabled={disabled}
         loading={loading}
+        hx-target="#minicart"
+        hx-post={useSection({
+          props: {
+            __resolveType: "deco-sites/storefront/sections/Cart/Minicart.tsx",
+            cart: {
+              __resolveType: "shopify/actions/cart/updateItems.ts",
+              lines: [{
+                id,
+                quantity: quantity - 1,
+              }],
+            },
+            platform: "shopify",
+          },
+        })}
       >
         -
       </Button>
@@ -43,6 +61,20 @@ function QuantitySelector({ onChange, quantity, disabled, loading }: Props) {
         onClick={increment}
         disabled={disabled}
         loading={loading}
+        hx-target="#minicart"
+        hx-post={useSection({
+          props: {
+            __resolveType: "deco-sites/storefront/sections/Cart/Minicart.tsx",
+            cart: {
+              __resolveType: "shopify/actions/cart/updateItems.ts",
+              lines: [{
+                id,
+                quantity: quantity + 1,
+              }],
+            },
+            platform: "shopify",
+          },
+        })}
       >
         +
       </Button>

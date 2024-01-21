@@ -1,29 +1,24 @@
-import { forwardRef } from "preact/compat";
+import { clx } from "$store/sdk/clx.ts";
 import type { JSX } from "preact";
 
-export type Props =
-  & Omit<JSX.IntrinsicElements["button"], "loading">
-  & {
-    loading?: boolean;
-  };
+export type Props = JSX.IntrinsicElements["button"];
 
-const Button = forwardRef<HTMLButtonElement, Props>(({
+const Button = ({
   type = "button",
   class: _class = "",
-  loading,
   disabled,
   children,
   ...props
-}, ref) => (
+}: Props) => (
   <button
-    {...props}
-    className={`btn no-animation ${_class}`}
-    disabled={disabled || loading}
+    hx-disabled-elt="this"
+    class={clx("btn no-animation", `${_class}`)}
+    disabled={disabled}
     type={type}
-    ref={ref}
+    {...props}
   >
-    {loading ? <span class="loading loading-spinner" /> : children}
+    {children}
   </button>
-));
+);
 
 export default Button;

@@ -5,13 +5,12 @@ import ProductCard, {
 import Icon from "$store/components/ui/Icon.tsx";
 import Header from "$store/components/ui/SectionHeader.tsx";
 import Slider from "$store/components/ui/Slider.tsx";
-import SliderJS from "$store/islands/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import { usePartialSection } from "deco/hooks/usePartialSection.ts";
+import { useSection } from "deco/hooks/usePartialSection.ts";
 
 /** @titleBy title */
 interface Tab {
@@ -51,7 +50,10 @@ function TabbedProductShelf({
   }
 
   return (
-    <div class="w-full container  py-8 flex flex-col gap-8 lg:gap-12 lg:py-10">
+    <div
+      id={id}
+      class="w-full container  py-8 flex flex-col gap-8 lg:gap-12 lg:py-10"
+    >
       <Header
         title={title || ""}
         description={description || ""}
@@ -64,7 +66,9 @@ function TabbedProductShelf({
           {tabs.map((tab, index) => (
             <button
               class={`tab tab-lg ${index === ti ? "tab-active" : ""}`}
-              {...usePartialSection({ props: { tabIndex: index } })}
+              hx-swap="outerHTML"
+              hx-target={`#${id}`}
+              hx-get={useSection({ props: { tabIndex: index } })}
             >
               {tab.title}
             </button>
@@ -72,10 +76,7 @@ function TabbedProductShelf({
         </div>
       </div>
 
-      <div
-        id={id}
-        class="container grid grid-cols-[48px_1fr_48px] px-0 sm:px-5"
-      >
+      <div class="container grid grid-cols-[48px_1fr_48px] px-0 sm:px-5">
         <Slider class="carousel carousel-center sm:carousel-end gap-6 col-span-full row-start-2 row-end-5">
           {products?.map((product, index) => (
             <Slider.Item
@@ -105,7 +106,7 @@ function TabbedProductShelf({
             </Slider.NextButton>
           </div>
         </>
-        <SliderJS rootId={id} />
+        <Slider.Script rootId={id} />
         <SendEventOnView
           id={id}
           event={{

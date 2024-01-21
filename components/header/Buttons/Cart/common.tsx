@@ -1,27 +1,24 @@
 import Button from "$store/components/ui/Button.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
-import { sendEvent } from "$store/sdk/analytics.tsx";
-import { useUI } from "$store/sdk/useUI.ts";
 import { AnalyticsItem } from "apps/commerce/types.ts";
+import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 
-interface Props {
+export interface Props {
   loading: boolean;
   currency: string;
   total: number;
   items: AnalyticsItem[];
+  [htmx: `hx-${string}`]: string;
 }
 
-function CartButton({ loading, currency, total, items }: Props) {
-  const { displayCart } = useUI();
-  const totalItems = items.length;
+const onEvent = (e: string) => {
+  document.currentScript.nextSibling.addEventListener("click", function () {
+    window.DECO.events.dispatch(e);
+  });
+};
 
-  const onClick = () => {
-    sendEvent({
-      name: "view_cart",
-      params: { currency, value: total, items },
-    });
-    displayCart.value = true;
-  };
+function CartButton({ loading, currency, total, items, ...rest }: Props) {
+  const totalItems = items.length;
 
   return (
     <div class="indicator">
@@ -33,15 +30,23 @@ function CartButton({ loading, currency, total, items }: Props) {
         {totalItems > 9 ? "9+" : totalItems}
       </span>
 
-      <Button
-        class="btn-circle btn-sm btn-ghost"
+      <script
+        type="defer"
+        src={scriptAsDataURI(onEvent, {
+          name: "view_cart",
+          params: { currency, value: total, items },
+        })}
+      />
+
+      <label
+        class="btn btn-circle btn-sm btn-ghost"
         aria-label="open cart"
-        data-deco={displayCart.value && "open-cart"}
-        loading={loading}
-        onClick={onClick}
+        data-deco="open-cart"
+        for="minicart-drawer"
+        {...rest}
       >
         <Icon id="ShoppingCart" size={24} strokeWidth={2} />
-      </Button>
+      </label>
     </div>
   );
 }

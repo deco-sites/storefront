@@ -5,9 +5,11 @@ import { sendEvent } from "$store/sdk/analytics.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
 import { AnalyticsItem } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
+import { useSection } from "deco/hooks/usePartialSection.ts";
 import { useCallback, useState } from "preact/hooks";
 
 export interface Item {
+  id: string;
   image: {
     src: string;
     alt: string;
@@ -43,19 +45,19 @@ function CartItem(
 ) {
   const { image, name, price: { sale, list }, quantity } = item;
   const isGift = sale < 0.01;
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
-  const withLoading = useCallback(
-    <A,>(cb: (args: A) => Promise<void>) => async (e: A) => {
-      try {
-        setLoading(true);
-        await cb(e);
-      } finally {
-        setLoading(false);
-      }
-    },
-    [],
-  );
+  // const withLoading = useCallback(
+  //   <A,>(cb: (args: A) => Promise<void>) => async (e: A) => {
+  //     try {
+  //       setLoading(true);
+  //       await cb(e);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   },
+  //   [],
+  // );
 
   return (
     <div
@@ -77,19 +79,34 @@ function CartItem(
         <div class="flex justify-between items-center">
           <span>{name}</span>
           <Button
-            disabled={loading || isGift}
-            loading={loading}
-            class="btn-ghost btn-square"
-            onClick={withLoading(async () => {
-              const analyticsItem = itemToAnalyticsItem(index);
-
-              await onUpdateQuantity(0, index);
-
-              analyticsItem && sendEvent({
-                name: "remove_from_cart",
-                params: { items: [analyticsItem] },
-              });
+            disabled={isGift}
+            // loading={loading}
+            class="btn btn-ghost btn-square"
+            hx-target="#minicart"
+            hx-post={useSection({
+              props: {
+                __resolveType:
+                  "deco-sites/storefront/sections/Cart/Minicart.tsx",
+                cart: {
+                  __resolveType: "shopify/actions/cart/updateItems.ts",
+                  lines: [{
+                    id: item.id,
+                    quantity: 0,
+                  }],
+                },
+                platform: "shopify",
+              },
             })}
+            // onClick={withLoading(async () => {
+            //   const analyticsItem = itemToAnalyticsItem(index);
+
+            //   await onUpdateQuantity(0, index);
+
+            //   analyticsItem && sendEvent({
+            //     name: "remove_from_cart",
+            //     params: { items: [analyticsItem] },
+            //   });
+            // })}
           >
             <Icon id="Trash" size={24} />
           </Button>
@@ -104,23 +121,24 @@ function CartItem(
         </div>
 
         <QuantitySelector
-          disabled={loading || isGift}
+          id={item.id}
+          disabled={isGift}
           quantity={quantity}
-          onChange={withLoading(async (quantity) => {
-            const analyticsItem = itemToAnalyticsItem(index);
-            const diff = quantity - item.quantity;
+          // onChange={withLoading(async (quantity) => {
+          //   const analyticsItem = itemToAnalyticsItem(index);
+          //   const diff = quantity - item.quantity;
 
-            await onUpdateQuantity(quantity, index);
+          //   await onUpdateQuantity(quantity, index);
 
-            if (analyticsItem) {
-              sendEvent({
-                name: diff < 0 ? "remove_from_cart" : "add_to_cart",
-                params: {
-                  items: [{ ...analyticsItem, quantity: Math.abs(diff) }],
-                },
-              });
-            }
-          })}
+          //   if (analyticsItem) {
+          //     sendEvent({
+          //       name: diff < 0 ? "remove_from_cart" : "add_to_cart",
+          //       params: {
+          //         items: [{ ...analyticsItem, quantity: Math.abs(diff) }],
+          //       },
+          //     });
+          //   }
+          // })}
         />
       </div>
     </div>

@@ -1,13 +1,13 @@
 import type { Props as SearchbarProps } from "$store/components/search/Searchbar.tsx";
 import Icon from "$store/components/ui/Icon.tsx";
-import { MenuButton, SearchButton } from "$store/islands/Header/Buttons.tsx";
-import CartButtonLinx from "$store/islands/Header/Cart/linx.tsx";
-import CartButtonShopify from "$store/islands/Header/Cart/shopify.tsx";
-import CartButtonVDNA from "$store/islands/Header/Cart/vnda.tsx";
-import CartButtonVTEX from "$store/islands/Header/Cart/vtex.tsx";
-import CartButtonWake from "$store/islands/Header/Cart/wake.tsx";
-import CartButtonNuvemshop from "$store/islands/Header/Cart/nuvemshop.tsx";
-import Searchbar from "$store/islands/Header/Searchbar.tsx";
+import { MenuButton, SearchButton } from "../../islands-old/Header/Buttons.tsx";
+import CartButtonLinx from "../../islands-old/Header/Cart/linx.tsx";
+import CartButtonShopify from "./Buttons/Cart/shopify.tsx";
+import CartButtonVDNA from "../../islands-old/Header/Cart/vnda.tsx";
+import CartButtonVTEX from "../../islands-old/Header/Cart/vtex.tsx";
+import CartButtonWake from "../../islands-old/Header/Cart/wake.tsx";
+import CartButtonNuvemshop from "../../islands-old/Header/Cart/nuvemshop.tsx";
+import Searchbar from "../../islands-old/Header/Searchbar.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
@@ -54,8 +54,8 @@ function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
           {platform === "vnda" && <CartButtonVDNA />}
           {platform === "wake" && <CartButtonWake />}
           {platform === "linx" && <CartButtonLinx />}
-          {platform === "shopify" && <CartButtonShopify />}
           {platform === "nuvemshop" && <CartButtonNuvemshop />}
+          <CartButtonShopify />
         </div>
       </div>
 
@@ -128,8 +128,8 @@ function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
               {platform === "vnda" && <CartButtonVDNA />}
               {platform === "wake" && <CartButtonWake />}
               {platform === "linx" && <CartButtonLinx />}
-              {platform === "shopify" && <CartButtonShopify />}
               {platform === "nuvemshop" && <CartButtonNuvemshop />}
+              <CartButtonShopify />
             </div>
           )}
         </div>
