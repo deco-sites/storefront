@@ -55,7 +55,7 @@ function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
           {platform === "wake" && <CartButtonWake />}
           {platform === "linx" && <CartButtonLinx />}
           {platform === "nuvemshop" && <CartButtonNuvemshop />}
-           <CartButtonShopify />
+          <CartButtonShopify />
         </div>
       </div>
 

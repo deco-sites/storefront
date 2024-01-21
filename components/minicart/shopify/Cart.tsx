@@ -3,10 +3,10 @@ import BaseCart from "../common/Cart.tsx";
 import { GetCartQuery } from "apps/shopify/utils/storefront/storefront.graphql.gen.ts";
 
 type Props = {
-  cart: GetCartQuery['cart']
-}
+  cart: GetCartQuery["cart"];
+};
 
-export const Cart = ( { cart }: Props) => {
+export const Cart = ({ cart }: Props) => {
   const items = cart?.lines?.nodes ?? [];
   const coupons = cart?.discountCodes;
   const coupon = coupons && coupons[0]?.applicable
@@ -19,7 +19,7 @@ export const Cart = ( { cart }: Props) => {
   const checkoutHref = cart?.checkoutUrl
     ? new URL(cart?.checkoutUrl).pathname
     : "";
-  
+
   return (
     <BaseCart
       items={items?.map((item) => ({
@@ -53,11 +53,11 @@ export const Cart = ( { cart }: Props) => {
       //   })}
       // itemToAnalyticsItem={(index) => {
       //   const item = items[index];
-  
+
       //   return item && itemToAnalyticsItem(item, index);
       // }}
     />
   );
-}
+};
 
 export default Cart;
