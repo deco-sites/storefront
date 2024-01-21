@@ -4,12 +4,13 @@ import { useUI } from "$store/sdk/useUI.ts";
 import { AddToCartParams } from "apps/commerce/types.ts";
 import { useState } from "preact/hooks";
 
+
 export interface Props {
   /** @description: sku name */
   eventParams: AddToCartParams;
   onAddItem: () => Promise<void>;
 
-  [htmx: `hx-${string}`]: string;
+  [htmx: `hx-${string}`]: string
 }
 
 // const useAddToCart = ({ eventParams, onAddItem }: Props) => {

@@ -38,15 +38,15 @@ function CartButton({ loading, currency, total, items, ...rest }: Props) {
         })}
       />
 
-      <Button
-        class="btn-circle btn-sm btn-ghost"
+      <label
+        class="btn btn-circle btn-sm btn-ghost"
         aria-label="open cart"
         data-deco="open-cart"
-        loading={loading}
+        for="minicart-drawer"
         {...rest}
       >
         <Icon id="ShoppingCart" size={24} strokeWidth={2} />
-      </Button>
+      </label>
     </div>
   );
 }

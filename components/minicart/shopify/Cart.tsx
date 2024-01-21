@@ -28,6 +28,7 @@ export const Cart = ({ cart }: Props) => {
           alt: item.merchandise.image?.altText ?? "",
         },
         quantity: item.quantity,
+        id: item.id,
         name: item.merchandise.product.title,
         price: {
           sale: item.cost.compareAtAmountPerQuantity?.amount,

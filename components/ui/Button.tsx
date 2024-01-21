@@ -1,29 +1,24 @@
 import { clx } from "$store/sdk/clx.ts";
 import type { JSX } from "preact";
 
-export type Props =
-  & Omit<JSX.IntrinsicElements["label"], "loading">
-  & {
-    loading?: boolean;
-  };
+export type Props = JSX.IntrinsicElements["button"];
 
 const Button = ({
   type = "button",
   class: _class = "",
-  loading,
   disabled,
   children,
   ...props
 }: Props) => (
-  <label
-    {...props}
-    className={clx("btn no-animation", `${_class}`)}
-    disabled={disabled || loading}
+  <button
+    hx-disabled-elt="this"
+    class={clx("btn no-animation", `${_class}`)}
+    disabled={disabled}
     type={type}
-    for="minicart-drawer"
+    {...props}
   >
-    {loading ? <span class="loading loading-spinner" /> : children}
-  </label>
+    {children}
+  </button>
 );
 
 export default Button;

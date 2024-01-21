@@ -5,9 +5,11 @@ import { sendEvent } from "$store/sdk/analytics.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
 import { AnalyticsItem } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
+import { useSection } from "deco/hooks/usePartialSection.ts";
 import { useCallback, useState } from "preact/hooks";
 
 export interface Item {
+  id: string;
   image: {
     src: string;
     alt: string;
@@ -79,7 +81,22 @@ function CartItem(
           <Button
             disabled={isGift}
             // loading={loading}
-            class="btn-ghost btn-square"
+            class="btn btn-ghost btn-square"
+            hx-target="#minicart"
+            hx-post={useSection({
+              props: {
+                __resolveType:
+                  "deco-sites/storefront/sections/Cart/Minicart.tsx",
+                cart: {
+                  __resolveType: "shopify/actions/cart/updateItems.ts",
+                  lines: [{
+                    id: item.id,
+                    quantity: 0,
+                  }],
+                },
+                platform: "shopify",
+              },
+            })}
             // onClick={withLoading(async () => {
             //   const analyticsItem = itemToAnalyticsItem(index);
 
@@ -104,6 +121,7 @@ function CartItem(
         </div>
 
         <QuantitySelector
+          id={item.id}
           disabled={isGift}
           quantity={quantity}
           // onChange={withLoading(async (quantity) => {

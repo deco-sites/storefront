@@ -59,14 +59,12 @@ function Cart({
         ? (
           <div class="flex flex-col gap-6">
             <span class="font-medium text-2xl">Sua sacola está vazia</span>
-            <Button
-              class="btn-outline"
-              onClick={() => {
-                displayCart.value = false;
-              }}
+            <label
+              for="minicart-drawer"
+              class="btn btn-outline"
             >
               Escolher produtos
-            </Button>
+            </label>
           </div>
         )
         : (

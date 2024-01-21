@@ -1,5 +1,5 @@
 // import { useCart } from "apps/shopify/hooks/useCart.ts";
-import Button, { Props as BtnProps } from "./common.tsx";
+import { Props as BtnProps } from "./common.tsx";
 import { useSection } from "deco/hooks/usePartialSection.ts";
 
 export type Props = Omit<BtnProps, "onAddItem"> & {
@@ -8,9 +8,12 @@ export type Props = Omit<BtnProps, "onAddItem"> & {
 
 function AddToCartButton({ productID, eventParams }: Props) {
   return (
-    <Button
+    <label
       // onAddItem={onAddItem}
       eventParams={eventParams}
+      class="btn btn-primary"
+      for="minicart-drawer"
+      hx-disabled-elt="this"
       hx-target="#minicart"
       hx-post={useSection({
         props: {
@@ -24,7 +27,9 @@ function AddToCartButton({ productID, eventParams }: Props) {
           platform: "shopify",
         },
       })}
-    />
+    >
+      Add to Cart
+    </label>
   );
 }
 
