@@ -1,21 +1,25 @@
 import { itemToAnalyticsItem, useCart } from "apps/shopify/hooks/useCart.ts";
 import BaseCart from "../common/Cart.tsx";
+import { GetCartQuery } from "apps/shopify/utils/storefront/storefront.graphql.gen.ts";
 
-function Cart() {
-  const { cart, loading, updateItems, addCouponsToCart } = useCart();
-  const items = cart.value?.lines?.nodes ?? [];
-  const coupons = cart.value?.discountCodes;
+type Props = {
+  cart: GetCartQuery['cart']
+}
+
+export const Cart = ( { cart }: Props) => {
+  const items = cart?.lines?.nodes ?? [];
+  const coupons = cart?.discountCodes;
   const coupon = coupons && coupons[0]?.applicable
     ? coupons[0].code
     : undefined;
   const locale = "pt-BR";
-  const currency = cart.value?.cost?.totalAmount.currencyCode ?? "BRL";
-  const total = cart.value?.cost?.totalAmount.amount ?? 0;
-  const subTotal = cart.value?.cost?.subtotalAmount.amount ?? 0;
-  const checkoutHref = cart.value?.checkoutUrl
-    ? new URL(cart.value?.checkoutUrl).pathname
+  const currency = cart?.cost?.totalAmount.currencyCode ?? "BRL";
+  const total = cart?.cost?.totalAmount.amount ?? 0;
+  const subTotal = cart?.cost?.subtotalAmount.amount ?? 0;
+  const checkoutHref = cart?.checkoutUrl
+    ? new URL(cart?.checkoutUrl).pathname
     : "";
-
+  
   return (
     <BaseCart
       items={items?.map((item) => ({
@@ -35,23 +39,23 @@ function Cart() {
       discounts={0}
       locale={locale}
       currency={currency}
-      loading={loading.value}
+      loading={false}
       freeShippingTarget={1000}
       checkoutHref={checkoutHref}
       coupon={coupon}
-      onAddCoupon={(text) => addCouponsToCart({ discountCodes: [text] })}
-      onUpdateQuantity={(quantity, index) =>
-        updateItems({
-          lines: [{
-            id: items[index].id,
-            quantity: quantity,
-          }],
-        })}
-      itemToAnalyticsItem={(index) => {
-        const item = items[index];
-
-        return item && itemToAnalyticsItem(item, index);
-      }}
+      // onAddCoupon={(text) => addCouponsToCart({ discountCodes: [text] })}
+      // onUpdateQuantity={(quantity, index) =>
+      //   updateItems({
+      //     lines: [{
+      //       id: items[index].id,
+      //       quantity: quantity,
+      //     }],
+      //   })}
+      // itemToAnalyticsItem={(index) => {
+      //   const item = items[index];
+  
+      //   return item && itemToAnalyticsItem(item, index);
+      // }}
     />
   );
 }

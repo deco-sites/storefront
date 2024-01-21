@@ -5,6 +5,7 @@ import { useEffect } from "preact/hooks";
 
 interface Props {
   onClose?: () => void;
+  id?: string;
   open?: boolean;
   class?: string;
   loading?: "eager" | "lazy";
@@ -20,9 +21,9 @@ function Drawer(props: Props) {
     onClose,
     class: _class = "",
     loading = "lazy",
+    id = useId(),
   } = props;
   const lazy = useSignal(loading === "lazy" && !open);
-  const id = useId();
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) =>

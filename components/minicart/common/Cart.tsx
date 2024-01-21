@@ -3,6 +3,7 @@ import { sendEvent } from "$store/sdk/analytics.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
 import { useUI } from "$store/sdk/useUI.ts";
 import { AnalyticsItem } from "apps/commerce/types.ts";
+import { ComponentChildren } from "preact";
 import CartItem, { Item, Props as ItemProps } from "./CartItem.tsx";
 import Coupon, { Props as CouponProps } from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
@@ -21,6 +22,17 @@ interface Props {
   onAddCoupon?: CouponProps["onAddCoupon"];
   onUpdateQuantity: ItemProps["onUpdateQuantity"];
   itemToAnalyticsItem: ItemProps["itemToAnalyticsItem"];
+}
+
+function Container({ children }: { children: ComponentChildren }) {
+  return (
+    <div
+      class="flex flex-col justify-center items-center overflow-hidden h-full"
+      style={{ minWidth: "calc(min(100vw, 425px))", maxWidth: "425px" }}
+    >
+      {children}
+    </div>
+  );
 }
 
 function Cart({
@@ -42,10 +54,7 @@ function Cart({
   const isEmtpy = items.length === 0;
 
   return (
-    <div
-      class="flex flex-col justify-center items-center overflow-hidden"
-      style={{ minWidth: "calc(min(100vw, 425px))", maxWidth: "425px" }}
-    >
+    <Container>
       {isEmtpy
         ? (
           <div class="flex flex-col gap-6">
@@ -154,8 +163,10 @@ function Cart({
             </footer>
           </>
         )}
-    </div>
+    </Container>
   );
 }
+
+Cart.Container = Container;
 
 export default Cart;

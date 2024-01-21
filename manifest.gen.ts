@@ -43,8 +43,9 @@ import * as $$$$$$35 from "./sections/Social/InstagramPosts.tsx";
 import * as $$$$$$36 from "./sections/Theme/Theme.tsx";
 import * as $$$$$$37 from "./sections/Links/LinkTree.tsx";
 import * as $$$$$$38 from "./sections/Links/Shortcuts.tsx";
-import * as $$$$$$39 from "./sections/Newsletter/Newsletter.tsx";
-import * as $$$$$$40 from "./sections/Header/Header.tsx";
+import * as $$$$$$39 from "./sections/Cart/Minicart.tsx";
+import * as $$$$$$40 from "./sections/Newsletter/Newsletter.tsx";
+import * as $$$$$$41 from "./sections/Header/Header.tsx";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
@@ -55,6 +56,7 @@ const manifest = {
   },
   "sections": {
     "deco-sites/storefront/sections/Animation/Animation.tsx": $$$$$$13,
+    "deco-sites/storefront/sections/Cart/Minicart.tsx": $$$$$$39,
     "deco-sites/storefront/sections/Category/CategoryBanner.tsx": $$$$$$2,
     "deco-sites/storefront/sections/Category/CategoryGrid.tsx": $$$$$$4,
     "deco-sites/storefront/sections/Category/CategoryList.tsx": $$$$$$3,
@@ -67,7 +69,7 @@ const manifest = {
     "deco-sites/storefront/sections/Content/Testimonials.tsx": $$$$$$16,
     "deco-sites/storefront/sections/Footer/Footer.tsx": $$$$$$1,
     "deco-sites/storefront/sections/Gallery.tsx": $$$$$$0,
-    "deco-sites/storefront/sections/Header/Header.tsx": $$$$$$40,
+    "deco-sites/storefront/sections/Header/Header.tsx": $$$$$$41,
     "deco-sites/storefront/sections/Images/BannerGrid.tsx": $$$$$$6,
     "deco-sites/storefront/sections/Images/Carousel.tsx": $$$$$$8,
     "deco-sites/storefront/sections/Images/ImageGallery.tsx": $$$$$$7,
@@ -81,7 +83,7 @@ const manifest = {
     "deco-sites/storefront/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$31,
     "deco-sites/storefront/sections/Miscellaneous/CookieConsent.tsx": $$$$$$32,
     "deco-sites/storefront/sections/Miscellaneous/Slide.tsx": $$$$$$33,
-    "deco-sites/storefront/sections/Newsletter/Newsletter.tsx": $$$$$$39,
+    "deco-sites/storefront/sections/Newsletter/Newsletter.tsx": $$$$$$40,
     "deco-sites/storefront/sections/Product/ImageGalleryFrontBack.tsx":
       $$$$$$27,
     "deco-sites/storefront/sections/Product/ImageGallerySlider.tsx": $$$$$$26,

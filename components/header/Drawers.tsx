@@ -1,5 +1,4 @@
 import type { Props as MenuProps } from "$store/components/header/Menu.tsx";
-import Cart from "$store/components/minicart/Cart.tsx";
 import type { Props as SearchbarProps } from "$store/components/search/Searchbar.tsx";
 import Button from "$store/components/ui/Button.tsx";
 import Drawer from "$store/components/ui/Drawer.tsx";
@@ -8,6 +7,7 @@ import { useUI } from "$store/sdk/useUI.ts";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { ComponentChildren } from "preact";
 import { lazy, Suspense } from "preact/compat";
+import Cart from "$store/components/minicart/common/Cart.tsx";
 
 const Menu = lazy(() => import("$store/components/header/Menu.tsx"));
 const Searchbar = lazy(() => import("$store/components/search/Searchbar.tsx"));
@@ -83,15 +83,17 @@ function Drawers({ menu, searchbar, children, platform }: Props) {
         {children}
       </Drawer>
       <Drawer // right drawer
+        id="minicart-drawer"
         class="drawer-end"
-        open={displayCart.value !== false}
-        onClose={() => displayCart.value = false}
+        loading="eager"
         aside={
-          <Aside
-            title="Minha sacola"
-            onClose={() => displayCart.value = false}
+          <Aside title="Minha sacola" // onClose={() => displayCart.value = false}
           >
-            <Cart platform={platform} />
+            <div id="minicart">
+              <Cart.Container>
+                <span class="loading loading-ring loading-lg" />
+              </Cart.Container>
+            </div>
           </Aside>
         }
       >

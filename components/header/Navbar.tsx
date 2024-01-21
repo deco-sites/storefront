@@ -2,7 +2,7 @@ import type { Props as SearchbarProps } from "$store/components/search/Searchbar
 import Icon from "$store/components/ui/Icon.tsx";
 import { MenuButton, SearchButton } from "../../islands-old/Header/Buttons.tsx";
 import CartButtonLinx from "../../islands-old/Header/Cart/linx.tsx";
-import CartButtonShopify from "../../islands-old/Header/Cart/shopify.tsx";
+import CartButtonShopify from "./Buttons/Cart/shopify.tsx";
 import CartButtonVDNA from "../../islands-old/Header/Cart/vnda.tsx";
 import CartButtonVTEX from "../../islands-old/Header/Cart/vtex.tsx";
 import CartButtonWake from "../../islands-old/Header/Cart/wake.tsx";
@@ -54,8 +54,8 @@ function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
           {platform === "vnda" && <CartButtonVDNA />}
           {platform === "wake" && <CartButtonWake />}
           {platform === "linx" && <CartButtonLinx />}
-          {platform === "shopify" && <CartButtonShopify />}
           {platform === "nuvemshop" && <CartButtonNuvemshop />}
+           <CartButtonShopify />
         </div>
       </div>
 
@@ -128,8 +128,8 @@ function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
               {platform === "vnda" && <CartButtonVDNA />}
               {platform === "wake" && <CartButtonWake />}
               {platform === "linx" && <CartButtonLinx />}
-              {platform === "shopify" && <CartButtonShopify />}
               {platform === "nuvemshop" && <CartButtonNuvemshop />}
+              <CartButtonShopify />
             </div>
           )}
         </div>
