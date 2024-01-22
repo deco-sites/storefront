@@ -1,5 +1,6 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Icon from "$store/components/ui/Icon.tsx";
+import Image from "apps/website/components/Image.tsx";
 
 export interface Props {
   title: string;
@@ -41,7 +42,8 @@ export default function ImageSection({
           disableSpacing?.top ? "" : "pt-12 lg:pt-28"
         } ${disableSpacing?.bottom ? "" : "pb-12 lg:pb-28"}`}
       >
-        <img
+        <Image
+          width={640}
           class="w-full lg:w-1/2 object-fit z-10"
           sizes="(max-width: 640px) 100vw, 30vw"
           src={image}
@@ -58,7 +60,7 @@ export default function ImageSection({
           </p>
           {cta?.href && cta?.text && (
             <a
-              class="pt-4 flex gap-2 border-none text-[#113032] transition-colors duration-200 cursor-pointer"
+              class="pt-4 flex gap-2 border-none text-secondary transition-colors duration-200 cursor-pointer"
               href={cta.href}
             >
               <span>{cta.text}</span>
@@ -67,7 +69,7 @@ export default function ImageSection({
                 width={24}
                 height={24}
                 strokeWidth={"2"}
-                class="text-[#113032]"
+                class="text-secondary"
               />
             </a>
           )}

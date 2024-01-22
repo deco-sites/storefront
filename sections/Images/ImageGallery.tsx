@@ -1,4 +1,5 @@
 import { Picture, Source } from "apps/website/components/Picture.tsx";
+import Image from "apps/website/components/Image.tsx";
 import Header from "$store/components/ui/SectionHeader.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
@@ -153,7 +154,8 @@ function Banner(
           media="(min-width: 768px)"
           src={srcDesktop || srcMobile}
         />
-        <img
+        <Image
+          width={640}
           class="w-full h-full object-cover"
           src={srcMobile}
           alt={alt}
