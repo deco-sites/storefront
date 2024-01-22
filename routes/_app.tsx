@@ -2,14 +2,18 @@ import { asset, Head } from "$fresh/runtime.ts";
 import { defineApp } from "$fresh/server.ts";
 import Theme from "$store/sections/Theme/Theme.tsx";
 import { Context } from "deco/deco.ts";
+import { useDevice } from "$store/sdk/device.ts";
+import { deviceOf } from "deco/utils/device.ts";
 
 const sw = () =>
   addEventListener("load", () =>
     navigator && navigator.serviceWorker &&
     navigator.serviceWorker.register("/sw.js"));
 
-export default defineApp(async (_req, ctx) => {
+export default defineApp(async (req, ctx) => {
   const revision = await Context.active().release?.revision();
+  const {device} = useDevice()
+  device.value = deviceOf(req)
 
   return (
     <>

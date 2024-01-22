@@ -9,6 +9,7 @@ import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
 import { relative } from "$store/sdk/url.ts";
+import { useDevice } from "$store/sdk/device.ts";
 
 export interface Layout {
   basics?: {
@@ -61,6 +62,7 @@ const HEIGHT = 279;
 function ProductCard(
   { product, preload, itemListName, layout, platform, index }: Props,
 ) {
+  const { device } = useDevice()
   const {
     url,
     productID,
@@ -204,7 +206,8 @@ function ProductCard(
             decoding="async"
           />
           {(!l?.onMouseOver?.image ||
-            l?.onMouseOver?.image == "Change image") && (
+            l?.onMouseOver?.image == "Change image") && 
+            device.value === "desktop" && (
             <Image
               src={back?.url ?? front.url!}
               alt={back?.alternateName ?? front.alternateName}
