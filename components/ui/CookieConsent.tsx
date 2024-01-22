@@ -136,10 +136,12 @@ function CookieConsent(props: Props) {
           </div>
         </div>
       </div>
-      <script
+      {
+        /* <script
         type="module"
         dangerouslySetInnerHTML={{ __html: `(${script})("${id}");` }}
-      />
+      /> */
+      }
     </>
   );
 }

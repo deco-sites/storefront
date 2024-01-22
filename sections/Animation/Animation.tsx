@@ -51,7 +51,8 @@ function Animation(
       >
         <Component {...props} />
       </div>
-      <script
+      {
+        /* <script
         async={true}
         dangerouslySetInnerHTML={{
           __html: `
@@ -64,12 +65,13 @@ function Animation(
                         }
                     });
                 }, { threshold: 0.50 });
-            
+
                 var element = document.getElementById('${id}');
                 observer.observe(element);
             `,
         }}
-      />
+      /> */
+      }
     </>
   );
 }
