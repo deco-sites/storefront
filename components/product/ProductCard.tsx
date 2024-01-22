@@ -62,7 +62,7 @@ const HEIGHT = 279;
 function ProductCard(
   { product, preload, itemListName, layout, platform, index }: Props,
 ) {
-  const { device } = useDevice()
+  const { device } = useDevice();
   const {
     url,
     productID,
@@ -206,7 +206,7 @@ function ProductCard(
             decoding="async"
           />
           {(!l?.onMouseOver?.image ||
-            l?.onMouseOver?.image == "Change image") && 
+            l?.onMouseOver?.image == "Change image") &&
             device.value === "desktop" && (
             <Image
               src={back?.url ?? front.url!}

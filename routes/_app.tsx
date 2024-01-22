@@ -12,8 +12,8 @@ const sw = () =>
 
 export default defineApp(async (req, ctx) => {
   const revision = await Context.active().release?.revision();
-  const {device} = useDevice()
-  device.value = deviceOf(req)
+  const { device } = useDevice();
+  device.value = deviceOf(req);
 
   return (
     <>
