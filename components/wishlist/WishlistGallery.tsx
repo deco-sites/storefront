@@ -11,9 +11,7 @@ function WishlistGallery(props: Props) {
     return (
       <div class="container mx-4 sm:mx-auto">
         <div class="mx-10 my-20 flex flex-col gap-4 justify-center items-center">
-          <span class="font-medium text-2xl">
-            Your wishlist is empty
-          </span>
+          <span class="font-medium text-2xl">Your wishlist is empty</span>
           <span>
             Log in and add items to your wishlist for later. They will show up
             here
