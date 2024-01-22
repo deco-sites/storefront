@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       site_matrix: ${{ steps.set_vars.outputs.site_matrix }}
+      is_first_commit: ${{ steps.check_first_commit.outputs.is_first_commit }}
     steps:
       - name: Set site matrix
         id: set_vars
@@ -25,8 +26,19 @@ jobs:
           else
             echo "site_matrix={site: ${{ vars.SITES }} }" >> $GITHUB_OUTPUT
           fi
+
+      - name: Check if it's the first commit
+        id: check_first_commit
+        run: |
+          if [ "$(git rev-list --count HEAD)" = "1" ]; then
+            echo "is_first_commit=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_first_commit=false" >> $GITHUB_OUTPUT
+          fi
+
   deploy:
     needs: set_vars
+    if: needs.set_vars.outputs.is_first_commit == 'false'
     strategy:
       matrix: ${{ fromJson(needs.set_vars.outputs.site_matrix) }}
     name: Deploy
