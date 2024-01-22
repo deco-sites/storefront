@@ -1,7 +1,8 @@
 import type { Platform } from "$store/apps/site.ts";
 import { SendEventOnClick } from "$store/components/Analytics.tsx";
 import Avatar from "$store/components/ui/Avatar.tsx";
-import WishlistButton from "$store/islands/WishlistButton.tsx";
+import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
+import WishlistButtonWake from "../../islands/WishlistButton/vtex.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
@@ -58,17 +59,15 @@ interface Props {
 const WIDTH = 200;
 const HEIGHT = 279;
 
-function ProductCard(
-  { product, preload, itemListName, layout, platform, index }: Props,
-) {
-  const {
-    url,
-    productID,
-    name,
-    image: images,
-    offers,
-    isVariantOf,
-  } = product;
+function ProductCard({
+  product,
+  preload,
+  itemListName,
+  layout,
+  platform,
+  index,
+}: Props) {
+  const { url, productID, name, image: images, offers, isVariantOf } = product;
   const id = `product-card-${productID}`;
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const productGroupID = isVariantOf?.productGroupID;
@@ -163,7 +162,13 @@ function ProductCard(
             }`}
           >
             {platform === "vtex" && (
-              <WishlistButton
+              <WishlistButtonVtex
+                productGroupID={productGroupID}
+                productID={productID}
+              />
+            )}
+            {platform === "wake" && (
+              <WishlistButtonWake
                 productGroupID={productGroupID}
                 productID={productID}
               />
@@ -174,7 +179,7 @@ function ProductCard(
             <div class="text-sm bg-base-100 p-[10px]">
               <span class="text-base-content font-bold">
                 {listPrice && price
-                  ? `${Math.round((listPrice - price) / listPrice * 100)}% `
+                  ? `${Math.round(((listPrice - price) / listPrice) * 100)}% `
                   : ""}
               </span>
               OFF
@@ -240,58 +245,76 @@ function ProductCard(
         {(!l?.elementsPositions?.skuSelector ||
           l?.elementsPositions?.skuSelector === "Top") && (
           <>
-            {l?.hide?.skuSelector ? "" : (
-              <ul
-                class={`flex items-center gap-2 w-full overflow-auto p-3 ${
-                  align === "center" ? "justify-center" : "justify-start"
-                } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
-              >
-                {skuSelector}
-              </ul>
-            )}
+            {l?.hide?.skuSelector
+              ? (
+                ""
+              )
+              : (
+                <ul
+                  class={`flex items-center gap-2 w-full overflow-auto p-3 ${
+                    align === "center" ? "justify-center" : "justify-start"
+                  } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
+                >
+                  {skuSelector}
+                </ul>
+              )}
           </>
         )}
 
         {l?.hide?.productName && l?.hide?.productDescription
-          ? ""
+          ? (
+            ""
+          )
           : (
             <div class="flex flex-col gap-0">
-              {l?.hide?.productName ? "" : (
-                <h2
-                  class="truncate text-base lg:text-lg text-base-content uppercase font-normal"
-                  dangerouslySetInnerHTML={{ __html: name ?? "" }}
-                />
-              )}
-              {l?.hide?.productDescription ? "" : (
-                <div
-                  class="truncate text-sm lg:text-sm text-neutral"
-                  dangerouslySetInnerHTML={{ __html: description ?? "" }}
-                />
-              )}
+              {l?.hide?.productName
+                ? (
+                  ""
+                )
+                : (
+                  <h2
+                    class="truncate text-base lg:text-lg text-base-content uppercase font-normal"
+                    dangerouslySetInnerHTML={{ __html: name ?? "" }}
+                  />
+                )}
+              {l?.hide?.productDescription
+                ? (
+                  ""
+                )
+                : (
+                  <div
+                    class="truncate text-sm lg:text-sm text-neutral"
+                    dangerouslySetInnerHTML={{ __html: description ?? "" }}
+                  />
+                )}
             </div>
           )}
-        {l?.hide?.allPrices ? "" : (
-          <div class="flex flex-col gap-2">
-            <div
-              class={`flex flex-col gap-0 ${
-                l?.basics?.oldPriceSize === "Normal"
-                  ? "lg:flex-row-reverse lg:gap-2"
-                  : ""
-              } ${align === "center" ? "justify-center" : "justify-end"}`}
-            >
+        {l?.hide?.allPrices
+          ? (
+            ""
+          )
+          : (
+            <div class="flex flex-col gap-2">
               <div
-                class={`line-through text-base-300 text-xs font-light ${
-                  l?.basics?.oldPriceSize === "Normal" ? "lg:text-sm" : ""
-                }`}
+                class={`flex flex-col gap-0 ${
+                  l?.basics?.oldPriceSize === "Normal"
+                    ? "lg:flex-row-reverse lg:gap-2"
+                    : ""
+                } ${align === "center" ? "justify-center" : "justify-end"}`}
               >
-                {formatPrice(listPrice, offers?.priceCurrency)}
-              </div>
-              <div class="text-base-content lg:text-sm font-light">
-                {formatPrice(price, offers?.priceCurrency)}
+                <div
+                  class={`line-through text-base-300 text-xs font-light ${
+                    l?.basics?.oldPriceSize === "Normal" ? "lg:text-sm" : ""
+                  }`}
+                >
+                  {formatPrice(listPrice, offers?.priceCurrency)}
+                </div>
+                <div class="text-base-content lg:text-sm font-light">
+                  {formatPrice(price, offers?.priceCurrency)}
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
 
         {/* SKU Selector */}
         {l?.elementsPositions?.skuSelector === "Bottom" && (
@@ -302,14 +325,18 @@ function ProductCard(
               } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
             >
               {l?.hide?.installments
-                ? ""
+                ? (
+                  ""
+                )
                 : (
                   <div class="text-base-300 font-light text-sm truncate">
                     ou {installments}
                   </div>
                 )}
               {l?.hide?.skuSelector
-                ? ""
+                ? (
+                  ""
+                )
                 : <div class="flex items-center gap-2">{skuSelector}</div>}
             </ul>
           </>
@@ -324,7 +351,9 @@ function ProductCard(
               {cta}
             </div>
           )
-          : ""}
+          : (
+            ""
+          )}
       </div>
     </div>
   );
