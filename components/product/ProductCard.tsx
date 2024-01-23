@@ -329,15 +329,21 @@ function ProductCard({
                   ""
                 )
                 : (
-                  <div class="text-base-300 font-light text-sm truncate">
-                    ou {installments}
-                  </div>
+                  <li>
+                    <span class="text-base-300 font-light text-sm truncate">
+                      ou {installments}
+                    </span>
+                  </li>
                 )}
               {l?.hide?.skuSelector
                 ? (
                   ""
                 )
-                : <div class="flex items-center gap-2">{skuSelector}</div>}
+                : (
+                  <li>
+                    <ul class="flex items-center gap-2">{skuSelector}</ul>
+                  </li>
+                )}
             </ul>
           </>
         )}
