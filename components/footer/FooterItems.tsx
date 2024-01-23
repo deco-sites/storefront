@@ -49,9 +49,12 @@ export default function FooterItems(
               <li>
                 <div class="collapse collapse-arrow ">
                   <input type="checkbox" class="min-h-[0]" />
-                  <div class="collapse-title min-h-[0] !p-0 flex gap-2">
+                  <label
+                    htmlFor={section.label}
+                    class="collapse-title min-h-[0] !p-0 flex gap-2"
+                  >
                     <span>{section.label}</span>
-                  </div>
+                  </label>
                   <div class="collapse-content">
                     <ul
                       class={`flex flex-col gap-1 pl-5 pt-2`}

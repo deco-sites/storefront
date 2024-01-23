@@ -116,9 +116,12 @@ function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
               href="/wishlist"
               aria-label="Wishlist"
             >
-              <div class="flex btn btn-circle btn-sm btn-ghost gap-1">
+              <button
+                class="flex btn btn-circle btn-sm btn-ghost gap-1"
+                aria-label="Wishlist"
+              >
                 <Icon id="Heart" size={24} strokeWidth={0.4} />
-              </div>
+              </button>
               WISHLIST
             </a>
           )}
