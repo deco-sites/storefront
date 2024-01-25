@@ -9,6 +9,7 @@ import SliderJS from "$store/islands/SliderJS.tsx";
 import { useId } from "$store/sdk/useId.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
+import Image from "apps/website/components/Image.tsx";
 
 /**
  * @titleBy alt
@@ -148,11 +149,13 @@ function BannerItem(
           width={1440}
           height={600}
         />
-        <img
+        <Image
           class="object-cover w-full h-full"
           loading={lcp ? "eager" : "lazy"}
           src={desktop}
           alt={alt}
+          width={1440}
+          height={600}
         />
       </Picture>
     </a>
@@ -230,7 +233,7 @@ function BannerCarousel(props: Props) {
       <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
         {images?.map((image, index) => {
           const params = { promotion_name: image.alt };
-
+          console.log(image);
           return (
             <Slider.Item index={index} class="carousel-item w-full">
               <BannerItem
