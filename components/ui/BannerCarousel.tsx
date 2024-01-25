@@ -233,7 +233,6 @@ function BannerCarousel(props: Props) {
       <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
         {images?.map((image, index) => {
           const params = { promotion_name: image.alt };
-          console.log(image);
           return (
             <Slider.Item index={index} class="carousel-item w-full">
               <BannerItem

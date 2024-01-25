@@ -1,3 +1,5 @@
+import Image from "apps/website/components/Image.tsx";
+
 export interface Props {
   title: string;
   description: string;
@@ -17,10 +19,12 @@ export default function Hero(props: Props) {
           : "hero-content text-center"}
       >
         {image && !imageOnRight && (
-          <img
+          <Image
             src={image.src}
             className="max-w-sm rounded-lg shadow-2xl"
             alt={image.alt}
+            width={1080}
+            height={1350}
           />
         )}
         <div className={image ? "" : "max-w-md"}>
@@ -33,10 +37,12 @@ export default function Hero(props: Props) {
           )}
         </div>
         {image && imageOnRight && (
-          <img
+          <Image
             src={image.src}
             className="max-w-sm rounded-lg shadow-2xl"
             alt={image.alt}
+            width={1080}
+            height={1350}
           />
         )}
       </div>
