@@ -21,7 +21,7 @@ export const SendEventOnClick = <E extends AnalyticsEvent>({ event, id }: {
         }
 
         elem.addEventListener("click", () => {
-          window.DECO.events.dispatch(event);
+          globalThis.window.DECO.events.dispatch(event);
         });
       },
       id,
@@ -49,7 +49,7 @@ export const SendEventOnView = <E extends AnalyticsEvent>(
           for (const item of items) {
             if (!item.isIntersecting) continue;
 
-            window.DECO.events.dispatch(event);
+            globalThis.window.DECO.events.dispatch(event);
             observer.unobserve(elem);
           }
         });

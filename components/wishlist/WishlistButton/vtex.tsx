@@ -32,7 +32,8 @@ function WishlistButton({
       productGroupID={productGroupID}
       productID={productID}
       removeItem={() => removeItem({ id: listItem.value!.id }!)}
-      addItem={() => addItem({ sku: productID, productId: productGroupID })}
+      addItem={() =>
+        addItem({ sku: productID, productId: productGroupID || productID })}
     />
   );
 }
