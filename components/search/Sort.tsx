@@ -6,13 +6,17 @@ const SORT_QUERY_PARAM = "sort";
 
 const useSort = () =>
   useMemo(() => {
-    const urlSearchParams = new URLSearchParams(globalThis.window.location?.search);
+    const urlSearchParams = new URLSearchParams(
+      globalThis.window.location?.search,
+    );
     return urlSearchParams.get(SORT_QUERY_PARAM) ?? "";
   }, []);
 
 // TODO: Replace with "search utils"
 const applySort = (e: JSX.TargetedEvent<HTMLSelectElement, Event>) => {
-  const urlSearchParams = new URLSearchParams(globalThis.window.location.search);
+  const urlSearchParams = new URLSearchParams(
+    globalThis.window.location.search,
+  );
 
   urlSearchParams.set(SORT_QUERY_PARAM, e.currentTarget.value);
   globalThis.window.location.search = urlSearchParams.toString();
