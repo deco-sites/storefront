@@ -1,5 +1,6 @@
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import Image from "apps/website/components/Image.tsx";
 
 /**
  * @titleBy alt
@@ -160,13 +161,15 @@ export default function BannnerGrid(props: Props) {
                 width={250}
                 height={250}
               />
-              <img
+              <Image
                 class="w-full"
                 sizes="(max-width: 640px) 100vw, 30vw"
                 src={srcMobile}
                 alt={alt}
                 decoding="async"
                 loading="lazy"
+                width={100}
+                height={100}
               />
             </Picture>
           </a>
