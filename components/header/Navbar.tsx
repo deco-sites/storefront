@@ -61,13 +61,13 @@ function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
 
       {/* Desktop Version */}
       <div class="hidden lg:grid lg:grid-cols-3 items-center border-b border-base-200 w-full px-6">
-        <div
+        <ul
           class={`flex gap-6 col-span-1 ${
             logoPosition === "left" ? "justify-center" : "justify-start"
           }`}
         >
           {items.map((item) => <NavItem item={item} />)}
-        </div>
+        </ul>
         <div
           class={`flex ${
             logoPosition === "left"
@@ -116,9 +116,12 @@ function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
               href="/wishlist"
               aria-label="Wishlist"
             >
-              <div class="flex btn btn-circle btn-sm btn-ghost gap-1">
+              <button
+                class="flex btn btn-circle btn-sm btn-ghost gap-1"
+                aria-label="Wishlist"
+              >
                 <Icon id="Heart" size={24} strokeWidth={0.4} />
-              </div>
+              </button>
               WISHLIST
             </a>
           )}

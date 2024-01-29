@@ -1,5 +1,6 @@
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import Image from "apps/website/components/Image.tsx";
 
 export interface Props {
   image: {
@@ -92,13 +93,15 @@ export default function ShoppableBanner(props: Props) {
               width={384}
               height={227}
             />
-            <img
+            <Image
               class="w-full h-full object-cover"
               sizes="(max-width: 640px) 100vw, 30vw"
               src={image?.mobile}
               alt={image?.altText}
               decoding="async"
               loading="lazy"
+              width={150}
+              height={150}
             />
           </Picture>
           {pins?.map(({ mobile, desktop, link, label }) => (

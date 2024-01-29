@@ -8,7 +8,8 @@ import AddToCartButtonWake from "$store/islands/AddToCartButton/wake.tsx";
 import AddToCartButtonNuvemshop from "$store/islands/AddToCartButton/nuvemshop.tsx";
 import OutOfStock from "$store/islands/OutOfStock.tsx";
 import ShippingSimulation from "$store/islands/ShippingSimulation.tsx";
-import WishlistButton from "$store/islands/WishlistButton.tsx";
+import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
+import WishlistButtonWake from "../../islands/WishlistButton/wake.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
 import { useId } from "$store/sdk/useId.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
@@ -37,10 +38,7 @@ function ProductInfo({ page, layout }: Props) {
     throw new Error("Missing Product Details Page Info");
   }
 
-  const {
-    breadcrumbList,
-    product,
-  } = page;
+  const { breadcrumbList, product } = page;
   const {
     productID,
     offers,
@@ -77,11 +75,7 @@ function ProductInfo({ page, layout }: Props) {
       {/* Code and name */}
       <div class="mt-4 sm:mt-8">
         <div>
-          {gtin && (
-            <span class="text-sm text-base-300">
-              Cod. {gtin}
-            </span>
-          )}
+          {gtin && <span class="text-sm text-base-300">Cod. {gtin}</span>}
         </div>
         <h1>
           <span class="font-medium text-xl capitalize">
@@ -105,9 +99,7 @@ function ProductInfo({ page, layout }: Props) {
             {formatPrice(price, offers?.priceCurrency)}
           </span>
         </div>
-        <span class="text-sm text-base-300">
-          {installments}
-        </span>
+        <span class="text-sm text-base-300">{installments}</span>
       </div>
       {/* Sku Selector */}
       <div class="mt-4 sm:mt-6">
@@ -125,7 +117,7 @@ function ProductInfo({ page, layout }: Props) {
                     productID={productID}
                     seller={seller}
                   />
-                  <WishlistButton
+                  <WishlistButtonVtex
                     variant="full"
                     productID={productID}
                     productGroupID={productGroupID}
@@ -133,10 +125,17 @@ function ProductInfo({ page, layout }: Props) {
                 </>
               )}
               {platform === "wake" && (
-                <AddToCartButtonWake
-                  eventParams={{ items: [eventItem] }}
-                  productID={productID}
-                />
+                <>
+                  <AddToCartButtonWake
+                    eventParams={{ items: [eventItem] }}
+                    productID={productID}
+                  />
+                  <WishlistButtonWake
+                    variant="full"
+                    productID={productID}
+                    productGroupID={productGroupID}
+                  />
+                </>
               )}
               {platform === "linx" && (
                 <AddToCartButtonLinx
@@ -173,11 +172,13 @@ function ProductInfo({ page, layout }: Props) {
       <div class="mt-8">
         {platform === "vtex" && (
           <ShippingSimulation
-            items={[{
-              id: Number(product.sku),
-              quantity: 1,
-              seller: seller,
-            }]}
+            items={[
+              {
+                id: Number(product.sku),
+                quantity: 1,
+                seller: seller,
+              },
+            ]}
           />
         )}
       </div>

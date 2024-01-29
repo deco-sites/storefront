@@ -110,12 +110,15 @@ function Searchbar({
           placeholder={placeholder}
           role="combobox"
           aria-controls="search-suggestion"
+          aria-haspopup="listbox"
+          aria-expanded={displaySearchPopup.value}
           autocomplete="off"
         />
         <Button
           type="button"
           class="join-item btn-ghost btn-square hidden sm:inline-flex"
           onClick={() => displaySearchPopup.value = false}
+          ariaLabel={displaySearchPopup.value ? "open search" : "search closed"}
         >
           <Icon id="XMark" size={24} strokeWidth={2} />
         </Button>

@@ -45,7 +45,27 @@ function BlogPosts({
     {
       href: "/",
       image:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/e46bf6cd-64c9-4eae-97a3-4a4e83939ac5",
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/80a115a2-3623-4e9b-aec7-42601c2ff416",
+      alt: "alternative text",
+      label: "Title Post",
+      description: "Description",
+      author: "Author",
+      date: "Date",
+    },
+    {
+      href: "/",
+      image:
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/80a115a2-3623-4e9b-aec7-42601c2ff416",
+      alt: "alternative text",
+      label: "Title Post",
+      description: "Description",
+      author: "Author",
+      date: "Date",
+    },
+    {
+      href: "/",
+      image:
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/80a115a2-3623-4e9b-aec7-42601c2ff416",
       alt: "alternative text",
       label: "Title Post",
       description: "Description",

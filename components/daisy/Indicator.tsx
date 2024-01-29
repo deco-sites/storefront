@@ -1,3 +1,5 @@
+import Image from "apps/website/components/Image.tsx";
+
 export interface Props {
   text?: string;
   badgeText?: string;
@@ -18,7 +20,9 @@ export default function Indicator(props: Props) {
         }`}
       >
         {!avatar && text}
-        {avatar && <img alt={avatar.alt} src={avatar.src} />}
+        {avatar && (
+          <Image alt={avatar.alt} src={avatar.src} width={80} height={80} />
+        )}
       </div>
     </div>
   );

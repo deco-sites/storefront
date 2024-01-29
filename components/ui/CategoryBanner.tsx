@@ -1,6 +1,7 @@
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { SectionProps } from "deco/types.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import Image from "apps/website/components/Image.tsx";
 
 /**
  * @titleBy matcher
@@ -63,7 +64,13 @@ function Banner(props: SectionProps<ReturnType<typeof loader>>) {
           height={200}
           media="(min-width: 767px)"
         />
-        <img class="w-full" src={image.desktop} alt={image.alt ?? title} />
+        <Image
+          class="w-full"
+          src={image.desktop}
+          alt={image.alt ?? title}
+          width={1440}
+          height={200}
+        />
       </Picture>
 
       <div class="container flex flex-col items-center justify-center sm:items-start col-start-1 col-span-1 row-start-1 row-span-1 w-full">
