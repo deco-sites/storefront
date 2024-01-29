@@ -47,6 +47,7 @@ function Drawer(props: Props) {
         type="checkbox"
         class="drawer-toggle"
         onChange={(e) => e.currentTarget.checked === false && onClose?.()}
+        aria-label={open ? "open drawer" : "closed drawer"}
       />
 
       <div class="drawer-content">
