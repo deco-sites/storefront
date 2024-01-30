@@ -41,7 +41,7 @@ function Sort({ sortOptions }: Props) {
 
   return (
     <>
-      <label for="sort" class="sr-only">Ordenar por </label>
+      <label for="sort" class="sr-only">Ordenar por</label>
       <select
         id="sort"
         name="sort"
