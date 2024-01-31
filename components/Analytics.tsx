@@ -1,5 +1,5 @@
 import type { AnalyticsEvent } from "apps/commerce/types.ts";
-import { useEffect } from "preact/hooks";
+import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 
 /**
  * This function is usefull for sending events on click. Works with both Server and Islands components
@@ -7,51 +7,57 @@ import { useEffect } from "preact/hooks";
 export const SendEventOnClick = <E extends AnalyticsEvent>({ event, id }: {
   event: E;
   id: string;
-}) => {
-  useEffect(() => {
-    requestAnimationFrame(() => {
-      const elem = document.getElementById(id);
+}) => (
+  <script
+    defer
+    src={scriptAsDataURI(
+      (id: string, event: AnalyticsEvent) => {
+        const elem = document.getElementById(id);
 
-      if (!elem) {
-        return console.warn(
-          `Could not find element ${id}. Click event will not be send. This will cause loss in analytics`,
-        );
-      }
+        if (!elem) {
+          return console.warn(
+            `Could not find element ${id}. Click event will not be send. This will cause loss in analytics`,
+          );
+        }
 
-      elem.addEventListener("click", () => {
-        globalThis.window.DECO.events.dispatch(event);
-      });
-    });
-  }, []);
-
-  return null;
-};
+        elem.addEventListener("click", () => {
+          globalThis.window.DECO.events.dispatch(event);
+        });
+      },
+      id,
+      event,
+    )}
+  />
+);
 
 export const SendEventOnView = <E extends AnalyticsEvent>(
   { event, id }: { event: E; id: string },
-) => {
-  useEffect(() => {
-    requestAnimationFrame(() => {
-      const elem = document.getElementById(id);
+) => (
+  <script
+    defer
+    src={scriptAsDataURI(
+      (id: string, event: E) => {
+        const elem = document.getElementById(id);
 
-      if (!elem) {
-        return console.warn(
-          `Could not find element ${id}. Click event will not be send. This will cause loss in analytics`,
-        );
-      }
-
-      const observer = new IntersectionObserver((items) => {
-        for (const item of items) {
-          if (!item.isIntersecting) continue;
-
-          globalThis.window.DECO.events.dispatch(event);
-          observer.unobserve(elem);
+        if (!elem) {
+          return console.warn(
+            `Could not find element ${id}. Click event will not be send. This will cause loss in analytics`,
+          );
         }
-      });
 
-      observer.observe(elem);
-    });
-  }, []);
+        const observer = new IntersectionObserver((items) => {
+          for (const item of items) {
+            if (!item.isIntersecting) continue;
 
-  return null;
-};
+            globalThis.window.DECO.events.dispatch(event);
+            observer.unobserve(elem);
+          }
+        });
+
+        observer.observe(elem);
+      },
+      id,
+      event,
+    )}
+  />
+);
