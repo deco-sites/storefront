@@ -69,6 +69,9 @@ server/
 import_map.local.json
 # db files
 .config.json
+.decofile.json
+.release.json
+
 # Fresh build directory
 _fresh/
 
