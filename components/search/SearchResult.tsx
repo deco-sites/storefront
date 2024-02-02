@@ -73,8 +73,7 @@ function Result({
               products={products}
               offset={offset}
               layout={{ card: cardLayout, columns: layout?.columns }}
-              nextPage={pageInfo.nextPage || ""}
-              count={pageInfo.recordPerPage || 4}
+              pageInfo={pageInfo}
             />
           </div>
         </div>
