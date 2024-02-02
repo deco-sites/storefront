@@ -23,16 +23,17 @@ export default function ShowMore({ pageInfo, layout, platform }: Props) {
 
   const handleLoadMore = async () => {
     loading.value = true;
-    if(!pageInfo.showMore) return;
+    if (!pageInfo.showMore) return;
     // Figure out a better way to type this loader
     // deno-lint-ignore no-explicit-any
     const invokePayload: any = {
-        key: pageInfo.showMore,
-        props: { 
-            count: pageInfo.recordPerPage || 12,
-            nextPage: window.location.origin + window.location.pathname + nextPage.value,
-        },
-      };
+      key: pageInfo.showMore,
+      props: {
+        count: pageInfo.recordPerPage || 12,
+        nextPage: window.location.origin + window.location.pathname +
+          nextPage.value,
+      },
+    };
     const page = await invoke(invokePayload) as ProductListingPage | null;
     loading.value = false;
     console.log(page);
