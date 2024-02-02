@@ -37,8 +37,6 @@ function ProductGallery({ products, pageInfo, layout, offset }: Props) {
   const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
   const desktop = DESKTOP_COLUMNS[layout?.columns?.desktop ?? 4];
 
-  console.log(platform);
-
   return (
     <div class={`grid ${mobile} gap-2 items-center ${desktop} sm:gap-10`}>
       {products?.map((product, index) => (

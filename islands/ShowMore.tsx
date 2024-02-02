@@ -36,7 +36,6 @@ export default function ShowMore({ pageInfo, layout, platform }: Props) {
     };
     const page = await invoke(invokePayload) as ProductListingPage | null;
     loading.value = false;
-    console.log(page);
 
     if (page) {
       nextPage.value = page.nextPage;
