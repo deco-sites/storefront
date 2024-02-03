@@ -4,6 +4,8 @@ import ProductCard, {
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import { PageInfo, Product } from "apps/commerce/types.ts";
 import ShowMore from "$store/islands/ShowMore.tsx";
+import { Head } from "$fresh/runtime.ts";
+import { Format } from "$store/components/search/SearchResult.tsx";
 
 export interface Columns {
   mobile?: 1 | 2;
@@ -13,10 +15,12 @@ export interface Columns {
 export interface Props {
   products: Product[] | null;
   pageInfo: PageInfo;
+  loaderProps: string;
   offset: number;
   layout?: {
     card?: CardLayout;
     columns?: Columns;
+    format?: Format;
   };
 }
 
@@ -32,7 +36,7 @@ const DESKTOP_COLUMNS = {
   5: "sm:grid-cols-5",
 };
 
-function ProductGallery({ products, pageInfo, layout, offset }: Props) {
+function ProductGallery({ products, pageInfo, layout, offset, loaderProps }: Props) {
   const platform = usePlatform();
   const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
   const desktop = DESKTOP_COLUMNS[layout?.columns?.desktop ?? 4];
@@ -49,12 +53,22 @@ function ProductGallery({ products, pageInfo, layout, offset }: Props) {
         />
       ))}
 
-      {(pageInfo.showMore) && (
-        <ShowMore
-          pageInfo={pageInfo}
-          layout={layout}
-          platform={platform}
-        />
+      <Head>
+        {pageInfo.nextPage && <link rel="next" href={pageInfo.nextPage} />}
+        {pageInfo.previousPage && (
+          <link rel="prev" href={pageInfo.previousPage} />
+        )}
+      </Head>
+
+      {(pageInfo.showMore && layout.format === "Show More") && (
+        <>
+          <ShowMore
+            pageInfo={pageInfo}
+            layout={layout}
+            platform={platform}
+            loaderProps={loaderProps}
+          />
+        </>
       )}
     </div>
   );
