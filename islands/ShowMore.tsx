@@ -18,20 +18,23 @@ export interface Props {
   loaderProps: Resolved<ProductListingPage | null>;
 }
 
-export default function ShowMore({ pageInfo, layout, platform, loaderProps }: Props) {
+export default function ShowMore(
+  { pageInfo, layout, platform, loaderProps }: Props,
+) {
   const products = useSignal<Array<Product | null>>([]);
   const nextPage = useSignal(pageInfo.nextPage);
   const loading = useSignal(false);
 
   const handleLoadMore = async () => {
     loading.value = true;
-    if (!pageInfo.showMore) return;
 
-    const url = new URL(window.location.origin + window.location.pathname + nextPage.value)
+    const url = new URL(
+      window.location.origin + window.location.pathname + nextPage.value,
+    );
 
     const invokePayload: any = {
       key: loaderProps.__resolveType,
-      props: { 
+      props: {
         ...loaderProps,
         __resolveType: undefined,
         pageHref: url.href,
