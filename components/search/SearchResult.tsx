@@ -50,8 +50,12 @@ function Result({
   layout,
   cardLayout,
   startingPage = 0,
-  loaderProps
-}: Omit<Props, "page"> & { page: ProductListingPage; layout?: Layout; loaderProps: Resolved<ProductListingPage | null>}) {
+  loaderProps,
+}: Omit<Props, "page"> & {
+  page: ProductListingPage;
+  layout?: Layout;
+  loaderProps: Resolved<ProductListingPage | null>;
+}) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
   const perPage = pageInfo.recordPerPage || products.length;
 
@@ -89,7 +93,7 @@ function Result({
           </div>
         </div>
 
-        {(format == "Pagination" || !pageInfo.showMore) && (
+        {format == "Pagination" && (
           <div class="flex justify-center my-4">
             <div class="join">
               <a
@@ -147,18 +151,17 @@ function SearchResult({ page, ...props }: ReturnType<typeof loader>) {
 }
 
 export const loader = async (props: Props, _req: Request, ctx: FnContext) => {
-
   const page = await ctx.invoke[props.page.__resolveType]({
-    ...props.page
-  })
+    ...props.page,
+  });
 
   return {
     ...props,
     page,
     loaderProps: {
-      ...props.page
-    }
-  }
-}
+      ...props.page,
+    },
+  };
+};
 
 export default SearchResult;

@@ -36,7 +36,9 @@ const DESKTOP_COLUMNS = {
   5: "sm:grid-cols-5",
 };
 
-function ProductGallery({ products, pageInfo, layout, offset, loaderProps }: Props) {
+function ProductGallery(
+  { products, pageInfo, layout, offset, loaderProps }: Props,
+) {
   const platform = usePlatform();
   const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
   const desktop = DESKTOP_COLUMNS[layout?.columns?.desktop ?? 4];
@@ -60,7 +62,7 @@ function ProductGallery({ products, pageInfo, layout, offset, loaderProps }: Pro
         )}
       </Head>
 
-      {(pageInfo.showMore && layout.format === "Show More") && (
+      {(layout.format === "Show More") && (
         <>
           <ShowMore
             pageInfo={pageInfo}
