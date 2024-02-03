@@ -1,11 +1,12 @@
 import { useSignal } from "@preact/signals";
 import { invoke } from "$store/runtime.ts";
-import { PageInfo, Product } from "apps/commerce/types.ts";
+import { PageInfo, Product, ProductListingPage } from "apps/commerce/types.ts";
 import ProductCard from "$store/components/product/ProductCard.tsx";
 import { Layout as CardLayout } from "$store/components/product/ProductCard.tsx";
 import { Columns } from "$store/components/product/ProductGallery.tsx";
 import Spinner from "$store/components/ui/Spinner.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
+import { Resolved } from "deco/engine/core/resolver.ts";
 
 export interface Props {
   pageInfo: PageInfo;
@@ -14,9 +15,10 @@ export interface Props {
     columns?: Columns;
   };
   platform: ReturnType<typeof usePlatform>;
+  loaderProps: Resolved<ProductListingPage | null>;
 }
 
-export default function ShowMore({ pageInfo, layout, platform }: Props) {
+export default function ShowMore({ pageInfo, layout, platform, loaderProps }: Props) {
   const products = useSignal<Array<Product | null>>([]);
   const nextPage = useSignal(pageInfo.nextPage);
   const loading = useSignal(false);
@@ -24,21 +26,25 @@ export default function ShowMore({ pageInfo, layout, platform }: Props) {
   const handleLoadMore = async () => {
     loading.value = true;
     if (!pageInfo.showMore) return;
-    // Figure out a better way to type this loader
-    // deno-lint-ignore no-explicit-any
+
+    const url = new URL(window.location.origin + window.location.pathname + nextPage.value)
+
     const invokePayload: any = {
-      key: pageInfo.showMore,
-      props: {
-        count: pageInfo.recordPerPage || 12,
-        nextPage: window.location.origin + window.location.pathname +
-          nextPage.value,
+      key: loaderProps.__resolveType,
+      props: { 
+        ...loaderProps,
+        __resolveType: undefined,
+        pageHref: url.href,
       },
     };
+
     const page = await invoke(invokePayload) as ProductListingPage | null;
+
     loading.value = false;
 
     if (page) {
-      nextPage.value = page.nextPage;
+      window.history.pushState({}, "", nextPage.value);
+      nextPage.value = page.pageInfo.nextPage;
       products.value = [...products.value, ...page.products];
     }
   };

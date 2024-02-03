@@ -8,6 +8,9 @@ import { useOffer } from "$store/sdk/useOffer.ts";
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
+import { Resolved } from "deco/engine/core/resolver.ts";
+
+export type Format = "Show More" | "Pagination";
 
 export interface Layout {
   /**
@@ -18,11 +21,15 @@ export interface Layout {
    * @description Number of products per line on grid
    */
   columns?: Columns;
+  /**
+   * @description Format of the pagination
+   */
+  format?: Format;
 }
 
 export interface Props {
   /** @title Integration */
-  page: ProductListingPage | null;
+  page: Resolved<ProductListingPage | null>;
   layout?: Layout;
   cardLayout?: CardLayout;
 
@@ -43,9 +50,12 @@ function Result({
   layout,
   cardLayout,
   startingPage = 0,
-}: Omit<Props, "page"> & { page: ProductListingPage }) {
+  loaderProps
+}: Omit<Props, "page"> & { page: ProductListingPage; layout?: Layout; loaderProps: Resolved<ProductListingPage | null>}) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
   const perPage = pageInfo.recordPerPage || products.length;
+
+  const { format = "Show More" } = layout ?? {};
 
   const id = useId();
 
@@ -72,35 +82,38 @@ function Result({
             <ProductGallery
               products={products}
               offset={offset}
-              layout={{ card: cardLayout, columns: layout?.columns }}
+              layout={{ card: cardLayout, columns: layout?.columns, format }}
               pageInfo={pageInfo}
+              loaderProps={loaderProps}
             />
           </div>
         </div>
 
-        <div class="flex justify-center my-4">
-          <div class="join">
-            <a
-              aria-label="previous page link"
-              rel="prev"
-              href={pageInfo.previousPage ?? "#"}
-              class="btn btn-ghost join-item"
-            >
-              <Icon id="ChevronLeft" size={24} strokeWidth={2} />
-            </a>
-            <span class="btn btn-ghost join-item">
-              Page {zeroIndexedOffsetPage + 1}
-            </span>
-            <a
-              aria-label="next page link"
-              rel="next"
-              href={pageInfo.nextPage ?? "#"}
-              class="btn btn-ghost join-item"
-            >
-              <Icon id="ChevronRight" size={24} strokeWidth={2} />
-            </a>
+        {(format == "Pagination" || !pageInfo.showMore) && (
+          <div class="flex justify-center my-4">
+            <div class="join">
+              <a
+                aria-label="previous page link"
+                rel="prev"
+                href={pageInfo.previousPage ?? "#"}
+                class="btn btn-ghost join-item"
+              >
+                <Icon id="ChevronLeft" size={24} strokeWidth={2} />
+              </a>
+              <span class="btn btn-ghost join-item">
+                Page {zeroIndexedOffsetPage + 1}
+              </span>
+              <a
+                aria-label="next page link"
+                rel="next"
+                href={pageInfo.nextPage ?? "#"}
+                class="btn btn-ghost join-item"
+              >
+                <Icon id="ChevronRight" size={24} strokeWidth={2} />
+              </a>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <SendEventOnView
         id={id}
@@ -125,12 +138,27 @@ function Result({
   );
 }
 
-function SearchResult({ page, ...props }: Props) {
+function SearchResult({ page, ...props }: ReturnType<typeof loader>) {
   if (!page) {
     return <NotFound />;
   }
 
   return <Result {...props} page={page} />;
+}
+
+export const loader = async (props: Props, _req: Request, ctx: FnContext) => {
+
+  const page = await ctx.invoke[props.page.__resolveType]({
+    ...props.page
+  })
+
+  return {
+    ...props,
+    page,
+    loaderProps: {
+      ...props.page
+    }
+  }
 }
 
 export default SearchResult;
