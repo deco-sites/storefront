@@ -2,10 +2,11 @@ import ProductCard, {
   Layout as CardLayout,
 } from "$store/components/product/ProductCard.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
-import { PageInfo, Product } from "apps/commerce/types.ts";
+import { PageInfo, Product, ProductListingPage } from "apps/commerce/types.ts";
 import ShowMore from "$store/islands/ShowMore.tsx";
 import { Head } from "$fresh/runtime.ts";
 import { Format } from "$store/components/search/SearchResult.tsx";
+import { Resolved } from "deco/engine/core/resolver.ts";
 
 export interface Columns {
   mobile?: 1 | 2;
@@ -15,7 +16,7 @@ export interface Columns {
 export interface Props {
   products: Product[] | null;
   pageInfo: PageInfo;
-  loaderProps: string;
+  loaderProps: Resolved<ProductListingPage | null>;
   offset: number;
   layout?: {
     card?: CardLayout;
@@ -62,7 +63,7 @@ function ProductGallery(
         )}
       </Head>
 
-      {(layout.format === "Show More") && (
+      {(layout && layout?.format === "Show More") && (
         <>
           <ShowMore
             pageInfo={pageInfo}
