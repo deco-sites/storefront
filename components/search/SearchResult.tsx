@@ -152,16 +152,9 @@ function SearchResult({ page, ...props }: ReturnType<typeof loader>) {
 }
 
 export const loader = async (props: Props, _req: Request, ctx: FnContext) => {
-  // Figure out a better way to type this loader
-  // deno-lint-ignore no-explicit-any
-  const invokePayload: any = {
-    key: props.page.__resolveType,
-    props: {
-      ...props.page,
-    },
-  };
-
-  const page = await invoke(invokePayload) as ProductListingPage | null;
+  const page = await ctx.invoke[props.page.__resolveType]({
+    ...props.page,
+  }) as ProductListingPage | null;
 
   return {
     ...props,
