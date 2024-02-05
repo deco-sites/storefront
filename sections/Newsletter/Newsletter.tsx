@@ -7,19 +7,45 @@ export interface Form {
   helpText?: string;
 }
 
+interface Content {
+  border?: boolean;
+  /**
+   * @format icon-select
+   * @options deco-sites/storefront/loaders/icons.ts
+   */
+  alignment?: "Left" | "Center" | "Right";
+  bgColor?: "Normal" | "Reverse";
+}
+
+interface Header {
+  /**
+   * @format icon-select
+   * @options deco-sites/storefront/loaders/icons.ts
+   */
+  fontSize?: "Small" | "Normal" | "Large";
+  /**
+   * @format icon-select
+   * @options deco-sites/storefront/loaders/icons.ts
+   */
+  textAlignment?: "Left" | "Center" | "Right";
+  /**
+   * @format icon-select
+   * @options deco-sites/storefront/loaders/icons.ts
+   */
+  case?: "Default" | "Titlecase" | "Uppercase" | "Lowercase";
+}
+
+interface Layout {
+  header?: Header;
+  content?: Content;
+}
+
 export interface Props {
   title?: string;
   /** @format textarea */
   description?: string;
   form?: Form;
-  layout?: {
-    headerFontSize?: "Large" | "Normal";
-    content?: {
-      border?: boolean;
-      alignment?: "Center" | "Left" | "Side to side";
-      bgColor?: "Normal" | "Reverse";
-    };
-  };
+  layout?: Layout;
 }
 
 const DEFAULT_PROPS: Props = {
@@ -32,10 +58,14 @@ const DEFAULT_PROPS: Props = {
       'Ao se inscrever, você concorda com nossa <a class="link" href="/politica-de-privacidade">Política de privacidade</a>.',
   },
   layout: {
-    headerFontSize: "Large",
+    header: {
+      fontSize: "Large",
+      textAlignment: "Center",
+      case: "Default",
+    },
     content: {
       border: false,
-      alignment: "Center",
+      alignment: "Left",
     },
   },
 };
@@ -51,7 +81,7 @@ export default function Newsletter(props: Props) {
       description={description}
       alignment={layout?.content?.alignment === "Left" ? "left" : "center"}
       colorReverse={isReverse}
-      fontSize={layout?.headerFontSize}
+      fontSize={layout?.header?.fontSize}
     />
   );
 
@@ -112,7 +142,7 @@ export default function Newsletter(props: Props) {
           </div>
         </div>
       )}
-      {layout?.content?.alignment === "Side to side" && (
+      {layout?.content?.alignment === "Right" && (
         <div
           class={`container flex flex-col rounded justify-between lg:flex-row p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
         >
