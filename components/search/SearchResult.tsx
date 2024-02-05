@@ -9,6 +9,7 @@ import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
 import { Resolved } from "deco/engine/core/resolver.ts";
+import { FnContext } from "deco/mod.ts";
 
 export type Format = "Show More" | "Pagination";
 
@@ -151,9 +152,16 @@ function SearchResult({ page, ...props }: ReturnType<typeof loader>) {
 }
 
 export const loader = async (props: Props, _req: Request, ctx: FnContext) => {
-  const page = await ctx.invoke[props.page.__resolveType]({
-    ...props.page,
-  });
+  // Figure out a better way to type this loader
+  // deno-lint-ignore no-explicit-any
+  const invokePayload: any = {
+    key: props.page.__resolveType,
+    props: {
+      ...props.page,
+    },
+  };
+
+  const page = await invoke(invokePayload) as ProductListingPage | null;
 
   return {
     ...props,

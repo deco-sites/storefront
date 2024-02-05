@@ -32,6 +32,8 @@ export default function ShowMore(
       window.location.origin + window.location.pathname + nextPage.value,
     );
 
+    // Figure out a better way to type this loader
+    // deno-lint-ignore no-explicit-any
     const invokePayload: any = {
       key: loaderProps.__resolveType,
       props: {
