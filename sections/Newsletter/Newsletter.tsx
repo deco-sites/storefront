@@ -10,7 +10,7 @@ export interface Form {
 interface Content {
   border?: boolean;
   /**
-   * @format icon-select
+   * @format button-group
    * @options deco-sites/storefront/loaders/icons.ts
    */
   alignment?: "Left" | "Center" | "Right";
@@ -19,17 +19,17 @@ interface Content {
 
 interface Header {
   /**
-   * @format icon-select
+   * @format button-group
    * @options deco-sites/storefront/loaders/icons.ts
    */
   fontSize?: "Small" | "Normal" | "Large";
   /**
-   * @format icon-select
+   * @format button-group
    * @options deco-sites/storefront/loaders/icons.ts
    */
   textAlignment?: "Left" | "Center" | "Right";
   /**
-   * @format icon-select
+   * @format button-group
    * @options deco-sites/storefront/loaders/icons.ts
    */
   case?: "Default" | "Titlecase" | "Uppercase" | "Lowercase";
