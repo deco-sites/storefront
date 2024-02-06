@@ -1,11 +1,13 @@
 import SearchResult, {
   Props as SearchResultProps,
 } from "$store/components/search/SearchResult.tsx";
-import { FnContext } from "deco/mod.ts";
+import { ProductListingPage } from "apps/commerce/types.ts";
+import { AppContext } from "$store/apps/site.ts";
+import { SectionProps } from "deco/mod.ts";
 
 export type Props = SearchResultProps;
 
-function WishlistGallery(props: ReturnType<typeof loader>) {
+function WishlistGallery(props: SectionProps<typeof loader>) {
   const isEmpty = !props.page || props.page.products.length === 0;
 
   if (isEmpty) {
@@ -25,10 +27,13 @@ function WishlistGallery(props: ReturnType<typeof loader>) {
   return <SearchResult {...props} />;
 }
 
-export const loader = async (props: Props, _req: Request, ctx: FnContext) => {
-  const page = await ctx.invoke[props.page.__resolveType]({
-    ...props.page,
-  }) as ProductListingPage | null;
+export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
+  const page = await ctx.invoke(
+    // deno-lint-ignore no-explicit-any
+    props.page.__resolveType as any,
+    // deno-lint-ignore no-explicit-any
+    props.page as any,
+  ) as ProductListingPage | null;
 
   return {
     ...props,

@@ -9,7 +9,8 @@ import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
 import { Resolved } from "deco/engine/core/resolver.ts";
-import { FnContext } from "deco/mod.ts";
+import { AppContext } from "$store/apps/site.ts";
+import type { SectionProps } from "deco/types.ts";
 
 export type Format = "Show More" | "Pagination";
 
@@ -58,7 +59,7 @@ function Result({
   loaderProps: Resolved<ProductListingPage | null>;
 }) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
-  const perPage = pageInfo.recordPerPage || products.length;
+  const perPage = pageInfo?.recordPerPage || products.length;
 
   const { format = "Show More" } = layout ?? {};
 
@@ -143,18 +144,23 @@ function Result({
   );
 }
 
-function SearchResult({ page, ...props }: ReturnType<typeof loader>) {
+function SearchResult(
+  { page, loaderProps, ...props }: SectionProps<typeof loader>,
+) {
   if (!page) {
     return <NotFound />;
   }
 
-  return <Result {...props} page={page} />;
+  return <Result {...props} page={page} loaderProps={loaderProps} />;
 }
 
-export const loader = async (props: Props, _req: Request, ctx: FnContext) => {
-  const page = await ctx.invoke[props.page.__resolveType]({
-    ...props.page,
-  }) as ProductListingPage | null;
+export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
+  const page = await ctx.invoke(
+    // deno-lint-ignore no-explicit-any
+    props.page.__resolveType as any,
+    // deno-lint-ignore no-explicit-any
+    props.page as any,
+  ) as ProductListingPage | null;
 
   return {
     ...props,
