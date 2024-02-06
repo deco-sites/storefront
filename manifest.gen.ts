@@ -2,9 +2,10 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $$$0 from "./loaders/Layouts/ProductCard.tsx";
-import * as $$$1 from "./loaders/List/Sections.tsx";
-import * as $$$2 from "./loaders/icons.ts";
+import * as $$$0 from "./loaders/availableIcons.ts";
+import * as $$$1 from "./loaders/Layouts/ProductCard.tsx";
+import * as $$$2 from "./loaders/List/Sections.tsx";
+import * as $$$3 from "./loaders/icons.ts";
 import * as $$$$$$0 from "./sections/Gallery.tsx";
 import * as $$$$$$1 from "./sections/Footer/Footer.tsx";
 import * as $$$$$$2 from "./sections/Category/CategoryBanner.tsx";
@@ -55,9 +56,10 @@ import * as $$$$$$$$$$$1 from "./apps/site.ts";
 
 const manifest = {
   "loaders": {
-    "deco-sites/storefront/loaders/icons.ts": $$$2,
-    "deco-sites/storefront/loaders/Layouts/ProductCard.tsx": $$$0,
-    "deco-sites/storefront/loaders/List/Sections.tsx": $$$1,
+    "deco-sites/storefront/loaders/availableIcons.ts": $$$0,
+    "deco-sites/storefront/loaders/icons.ts": $$$3,
+    "deco-sites/storefront/loaders/Layouts/ProductCard.tsx": $$$1,
+    "deco-sites/storefront/loaders/List/Sections.tsx": $$$2,
   },
   "sections": {
     "deco-sites/storefront/sections/Animation/Animation.tsx": $$$$$$13,
