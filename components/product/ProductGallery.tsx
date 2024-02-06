@@ -2,7 +2,11 @@ import ProductCard, {
   Layout as CardLayout,
 } from "$store/components/product/ProductCard.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
-import { Product } from "apps/commerce/types.ts";
+import { PageInfo, Product, ProductListingPage } from "apps/commerce/types.ts";
+import ShowMore from "$store/islands/ShowMore.tsx";
+import { Head } from "$fresh/runtime.ts";
+import { Format } from "$store/components/search/SearchResult.tsx";
+import { Resolved } from "deco/engine/core/resolver.ts";
 
 export interface Columns {
   mobile?: 1 | 2;
@@ -11,10 +15,13 @@ export interface Columns {
 
 export interface Props {
   products: Product[] | null;
+  pageInfo: PageInfo;
+  loaderProps: Resolved<ProductListingPage | null>;
   offset: number;
   layout?: {
     card?: CardLayout;
     columns?: Columns;
+    format?: Format;
   };
 }
 
@@ -30,7 +37,9 @@ const DESKTOP_COLUMNS = {
   5: "sm:grid-cols-5",
 };
 
-function ProductGallery({ products, layout, offset }: Props) {
+function ProductGallery(
+  { products, pageInfo, layout, offset, loaderProps }: Props,
+) {
   const platform = usePlatform();
   const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
   const desktop = DESKTOP_COLUMNS[layout?.columns?.desktop ?? 4];
@@ -46,6 +55,24 @@ function ProductGallery({ products, layout, offset }: Props) {
           platform={platform}
         />
       ))}
+
+      <Head>
+        {pageInfo.nextPage && <link rel="next" href={pageInfo.nextPage} />}
+        {pageInfo.previousPage && (
+          <link rel="prev" href={pageInfo.previousPage} />
+        )}
+      </Head>
+
+      {(layout && layout?.format === "Show More") && (
+        <>
+          <ShowMore
+            pageInfo={pageInfo}
+            layout={layout}
+            platform={platform}
+            loaderProps={loaderProps}
+          />
+        </>
+      )}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { ProductListingPage } from "apps/commerce/types.ts";
 import type { JSX } from "preact";
 
 const SORT_QUERY_PARAM = "sort";
+const PAGE_QUERY_PARAM = "page";
 
 const useSort = () =>
   useMemo(() => {
@@ -18,6 +19,7 @@ const applySort = (e: JSX.TargetedEvent<HTMLSelectElement, Event>) => {
     globalThis.window.location.search,
   );
 
+  urlSearchParams.delete(PAGE_QUERY_PARAM);
   urlSearchParams.set(SORT_QUERY_PARAM, e.currentTarget.value);
   globalThis.window.location.search = urlSearchParams.toString();
 };
