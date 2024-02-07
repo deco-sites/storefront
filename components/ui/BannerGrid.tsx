@@ -161,15 +161,13 @@ export default function BannnerGrid(props: Props) {
                 width={250}
                 height={250}
               />
-              <Image
+              <img
                 class="w-full"
                 sizes="(max-width: 640px) 100vw, 30vw"
                 src={srcMobile}
                 alt={alt}
                 decoding="async"
                 loading="lazy"
-                width={100}
-                height={100}
               />
             </Picture>
           </a>

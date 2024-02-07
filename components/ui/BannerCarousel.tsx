@@ -149,13 +149,11 @@ function BannerItem(
           width={1440}
           height={600}
         />
-        <Image
+         <img
           class="object-cover w-full h-full"
           loading={lcp ? "eager" : "lazy"}
           src={desktop}
           alt={alt}
-          width={1440}
-          height={600}
         />
       </Picture>
     </a>
