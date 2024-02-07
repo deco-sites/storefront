@@ -154,7 +154,7 @@ function Banner(
           media="(min-width: 768px)"
           src={srcDesktop || srcMobile}
         />
-        <Image
+        <img
           width={640}
           class="w-full h-full object-cover"
           src={srcMobile}
