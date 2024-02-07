@@ -18,7 +18,6 @@ export type Props = {
    */
   platform: Platform;
   theme?: Section;
-  vendor?: string;
 } & CommerceProps;
 
 export type Platform =
