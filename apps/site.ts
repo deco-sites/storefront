@@ -6,7 +6,7 @@ import { color as wake } from "apps/wake/mod.ts";
 import { color as linx } from "apps/linx/mod.ts";
 import { color as nuvemshop } from "apps/nuvemshop/mod.ts";
 import { Section } from "deco/blocks/section.ts";
-import { App } from "deco/mod.ts";
+import type { App as A, AppContext as AC } from "deco/mod.ts";
 import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
 
@@ -18,6 +18,7 @@ export type Props = {
    */
   platform: Platform;
   theme?: Section;
+  vendor?: string;
 } & CommerceProps;
 
 export type Platform =
@@ -28,8 +29,12 @@ export type Platform =
   | "linx"
   | "nuvemshop"
   | "custom";
+  
 
 export let _platform: Platform = "custom";
+
+export type App = ReturnType<typeof Site>;
+export type AppContext = AC<App>;
 
 const color = (platform: string) => {
   switch (platform) {
@@ -56,7 +61,7 @@ let firstRun = true;
 
 export default function Site(
   { theme, ...state }: Props,
-): App<Manifest, Props, [ReturnType<typeof commerce>]> {
+): A<Manifest, Props, [ReturnType<typeof commerce>]> {
   _platform = state.platform || state.commerce?.platform || "custom";
 
   // Prevent console.logging twice
