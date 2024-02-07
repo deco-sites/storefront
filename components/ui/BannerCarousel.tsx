@@ -149,7 +149,7 @@ function BannerItem(
           width={1440}
           height={600}
         />
-         <img
+        <img
           class="object-cover w-full h-full"
           loading={lcp ? "eager" : "lazy"}
           src={desktop}
