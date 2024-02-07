@@ -29,7 +29,6 @@ export type Platform =
   | "linx"
   | "nuvemshop"
   | "custom";
-  
 
 export let _platform: Platform = "custom";
 
