@@ -10,7 +10,6 @@ const animationClasses = {
 };
 
 interface Children {
-  label?: string;
   section: Section;
 }
 
