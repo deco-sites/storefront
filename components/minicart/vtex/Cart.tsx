@@ -5,8 +5,7 @@ function Cart() {
   const { cart, loading, updateItems, addCouponsToCart } = useCart();
   const { items, totalizers } = cart.value ?? { items: [] };
   const total = totalizers?.find((item) => item.id === "Items")?.value || 0;
-  const discounts =
-    (totalizers?.find((item) => item.id === "Discounts")?.value || 0) * -1;
+  const discounts = (totalizers?.find((item) => item.id === "Discounts")?.value || 0) * -1;
   const locale = cart.value?.clientPreferencesData.locale ?? "pt-BR";
   const currency = cart.value?.storePreferencesData.currencyCode ?? "BRL";
   const coupon = cart.value?.marketingData?.coupon ?? undefined;

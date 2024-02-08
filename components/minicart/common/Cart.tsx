@@ -105,7 +105,7 @@ function Cart({
                 )}
                 <div class="w-full flex justify-between px-4 text-sm">
                   <span>Subtotal</span>
-                  <span class="px-4">
+                  <span>
                     {formatPrice(subtotal, currency, locale)}
                   </span>
                 </div>
@@ -139,7 +139,7 @@ function Cart({
                         params: {
                           coupon,
                           currency,
-                          value: total - discounts,
+                          value: total,
                           items: items
                             .map((_, index) => itemToAnalyticsItem(index))
                             .filter((x): x is AnalyticsItem => Boolean(x)),
