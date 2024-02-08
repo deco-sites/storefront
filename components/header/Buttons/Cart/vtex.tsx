@@ -12,8 +12,8 @@ function CartButton() {
   const coupon = marketingData?.coupon ?? undefined;
   const currency = storePreferencesData?.currencyCode ?? "BRL";
   const total = totalizers.find((item) => item.id === "Items")?.value ?? 0;
-  const discounts = totalizers.find((item) => item.id === "Discounts")?.value ??
-    0;
+  const discounts =
+    (totalizers.find((item) => item.id === "Discounts")?.value ?? 0) * -1;
 
   return (
     <Button
