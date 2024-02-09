@@ -1,7 +1,7 @@
 {
   "imports": {
     "$store/": "./",
-    "deco/": "https://denopkg.com/deco-cx/deco@1.52.20/",
+    "deco/": "https://denopkg.com/deco-cx/deco@d16decfea30e01c86ffc96a1c3227abac0996e3d/",
     "apps/": "https://denopkg.com/deco-cx/apps@0.32.29/",
     "$fresh/": "https://deno.land/x/fresh@1.6.3/",
     "preact": "https://esm.sh/preact@10.19.2",
@@ -49,7 +49,6 @@
   "nodeModulesDir": true,
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "preact",
-    "experimentalDecorators": true
+    "jsxImportSource": "preact"
   }
 }
