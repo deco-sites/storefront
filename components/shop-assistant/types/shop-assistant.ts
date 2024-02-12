@@ -1,12 +1,13 @@
 // deno-lint-ignore-file no-explicit-any
-// TODO(@ItamarRocha): Import these from the other Product definition
+import { Product as ProductType } from "apps/commerce/types.ts";
+
 export interface Content {
   name: string;
   props: {
     url: string;
     request: string;
   };
-  response: string | Product[];
+  response: string | ProductType[];
   options?: string[];
 }
 
@@ -44,7 +45,7 @@ export interface PropertyValue {
 export interface ProductGroup {
   "@type": string;
   productGroupID: string;
-  hasVariant: Product[];
+  hasVariant: ProductType[];
   url: string;
   name: string;
   additionalProperty: PropertyValue[];

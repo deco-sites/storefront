@@ -5,8 +5,8 @@ import {
   MessageContentAudio,
   MessageContentFile,
   MessageContentText,
-  Product,
 } from "../types/shop-assistant.ts";
+import { Product as ProductType } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import AddToCartButton from "$store/islands/AddToCartButton/vtex.tsx";
@@ -27,7 +27,7 @@ export const mapProductToAnalyticsItemAssistant = (
     index = 0,
     quantity = 1,
   }: {
-    product: Product;
+    product: ProductType;
     price?: number;
     listPrice?: number;
     index?: number;
@@ -67,7 +67,7 @@ export function FunctionCalls(
     return (content as Content).response !== undefined;
   };
 
-  const allProducts: Product[] = messages
+  const allProducts: ProductType[] = messages
     .filter((message) => message.type === "function_calls")
     .flatMap((message) =>
       message.content
@@ -78,7 +78,7 @@ export function FunctionCalls(
               "vtex/loaders/intelligentSearch/productList.ts" &&
             content.response.length !== 0,
         )
-        .flatMap((content) => content.response as Product[])
+        .flatMap((content) => content.response as ProductType[])
     );
 
   console.log({ allProducts });
@@ -110,7 +110,7 @@ export function FunctionCalls(
 }
 
 function ProductShelf(
-  { products, assistantIds }: { products: Product[]; assistantIds: Ids },
+  { products, assistantIds }: { products: ProductType[]; assistantIds: Ids },
 ) {
   const id = useId();
   console.log(products);
@@ -150,13 +150,16 @@ function ProductShelf(
 }
 
 function ProductCard(
-  { product, assistantIds }: { product: Product; assistantIds: Ids },
+  { product, assistantIds }: { product: ProductType; assistantIds: Ids },
 ) {
+  const {
+    price = 0,
+    seller = "1",
+  } = useOffer(product.offers);
   const { title, description } = extractTitleAndDescription(
     product.description,
   );
-  const currency = product.offers.priceCurrency;
-  const price = product.offers.offers[0].price;
+  const currency = product.offers?.priceCurrency;
 
   return (
     <div class="flex flex-row items-center bg-white gap-4 rounded-2xl text-black p-4">
@@ -167,7 +170,7 @@ function ProductCard(
         class="w-[18rem] flex justify-center"
       >
         <img
-          src={product.image[0].url}
+          src={product.image ? product.image[0].url : ""}
           alt={product.name}
           class="w-full h-auto rounded-md"
         />
@@ -189,14 +192,14 @@ function ProductCard(
           </p>
           <AddToCartButton
             productID={product.productID}
-            seller={product.offers.offers[0].seller}
+            seller={seller}
             eventParams={{ items: [] }}
             onClick={() => {
               sendEvent({
                 name: "add_to_cart",
                 params: {
-                  currency: product.offers.priceCurrency,
-                  value: product.offers.offers[0].price,
+                  currency: product.offers?.priceCurrency,
+                  value: product.offers?.offers[0].price,
                   assistantId: assistantIds.assistantId,
                   assistantThreadID: assistantIds.threadId,
                   items: [mapProductToAnalyticsItem({ product })],
@@ -211,13 +214,13 @@ function ProductCard(
 }
 
 function ProductCarousel(
-  { products, assistantIds }: { products: Product[]; assistantIds: Ids },
+  { products, assistantIds }: { products: ProductType[]; assistantIds: Ids },
 ) {
   const id = useId();
   const [currentProductIndex, setCurrentProductIndex] = useState(0);
-  const product = products[currentProductIndex] as Product;
+  const product = products[currentProductIndex] as ProductType;
   const currency = product.offers?.priceCurrency;
-  const price = product.offers.offers[0].price;
+  const price = product.offers?.offers[0].price;
   const [transition, setTransition] = useState("");
 
   const handleNextProduct = () => {
@@ -300,8 +303,8 @@ function ProductCarousel(
             class="flex justify-center min-w-[7rem]"
           >
             <img
-              src={product.image[0].url}
-              alt={product.image[0].name}
+              src={product.image ? product.image[0].url : ""}
+              alt={product.image ? product.image[0].name : ""}
               class="w-fit h-24 sm:h-32 max-w-fit rounded-md"
             />
           </a>
@@ -324,14 +327,14 @@ function ProductCarousel(
             </p>
             <AddToCartButton
               productID={product.productID}
-              seller={product.offers.offers[0].seller}
+              seller={product.offers?.offers[0].seller || ""}
               eventParams={{ items: [] }}
               onClick={() => {
                 sendEvent({
                   name: "add_to_cart",
                   params: {
-                    currency: product.offers.priceCurrency,
-                    value: product.offers.offers[0].price,
+                    currency: product.offers?.priceCurrency,
+                    value: product.offers?.offers[0].price,
                     assistantId: assistantIds.assistantId,
                     assistantThreadID: assistantIds.threadId,
                     items: [mapProductToAnalyticsItem({ product })],
@@ -360,7 +363,8 @@ function ProductCarousel(
 }
 
 // Helper functions
-const extractTitleAndDescription = (htmlString: string) => {
+const extractTitleAndDescription = (htmlString: string | undefined) => {
+  if (!htmlString) return { title: "", description: htmlString };
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlString, "text/html");
 
@@ -374,7 +378,7 @@ const extractTitleAndDescription = (htmlString: string) => {
   return { title, description };
 };
 
-const translatePriceCurrency = (priceCurrency: string) => {
+const translatePriceCurrency = (priceCurrency: string | undefined) => {
   if (!priceCurrency) return "";
   switch (priceCurrency) {
     case "BRL":
@@ -388,7 +392,11 @@ const translatePriceCurrency = (priceCurrency: string) => {
   }
 };
 
-const transformPrice = (price: number, currency: string) => {
+const transformPrice = (
+  price: number | undefined,
+  currency: string | undefined,
+) => {
+  if (!price) return "";
   // Example: change 188.7 to 188,70 if currency is BRL, any other currency will be 188.70
   switch (currency) {
     case "BRL":
