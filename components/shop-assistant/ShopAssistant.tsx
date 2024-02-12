@@ -35,7 +35,6 @@ export interface MainColors {
   "logo": string;
 }
 
-console.log("ShopAssistant.tsx");
 export interface Props {
   openChat?: boolean;
   mainColors?: MainColors;
@@ -51,7 +50,6 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
   const { displayCart } = useUI();
 
   useEffect(() => {
-    console.log({ openChat });
     if (typeof window !== "undefined") {
       const isOpen = JSON.parse(sessionStorage.getItem("isOpen") ?? "false") ||
         false;
@@ -79,7 +77,6 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
   }, [isChatMinimized]);
 
   useEffect(() => {
-    console.log({ openChat });
     setShowChat(openChat);
     sessionStorage.setItem("isOpen", JSON.stringify(openChat));
   }, [openChat]);
@@ -156,7 +153,6 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
       try {
         if (isJSON(event.data)) {
           const parsedData = JSON.parse(event.data);
-          console.log({ parsedData });
           if (parsedData.type === "Id") {
             updateIds({
               threadId: parsedData.threadId,
@@ -371,7 +367,6 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
 export default function ShopAssistant(
   { mainColors, logo, openChat }: Props,
 ) {
-  console.log("ShopAssistant.tsx");
   return (
     <ChatProvider>
       <Chat mainColors={mainColors} logo={logo} openChat={openChat} />
