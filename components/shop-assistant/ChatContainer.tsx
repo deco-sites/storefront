@@ -29,11 +29,9 @@ export function ChatContainer(
   }: ChatProps,
 ) {
   const [shouldAnimateWidth, setShouldAnimateWidth] = useState(false);
-  console.log("logo", logo);
 
   useEffect(() => {
     const localMsgList = [...messageList.value];
-    console.log({ localMsgList });
 
     const functionCallMsg: AssistantMsg[] = localMsgList
       .filter((msg): msg is AssistantMsg =>

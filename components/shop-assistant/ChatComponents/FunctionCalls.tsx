@@ -10,10 +10,8 @@ import { Product as ProductType } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
 import AddToCartButton from "$store/islands/AddToCartButton/vtex.tsx";
-import { useSignal } from "@preact/signals";
 import { useState } from "preact/hooks";
 import Icon from "$store/components/ui/Icon.tsx";
-import { useChatContext } from "$store/components/shop-assistant/ChatContext.tsx";
 import { sendEvent, SendEventOnView } from "$store/sdk/analytics.tsx";
 import { useId } from "preact/compat";
 import { AnalyticsItem } from "apps/commerce/types.ts";
@@ -81,8 +79,6 @@ export function FunctionCalls(
         .flatMap((content) => content.response as ProductType[])
     );
 
-  console.log({ allProducts });
-
   return (
     <>
       {allProducts.length > 0 && (
@@ -113,7 +109,6 @@ function ProductShelf(
   { products, assistantIds }: { products: ProductType[]; assistantIds: Ids },
 ) {
   const id = useId();
-  console.log(products);
   return (
     <div class="flex flex-row lg:flex-col w-auto gap-4 ml-6">
       {products.map((product, index) => (
