@@ -7,6 +7,8 @@ import ShowMore from "$store/islands/ShowMore.tsx";
 import { Head } from "$fresh/runtime.ts";
 import { Format } from "$store/components/search/SearchResult.tsx";
 import { Resolved } from "deco/engine/core/resolver.ts";
+import { usePartialSection } from "deco/hooks/usePartialSection.ts";
+import { Partial } from "$fresh/runtime.ts";
 
 export interface Columns {
   mobile?: 1 | 2;
@@ -38,23 +40,27 @@ const DESKTOP_COLUMNS = {
 };
 
 function ProductGallery(
-  { products, pageInfo, layout, offset, loaderProps }: Props,
+  { products : p, pageInfo, layout, offset, loaderProps }: Props,
 ) {
   const platform = usePlatform();
+  const products = p
   const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
   const desktop = DESKTOP_COLUMNS[layout?.columns?.desktop ?? 4];
+  const pageInfoString = pageInfo.nextPage + "teste"
 
   return (
-    <div class={`grid ${mobile} gap-2 items-center ${desktop} sm:gap-10`}>
-      {products?.map((product, index) => (
-        <ProductCard
-          product={product}
-          preload={index === 0}
-          index={offset + index}
-          layout={layout?.card}
-          platform={platform}
-        />
-      ))}
+    <div
+      class={`grid ${mobile} gap-2 items-center ${desktop} sm:gap-10`}
+      f-client-nav
+    >
+      <div>
+        <Partial name="products-list" mode="">
+          <div>
+            {pageInfoString}
+          </div>
+        </Partial>
+      </div>
+      
 
       <Head>
         {pageInfo.nextPage && <link rel="next" href={pageInfo.nextPage} />}
@@ -71,6 +77,12 @@ function ProductGallery(
             platform={platform}
             loaderProps={loaderProps}
           />
+          <h1>{pageInfo.nextPage}</h1>
+          <a
+            href={`http://localhost:8000/masculino${pageInfo.nextPage}`}
+          >
+            Partial showMore
+          </a>
         </>
       )}
     </div>

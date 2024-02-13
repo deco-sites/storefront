@@ -11,6 +11,7 @@ import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
 import { Resolved } from "deco/engine/core/resolver.ts";
 import { AppContext } from "$store/apps/site.ts";
 import type { SectionProps } from "deco/types.ts";
+import { Partial } from "$fresh/runtime.ts";
 
 export type Format = "Show More" | "Pagination";
 
@@ -31,7 +32,7 @@ export interface Layout {
 
 export interface Props {
   /** @title Integration */
-  page: Resolved<ProductListingPage | null>;
+  page: ProductListingPage | null;
   layout?: Layout;
   cardLayout?: CardLayout;
 
@@ -84,7 +85,7 @@ function Result({
               <Filters filters={filters} />
             </aside>
           )}
-          <div class="flex-grow" id={id}>
+          <div class="flex-grow">
             <ProductGallery
               products={products}
               offset={offset}
@@ -145,30 +146,16 @@ function Result({
 }
 
 function SearchResult(
-  { page, loaderProps, ...props }: SectionProps<typeof loader>,
+  { page, ...props }: Props,
 ) {
   if (!page) {
     return <NotFound />;
   }
 
-  return <Result {...props} page={page} loaderProps={loaderProps} />;
+  console.log(page)
+
+  return <Result {...props} page={page} />;
 }
 
-export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
-  const page = await ctx.invoke(
-    // deno-lint-ignore no-explicit-any
-    props.page.__resolveType as any,
-    // deno-lint-ignore no-explicit-any
-    props.page as any,
-  ) as ProductListingPage | null;
-
-  return {
-    ...props,
-    page,
-    loaderProps: {
-      ...props.page,
-    },
-  };
-};
 
 export default SearchResult;
