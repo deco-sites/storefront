@@ -30,7 +30,7 @@ export interface MainColors {
   /**
    * @format color
    * @title Logo Color
-   * @default #43db70
+   * @default #02F67C
    */
   "logo": string;
 }
@@ -41,7 +41,7 @@ export interface Props {
   logo?: { src: ImageWidget; alt: string };
 }
 
-function Chat({ mainColors, logo, openChat = false }: Props) {
+function Chat({ mainColors, logo, openChat }: Props) {
   const ws = useSignal<WebSocket | null>(null);
   const messageList = useSignal<Message[]>([]);
   const assistantIds = useSignal<Ids>({ threadId: "", assistantId: "" });
@@ -50,6 +50,7 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
   const { displayCart } = useUI();
 
   useEffect(() => {
+    console.log({ openChat });
     if (typeof window !== "undefined") {
       const isOpen = JSON.parse(sessionStorage.getItem("isOpen") ?? "false") ||
         false;
@@ -71,15 +72,11 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
   }
 
   useEffect(() => {
+    console.log({ isChatMinimized });
     if (isChatMinimized) {
       setShowChat(false);
     }
   }, [isChatMinimized]);
-
-  useEffect(() => {
-    setShowChat(openChat);
-    sessionStorage.setItem("isOpen", JSON.stringify(openChat));
-  }, [openChat]);
 
   useEffect(() => {
     loadChatSession();
@@ -265,7 +262,9 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
   };
 
   const handleClick = () => {
+    console.log({ showChat });
     setShowChat(!showChat);
+    sessionStorage.setItem("isOpen", JSON.stringify(!showChat));
     sendEvent({
       name: "select_promotion",
       params: {
@@ -276,7 +275,6 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
         openChat: !showChat,
       },
     });
-    sessionStorage.setItem("isOpen", JSON.stringify(!showChat));
   };
 
   return (

@@ -215,7 +215,10 @@ function ProductCarousel(
   const [currentProductIndex, setCurrentProductIndex] = useState(0);
   const product = products[currentProductIndex] as ProductType;
   const currency = product.offers?.priceCurrency;
-  const price = product.offers?.offers[0].price;
+  const {
+    price = 0,
+    seller = "1",
+  } = useOffer(product.offers);
   const [transition, setTransition] = useState("");
 
   const handleNextProduct = () => {
@@ -322,7 +325,7 @@ function ProductCarousel(
             </p>
             <AddToCartButton
               productID={product.productID}
-              seller={product.offers?.offers[0].seller || ""}
+              seller={seller}
               eventParams={{ items: [] }}
               onClick={() => {
                 sendEvent({
