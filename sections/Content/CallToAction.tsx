@@ -10,7 +10,7 @@ export interface Props {
   cta: CTA[];
 }
 
-export default function CallToAction({ text, cta }: Props) {
+export default function CallToAction({ text = "Call to Action", cta }: Props) {
   return (
     <div class="py-16 md:py-28">
       <section class="xl:container mx-auto flex flex-col items-center justify-center gap-8 mb-16 lg:mb-0 z-10">

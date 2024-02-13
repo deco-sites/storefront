@@ -1,8 +1,8 @@
-interface Props {
+export interface Props {
   title?: string;
   fontSize?: "Small" | "Normal" | "Large";
   description?: string;
-  alignment: "center" | "left";
+  alignment?: "center" | "left";
   colorReverse?: boolean;
 }
 
@@ -43,7 +43,9 @@ function Header(props: Props) {
                   class={`
                   leading-6 lg:leading-8
                   ${
-                    props.colorReverse ? "text-primary-content" : "text-neutral"
+                    props.colorReverse
+                      ? "text-primary-content"
+                      : "text-base-content"
                   }
                   ${fontSizeClasses[props.fontSize || "Normal"]}
                 `}
