@@ -53,7 +53,10 @@ export default function Services({
             <p class="text-base-content text-[36px] md:text-[48px] leading-[120%] font-bold">
               {service.label}
             </p>
-            <p class="text-base-content text-[16px] md:text-[18px]" dangerouslySetInnerHTML={{__html: service.description || ""}}>
+            <p
+              class="text-base-content text-[16px] md:text-[18px]"
+              dangerouslySetInnerHTML={{ __html: service.description || "" }}
+            >
             </p>
           </div>
         </div>

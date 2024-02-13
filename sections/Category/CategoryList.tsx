@@ -96,7 +96,7 @@ const DEFAULT_LIST = [
       "https://ik.imagekit.io/decocx/tr:w-680,h-680/https:/ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/fdcb3c8f-d629-485e-bf70-8060bd8a9f65",
     buttonText: "Ver produtos",
   },
-]
+];
 
 function CategoryList(props: Props) {
   const id = useId();

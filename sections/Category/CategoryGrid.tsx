@@ -62,7 +62,7 @@ const DEFAULT_LIST = [
     label: "category",
     buttonText: "Explore collection",
   },
-]
+];
 
 function CategoryGrid(props: Props) {
   const id = useId();

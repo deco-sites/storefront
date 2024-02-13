@@ -153,12 +153,11 @@ const animationByType = {
     `,
 };
 
-export function Preview(){
-
+export function Preview() {
   const animationClass = animationClasses["slide-left"];
   const id = useId();
 
-  return(
+  return (
     <div>
       <style
         dangerouslySetInnerHTML={{ __html: animationByType["slide-left"] }}
@@ -172,5 +171,5 @@ export function Preview(){
         <h1 class="text-9xl text-base-content font-semibold my-8">Animation</h1>
       </div>
     </div>
-  )
+  );
 }

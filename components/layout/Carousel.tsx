@@ -116,9 +116,7 @@ function Section({ interval = 0, layout, style, children }: Props) {
             {items?.map((_, index) => (
               <li class="carousel-item">
                 <Slider.Dot index={index}>
-                  <div
-                    class="w-4 h-4 rounded-full group-disabled:bg-primary bg-transparent border-[1px] border-primary"
-                  />
+                  <div class="w-4 h-4 rounded-full group-disabled:bg-primary bg-transparent border-[1px] border-primary" />
                 </Slider.Dot>
               </li>
             ))}

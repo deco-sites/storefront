@@ -43,7 +43,9 @@ function Header(props: Props) {
                   class={`
                   leading-6 lg:leading-8
                   ${
-                    props.colorReverse ? "text-primary-content" : "text-base-content"
+                    props.colorReverse
+                      ? "text-primary-content"
+                      : "text-base-content"
                   }
                   ${fontSizeClasses[props.fontSize || "Normal"]}
                 `}

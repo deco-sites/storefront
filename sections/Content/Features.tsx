@@ -42,21 +42,23 @@ const DEFAULT_CARDS = [
   {
     "icon": "Discount" as AvailableIcons,
     "text": ":)",
-    "title": "<p>Visit our coupon page!</p>"
+    "title": "<p>Visit our coupon page!</p>",
   },
   {
     "icon": "Discount" as AvailableIcons,
     "text": ":)",
-    "title": "<p>Visit our coupon page!</p>"
+    "title": "<p>Visit our coupon page!</p>",
   },
   {
     "icon": "Discount" as AvailableIcons,
     "text": ":)",
-    "title": "<p>Visit our coupon page!</p>"
-  }
-]
+    "title": "<p>Visit our coupon page!</p>",
+  },
+];
 
-export default function Features({ title = "Feature", cards = DEFAULT_CARDS }: Props) {
+export default function Features(
+  { title = "Feature", cards = DEFAULT_CARDS }: Props,
+) {
   return (
     <section class="relative bg-white text-black py-20 max-w-screen">
       <div class="mx-6 lg:container lg:mx-auto flex justify-center items-center flex-col gap-20">
