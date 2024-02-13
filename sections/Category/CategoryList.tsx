@@ -57,7 +57,7 @@ const DEFAULT_LIST = [
     description: "Moda feminina direto de Milão",
     href: "/feminino",
     image:
-      "https://ik.imagekit.io/decocx/tr:w-680,h-680/https:/ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/fdcb3c8f-d629-485e-bf70-8060bd8a9f65",
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2753/b2278d2d-2270-482b-98d4-f09d5f05ba97",
     buttonText: "Ver produtos",
   },
   {
@@ -66,7 +66,7 @@ const DEFAULT_LIST = [
     description: "Moda feminina direto de Milão",
     href: "/feminino",
     image:
-      "https://ik.imagekit.io/decocx/tr:w-680,h-680/https:/ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/fdcb3c8f-d629-485e-bf70-8060bd8a9f65",
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2753/b2278d2d-2270-482b-98d4-f09d5f05ba97",
     buttonText: "Ver produtos",
   },
   {
@@ -75,7 +75,7 @@ const DEFAULT_LIST = [
     description: "Moda feminina direto de Milão",
     href: "/feminino",
     image:
-      "https://ik.imagekit.io/decocx/tr:w-680,h-680/https:/ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/fdcb3c8f-d629-485e-bf70-8060bd8a9f65",
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2753/b2278d2d-2270-482b-98d4-f09d5f05ba97",
     buttonText: "Ver produtos",
   },
   {
@@ -84,7 +84,7 @@ const DEFAULT_LIST = [
     description: "Moda feminina direto de Milão",
     href: "/feminino",
     image:
-      "https://ik.imagekit.io/decocx/tr:w-680,h-680/https:/ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/fdcb3c8f-d629-485e-bf70-8060bd8a9f65",
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2753/b2278d2d-2270-482b-98d4-f09d5f05ba97",
     buttonText: "Ver produtos",
   },
   {
@@ -93,7 +93,7 @@ const DEFAULT_LIST = [
     description: "Moda feminina direto de Milão",
     href: "/feminino",
     image:
-      "https://ik.imagekit.io/decocx/tr:w-680,h-680/https:/ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/fdcb3c8f-d629-485e-bf70-8060bd8a9f65",
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2753/b2278d2d-2270-482b-98d4-f09d5f05ba97",
     buttonText: "Ver produtos",
   },
 ];
