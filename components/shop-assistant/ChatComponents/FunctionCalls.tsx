@@ -220,6 +220,28 @@ function ProductCarousel(
     seller = "1",
   } = useOffer(product.offers);
   const [transition, setTransition] = useState("");
+  const [touchStart, setTouchStart] = useState<null | number>(null);
+  const [touchEnd, setTouchEnd] = useState<null | number>(null);
+
+  // the required distance between touchStart and touchEnd to be detected as a swipe
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: TouchEvent) => {
+    setTouchEnd(null); // otherwise the swipe is fired even with usual touch events
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: TouchEvent) =>
+    setTouchEnd(e.targetTouches[0].clientX);
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe) handleNextProduct();
+    if (isRightSwipe) handlePrevProduct();
+  };
 
   const handleNextProduct = () => {
     setTransition("nextCard");
@@ -259,7 +281,12 @@ function ProductCarousel(
         }
       }`}
       </style>
-      <div class="relative bg-white rounded-2xl flex items-center justify-center h-48 text-black w-full">
+      <div
+        class="relative bg-white rounded-2xl flex items-center justify-center h-48 text-black w-full"
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         {products.length > 1
           ? (
             <>
