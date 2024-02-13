@@ -122,7 +122,7 @@ function BlogPosts({
   );
 
   return (
-    <div class="w-full container py-8 flex flex-col gap-6 lg:pt-32 pb-16">
+    <div class="w-full container py-8 flex flex-col gap-6 pb-16">
       <div class="px-9">
         <Header
           title={title || "BlogPosts"}
