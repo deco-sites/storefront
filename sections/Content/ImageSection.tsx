@@ -25,10 +25,13 @@ const PLACEMENT = {
   right: "flex-col lg:flex-row",
 };
 
+const DEFAULT_IMAGE =
+  "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2753/b2278d2d-2270-482b-98d4-f09d5f05ba97";
+
 export default function ImageSection({
   title,
   description,
-  image,
+  image = DEFAULT_IMAGE,
   placement,
   disableSpacing,
   cta,
