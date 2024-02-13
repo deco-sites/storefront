@@ -20,7 +20,6 @@ export interface GridMobile {
     | "12"
     | "None";
   rows?: "1" | "2" | "3" | "4" | "5" | "6" | "None";
-  /** @default 8 */
   gap?: "1" | "2" | "4" | "8" | "12" | "16";
   /** @default Center */
   placeItems?: "Center" | "Start" | "End" | "Baseline" | "Stretch";
@@ -44,7 +43,6 @@ export interface GridDesktop {
     | "12"
     | "None";
   rows?: "1" | "2" | "3" | "4" | "5" | "6" | "None";
-  /** @default 8 */
   gap?: "1" | "2" | "4" | "8" | "12" | "16";
   /** @default Center */
   placeItems?: "Center" | "Start" | "End" | "Baseline" | "Stretch";
@@ -54,6 +52,9 @@ export interface GridDesktop {
  * @title Grid
  */
 export interface Props {
+  /**
+   * @hide
+   */
   children?: VNode | null;
   sectionChildrens?: Section[];
   mobile?: GridMobile;
