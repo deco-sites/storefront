@@ -318,7 +318,7 @@ function Chat({ mainColors, logo, openChat }: Props) {
           ? (
             <div
               class={`mr-0 ${
-                displayCart.value ? "sm:mr-[42rem]" : "sm:mr-[1.2rem]"
+                displayCart.value ? "sm:mr-[28rem]" : "sm:mr-[1.2rem]"
               }`}
               style={{
                 animation: "expandChat 0.5s ease-out forwards",
@@ -342,7 +342,7 @@ function Chat({ mainColors, logo, openChat }: Props) {
               onClick={handleClick}
               style={{ animation: "pulse 1.5s infinite" }}
               class={`mr-6 ${
-                displayCart.value ? "sm:mr-[42rem]" : "sm:mr-[1.2rem]"
+                displayCart.value ? "sm:mr-[28rem]" : "sm:mr-[1.2rem]"
               } mb-8 hover:shadow-custom-inset sm:mb-0 bg-chatLogo rounded-full flex justify-center items-center w-16 h-16 p-4 shadow-md`}
             >
               {logo
