@@ -95,21 +95,39 @@ export interface UnitPriceSpecification {
   price: number;
 }
 
-export interface BaseMessage {
-  type: string;
-  role: "user" | "assistant";
-}
-
-export interface UserMsg extends BaseMessage {
+export interface UserMsg {
+  type: "message";
+  role: "user";
   content: (MessageContentText | MessageContentFile | MessageContentAudio)[];
 }
 
-export interface AssistantMsg extends BaseMessage {
-  content: Content[];
+export interface AssistantTextMessage {
+  content: MessageContentText[];
   messageId?: string;
+  role: "assistant";
+  type: "message";
 }
 
-export type Message = UserMsg | AssistantMsg;
+export interface AssistantContentMessage {
+  content: Content[];
+  messageId?: string;
+  role: "assistant";
+  type: "function_calls" | "start_function_call";
+}
+
+export interface AssistantErrorMessage {
+  content: Content[];
+  messageId?: string;
+  role: "assistant";
+  type: "error";
+}
+
+export type AssistantMessage =
+  | AssistantTextMessage
+  | AssistantContentMessage
+  | AssistantErrorMessage;
+
+export type Message = UserMsg | AssistantMessage;
 
 export interface MessageContentText {
   type: "text";

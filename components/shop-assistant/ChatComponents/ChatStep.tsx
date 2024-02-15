@@ -13,6 +13,12 @@ import { useState } from "preact/hooks";
 import Icon from "$store/components/ui/Icon.tsx";
 import AutosizeTextarea from "$store/components/shop-assistant/autosize-textarea/AutosizeTextarea.tsx";
 import { useFileUpload } from "apps/ai-assistants/hooks/useFileUpload.ts";
+import { useChatContext } from "$store/components/shop-assistant/ChatContext.tsx";
+
+const AUDIO_MAX_DURATION = 89000; // 89 seconds
+const MAX_IMAGE_SIZE = "4194304"; // Maximum file size in bytes (4 MB)
+const MAX_FILE_WARNING =
+  "Seu arquivo ultrapassa 4 MB. Por favor, envie um arquivo menor.";
 
 type ChatProps = {
   messageList: Signal<Message[]>;
@@ -20,13 +26,6 @@ type ChatProps = {
   addNewMessageToList: ({ content, type, role }: Message) => void;
   send: (text: string) => void;
   updateMessageListArray: (messageList: Message[]) => void;
-};
-
-// TODO(ItamarRocha): Refactor and remove this
-type ProcessedFileInfo = {
-  fileUrl: string;
-  base64: string | ArrayBuffer | null;
-  file: File | null;
 };
 
 export function ChatStep(
@@ -101,6 +100,7 @@ function InputArea(
   const userInput = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { describeImage, awsUploadImage, transcribeAudio } = useFileUpload();
+  const { inputDisable } = useChatContext();
 
   const processSubmit = async () => {
     const inputValue = userInput.current?.value;
@@ -108,6 +108,19 @@ function InputArea(
 
     // Handle file input and send message if there is a file
     if (currentFile) {
+      if (currentFile.size > parseInt(MAX_IMAGE_SIZE)) {
+        addNewMessageToList({
+          content: [{
+            type: "text",
+            value: MAX_FILE_WARNING,
+            options: [],
+          }],
+          type: "message",
+          role: "assistant",
+        });
+        return;
+      }
+
       const fileUrl = URL.createObjectURL(currentFile);
       const msgContent: MessageContentFile[] = [{
         type: "file",
@@ -192,28 +205,24 @@ function InputArea(
     }
   };
 
-  const processFileUpload = async (
+  const processFileUpload = (
     event: React.ChangeEvent<HTMLInputElement>,
-  ): Promise<ProcessedFileInfo | null> => {
+  ): File | null => {
     const input = event.target as HTMLInputElement;
     if (input && input.files && input.files.length > 0) {
       const file = input.files[0];
       if (!file) return null;
-      const fileUrl = URL.createObjectURL(file);
-      const base64 = await getBase64(file);
-      return { fileUrl, base64, file };
+      return file;
     }
     return null;
   };
 
-  const handleFileChange = async (
+  const handleFileChange = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const processedFileInfo = await processFileUpload(event);
-
+    const processedFileInfo = processFileUpload(event);
     if (!processedFileInfo) return;
-
-    setCurrentFile(processedFileInfo.file);
+    setCurrentFile(processedFileInfo);
   };
 
   const startRecording = async () => {
@@ -240,6 +249,9 @@ function InputArea(
       mediaRecorderRef.current.start(1000);
 
       setIsRecording(true); // Change the state to reflect that recording has started
+      setTimeout(() => {
+        stopRecording();
+      }, AUDIO_MAX_DURATION); // Stop recording after AUDIO_MAX_DURATION seconds
     } catch (error) {
       // Handle the error appropriately
       console.error("Error starting recording:", error);
@@ -343,23 +355,26 @@ function InputArea(
           <AutosizeTextarea
             maxRows={7}
             minRows={1}
-            disabled={isLastMessageFromUser()}
-            class={`w-72 resize-none h-5 pr-11 sm:pr-2 text-chatTertiary bg-transparent text-sm placeholder:text-chatTertiary focus-visible:outline-0 ${
-              isLastMessageFromUser() ? "cursor-not-allowed" : "cursor-auto"
+            disabled={isLastMessageFromUser() && inputDisable}
+            class={`w-72 resize-none h-5 pr-11 sm:pr-2 text-chatTertiary bg-transparent text-base sm:text-sm placeholder:text-chatTertiary focus-visible:outline-0 ${
+              isLastMessageFromUser() && inputDisable
+                ? "cursor-not-allowed"
+                : "cursor-auto"
             }`}
             ref={userInput}
             name="userInput"
-            placeholder={isLastMessageFromUser()
+            placeholder={isLastMessageFromUser() && inputDisable
               ? "Aguarde, processando mensagem..."
               : "Digite sua mensagem aqui"}
             aria-label="Chat input area"
             onKeyDown={handleKeydown}
+            maxLength={750} // Set the maximum input length to 750 characters
           />
           <div class="absolute right-4 flex flex-row gap-3">
             <div
               onClick={handleFileClick}
               class={`flex items-center justify-center ${
-                isLastMessageFromUser()
+                isLastMessageFromUser() && inputDisable
                   ? "cursor-not-allowed"
                   : "cursor-pointer"
               }`}
@@ -373,20 +388,20 @@ function InputArea(
               <input
                 id="fileInput"
                 type="file"
-                disabled={isLastMessageFromUser()}
+                disabled={isLastMessageFromUser() && inputDisable}
                 ref={fileInputRef}
                 name="fileInput"
                 aria-label="File input"
                 onChange={handleFileChange}
                 class="sr-only" // Hides visually but keeps it accessible
-                accept="image/png, image/jpeg, image/gif, image/webp" //image has to be below 20 MB in size and is of one the following formats: ['png', 'jpeg', 'gif', 'webp'].
+                accept="image/png, image/jpeg, image/gif, image/webp"
               />
             </div>
             <button
-              disabled={isLastMessageFromUser()}
+              disabled={isLastMessageFromUser() && inputDisable}
               onClick={handleAudioClick}
               class={`flex items-center justify-center ${
-                isLastMessageFromUser()
+                isLastMessageFromUser() && inputDisable
                   ? "cursor-not-allowed"
                   : "cursor-pointer"
               }`}

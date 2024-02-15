@@ -1,7 +1,11 @@
 import { useSignal } from "@preact/signals";
 import { useCallback, useEffect, useState } from "preact/hooks";
 import { ChatContainer } from "./ChatContainer.tsx";
-import { AssistantMsg, Ids, Message } from "./types/shop-assistant.ts";
+import {
+  AssistantContentMessage,
+  Ids,
+  Message,
+} from "./types/shop-assistant.ts";
 import { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import { ChatProvider, useChatContext } from "./ChatContext.tsx";
@@ -12,25 +16,25 @@ export interface MainColors {
   /**
    * @format color
    * @title Primary
-   * @default #E8E8E8
+   * @default #E9E1D8
    */
   "primary": string;
   /**
    * @format color
    * @title Secondary
-   * @default #FFFFFF
+   * @default #fff
    */
   "secondary": string;
   /**
    * @format color
    * @title Text Color
-   * @default #000000
+   * @default #000
    */
   "tertiary": string;
   /**
    * @format color
    * @title Logo Color
-   * @default #02F67C
+   * @default #df8292
    */
   "logo": string;
 }
@@ -41,7 +45,7 @@ export interface Props {
   logo?: { src: ImageWidget; alt: string };
 }
 
-function Chat({ mainColors, logo, openChat }: Props) {
+function Chat({ mainColors, logo, openChat = false }: Props) {
   const ws = useSignal<WebSocket | null>(null);
   const messageList = useSignal<Message[]>([]);
   const assistantIds = useSignal<Ids>({ threadId: "", assistantId: "" });
@@ -50,7 +54,6 @@ function Chat({ mainColors, logo, openChat }: Props) {
   const { displayCart } = useUI();
 
   useEffect(() => {
-    console.log({ openChat });
     if (typeof window !== "undefined") {
       const isOpen = JSON.parse(sessionStorage.getItem("isOpen") ?? "false") ||
         false;
@@ -72,7 +75,6 @@ function Chat({ mainColors, logo, openChat }: Props) {
   }
 
   useEffect(() => {
-    console.log({ isChatMinimized });
     if (isChatMinimized) {
       setShowChat(false);
     }
@@ -127,7 +129,7 @@ function Chat({ mainColors, logo, openChat }: Props) {
     );
 
     // Messages with type function_call, start_function_call or message belongs to this category of messages
-    const handleJSONMessage = (data: AssistantMsg) => {
+    const handleJSONMessage = (data: AssistantContentMessage) => {
       addNewMessageToList({
         content: data.content,
         type: data.type,

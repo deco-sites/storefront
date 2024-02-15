@@ -2,11 +2,12 @@ import { memo } from "preact/compat";
 import type { ComponentChildren } from "preact";
 import { Ref, useEffect, useRef, useState } from "preact/hooks";
 import {
-  AssistantMsg,
+  AssistantMessage,
   Message,
   MessageContentText,
   UserMsg,
 } from "../types/shop-assistant.ts";
+import { useChatContext } from "$store/components/shop-assistant/ChatContext.tsx";
 
 type MessagesProps = {
   messageList: Message[];
@@ -102,7 +103,7 @@ export function Messages(
                   updateMessageListArray={updateMessageListArray}
                 />
               )
-              : <UserMessage message={message as UserMsg} />}
+              : <UserMessage message={message} />}
           </div>
         ))}
         <TypingIndicator show={showLoading} messageEl={messageEl} />
@@ -112,7 +113,7 @@ export function Messages(
 }
 
 type BotMessageProps = {
-  message: Message;
+  message: AssistantMessage;
   send: (text: string) => void;
   messageList: Message[];
   addNewMessageToList: ({ content, type, role }: Message) => void;
@@ -130,15 +131,18 @@ const BotMessage = memo(
       updateMessageListArray,
     }: BotMessageProps,
   ) => {
+    if (message.type === "error") {
+      return <ErrorMessage />;
+    }
     if (message.type === "message") {
       return (
         <>
           {message.content.map((content, index) => (
             <BotMessageWrapper key={index}>
               <div class="flex flex-col gap-2">
-                <div>{(content as MessageContentText).value}</div>
+                <div>{content.value}</div>
                 <OptionsButtonGroup
-                  content={content as MessageContentText}
+                  content={content}
                   send={send}
                   messageList={messageList}
                   addNewMessageToList={addNewMessageToList}
@@ -154,6 +158,17 @@ const BotMessage = memo(
     return null;
   },
 );
+
+function ErrorMessage() {
+  return (
+    <BotMessageWrapper>
+      <div>
+        Ei, algo não saiu como esperávamos... 🚧 Por favor, recarregue a página
+        e tente novamente.
+      </div>
+    </BotMessageWrapper>
+  );
+}
 
 type OptionsButtonGroupProps = {
   content: MessageContentText;
@@ -191,11 +206,18 @@ function OptionsButtonGroup(
   };
 
   const getLastUserMessage = (messageList: Message[]): string => {
-    const lastUserMessage = messageList.reverse().find((msg) =>
-      msg.role === "user"
-    );
+    const lastUserMessage: UserMsg | undefined = messageList.slice().reverse()
+      .find(isUserMsg);
+
     if (!lastUserMessage) return "";
-    return (lastUserMessage?.content[0] as MessageContentText).value;
+
+    const content = lastUserMessage.content[0];
+
+    if ("value" in content) { // MessageContentText type
+      return content.value;
+    }
+
+    return "";
   };
 
   const removeQuickReplies = () => {
@@ -211,31 +233,24 @@ function OptionsButtonGroup(
     }
 
     const newMessageList: Message[] = messageList.map((message, index) => {
-      if (index === lastAssistantMsgIndex && message.content) {
-        if (message.role === "assistant" && "messageId" in message) {
-          // AssistantMsg
-          const assistantMessage = message as AssistantMsg;
-          return {
-            ...assistantMessage, // keep any other properties
-            content: assistantMessage.content, // No modifications
-          };
-        } else {
-          // UserMsg
-          const userMessage = message as UserMsg;
-          const newContent = userMessage.content.map((content) => {
-            if (content.type === "text") {
-              // MessageContentText, remove 'options'
-              return { ...content, options: [] };
-            }
-            return content; // Other types without modifications
-          });
+      if (
+        index === lastAssistantMsgIndex && message.content &&
+        message.role === "assistant" && message.type === "message"
+      ) {
+        const modifiedContent = message.content.map((contentItem) => {
+          if (contentItem.type === "text") {
+            return { ...contentItem, options: [] };
+          }
+          // Returning the contentItem without modifications if it's not a 'text' type
+          return contentItem;
+        });
 
-          return {
-            ...userMessage,
-            content: newContent,
-          };
-        }
+        return {
+          ...message,
+          content: modifiedContent,
+        };
       }
+      // Returning the message without modifications if it's not an assistant message of type 'message' at the specified index
       return message;
     });
 
@@ -244,11 +259,11 @@ function OptionsButtonGroup(
 
   return (
     <div>
-      {(content as MessageContentText).options?.length > 0 && (
+      {content.options?.length > 0 && (
         <div class="flex flex-col justify-start space-y-2">
           <div class="text-chatTertiary text-xs font-light">Quick Replies</div>
           <div class="gap-2 flex flex-row items-center">
-            {(content as MessageContentText).options.map((option, index) => (
+            {content.options.map((option, index) => (
               <button
                 class="p-2 text-chatTertiary rounded-2xl bg-chatSecondary text-xs hover:shadow-custom-inset"
                 key={index}
@@ -266,7 +281,7 @@ function OptionsButtonGroup(
 
 function BotMessageWrapper({ children }: { children: ComponentChildren }) {
   return (
-    <div class="mb-3 text-chatTertiary text-sm max-w-s self-start w-full">
+    <div class="mb-3 text-chatTertiary max-w-s self-start w-full">
       {children}
     </div>
   );
@@ -281,7 +296,7 @@ function UserMessage({ message }: { message: UserMsg }) {
     <div
       class={`mb-6 p-2 rounded-xl rounded-br-none ${
         isAudioMessage ? "" : "bg-secondary-70"
-      } text-chatTertiary text-sm max-w-s w-fit self-end`}
+      } text-chatTertiary max-w-s w-fit self-end`}
     >
       {message.content.map((content, index) => {
         if ("value" in content) {
@@ -310,6 +325,7 @@ function TypingIndicator(
   const [message, setMessage] = useState<string>("");
   const [step, setStep] = useState<number>(0);
   const messageElement = messageEl.current;
+  const { disableChatInput } = useChatContext();
 
   useEffect(() => {
     // TODO: Refactor this to use messages from props / generate random waiting messages / typing indicator as first message (...)
@@ -331,9 +347,9 @@ function TypingIndicator(
       }, 23000));
       timeouts.push(setTimeout(() => {
         setMessage(
-          "Hmm, enfrentamos um contratempo. 🌀 Faça uma nova tentativa e, caso continue com problemas, recarregue a página para recomeçarmos.",
+          "Hmm, enfrentamos um contratempo. 🌀 Por favor, recarregue a página para recomeçarmos.",
         );
-        setStep(4);
+        disableChatInput(false);
       }, 60000));
 
       return () => {
@@ -352,7 +368,7 @@ function TypingIndicator(
 
   return show
     ? (
-      <div className="text-sm mb-4">
+      <div className="mb-4">
         <style>
           {`@keyframes blink {
               0%, 100% { opacity: 0; }
@@ -362,7 +378,6 @@ function TypingIndicator(
         {step === 0 && (
           <div
             style={{ animation: "messageAppear 200ms linear" }}
-            class="text-sm"
           >
             Digitando
             <span
@@ -396,3 +411,8 @@ function TypingIndicator(
     )
     : null;
 }
+
+// Type guards
+const isUserMsg = (msg: Message): msg is UserMsg => {
+  return msg.role === "user";
+};

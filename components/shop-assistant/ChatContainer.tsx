@@ -1,5 +1,10 @@
 import { Signal } from "@preact/signals";
-import { AssistantMsg, Content, Ids, Message } from "./types/shop-assistant.ts";
+import {
+  AssistantMessage,
+  Content,
+  Ids,
+  Message,
+} from "./types/shop-assistant.ts";
 import { useEffect, useState } from "preact/hooks";
 import { ChatStep } from "./ChatComponents/ChatStep.tsx";
 import Image from "apps/website/components/Image.tsx";
@@ -33,12 +38,10 @@ export function ChatContainer(
   useEffect(() => {
     const localMsgList = [...messageList.value];
 
-    const functionCallMsg: AssistantMsg[] = localMsgList
-      .filter((msg): msg is AssistantMsg =>
+    const functionCallMsg: AssistantMessage[] = localMsgList
+      .filter((msg): msg is AssistantMessage =>
         msg.type === "function_calls" &&
-        (msg.content as Content[]).some((content) =>
-          content.response.length > 0
-        )
+        msg.content.some((content) => content.response.length > 0)
       );
 
     // Check if there is a multi_tool_use.parallel function call (which is an error from the openApi call)
