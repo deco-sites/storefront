@@ -6,6 +6,7 @@ import CartButtonShopify from "$store/islands/Header/Cart/shopify.tsx";
 import CartButtonVDNA from "$store/islands/Header/Cart/vnda.tsx";
 import CartButtonVTEX from "$store/islands/Header/Cart/vtex.tsx";
 import CartButtonWake from "$store/islands/Header/Cart/wake.tsx";
+import CartButtonWap from "$store/islands/Header/Cart/wap.tsx";
 import CartButtonNuvemshop from "$store/islands/Header/Cart/nuvemshop.tsx";
 import Searchbar from "$store/islands/Header/Searchbar.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
@@ -15,7 +16,13 @@ import NavItem from "./NavItem.tsx";
 import { navbarHeight } from "./constants.ts";
 import { Buttons, Logo } from "$store/components/header/Header.tsx";
 
-function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
+function Navbar({
+  items,
+  searchbar,
+  logo,
+  buttons,
+  logoPosition = "left",
+}: {
   items: SiteNavigationElement[];
   searchbar?: SearchbarProps;
   logo?: Logo;
@@ -56,6 +63,7 @@ function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
           {platform === "linx" && <CartButtonLinx />}
           {platform === "shopify" && <CartButtonShopify />}
           {platform === "nuvemshop" && <CartButtonNuvemshop />}
+          {platform === "wap" && <CartButtonWap />}
         </div>
       </div>
 
@@ -66,7 +74,9 @@ function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
             logoPosition === "left" ? "justify-center" : "justify-start"
           }`}
         >
-          {items.map((item) => <NavItem item={item} />)}
+          {items.map((item) => (
+            <NavItem item={item} />
+          ))}
         </ul>
         <div
           class={`flex ${
@@ -76,11 +86,7 @@ function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
           }`}
         >
           {logo && (
-            <a
-              href="/"
-              aria-label="Store logo"
-              class="block"
-            >
+            <a href="/" aria-label="Store logo" class="block">
               <Image
                 src={logo.src}
                 alt={logo.alt}
@@ -93,7 +99,8 @@ function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
         <div class="flex-none flex items-center justify-end gap-6 col-span-1">
           {!buttons?.hideSearchButton && (
             <div class="flex items-center text-xs font-thin gap-1">
-              <SearchButton />SEARCH
+              <SearchButton />
+              SEARCH
             </div>
           )}
 
@@ -133,6 +140,8 @@ function Navbar({ items, searchbar, logo, buttons, logoPosition = "left" }: {
               {platform === "linx" && <CartButtonLinx />}
               {platform === "shopify" && <CartButtonShopify />}
               {platform === "nuvemshop" && <CartButtonNuvemshop />}
+              {platform === "wap" && <CartButtonWap />}
+
             </div>
           )}
         </div>
