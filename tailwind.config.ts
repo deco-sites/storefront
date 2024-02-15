@@ -16,6 +16,18 @@ export default {
           "100%": { transform: "translateX(-50%)" },
         },
       },
+      colors: {
+        chatPrimary: "var(--primary-color-hex)",
+        chatSecondary: "var(--secondary-color-hex)",
+        chatTertiary: "var(--tertiary-color-hex)",
+        chatLogo: "var(--logo-color-hex)",
+        opaqueWhite: "var(--opaque-white)",
+      },
+    },
+  },
+  variants: {
+    extend: {
+      boxShadow: ["hover"],
     },
   },
 };
