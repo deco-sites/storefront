@@ -344,7 +344,13 @@ function TypingIndicator(
           "Só um segundinho, estou quase encontrando algo incrível! 🔍",
         );
         setStep(3);
-      }, 23000));
+      }, 15000));
+      timeouts.push(setTimeout(() => {
+        setMessage(
+          "Parece que está demorando um pouco mais do que o esperado. Aguarde mais um momento.",
+        );
+        setStep(4);
+      }, 30000));
       timeouts.push(setTimeout(() => {
         setMessage(
           "Hmm, enfrentamos um contratempo. 🌀 Por favor, recarregue a página para recomeçarmos.",
