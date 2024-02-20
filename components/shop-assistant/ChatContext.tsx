@@ -14,7 +14,7 @@ interface ChatProviderProps {
 
 export function ChatProvider({ children }: ChatProviderProps) {
   const [isChatMinimized, setIsChatMinimized] = useState(false);
-  const [inputDisable, setInputDisable] = useState(false);
+  const [inputDisable, setInputDisable] = useState(true);
 
   const minimizeChat = (state: boolean) => {
     setIsChatMinimized(state);
