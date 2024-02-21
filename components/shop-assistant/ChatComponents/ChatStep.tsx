@@ -99,6 +99,7 @@ function InputArea(
   const audioChunksRef = useRef<BlobPart[]>([]);
   const userInput = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const recordingStartTimeRef = useRef<number>(0);
   const { describeImage, awsUploadImage, transcribeAudio } = useFileUpload();
   const { inputDisable } = useChatContext();
 
@@ -240,6 +241,7 @@ function InputArea(
       mediaRecorderRef.current = new MediaRecorder(mediaStreamRef.current, {
         mimeType: mimeTypeRef.current,
       });
+      recordingStartTimeRef.current = Date.now();
 
       mediaRecorderRef.current.ondataavailable = (event) => {
         audioChunksRef.current.push(event.data);
@@ -270,6 +272,9 @@ function InputArea(
   };
 
   const handleRecordingStop = async () => {
+    const recordingEndTime = Date.now();
+    const durationSeconds = recordingStartTimeRef.current ? (recordingEndTime - recordingStartTimeRef.current) / 1000 : AUDIO_MAX_DURATION / 1000;
+
     const audioBlob = new Blob(audioChunksRef.current, {
       type: mimeTypeRef.current,
     });
@@ -280,6 +285,7 @@ function InputArea(
     const transcription = await transcribeAudio({
       file: base64,
       ids: assistantIds,
+      audioDuration: durationSeconds,
     });
 
     if (!transcription.text) return;
