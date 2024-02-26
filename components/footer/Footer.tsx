@@ -1,5 +1,4 @@
 import BackToTop from "$store/components/footer/BackToTop.tsx";
-import ColorClasses from "$store/components/footer/ColorClasses.tsx";
 import Divider from "$store/components/footer/Divider.tsx";
 import ExtraLinks from "$store/components/footer/ExtraLinks.tsx";
 import FooterItems from "$store/components/footer/FooterItems.tsx";
@@ -9,6 +8,7 @@ import PaymentMethods from "$store/components/footer/PaymentMethods.tsx";
 import RegionSelector from "$store/components/footer/RegionSelector.tsx";
 import Social from "$store/components/footer/Social.tsx";
 import Newsletter from "$store/islands/Newsletter.tsx";
+import { clx } from "$store/sdk/clx.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import PoweredByDeco from "apps/website/components/PoweredByDeco.tsx";
 
@@ -110,6 +110,14 @@ export interface Props {
   };
   layout?: Layout;
 }
+
+const LAYOUT = {
+  "Primary": "bg-primary text-primary-content",
+  "Secondary": "bg-secondary text-secondary-content",
+  "Accent": "bg-accent text-accent-content",
+  "Base 100": "bg-base-100 text-base-content",
+  "Base 100 inverted": "bg-base-content text-base-100",
+};
 
 function Footer({
   logo,
@@ -214,9 +222,10 @@ function Footer({
 
   return (
     <footer
-      class={`w-full flex flex-col pt-10 pb-2 md:pb-10 gap-10 ${
-        ColorClasses(layout)
-      }`}
+      class={clx(
+        "w-full flex flex-col pt-10 pb-2 md:pb-10 gap-10",
+        LAYOUT[layout?.backgroundColor ?? "Primary"],
+      )}
     >
       <div class="lg:container mx-6 lg:mx-auto">
         {(!layout?.variation || layout?.variation == "Variation 1") && (
