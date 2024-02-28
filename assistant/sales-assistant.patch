@@ -1,0 +1,4214 @@
+From 7b5353185c400e85808a6db16e6ae11cea130c9c Mon Sep 17 00:00:00 2001
+From: caroluchoa <carol_uchoa8@hotmail.com>
+Date: Mon, 12 Feb 2024 18:44:53 -0300
+Subject: [PATCH 01/17] add chat
+
+---
+ components/minicart/vtex/Cart.tsx             |   6 +-
+ components/product/AddToCartButton/vtex.tsx   |  12 +-
+ .../ChatComponents/ChatStep.tsx               | 478 ++++++++++++++++++
+ .../ChatComponents/FunctionCalls.tsx          | 399 +++++++++++++++
+ .../ChatComponents/Messages.tsx               | 398 +++++++++++++++
+ components/shop-assistant/ChatContainer.tsx   | 132 +++++
+ components/shop-assistant/ChatContext.tsx     |  31 ++
+ components/shop-assistant/ShopAssistant.tsx   | 380 ++++++++++++++
+ .../autosize-textarea/AutosizeTextarea.tsx    | 103 ++++
+ .../autosize-textarea/calculateNodeHeight.ts  |  74 +++
+ .../autosize-textarea/forceHiddenStyles.ts    |  23 +
+ .../autosize-textarea/getSizingData.ts        |  91 ++++
+ .../shop-assistant/autosize-textarea/hooks.ts |  82 +++
+ .../shop-assistant/autosize-textarea/utils.ts |  11 +
+ .../shop-assistant/types/shop-assistant.ts    | 140 +++++
+ components/ui/Icon.tsx                        |   5 +-
+ islands/Chat.tsx                              |   1 +
+ sdk/analytics.tsx                             |  33 ++
+ sections/Chat/Chat.tsx                        |   1 +
+ static/deco-logo.svg                          |   3 +
+ static/sprites.svg                            |   4 +-
+ tailwind.config.ts                            |  12 +
+ 25 files changed, 2497 insertions(+), 90 deletions(-)
+ create mode 100644 components/shop-assistant/ChatComponents/ChatStep.tsx
+ create mode 100644 components/shop-assistant/ChatComponents/FunctionCalls.tsx
+ create mode 100644 components/shop-assistant/ChatComponents/Messages.tsx
+ create mode 100644 components/shop-assistant/ChatContainer.tsx
+ create mode 100644 components/shop-assistant/ChatContext.tsx
+ create mode 100644 components/shop-assistant/ShopAssistant.tsx
+ create mode 100644 components/shop-assistant/autosize-textarea/AutosizeTextarea.tsx
+ create mode 100644 components/shop-assistant/autosize-textarea/calculateNodeHeight.ts
+ create mode 100644 components/shop-assistant/autosize-textarea/forceHiddenStyles.ts
+ create mode 100644 components/shop-assistant/autosize-textarea/getSizingData.ts
+ create mode 100644 components/shop-assistant/autosize-textarea/hooks.ts
+ create mode 100644 components/shop-assistant/autosize-textarea/utils.ts
+ create mode 100644 components/shop-assistant/types/shop-assistant.ts
+ create mode 100644 islands/Chat.tsx
+ create mode 100644 sections/Chat/Chat.tsx
+ create mode 100644 static/deco-logo.svg
+
+diff --git a/components/minicart/vtex/Cart.tsx b/components/minicart/vtex/Cart.tsx
+index 9cbc501..f1bfcaf 100644
+--- a/components/minicart/vtex/Cart.tsx
++++ b/components/minicart/vtex/Cart.tsx
+@@ -5,7 +5,8 @@ function Cart() {
+   const { cart, loading, updateItems, addCouponsToCart } = useCart();
+   const { items, totalizers } = cart.value ?? { items: [] };
+   const total = totalizers?.find((item) => item.id === "Items")?.value || 0;
+-  const discounts = (totalizers?.find((item) => item.id === "Discounts")?.value || 0) * -1;
++  const discounts =
++    (totalizers?.find((item) => item.id === "Discounts")?.value || 0) * -1;
+   const locale = cart.value?.clientPreferencesData.locale ?? "pt-BR";
+   const currency = cart.value?.storePreferencesData.currencyCode ?? "BRL";
+   const coupon = cart.value?.marketingData?.coupon ?? undefined;
+@@ -31,8 +32,7 @@ function Cart() {
+       coupon={coupon}
+       onAddCoupon={(text) => addCouponsToCart({ text })}
+       onUpdateQuantity={(quantity, index) =>
+-        updateItems({ orderItems: [{ index, quantity }] })
+-      }
++        updateItems({ orderItems: [{ index, quantity }] })}
+       itemToAnalyticsItem={(index) => {
+         const item = items[index];
+ 
+diff --git a/components/product/AddToCartButton/vtex.tsx b/components/product/AddToCartButton/vtex.tsx
+index 5f44064..48788c1 100644
+--- a/components/product/AddToCartButton/vtex.tsx
++++ b/components/product/AddToCartButton/vtex.tsx
+@@ -4,18 +4,24 @@ import Button, { Props as BtnProps } from "./common.tsx";
+ export interface Props extends Omit<BtnProps, "onAddItem"> {
+   seller: string;
+   productID: string;
++  onClick?: () => void;
+ }
+ 
+-function AddToCartButton({ seller, productID, eventParams }: Props) {
++function AddToCartButton({ seller, productID, eventParams, onClick }: Props) {
+   const { addItems } = useCart();
+-  const onAddItem = () =>
+-    addItems({
++  const onAddItem = () => {
++    if (onClick) {
++      onClick();
++    }
++
++    return addItems({
+       orderItems: [{
+         id: productID,
+         seller: seller,
+         quantity: 1,
+       }],
+     });
++  };
+ 
+   return <Button onAddItem={onAddItem} eventParams={eventParams} />;
+ }
+diff --git a/components/shop-assistant/ChatComponents/ChatStep.tsx b/components/shop-assistant/ChatComponents/ChatStep.tsx
+new file mode 100644
+index 0000000..219fb32
+--- /dev/null
++++ b/components/shop-assistant/ChatComponents/ChatStep.tsx
+@@ -0,0 +1,478 @@
++import { useRef } from "preact/hooks";
++import { Messages } from "./Messages.tsx";
++import {
++  Ids,
++  Message,
++  MessageContentAudio,
++  MessageContentFile,
++  MessageContentText,
++} from "../types/shop-assistant.ts";
++import { Signal } from "@preact/signals";
++import { FunctionCalls } from "./FunctionCalls.tsx";
++import { useState } from "preact/hooks";
++import Icon from "$store/components/ui/Icon.tsx";
++import AutosizeTextarea from "$store/components/shop-assistant/autosize-textarea/AutosizeTextarea.tsx";
++import { useFileUpload } from "apps/ai-assistants/hooks/useFileUpload.ts";
++
++type ChatProps = {
++  messageList: Signal<Message[]>;
++  assistantIds: Signal<Ids>;
++  addNewMessageToList: ({ content, type, role }: Message) => void;
++  send: (text: string) => void;
++  updateMessageListArray: (messageList: Message[]) => void;
++};
++
++// TODO(ItamarRocha): Refactor and remove this
++type ProcessedFileInfo = {
++  fileUrl: string;
++  base64: string | ArrayBuffer | null;
++  file: File | null;
++};
++
++export function ChatStep(
++  {
++    messageList,
++    assistantIds,
++    addNewMessageToList,
++    send,
++    updateMessageListArray,
++  }: ChatProps,
++) {
++  return (
++    <div class="text-chatTertiary min-h-full flex justify-between w-full flex-row">
++      <div class="min-w-[40%] sm:min-w-[23rem] flex flex-col justify-between gap-4 w-full max-w-[25rem]">
++        <Messages
++          messageList={messageList.value}
++          send={send}
++          addNewMessageToList={addNewMessageToList}
++          updateMessageListArray={updateMessageListArray}
++        />
++        <div class="lg:hidden block">
++          <FunctionCalls
++            messages={messageList.value}
++            assistantIds={assistantIds.value}
++          />
++        </div>
++        <InputArea
++          send={send}
++          addNewMessageToList={addNewMessageToList}
++          assistantIds={assistantIds.value}
++          messageList={messageList}
++        />
++      </div>
++      <div class="lg:block hidden">
++        <FunctionCalls
++          messages={messageList.value}
++          assistantIds={assistantIds.value}
++        />
++      </div>
++    </div>
++  );
++}
++
++type InputAreaProps = {
++  send: (text: string) => void;
++  addNewMessageToList: ({ content, type, role }: Message) => void;
++  assistantIds: Ids;
++  messageList: Signal<Message[]>;
++};
++
++function getBase64(file: File | Blob): Promise<string | ArrayBuffer | null> {
++  return new Promise((resolve, reject) => {
++    const reader = new FileReader();
++    reader.readAsDataURL(file);
++    reader.onload = () => resolve(reader.result);
++    reader.onerror = (error) => reject(error);
++  });
++}
++
++function InputArea(
++  { send, addNewMessageToList, assistantIds, messageList }: InputAreaProps,
++) {
++  const [currentFile, setCurrentFile] = useState<File | null>(
++    null,
++  );
++  const [isRecording, setIsRecording] = useState(false);
++
++  const mediaStreamRef = useRef<MediaStream | null>(null);
++  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
++  const mimeTypeRef = useRef<string>("video/mp4");
++  const audioChunksRef = useRef<BlobPart[]>([]);
++  const userInput = useRef<HTMLTextAreaElement>(null);
++  const fileInputRef = useRef<HTMLInputElement>(null);
++  const { describeImage, awsUploadImage, transcribeAudio } = useFileUpload();
++
++  const processSubmit = async () => {
++    const inputValue = userInput.current?.value;
++    if (!inputValue) return;
++
++    // Handle file input and send message if there is a file
++    if (currentFile) {
++      const fileUrl = URL.createObjectURL(currentFile);
++      const msgContent: MessageContentFile[] = [{
++        type: "file",
++        url: fileUrl,
++        message: inputValue,
++      }];
++
++      addNewMessageToList({
++        content: msgContent,
++        type: "message",
++        role: "user",
++      });
++
++      const base64 = await getBase64(currentFile);
++
++      userInput.current.value = "";
++      resetFileInput();
++
++      try {
++        const uploadURL = await awsUploadImage({
++          file: base64,
++          ids: assistantIds,
++        });
++        const descriptionResponse = await describeImage({
++          uploadURL: uploadURL,
++          userPrompt: inputValue,
++          ids: assistantIds,
++        });
++
++        if (descriptionResponse instanceof Response) {
++          const error = await descriptionResponse.json();
++          throw new Error(error);
++        }
++
++        const imageDescription = descriptionResponse.choices[0].message.content;
++        const concatenatedMessage = `${inputValue}. Find ${imageDescription}`;
++
++        send(concatenatedMessage);
++      } catch (error) {
++        const errorMessage = error?.cause?.error ||
++          "Something went wrong. Please try again.";
++        addNewMessageToList({
++          content: [{
++            type: "text",
++            value: errorMessage || "Something went wrong. Please try again.",
++            options: [],
++          }],
++          type: "message",
++          role: "assistant",
++        });
++      }
++
++      return;
++    }
++
++    send(inputValue);
++
++    const msgContent: MessageContentText[] = [{
++      type: "text",
++      value: inputValue,
++      options: [],
++    }];
++
++    addNewMessageToList({
++      content: msgContent,
++      type: "message",
++      role: "user",
++    });
++
++    userInput.current.value = "";
++    resetFileInput();
++  };
++
++  const handleUserInput = (e: React.TargetedEvent<HTMLFormElement>) => {
++    e.preventDefault();
++  };
++
++  const handleKeydown = (e: KeyboardEvent) => {
++    if (e.key === "Enter" && !e.shiftKey) {
++      e.preventDefault();
++      processSubmit();
++    }
++  };
++
++  const processFileUpload = async (
++    event: React.ChangeEvent<HTMLInputElement>,
++  ): Promise<ProcessedFileInfo | null> => {
++    const input = event.target as HTMLInputElement;
++    if (input && input.files && input.files.length > 0) {
++      const file = input.files[0];
++      if (!file) return null;
++      const fileUrl = URL.createObjectURL(file);
++      const base64 = await getBase64(file);
++      return { fileUrl, base64, file };
++    }
++    return null;
++  };
++
++  const handleFileChange = async (
++    event: React.ChangeEvent<HTMLInputElement>,
++  ) => {
++    const processedFileInfo = await processFileUpload(event);
++
++    if (!processedFileInfo) return;
++
++    setCurrentFile(processedFileInfo.file);
++  };
++
++  const startRecording = async () => {
++    try {
++      if (MediaRecorder.isTypeSupported("audio/webm")) {
++        mimeTypeRef.current = "audio/webm"; // works on most desktop browsers
++      } else if (MediaRecorder.isTypeSupported("audio/wav")) {
++        mimeTypeRef.current = "audio/wav";
++      }
++
++      // Ask for permission to use the microphone and start recording
++      mediaStreamRef.current = await navigator.mediaDevices.getUserMedia({
++        audio: true,
++      });
++      mediaRecorderRef.current = new MediaRecorder(mediaStreamRef.current, {
++        mimeType: mimeTypeRef.current,
++      });
++
++      mediaRecorderRef.current.ondataavailable = (event) => {
++        audioChunksRef.current.push(event.data);
++      };
++
++      mediaRecorderRef.current.onstop = handleRecordingStop;
++      mediaRecorderRef.current.start(1000);
++
++      setIsRecording(true); // Change the state to reflect that recording has started
++    } catch (error) {
++      // Handle the error appropriately
++      console.error("Error starting recording:", error);
++    }
++  };
++
++  const stopRecording = () => {
++    if (mediaRecorderRef.current) {
++      mediaRecorderRef.current.stop(); // This will trigger the 'onstop' event
++      mediaStreamRef.current?.getTracks().forEach((track) => {
++        track.stop();
++        track.enabled = false;
++      });
++      setIsRecording(false); // Update the state to reflect that recording has stopped
++    }
++  };
++
++  const handleRecordingStop = async () => {
++    const audioBlob = new Blob(audioChunksRef.current, {
++      type: mimeTypeRef.current,
++    });
++
++    audioChunksRef.current = []; // Clear the recorded chunks
++
++    const base64 = await getBase64(audioBlob);
++    const transcription = await transcribeAudio({
++      file: base64,
++      ids: assistantIds,
++    });
++
++    if (!transcription.text) return;
++
++    send(transcription.text);
++
++    const msgContent: MessageContentAudio[] = [{
++      type: "audio",
++      text: transcription.text,
++      url: URL.createObjectURL(audioBlob),
++    }];
++
++    addNewMessageToList({
++      content: msgContent,
++      type: "message",
++      role: "user",
++    });
++
++    setIsRecording(false);
++  };
++
++  const handleAudioClick = () => {
++    if (isRecording) {
++      stopRecording();
++    } else {
++      startRecording();
++    }
++  };
++
++  const resetFileInput = () => {
++    if (fileInputRef.current) {
++      fileInputRef.current.value = "";
++    }
++    setCurrentFile(null);
++  };
++
++  const handleFileClick = (event: MouseEvent) => {
++    event.stopPropagation();
++    fileInputRef.current && fileInputRef.current.click();
++  };
++
++  const isLastMessageFromUser = () => {
++    const lastMessage = messageList.value.at(-1);
++
++    return (lastMessage?.type === "start_function_call" ||
++      lastMessage?.role === "user");
++  };
++
++  return (
++    <>
++      <style>
++        {`@keyframes blink-animation {
++         0% {
++           color: white;
++         }
++         50% {
++           color: red;
++         }
++         100% {
++           color: white;
++         }
++       }
++       `}
++      </style>
++      <form onSubmit={handleUserInput} class="sticky">
++        {currentFile && (
++          <FilePreview
++            resetFileInput={resetFileInput}
++            fileUrl={URL.createObjectURL(currentFile)}
++          />
++        )}
++        <div class="flex p-4 items-center relative w-full bg-secondary-70 rounded-[2rem]">
++          <AutosizeTextarea
++            maxRows={7}
++            minRows={1}
++            disabled={isLastMessageFromUser()}
++            class={`w-72 resize-none h-5 pr-11 sm:pr-2 text-chatTertiary bg-transparent text-sm placeholder:text-chatTertiary focus-visible:outline-0 ${
++              isLastMessageFromUser() ? "cursor-not-allowed" : "cursor-auto"
++            }`}
++            ref={userInput}
++            name="userInput"
++            placeholder={isLastMessageFromUser()
++              ? "Aguarde, processando mensagem..."
++              : "Digite sua mensagem aqui"}
++            aria-label="Chat input area"
++            onKeyDown={handleKeydown}
++          />
++          <div class="absolute right-4 flex flex-row gap-3">
++            <div
++              onClick={handleFileClick}
++              class={`flex items-center justify-center ${
++                isLastMessageFromUser()
++                  ? "cursor-not-allowed"
++                  : "cursor-pointer"
++              }`}
++            >
++              <Icon
++                id="Camera"
++                class="text-chatTertiary"
++                height={16}
++                width={16}
++              />
++              <input
++                id="fileInput"
++                type="file"
++                disabled={isLastMessageFromUser()}
++                ref={fileInputRef}
++                name="fileInput"
++                aria-label="File input"
++                onChange={handleFileChange}
++                class="sr-only" // Hides visually but keeps it accessible
++                accept="image/png, image/jpeg, image/gif, image/webp" //image has to be below 20 MB in size and is of one the following formats: ['png', 'jpeg', 'gif', 'webp'].
++              />
++            </div>
++            <button
++              disabled={isLastMessageFromUser()}
++              onClick={handleAudioClick}
++              class={`flex items-center justify-center ${
++                isLastMessageFromUser()
++                  ? "cursor-not-allowed"
++                  : "cursor-pointer"
++              }`}
++            >
++              <Icon
++                id="Microphone"
++                style={{
++                  animation: isRecording
++                    ? "blink-animation 1s linear infinite"
++                    : "",
++                }}
++                class="text-chatTertiary"
++                height={20}
++                width={20}
++              />
++            </button>
++          </div>
++        </div>
++      </form>
++    </>
++  );
++}
++
++type FilePreviewProps = {
++  fileUrl: string;
++  resetFileInput: () => void;
++};
++
++function FilePreview({ fileUrl, resetFileInput }: FilePreviewProps) {
++  const [isModalOpen, setIsModalOpen] = useState(false);
++
++  const toggleModal = () => {
++    setIsModalOpen(!isModalOpen);
++  };
++
++  const closeModal = (event: MouseEvent) => {
++    if (event.currentTarget === event.target) {
++      setIsModalOpen(false);
++    }
++  };
++
++  return (
++    <div class="ml-4 mb-4 w-fit relative">
++      <img
++        onClick={toggleModal}
++        src={fileUrl}
++        alt="file preview"
++        class="w-14 rounded-xl relative hover:cursor-pointer"
++      />
++      <button
++        onClick={resetFileInput}
++        class="bg-chatSecondary hover:shadow-custom-inset rounded-full h-fit absolute right-1 top-1 -translate-y-1/2 translate-x-1/2 group"
++      >
++        <Icon
++          id="Close"
++          class="text-chatTertiary m-1"
++          height={16}
++          width={16}
++        />
++        <span class="absolute bottom-0 left-full mb-2 hidden group-hover:block bg-black text-white text-xs rounded py-1 px-2">
++          Remove File
++        </span>
++      </button>
++      {/* TODO: Use Portals to make the modal fit the whole screen */}
++      {isModalOpen && (
++        <div
++          onClick={closeModal}
++          class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 m-16"
++        >
++          <div class="relative p-8 max-w-screen-md max-h-screen-md">
++            <img
++              src={fileUrl}
++              alt="Enlarged file preview"
++              class="max-w-80 max-h-80"
++            />
++            <Icon
++              id="Close"
++              onClick={toggleModal}
++              width={24}
++              height={24}
++              class="absolute cursor-pointer top-0 right-4 bg-white p-1 rounded-full text-black"
++              aria-label="Close"
++            />
++          </div>
++        </div>
++      )}
++    </div>
++  );
++}
+diff --git a/components/shop-assistant/ChatComponents/FunctionCalls.tsx b/components/shop-assistant/ChatComponents/FunctionCalls.tsx
+new file mode 100644
+index 0000000..da47011
+--- /dev/null
++++ b/components/shop-assistant/ChatComponents/FunctionCalls.tsx
+@@ -0,0 +1,399 @@
++import {
++  Content,
++  Ids,
++  Message,
++  MessageContentAudio,
++  MessageContentFile,
++  MessageContentText,
++  Product,
++} from "../types/shop-assistant.ts";
++import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
++import { useOffer } from "$store/sdk/useOffer.ts";
++import AddToCartButton from "$store/islands/AddToCartButton/vtex.tsx";
++import { useSignal } from "@preact/signals";
++import { useState } from "preact/hooks";
++import Icon from "$store/components/ui/Icon.tsx";
++import { useChatContext } from "$store/components/shop-assistant/ChatContext.tsx";
++import { sendEvent, SendEventOnView } from "$store/sdk/analytics.tsx";
++import { useId } from "preact/compat";
++import { AnalyticsItem } from "apps/commerce/types.ts";
++import { mapProductCategoryToAnalyticsCategories } from "apps/commerce/utils/productToAnalyticsItem.ts";
++
++export const mapProductToAnalyticsItemAssistant = (
++  {
++    product,
++    price,
++    listPrice,
++    index = 0,
++    quantity = 1,
++  }: {
++    product: Product;
++    price?: number;
++    listPrice?: number;
++    index?: number;
++    quantity?: number;
++  },
++): AnalyticsItem => {
++  const { name, productID, inProductGroupWithID, isVariantOf, url } = product;
++  const categories = mapProductCategoryToAnalyticsCategories(
++    product.category ?? "",
++  );
++
++  return {
++    item_id: productID,
++    item_group_id: inProductGroupWithID,
++    quantity,
++    price,
++    index,
++    discount: Number((price && listPrice ? listPrice - price : 0).toFixed(2)),
++    item_name: isVariantOf?.name ?? name ?? "",
++    item_variant: name,
++    item_brand: product.brand?.name ?? "",
++    item_url: url,
++    ...categories,
++  };
++};
++
++export function FunctionCalls(
++  { messages, assistantIds }: { messages: Message[]; assistantIds: Ids },
++) {
++  const isFunctionCallContent = (
++    content:
++      | MessageContentText
++      | MessageContentFile
++      | MessageContentAudio
++      | Content,
++  ): content is Content => {
++    return (content as Content).response !== undefined;
++  };
++
++  const allProducts: Product[] = messages
++    .filter((message) => message.type === "function_calls")
++    .flatMap((message) =>
++      message.content
++        .filter(isFunctionCallContent)
++        .filter(
++          (content) =>
++            content.name ===
++              "vtex/loaders/intelligentSearch/productList.ts" &&
++            content.response.length !== 0,
++        )
++        .flatMap((content) => content.response as Product[])
++    );
++
++  console.log({ allProducts });
++
++  return (
++    <>
++      {allProducts.length > 0 && (
++        <div class="flex max-w-full h-full w-[inherit]">
++          <div className="overflow-y-auto overflow-x-auto w-full flex justify-center">
++            <div className="hidden lg:block">
++              <ProductShelf
++                key="shelf"
++                products={allProducts}
++                assistantIds={assistantIds}
++              />
++            </div>
++            <div className="block lg:hidden max-w-[22rem]">
++              <ProductCarousel
++                key="carousel"
++                products={allProducts}
++                assistantIds={assistantIds}
++              />
++            </div>
++          </div>
++        </div>
++      )}
++    </>
++  );
++}
++
++function ProductShelf(
++  { products, assistantIds }: { products: Product[]; assistantIds: Ids },
++) {
++  const id = useId();
++  console.log(products);
++  return (
++    <div class="flex flex-row lg:flex-col w-auto gap-4 ml-6">
++      {products.map((product, index) => (
++        <div
++          id={id}
++          key={index}
++          style={{
++            animation: `messageAppear 300ms linear ${index * 600}ms`,
++            animationFillMode: "backwards",
++          }}
++        >
++          <ProductCard
++            key={index}
++            product={product}
++            assistantIds={assistantIds}
++          />
++          <SendEventOnView
++            id={id}
++            event={{
++              name: "view_item",
++              params: {
++                item_list_id: "product",
++                item_list_name: "Product",
++                assistantId: assistantIds.assistantId,
++                assistantThreadID: assistantIds.threadId,
++                items: [mapProductToAnalyticsItemAssistant({ product })],
++              },
++            }}
++          />
++        </div>
++      ))}
++    </div>
++  );
++}
++
++function ProductCard(
++  { product, assistantIds }: { product: Product; assistantIds: Ids },
++) {
++  const { title, description } = extractTitleAndDescription(
++    product.description,
++  );
++  const currency = product.offers.priceCurrency;
++  const price = product.offers.offers[0].price;
++
++  return (
++    <div class="flex flex-row items-center bg-white gap-4 rounded-2xl text-black p-4">
++      <a
++        href={product.url}
++        target="_self"
++        rel="noopener noreferrer"
++        class="w-[18rem] flex justify-center"
++      >
++        <img
++          src={product.image[0].url}
++          alt={product.name}
++          class="w-full h-auto rounded-md"
++        />
++      </a>
++      <div class="flex flex-col w-full h-full space-y-4 py-4 pr-4">
++        <a
++          href={product.url}
++          target="_self"
++          rel="noopener noreferrer"
++        >
++          <p class="text-xs font-semibold">{product.name}</p>
++        </a>
++        <p class="text-xs overflow-y-auto font-light max-h-16">
++          {description}
++        </p>
++        <div class="flex justify-between items-center">
++          <p class="text-lg w-full">
++            {translatePriceCurrency(currency)} {transformPrice(price, currency)}
++          </p>
++          <AddToCartButton
++            productID={product.productID}
++            seller={product.offers.offers[0].seller}
++            eventParams={{ items: [] }}
++            onClick={() => {
++              sendEvent({
++                name: "add_to_cart",
++                params: {
++                  currency: product.offers.priceCurrency,
++                  value: product.offers.offers[0].price,
++                  assistantId: assistantIds.assistantId,
++                  assistantThreadID: assistantIds.threadId,
++                  items: [mapProductToAnalyticsItem({ product })],
++                },
++              });
++            }}
++          />
++        </div>
++      </div>
++    </div>
++  );
++}
++
++function ProductCarousel(
++  { products, assistantIds }: { products: Product[]; assistantIds: Ids },
++) {
++  const id = useId();
++  const [currentProductIndex, setCurrentProductIndex] = useState(0);
++  const product = products[currentProductIndex] as Product;
++  const currency = product.offers?.priceCurrency;
++  const price = product.offers.offers[0].price;
++  const [transition, setTransition] = useState("");
++
++  const handleNextProduct = () => {
++    setTransition("nextCard");
++    setCurrentProductIndex((
++      prevIndex,
++    ) => (prevIndex === products.length - 1 ? 0 : prevIndex + 1));
++  };
++
++  const handlePrevProduct = () => {
++    setTransition("prevCard");
++    setCurrentProductIndex((
++      prevIndex,
++    ) => (prevIndex === 0 ? products.length - 1 : prevIndex - 1));
++  };
++
++  return (
++    <>
++      <style>
++        {`@keyframes nextCard {
++        from {
++          opacity: 0;
++          transform: translateX(30%);
++        }
++        to {
++          opacity: 1;
++          transform: translateX(0);
++        }
++      }`}
++        {`@keyframes prevCard {
++        from {
++          opacity: 0;
++          transform: translateX(-30%);
++        }
++        to {
++          opacity: 1;
++          transform: translateX(0);
++        }
++      }`}
++      </style>
++      <div class="relative bg-white rounded-2xl flex items-center justify-center h-48 text-black w-full">
++        {products.length > 1
++          ? (
++            <>
++              <button
++                class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-primary-90 rounded-full ml-2"
++                onClick={handlePrevProduct}
++              >
++                <Icon
++                  id="ChevronLeft"
++                  class="text-white p-[0.4rem]"
++                  height={24}
++                  width={24}
++                  strokeWidth={2}
++                />
++              </button>
++              <button
++                class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-primary-90 rounded-full mr-2"
++                onClick={handleNextProduct}
++              >
++                <Icon
++                  id="ChevronRight"
++                  class="text-white p-[0.4rem]"
++                  height={24}
++                  width={24}
++                />
++              </button>
++            </>
++          )
++          : null}
++        <div
++          class="flex flex-row gap-4 text-black text-xs px-12 py-4 items-center min-h-44 w-full"
++          style={{ animation: `${transition} 200ms linear` }}
++          key={currentProductIndex}
++        >
++          <a
++            href={product.url}
++            target="_self"
++            rel="noopener noreferrer"
++            class="flex justify-center min-w-[7rem]"
++          >
++            <img
++              src={product.image[0].url}
++              alt={product.image[0].name}
++              class="w-fit h-24 sm:h-32 max-w-fit rounded-md"
++            />
++          </a>
++          <div id={id} class="flex flex-col gap-4 w-full max-w-[10rem]">
++            <a
++              href={product.url}
++              target="_self"
++              rel="noopener noreferrer"
++            >
++              <h2
++                class="font-bold max-w-[8rem] line-clamp-3"
++                title={product.name}
++              >
++                {product.name}
++              </h2>
++            </a>
++            <p class="font-normal">
++              {translatePriceCurrency(currency)}{" "}
++              {transformPrice(price, currency)}
++            </p>
++            <AddToCartButton
++              productID={product.productID}
++              seller={product.offers.offers[0].seller}
++              eventParams={{ items: [] }}
++              onClick={() => {
++                sendEvent({
++                  name: "add_to_cart",
++                  params: {
++                    currency: product.offers.priceCurrency,
++                    value: product.offers.offers[0].price,
++                    assistantId: assistantIds.assistantId,
++                    assistantThreadID: assistantIds.threadId,
++                    items: [mapProductToAnalyticsItem({ product })],
++                  },
++                });
++              }}
++            />
++            <SendEventOnView
++              id={id}
++              event={{
++                name: "view_item",
++                params: {
++                  item_list_id: "product",
++                  item_list_name: "Product",
++                  assistantId: assistantIds.assistantId,
++                  assistantThreadID: assistantIds.threadId,
++                  items: [mapProductToAnalyticsItemAssistant({ product })],
++                },
++              }}
++            />
++          </div>
++        </div>
++      </div>
++    </>
++  );
++}
++
++// Helper functions
++const extractTitleAndDescription = (htmlString: string) => {
++  const parser = new DOMParser();
++  const doc = parser.parseFromString(htmlString, "text/html");
++
++  const title = doc.querySelector("h1, h2, h3, h4, h5, h6")?.textContent ||
++    "";
++
++  const titleElement = doc.querySelector("h1, h2, h3, h4, h5, h6");
++  if (titleElement) titleElement.remove();
++  const description = doc.body.textContent || "";
++
++  return { title, description };
++};
++
++const translatePriceCurrency = (priceCurrency: string) => {
++  if (!priceCurrency) return "";
++  switch (priceCurrency) {
++    case "BRL":
++      return "R$";
++    case "USD":
++      return "$";
++    case "EUR":
++      return "€";
++    default:
++      return priceCurrency;
++  }
++};
++
++const transformPrice = (price: number, currency: string) => {
++  // Example: change 188.7 to 188,70 if currency is BRL, any other currency will be 188.70
++  switch (currency) {
++    case "BRL":
++      return price.toFixed(2).replace(".", ",");
++    default:
++      return price.toFixed(2);
++  }
++};
+diff --git a/components/shop-assistant/ChatComponents/Messages.tsx b/components/shop-assistant/ChatComponents/Messages.tsx
+new file mode 100644
+index 0000000..d7a9166
+--- /dev/null
++++ b/components/shop-assistant/ChatComponents/Messages.tsx
+@@ -0,0 +1,398 @@
++import { memo } from "preact/compat";
++import type { ComponentChildren } from "preact";
++import { Ref, useEffect, useRef, useState } from "preact/hooks";
++import {
++  AssistantMsg,
++  Message,
++  MessageContentText,
++  UserMsg,
++} from "../types/shop-assistant.ts";
++
++type MessagesProps = {
++  messageList: Message[];
++  send: (text: string) => void;
++  addNewMessageToList: ({ content, type, role }: Message) => void;
++  updateMessageListArray: (messageList: Message[]) => void;
++};
++
++export function Messages(
++  { messageList, send, addNewMessageToList, updateMessageListArray }:
++    MessagesProps,
++) {
++  const messageEl = useRef<HTMLDivElement>(null);
++  const [hasExpanded, setHasExpanded] = useState(false);
++  const [showLoading, setShowLoading] = useState(false);
++
++  useEffect(() => {
++    if (messageList.length > 1) {
++      setHasExpanded(true);
++    }
++  }, [messageList]);
++
++  useEffect(() => {
++    // For automatic scrolling
++    const messageElement = messageEl.current;
++
++    if (messageElement) {
++      messageElement.scrollTop = messageElement.scrollHeight;
++    }
++  }, [messageList, showLoading]);
++
++  useEffect(() => {
++    const lastMessage = messageList[messageList.length - 1];
++
++    // Show loading when the last message is a start_function_call or a user's message
++    if (
++      lastMessage?.type === "start_function_call" ||
++      lastMessage?.role === "user"
++    ) {
++      setTimeout(() => setShowLoading(true), 1000);
++    } else {
++      setShowLoading(false);
++    }
++  }, [messageList]);
++
++  return (
++    <>
++      <style>
++        {`@keyframes heightIncrease {
++        from {
++          height: 30vh;
++        }
++        to {
++          height: 60vh;
++        }
++      }`}
++        {`@keyframes messageAppear {
++        from {
++          opacity: 0;
++          transform: translateY(50%);
++        }
++        to {
++          opacity: 1;
++          transform: translateY(0);
++        }
++      }`}
++      </style>
++      <div
++        class="flex flex-col min-w-[40%] max-w-[25rem] w-full overflow-y-auto scroll-smooth px-2"
++        style={hasExpanded
++          ? {
++            animation: `heightIncrease 200ms linear`,
++            height: "60vh",
++            overflowY: "auto",
++            transition: "height 200ms",
++          }
++          : { height: "30vh", overflow: "hidden", transition: "height 200ms" }}
++        ref={messageEl}
++      >
++        {messageList.map((message, index) => (
++          <div
++            key={index}
++            style={{ animation: "messageAppear 200ms linear" }}
++            class="flex flex-col"
++          >
++            {message.role === "assistant"
++              ? (
++                <BotMessage
++                  message={message}
++                  send={send}
++                  messageList={messageList}
++                  addNewMessageToList={addNewMessageToList}
++                  updateMessageListArray={updateMessageListArray}
++                />
++              )
++              : <UserMessage message={message as UserMsg} />}
++          </div>
++        ))}
++        <TypingIndicator show={showLoading} messageEl={messageEl} />
++      </div>
++    </>
++  );
++}
++
++type BotMessageProps = {
++  message: Message;
++  send: (text: string) => void;
++  messageList: Message[];
++  addNewMessageToList: ({ content, type, role }: Message) => void;
++  updateMessageListArray: (messageList: Message[]) => void;
++};
++
++// TODO: Refactor Content types to avoid type assertions
++const BotMessage = memo(
++  (
++    {
++      message,
++      send,
++      messageList,
++      addNewMessageToList,
++      updateMessageListArray,
++    }: BotMessageProps,
++  ) => {
++    if (message.type === "message") {
++      return (
++        <>
++          {message.content.map((content, index) => (
++            <BotMessageWrapper key={index}>
++              <div class="flex flex-col gap-2">
++                <div>{(content as MessageContentText).value}</div>
++                <OptionsButtonGroup
++                  content={content as MessageContentText}
++                  send={send}
++                  messageList={messageList}
++                  addNewMessageToList={addNewMessageToList}
++                  updateMessageListArray={updateMessageListArray}
++                />
++              </div>
++            </BotMessageWrapper>
++          ))}
++        </>
++      );
++    }
++
++    return null;
++  },
++);
++
++type OptionsButtonGroupProps = {
++  content: MessageContentText;
++  send: (text: string) => void;
++  messageList: Message[];
++  addNewMessageToList: ({ content, type, role }: Message) => void;
++  updateMessageListArray: (messageList: Message[]) => void;
++};
++
++function OptionsButtonGroup(
++  {
++    content,
++    send,
++    messageList,
++    addNewMessageToList,
++    updateMessageListArray,
++  }: OptionsButtonGroupProps,
++) {
++  const sendBtnClickMessage = (option: string) => {
++    const msgContent: MessageContentText[] = [{
++      type: "text",
++      value: option,
++      options: [],
++    }];
++
++    removeQuickReplies();
++
++    addNewMessageToList({
++      content: msgContent,
++      type: "message",
++      role: "user",
++    });
++
++    send(option.concat(" ", getLastUserMessage(messageList)));
++  };
++
++  const getLastUserMessage = (messageList: Message[]): string => {
++    const lastUserMessage = messageList.reverse().find((msg) =>
++      msg.role === "user"
++    );
++    if (!lastUserMessage) return "";
++    return (lastUserMessage?.content[0] as MessageContentText).value;
++  };
++
++  const removeQuickReplies = () => {
++    // TODO: refactor this
++    let lastAssistantMsgIndex = -1;
++    for (let i = messageList.length - 1; i >= 0; i--) {
++      if (
++        messageList[i].role === "assistant" && messageList[i].type === "message"
++      ) {
++        lastAssistantMsgIndex = i;
++        break;
++      }
++    }
++
++    const newMessageList: Message[] = messageList.map((message, index) => {
++      if (index === lastAssistantMsgIndex && message.content) {
++        if (message.role === "assistant" && "messageId" in message) {
++          // AssistantMsg
++          const assistantMessage = message as AssistantMsg;
++          return {
++            ...assistantMessage, // keep any other properties
++            content: assistantMessage.content, // No modifications
++          };
++        } else {
++          // UserMsg
++          const userMessage = message as UserMsg;
++          const newContent = userMessage.content.map((content) => {
++            if (content.type === "text") {
++              // MessageContentText, remove 'options'
++              return { ...content, options: [] };
++            }
++            return content; // Other types without modifications
++          });
++
++          return {
++            ...userMessage,
++            content: newContent,
++          };
++        }
++      }
++      return message;
++    });
++
++    updateMessageListArray(newMessageList);
++  };
++
++  return (
++    <div>
++      {(content as MessageContentText).options?.length > 0 && (
++        <div class="flex flex-col justify-start space-y-2">
++          <div class="text-chatTertiary text-xs font-light">Quick Replies</div>
++          <div class="gap-2 flex flex-row items-center">
++            {(content as MessageContentText).options.map((option, index) => (
++              <button
++                class="p-2 text-chatTertiary rounded-2xl bg-chatSecondary text-xs hover:shadow-custom-inset"
++                key={index}
++                onClick={() => sendBtnClickMessage(option)}
++              >
++                {option}
++              </button>
++            ))}
++          </div>
++        </div>
++      )}
++    </div>
++  );
++}
++
++function BotMessageWrapper({ children }: { children: ComponentChildren }) {
++  return (
++    <div class="mb-3 text-chatTertiary text-sm max-w-s self-start w-full">
++      {children}
++    </div>
++  );
++}
++
++function UserMessage({ message }: { message: UserMsg }) {
++  const isAudioMessage = message.content.some((content) =>
++    content.type === "audio"
++  );
++
++  return (
++    <div
++      class={`mb-6 p-2 rounded-xl rounded-br-none ${
++        isAudioMessage ? "" : "bg-secondary-70"
++      } text-chatTertiary text-sm max-w-s w-fit self-end`}
++    >
++      {message.content.map((content, index) => {
++        if ("value" in content) {
++          return <div key={index}>{content.value}</div>;
++        }
++        if (content.type === "file") {
++          return (
++            <>
++              <img key={index} src={content.url} class="w-32 rounded-xl"></img>
++              <div class="mt-2">{content.message}</div>
++            </>
++          );
++        }
++        if (content.type === "audio") {
++          return <audio controls key={index} src={content.url}></audio>;
++        }
++        return null;
++      })}
++    </div>
++  );
++}
++
++function TypingIndicator(
++  { show, messageEl }: { show: boolean; messageEl: Ref<HTMLDivElement> },
++) {
++  const [message, setMessage] = useState<string>("");
++  const [step, setStep] = useState<number>(0);
++  const messageElement = messageEl.current;
++
++  useEffect(() => {
++    // TODO: Refactor this to use messages from props / generate random waiting messages / typing indicator as first message (...)
++    if (show) {
++      const timeouts: number[] = [];
++      timeouts.push(setTimeout(() => {
++        setMessage("Um segundo, estou pensando... 🤔");
++        setStep(1);
++      }, 8000));
++      timeouts.push(setTimeout(() => {
++        setMessage("Aguarde só mais um instante... ⏳");
++        setStep(2);
++      }, 15000));
++      timeouts.push(setTimeout(() => {
++        setMessage(
++          "Só um segundinho, estou quase encontrando algo incrível! 🔍",
++        );
++        setStep(3);
++      }, 23000));
++      timeouts.push(setTimeout(() => {
++        setMessage(
++          "Hmm, enfrentamos um contratempo. 🌀 Faça uma nova tentativa e, caso continue com problemas, recarregue a página para recomeçarmos.",
++        );
++        setStep(4);
++      }, 60000));
++
++      return () => {
++        timeouts.forEach(clearTimeout);
++      };
++    }
++  }, [show]);
++
++  useEffect(() => {
++    if (messageElement) messageElement.scrollTop = messageElement.scrollHeight;
++  }, [show, message, step]);
++
++  useEffect(() => {
++    setStep(0);
++  }, [show]);
++
++  return show
++    ? (
++      <div className="text-sm mb-4">
++        <style>
++          {`@keyframes blink {
++              0%, 100% { opacity: 0; }
++              100% { opacity: 1; }
++            }`}
++        </style>
++        {step === 0 && (
++          <div
++            style={{ animation: "messageAppear 200ms linear" }}
++            class="text-sm"
++          >
++            Digitando
++            <span
++              style={{
++                animation: "blink 0.7s infinite",
++                animationDelay: "0.1s",
++              }}
++            >
++              .
++            </span>
++            <span
++              style={{
++                animation: "blink 0.7s infinite",
++                animationDelay: "0.3s",
++              }}
++            >
++              .
++            </span>
++            <span
++              style={{
++                animation: "blink 0.7s infinite",
++                animationDelay: "0.5s",
++              }}
++            >
++              .
++            </span>
++          </div>
++        )}
++        {step > 0 && <div>{message}</div>}
++      </div>
++    )
++    : null;
++}
+diff --git a/components/shop-assistant/ChatContainer.tsx b/components/shop-assistant/ChatContainer.tsx
+new file mode 100644
+index 0000000..6eecc38
+--- /dev/null
++++ b/components/shop-assistant/ChatContainer.tsx
+@@ -0,0 +1,132 @@
++import { Signal } from "@preact/signals";
++import { AssistantMsg, Content, Ids, Message } from "./types/shop-assistant.ts";
++import { useEffect, useState } from "preact/hooks";
++import { ChatStep } from "./ChatComponents/ChatStep.tsx";
++import Image from "apps/website/components/Image.tsx";
++import Icon from "$store/components/ui/Icon.tsx";
++
++type ChatProps = {
++  messageList: Signal<Message[]>;
++  assistantIds: Signal<Ids>;
++  addNewMessageToList: ({ content, type, role }: Message) => void;
++  send: (text: string) => void;
++  handleShowChat: () => void;
++  logo?: { src: string; alt: string };
++  updateMessageListArray: (messageList: Message[]) => void;
++  updateIds: (ids: Ids) => void;
++};
++
++export function ChatContainer(
++  {
++    messageList,
++    assistantIds,
++    addNewMessageToList,
++    send,
++    handleShowChat,
++    logo,
++    updateMessageListArray,
++    updateIds,
++  }: ChatProps,
++) {
++  const [shouldAnimateWidth, setShouldAnimateWidth] = useState(false);
++  console.log("logo", logo);
++
++  useEffect(() => {
++    const localMsgList = [...messageList.value];
++    console.log({ localMsgList });
++
++    const functionCallMsg: AssistantMsg[] = localMsgList
++      .filter((msg): msg is AssistantMsg =>
++        msg.type === "function_calls" &&
++        (msg.content as Content[]).some((content) =>
++          content.response.length > 0
++        )
++      );
++
++    // Check if there is a multi_tool_use.parallel function call (which is an error from the openApi call)
++    const isMultiTool = functionCallMsg.some((msg) => {
++      return (msg.content as Content[]).some((content) => {
++        return content.name === "multi_tool_use.parallel";
++      });
++    });
++
++    setShouldAnimateWidth(!isMultiTool && functionCallMsg.length > 0);
++  }, [messageList.value]);
++
++  const handleClearChat = () => {
++    if (
++      window.confirm(
++        "Are you sure you want to clear the chat? This action cannot be undone.",
++      )
++    ) {
++      updateMessageListArray([]);
++      updateIds({ threadId: "", assistantId: "" });
++    }
++  };
++
++  return (
++    <>
++      <style>
++        {`@keyframes widthIncrease {
++          from {
++            width: 25rem;
++          }
++          to {
++            width: 60rem;
++          }
++        }`}
++      </style>
++      <div
++        style={{
++          animation: shouldAnimateWidth ? "widthIncrease 200ms linear" : "none",
++          transition: "width 200ms",
++        }}
++        class={`p-4 gap-4 h-fit max-h-[80vh] shadow-lg outline-opaqueWhite outline outline-8 rounded-t-3xl sm:rounded-t-[1.5rem] rounded-b-none sm:rounded-b-[1.5rem] flex flex-col bg-primary-90
++        w-full ${
++          shouldAnimateWidth
++            ? "lg:w-[60rem] max-w-[25rem] lg:max-w-[60rem]"
++            : "lg:w-[25rem] max-w-[25rem]"
++        }`}
++      >
++        <div class="flex items-center flex-row justify-between">
++          <div class="bg-chatLogo rounded-full flex justify-center items-center w-fit">
++            {logo
++              ? (
++                <Image
++                  class="m-2 w-6 h-6"
++                  src={logo.src}
++                  alt={logo.alt}
++                  width={24}
++                  height={24}
++                />
++              )
++              : <img src="/deco-logo.svg"></img>}
++          </div>
++          <div class="gap-4 flex items-center flex-row">
++            <button
++              onClick={handleClearChat}
++              class="group absolute right-16"
++            >
++              <span class="text-chatTertiary font-light text-sm">Limpar</span>
++            </button>
++            <button onClick={handleShowChat}>
++              <Icon
++                id="Close"
++                class="text-chatTertiary"
++                height={20}
++                width={20}
++              />
++            </button>
++          </div>
++        </div>
++        <ChatStep
++          send={send}
++          assistantIds={assistantIds}
++          messageList={messageList}
++          addNewMessageToList={addNewMessageToList}
++          updateMessageListArray={updateMessageListArray}
++        />
++      </div>
++    </>
++  );
++}
+diff --git a/components/shop-assistant/ChatContext.tsx b/components/shop-assistant/ChatContext.tsx
+new file mode 100644
+index 0000000..39b4c7e
+--- /dev/null
++++ b/components/shop-assistant/ChatContext.tsx
+@@ -0,0 +1,31 @@
++import { createContext } from "preact";
++import { useContext, useState } from "preact/hooks";
++
++const ChatContext = createContext({
++  isChatMinimized: false,
++  minimizeChat: (state: boolean) => {},
++});
++
++interface ChatProviderProps {
++  children: preact.ComponentChildren;
++}
++
++export function ChatProvider({ children }: ChatProviderProps) {
++  const [isChatMinimized, setIsChatMinimized] = useState(false);
++
++  const minimizeChat = (state: boolean) => {
++    setIsChatMinimized(state);
++  };
++
++  return (
++    <ChatContext.Provider
++      value={{ isChatMinimized, minimizeChat }}
++    >
++      {children}
++    </ChatContext.Provider>
++  );
++}
++
++export function useChatContext() {
++  return useContext(ChatContext);
++}
+diff --git a/components/shop-assistant/ShopAssistant.tsx b/components/shop-assistant/ShopAssistant.tsx
+new file mode 100644
+index 0000000..e1325ce
+--- /dev/null
++++ b/components/shop-assistant/ShopAssistant.tsx
+@@ -0,0 +1,380 @@
++import { useSignal } from "@preact/signals";
++import { useCallback, useEffect, useState } from "preact/hooks";
++import { ChatContainer } from "./ChatContainer.tsx";
++import { AssistantMsg, Ids, Message } from "./types/shop-assistant.ts";
++import { ImageWidget } from "apps/admin/widgets.ts";
++import Image from "apps/website/components/Image.tsx";
++import { ChatProvider, useChatContext } from "./ChatContext.tsx";
++import { useUI } from "$store/sdk/useUI.ts";
++import { sendEvent } from "$store/sdk/analytics.tsx";
++
++export interface MainColors {
++  /**
++   * @format color
++   * @title Primary
++   * @default #E8E8E8
++   */
++  "primary": string;
++  /**
++   * @format color
++   * @title Secondary
++   * @default #FFFFFF
++   */
++  "secondary": string;
++  /**
++   * @format color
++   * @title Text Color
++   * @default #000000
++   */
++  "tertiary": string;
++  /**
++   * @format color
++   * @title Logo Color
++   * @default #43db70
++   */
++  "logo": string;
++}
++
++console.log("ShopAssistant.tsx");
++export interface Props {
++  openChat?: boolean;
++  mainColors?: MainColors;
++  logo?: { src: ImageWidget; alt: string };
++}
++
++function Chat({ mainColors, logo, openChat = false }: Props) {
++  const ws = useSignal<WebSocket | null>(null);
++  const messageList = useSignal<Message[]>([]);
++  const assistantIds = useSignal<Ids>({ threadId: "", assistantId: "" });
++  const [showChat, setShowChat] = useState<boolean>(false);
++  const { minimizeChat, isChatMinimized } = useChatContext();
++  const { displayCart } = useUI();
++
++  useEffect(() => {
++    console.log({ openChat });
++    if (typeof window !== "undefined") {
++      const isOpen = JSON.parse(sessionStorage.getItem("isOpen") ?? "false") ||
++        false;
++      setShowChat(isOpen);
++    } else {
++      setShowChat(false);
++    }
++  }, []);
++
++  useEffect(() => {
++    minimizeChat(displayCart.value);
++  }, [displayCart.value]);
++
++  function hexToRgb(hex: string): string {
++    const r = parseInt(hex.slice(1, 3), 16);
++    const g = parseInt(hex.slice(3, 5), 16);
++    const b = parseInt(hex.slice(5, 7), 16);
++    return `${r}, ${g}, ${b}`;
++  }
++
++  useEffect(() => {
++    if (isChatMinimized) {
++      setShowChat(false);
++    }
++  }, [isChatMinimized]);
++
++  useEffect(() => {
++    console.log({ openChat });
++    setShowChat(openChat);
++    sessionStorage.setItem("isOpen", JSON.stringify(openChat));
++  }, [openChat]);
++
++  useEffect(() => {
++    loadChatSession();
++  }, []);
++
++  useEffect(() => {
++    if (mainColors) {
++      // Set the regular color variables
++      document.documentElement.style.setProperty(
++        "--primary-color-hex",
++        mainColors.primary,
++      );
++      document.documentElement.style.setProperty(
++        "--secondary-color-hex",
++        mainColors.secondary,
++      );
++      document.documentElement.style.setProperty(
++        "--tertiary-color-hex",
++        mainColors.tertiary,
++      );
++      document.documentElement.style.setProperty(
++        "--logo-color-hex",
++        mainColors.logo,
++      );
++
++      // Set the RGB color variables
++      document.documentElement.style.setProperty(
++        "--primary-color",
++        hexToRgb(mainColors.primary),
++      );
++      document.documentElement.style.setProperty(
++        "--secondary-color",
++        hexToRgb(mainColors.secondary),
++      );
++      document.documentElement.style.setProperty(
++        "--opaque-white",
++        "rgba(255, 255, 255, 0.5)",
++      );
++    }
++  }, [mainColors]);
++
++  useEffect(() => {
++    const host = window.location.host;
++    const websocket = window.location.protocol === "https:" ? "wss" : "ws";
++    // TODO: make chat name dynamic via prop
++    ws.value = new WebSocket(
++      `${websocket}://${host}/live/invoke/ai-assistants/actions/chat.ts?assistant=storefront`,
++    );
++
++    // Messages with type function_call, start_function_call or message belongs to this category of messages
++    const handleJSONMessage = (data: AssistantMsg) => {
++      addNewMessageToList({
++        content: data.content,
++        type: data.type,
++        role: data.role ?? "assistant",
++      });
++    };
++
++    // Welcome message belongs to this category of messages
++    const handlePureStringMessage = (data: string) => {
++      if (!hasChatHistory()) {
++        addNewMessageToList({
++          content: [{ type: "text", value: data, options: [] }],
++          type: "message",
++          role: "assistant",
++        });
++      }
++    };
++
++    ws.value.onmessage = (event: MessageEvent) => {
++      try {
++        if (isJSON(event.data)) {
++          const parsedData = JSON.parse(event.data);
++          console.log({ parsedData });
++          if (parsedData.type === "Id") {
++            updateIds({
++              threadId: parsedData.threadId,
++              assistantId: parsedData.assistantId,
++            });
++          } else {
++            handleJSONMessage(parsedData);
++          }
++        } else {
++          handlePureStringMessage(event.data);
++        }
++      } catch (error) {
++        console.error("Error processing message:", error);
++      }
++    };
++  }, []);
++
++  useEffect(() => {
++    // TODO: Refactor
++    const updatedMessageList = [...messageList.value];
++
++    // Clear the first function_calls message if there's more than one
++    const functionCallMsgs = updatedMessageList.filter((msg) =>
++      msg.type === "function_calls"
++    );
++    if (functionCallMsgs.length > 1) {
++      const firstFunctionCallIndex = updatedMessageList.findIndex((msg) =>
++        msg.type === "function_calls"
++      );
++      if (firstFunctionCallIndex !== -1) {
++        updatedMessageList.splice(firstFunctionCallIndex, 1);
++      }
++    }
++
++    // Update messageList only if there are changes
++    if (
++      JSON.stringify(messageList.value) !== JSON.stringify(updatedMessageList)
++    ) {
++      messageList.value = updatedMessageList;
++    }
++  }, [messageList.value]);
++
++  const isJSON = (str: string) => {
++    try {
++      JSON.parse(str);
++      return true;
++    } catch (err) {
++      return false;
++    }
++  };
++
++  const send = useCallback((text: string) => {
++    if (ws.value) {
++      ws.value.send(text);
++    }
++  }, []);
++
++  const addNewMessageToList = (newMessage: Message): void => {
++    const isChatOpen = JSON.parse(
++      sessionStorage.getItem("isOpen") ?? "false",
++    );
++    messageList.value = [...messageList.value, newMessage];
++    storeChatSession({
++      messageList: messageList.value,
++      isChatOpen: isChatOpen,
++    });
++  };
++
++  const updateIds = (newIds: Ids): void => {
++    assistantIds.value = newIds;
++    sessionStorage.setItem("threadId", newIds.threadId);
++    sessionStorage.setItem("assistantId", newIds.assistantId);
++  };
++
++  const updateMessageListArray = (newMessageList: Message[]): void => {
++    const isChatOpen = JSON.parse(
++      sessionStorage.getItem("isOpen") ?? "false",
++    );
++    messageList.value = newMessageList;
++    storeChatSession({ messageList: newMessageList, isChatOpen: isChatOpen });
++  };
++
++  const storeChatSession = (
++    { messageList, isChatOpen }: {
++      messageList: Message[];
++      isChatOpen: boolean;
++    },
++  ) => {
++    sessionStorage.setItem("chatHistory", JSON.stringify(messageList));
++    sessionStorage.setItem("isOpen", JSON.stringify(isChatOpen));
++  };
++
++  // TODO(@ItamarRocha): add get ids from session storage and send it to the server
++  const loadChatSession = () => {
++    const chatHistory = JSON.parse(
++      sessionStorage.getItem("chatHistory") ?? "[]",
++    );
++    const isChatOpen = JSON.parse(
++      sessionStorage.getItem("isOpen") ?? "false",
++    );
++    messageList.value = chatHistory;
++    setShowChat(isChatOpen);
++  };
++
++  const hasChatHistory = () => {
++    const chatHistory = JSON.parse(
++      sessionStorage.getItem("chatHistory") ?? "[]",
++    );
++    return chatHistory.length > 0;
++  };
++
++  const handleClick = () => {
++    setShowChat(!showChat);
++    sendEvent({
++      name: "select_promotion",
++      params: {
++        promotion_id: "chat-sales-assistant",
++        promotion_name: "chat-sales-assistant",
++        assistantId: assistantIds.value.assistantId,
++        assistantThreadID: assistantIds.value.threadId,
++        openChat: !showChat,
++      },
++    });
++    sessionStorage.setItem("isOpen", JSON.stringify(!showChat));
++  };
++
++  return (
++    <>
++      <style>
++        {`
++          .bg-primary-90 {
++            background-color: rgba(var(--primary-color), 0.95);
++          }
++          .bg-secondary-70 {
++            background-color: rgba(var(--secondary-color), 0.70);
++          }
++          .bg-chatSecondary:hover {
++            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.1);
++          }
++          `}
++        {`@keyframes expandChat {
++          from {
++            transform: scale(0);
++            opacity: 0;
++          }
++          to {
++            transform: scale(1);
++            opacity: 1;
++          }
++        }`}
++        {`@keyframes pulse {
++          0% {
++            transform: scale(1);
++          }
++          50% {
++            transform: scale(1.1);
++          }
++          100% {
++            transform: scale(1);
++          }
++        }`}
++      </style>
++      <div class="right-0 fixed bottom-0 sm:bottom-4 z-[999]">
++        {showChat
++          ? (
++            <div
++              class={`mr-0 ${
++                displayCart.value ? "sm:mr-[42rem]" : "sm:mr-[1.2rem]"
++              }`}
++              style={{
++                animation: "expandChat 0.5s ease-out forwards",
++                transformOrigin: "bottom right",
++              }}
++            >
++              <ChatContainer
++                logo={logo}
++                send={send}
++                assistantIds={assistantIds}
++                messageList={messageList}
++                addNewMessageToList={addNewMessageToList}
++                handleShowChat={handleClick}
++                updateMessageListArray={updateMessageListArray}
++                updateIds={updateIds}
++              />
++            </div>
++          )
++          : (
++            <button
++              onClick={handleClick}
++              style={{ animation: "pulse 1.5s infinite" }}
++              class={`mr-6 ${
++                displayCart.value ? "sm:mr-[42rem]" : "sm:mr-[1.2rem]"
++              } mb-8 hover:shadow-custom-inset sm:mb-0 bg-chatLogo rounded-full flex justify-center items-center w-16 h-16 p-4 shadow-md`}
++            >
++              {logo
++                ? (
++                  <Image
++                    src={logo.src}
++                    alt={logo.alt}
++                    width={50}
++                    height={50}
++                  />
++                )
++                : <img src="/deco-icon.svg"></img>}
++            </button>
++          )}
++      </div>
++    </>
++  );
++}
++
++export default function ShopAssistant(
++  { mainColors, logo, openChat }: Props,
++) {
++  console.log("ShopAssistant.tsx");
++  return (
++    <ChatProvider>
++      <Chat mainColors={mainColors} logo={logo} openChat={openChat} />
++    </ChatProvider>
++  );
++}
+diff --git a/components/shop-assistant/autosize-textarea/AutosizeTextarea.tsx b/components/shop-assistant/autosize-textarea/AutosizeTextarea.tsx
+new file mode 100644
+index 0000000..4cc6568
+--- /dev/null
++++ b/components/shop-assistant/autosize-textarea/AutosizeTextarea.tsx
+@@ -0,0 +1,103 @@
++import { JSX } from "preact";
++import calculateNodeHeight from "./calculateNodeHeight.ts";
++import getSizingData, { SizingData } from "./getSizingData.ts";
++import { useLayoutEffect, useRef } from "preact/hooks";
++import {
++  useComposedRef,
++  useFontsLoadedListener,
++  useWindowResizeListener,
++} from "./hooks.ts";
++import { noop } from "./utils.ts";
++import { forwardRef } from "preact/compat";
++
++type TextareaProps = JSX.HTMLAttributes<HTMLTextAreaElement>;
++
++type Style =
++  & Omit<
++    NonNullable<TextareaProps["style"]>,
++    "maxHeight" | "minHeight"
++  >
++  & {
++    height?: number;
++  };
++
++export type TextareaHeightChangeMeta = {
++  rowHeight: number;
++};
++export interface TextareaAutosizeProps extends Omit<TextareaProps, "style"> {
++  maxRows?: number;
++  minRows?: number;
++  onHeightChange?: (height: number, meta: TextareaHeightChangeMeta) => void;
++  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
++  cacheMeasurements?: boolean;
++  style?: Style;
++}
++
++const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
++  ({
++    cacheMeasurements,
++    maxRows,
++    minRows,
++    onChange = noop,
++    onHeightChange = noop,
++    ...props
++  }, userRef) => {
++    if (props.style) {
++      if ("maxHeight" in props.style) {
++        throw new Error(
++          "Using `style.maxHeight` for <TextareaAutosize/> is not supported. Please use `maxRows`.",
++        );
++      }
++      if ("minHeight" in props.style) {
++        throw new Error(
++          "Using `style.minHeight` for <TextareaAutosize/> is not supported. Please use `minRows`.",
++        );
++      }
++    }
++    const isControlled = props.value !== undefined;
++    const libRef = useRef<HTMLTextAreaElement | null>(null);
++    const ref = useComposedRef(libRef, userRef);
++    const heightRef = useRef(0);
++    const measurementsCacheRef = useRef<SizingData>();
++
++    const resizeTextarea = () => {
++      const node = libRef.current!;
++      const nodeSizingData = cacheMeasurements && measurementsCacheRef.current
++        ? measurementsCacheRef.current
++        : getSizingData(node);
++
++      if (!nodeSizingData) {
++        return;
++      }
++
++      measurementsCacheRef.current = nodeSizingData;
++
++      const [height, rowHeight] = calculateNodeHeight(
++        nodeSizingData,
++        node.value || node.placeholder || "x",
++        minRows,
++        maxRows,
++      );
++
++      if (heightRef.current !== height) {
++        heightRef.current = height;
++        node.style.setProperty("height", `${height}px`, "important");
++        onHeightChange(height, { rowHeight });
++      }
++    };
++
++    const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
++      if (!isControlled) {
++        resizeTextarea();
++      }
++      onChange(event);
++    };
++
++    useLayoutEffect(resizeTextarea);
++    useWindowResizeListener(resizeTextarea);
++    useFontsLoadedListener(resizeTextarea);
++    return <textarea {...props} onChange={handleChange} ref={ref} />;
++  },
++);
++
++export default TextareaAutosize;
+diff --git a/components/shop-assistant/autosize-textarea/calculateNodeHeight.ts b/components/shop-assistant/autosize-textarea/calculateNodeHeight.ts
+new file mode 100644
+index 0000000..d28420a
+--- /dev/null
++++ b/components/shop-assistant/autosize-textarea/calculateNodeHeight.ts
+@@ -0,0 +1,74 @@
++import { SizingData } from "./getSizingData.ts";
++import forceHiddenStyles from "./forceHiddenStyles.ts";
++
++// TODO: use labelled tuples once they are avaiable:
++//   export type CalculatedNodeHeights = [height: number, rowHeight: number];
++// https://github.com/microsoft/TypeScript/issues/28259
++export type CalculatedNodeHeights = number[];
++
++let hiddenTextarea: HTMLTextAreaElement | null = null;
++
++const getHeight = (node: HTMLElement, sizingData: SizingData): number => {
++  const height = node.scrollHeight;
++
++  if (sizingData.sizingStyle.boxSizing === "border-box") {
++    // border-box: add border, since height = content + padding + border
++    return height + sizingData.borderSize;
++  }
++
++  // remove padding, since height = content
++  return height - sizingData.paddingSize;
++};
++
++export default function calculateNodeHeight(
++  sizingData: SizingData,
++  value: string,
++  minRows = 1,
++  maxRows = Infinity,
++): CalculatedNodeHeights {
++  if (!hiddenTextarea) {
++    hiddenTextarea = document.createElement("textarea");
++    hiddenTextarea.setAttribute("tabindex", "-1");
++    hiddenTextarea.setAttribute("aria-hidden", "true");
++    forceHiddenStyles(hiddenTextarea);
++  }
++
++  if (hiddenTextarea.parentNode === null) {
++    document.body.appendChild(hiddenTextarea);
++  }
++
++  const { paddingSize, borderSize, sizingStyle } = sizingData;
++  const { boxSizing } = sizingStyle;
++
++  Object.keys(sizingStyle).forEach((_key) => {
++    const key = _key as keyof typeof sizingStyle;
++    // deno-lint-ignore no-explicit-any
++    hiddenTextarea!.style[key] = sizingStyle[key] as any;
++  });
++
++  forceHiddenStyles(hiddenTextarea);
++
++  hiddenTextarea.value = value;
++  let height = getHeight(hiddenTextarea, sizingData);
++  // Double set and calc due to Firefox bug: https://bugzilla.mozilla.org/show_bug.cgi?id=1795904
++  hiddenTextarea.value = value;
++  height = getHeight(hiddenTextarea, sizingData);
++
++  // measure height of a textarea with a single row
++  hiddenTextarea.value = "x";
++  const rowHeight = hiddenTextarea.scrollHeight - paddingSize;
++
++  let minHeight = rowHeight * minRows;
++  if (boxSizing === "border-box") {
++    minHeight = minHeight + paddingSize + borderSize;
++  }
++  height = Math.max(minHeight, height);
++
++  let maxHeight = rowHeight * maxRows;
++  if (boxSizing === "border-box") {
++    maxHeight = maxHeight + paddingSize + borderSize;
++  }
++  height = Math.min(maxHeight, height);
++
++  return [height, rowHeight];
++}
+diff --git a/components/shop-assistant/autosize-textarea/forceHiddenStyles.ts b/components/shop-assistant/autosize-textarea/forceHiddenStyles.ts
+new file mode 100644
+index 0000000..4971d00
+--- /dev/null
++++ b/components/shop-assistant/autosize-textarea/forceHiddenStyles.ts
+@@ -0,0 +1,23 @@
++const HIDDEN_TEXTAREA_STYLE = {
++  "min-height": "0",
++  "max-height": "none",
++  height: "0",
++  visibility: "hidden",
++  overflow: "hidden",
++  position: "absolute",
++  "z-index": "-1000",
++  top: "0",
++  right: "0",
++} as const;
++
++const forceHiddenStyles = (node: HTMLElement) => {
++  Object.keys(HIDDEN_TEXTAREA_STYLE).forEach((key) => {
++    node.style.setProperty(
++      key,
++      HIDDEN_TEXTAREA_STYLE[key as keyof typeof HIDDEN_TEXTAREA_STYLE],
++      "important",
++    );
++  });
++};
++
++export default forceHiddenStyles;
+diff --git a/components/shop-assistant/autosize-textarea/getSizingData.ts b/components/shop-assistant/autosize-textarea/getSizingData.ts
+new file mode 100644
+index 0000000..63d5682
+--- /dev/null
++++ b/components/shop-assistant/autosize-textarea/getSizingData.ts
+@@ -0,0 +1,91 @@
++import { pick } from "./utils.ts";
++
++const SIZING_STYLE = [
++  "borderBottomWidth",
++  "borderLeftWidth",
++  "borderRightWidth",
++  "borderTopWidth",
++  "boxSizing",
++  "fontFamily",
++  "fontSize",
++  "fontStyle",
++  "fontWeight",
++  "letterSpacing",
++  "lineHeight",
++  "paddingBottom",
++  "paddingLeft",
++  "paddingRight",
++  "paddingTop",
++  // non-standard
++  "tabSize",
++  "textIndent",
++  // non-standard
++  "textRendering",
++  "textTransform",
++  "width",
++  "wordBreak",
++] as const;
++
++type SizingProps = Extract<
++  (typeof SIZING_STYLE)[number],
++  keyof CSSStyleDeclaration
++>;
++
++type SizingStyle = Pick<CSSStyleDeclaration, SizingProps>;
++
++export type SizingData = {
++  sizingStyle: SizingStyle;
++  paddingSize: number;
++  borderSize: number;
++};
++
++const isIE = typeof document !== "undefined"
++  // deno-lint-ignore no-explicit-any
++  ? !!(document.documentElement as any).currentStyle
++  : false;
++
++const getSizingData = (node: HTMLElement): SizingData | null => {
++  if (!node || !(node instanceof HTMLElement)) {
++    // Return null or handle the error appropriately if node is not a valid HTMLElement
++    return null;
++  }
++
++  const style = window.getComputedStyle(node);
++
++  if (style === null) {
++    return null;
++  }
++
++  const sizingStyle = pick(SIZING_STYLE as unknown as SizingProps[], style);
++  const { boxSizing } = sizingStyle;
++
++  // probably node is detached from DOM, can't read computed dimensions
++  if (boxSizing === "") {
++    return null;
++  }
++
++  // IE (Edge has already correct behaviour) returns content width as computed width
++  // so we need to add manually padding and border widths
++  if (isIE && boxSizing === "border-box") {
++    sizingStyle.width = parseFloat(sizingStyle.width!) +
++      parseFloat(sizingStyle.borderRightWidth!) +
++      parseFloat(sizingStyle.borderLeftWidth!) +
++      parseFloat(sizingStyle.paddingRight!) +
++      parseFloat(sizingStyle.paddingLeft!) +
++      "px";
++  }
++
++  const paddingSize = parseFloat(sizingStyle.paddingBottom!) +
++    parseFloat(sizingStyle.paddingTop!);
++
++  const borderSize = parseFloat(sizingStyle.borderBottomWidth!) +
++    parseFloat(sizingStyle.borderTopWidth!);
++
++  return {
++    sizingStyle,
++    paddingSize,
++    borderSize,
++  };
++};
++
++export default getSizingData;
+diff --git a/components/shop-assistant/autosize-textarea/hooks.ts b/components/shop-assistant/autosize-textarea/hooks.ts
+new file mode 100644
+index 0000000..44ff1a7
+--- /dev/null
++++ b/components/shop-assistant/autosize-textarea/hooks.ts
+@@ -0,0 +1,82 @@
++// deno-lint-ignore-file no-explicit-any
++import { useEffect, useLayoutEffect, useRef } from "preact/hooks";
++import { Ref } from "preact/compat";
++
++function useLatest<T>(value: T) {
++  const ref = useRef<T>(value);
++  useEffect(() => {
++    ref.current = value;
++  }, [value]);
++  return ref;
++}
++
++export function useComposedRef<T>(
++  ...refs: (Ref<T> | ((instance: T) => void) | null)[]
++) {
++  const targetRef = useRef<T>(null);
++
++  useEffect(() => {
++    refs.forEach((ref) => {
++      if (!ref) return;
++      if (!targetRef.current) return;
++
++      if (typeof ref === "function") {
++        ref(targetRef.current);
++      } else if ("current" in ref) {
++        (ref as React.MutableRefObject<T | null>).current = targetRef.current;
++      }
++    });
++  }, [refs]);
++
++  return targetRef;
++}
++
++type UnknownFunction = (...args: any[]) => any;
++
++type InferEventType<TTarget> = TTarget extends {
++  // we infer from 2 overloads which are super common for event targets in the DOM lib
++  // we "prioritize" the first one as the first one is always more specific
++  addEventListener(type: infer P, ...args: any): void;
++  // we can ignore the second one as it's usually just a fallback that allows bare `string` here
++  // we use `infer P2` over `any` as we really don't care about this type value
++  // and we don't want to accidentally fail a type assignability check, remember that `any` isn't assignable to `never`
++  addEventListener(type: infer P2, ...args: any): void;
++} ? P & string
++  : never;
++
++type InferEvent<
++  TTarget,
++  TType extends string,
++> = `on${TType}` extends keyof TTarget
++  ? Parameters<Extract<TTarget[`on${TType}`], UnknownFunction>>[0]
++  : Event;
++
++function useListener<
++  TTarget extends EventTarget,
++  TType extends InferEventType<TTarget>,
++>(
++  target: TTarget,
++  type: TType,
++  listener: (event: InferEvent<TTarget, TType>) => void,
++) {
++  const latestListener = useLatest(listener);
++
++  useLayoutEffect(() => {
++    const handler: typeof listener = (ev) => latestListener.current(ev);
++
++    if (!target) {
++      return;
++    }
++
++    target.addEventListener(type, handler);
++    return () => target.removeEventListener(type, handler);
++  }, [target, type]);
++}
++
++export const useWindowResizeListener = (listener: (event: UIEvent) => any) => {
++  useListener(window, "resize", listener);
++};
++
++export const useFontsLoadedListener = (listener: (event: Event) => any) => {
++  useListener(document.fonts, "loadingdone", listener);
++};
+diff --git a/components/shop-assistant/autosize-textarea/utils.ts b/components/shop-assistant/autosize-textarea/utils.ts
+new file mode 100644
+index 0000000..2691cba
+--- /dev/null
++++ b/components/shop-assistant/autosize-textarea/utils.ts
+@@ -0,0 +1,11 @@
++// deno-lint-ignore-file no-explicit-any
++export const noop = (_event: any, _value?: any) => {};
++
++export const pick = <Obj extends { [key: string]: any }, Key extends keyof Obj>(
++  props: Key[],
++  obj: Obj,
++): Pick<Obj, Key> =>
++  props.reduce((acc, prop) => {
++    acc[prop] = obj[prop];
++    return acc;
++  }, {} as Pick<Obj, Key>);
+diff --git a/components/shop-assistant/types/shop-assistant.ts b/components/shop-assistant/types/shop-assistant.ts
+new file mode 100644
+index 0000000..f933a2c
+--- /dev/null
++++ b/components/shop-assistant/types/shop-assistant.ts
+@@ -0,0 +1,140 @@
++// deno-lint-ignore-file no-explicit-any
++// TODO(@ItamarRocha): Import these from the other Product definition
++export interface Content {
++  name: string;
++  props: {
++    url: string;
++    request: string;
++  };
++  response: string | Product[];
++  options?: string[];
++}
++
++export interface Product {
++  "@type": string;
++  category: string;
++  productID: string;
++  url: string;
++  name: string;
++  description: string;
++  brand: Brand;
++  inProductGroupWithID: string;
++  sku: string;
++  gtin: string;
++  releaseDate: number;
++  additionalProperty: PropertyValue[];
++  isVariantOf?: ProductGroup;
++  image: ImageObject[];
++  offers: AggregateOffer;
++}
++
++export interface Brand {
++  "@type": string;
++  "@id": string;
++  name: string;
++}
++
++export interface PropertyValue {
++  "@type": string;
++  name: string;
++  value: string | number;
++  valueReference: string;
++}
++
++export interface ProductGroup {
++  "@type": string;
++  productGroupID: string;
++  hasVariant: Product[];
++  url: string;
++  name: string;
++  additionalProperty: PropertyValue[];
++  model: string;
++}
++
++export interface ImageObject {
++  "@type": string;
++  alternateName: string;
++  url: string;
++  name: string;
++}
++
++export interface AggregateOffer {
++  "@type": string;
++  priceCurrency: string;
++  highPrice: number;
++  lowPrice: number;
++  offerCount: number;
++  offers: Offer[];
++}
++
++export interface Offer {
++  "@type": string;
++  price: number;
++  seller: string;
++  priceValidUntil: string;
++  inventoryLevel: InventoryLevel;
++  giftSkuIds: any[]; // Precisaria definir o tipo correto
++  teasers: any[]; // Precisaria definir o tipo correto
++  priceSpecification: UnitPriceSpecification[];
++  availability: string;
++}
++
++export interface InventoryLevel {
++  value: number;
++}
++
++export interface UnitPriceSpecification {
++  "@type": string;
++  priceType: string;
++  priceComponentType?: string;
++  name?: string;
++  description?: string;
++  billingDuration?: number;
++  billingIncrement?: number;
++  price: number;
++}
++
++export interface BaseMessage {
++  type: string;
++  role: "user" | "assistant";
++}
++
++export interface UserMsg extends BaseMessage {
++  content: (MessageContentText | MessageContentFile | MessageContentAudio)[];
++}
++
++export interface AssistantMsg extends BaseMessage {
++  content: Content[];
++  messageId?: string;
++}
++
++export type Message = UserMsg | AssistantMsg;
++
++export interface MessageContentText {
++  type: "text";
++  value: string;
++  options: string[];
++}
++
++export interface MessageContentFile {
++  type: "file";
++  url: string;
++  message: string;
++}
++
++export interface MessageContentAudio {
++  type: "audio";
++  url: string;
++  text: string;
++}
++
++export type MessageContent =
++  | MessageContentText
++  | MessageContentFile
++  | MessageContentAudio
++  | Content;
++
++export interface Ids {
++  threadId: string;
++  assistantId: string;
++}
+diff --git a/components/ui/Icon.tsx b/components/ui/Icon.tsx
+index 0eb1267..5a3d021 100644
+--- a/components/ui/Icon.tsx
++++ b/components/ui/Icon.tsx
+@@ -46,7 +46,10 @@ export type AvailableIcons =
+   | "AlertSuccess"
+   | "AlertWarning"
+   | "AlertError"
+-  | "share";
++  | "share"
++  | "Camera"
++  | "Close"
++  | "Microphone";
+ 
+ interface Props extends JSX.SVGAttributes<SVGSVGElement> {
+   /**
+diff --git a/islands/Chat.tsx b/islands/Chat.tsx
+new file mode 100644
+index 0000000..e42555b
+--- /dev/null
++++ b/islands/Chat.tsx
+@@ -0,0 +1 @@
++export { default } from "../components/shop-assistant/ShopAssistant.tsx";
+diff --git a/sdk/analytics.tsx b/sdk/analytics.tsx
+index 4ab42f0..1a1ff96 100644
+--- a/sdk/analytics.tsx
++++ b/sdk/analytics.tsx
+@@ -1,6 +1,39 @@
+ import type { AnalyticsEvent } from "apps/commerce/types.ts";
++import { scriptAsDataURI } from "apps/utils/dataURI.ts";
+ 
+ export const sendEvent = <E extends AnalyticsEvent>(event: E) => {
+   console.log(JSON.stringify(event, null, 2));
+   globalThis.window.DECO.events.dispatch(event);
+ };
++
++export const SendEventOnView = <E extends AnalyticsEvent>(
++  { event, id }: { event: E; id: string },
++) => (
++  <script
++    defer
++    src={scriptAsDataURI(
++      (id: string, event: E) => {
++        const elem = document.getElementById(id);
++
++        if (!elem) {
++          return console.warn(
++            `Could not find element ${id}. Click event will not be send. This will cause loss in analytics`,
++          );
++        }
++
++        const observer = new IntersectionObserver((items) => {
++          for (const item of items) {
++            if (!item.isIntersecting) continue;
++
++            window.DECO.events.dispatch(event);
++            observer.unobserve(elem);
++          }
++        });
++
++        observer.observe(elem);
++      },
++      id,
++      event,
++    )}
++  />
++);
+diff --git a/sections/Chat/Chat.tsx b/sections/Chat/Chat.tsx
+new file mode 100644
+index 0000000..f751ccf
+--- /dev/null
++++ b/sections/Chat/Chat.tsx
+@@ -0,0 +1 @@
++export { default } from "../../islands/Chat.tsx";
+diff --git a/static/deco-logo.svg b/static/deco-logo.svg
+new file mode 100644
+index 0000000..592740a
+--- /dev/null
++++ b/static/deco-logo.svg
+@@ -0,0 +1,3 @@
++<svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
++<path id="Vector" d="M8.21429 28C13.6652 28 16.7655 25.5614 20.3707 18.0872C22.3369 13.9694 24.018 9.93193 25.944 5.93546L28.2391 6.65564C28.8531 6.85528 29.182 6.49519 28.8951 5.93546L26.1085 0.379209C25.9038 -0.0200649 25.4525 -0.0611118 25.1656 0.060163L18.2401 2.61813C17.6663 2.81776 17.7065 3.33831 18.2803 3.4969L20.3286 4.13686C18.6494 7.85533 16.5589 13.4508 14.8778 16.9677C12.9919 20.8858 12.0509 23.6434 8.85501 23.6434C5.65907 23.6434 5.12545 21.2049 6.47765 17.7271C8.0345 13.6896 10.6567 12.4899 13.648 13.3295C14.4685 12.21 15.0824 10.5308 15.3272 9.01211C14.4665 8.77142 13.4414 8.69306 12.5826 8.69306C7.74761 8.69306 2.95275 11.1316 0.986605 16.2475C-1.55332 22.843 0.795346 28 8.21237 28H8.21429Z" fill="#063534"/>
++</svg>
+diff --git a/static/sprites.svg b/static/sprites.svg
+index 7923763..87bf0a1 100644
+--- a/static/sprites.svg
++++ b/static/sprites.svg
+@@ -109,5 +109,7 @@
+ 		<path d="M18 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path><path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path><path d="M8.7 10.7l6.6 -3.4"></path>
+ 		<path d="M8.7 13.3l6.6 3.4"></path>
+     </symbol>
+-
++	<symbol id="Camera" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera" viewBox="0 0 16 16"> <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z"/> <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/> </symbol>
++ 	<symbol id="Close" viewPort="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg"> <line x1="1" y1="11" x2="11" y2="1" stroke="black" stroke-width="2"/> <line x1="1" y1="1" x2="11" y2="11" stroke="black" stroke-width="2"/></symbol>
++  	<symbol id="Microphone" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic" viewBox="0 0 16 16"> <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/> <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0v5zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3z"/> </symbol>
+ </svg>
+diff --git a/tailwind.config.ts b/tailwind.config.ts
+index ef2ff23..ab4e97a 100644
+--- a/tailwind.config.ts
++++ b/tailwind.config.ts
+@@ -16,6 +16,18 @@ export default {
+           "100%": { transform: "translateX(-50%)" },
+         },
+       },
++      colors: {
++        chatPrimary: "var(--primary-color-hex)",
++        chatSecondary: "var(--secondary-color-hex)",
++        chatTertiary: "var(--tertiary-color-hex)",
++        chatLogo: "var(--logo-color-hex)",
++        opaqueWhite: "var(--opaque-white)",
++      },
++    },
++  },
++  variants: {
++    extend: {
++      boxShadow: ["hover"],
+     },
+   },
+ };
+-- 
+2.42.1
+
+From d174cbea4faa53a12f17116c23a319b26ee392a3 Mon Sep 17 00:00:00 2001
+From: caroluchoa <carol_uchoa8@hotmail.com>
+Date: Mon, 12 Feb 2024 19:26:26 -0300
+Subject: [PATCH 04/17] change Product type definition
+
+---
+ .../ChatComponents/FunctionCalls.tsx          | 54 +++++++++++--------
+ .../shop-assistant/types/shop-assistant.ts    |  7 +--
+ 2 files changed, 36 insertions(+), 27 deletions(-)
+
+diff --git a/components/shop-assistant/ChatComponents/FunctionCalls.tsx b/components/shop-assistant/ChatComponents/FunctionCalls.tsx
+index da47011..c1ef735 100644
+--- a/components/shop-assistant/ChatComponents/FunctionCalls.tsx
++++ b/components/shop-assistant/ChatComponents/FunctionCalls.tsx
+@@ -5,8 +5,8 @@ import {
+   MessageContentAudio,
+   MessageContentFile,
+   MessageContentText,
+-  Product,
+ } from "../types/shop-assistant.ts";
++import { Product as ProductType } from "apps/commerce/types.ts";
+ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+ import { useOffer } from "$store/sdk/useOffer.ts";
+ import AddToCartButton from "$store/islands/AddToCartButton/vtex.tsx";
+@@ -27,7 +27,7 @@ export const mapProductToAnalyticsItemAssistant = (
+     index = 0,
+     quantity = 1,
+   }: {
+-    product: Product;
++    product: ProductType;
+     price?: number;
+     listPrice?: number;
+     index?: number;
+@@ -67,7 +67,7 @@ export function FunctionCalls(
+     return (content as Content).response !== undefined;
+   };
+ 
+-  const allProducts: Product[] = messages
++  const allProducts: ProductType[] = messages
+     .filter((message) => message.type === "function_calls")
+     .flatMap((message) =>
+       message.content
+@@ -78,7 +78,7 @@ export function FunctionCalls(
+               "vtex/loaders/intelligentSearch/productList.ts" &&
+             content.response.length !== 0,
+         )
+-        .flatMap((content) => content.response as Product[])
++        .flatMap((content) => content.response as ProductType[])
+     );
+ 
+   console.log({ allProducts });
+@@ -110,7 +110,7 @@ export function FunctionCalls(
+ }
+ 
+ function ProductShelf(
+-  { products, assistantIds }: { products: Product[]; assistantIds: Ids },
++  { products, assistantIds }: { products: ProductType[]; assistantIds: Ids },
+ ) {
+   const id = useId();
+   console.log(products);
+@@ -150,13 +150,16 @@ function ProductShelf(
+ }
+ 
+ function ProductCard(
+-  { product, assistantIds }: { product: Product; assistantIds: Ids },
++  { product, assistantIds }: { product: ProductType; assistantIds: Ids },
+ ) {
++  const {
++    price = 0,
++    seller = "1",
++  } = useOffer(product.offers);
+   const { title, description } = extractTitleAndDescription(
+     product.description,
+   );
+-  const currency = product.offers.priceCurrency;
+-  const price = product.offers.offers[0].price;
++  const currency = product.offers?.priceCurrency;
+ 
+   return (
+     <div class="flex flex-row items-center bg-white gap-4 rounded-2xl text-black p-4">
+@@ -167,7 +170,7 @@ function ProductCard(
+         class="w-[18rem] flex justify-center"
+       >
+         <img
+-          src={product.image[0].url}
++          src={product.image ? product.image[0].url : ""}
+           alt={product.name}
+           class="w-full h-auto rounded-md"
+         />
+@@ -189,14 +192,14 @@ function ProductCard(
+           </p>
+           <AddToCartButton
+             productID={product.productID}
+-            seller={product.offers.offers[0].seller}
++            seller={seller}
+             eventParams={{ items: [] }}
+             onClick={() => {
+               sendEvent({
+                 name: "add_to_cart",
+                 params: {
+-                  currency: product.offers.priceCurrency,
+-                  value: product.offers.offers[0].price,
++                  currency: product.offers?.priceCurrency,
++                  value: product.offers?.offers[0].price,
+                   assistantId: assistantIds.assistantId,
+                   assistantThreadID: assistantIds.threadId,
+                   items: [mapProductToAnalyticsItem({ product })],
+@@ -211,13 +214,13 @@ function ProductCard(
+ }
+ 
+ function ProductCarousel(
+-  { products, assistantIds }: { products: Product[]; assistantIds: Ids },
++  { products, assistantIds }: { products: ProductType[]; assistantIds: Ids },
+ ) {
+   const id = useId();
+   const [currentProductIndex, setCurrentProductIndex] = useState(0);
+-  const product = products[currentProductIndex] as Product;
++  const product = products[currentProductIndex] as ProductType;
+   const currency = product.offers?.priceCurrency;
+-  const price = product.offers.offers[0].price;
++  const price = product.offers?.offers[0].price;
+   const [transition, setTransition] = useState("");
+ 
+   const handleNextProduct = () => {
+@@ -300,8 +303,8 @@ function ProductCarousel(
+             class="flex justify-center min-w-[7rem]"
+           >
+             <img
+-              src={product.image[0].url}
+-              alt={product.image[0].name}
++              src={product.image ? product.image[0].url : ""}
++              alt={product.image ? product.image[0].name : ""}
+               class="w-fit h-24 sm:h-32 max-w-fit rounded-md"
+             />
+           </a>
+@@ -324,14 +327,14 @@ function ProductCarousel(
+             </p>
+             <AddToCartButton
+               productID={product.productID}
+-              seller={product.offers.offers[0].seller}
++              seller={product.offers?.offers[0].seller || ""}
+               eventParams={{ items: [] }}
+               onClick={() => {
+                 sendEvent({
+                   name: "add_to_cart",
+                   params: {
+-                    currency: product.offers.priceCurrency,
+-                    value: product.offers.offers[0].price,
++                    currency: product.offers?.priceCurrency,
++                    value: product.offers?.offers[0].price,
+                     assistantId: assistantIds.assistantId,
+                     assistantThreadID: assistantIds.threadId,
+                     items: [mapProductToAnalyticsItem({ product })],
+@@ -360,7 +363,8 @@ function ProductCarousel(
+ }
+ 
+ // Helper functions
+-const extractTitleAndDescription = (htmlString: string) => {
++const extractTitleAndDescription = (htmlString: string | undefined) => {
++  if (!htmlString) return { title: "", description: htmlString };
+   const parser = new DOMParser();
+   const doc = parser.parseFromString(htmlString, "text/html");
+ 
+@@ -374,7 +378,7 @@ const extractTitleAndDescription = (htmlString: string) => {
+   return { title, description };
+ };
+ 
+-const translatePriceCurrency = (priceCurrency: string) => {
++const translatePriceCurrency = (priceCurrency: string | undefined) => {
+   if (!priceCurrency) return "";
+   switch (priceCurrency) {
+     case "BRL":
+@@ -388,7 +392,11 @@ const translatePriceCurrency = (priceCurrency: string) => {
+   }
+ };
+ 
+-const transformPrice = (price: number, currency: string) => {
++const transformPrice = (
++  price: number | undefined,
++  currency: string | undefined,
++) => {
++  if (!price) return "";
+   // Example: change 188.7 to 188,70 if currency is BRL, any other currency will be 188.70
+   switch (currency) {
+     case "BRL":
+diff --git a/components/shop-assistant/types/shop-assistant.ts b/components/shop-assistant/types/shop-assistant.ts
+index f933a2c..2a33ed0 100644
+--- a/components/shop-assistant/types/shop-assistant.ts
++++ b/components/shop-assistant/types/shop-assistant.ts
+@@ -1,12 +1,13 @@
+ // deno-lint-ignore-file no-explicit-any
+-// TODO(@ItamarRocha): Import these from the other Product definition
++import { Product as ProductType } from "apps/commerce/types.ts";
++
+ export interface Content {
+   name: string;
+   props: {
+     url: string;
+     request: string;
+   };
+-  response: string | Product[];
++  response: string | ProductType[];
+   options?: string[];
+ }
+ 
+@@ -44,7 +45,7 @@ export interface PropertyValue {
+ export interface ProductGroup {
+   "@type": string;
+   productGroupID: string;
+-  hasVariant: Product[];
++  hasVariant: ProductType[];
+   url: string;
+   name: string;
+   additionalProperty: PropertyValue[];
+-- 
+2.42.1
+
+From 79dfc37db90be7c670eda0e236004f0eaa1343c9 Mon Sep 17 00:00:00 2001
+From: caroluchoa <carol_uchoa8@hotmail.com>
+Date: Mon, 12 Feb 2024 20:06:38 -0300
+Subject: [PATCH 05/17] remove logs
+
+---
+ components/shop-assistant/ChatComponents/FunctionCalls.tsx | 5 -----
+ components/shop-assistant/ChatContainer.tsx                | 2 --
+ 2 files changed, 7 deletions(-)
+
+diff --git a/components/shop-assistant/ChatComponents/FunctionCalls.tsx b/components/shop-assistant/ChatComponents/FunctionCalls.tsx
+index c1ef735..478afbd 100644
+--- a/components/shop-assistant/ChatComponents/FunctionCalls.tsx
++++ b/components/shop-assistant/ChatComponents/FunctionCalls.tsx
+@@ -10,10 +10,8 @@ import { Product as ProductType } from "apps/commerce/types.ts";
+ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+ import { useOffer } from "$store/sdk/useOffer.ts";
+ import AddToCartButton from "$store/islands/AddToCartButton/vtex.tsx";
+-import { useSignal } from "@preact/signals";
+ import { useState } from "preact/hooks";
+ import Icon from "$store/components/ui/Icon.tsx";
+-import { useChatContext } from "$store/components/shop-assistant/ChatContext.tsx";
+ import { sendEvent, SendEventOnView } from "$store/sdk/analytics.tsx";
+ import { useId } from "preact/compat";
+ import { AnalyticsItem } from "apps/commerce/types.ts";
+@@ -81,8 +79,6 @@ export function FunctionCalls(
+         .flatMap((content) => content.response as ProductType[])
+     );
+ 
+-  console.log({ allProducts });
+-
+   return (
+     <>
+       {allProducts.length > 0 && (
+@@ -113,7 +109,6 @@ function ProductShelf(
+   { products, assistantIds }: { products: ProductType[]; assistantIds: Ids },
+ ) {
+   const id = useId();
+-  console.log(products);
+   return (
+     <div class="flex flex-row lg:flex-col w-auto gap-4 ml-6">
+       {products.map((product, index) => (
+diff --git a/components/shop-assistant/ChatContainer.tsx b/components/shop-assistant/ChatContainer.tsx
+index 6eecc38..83121aa 100644
+--- a/components/shop-assistant/ChatContainer.tsx
++++ b/components/shop-assistant/ChatContainer.tsx
+@@ -29,11 +29,9 @@ export function ChatContainer(
+   }: ChatProps,
+ ) {
+   const [shouldAnimateWidth, setShouldAnimateWidth] = useState(false);
+-  console.log("logo", logo);
+ 
+   useEffect(() => {
+     const localMsgList = [...messageList.value];
+-    console.log({ localMsgList });
+ 
+     const functionCallMsg: AssistantMsg[] = localMsgList
+       .filter((msg): msg is AssistantMsg =>
+-- 
+2.42.1
+
+From 51fc93eb6d043c5300c048bd275e734f026d95e4 Mon Sep 17 00:00:00 2001
+From: caroluchoa <carol_uchoa8@hotmail.com>
+Date: Mon, 12 Feb 2024 20:06:53 -0300
+Subject: [PATCH 06/17] remove logs
+
+---
+ components/shop-assistant/ShopAssistant.tsx | 5 -----
+ 1 file changed, 5 deletions(-)
+
+diff --git a/components/shop-assistant/ShopAssistant.tsx b/components/shop-assistant/ShopAssistant.tsx
+index e1325ce..4ab1618 100644
+--- a/components/shop-assistant/ShopAssistant.tsx
++++ b/components/shop-assistant/ShopAssistant.tsx
+@@ -35,7 +35,6 @@ export interface MainColors {
+   "logo": string;
+ }
+ 
+-console.log("ShopAssistant.tsx");
+ export interface Props {
+   openChat?: boolean;
+   mainColors?: MainColors;
+@@ -51,7 +50,6 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
+   const { displayCart } = useUI();
+ 
+   useEffect(() => {
+-    console.log({ openChat });
+     if (typeof window !== "undefined") {
+       const isOpen = JSON.parse(sessionStorage.getItem("isOpen") ?? "false") ||
+         false;
+@@ -79,7 +77,6 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
+   }, [isChatMinimized]);
+ 
+   useEffect(() => {
+-    console.log({ openChat });
+     setShowChat(openChat);
+     sessionStorage.setItem("isOpen", JSON.stringify(openChat));
+   }, [openChat]);
+@@ -156,7 +153,6 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
+       try {
+         if (isJSON(event.data)) {
+           const parsedData = JSON.parse(event.data);
+-          console.log({ parsedData });
+           if (parsedData.type === "Id") {
+             updateIds({
+               threadId: parsedData.threadId,
+@@ -371,7 +367,6 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
+ export default function ShopAssistant(
+   { mainColors, logo, openChat }: Props,
+ ) {
+-  console.log("ShopAssistant.tsx");
+   return (
+     <ChatProvider>
+       <Chat mainColors={mainColors} logo={logo} openChat={openChat} />
+-- 
+2.42.1
+
+From 533fb72a5304e0c715ff97491992bcea9c292f7d Mon Sep 17 00:00:00 2001
+From: caroluchoa <carol_uchoa8@hotmail.com>
+Date: Tue, 13 Feb 2024 15:11:28 -0300
+Subject: [PATCH 09/17] fix session storage open chat
+
+---
+ .../ChatComponents/FunctionCalls.tsx               |  7 +++++--
+ components/shop-assistant/ShopAssistant.tsx        | 14 ++++++--------
+ static/deco-logo.svg                               |  2 +-
+ 3 files changed, 12 insertions(+), 11 deletions(-)
+
+diff --git a/components/shop-assistant/ChatComponents/FunctionCalls.tsx b/components/shop-assistant/ChatComponents/FunctionCalls.tsx
+index 478afbd..0c234b7 100644
+--- a/components/shop-assistant/ChatComponents/FunctionCalls.tsx
++++ b/components/shop-assistant/ChatComponents/FunctionCalls.tsx
+@@ -215,7 +215,10 @@ function ProductCarousel(
+   const [currentProductIndex, setCurrentProductIndex] = useState(0);
+   const product = products[currentProductIndex] as ProductType;
+   const currency = product.offers?.priceCurrency;
+-  const price = product.offers?.offers[0].price;
++  const {
++    price = 0,
++    seller = "1",
++  } = useOffer(product.offers);
+   const [transition, setTransition] = useState("");
+ 
+   const handleNextProduct = () => {
+@@ -322,7 +325,7 @@ function ProductCarousel(
+             </p>
+             <AddToCartButton
+               productID={product.productID}
+-              seller={product.offers?.offers[0].seller || ""}
++              seller={seller}
+               eventParams={{ items: [] }}
+               onClick={() => {
+                 sendEvent({
+diff --git a/components/shop-assistant/ShopAssistant.tsx b/components/shop-assistant/ShopAssistant.tsx
+index 4ab1618..d2e1c6a 100644
+--- a/components/shop-assistant/ShopAssistant.tsx
++++ b/components/shop-assistant/ShopAssistant.tsx
+@@ -30,7 +30,7 @@ export interface MainColors {
+   /**
+    * @format color
+    * @title Logo Color
+-   * @default #43db70
++   * @default #02F67C
+    */
+   "logo": string;
+ }
+@@ -41,7 +41,7 @@ export interface Props {
+   logo?: { src: ImageWidget; alt: string };
+ }
+ 
+-function Chat({ mainColors, logo, openChat = false }: Props) {
++function Chat({ mainColors, logo, openChat }: Props) {
+   const ws = useSignal<WebSocket | null>(null);
+   const messageList = useSignal<Message[]>([]);
+   const assistantIds = useSignal<Ids>({ threadId: "", assistantId: "" });
+@@ -50,6 +50,7 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
+   const { displayCart } = useUI();
+ 
+   useEffect(() => {
++    console.log({ openChat });
+     if (typeof window !== "undefined") {
+       const isOpen = JSON.parse(sessionStorage.getItem("isOpen") ?? "false") ||
+         false;
+@@ -71,16 +72,12 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
+   }
+ 
+   useEffect(() => {
++    console.log({ isChatMinimized });
+     if (isChatMinimized) {
+       setShowChat(false);
+     }
+   }, [isChatMinimized]);
+ 
+-  useEffect(() => {
+-    setShowChat(openChat);
+-    sessionStorage.setItem("isOpen", JSON.stringify(openChat));
+-  }, [openChat]);
+-
+   useEffect(() => {
+     loadChatSession();
+   }, []);
+@@ -265,7 +262,9 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
+   };
+ 
+   const handleClick = () => {
++    console.log({ showChat });
+     setShowChat(!showChat);
++    sessionStorage.setItem("isOpen", JSON.stringify(!showChat));
+     sendEvent({
+       name: "select_promotion",
+       params: {
+@@ -276,7 +275,6 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
+         openChat: !showChat,
+       },
+     });
+-    sessionStorage.setItem("isOpen", JSON.stringify(!showChat));
+   };
+ 
+   return (
+diff --git a/static/deco-logo.svg b/static/deco-logo.svg
+index 592740a..cf0189d 100644
+--- a/static/deco-logo.svg
++++ b/static/deco-logo.svg
+@@ -1,3 +1,3 @@
+ <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+-<path id="Vector" d="M8.21429 28C13.6652 28 16.7655 25.5614 20.3707 18.0872C22.3369 13.9694 24.018 9.93193 25.944 5.93546L28.2391 6.65564C28.8531 6.85528 29.182 6.49519 28.8951 5.93546L26.1085 0.379209C25.9038 -0.0200649 25.4525 -0.0611118 25.1656 0.060163L18.2401 2.61813C17.6663 2.81776 17.7065 3.33831 18.2803 3.4969L20.3286 4.13686C18.6494 7.85533 16.5589 13.4508 14.8778 16.9677C12.9919 20.8858 12.0509 23.6434 8.85501 23.6434C5.65907 23.6434 5.12545 21.2049 6.47765 17.7271C8.0345 13.6896 10.6567 12.4899 13.648 13.3295C14.4685 12.21 15.0824 10.5308 15.3272 9.01211C14.4665 8.77142 13.4414 8.69306 12.5826 8.69306C7.74761 8.69306 2.95275 11.1316 0.986605 16.2475C-1.55332 22.843 0.795346 28 8.21237 28H8.21429Z" fill="#063534"/>
++<path id="Vector" d="M8.21429 28C13.6652 28 16.7655 25.5614 20.3707 18.0872C22.3369 13.9694 24.018 9.93193 25.944 5.93546L28.2391 6.65564C28.8531 6.85528 29.182 6.49519 28.8951 5.93546L26.1085 0.379209C25.9038 -0.0200649 25.4525 -0.0611118 25.1656 0.060163L18.2401 2.61813C17.6663 2.81776 17.7065 3.33831 18.2803 3.4969L20.3286 4.13686C18.6494 7.85533 16.5589 13.4508 14.8778 16.9677C12.9919 20.8858 12.0509 23.6434 8.85501 23.6434C5.65907 23.6434 5.12545 21.2049 6.47765 17.7271C8.0345 13.6896 10.6567 12.4899 13.648 13.3295C14.4685 12.21 15.0824 10.5308 15.3272 9.01211C14.4665 8.77142 13.4414 8.69306 12.5826 8.69306C7.74761 8.69306 2.95275 11.1316 0.986605 16.2475C-1.55332 22.843 0.795346 28 8.21237 28H8.21429Z" fill="#02F67C"/>
+ </svg>
+-- 
+2.42.1
+
+From 9e29ab9031e1514dca5fec75616d9b77eec443e3 Mon Sep 17 00:00:00 2001
+From: caroluchoa <carol_uchoa8@hotmail.com>
+Date: Tue, 13 Feb 2024 15:12:59 -0300
+Subject: [PATCH 10/17] change chat margin when cart is open
+
+---
+ components/shop-assistant/ShopAssistant.tsx | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/components/shop-assistant/ShopAssistant.tsx b/components/shop-assistant/ShopAssistant.tsx
+index d2e1c6a..cd11d7b 100644
+--- a/components/shop-assistant/ShopAssistant.tsx
++++ b/components/shop-assistant/ShopAssistant.tsx
+@@ -318,7 +318,7 @@ function Chat({ mainColors, logo, openChat }: Props) {
+           ? (
+             <div
+               class={`mr-0 ${
+-                displayCart.value ? "sm:mr-[42rem]" : "sm:mr-[1.2rem]"
++                displayCart.value ? "sm:mr-[28rem]" : "sm:mr-[1.2rem]"
+               }`}
+               style={{
+                 animation: "expandChat 0.5s ease-out forwards",
+@@ -342,7 +342,7 @@ function Chat({ mainColors, logo, openChat }: Props) {
+               onClick={handleClick}
+               style={{ animation: "pulse 1.5s infinite" }}
+               class={`mr-6 ${
+-                displayCart.value ? "sm:mr-[42rem]" : "sm:mr-[1.2rem]"
++                displayCart.value ? "sm:mr-[28rem]" : "sm:mr-[1.2rem]"
+               } mb-8 hover:shadow-custom-inset sm:mb-0 bg-chatLogo rounded-full flex justify-center items-center w-16 h-16 p-4 shadow-md`}
+             >
+               {logo
+-- 
+2.42.1
+
+From 87ff047ed334ff7fe47fa10175a401f3adffcd2e Mon Sep 17 00:00:00 2001
+From: caroluchoa <carol_uchoa8@hotmail.com>
+Date: Tue, 13 Feb 2024 15:22:10 -0300
+Subject: [PATCH 11/17] add swiper to product carousel
+
+---
+ .../ChatComponents/FunctionCalls.tsx          | 29 ++++++++++++++++++-
+ 1 file changed, 28 insertions(+), 1 deletion(-)
+
+diff --git a/components/shop-assistant/ChatComponents/FunctionCalls.tsx b/components/shop-assistant/ChatComponents/FunctionCalls.tsx
+index 0c234b7..98c9e60 100644
+--- a/components/shop-assistant/ChatComponents/FunctionCalls.tsx
++++ b/components/shop-assistant/ChatComponents/FunctionCalls.tsx
+@@ -220,6 +220,28 @@ function ProductCarousel(
+     seller = "1",
+   } = useOffer(product.offers);
+   const [transition, setTransition] = useState("");
++  const [touchStart, setTouchStart] = useState<null | number>(null);
++  const [touchEnd, setTouchEnd] = useState<null | number>(null);
++
++  // the required distance between touchStart and touchEnd to be detected as a swipe
++  const minSwipeDistance = 50;
++
++  const onTouchStart = (e: TouchEvent) => {
++    setTouchEnd(null); // otherwise the swipe is fired even with usual touch events
++    setTouchStart(e.targetTouches[0].clientX);
++  };
++
++  const onTouchMove = (e: TouchEvent) =>
++    setTouchEnd(e.targetTouches[0].clientX);
++
++  const onTouchEnd = () => {
++    if (!touchStart || !touchEnd) return;
++    const distance = touchStart - touchEnd;
++    const isLeftSwipe = distance > minSwipeDistance;
++    const isRightSwipe = distance < -minSwipeDistance;
++    if (isLeftSwipe) handleNextProduct();
++    if (isRightSwipe) handlePrevProduct();
++  };
+ 
+   const handleNextProduct = () => {
+     setTransition("nextCard");
+@@ -259,7 +281,12 @@ function ProductCarousel(
+         }
+       }`}
+       </style>
+-      <div class="relative bg-white rounded-2xl flex items-center justify-center h-48 text-black w-full">
++      <div
++        class="relative bg-white rounded-2xl flex items-center justify-center h-48 text-black w-full"
++        onTouchStart={onTouchStart}
++        onTouchMove={onTouchMove}
++        onTouchEnd={onTouchEnd}
++      >
+         {products.length > 1
+           ? (
+             <>
+-- 
+2.42.1
+
+From 21a57bbddd25f19c2b3936ae0bbef4f79123874e Mon Sep 17 00:00:00 2001
+From: caroluchoa <carol_uchoa8@hotmail.com>
+Date: Thu, 15 Feb 2024 15:48:01 -0300
+Subject: [PATCH 13/17] improve types structures / improve error handling
+
+---
+ .../ChatComponents/ChatStep.tsx               |  67 +++++++-----
+ .../ChatComponents/Messages.tsx               | 102 +++++++++++-------
+ components/shop-assistant/ChatContainer.tsx   |  15 +--
+ components/shop-assistant/ChatContext.tsx     |   9 +-
+ components/shop-assistant/ShopAssistant.tsx   |  20 ++--
+ .../shop-assistant/types/shop-assistant.ts    |  32 ++++--
+ 6 files changed, 155 insertions(+), 90 deletions(-)
+
+diff --git a/components/shop-assistant/ChatComponents/ChatStep.tsx b/components/shop-assistant/ChatComponents/ChatStep.tsx
+index 219fb32..0fb5dae 100644
+--- a/components/shop-assistant/ChatComponents/ChatStep.tsx
++++ b/components/shop-assistant/ChatComponents/ChatStep.tsx
+@@ -13,6 +13,12 @@ import { useState } from "preact/hooks";
+ import Icon from "$store/components/ui/Icon.tsx";
+ import AutosizeTextarea from "$store/components/shop-assistant/autosize-textarea/AutosizeTextarea.tsx";
+ import { useFileUpload } from "apps/ai-assistants/hooks/useFileUpload.ts";
++import { useChatContext } from "$store/components/shop-assistant/ChatContext.tsx";
++
++const AUDIO_MAX_DURATION = 89000; // 89 seconds
++const MAX_IMAGE_SIZE = "4194304"; // Maximum file size in bytes (4 MB)
++const MAX_FILE_WARNING =
++  "Seu arquivo ultrapassa 4 MB. Por favor, envie um arquivo menor.";
+ 
+ type ChatProps = {
+   messageList: Signal<Message[]>;
+@@ -22,13 +28,6 @@ type ChatProps = {
+   updateMessageListArray: (messageList: Message[]) => void;
+ };
+ 
+-// TODO(ItamarRocha): Refactor and remove this
+-type ProcessedFileInfo = {
+-  fileUrl: string;
+-  base64: string | ArrayBuffer | null;
+-  file: File | null;
+-};
+-
+ export function ChatStep(
+   {
+     messageList,
+@@ -101,6 +100,7 @@ function InputArea(
+   const userInput = useRef<HTMLTextAreaElement>(null);
+   const fileInputRef = useRef<HTMLInputElement>(null);
+   const { describeImage, awsUploadImage, transcribeAudio } = useFileUpload();
++  const { inputDisable } = useChatContext();
+ 
+   const processSubmit = async () => {
+     const inputValue = userInput.current?.value;
+@@ -108,6 +108,19 @@ function InputArea(
+ 
+     // Handle file input and send message if there is a file
+     if (currentFile) {
++      if (currentFile.size > parseInt(MAX_IMAGE_SIZE)) {
++        addNewMessageToList({
++          content: [{
++            type: "text",
++            value: MAX_FILE_WARNING,
++            options: [],
++          }],
++          type: "message",
++          role: "assistant",
++        });
++        return;
++      }
++
+       const fileUrl = URL.createObjectURL(currentFile);
+       const msgContent: MessageContentFile[] = [{
+         type: "file",
+@@ -192,28 +205,24 @@ function InputArea(
+     }
+   };
+ 
+-  const processFileUpload = async (
++  const processFileUpload = (
+     event: React.ChangeEvent<HTMLInputElement>,
+-  ): Promise<ProcessedFileInfo | null> => {
++  ): File | null => {
+     const input = event.target as HTMLInputElement;
+     if (input && input.files && input.files.length > 0) {
+       const file = input.files[0];
+       if (!file) return null;
+-      const fileUrl = URL.createObjectURL(file);
+-      const base64 = await getBase64(file);
+-      return { fileUrl, base64, file };
++      return file;
+     }
+     return null;
+   };
+ 
+-  const handleFileChange = async (
++  const handleFileChange = (
+     event: React.ChangeEvent<HTMLInputElement>,
+   ) => {
+-    const processedFileInfo = await processFileUpload(event);
+-
++    const processedFileInfo = processFileUpload(event);
+     if (!processedFileInfo) return;
+-
+-    setCurrentFile(processedFileInfo.file);
++    setCurrentFile(processedFileInfo);
+   };
+ 
+   const startRecording = async () => {
+@@ -240,6 +249,9 @@ function InputArea(
+       mediaRecorderRef.current.start(1000);
+ 
+       setIsRecording(true); // Change the state to reflect that recording has started
++      setTimeout(() => {
++        stopRecording();
++      }, AUDIO_MAX_DURATION); // Stop recording after AUDIO_MAX_DURATION seconds
+     } catch (error) {
+       // Handle the error appropriately
+       console.error("Error starting recording:", error);
+@@ -343,23 +355,26 @@ function InputArea(
+           <AutosizeTextarea
+             maxRows={7}
+             minRows={1}
+-            disabled={isLastMessageFromUser()}
+-            class={`w-72 resize-none h-5 pr-11 sm:pr-2 text-chatTertiary bg-transparent text-sm placeholder:text-chatTertiary focus-visible:outline-0 ${
+-              isLastMessageFromUser() ? "cursor-not-allowed" : "cursor-auto"
++            disabled={isLastMessageFromUser() && inputDisable}
++            class={`w-72 resize-none h-5 pr-11 sm:pr-2 text-chatTertiary bg-transparent text-base sm:text-sm placeholder:text-chatTertiary focus-visible:outline-0 ${
++              isLastMessageFromUser() && inputDisable
++                ? "cursor-not-allowed"
++                : "cursor-auto"
+             }`}
+             ref={userInput}
+             name="userInput"
+-            placeholder={isLastMessageFromUser()
++            placeholder={isLastMessageFromUser() && inputDisable
+               ? "Aguarde, processando mensagem..."
+               : "Digite sua mensagem aqui"}
+             aria-label="Chat input area"
+             onKeyDown={handleKeydown}
++            maxLength={750} // Set the maximum input length to 750 characters
+           />
+           <div class="absolute right-4 flex flex-row gap-3">
+             <div
+               onClick={handleFileClick}
+               class={`flex items-center justify-center ${
+-                isLastMessageFromUser()
++                isLastMessageFromUser() && inputDisable
+                   ? "cursor-not-allowed"
+                   : "cursor-pointer"
+               }`}
+@@ -373,20 +388,20 @@ function InputArea(
+               <input
+                 id="fileInput"
+                 type="file"
+-                disabled={isLastMessageFromUser()}
++                disabled={isLastMessageFromUser() && inputDisable}
+                 ref={fileInputRef}
+                 name="fileInput"
+                 aria-label="File input"
+                 onChange={handleFileChange}
+                 class="sr-only" // Hides visually but keeps it accessible
+-                accept="image/png, image/jpeg, image/gif, image/webp" //image has to be below 20 MB in size and is of one the following formats: ['png', 'jpeg', 'gif', 'webp'].
++                accept="image/png, image/jpeg, image/gif, image/webp"
+               />
+             </div>
+             <button
+-              disabled={isLastMessageFromUser()}
++              disabled={isLastMessageFromUser() && inputDisable}
+               onClick={handleAudioClick}
+               class={`flex items-center justify-center ${
+-                isLastMessageFromUser()
++                isLastMessageFromUser() && inputDisable
+                   ? "cursor-not-allowed"
+                   : "cursor-pointer"
+               }`}
+diff --git a/components/shop-assistant/ChatComponents/Messages.tsx b/components/shop-assistant/ChatComponents/Messages.tsx
+index d7a9166..47ceec0 100644
+--- a/components/shop-assistant/ChatComponents/Messages.tsx
++++ b/components/shop-assistant/ChatComponents/Messages.tsx
+@@ -2,11 +2,12 @@ import { memo } from "preact/compat";
+ import type { ComponentChildren } from "preact";
+ import { Ref, useEffect, useRef, useState } from "preact/hooks";
+ import {
+-  AssistantMsg,
++  AssistantMessage,
+   Message,
+   MessageContentText,
+   UserMsg,
+ } from "../types/shop-assistant.ts";
++import { useChatContext } from "$store/components/shop-assistant/ChatContext.tsx";
+ 
+ type MessagesProps = {
+   messageList: Message[];
+@@ -102,7 +103,7 @@ export function Messages(
+                   updateMessageListArray={updateMessageListArray}
+                 />
+               )
+-              : <UserMessage message={message as UserMsg} />}
++              : <UserMessage message={message} />}
+           </div>
+         ))}
+         <TypingIndicator show={showLoading} messageEl={messageEl} />
+@@ -112,7 +113,7 @@ export function Messages(
+ }
+ 
+ type BotMessageProps = {
+-  message: Message;
++  message: AssistantMessage;
+   send: (text: string) => void;
+   messageList: Message[];
+   addNewMessageToList: ({ content, type, role }: Message) => void;
+@@ -130,15 +131,18 @@ const BotMessage = memo(
+       updateMessageListArray,
+     }: BotMessageProps,
+   ) => {
++    if (message.type === "error") {
++      return <ErrorMessage />;
++    }
+     if (message.type === "message") {
+       return (
+         <>
+           {message.content.map((content, index) => (
+             <BotMessageWrapper key={index}>
+               <div class="flex flex-col gap-2">
+-                <div>{(content as MessageContentText).value}</div>
++                <div>{content.value}</div>
+                 <OptionsButtonGroup
+-                  content={content as MessageContentText}
++                  content={content}
+                   send={send}
+                   messageList={messageList}
+                   addNewMessageToList={addNewMessageToList}
+@@ -155,6 +159,17 @@ const BotMessage = memo(
+   },
+ );
+ 
++function ErrorMessage() {
++  return (
++    <BotMessageWrapper>
++      <div>
++        Ei, algo não saiu como esperávamos... 🚧 Por favor, recarregue a página
++        e tente novamente.
++      </div>
++    </BotMessageWrapper>
++  );
++}
++
+ type OptionsButtonGroupProps = {
+   content: MessageContentText;
+   send: (text: string) => void;
+@@ -191,11 +206,18 @@ function OptionsButtonGroup(
+   };
+ 
+   const getLastUserMessage = (messageList: Message[]): string => {
+-    const lastUserMessage = messageList.reverse().find((msg) =>
+-      msg.role === "user"
+-    );
++    const lastUserMessage: UserMsg | undefined = messageList.slice().reverse()
++      .find(isUserMsg);
++
+     if (!lastUserMessage) return "";
+-    return (lastUserMessage?.content[0] as MessageContentText).value;
++
++    const content = lastUserMessage.content[0];
++
++    if ("value" in content) { // MessageContentText type
++      return content.value;
++    }
++
++    return "";
+   };
+ 
+   const removeQuickReplies = () => {
+@@ -211,31 +233,24 @@ function OptionsButtonGroup(
+     }
+ 
+     const newMessageList: Message[] = messageList.map((message, index) => {
+-      if (index === lastAssistantMsgIndex && message.content) {
+-        if (message.role === "assistant" && "messageId" in message) {
+-          // AssistantMsg
+-          const assistantMessage = message as AssistantMsg;
+-          return {
+-            ...assistantMessage, // keep any other properties
+-            content: assistantMessage.content, // No modifications
+-          };
+-        } else {
+-          // UserMsg
+-          const userMessage = message as UserMsg;
+-          const newContent = userMessage.content.map((content) => {
+-            if (content.type === "text") {
+-              // MessageContentText, remove 'options'
+-              return { ...content, options: [] };
+-            }
+-            return content; // Other types without modifications
+-          });
+-
+-          return {
+-            ...userMessage,
+-            content: newContent,
+-          };
+-        }
++      if (
++        index === lastAssistantMsgIndex && message.content &&
++        message.role === "assistant" && message.type === "message"
++      ) {
++        const modifiedContent = message.content.map((contentItem) => {
++          if (contentItem.type === "text") {
++            return { ...contentItem, options: [] };
++          }
++          // Returning the contentItem without modifications if it's not a 'text' type
++          return contentItem;
++        });
++
++        return {
++          ...message,
++          content: modifiedContent,
++        };
+       }
++      // Returning the message without modifications if it's not an assistant message of type 'message' at the specified index
+       return message;
+     });
+ 
+@@ -244,11 +259,11 @@ function OptionsButtonGroup(
+ 
+   return (
+     <div>
+-      {(content as MessageContentText).options?.length > 0 && (
++      {content.options?.length > 0 && (
+         <div class="flex flex-col justify-start space-y-2">
+           <div class="text-chatTertiary text-xs font-light">Quick Replies</div>
+           <div class="gap-2 flex flex-row items-center">
+-            {(content as MessageContentText).options.map((option, index) => (
++            {content.options.map((option, index) => (
+               <button
+                 class="p-2 text-chatTertiary rounded-2xl bg-chatSecondary text-xs hover:shadow-custom-inset"
+                 key={index}
+@@ -266,7 +281,7 @@ function OptionsButtonGroup(
+ 
+ function BotMessageWrapper({ children }: { children: ComponentChildren }) {
+   return (
+-    <div class="mb-3 text-chatTertiary text-sm max-w-s self-start w-full">
++    <div class="mb-3 text-chatTertiary max-w-s self-start w-full">
+       {children}
+     </div>
+   );
+@@ -281,7 +296,7 @@ function UserMessage({ message }: { message: UserMsg }) {
+     <div
+       class={`mb-6 p-2 rounded-xl rounded-br-none ${
+         isAudioMessage ? "" : "bg-secondary-70"
+-      } text-chatTertiary text-sm max-w-s w-fit self-end`}
++      } text-chatTertiary max-w-s w-fit self-end`}
+     >
+       {message.content.map((content, index) => {
+         if ("value" in content) {
+@@ -310,6 +325,7 @@ function TypingIndicator(
+   const [message, setMessage] = useState<string>("");
+   const [step, setStep] = useState<number>(0);
+   const messageElement = messageEl.current;
++  const { disableChatInput } = useChatContext();
+ 
+   useEffect(() => {
+     // TODO: Refactor this to use messages from props / generate random waiting messages / typing indicator as first message (...)
+@@ -331,9 +347,9 @@ function TypingIndicator(
+       }, 23000));
+       timeouts.push(setTimeout(() => {
+         setMessage(
+-          "Hmm, enfrentamos um contratempo. 🌀 Faça uma nova tentativa e, caso continue com problemas, recarregue a página para recomeçarmos.",
++          "Hmm, enfrentamos um contratempo. 🌀 Por favor, recarregue a página para recomeçarmos.",
+         );
+-        setStep(4);
++        disableChatInput(false);
+       }, 60000));
+ 
+       return () => {
+@@ -352,7 +368,7 @@ function TypingIndicator(
+ 
+   return show
+     ? (
+-      <div className="text-sm mb-4">
++      <div className="mb-4">
+         <style>
+           {`@keyframes blink {
+               0%, 100% { opacity: 0; }
+@@ -362,7 +378,6 @@ function TypingIndicator(
+         {step === 0 && (
+           <div
+             style={{ animation: "messageAppear 200ms linear" }}
+-            class="text-sm"
+           >
+             Digitando
+             <span
+@@ -396,3 +411,8 @@ function TypingIndicator(
+     )
+     : null;
+ }
++
++// Type guards
++const isUserMsg = (msg: Message): msg is UserMsg => {
++  return msg.role === "user";
++};
+diff --git a/components/shop-assistant/ChatContainer.tsx b/components/shop-assistant/ChatContainer.tsx
+index 83121aa..a260aa7 100644
+--- a/components/shop-assistant/ChatContainer.tsx
++++ b/components/shop-assistant/ChatContainer.tsx
+@@ -1,5 +1,10 @@
+ import { Signal } from "@preact/signals";
+-import { AssistantMsg, Content, Ids, Message } from "./types/shop-assistant.ts";
++import {
++  AssistantMessage,
++  Content,
++  Ids,
++  Message,
++} from "./types/shop-assistant.ts";
+ import { useEffect, useState } from "preact/hooks";
+ import { ChatStep } from "./ChatComponents/ChatStep.tsx";
+ import Image from "apps/website/components/Image.tsx";
+@@ -33,12 +38,10 @@ export function ChatContainer(
+   useEffect(() => {
+     const localMsgList = [...messageList.value];
+ 
+-    const functionCallMsg: AssistantMsg[] = localMsgList
+-      .filter((msg): msg is AssistantMsg =>
++    const functionCallMsg: AssistantMessage[] = localMsgList
++      .filter((msg): msg is AssistantMessage =>
+         msg.type === "function_calls" &&
+-        (msg.content as Content[]).some((content) =>
+-          content.response.length > 0
+-        )
++        msg.content.some((content) => content.response.length > 0)
+       );
+ 
+     // Check if there is a multi_tool_use.parallel function call (which is an error from the openApi call)
+diff --git a/components/shop-assistant/ChatContext.tsx b/components/shop-assistant/ChatContext.tsx
+index 39b4c7e..ac0ba5b 100644
+--- a/components/shop-assistant/ChatContext.tsx
++++ b/components/shop-assistant/ChatContext.tsx
+@@ -4,6 +4,8 @@ import { useContext, useState } from "preact/hooks";
+ const ChatContext = createContext({
+   isChatMinimized: false,
+   minimizeChat: (state: boolean) => {},
++  inputDisable: true,
++  disableChatInput: (state: boolean) => {},
+ });
+ 
+ interface ChatProviderProps {
+@@ -12,14 +14,19 @@ interface ChatProviderProps {
+ 
+ export function ChatProvider({ children }: ChatProviderProps) {
+   const [isChatMinimized, setIsChatMinimized] = useState(false);
++  const [inputDisable, setInputDisable] = useState(false);
+ 
+   const minimizeChat = (state: boolean) => {
+     setIsChatMinimized(state);
+   };
+ 
++  const disableChatInput = (state: boolean) => {
++    setInputDisable(state);
++  };
++
+   return (
+     <ChatContext.Provider
+-      value={{ isChatMinimized, minimizeChat }}
++      value={{ isChatMinimized, minimizeChat, disableChatInput, inputDisable }}
+     >
+       {children}
+     </ChatContext.Provider>
+diff --git a/components/shop-assistant/ShopAssistant.tsx b/components/shop-assistant/ShopAssistant.tsx
+index cd11d7b..bdffcdd 100644
+--- a/components/shop-assistant/ShopAssistant.tsx
++++ b/components/shop-assistant/ShopAssistant.tsx
+@@ -1,7 +1,11 @@
+ import { useSignal } from "@preact/signals";
+ import { useCallback, useEffect, useState } from "preact/hooks";
+ import { ChatContainer } from "./ChatContainer.tsx";
+-import { AssistantMsg, Ids, Message } from "./types/shop-assistant.ts";
++import {
++  AssistantContentMessage,
++  Ids,
++  Message,
++} from "./types/shop-assistant.ts";
+ import { ImageWidget } from "apps/admin/widgets.ts";
+ import Image from "apps/website/components/Image.tsx";
+ import { ChatProvider, useChatContext } from "./ChatContext.tsx";
+@@ -12,25 +16,25 @@ export interface MainColors {
+   /**
+    * @format color
+    * @title Primary
+-   * @default #E8E8E8
++   * @default #E9E1D8
+    */
+   "primary": string;
+   /**
+    * @format color
+    * @title Secondary
+-   * @default #FFFFFF
++   * @default #fff
+    */
+   "secondary": string;
+   /**
+    * @format color
+    * @title Text Color
+-   * @default #000000
++   * @default #000
+    */
+   "tertiary": string;
+   /**
+    * @format color
+    * @title Logo Color
+-   * @default #02F67C
++   * @default #df8292
+    */
+   "logo": string;
+ }
+@@ -41,7 +45,7 @@ export interface Props {
+   logo?: { src: ImageWidget; alt: string };
+ }
+ 
+-function Chat({ mainColors, logo, openChat }: Props) {
++function Chat({ mainColors, logo, openChat = false }: Props) {
+   const ws = useSignal<WebSocket | null>(null);
+   const messageList = useSignal<Message[]>([]);
+   const assistantIds = useSignal<Ids>({ threadId: "", assistantId: "" });
+@@ -50,7 +54,6 @@ function Chat({ mainColors, logo, openChat }: Props) {
+   const { displayCart } = useUI();
+ 
+   useEffect(() => {
+-    console.log({ openChat });
+     if (typeof window !== "undefined") {
+       const isOpen = JSON.parse(sessionStorage.getItem("isOpen") ?? "false") ||
+         false;
+@@ -72,7 +75,6 @@ function Chat({ mainColors, logo, openChat }: Props) {
+   }
+ 
+   useEffect(() => {
+-    console.log({ isChatMinimized });
+     if (isChatMinimized) {
+       setShowChat(false);
+     }
+@@ -127,7 +129,7 @@ function Chat({ mainColors, logo, openChat }: Props) {
+     );
+ 
+     // Messages with type function_call, start_function_call or message belongs to this category of messages
+-    const handleJSONMessage = (data: AssistantMsg) => {
++    const handleJSONMessage = (data: AssistantContentMessage) => {
+       addNewMessageToList({
+         content: data.content,
+         type: data.type,
+diff --git a/components/shop-assistant/types/shop-assistant.ts b/components/shop-assistant/types/shop-assistant.ts
+index 2a33ed0..979e1c9 100644
+--- a/components/shop-assistant/types/shop-assistant.ts
++++ b/components/shop-assistant/types/shop-assistant.ts
+@@ -95,21 +95,39 @@ export interface UnitPriceSpecification {
+   price: number;
+ }
+ 
+-export interface BaseMessage {
+-  type: string;
+-  role: "user" | "assistant";
++export interface UserMsg {
++  type: "message";
++  role: "user";
++  content: (MessageContentText | MessageContentFile | MessageContentAudio)[];
+ }
+ 
+-export interface UserMsg extends BaseMessage {
+-  content: (MessageContentText | MessageContentFile | MessageContentAudio)[];
++export interface AssistantTextMessage {
++  content: MessageContentText[];
++  messageId?: string;
++  role: "assistant";
++  type: "message";
++}
++
++export interface AssistantContentMessage {
++  content: Content[];
++  messageId?: string;
++  role: "assistant";
++  type: "function_calls" | "start_function_call";
+ }
+ 
+-export interface AssistantMsg extends BaseMessage {
++export interface AssistantErrorMessage {
+   content: Content[];
+   messageId?: string;
++  role: "assistant";
++  type: "error";
+ }
+ 
+-export type Message = UserMsg | AssistantMsg;
++export type AssistantMessage =
++  | AssistantTextMessage
++  | AssistantContentMessage
++  | AssistantErrorMessage;
++
++export type Message = UserMsg | AssistantMessage;
+ 
+ export interface MessageContentText {
+   type: "text";
+-- 
+2.42.1
+
+From ea0195c29f99355dab7afb446b8bd2079e7452a8 Mon Sep 17 00:00:00 2001
+From: caroluchoa <carol_uchoa8@hotmail.com>
+Date: Mon, 19 Feb 2024 18:28:39 -0300
+Subject: [PATCH 14/17] improve erro handling
+
+---
+ components/shop-assistant/ChatComponents/Messages.tsx | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/components/shop-assistant/ChatComponents/Messages.tsx b/components/shop-assistant/ChatComponents/Messages.tsx
+index 47ceec0..fdd7813 100644
+--- a/components/shop-assistant/ChatComponents/Messages.tsx
++++ b/components/shop-assistant/ChatComponents/Messages.tsx
+@@ -344,7 +344,13 @@ function TypingIndicator(
+           "Só um segundinho, estou quase encontrando algo incrível! 🔍",
+         );
+         setStep(3);
+-      }, 23000));
++      }, 15000));
++      timeouts.push(setTimeout(() => {
++        setMessage(
++          "Parece que está demorando um pouco mais do que o esperado. Aguarde mais um momento.",
++        );
++        setStep(4);
++      }, 30000));
+       timeouts.push(setTimeout(() => {
+         setMessage(
+           "Hmm, enfrentamos um contratempo. 🌀 Por favor, recarregue a página para recomeçarmos.",
+-- 
+2.42.1
+
+From f3ce015998eb61aca941c536ed039893130b288d Mon Sep 17 00:00:00 2001
+From: caroluchoa <carol_uchoa8@hotmail.com>
+Date: Tue, 20 Feb 2024 14:41:34 -0300
+Subject: [PATCH 15/17] set input disable to true
+
+---
+ components/shop-assistant/ChatContext.tsx | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/components/shop-assistant/ChatContext.tsx b/components/shop-assistant/ChatContext.tsx
+index ac0ba5b..c956d59 100644
+--- a/components/shop-assistant/ChatContext.tsx
++++ b/components/shop-assistant/ChatContext.tsx
+@@ -14,7 +14,7 @@ interface ChatProviderProps {
+ 
+ export function ChatProvider({ children }: ChatProviderProps) {
+   const [isChatMinimized, setIsChatMinimized] = useState(false);
+-  const [inputDisable, setInputDisable] = useState(false);
++  const [inputDisable, setInputDisable] = useState(true);
+ 
+   const minimizeChat = (state: boolean) => {
+     setIsChatMinimized(state);
+-- 
+2.42.1
+
+From d3e00d8e0d96a2b22c947c19c96f864950ac29f4 Mon Sep 17 00:00:00 2001
+From: Itamar Rocha Filho <itamardprf@gmail.com>
+Date: Wed, 21 Feb 2024 08:11:26 -0300
+Subject: [PATCH 16/17] Send audio duration information for tracking purposes
+ deco-cx/apps@7587c80e07946e765fa808f1074dbb6498904d65
+
+---
+ components/shop-assistant/ChatComponents/ChatStep.tsx | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/components/shop-assistant/ChatComponents/ChatStep.tsx b/components/shop-assistant/ChatComponents/ChatStep.tsx
+index 0fb5dae..9d590d4 100644
+--- a/components/shop-assistant/ChatComponents/ChatStep.tsx
++++ b/components/shop-assistant/ChatComponents/ChatStep.tsx
+@@ -99,6 +99,7 @@ function InputArea(
+   const audioChunksRef = useRef<BlobPart[]>([]);
+   const userInput = useRef<HTMLTextAreaElement>(null);
+   const fileInputRef = useRef<HTMLInputElement>(null);
++  const recordingStartTimeRef = useRef<number>(0);
+   const { describeImage, awsUploadImage, transcribeAudio } = useFileUpload();
+   const { inputDisable } = useChatContext();
+ 
+@@ -240,6 +241,7 @@ function InputArea(
+       mediaRecorderRef.current = new MediaRecorder(mediaStreamRef.current, {
+         mimeType: mimeTypeRef.current,
+       });
++      recordingStartTimeRef.current = Date.now();
+ 
+       mediaRecorderRef.current.ondataavailable = (event) => {
+         audioChunksRef.current.push(event.data);
+@@ -270,6 +272,9 @@ function InputArea(
+   };
+ 
+   const handleRecordingStop = async () => {
++    const recordingEndTime = Date.now();
++    const durationSeconds = recordingStartTimeRef.current ? (recordingEndTime - recordingStartTimeRef.current) / 1000 : AUDIO_MAX_DURATION / 1000;
++
+     const audioBlob = new Blob(audioChunksRef.current, {
+       type: mimeTypeRef.current,
+     });
+@@ -280,6 +285,7 @@ function InputArea(
+     const transcription = await transcribeAudio({
+       file: base64,
+       ids: assistantIds,
++      audioDuration: durationSeconds,
+     });
+ 
+     if (!transcription.text) return;
+-- 
+2.42.1
+
+From 82a966b40a9ff5987a9615edf5a1a86237cf8df0 Mon Sep 17 00:00:00 2001
+From: caroluchoa <carol_uchoa8@hotmail.com>
+Date: Wed, 28 Feb 2024 00:10:53 -0300
+Subject: [PATCH 17/17] apply patches updates
+
+---
+ .../ChatComponents/ChatStep.tsx               |  19 +-
+ .../ChatComponents/FunctionCalls.tsx          |  22 +-
+ components/shop-assistant/ChatContainer.tsx   |  12 +-
+ components/shop-assistant/ShopAssistant.tsx   |  51 ++---
+ .../shop-assistant/types/shop-assistant.ts    |   2 +-
+ 5 files changed, 165 insertions(+), 157 deletions(-)
+
+diff --git a/components/shop-assistant/ChatComponents/ChatStep.tsx b/components/shop-assistant/ChatComponents/ChatStep.tsx
+index 9d590d4..dd856a3 100644
+--- a/components/shop-assistant/ChatComponents/ChatStep.tsx
++++ b/components/shop-assistant/ChatComponents/ChatStep.tsx
+@@ -1,7 +1,7 @@
+ import { useRef } from "preact/hooks";
+ import { Messages } from "./Messages.tsx";
+ import {
+-  Ids,
++  AssistantIds,
+   Message,
+   MessageContentAudio,
+   MessageContentFile,
+@@ -22,7 +22,7 @@ const MAX_FILE_WARNING =
+ 
+ type ChatProps = {
+   messageList: Signal<Message[]>;
+-  assistantIds: Signal<Ids>;
++  assistantIds: Signal<AssistantIds>;
+   addNewMessageToList: ({ content, type, role }: Message) => void;
+   send: (text: string) => void;
+   updateMessageListArray: (messageList: Message[]) => void;
+@@ -72,7 +72,7 @@ export function ChatStep(
+ type InputAreaProps = {
+   send: (text: string) => void;
+   addNewMessageToList: ({ content, type, role }: Message) => void;
+-  assistantIds: Ids;
++  assistantIds: AssistantIds;
+   messageList: Signal<Message[]>;
+ };
+ 
+@@ -143,12 +143,12 @@ function InputArea(
+       try {
+         const uploadURL = await awsUploadImage({
+           file: base64,
+-          ids: assistantIds,
++          assistantIds,
+         });
+         const descriptionResponse = await describeImage({
+           uploadURL: uploadURL,
+           userPrompt: inputValue,
+-          ids: assistantIds,
++          assistantIds,
+         });
+ 
+         if (descriptionResponse instanceof Response) {
+@@ -156,7 +156,8 @@ function InputArea(
+           throw new Error(error);
+         }
+ 
+-        const imageDescription = descriptionResponse.choices[0].message.content;
++        const imageDescription = descriptionResponse?.choices[0].message
++          .content;
+         const concatenatedMessage = `${inputValue}. Find ${imageDescription}`;
+ 
+         send(concatenatedMessage);
+@@ -273,7 +274,9 @@ function InputArea(
+ 
+   const handleRecordingStop = async () => {
+     const recordingEndTime = Date.now();
+-    const durationSeconds = recordingStartTimeRef.current ? (recordingEndTime - recordingStartTimeRef.current) / 1000 : AUDIO_MAX_DURATION / 1000;
++    const durationSeconds = recordingStartTimeRef.current
++      ? (recordingEndTime - recordingStartTimeRef.current) / 1000
++      : AUDIO_MAX_DURATION / 1000;
+ 
+     const audioBlob = new Blob(audioChunksRef.current, {
+       type: mimeTypeRef.current,
+@@ -284,7 +287,7 @@ function InputArea(
+     const base64 = await getBase64(audioBlob);
+     const transcription = await transcribeAudio({
+       file: base64,
+-      ids: assistantIds,
++      assistantIds,
+       audioDuration: durationSeconds,
+     });
+ 
+diff --git a/components/shop-assistant/ChatComponents/FunctionCalls.tsx b/components/shop-assistant/ChatComponents/FunctionCalls.tsx
+index 98c9e60..991fe93 100644
+--- a/components/shop-assistant/ChatComponents/FunctionCalls.tsx
++++ b/components/shop-assistant/ChatComponents/FunctionCalls.tsx
+@@ -1,6 +1,6 @@
+ import {
++  AssistantIds,
+   Content,
+-  Ids,
+   Message,
+   MessageContentAudio,
+   MessageContentFile,
+@@ -53,7 +53,10 @@ export const mapProductToAnalyticsItemAssistant = (
+ };
+ 
+ export function FunctionCalls(
+-  { messages, assistantIds }: { messages: Message[]; assistantIds: Ids },
++  { messages, assistantIds }: {
++    messages: Message[];
++    assistantIds: AssistantIds;
++  },
+ ) {
+   const isFunctionCallContent = (
+     content:
+@@ -106,7 +109,10 @@ export function FunctionCalls(
+ }
+ 
+ function ProductShelf(
+-  { products, assistantIds }: { products: ProductType[]; assistantIds: Ids },
++  { products, assistantIds }: {
++    products: ProductType[];
++    assistantIds: AssistantIds;
++  },
+ ) {
+   const id = useId();
+   return (
+@@ -145,7 +151,10 @@ function ProductShelf(
+ }
+ 
+ function ProductCard(
+-  { product, assistantIds }: { product: ProductType; assistantIds: Ids },
++  { product, assistantIds }: {
++    product: ProductType;
++    assistantIds: AssistantIds;
++  },
+ ) {
+   const {
+     price = 0,
+@@ -209,7 +218,10 @@ function ProductCard(
+ }
+ 
+ function ProductCarousel(
+-  { products, assistantIds }: { products: ProductType[]; assistantIds: Ids },
++  { products, assistantIds }: {
++    products: ProductType[];
++    assistantIds: AssistantIds;
++  },
+ ) {
+   const id = useId();
+   const [currentProductIndex, setCurrentProductIndex] = useState(0);
+diff --git a/components/shop-assistant/ChatContainer.tsx b/components/shop-assistant/ChatContainer.tsx
+index a260aa7..c4cf759 100644
+--- a/components/shop-assistant/ChatContainer.tsx
++++ b/components/shop-assistant/ChatContainer.tsx
+@@ -1,8 +1,8 @@
+ import { Signal } from "@preact/signals";
+ import {
++  AssistantIds,
+   AssistantMessage,
+   Content,
+-  Ids,
+   Message,
+ } from "./types/shop-assistant.ts";
+ import { useEffect, useState } from "preact/hooks";
+@@ -12,13 +12,13 @@ import Icon from "$store/components/ui/Icon.tsx";
+ 
+ type ChatProps = {
+   messageList: Signal<Message[]>;
+-  assistantIds: Signal<Ids>;
++  assistantIds: Signal<AssistantIds>;
+   addNewMessageToList: ({ content, type, role }: Message) => void;
+   send: (text: string) => void;
+   handleShowChat: () => void;
+   logo?: { src: string; alt: string };
+   updateMessageListArray: (messageList: Message[]) => void;
+-  updateIds: (ids: Ids) => void;
++  updateAssistantIds: (ids: AssistantIds) => void;
+ };
+ 
+ export function ChatContainer(
+@@ -30,7 +30,7 @@ export function ChatContainer(
+     handleShowChat,
+     logo,
+     updateMessageListArray,
+-    updateIds,
++    updateAssistantIds,
+   }: ChatProps,
+ ) {
+   const [shouldAnimateWidth, setShouldAnimateWidth] = useState(false);
+@@ -60,8 +60,8 @@ export function ChatContainer(
+         "Are you sure you want to clear the chat? This action cannot be undone.",
+       )
+     ) {
+-      updateMessageListArray([]);
+-      updateIds({ threadId: "", assistantId: "" });
++      updateMessageListArray([messageList.value[0]]);
++      updateAssistantIds({ threadId: "", assistantId: "" });
+     }
+   };
+ 
+diff --git a/components/shop-assistant/ShopAssistant.tsx b/components/shop-assistant/ShopAssistant.tsx
+index bdffcdd..e11cd4c 100644
+--- a/components/shop-assistant/ShopAssistant.tsx
++++ b/components/shop-assistant/ShopAssistant.tsx
+@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "preact/hooks";
+ import { ChatContainer } from "./ChatContainer.tsx";
+ import {
+   AssistantContentMessage,
+-  Ids,
++  AssistantIds,
+   Message,
+ } from "./types/shop-assistant.ts";
+ import { ImageWidget } from "apps/admin/widgets.ts";
+@@ -48,7 +48,10 @@ export interface Props {
+ function Chat({ mainColors, logo, openChat = false }: Props) {
+   const ws = useSignal<WebSocket | null>(null);
+   const messageList = useSignal<Message[]>([]);
+-  const assistantIds = useSignal<Ids>({ threadId: "", assistantId: "" });
++  const assistantIds = useSignal<AssistantIds>({
++    threadId: "",
++    assistantId: "",
++  });
+   const [showChat, setShowChat] = useState<boolean>(false);
+   const { minimizeChat, isChatMinimized } = useChatContext();
+   const { displayCart } = useUI();
+@@ -128,22 +131,16 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
+       `${websocket}://${host}/live/invoke/ai-assistants/actions/chat.ts?assistant=storefront`,
+     );
+ 
+-    // Messages with type function_call, start_function_call or message belongs to this category of messages
+-    const handleJSONMessage = (data: AssistantContentMessage) => {
+-      addNewMessageToList({
+-        content: data.content,
+-        type: data.type,
+-        role: data.role ?? "assistant",
+-      });
+-    };
+-
+-    // Welcome message belongs to this category of messages
+-    const handlePureStringMessage = (data: string) => {
+-      if (!hasChatHistory()) {
++    // All messages belong to this category
++    const handleJSONMessage = (
++      data: AssistantContentMessage,
++      isWelcomeMessage: boolean,
++    ) => {
++      if (!hasChatHistory() || !isWelcomeMessage) {
+         addNewMessageToList({
+-          content: [{ type: "text", value: data, options: [] }],
+-          type: "message",
+-          role: "assistant",
++          content: data.content,
++          type: data.type,
++          role: data.role ?? "assistant",
+         });
+       }
+     };
+@@ -152,16 +149,13 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
+       try {
+         if (isJSON(event.data)) {
+           const parsedData = JSON.parse(event.data);
+-          if (parsedData.type === "Id") {
+-            updateIds({
+-              threadId: parsedData.threadId,
+-              assistantId: parsedData.assistantId,
+-            });
+-          } else {
+-            handleJSONMessage(parsedData);
+-          }
++          handleJSONMessage(parsedData, parsedData.isWelcomeMessage);
++          updateAssistantIds({
++            threadId: parsedData.threadId,
++            assistantId: parsedData.assistantId,
++          });
+         } else {
+-          handlePureStringMessage(event.data);
++          console.error("Data received is not a JSON.");
+         }
+       } catch (error) {
+         console.error("Error processing message:", error);
+@@ -220,7 +214,7 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
+     });
+   };
+ 
+-  const updateIds = (newIds: Ids): void => {
++  const updateAssistantIds = (newIds: AssistantIds): void => {
+     assistantIds.value = newIds;
+     sessionStorage.setItem("threadId", newIds.threadId);
+     sessionStorage.setItem("assistantId", newIds.assistantId);
+@@ -264,7 +258,6 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
+   };
+ 
+   const handleClick = () => {
+-    console.log({ showChat });
+     setShowChat(!showChat);
+     sessionStorage.setItem("isOpen", JSON.stringify(!showChat));
+     sendEvent({
+@@ -335,7 +328,7 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
+                 addNewMessageToList={addNewMessageToList}
+                 handleShowChat={handleClick}
+                 updateMessageListArray={updateMessageListArray}
+-                updateIds={updateIds}
++                updateAssistantIds={updateAssistantIds}
+               />
+             </div>
+           )
+diff --git a/components/shop-assistant/types/shop-assistant.ts b/components/shop-assistant/types/shop-assistant.ts
+index 979e1c9..2d66839 100644
+--- a/components/shop-assistant/types/shop-assistant.ts
++++ b/components/shop-assistant/types/shop-assistant.ts
+@@ -153,7 +153,7 @@ export type MessageContent =
+   | MessageContentAudio
+   | Content;
+ 
+-export interface Ids {
++export interface AssistantIds {
+   threadId: string;
+   assistantId: string;
+ }
+-- 
+2.42.1
+
