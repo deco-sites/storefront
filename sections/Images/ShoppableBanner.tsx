@@ -93,15 +93,13 @@ export default function ShoppableBanner(props: Props) {
               width={384}
               height={227}
             />
-            <Image
+            <img
               class="w-full h-full object-cover"
               sizes="(max-width: 640px) 100vw, 30vw"
               src={image?.mobile}
               alt={image?.altText}
               decoding="async"
               loading="lazy"
-              width={150}
-              height={150}
             />
           </Picture>
           {pins?.map(({ mobile, desktop, link, label }) => (

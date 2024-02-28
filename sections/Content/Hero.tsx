@@ -25,8 +25,8 @@ const PLACEMENT = {
 };
 
 export default function HeroFlats({
-  title,
-  description,
+  title = "Hero",
+  description = "Your description here",
   image,
   placement,
   cta,

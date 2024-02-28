@@ -64,13 +64,7 @@ function Banner(props: SectionProps<ReturnType<typeof loader>>) {
           height={200}
           media="(min-width: 767px)"
         />
-        <Image
-          class="w-full"
-          src={image.desktop}
-          alt={image.alt ?? title}
-          width={1440}
-          height={200}
-        />
+        <img class="w-full" src={image.desktop} alt={image.alt ?? title} />
       </Picture>
 
       <div class="container flex flex-col items-center justify-center sm:items-start col-start-1 col-span-1 row-start-1 row-span-1 w-full">

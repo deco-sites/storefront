@@ -10,7 +10,6 @@ const animationClasses = {
 };
 
 interface Children {
-  label?: string;
   section: Section;
 }
 
@@ -153,3 +152,24 @@ const animationByType = {
         }
     `,
 };
+
+export function Preview() {
+  const animationClass = animationClasses["slide-left"];
+  const id = useId();
+
+  return (
+    <div>
+      <style
+        dangerouslySetInnerHTML={{ __html: animationByType["slide-left"] }}
+      >
+      </style>
+      <div
+        id={id}
+        class="flex justify-center items-center"
+        style={{ animationDuration: "2s" }}
+      >
+        <h1 class="text-9xl text-base-content font-semibold my-8">Animation</h1>
+      </div>
+    </div>
+  );
+}

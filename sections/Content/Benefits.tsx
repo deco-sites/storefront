@@ -12,7 +12,13 @@ interface Benefit {
 }
 
 export interface Props {
+  /**
+   * @default Benefits
+   */
   title?: string;
+  /**
+   * @default Check out the benefits
+   */
   description?: string;
   benefits?: Array<Benefit>;
   layout?: {
@@ -25,8 +31,8 @@ export default function Benefits(
   props: Props,
 ) {
   const {
-    title = "",
-    description = "",
+    title = "Benefits",
+    description = "Check out the benefits",
     benefits = [{
       icon: "Truck",
       label: "Entrega em todo Brasil",
@@ -67,7 +73,7 @@ export default function Benefits(
         <div class="flex-none">
           <Icon
             id={benefit.icon}
-            class={reverse ? "text-base-100" : "text-primary"}
+            class={"text-base-content"}
             width={36}
             height={36}
             strokeWidth={0.01}

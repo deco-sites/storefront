@@ -1,8 +1,10 @@
-interface Props {
+import { clx } from "$store/sdk/clx.ts";
+
+export interface Props {
   title?: string;
   fontSize?: "Small" | "Normal" | "Large";
   description?: string;
-  alignment: "center" | "left";
+  alignment?: "center" | "left";
   colorReverse?: boolean;
 }
 
@@ -25,14 +27,13 @@ function Header(props: Props) {
             {props.title &&
               (
                 <h1
-                  class={`text-2xl font-light leading-8 lg:leading-10
-                  ${
+                  class={clx(
+                    "text-2xl font-light leading-8 lg:leading-10",
                     props.colorReverse
                       ? "text-primary-content"
-                      : "text-base-content"
-                  }
-                  ${fontSizeClasses[props.fontSize || "Normal"]}
-                `}
+                      : "text-base-content",
+                    fontSizeClasses[props.fontSize || "Normal"],
+                  )}
                 >
                   {props.title}
                 </h1>
@@ -40,13 +41,13 @@ function Header(props: Props) {
             {props.description &&
               (
                 <h2
-                  class={`
-                  leading-6 lg:leading-8
-                  ${
-                    props.colorReverse ? "text-primary-content" : "text-neutral"
-                  }
-                  ${fontSizeClasses[props.fontSize || "Normal"]}
-                `}
+                  class={clx(
+                    "leading-6 lg:leading-8",
+                    props.colorReverse
+                      ? "text-primary-content"
+                      : "text-base-content",
+                    fontSizeClasses[props.fontSize || "Normal"],
+                  )}
                 >
                   {props.description}
                 </h2>

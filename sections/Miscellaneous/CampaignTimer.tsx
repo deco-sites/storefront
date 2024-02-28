@@ -1,5 +1,6 @@
 import { useId } from "$store/sdk/useId.ts";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
+import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 
 export interface Props {
   /**
@@ -130,12 +131,7 @@ function CampaignTimer({
           </div>
         </div>
       </div>
-      <script
-        type="module"
-        dangerouslySetInnerHTML={{
-          __html: `(${snippet})("${expiresAt}", "${id}");`,
-        }}
-      />
+      <script defer src={scriptAsDataURI(snippet, expiresAt, id)} />
     </>
   );
 }
