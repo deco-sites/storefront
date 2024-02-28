@@ -153,7 +153,7 @@ export type MessageContent =
   | MessageContentAudio
   | Content;
 
-export interface Ids {
+export interface AssistantIds {
   threadId: string;
   assistantId: string;
 }

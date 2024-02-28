@@ -1,8 +1,8 @@
 import { Signal } from "@preact/signals";
 import {
+  AssistantIds,
   AssistantMessage,
   Content,
-  Ids,
   Message,
 } from "./types/shop-assistant.ts";
 import { useEffect, useState } from "preact/hooks";
@@ -12,13 +12,13 @@ import Icon from "$store/components/ui/Icon.tsx";
 
 type ChatProps = {
   messageList: Signal<Message[]>;
-  assistantIds: Signal<Ids>;
+  assistantIds: Signal<AssistantIds>;
   addNewMessageToList: ({ content, type, role }: Message) => void;
   send: (text: string) => void;
   handleShowChat: () => void;
   logo?: { src: string; alt: string };
   updateMessageListArray: (messageList: Message[]) => void;
-  updateIds: (ids: Ids) => void;
+  updateAssistantIds: (ids: AssistantIds) => void;
 };
 
 export function ChatContainer(
@@ -30,7 +30,7 @@ export function ChatContainer(
     handleShowChat,
     logo,
     updateMessageListArray,
-    updateIds,
+    updateAssistantIds,
   }: ChatProps,
 ) {
   const [shouldAnimateWidth, setShouldAnimateWidth] = useState(false);
@@ -60,8 +60,8 @@ export function ChatContainer(
         "Are you sure you want to clear the chat? This action cannot be undone.",
       )
     ) {
-      updateMessageListArray([]);
-      updateIds({ threadId: "", assistantId: "" });
+      updateMessageListArray([messageList.value[0]]);
+      updateAssistantIds({ threadId: "", assistantId: "" });
     }
   };
 

@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "preact/hooks";
 import { ChatContainer } from "./ChatContainer.tsx";
 import {
   AssistantContentMessage,
-  Ids,
+  AssistantIds,
   Message,
 } from "./types/shop-assistant.ts";
 import { ImageWidget } from "apps/admin/widgets.ts";
@@ -48,7 +48,10 @@ export interface Props {
 function Chat({ mainColors, logo, openChat = false }: Props) {
   const ws = useSignal<WebSocket | null>(null);
   const messageList = useSignal<Message[]>([]);
-  const assistantIds = useSignal<Ids>({ threadId: "", assistantId: "" });
+  const assistantIds = useSignal<AssistantIds>({
+    threadId: "",
+    assistantId: "",
+  });
   const [showChat, setShowChat] = useState<boolean>(false);
   const { minimizeChat, isChatMinimized } = useChatContext();
   const { displayCart } = useUI();
@@ -128,22 +131,16 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
       `${websocket}://${host}/live/invoke/ai-assistants/actions/chat.ts?assistant=storefront`,
     );
 
-    // Messages with type function_call, start_function_call or message belongs to this category of messages
-    const handleJSONMessage = (data: AssistantContentMessage) => {
-      addNewMessageToList({
-        content: data.content,
-        type: data.type,
-        role: data.role ?? "assistant",
-      });
-    };
-
-    // Welcome message belongs to this category of messages
-    const handlePureStringMessage = (data: string) => {
-      if (!hasChatHistory()) {
+    // All messages belong to this category
+    const handleJSONMessage = (
+      data: AssistantContentMessage,
+      isWelcomeMessage: boolean,
+    ) => {
+      if (!hasChatHistory() || !isWelcomeMessage) {
         addNewMessageToList({
-          content: [{ type: "text", value: data, options: [] }],
-          type: "message",
-          role: "assistant",
+          content: data.content,
+          type: data.type,
+          role: data.role ?? "assistant",
         });
       }
     };
@@ -152,16 +149,13 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
       try {
         if (isJSON(event.data)) {
           const parsedData = JSON.parse(event.data);
-          if (parsedData.type === "Id") {
-            updateIds({
-              threadId: parsedData.threadId,
-              assistantId: parsedData.assistantId,
-            });
-          } else {
-            handleJSONMessage(parsedData);
-          }
+          handleJSONMessage(parsedData, parsedData.isWelcomeMessage);
+          updateAssistantIds({
+            threadId: parsedData.threadId,
+            assistantId: parsedData.assistantId,
+          });
         } else {
-          handlePureStringMessage(event.data);
+          console.error("Data received is not a JSON.");
         }
       } catch (error) {
         console.error("Error processing message:", error);
@@ -220,7 +214,7 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
     });
   };
 
-  const updateIds = (newIds: Ids): void => {
+  const updateAssistantIds = (newIds: AssistantIds): void => {
     assistantIds.value = newIds;
     sessionStorage.setItem("threadId", newIds.threadId);
     sessionStorage.setItem("assistantId", newIds.assistantId);
@@ -264,7 +258,6 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
   };
 
   const handleClick = () => {
-    console.log({ showChat });
     setShowChat(!showChat);
     sessionStorage.setItem("isOpen", JSON.stringify(!showChat));
     sendEvent({
@@ -335,7 +328,7 @@ function Chat({ mainColors, logo, openChat = false }: Props) {
                 addNewMessageToList={addNewMessageToList}
                 handleShowChat={handleClick}
                 updateMessageListArray={updateMessageListArray}
-                updateIds={updateIds}
+                updateAssistantIds={updateAssistantIds}
               />
             </div>
           )

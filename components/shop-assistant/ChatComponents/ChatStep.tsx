@@ -1,7 +1,7 @@
 import { useRef } from "preact/hooks";
 import { Messages } from "./Messages.tsx";
 import {
-  Ids,
+  AssistantIds,
   Message,
   MessageContentAudio,
   MessageContentFile,
@@ -22,7 +22,7 @@ const MAX_FILE_WARNING =
 
 type ChatProps = {
   messageList: Signal<Message[]>;
-  assistantIds: Signal<Ids>;
+  assistantIds: Signal<AssistantIds>;
   addNewMessageToList: ({ content, type, role }: Message) => void;
   send: (text: string) => void;
   updateMessageListArray: (messageList: Message[]) => void;
@@ -72,7 +72,7 @@ export function ChatStep(
 type InputAreaProps = {
   send: (text: string) => void;
   addNewMessageToList: ({ content, type, role }: Message) => void;
-  assistantIds: Ids;
+  assistantIds: AssistantIds;
   messageList: Signal<Message[]>;
 };
 
@@ -143,12 +143,12 @@ function InputArea(
       try {
         const uploadURL = await awsUploadImage({
           file: base64,
-          ids: assistantIds,
+          assistantIds,
         });
         const descriptionResponse = await describeImage({
           uploadURL: uploadURL,
           userPrompt: inputValue,
-          ids: assistantIds,
+          assistantIds,
         });
 
         if (descriptionResponse instanceof Response) {
@@ -156,7 +156,8 @@ function InputArea(
           throw new Error(error);
         }
 
-        const imageDescription = descriptionResponse.choices[0].message.content;
+        const imageDescription = descriptionResponse?.choices[0].message
+          .content;
         const concatenatedMessage = `${inputValue}. Find ${imageDescription}`;
 
         send(concatenatedMessage);
@@ -273,7 +274,9 @@ function InputArea(
 
   const handleRecordingStop = async () => {
     const recordingEndTime = Date.now();
-    const durationSeconds = recordingStartTimeRef.current ? (recordingEndTime - recordingStartTimeRef.current) / 1000 : AUDIO_MAX_DURATION / 1000;
+    const durationSeconds = recordingStartTimeRef.current
+      ? (recordingEndTime - recordingStartTimeRef.current) / 1000
+      : AUDIO_MAX_DURATION / 1000;
 
     const audioBlob = new Blob(audioChunksRef.current, {
       type: mimeTypeRef.current,
@@ -284,7 +287,7 @@ function InputArea(
     const base64 = await getBase64(audioBlob);
     const transcription = await transcribeAudio({
       file: base64,
-      ids: assistantIds,
+      assistantIds,
       audioDuration: durationSeconds,
     });
 

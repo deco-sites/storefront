@@ -1,6 +1,6 @@
 import {
+  AssistantIds,
   Content,
-  Ids,
   Message,
   MessageContentAudio,
   MessageContentFile,
@@ -53,7 +53,10 @@ export const mapProductToAnalyticsItemAssistant = (
 };
 
 export function FunctionCalls(
-  { messages, assistantIds }: { messages: Message[]; assistantIds: Ids },
+  { messages, assistantIds }: {
+    messages: Message[];
+    assistantIds: AssistantIds;
+  },
 ) {
   const isFunctionCallContent = (
     content:
@@ -106,7 +109,10 @@ export function FunctionCalls(
 }
 
 function ProductShelf(
-  { products, assistantIds }: { products: ProductType[]; assistantIds: Ids },
+  { products, assistantIds }: {
+    products: ProductType[];
+    assistantIds: AssistantIds;
+  },
 ) {
   const id = useId();
   return (
@@ -145,7 +151,10 @@ function ProductShelf(
 }
 
 function ProductCard(
-  { product, assistantIds }: { product: ProductType; assistantIds: Ids },
+  { product, assistantIds }: {
+    product: ProductType;
+    assistantIds: AssistantIds;
+  },
 ) {
   const {
     price = 0,
@@ -209,7 +218,10 @@ function ProductCard(
 }
 
 function ProductCarousel(
-  { products, assistantIds }: { products: ProductType[]; assistantIds: Ids },
+  { products, assistantIds }: {
+    products: ProductType[];
+    assistantIds: AssistantIds;
+  },
 ) {
   const id = useId();
   const [currentProductIndex, setCurrentProductIndex] = useState(0);
