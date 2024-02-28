@@ -55,10 +55,9 @@ import * as $$$$$$45 from "./sections/Product/ProductShelfTabbed.tsx";
 import * as $$$$$$46 from "./sections/Product/SearchResult.tsx";
 import * as $$$$$$47 from "./sections/Product/ShelfWithImage.tsx";
 import * as $$$$$$48 from "./sections/Product/Wishlist.tsx";
-import * as $$$$$$49 from "./sections/RichText.tsx";
-import * as $$$$$$50 from "./sections/Social/InstagramPosts.tsx";
-import * as $$$$$$51 from "./sections/Social/WhatsApp.tsx";
-import * as $$$$$$52 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$49 from "./sections/Social/InstagramPosts.tsx";
+import * as $$$$$$50 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$51 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "loaders": {
@@ -118,10 +117,9 @@ const manifest = {
     "deco-sites/storefront/sections/Product/SearchResult.tsx": $$$$$$46,
     "deco-sites/storefront/sections/Product/ShelfWithImage.tsx": $$$$$$47,
     "deco-sites/storefront/sections/Product/Wishlist.tsx": $$$$$$48,
-    "deco-sites/storefront/sections/RichText.tsx": $$$$$$49,
-    "deco-sites/storefront/sections/Social/InstagramPosts.tsx": $$$$$$50,
-    "deco-sites/storefront/sections/Social/WhatsApp.tsx": $$$$$$51,
-    "deco-sites/storefront/sections/Theme/Theme.tsx": $$$$$$52,
+    "deco-sites/storefront/sections/Social/InstagramPosts.tsx": $$$$$$49,
+    "deco-sites/storefront/sections/Social/WhatsApp.tsx": $$$$$$50,
+    "deco-sites/storefront/sections/Theme/Theme.tsx": $$$$$$51,
   },
   "apps": {
     "deco-sites/storefront/apps/decohub.ts": $$$$$$$$$$$0,
