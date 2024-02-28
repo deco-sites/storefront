@@ -28,6 +28,8 @@ const icons = [
   { component: "L", label: "Large", prop: "fontSize" },
 ];
 
+// Used to load icons that will be used for ButtonGroup widgets.
+// The file adminIcons.ts contains all available icons in a string format, and this loader maps them to the format expected by the button-group widget.
 export default function IconsLoader(
   _props: unknown,
   req: Request,

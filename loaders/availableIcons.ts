@@ -6,6 +6,7 @@ const icons = Object.keys(AvailableIcons).map((iconName) => ({
   label: iconName,
 }));
 
+// Used to load all available icons that will be used for IconSelect widgets.
 export default function IconsLoader(
   _props: unknown,
   req: Request,

@@ -1,4 +1,4 @@
-// Icons for button group widget
+// Icons for ButtonGroup widget
 
 export const Left = `<svg id="Left" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
 <path fill-rule="evenodd" clip-rule="evenodd" d="M3.33333 2.5C3.79357 2.5 4.16667 2.8731 4.16667 3.33333V16.6667C4.16667 17.1269 3.79357 17.5 3.33333 17.5C2.8731 17.5 2.5 17.1269 2.5 16.6667V3.33333C2.5 2.8731 2.8731 2.5 3.33333 2.5Z" fill="inherit"/>
