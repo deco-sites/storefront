@@ -23,16 +23,6 @@ interface Header {
    * @options deco-sites/storefront/loaders/icons.ts
    */
   fontSize?: "Small" | "Normal" | "Large";
-  /**
-   * @format button-group
-   * @options deco-sites/storefront/loaders/icons.ts
-   */
-  textAlignment?: "Left" | "Center" | "Right";
-  /**
-   * @format button-group
-   * @options deco-sites/storefront/loaders/icons.ts
-   */
-  case?: "Default" | "Titlecase" | "Uppercase" | "Lowercase";
 }
 
 interface Layout {
@@ -60,8 +50,6 @@ const DEFAULT_PROPS: Props = {
   layout: {
     header: {
       fontSize: "Large",
-      textAlignment: "Center",
-      case: "Default",
     },
     content: {
       border: false,
