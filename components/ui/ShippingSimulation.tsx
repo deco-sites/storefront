@@ -89,7 +89,7 @@ function ShippingSimulation({ items }: Props) {
     } finally {
       loading.value = false;
     }
-  }, []);
+  }, [items]);
 
   return (
     <div class="flex flex-col gap-2">
