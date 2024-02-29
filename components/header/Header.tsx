@@ -106,7 +106,7 @@ function Header({
   );
 }
 
-export const loader = (props: Props, req: Request, ctx: AppContext) => {
+export const loader = (props: Props, _req: Request, ctx: AppContext) => {
   return { ...props, device: ctx.device };
 };
 

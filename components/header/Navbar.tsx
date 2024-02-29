@@ -15,6 +15,7 @@ import NavItem from "./NavItem.tsx";
 import { navbarHeight } from "./constants.ts";
 import { Buttons, Logo } from "$store/components/header/Header.tsx";
 
+// Make it sure to render it on the server only. DO NOT render it on an island
 function Navbar(
   { items, searchbar, logo, buttons, logoPosition = "left", device }: {
     items: SiteNavigationElement[];
@@ -27,6 +28,7 @@ function Navbar(
 ) {
   const platform = usePlatform();
 
+  // Mobile header
   if (device === "mobile") {
     return (
       <div
@@ -63,8 +65,9 @@ function Navbar(
     );
   }
 
+  // Desktop header
   return (
-    <div class="hidden lg:grid lg:grid-cols-3 items-center border-b border-base-200 w-full px-6">
+    <div class="hidden sm:grid sm:grid-cols-3 items-center border-b border-base-200 w-full px-6">
       <ul
         class={`flex gap-6 col-span-1 ${
           logoPosition === "left" ? "justify-center" : "justify-start"
