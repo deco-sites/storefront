@@ -4,6 +4,8 @@
 
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
+import * as $$$2 from "./loaders/availableIcons.ts";
+import * as $$$3 from "./loaders/icons.ts";
 import * as $$$0 from "./loaders/Layouts/ProductCard.tsx";
 import * as $$$1 from "./loaders/List/Sections.tsx";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
@@ -61,6 +63,8 @@ import * as $$$$$$51 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "loaders": {
+    "deco-sites/storefront/loaders/availableIcons.ts": $$$2,
+    "deco-sites/storefront/loaders/icons.ts": $$$3,
     "deco-sites/storefront/loaders/Layouts/ProductCard.tsx": $$$0,
     "deco-sites/storefront/loaders/List/Sections.tsx": $$$1,
   },
