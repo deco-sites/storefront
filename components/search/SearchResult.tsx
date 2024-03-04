@@ -49,7 +49,7 @@ function Result({
   layout,
   cardLayout,
   startingPage = 0,
-  url: _url
+  url: _url,
 }: Omit<Props, "page"> & {
   page: ProductListingPage;
   layout?: Layout;
@@ -57,7 +57,7 @@ function Result({
 }) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
   const perPage = pageInfo?.recordPerPage || products.length;
-  const url = new URL(_url)
+  const url = new URL(_url);
 
   const { format = "Show More" } = layout ?? {};
 
@@ -72,15 +72,18 @@ function Result({
   return (
     <>
       <div class="container px-4 sm:py-10">
-        {(isFirstPage || !isPartial) && <SearchControls
-          sortOptions={sortOptions}
-          filters={filters}
-          breadcrumb={breadcrumb}
-          displayFilter={layout?.variant === "drawer"}
-        />}
+        {(isFirstPage || !isPartial) && (
+          <SearchControls
+            sortOptions={sortOptions}
+            filters={filters}
+            breadcrumb={breadcrumb}
+            displayFilter={layout?.variant === "drawer"}
+          />
+        )}
 
         <div class="flex flex-row">
-          {layout?.variant === "aside" && filters.length > 0 && (isFirstPage || !isPartial) && (
+          {layout?.variant === "aside" && filters.length > 0 &&
+            (isFirstPage || !isPartial) && (
             <aside class="hidden sm:block w-min min-w-[250px]">
               <Filters filters={filters} />
             </aside>
@@ -156,12 +159,10 @@ function SearchResult(
 }
 
 export const loader = (props: Props, req: Request) => {
-
   return {
     ...props,
     url: req.url,
-  }
-}
-
+  };
+};
 
 export default SearchResult;

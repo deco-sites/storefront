@@ -9,7 +9,6 @@ export interface Props {
   pageInfo: PageInfo;
 }
 
-
 export default function ShowMore(
   { children, pageInfo }: Props,
 ) {
@@ -33,15 +32,18 @@ export default function ShowMore(
   return (
     <div class={isAtPage ? "flex justify-center col-span-full" : "hidden"}>
       {children}
-      <button 
+      <button
         class={`btn cursor-pointer absolute ${loading.value ? "hidden" : ""}`}
         onClick={() => {
           loading.value = true;
-          const element = document.getElementById(`show-more-button-${loadedPage}`);
-          if(element) {
-            element.click()
+          const element = document.getElementById(
+            `show-more-button-${loadedPage}`,
+          );
+          if (element) {
+            element.click();
           }
-        }}>
+        }}
+      >
         Show More
       </button>
     </div>

@@ -41,13 +41,12 @@ const DESKTOP_COLUMNS = {
 };
 
 function ProductGallery(
-  { products : p, pageInfo, layout, offset, url }: Props,
+  { products: p, pageInfo, layout, offset, url }: Props,
 ) {
   const platform = usePlatform();
-  const products = p
+  const products = p;
   const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
   const desktop = DESKTOP_COLUMNS[layout?.columns?.desktop ?? 4];
-
 
   const partialUrl = pageInfo.nextPage ? new URL(url.href) : null;
   if (pageInfo.nextPage) {
@@ -67,13 +66,11 @@ function ProductGallery(
         )}
       </Head>
 
-      {
-        products?.map((product, index) => {
-          return(
-            <ProductCard product={product} layout={layout?.card} key={index} />
-          )
-        })
-      }
+      {products?.map((product, index) => {
+        return (
+          <ProductCard product={product} layout={layout?.card} key={index} />
+        );
+      })}
 
       {(layout && layout?.format === "Show More") && (
         <>
@@ -83,8 +80,8 @@ function ProductGallery(
             {partialUrl && (
               <>
                 <div class="mt-2">
-                  <Spinner size={24}/>
-                </div>    
+                  <Spinner size={24} />
+                </div>
                 <button
                   id={`show-more-button-${pageInfo.currentPage}`}
                   class="btn cursor-pointer hidden w-0 h-0 absolute"
