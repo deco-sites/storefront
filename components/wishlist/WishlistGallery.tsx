@@ -27,20 +27,10 @@ function WishlistGallery(props: SectionProps<typeof loader>) {
   return <SearchResult {...props} />;
 }
 
-export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
-  const page = await ctx.invoke(
-    // deno-lint-ignore no-explicit-any
-    props.page.__resolveType as any,
-    // deno-lint-ignore no-explicit-any
-    props.page as any,
-  ) as ProductListingPage | null;
-
+export const loader = (props: Props, req: Request) => {
   return {
     ...props,
-    page,
-    loaderProps: {
-      ...props.page,
-    },
+    url: req.url,
   };
 };
 

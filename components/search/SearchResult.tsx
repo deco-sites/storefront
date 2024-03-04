@@ -52,7 +52,6 @@ function Result({
   url: _url,
 }: Omit<Props, "page"> & {
   page: ProductListingPage;
-  layout?: Layout;
   url: string;
 }) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
@@ -88,7 +87,7 @@ function Result({
               <Filters filters={filters} />
             </aside>
           )}
-          <div class="flex-grow">
+          <div class="flex-grow" id={id}>
             <ProductGallery
               products={products}
               offset={offset}

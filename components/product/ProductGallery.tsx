@@ -6,9 +6,7 @@ import { PageInfo, Product, ProductListingPage } from "apps/commerce/types.ts";
 import ShowMore from "$store/islands/ShowMore.tsx";
 import { Head } from "$fresh/runtime.ts";
 import { Format } from "$store/components/search/SearchResult.tsx";
-import { Resolved } from "deco/engine/core/resolver.ts";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
-import { Partial } from "$fresh/runtime.ts";
 import Spinner from "$store/components/ui/Spinner.tsx";
 
 export interface Columns {
@@ -41,10 +39,9 @@ const DESKTOP_COLUMNS = {
 };
 
 function ProductGallery(
-  { products: p, pageInfo, layout, offset, url }: Props,
+  { products, pageInfo, layout, offset, url }: Props,
 ) {
   const platform = usePlatform();
-  const products = p;
   const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
   const desktop = DESKTOP_COLUMNS[layout?.columns?.desktop ?? 4];
 
@@ -57,7 +54,6 @@ function ProductGallery(
   return (
     <div
       class={`grid ${mobile} gap-2 items-center ${desktop} sm:gap-10`}
-      f-client-nav
     >
       <Head>
         {pageInfo.nextPage && <link rel="next" href={pageInfo.nextPage} />}
@@ -66,11 +62,16 @@ function ProductGallery(
         )}
       </Head>
 
-      {products?.map((product, index) => {
-        return (
-          <ProductCard product={product} layout={layout?.card} key={index} />
-        );
-      })}
+      {products?.map((product, index) => (
+        <ProductCard
+          key={`product-card-${product.productID}`}
+          product={product}
+          preload={index === 0}
+          index={offset + index}
+          layout={layout?.card}
+          platform={platform}
+        />
+      ))}
 
       {(layout && layout?.format === "Show More") && (
         <>
@@ -78,7 +79,7 @@ function ProductGallery(
             pageInfo={pageInfo}
           >
             {partialUrl && (
-              <>
+              <div f-client-nav>
                 <div class="mt-2">
                   <Spinner size={24} />
                 </div>
@@ -89,7 +90,7 @@ function ProductGallery(
                 >
                   Show More
                 </button>
-              </>
+              </div>
             )}
           </ShowMore>
         </>
