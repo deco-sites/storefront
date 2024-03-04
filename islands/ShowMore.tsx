@@ -1,80 +1,49 @@
-import { useSignal } from "@preact/signals";
-import { invoke } from "$store/runtime.ts";
-import { PageInfo, Product, ProductListingPage } from "apps/commerce/types.ts";
-import ProductCard from "$store/components/product/ProductCard.tsx";
-import { Layout as CardLayout } from "$store/components/product/ProductCard.tsx";
-import { Columns } from "$store/components/product/ProductGallery.tsx";
-import Spinner from "$store/components/ui/Spinner.tsx";
-import { usePlatform } from "$store/sdk/usePlatform.tsx";
-import { Resolved } from "deco/engine/core/resolver.ts";
+import { useEffect, useMemo } from "preact/hooks";
+import type { ComponentChildren } from "preact";
+import { useShowMore } from "$store/sdk/useShowMore.ts";
+import { PageInfo } from "apps/commerce/types.ts";
+import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 
 export interface Props {
+  children: ComponentChildren;
   pageInfo: PageInfo;
-  layout?: {
-    card?: CardLayout;
-    columns?: Columns;
-  };
-  platform: ReturnType<typeof usePlatform>;
-  loaderProps: Resolved<ProductListingPage | null>;
 }
 
+
 export default function ShowMore(
-  { pageInfo, layout, platform, loaderProps }: Props,
+  { children, pageInfo }: Props,
 ) {
-  const products = useSignal<Array<Product | null>>([]);
-  const nextPage = useSignal(pageInfo.nextPage);
-  const loading = useSignal(false);
+  const { currentPage, loading } = useShowMore();
 
-  const handleLoadMore = async () => {
-    loading.value = true;
+  const loadedPage = pageInfo.currentPage;
+  const isAtPage = useMemo(() => currentPage.value === loadedPage, [
+    currentPage.value,
+  ]);
 
-    const url = new URL(
-      window.location.origin + window.location.pathname + nextPage.value,
-    );
-
-    // Figure out a better way to type this loader
-    // deno-lint-ignore no-explicit-any
-    const invokePayload: any = {
-      key: loaderProps.__resolveType,
-      props: {
-        ...loaderProps,
-        __resolveType: undefined,
-        pageHref: url.href,
-      },
-    };
-
-    const page = await invoke(invokePayload) as ProductListingPage | null;
-
-    loading.value = false;
-
-    if (page) {
-      window.history.pushState({}, "", nextPage.value);
-      nextPage.value = page.pageInfo.nextPage;
-      products.value = [...products.value, ...page.products];
+  useEffect(() => {
+    if (loadedPage !== 1) {
+      const url = new URL(window.location.href);
+      url.searchParams.set("page", loadedPage.toString());
+      window.history.replaceState({}, "", url.toString());
+      loading.value = false;
     }
-  };
+    currentPage.value = loadedPage;
+  }, []);
 
   return (
-    <>
-      {products.value.map((product, index) => {
-        if (!product) return null;
-        return (
-          <ProductCard
-            product={product}
-            preload={index === 0}
-            layout={layout?.card}
-            platform={platform}
-          />
-        );
-      })}
-      {nextPage.value && (
-        <button
-          onClick={handleLoadMore}
-          class="btn w-auto mx-auto col-span-full"
-        >
-          {loading.value ? <Spinner /> : "Show More"}
-        </button>
-      )}
-    </>
+    <div class={isAtPage ? "flex justify-center col-span-full" : "hidden"}>
+      {children}
+      <button 
+        class={`btn cursor-pointer absolute ${loading.value ? "hidden" : ""}`}
+        onClick={() => {
+          loading.value = true;
+          const element = document.getElementById(`show-more-button-${loadedPage}`);
+          if(element) {
+            element.click()
+          }
+        }}>
+        Show More
+      </button>
+    </div>
   );
 }

@@ -8,10 +8,6 @@ import { useOffer } from "$store/sdk/useOffer.ts";
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
-import { Resolved } from "deco/engine/core/resolver.ts";
-import { AppContext } from "$store/apps/site.ts";
-import type { SectionProps } from "deco/types.ts";
-import { Partial } from "$fresh/runtime.ts";
 
 export type Format = "Show More" | "Pagination";
 
@@ -53,14 +49,15 @@ function Result({
   layout,
   cardLayout,
   startingPage = 0,
-  loaderProps,
+  url: _url
 }: Omit<Props, "page"> & {
   page: ProductListingPage;
   layout?: Layout;
-  loaderProps: Resolved<ProductListingPage | null>;
+  url: string;
 }) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
   const perPage = pageInfo?.recordPerPage || products.length;
+  const url = new URL(_url)
 
   const { format = "Show More" } = layout ?? {};
 
@@ -69,18 +66,21 @@ function Result({
   const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
   const offset = zeroIndexedOffsetPage * perPage;
 
+  const isPartial = url.searchParams.get("partial") === "true";
+  const isFirstPage = pageInfo.currentPage === 1;
+
   return (
     <>
       <div class="container px-4 sm:py-10">
-        <SearchControls
+        {(isFirstPage || !isPartial) && <SearchControls
           sortOptions={sortOptions}
           filters={filters}
           breadcrumb={breadcrumb}
           displayFilter={layout?.variant === "drawer"}
-        />
+        />}
 
         <div class="flex flex-row">
-          {layout?.variant === "aside" && filters.length > 0 && (
+          {layout?.variant === "aside" && filters.length > 0 && (isFirstPage || !isPartial) && (
             <aside class="hidden sm:block w-min min-w-[250px]">
               <Filters filters={filters} />
             </aside>
@@ -91,7 +91,7 @@ function Result({
               offset={offset}
               layout={{ card: cardLayout, columns: layout?.columns, format }}
               pageInfo={pageInfo}
-              loaderProps={loaderProps}
+              url={url}
             />
           </div>
         </div>
@@ -146,15 +146,21 @@ function Result({
 }
 
 function SearchResult(
-  { page, ...props }: Props,
+  { page, ...props }: ReturnType<typeof loader>,
 ) {
   if (!page) {
     return <NotFound />;
   }
 
-  console.log(page)
-
   return <Result {...props} page={page} />;
+}
+
+export const loader = (props: Props, req: Request) => {
+
+  return {
+    ...props,
+    url: req.url,
+  }
 }
 
 
