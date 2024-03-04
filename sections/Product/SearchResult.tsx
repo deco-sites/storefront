@@ -8,4 +8,4 @@ export function LoadingFallback() {
   );
 }
 
-export const partialMode = "append"
+export const partialMode = "append";
