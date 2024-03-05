@@ -49,6 +49,7 @@ function ProductGallery(
   if (pageInfo.nextPage) {
     partialUrl?.searchParams.set("page", (pageInfo.currentPage + 1).toString());
     partialUrl?.searchParams.set("partial", "true");
+    partialUrl?.searchParams.set("partial-mode", "append");
   }
 
   return (

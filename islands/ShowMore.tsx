@@ -2,7 +2,6 @@ import { useEffect, useMemo } from "preact/hooks";
 import type { ComponentChildren } from "preact";
 import { useShowMore } from "$store/sdk/useShowMore.ts";
 import { PageInfo } from "apps/commerce/types.ts";
-import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 
 export interface Props {
   children: ComponentChildren;

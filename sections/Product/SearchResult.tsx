@@ -7,5 +7,3 @@ export function LoadingFallback() {
     </div>
   );
 }
-
-export const partialMode = "append";
