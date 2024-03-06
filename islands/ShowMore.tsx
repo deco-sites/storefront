@@ -14,15 +14,13 @@ export default function ShowMore(
   const { currentPage, loading } = useShowMore();
 
   const loadedPage = pageInfo.currentPage;
+  const isFirstPage = !pageInfo.previousPage
   const isAtPage = useMemo(() => currentPage.value === loadedPage, [
     currentPage.value,
   ]);
 
   useEffect(() => {
-    if (loadedPage !== 1) {
-      const url = new URL(window.location.href);
-      url.searchParams.set("page", loadedPage.toString());
-      window.history.replaceState({}, "", url.toString());
+    if (!isFirstPage) {
       loading.value = false;
     }
     currentPage.value = loadedPage;
@@ -44,6 +42,11 @@ export default function ShowMore(
           );
           if (element) {
             element.click();
+          }
+          if(pageInfo.nextPage){
+            const url = new URL(pageInfo.nextPage, window.location.href);
+            url.searchParams.delete("partial");
+            window.history.replaceState({}, "", url.toString());
           }
         }}
       >

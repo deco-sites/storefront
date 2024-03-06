@@ -45,9 +45,9 @@ function ProductGallery(
   const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
   const desktop = DESKTOP_COLUMNS[layout?.columns?.desktop ?? 4];
 
-  const partialUrl = pageInfo.nextPage ? new URL(url.href) : null;
-  if (pageInfo.nextPage) {
-    partialUrl?.searchParams.set("page", (pageInfo.currentPage + 1).toString());
+  const nextPage = pageInfo.nextPage ? new URL(pageInfo.nextPage, url.href) : null;
+  const partialUrl = nextPage ? new URL(nextPage.href) : null
+  if (pageInfo.nextPage && nextPage) {
     partialUrl?.searchParams.set("partial", "true");
   }
 
@@ -81,7 +81,7 @@ function ProductGallery(
             pageInfo={pageInfo}
           >
             {partialUrl && (
-              <div f-client-nav>
+              <div>
                 <div class="mt-2">
                   <Spinner size={24} />
                 </div>

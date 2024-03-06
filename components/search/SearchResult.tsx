@@ -66,7 +66,7 @@ function Result({
   const offset = zeroIndexedOffsetPage * perPage;
 
   const isPartial = url.searchParams.get("partial") === "true";
-  const isFirstPage = pageInfo.currentPage === 1;
+  const isFirstPage = !pageInfo.previousPage;
 
   return (
     <>
