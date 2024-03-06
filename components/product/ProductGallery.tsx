@@ -86,7 +86,10 @@ function ProductGallery(
                 <button
                   id={`show-more-button-${pageInfo.currentPage}`}
                   class="btn cursor-pointer hidden w-0 h-0 absolute"
-                  {...usePartialSection({ href: partialUrl.href, mode: "append"})}
+                  {...usePartialSection({
+                    href: partialUrl.href,
+                    mode: "append",
+                  })}
                 >
                   Show More
                 </button>
