@@ -45,8 +45,10 @@ function ProductGallery(
   const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
   const desktop = DESKTOP_COLUMNS[layout?.columns?.desktop ?? 4];
 
-  const nextPage = pageInfo.nextPage ? new URL(pageInfo.nextPage, url.href) : null;
-  const partialUrl = nextPage ? new URL(nextPage.href) : null
+  const nextPage = pageInfo.nextPage
+    ? new URL(pageInfo.nextPage, url.href)
+    : null;
+  const partialUrl = nextPage ? new URL(nextPage.href) : null;
   if (pageInfo.nextPage && nextPage) {
     partialUrl?.searchParams.set("partial", "true");
   }
