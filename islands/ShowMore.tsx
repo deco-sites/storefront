@@ -29,7 +29,11 @@ export default function ShowMore(
   }, []);
 
   return (
-    <div class={isAtPage ? "flex justify-center col-span-full" : "hidden"}>
+    <div
+      class={(isAtPage && pageInfo.nextPage)
+        ? "flex justify-center col-span-full"
+        : "hidden"}
+    >
       {children}
       <button
         class={`btn cursor-pointer absolute ${loading.value ? "hidden" : ""}`}

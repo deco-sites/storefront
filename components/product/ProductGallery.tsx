@@ -2,7 +2,7 @@ import ProductCard, {
   Layout as CardLayout,
 } from "$store/components/product/ProductCard.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
-import { PageInfo, Product, ProductListingPage } from "apps/commerce/types.ts";
+import { PageInfo, Product } from "apps/commerce/types.ts";
 import ShowMore from "$store/islands/ShowMore.tsx";
 import { Head } from "$fresh/runtime.ts";
 import { Format } from "$store/components/search/SearchResult.tsx";
@@ -55,12 +55,14 @@ function ProductGallery(
     <div
       class={`grid ${mobile} gap-2 items-center ${desktop} sm:gap-10`}
     >
-      <Head>
-        {pageInfo.nextPage && <link rel="next" href={pageInfo.nextPage} />}
-        {pageInfo.previousPage && (
-          <link rel="prev" href={pageInfo.previousPage} />
-        )}
-      </Head>
+      {layout?.format == "Show More" && (
+        <Head>
+          {pageInfo.nextPage && <link rel="next" href={pageInfo.nextPage} />}
+          {pageInfo.previousPage && (
+            <link rel="prev" href={pageInfo.previousPage} />
+          )}
+        </Head>
+      )}
 
       {products?.map((product, index) => (
         <ProductCard
