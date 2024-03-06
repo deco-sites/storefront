@@ -49,7 +49,6 @@ function ProductGallery(
   if (pageInfo.nextPage) {
     partialUrl?.searchParams.set("page", (pageInfo.currentPage + 1).toString());
     partialUrl?.searchParams.set("partial", "true");
-    partialUrl?.searchParams.set("partial-mode", "append");
   }
 
   return (
@@ -87,7 +86,7 @@ function ProductGallery(
                 <button
                   id={`show-more-button-${pageInfo.currentPage}`}
                   class="btn cursor-pointer hidden w-0 h-0 absolute"
-                  {...usePartialSection({ href: partialUrl.href })}
+                  {...usePartialSection({ href: partialUrl.href, mode: "append"})}
                 >
                   Show More
                 </button>
