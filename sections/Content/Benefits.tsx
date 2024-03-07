@@ -1,6 +1,16 @@
 import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
 import Header from "$store/components/ui/SectionHeader.tsx";
 
+interface Benefit {
+  label: string;
+  /**
+   * @format icon-select
+   * @options deco-sites/storefront/loaders/availableIcons.ts
+   */
+  icon: AvailableIcons;
+  description: string;
+}
+
 export interface Props {
   /**
    * @default Benefits
@@ -10,11 +20,7 @@ export interface Props {
    * @default Check out the benefits
    */
   description?: string;
-  benefits?: Array<{
-    label: string;
-    icon: AvailableIcons;
-    description: string;
-  }>;
+  benefits?: Array<Benefit>;
   layout?: {
     variation?: "Simple" | "With border" | "Color reverse";
     headerAlignment?: "center" | "left";

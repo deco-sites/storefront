@@ -87,4 +87,4 @@ export default function Site(
   };
 }
 
-export { onBeforeResolveProps } from "apps/website/mod.ts";
+export { onBeforeResolveProps, Preview } from "apps/website/mod.ts";
