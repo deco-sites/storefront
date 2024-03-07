@@ -126,8 +126,8 @@ const manifest = {
     "deco-sites/storefront/sections/Theme/Theme.tsx": $$$$$$51,
   },
   "apps": {
-    "deco-sites/storefront/apps/decohub.ts": $$$$$$$$$$$1,
-    "deco-sites/storefront/apps/site.ts": $$$$$$$$$$$0,
+    "deco-sites/storefront/apps/decohub.ts": $$$$$$$$$$$0,
+    "deco-sites/storefront/apps/site.ts": $$$$$$$$$$$1,
   },
   "name": "deco-sites/storefront",
   "baseUrl": import.meta.url,

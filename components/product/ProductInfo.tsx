@@ -5,13 +5,11 @@ import AddToCartButtonShopify from "$store/islands/AddToCartButton/shopify.tsx";
 import AddToCartButtonVNDA from "$store/islands/AddToCartButton/vnda.tsx";
 import AddToCartButtonVTEX from "$store/islands/AddToCartButton/vtex.tsx";
 import AddToCartButtonWake from "$store/islands/AddToCartButton/wake.tsx";
-import AddToCartButtonWap from "$store/islands/AddToCartButton/wap.tsx";
 import AddToCartButtonNuvemshop from "$store/islands/AddToCartButton/nuvemshop.tsx";
 import OutOfStock from "$store/islands/OutOfStock.tsx";
 import ShippingSimulation from "$store/islands/ShippingSimulation.tsx";
 import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
 import WishlistButtonWake from "../../islands/WishlistButton/wake.tsx";
-import WishlistButtonWap from "../../islands/WishlistButton/wap.tsx";
 import { formatPrice } from "$store/sdk/format.ts";
 import { useId } from "$store/sdk/useId.ts";
 import { useOffer } from "$store/sdk/useOffer.ts";
@@ -71,10 +69,6 @@ function ProductInfo({ page, layout }: Props) {
     listPrice,
   });
 
-  const attributoSimples = product.additionalProperty?.find(
-    (p) => p.valueReference === "ATRIBUTO SIMPLES"
-  );
-
   return (
     <div class="flex flex-col" id={id}>
       <Breadcrumb itemListElement={breadcrumb.itemListElement} />
@@ -113,80 +107,66 @@ function ProductInfo({ page, layout }: Props) {
       </div>
       {/* Add to Cart and Favorites button */}
       <div class="mt-4 sm:mt-10 flex flex-col gap-2">
-        {availability === "https://schema.org/InStock" ? (
-          <>
-            {platform === "vtex" && (
-              <>
-                <AddToCartButtonVTEX
+        {availability === "https://schema.org/InStock"
+          ? (
+            <>
+              {platform === "vtex" && (
+                <>
+                  <AddToCartButtonVTEX
+                    eventParams={{ items: [eventItem] }}
+                    productID={productID}
+                    seller={seller}
+                  />
+                  <WishlistButtonVtex
+                    variant="full"
+                    productID={productID}
+                    productGroupID={productGroupID}
+                  />
+                </>
+              )}
+              {platform === "wake" && (
+                <>
+                  <AddToCartButtonWake
+                    eventParams={{ items: [eventItem] }}
+                    productID={productID}
+                  />
+                  <WishlistButtonWake
+                    variant="full"
+                    productID={productID}
+                    productGroupID={productGroupID}
+                  />
+                </>
+              )}
+              {platform === "linx" && (
+                <AddToCartButtonLinx
                   eventParams={{ items: [eventItem] }}
-                  productID={productID}
-                  seller={seller}
-                />
-                <WishlistButtonVtex
-                  variant="full"
                   productID={productID}
                   productGroupID={productGroupID}
                 />
-              </>
-            )}
-            {platform === "wake" && (
-              <>
-                <AddToCartButtonWake
+              )}
+              {platform === "vnda" && (
+                <AddToCartButtonVNDA
+                  eventParams={{ items: [eventItem] }}
+                  productID={productID}
+                  additionalProperty={additionalProperty}
+                />
+              )}
+              {platform === "shopify" && (
+                <AddToCartButtonShopify
                   eventParams={{ items: [eventItem] }}
                   productID={productID}
                 />
-                <WishlistButtonWake
-                  variant="full"
-                  productID={productID}
+              )}
+              {platform === "nuvemshop" && (
+                <AddToCartButtonNuvemshop
                   productGroupID={productGroupID}
-                />
-              </>
-            )}
-            {platform === "wap" && (
-              <>
-                <AddToCartButtonWap
                   eventParams={{ items: [eventItem] }}
-                  productID={productID}
-                  idAtributoSimples={Number(attributoSimples?.propertyID || 0)}
+                  additionalProperty={additionalProperty}
                 />
-                <WishlistButtonWap
-                  variant="full"
-                  productID={productID}
-                  productGroupID={productGroupID}
-                />
-              </>
-            )}
-            {platform === "linx" && (
-              <AddToCartButtonLinx
-                eventParams={{ items: [eventItem] }}
-                productID={productID}
-                productGroupID={productGroupID}
-              />
-            )}
-            {platform === "vnda" && (
-              <AddToCartButtonVNDA
-                eventParams={{ items: [eventItem] }}
-                productID={productID}
-                additionalProperty={additionalProperty}
-              />
-            )}
-            {platform === "shopify" && (
-              <AddToCartButtonShopify
-                eventParams={{ items: [eventItem] }}
-                productID={productID}
-              />
-            )}
-            {platform === "nuvemshop" && (
-              <AddToCartButtonNuvemshop
-                productGroupID={productGroupID}
-                eventParams={{ items: [eventItem] }}
-                additionalProperty={additionalProperty}
-              />
-            )}
-          </>
-        ) : (
-          <OutOfStock productID={productID} />
-        )}
+              )}
+            </>
+          )
+          : <OutOfStock productID={productID} />}
       </div>
       {/* Shipping Simulation */}
       <div class="mt-8">
