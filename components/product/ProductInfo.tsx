@@ -20,7 +20,7 @@ import ProductSelector from "./ProductVariantSelector.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
-  layout: {
+  layout?: {
     /**
      * @title Product Name
      * @description How product title will be displayed. Concat to concatenate product and sku names.
@@ -70,7 +70,7 @@ function ProductInfo({ page, layout }: Props) {
   });
 
   return (
-    <div class="flex flex-col" id={id}>
+    <div class="flex flex-col px-4" id={id}>
       <Breadcrumb itemListElement={breadcrumb.itemListElement} />
       {/* Code and name */}
       <div class="mt-4 sm:mt-8">
