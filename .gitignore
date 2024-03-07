@@ -73,3 +73,6 @@ import_map.local.json
 _fresh/
 
 deno.lock
+
+# deco files
+.decofile.json
