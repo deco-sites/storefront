@@ -1,9 +1,10 @@
 import commerce, { Props as CommerceProps } from "apps/commerce/mod.ts";
-import { color as shopify } from "apps/shopify/mod.ts";
+import { color as wap } from "apps/wap/mod.ts";
 import { color as vnda } from "apps/vnda/mod.ts";
 import { color as vtex } from "apps/vtex/mod.ts";
 import { color as wake } from "apps/wake/mod.ts";
 import { color as linx } from "apps/linx/mod.ts";
+import { color as shopify } from "apps/shopify/mod.ts";
 import { color as nuvemshop } from "apps/nuvemshop/mod.ts";
 import { Section } from "deco/blocks/section.ts";
 import type { App as A, AppContext as AC } from "deco/mod.ts";
@@ -25,6 +26,7 @@ export type Platform =
   | "vnda"
   | "shopify"
   | "wake"
+  | "wap"
   | "linx"
   | "nuvemshop"
   | "custom";
@@ -44,6 +46,8 @@ const color = (platform: string) => {
       return wake;
     case "shopify":
       return shopify;
+    case "wap":
+      return wap;
     case "linx":
       return linx;
     case "nuvemshop":
@@ -66,8 +70,7 @@ export default function Site(
   if (firstRun) {
     firstRun = false;
     console.info(
-      ` 🐁 ${rgb24("Storefront", color("deco"))} | ${
-        rgb24(_platform, color(_platform))
+      ` 🐁 ${rgb24("Storefront", color("deco"))} | ${rgb24(_platform, color(_platform))
       } \n`,
     );
   }

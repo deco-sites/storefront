@@ -6,6 +6,7 @@ import CartButtonShopify from "$store/islands/Header/Cart/shopify.tsx";
 import CartButtonVDNA from "$store/islands/Header/Cart/vnda.tsx";
 import CartButtonVTEX from "$store/islands/Header/Cart/vtex.tsx";
 import CartButtonWake from "$store/islands/Header/Cart/wake.tsx";
+import CartButtonWap from "$store/islands/Header/Cart/wap.tsx";
 import CartButtonNuvemshop from "$store/islands/Header/Cart/nuvemshop.tsx";
 import Searchbar from "$store/islands/Header/Searchbar.tsx";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
@@ -14,6 +15,7 @@ import Image from "apps/website/components/Image.tsx";
 import NavItem from "./NavItem.tsx";
 import { navbarHeight } from "./constants.ts";
 import { Buttons, Logo } from "$store/components/header/Header.tsx";
+
 
 // Make it sure to render it on the server only. DO NOT render it on an island
 function Navbar(
@@ -60,10 +62,12 @@ function Navbar(
           {platform === "linx" && <CartButtonLinx />}
           {platform === "shopify" && <CartButtonShopify />}
           {platform === "nuvemshop" && <CartButtonNuvemshop />}
+          {platform === "wap" && <CartButtonWap />}
         </div>
       </div>
     );
   }
+
 
   // Desktop header
   return (
@@ -125,6 +129,7 @@ function Navbar(
               class="flex btn btn-circle btn-sm btn-ghost gap-1"
               aria-label="Wishlist"
             >
+
               <Icon id="Heart" size={24} strokeWidth={0.4} />
             </button>
             WISHLIST
@@ -138,6 +143,7 @@ function Navbar(
             {platform === "linx" && <CartButtonLinx />}
             {platform === "shopify" && <CartButtonShopify />}
             {platform === "nuvemshop" && <CartButtonNuvemshop />}
+            {platform === "wap" && <CartButtonWap />}
           </div>
         )}
       </div>
