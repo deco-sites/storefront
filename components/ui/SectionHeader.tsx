@@ -1,4 +1,4 @@
-import { clx } from "$store/sdk/clx.ts";
+import { clx } from "../../sdk/clx.ts";
 
 export interface Props {
   title?: string;

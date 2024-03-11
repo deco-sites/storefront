@@ -4,7 +4,7 @@ import SimpleImage, {
 
 import ImageCardsCarousel, {
   Props as CarouselProps,
-} from "$store/components/cards/ImageCardsCarousel.tsx";
+} from "../../components/cards/ImageCardsCarousel.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { flex } from "../../constants.tsx";
 

@@ -1,4 +1,4 @@
-export { default, loader } from "$store/components/search/SearchResult.tsx";
+export { default, loader } from "../../components/search/SearchResult.tsx";
 
 export function LoadingFallback() {
   return (

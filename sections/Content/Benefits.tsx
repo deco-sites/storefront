@@ -1,5 +1,5 @@
-import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
-import Header from "$store/components/ui/SectionHeader.tsx";
+import Icon, { AvailableIcons } from "../../components/ui/Icon.tsx";
+import Header from "../../components/ui/SectionHeader.tsx";
 
 interface Benefit {
   label: string;

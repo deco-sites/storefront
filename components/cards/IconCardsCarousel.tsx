@@ -1,7 +1,7 @@
-import Card, { Props as CardProps } from "$store/components/cards/IconCard.tsx";
+import Card, { Props as CardProps } from "../../components/cards/IconCard.tsx";
 import Carousel, {
   Props as CarouselProps,
-} from "$store/components/layout/Carousel.tsx";
+} from "../../components/layout/Carousel.tsx";
 
 export interface Props {
   placeholderItems?: number;

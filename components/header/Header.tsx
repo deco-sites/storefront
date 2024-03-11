@@ -1,7 +1,7 @@
-import { AppContext } from "$store/apps/site.ts";
-import type { Props as SearchbarProps } from "$store/components/search/Searchbar.tsx";
-import Drawers from "$store/islands/Header/Drawers.tsx";
-import { usePlatform } from "$store/sdk/usePlatform.tsx";
+import { AppContext } from "../../apps/site.ts";
+import type { Props as SearchbarProps } from "../../components/search/Searchbar.tsx";
+import Drawers from "../../islands/Header/Drawers.tsx";
+import { usePlatform } from "../../sdk/usePlatform.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import type { SectionProps } from "deco/types.ts";

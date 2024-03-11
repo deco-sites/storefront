@@ -1,7 +1,7 @@
-import Icon from "$store/components/ui/Icon.tsx";
-import Slider from "$store/components/ui/Slider.tsx";
-import SliderJS from "$store/islands/SliderJS.tsx";
-import { clx } from "$store/sdk/clx.ts";
+import Icon from "../../components/ui/Icon.tsx";
+import Slider from "../../components/ui/Slider.tsx";
+import SliderJS from "../../islands/SliderJS.tsx";
+import { clx } from "../../sdk/clx.ts";
 import type { Section } from "deco/blocks/section.ts";
 import { ComponentChildren, toChildArray } from "preact";
 import { useId } from "preact/hooks";

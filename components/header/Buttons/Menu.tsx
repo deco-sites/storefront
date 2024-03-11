@@ -1,6 +1,6 @@
-import Button from "$store/components/ui/Button.tsx";
-import Icon from "$store/components/ui/Icon.tsx";
-import { useUI } from "$store/sdk/useUI.ts";
+import Button from "../../../components/ui/Button.tsx";
+import Icon from "../../../components/ui/Icon.tsx";
+import { useUI } from "../../../sdk/useUI.ts";
 
 export default function MenuButton() {
   const { displayMenu } = useUI();

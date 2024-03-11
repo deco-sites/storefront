@@ -1,6 +1,6 @@
 import { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
-import Icon, { AvailableIcons } from "$store/components/ui/Icon.tsx";
+import Icon, { AvailableIcons } from "../../components/ui/Icon.tsx";
 import type { ComponentChildren } from "preact";
 
 export interface Props {

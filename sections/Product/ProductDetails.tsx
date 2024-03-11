@@ -1,8 +1,7 @@
 import { ProductDetailsPage } from "apps/commerce/types.ts";
-import type { Section } from "deco/blocks/section.ts";
-import ImageGallerySlider from "$store/components/product/Gallery/ImageSlider.tsx";
-import ProductInfo from "$store/components/product/ProductInfo.tsx";
-import NotFound from "$store/sections/Product/NotFound.tsx";
+import ImageGallerySlider from "../../components/product/Gallery/ImageSlider.tsx";
+import ProductInfo from "../../components/product/ProductInfo.tsx";
+import NotFound from "../../sections/Product/NotFound.tsx";
 
 export interface Props {
   /** @title Integration */

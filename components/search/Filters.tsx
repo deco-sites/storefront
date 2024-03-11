@@ -1,5 +1,5 @@
-import Avatar from "$store/components/ui/Avatar.tsx";
-import { formatPrice } from "$store/sdk/format.ts";
+import Avatar from "../../components/ui/Avatar.tsx";
+import { formatPrice } from "../../sdk/format.ts";
 import type {
   Filter,
   FilterToggle,
