@@ -1,4 +1,4 @@
-import { useId } from "$store/sdk/useId.ts";
+import { useId } from "../../sdk/useId.ts";
 import { useSignal } from "@preact/signals";
 import { ComponentChildren } from "preact";
 import { useEffect } from "preact/hooks";

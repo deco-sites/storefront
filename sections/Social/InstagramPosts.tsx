@@ -1,6 +1,6 @@
 import type { SectionProps } from "deco/mod.ts";
 import Image from "apps/website/components/Image.tsx";
-import Header from "$store/components/ui/SectionHeader.tsx";
+import Header from "../../components/ui/SectionHeader.tsx";
 
 export interface layout {
   headerAlignment?: "center" | "left";

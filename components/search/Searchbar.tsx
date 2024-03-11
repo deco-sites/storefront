@@ -9,18 +9,18 @@
  * no JavaScript is shipped to the browser!
  */
 
-import ProductCard from "$store/components/product/ProductCard.tsx";
-import Button from "$store/components/ui/Button.tsx";
-import Icon from "$store/components/ui/Icon.tsx";
-import Slider from "$store/components/ui/Slider.tsx";
-import { sendEvent } from "$store/sdk/analytics.tsx";
-import { useId } from "$store/sdk/useId.ts";
-import { useSuggestions } from "$store/sdk/useSuggestions.ts";
-import { useUI } from "$store/sdk/useUI.ts";
+import ProductCard from "../../components/product/ProductCard.tsx";
+import Button from "../../components/ui/Button.tsx";
+import Icon from "../../components/ui/Icon.tsx";
+import Slider from "../../components/ui/Slider.tsx";
+import { sendEvent } from "../../sdk/analytics.tsx";
+import { useId } from "../../sdk/useId.ts";
+import { useSuggestions } from "../../sdk/useSuggestions.ts";
+import { useUI } from "../../sdk/useUI.ts";
 import { Suggestion } from "apps/commerce/types.ts";
 import { Resolved } from "deco/engine/core/resolver.ts";
 import { useEffect, useRef } from "preact/compat";
-import type { Platform } from "$store/apps/site.ts";
+import type { Platform } from "../../apps/site.ts";
 
 // Editable props
 export interface Props {

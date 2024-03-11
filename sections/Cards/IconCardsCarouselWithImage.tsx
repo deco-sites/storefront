@@ -3,7 +3,7 @@ import SimpleImage, {
 } from "../../components/ui/SimpleImage.tsx";
 import IconCardsCarousel, {
   Props as CarouselProps,
-} from "$store/components/cards/IconCardsCarousel.tsx";
+} from "../../components/cards/IconCardsCarousel.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { flex } from "../../constants.tsx";
 

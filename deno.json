@@ -1,6 +1,5 @@
 {
   "imports": {
-    "$store/": "./",
     "deco/": "https://denopkg.com/deco-cx/deco@1.57.4/",
     "apps/": "https://denopkg.com/deco-cx/apps@0.35.4/",
     "$fresh/": "https://deno.land/x/fresh@1.6.5/",

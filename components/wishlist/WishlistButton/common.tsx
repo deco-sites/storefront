@@ -1,7 +1,7 @@
 import { useSignal } from "@preact/signals";
-import Icon from "$store/components/ui/Icon.tsx";
-import Button from "$store/components/ui/Button.tsx";
-import { sendEvent } from "$store/sdk/analytics.tsx";
+import Icon from "../../../components/ui/Icon.tsx";
+import Button from "../../../components/ui/Button.tsx";
+import { sendEvent } from "../../../sdk/analytics.tsx";
 
 export interface Props {
   productID: string;

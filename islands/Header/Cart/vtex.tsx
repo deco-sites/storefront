@@ -1,4 +1,4 @@
-import Component from "$store/components/header/Buttons/Cart/vtex.tsx";
+import Component from "../../../components/header/Buttons/Cart/vtex.tsx";
 
 function Island() {
   return <Component />;

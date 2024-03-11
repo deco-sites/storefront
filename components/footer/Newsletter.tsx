@@ -1,5 +1,5 @@
-import { invoke } from "$store/runtime.ts";
-import { clx } from "$store/sdk/clx.ts";
+import { invoke } from "../../runtime.ts";
+import { clx } from "../../sdk/clx.ts";
 import { useSignal } from "@preact/signals";
 import type { JSX } from "preact";
 

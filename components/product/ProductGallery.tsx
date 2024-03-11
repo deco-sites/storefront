@@ -1,13 +1,13 @@
+import { Head } from "$fresh/runtime.ts";
+import { PageInfo, Product } from "apps/commerce/types.ts";
+import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import ProductCard, {
   Layout as CardLayout,
-} from "$store/components/product/ProductCard.tsx";
-import { usePlatform } from "$store/sdk/usePlatform.tsx";
-import { PageInfo, Product } from "apps/commerce/types.ts";
-import ShowMore from "$store/islands/ShowMore.tsx";
-import { Head } from "$fresh/runtime.ts";
-import { Format } from "$store/components/search/SearchResult.tsx";
-import { usePartialSection } from "deco/hooks/usePartialSection.ts";
-import Spinner from "$store/components/ui/Spinner.tsx";
+} from "../../components/product/ProductCard.tsx";
+import { Format } from "../../components/search/SearchResult.tsx";
+import Spinner from "../../components/ui/Spinner.tsx";
+import ShowMore from "../../islands/ShowMore.tsx";
+import { usePlatform } from "../../sdk/usePlatform.tsx";
 
 export interface Columns {
   mobile?: 1 | 2;

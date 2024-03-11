@@ -1,5 +1,5 @@
 import Image from "apps/website/components/Image.tsx";
-import Header from "$store/components/ui/SectionHeader.tsx";
+import Header from "../../components/ui/SectionHeader.tsx";
 import { useMemo } from "preact/hooks";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 

@@ -1,10 +1,10 @@
-import Icon from "$store/components/ui/Icon.tsx";
-import Slider from "$store/components/ui/Slider.tsx";
-import ProductImageZoom from "$store/islands/ProductImageZoom.tsx";
-import SliderJS from "$store/islands/SliderJS.tsx";
-import { useId } from "$store/sdk/useId.ts";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
+import Icon from "../../../components/ui/Icon.tsx";
+import Slider from "../../../components/ui/Slider.tsx";
+import ProductImageZoom from "../../../islands/ProductImageZoom.tsx";
+import SliderJS from "../../../islands/SliderJS.tsx";
+import { useId } from "../../../sdk/useId.ts";
 
 export interface Props {
   /** @title Integration */

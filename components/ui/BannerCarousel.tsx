@@ -1,12 +1,12 @@
 import {
   SendEventOnClick,
   SendEventOnView,
-} from "$store/components/Analytics.tsx";
-import Button from "$store/components/ui/Button.tsx";
-import Icon from "$store/components/ui/Icon.tsx";
-import Slider from "$store/components/ui/Slider.tsx";
-import SliderJS from "$store/islands/SliderJS.tsx";
-import { useId } from "$store/sdk/useId.ts";
+} from "../../components/Analytics.tsx";
+import Button from "../../components/ui/Button.tsx";
+import Icon from "../../components/ui/Icon.tsx";
+import Slider from "../../components/ui/Slider.tsx";
+import SliderJS from "../../islands/SliderJS.tsx";
+import { useId } from "../../sdk/useId.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import Image from "apps/website/components/Image.tsx";

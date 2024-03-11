@@ -1,14 +1,14 @@
-import BackToTop from "$store/components/footer/BackToTop.tsx";
-import Divider from "$store/components/footer/Divider.tsx";
-import ExtraLinks from "$store/components/footer/ExtraLinks.tsx";
-import FooterItems from "$store/components/footer/FooterItems.tsx";
-import Logo from "$store/components/footer/Logo.tsx";
-import MobileApps from "$store/components/footer/MobileApps.tsx";
-import PaymentMethods from "$store/components/footer/PaymentMethods.tsx";
-import RegionSelector from "$store/components/footer/RegionSelector.tsx";
-import Social from "$store/components/footer/Social.tsx";
-import Newsletter from "$store/islands/Newsletter.tsx";
-import { clx } from "$store/sdk/clx.ts";
+import BackToTop from "../../components/footer/BackToTop.tsx";
+import Divider from "../../components/footer/Divider.tsx";
+import ExtraLinks from "../../components/footer/ExtraLinks.tsx";
+import FooterItems from "../../components/footer/FooterItems.tsx";
+import Logo from "../../components/footer/Logo.tsx";
+import MobileApps from "../../components/footer/MobileApps.tsx";
+import PaymentMethods from "../../components/footer/PaymentMethods.tsx";
+import RegionSelector from "../../components/footer/RegionSelector.tsx";
+import Social from "../../components/footer/Social.tsx";
+import Newsletter from "../../islands/Newsletter.tsx";
+import { clx } from "../../sdk/clx.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import PoweredByDeco from "apps/website/components/PoweredByDeco.tsx";
 

@@ -1,4 +1,4 @@
-import Header from "$store/components/ui/SectionHeader.tsx";
+import Header from "../../components/ui/SectionHeader.tsx";
 
 export interface Question {
   question: string;

@@ -1,8 +1,8 @@
-import Header from "$store/components/ui/SectionHeader.tsx";
-import { useId } from "$store/sdk/useId.ts";
+import Header from "../../components/ui/SectionHeader.tsx";
+import { useId } from "../../sdk/useId.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import Button from "$store/components/ui/Button.tsx";
+import Button from "../../components/ui/Button.tsx";
 
 export interface CategoryGridProps {
   href?: string;

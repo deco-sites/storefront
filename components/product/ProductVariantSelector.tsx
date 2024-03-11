@@ -1,7 +1,7 @@
-import Avatar from "$store/components/ui/Avatar.tsx";
-import { useVariantPossibilities } from "$store/sdk/useVariantPossiblities.ts";
+import Avatar from "../../components/ui/Avatar.tsx";
+import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
 import type { Product } from "apps/commerce/types.ts";
-import { relative } from "$store/sdk/url.ts";
+import { relative } from "../../sdk/url.ts";
 
 interface Props {
   product: Product;

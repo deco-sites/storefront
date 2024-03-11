@@ -1,4 +1,4 @@
-import Icon from "$store/components/ui/Icon.tsx";
+import Icon from "../../components/ui/Icon.tsx";
 
 export default function BackToTop({ content }: { content?: string }) {
   return (

@@ -1,10 +1,10 @@
-import { SendEventOnView } from "$store/components/Analytics.tsx";
-import { Layout as CardLayout } from "$store/components/product/ProductCard.tsx";
-import Filters from "$store/components/search/Filters.tsx";
-import Icon from "$store/components/ui/Icon.tsx";
-import SearchControls from "$store/islands/SearchControls.tsx";
-import { useId } from "$store/sdk/useId.ts";
-import { useOffer } from "$store/sdk/useOffer.ts";
+import { SendEventOnView } from "../../components/Analytics.tsx";
+import { Layout as CardLayout } from "../../components/product/ProductCard.tsx";
+import Filters from "../../components/search/Filters.tsx";
+import Icon from "../../components/ui/Icon.tsx";
+import SearchControls from "../../islands/SearchControls.tsx";
+import { useId } from "../../sdk/useId.ts";
+import { useOffer } from "../../sdk/useOffer.ts";
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
