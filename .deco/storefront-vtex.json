@@ -2939,7 +2939,9 @@
               "w": 24,
               "h": 24,
               "x": 0,
-              "y": 0
+              "y": 0,
+              "moved": false,
+              "static": false
             }
           ],
           "tabs": {
@@ -3071,7 +3073,8 @@
               "children": "cms:edit",
               "id": "Home:/:files:cms:edit",
               "state": {
-                "__signal": null
+                "__signal": null,
+                "value": null
               }
             },
             "Home:/:files:cms:preview": {
@@ -3092,6 +3095,59 @@
             }
           },
           "name": "Home Pages"
+        },
+        {
+          "readonly": false,
+          "icon": "rocket",
+          "layout": [
+            {
+              "i": "3d5ffec:Release:rocket:dashboard:site:release",
+              "w": 24,
+              "h": 24,
+              "x": 0,
+              "y": 0,
+              "moved": false,
+              "static": false
+            }
+          ],
+          "tabs": {
+            "3d5ffec:Release:rocket:dashboard:site:release": {
+              "title": "3d5ffec",
+              "subtitle": "Release",
+              "model": {
+                "__signal": {
+                  "oid": "3d5ffec59bc67054249b1b1c29a47358bf15ca3e",
+                  "short": "3d5ffec",
+                  "commit": {
+                    "message": "Release draft environment with 2 changes made by Tiago Gimenes\n",
+                    "parent": [
+                      "06c2f22cfe4596e1528e1d789fbc8672b2d62f5c"
+                    ],
+                    "tree": "c59eb8d0e7c7239369ab240bede954343ce0f538",
+                    "author": {
+                      "name": "Tiago Gimenes",
+                      "email": "gimenes@deco.cx",
+                      "timestamp": 1710262578,
+                      "timezoneOffset": 180
+                    },
+                    "committer": {
+                      "name": "Tiago Gimenes",
+                      "email": "gimenes@deco.cx",
+                      "timestamp": 1710262578,
+                      "timezoneOffset": 180
+                    }
+                  }
+                }
+              },
+              "children": "dashboard:site:release",
+              "icon": "rocket",
+              "id": "3d5ffec:Release:rocket:dashboard:site:release",
+              "state": {
+                "__signal": null
+              }
+            }
+          },
+          "name": "3d5ffec Release"
         }
       ]
     }
@@ -3667,15 +3723,6 @@
         "__resolveType": "Header - 01"
       },
       {
-        "__resolveType": "deco-sites/storefront/sections/Miscellaneous/Slide.tsx",
-        "content": [
-          {
-            "label": "HOT SALE",
-            "repeat": 30
-          }
-        ]
-      },
-      {
         "__resolveType": "deco-sites/storefront/sections/Images/Carousel.tsx",
         "dots": false,
         "arrows": true,
@@ -3715,6 +3762,15 @@
           }
         ],
         "preload": true
+      },
+      {
+        "__resolveType": "deco-sites/storefront/sections/Miscellaneous/Slide.tsx",
+        "content": [
+          {
+            "label": "HOT SALE",
+            "repeat": 30
+          }
+        ]
       },
       {
         "link": {
