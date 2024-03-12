@@ -1,0 +1,1 @@
+{"data":{"facets":[],"hitsPerPage":12,"startingPage":0,"__resolveType":"algolia/loaders/product/listingPage.ts","sortFacetValuesBy":"count"},"extensions":[{"__resolveType":"vtex/loaders/product/extensions/listingPage.ts"}],"__resolveType":"commerce/loaders/product/extensions/listingPage.ts"}
