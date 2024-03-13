@@ -3242,7 +3242,7 @@
           "count": 4,
           "__resolveType": "vtex/loaders/intelligentSearch/suggestions.ts"
         },
-        "__resolveType": "resolved.json"
+        "__resolveType": "resolved"
       },
       "placeholder": "What are you looking for?"
     },
