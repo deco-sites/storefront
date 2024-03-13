@@ -1,5 +1,5 @@
 import { Section } from "deco/blocks/section.ts";
-import { useId } from "$store/sdk/useId.ts";
+import { useId } from "../../sdk/useId.ts";
 
 const animationClasses = {
   "fade-in": "animate-fade-in",

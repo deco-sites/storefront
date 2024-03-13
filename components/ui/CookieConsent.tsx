@@ -1,4 +1,4 @@
-import { useId } from "$store/sdk/useId.ts";
+import { useId } from "../../sdk/useId.ts";
 
 const script = (id: string) => {
   const callback = () => {

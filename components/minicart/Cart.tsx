@@ -1,6 +1,6 @@
-// import { platform } from "$store/apps/storefront.ts";
+// import { platform } from "../../apps/storefront.ts";
 import { lazy } from "preact/compat";
-import { usePlatform } from "$store/sdk/usePlatform.tsx";
+import { usePlatform } from "../../sdk/usePlatform.tsx";
 
 const CartVTEX = lazy(() => import("./vtex/Cart.tsx"));
 const CartVNDA = lazy(() => import("./vnda/Cart.tsx"));

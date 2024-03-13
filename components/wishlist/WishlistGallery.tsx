@@ -1,9 +1,7 @@
+import { SectionProps } from "deco/mod.ts";
 import SearchResult, {
   Props as SearchResultProps,
-} from "$store/components/search/SearchResult.tsx";
-import { ProductListingPage } from "apps/commerce/types.ts";
-import { AppContext } from "$store/apps/site.ts";
-import { SectionProps } from "deco/mod.ts";
+} from "../../components/search/SearchResult.tsx";
 
 export type Props = SearchResultProps;
 

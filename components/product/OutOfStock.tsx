@@ -1,5 +1,5 @@
 import { useSignal } from "@preact/signals";
-import { invoke } from "$store/runtime.ts";
+import { invoke } from "../../runtime.ts";
 import type { Product } from "apps/commerce/types.ts";
 import type { JSX } from "preact";
 

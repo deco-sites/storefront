@@ -1,0 +1,277 @@
+{
+  "__signal": [
+    {
+      "layout": [
+        { "i": "seo", "w": 8, "h": 12, "x": 0, "y": 0 },
+        { "i": "analytics", "w": 8, "h": 12, "x": 8, "y": 0 },
+        { "i": "pages", "w": 8, "h": 12, "x": 16, "y": 0 },
+        { "i": "psi", "w": 8, "h": 12, "x": 0, "y": 1 },
+        { "i": "releases", "w": 8, "h": 12, "x": 8, "y": 1 },
+        { "i": "issues", "w": 8, "h": 12, "x": 16, "y": 1 }
+      ],
+      "tabs": {
+        "seo": {
+          "id": "seo",
+          "state": { "__signal": null },
+          "title": "SEO / Metatags",
+          "icon": "layout-grid",
+          "model": { "__signal": { "blockId": "", "appId": "site" } },
+          "children": "dashboard:site:seo"
+        },
+        "analytics": {
+          "id": "analytics",
+          "state": { "__signal": null },
+          "title": "Analytics",
+          "icon": "layout-grid",
+          "model": { "__signal": { "blockId": "" } },
+          "children": "dashboard:site:analytics"
+        },
+        "pages": {
+          "id": "pages",
+          "state": { "__signal": null },
+          "title": "Pages List",
+          "icon": "files",
+          "model": { "__signal": { "blockId": "", "blockType": "pages" } },
+          "children": "cms:list"
+        },
+        "psi": {
+          "id": "psi",
+          "state": { "__signal": null },
+          "title": "PageSpeed",
+          "icon": "layout-grid",
+          "model": { "__signal": { "blockId": "" } },
+          "children": "dashboard:site:pagespeed"
+        },
+        "releases": {
+          "id": "releases",
+          "state": { "__signal": null },
+          "title": "Releases",
+          "icon": "layout-grid",
+          "model": { "__signal": { "blockId": "" } },
+          "children": "dashboard:site:releases"
+        },
+        "issues": {
+          "id": "issues",
+          "state": { "__signal": null },
+          "title": "Report Issues",
+          "icon": "layout-grid",
+          "model": { "__signal": { "blockId": "" } },
+          "children": "dashboard:site:issues"
+        }
+      },
+      "name": "Home",
+      "icon": "home",
+      "readonly": true
+    },
+    {
+      "layout": [{ "i": "pages", "w": 24, "h": 24, "x": 0, "y": 0 }],
+      "tabs": {
+        "pages": {
+          "id": "pages",
+          "state": { "__signal": null },
+          "title": "Pages List",
+          "icon": "files",
+          "model": { "__signal": { "blockId": "", "blockType": "pages" } },
+          "children": "cms:list"
+        }
+      },
+      "name": "Pages",
+      "icon": "files",
+      "readonly": true
+    },
+    {
+      "layout": [],
+      "tabs": {},
+      "name": "Redirects",
+      "icon": "redirect",
+      "readonly": true
+    },
+    {
+      "layout": [{ "i": "sections", "w": 24, "h": 24, "x": 0, "y": 0 }],
+      "tabs": {
+        "sections": {
+          "id": "sections",
+          "state": { "__signal": null },
+          "title": "Gallery",
+          "icon": "package",
+          "model": { "__signal": { "blockId": "", "blockType": "sections" } },
+          "children": "cms:list"
+        }
+      },
+      "name": "Sections",
+      "icon": "block",
+      "readonly": true
+    },
+    {
+      "layout": [{ "i": "loaders", "w": 24, "h": 24, "x": 0, "y": 0 }],
+      "tabs": {
+        "loaders": {
+          "id": "loaders",
+          "state": { "__signal": null },
+          "title": "Gallery",
+          "icon": "packages",
+          "model": { "__signal": { "blockId": "", "blockType": "loaders" } },
+          "children": "cms:list"
+        }
+      },
+      "name": "Loaders",
+      "icon": "block",
+      "readonly": true
+    },
+    {
+      "layout": [{ "i": "actions", "w": 24, "h": 24, "x": 0, "y": 0 }],
+      "tabs": {
+        "actions": {
+          "id": "actions",
+          "state": { "__signal": null },
+          "title": "Gallery",
+          "icon": "packages",
+          "model": { "__signal": { "blockId": "", "blockType": "actions" } },
+          "children": "cms:list"
+        }
+      },
+      "name": "Actions",
+      "icon": "block",
+      "readonly": true
+    },
+    {
+      "layout": [{ "i": "apps", "w": 24, "h": 24, "x": 0, "y": 0 }],
+      "tabs": {
+        "apps": {
+          "id": "apps",
+          "state": { "__signal": null },
+          "title": "Gallery",
+          "icon": "apps",
+          "model": { "__signal": { "blockId": "", "blockType": "apps" } },
+          "children": "cms:list"
+        }
+      },
+      "name": "Apps",
+      "icon": "apps",
+      "readonly": true
+    },
+    {
+      "layout": [],
+      "tabs": {},
+      "name": "Themes",
+      "icon": "palette",
+      "readonly": true
+    },
+    {
+      "name": "SEO",
+      "icon": "search",
+      "readonly": true,
+      "layout": [
+        { "i": "seoForm", "w": 6, "h": 24, "x": 0, "y": 0 },
+        { "i": "seoPreview", "w": 18, "h": 24, "x": 6, "y": 0 }
+      ],
+      "tabs": {
+        "seoForm": {
+          "id": "seo:form",
+          "state": { "__signal": null },
+          "title": "SEO",
+          "icon": "search",
+          "model": {
+            "__signal": {
+              "blockId": "site",
+              "viewport": "desktop",
+              "path": ["seo"]
+            }
+          },
+          "children": "cms:edit:partial"
+        },
+        "seoPreview": {
+          "id": "seo:preview",
+          "state": { "__signal": null },
+          "title": "SEO Preview",
+          "icon": "search",
+          "model": { "__signal": { "blockId": "site", "viewport": "desktop" } },
+          "children": "cms:preview"
+        }
+      }
+    },
+    {
+      "layout": [],
+      "tabs": {},
+      "name": "Experiments",
+      "icon": "experiment",
+      "readonly": true
+    },
+    {
+      "layout": [{ "i": "analytics", "w": 24, "h": 24, "x": 0, "y": 0 }],
+      "tabs": {
+        "analytics": {
+          "id": "analytics",
+          "state": { "__signal": null },
+          "title": "Analytics",
+          "icon": "layout-grid",
+          "model": { "__signal": { "blockId": "" } },
+          "children": "dashboard:site:analytics"
+        }
+      },
+      "name": "Analytics",
+      "icon": "chart-bar",
+      "readonly": true
+    },
+    {
+      "layout": [
+        {
+          "i": "releases",
+          "w": 24,
+          "h": 24,
+          "x": 0,
+          "y": 0,
+          "moved": false,
+          "static": false
+        }
+      ],
+      "tabs": {
+        "releases": {
+          "id": "releases",
+          "state": { "__signal": null },
+          "title": "Releases",
+          "icon": "layout-grid",
+          "model": { "__signal": { "blockId": "" } },
+          "children": "dashboard:site:releases"
+        }
+      },
+      "name": "Releases",
+      "icon": "rocket",
+      "readonly": true
+    },
+    {
+      "layout": [],
+      "tabs": {},
+      "name": "Domains",
+      "icon": "adjustments-horizontal",
+      "readonly": true
+    },
+    {
+      "readonly": false,
+      "icon": "rocket",
+      "layout": [
+        {
+          "i": "draft:Environment:rocket:dashboard:site:environment",
+          "w": 24,
+          "h": 24,
+          "x": 0,
+          "y": 0,
+          "moved": false,
+          "static": false
+        }
+      ],
+      "tabs": {
+        "draft:Environment:rocket:dashboard:site:environment": {
+          "title": "draft",
+          "subtitle": "Environment",
+          "model": { "__signal": { "env": "draft" } },
+          "children": "dashboard:site:environment",
+          "icon": "rocket",
+          "id": "draft:Environment:rocket:dashboard:site:environment",
+          "state": { "__signal": null }
+        }
+      },
+      "name": "draft Environment"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import Icon from "$store/components/ui/Icon.tsx";
+import Icon from "../../components/ui/Icon.tsx";
 
 export interface PaymentItem {
   label: "Diners" | "Elo" | "Mastercard" | "Pix" | "Visa";

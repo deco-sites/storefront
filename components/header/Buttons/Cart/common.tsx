@@ -1,8 +1,8 @@
-import Button from "$store/components/ui/Button.tsx";
-import Icon from "$store/components/ui/Icon.tsx";
-import { sendEvent } from "$store/sdk/analytics.tsx";
-import { useUI } from "$store/sdk/useUI.ts";
 import { AnalyticsItem } from "apps/commerce/types.ts";
+import Button from "../../../../components/ui/Button.tsx";
+import Icon from "../../../../components/ui/Icon.tsx";
+import { sendEvent } from "../../../../sdk/analytics.tsx";
+import { useUI } from "../../../../sdk/useUI.ts";
 
 interface Props {
   loading: boolean;

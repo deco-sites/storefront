@@ -1,5 +1,5 @@
-import Icon from "$store/components/ui/Icon.tsx";
-import { AvailableIcons } from "$store/components/ui/Icon.tsx";
+import Icon from "../../components/ui/Icon.tsx";
+import { AvailableIcons } from "../../components/ui/Icon.tsx";
 
 export interface Shortcut {
   label?: string;

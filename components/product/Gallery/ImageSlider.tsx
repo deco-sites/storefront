@@ -1,16 +1,16 @@
-import Icon from "$store/components/ui/Icon.tsx";
-import Slider from "$store/components/ui/Slider.tsx";
-import ProductImageZoom from "$store/islands/ProductImageZoom.tsx";
-import SliderJS from "$store/islands/SliderJS.tsx";
-import { useId } from "$store/sdk/useId.ts";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
+import Icon from "../../../components/ui/Icon.tsx";
+import Slider from "../../../components/ui/Slider.tsx";
+import ProductImageZoom from "../../../islands/ProductImageZoom.tsx";
+import SliderJS from "../../../islands/SliderJS.tsx";
+import { useId } from "../../../sdk/useId.ts";
 
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
 
-  layout: {
+  layout?: {
     width: number;
     height: number;
   };
@@ -31,8 +31,11 @@ export default function GallerySlider(props: Props) {
 
   const {
     page: { product: { image: images = [] } },
-    layout: { width, height },
+    layout,
   } = props;
+
+  const { width, height } = layout || { width: 300, height: 370 };
+
   const aspectRatio = `${width} / ${height}`;
 
   return (
@@ -92,8 +95,8 @@ export default function GallerySlider(props: Props) {
               <Image
                 style={{ aspectRatio }}
                 class="group-disabled:border-base-300 border rounded "
-                width={63}
-                height={87.5}
+                width={100}
+                height={123}
                 src={img.url!}
                 alt={img.alternateName}
               />

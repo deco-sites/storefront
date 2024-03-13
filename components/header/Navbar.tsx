@@ -1,20 +1,20 @@
-import type { Props as SearchbarProps } from "$store/components/search/Searchbar.tsx";
-import Icon from "$store/components/ui/Icon.tsx";
-import { MenuButton, SearchButton } from "$store/islands/Header/Buttons.tsx";
-import CartButtonLinx from "$store/islands/Header/Cart/linx.tsx";
-import CartButtonShopify from "$store/islands/Header/Cart/shopify.tsx";
-import CartButtonVDNA from "$store/islands/Header/Cart/vnda.tsx";
-import CartButtonVTEX from "$store/islands/Header/Cart/vtex.tsx";
-import CartButtonWake from "$store/islands/Header/Cart/wake.tsx";
-import CartButtonWap from "$store/islands/Header/Cart/wap.tsx";
-import CartButtonNuvemshop from "$store/islands/Header/Cart/nuvemshop.tsx";
-import Searchbar from "$store/islands/Header/Searchbar.tsx";
-import { usePlatform } from "$store/sdk/usePlatform.tsx";
+import type { Props as SearchbarProps } from "../../components/search/Searchbar.tsx";
+import Icon from "../../components/ui/Icon.tsx";
+import { MenuButton, SearchButton } from "../../islands/Header/Buttons.tsx";
+import CartButtonLinx from "../../islands/Header/Cart/linx.tsx";
+import CartButtonShopify from "../../islands/Header/Cart/shopify.tsx";
+import CartButtonVDNA from "../../islands/Header/Cart/vnda.tsx";
+import CartButtonVTEX from "../../islands/Header/Cart/vtex.tsx";
+import CartButtonWake from "../../islands/Header/Cart/wake.tsx";
+import CartButtonNuvemshop from "../../islands/Header/Cart/nuvemshop.tsx";
+import CartButtonWap from "../../islands/Header/Cart/wap.tsx";
+import Searchbar from "../../islands/Header/Searchbar.tsx";
+import { usePlatform } from "../../sdk/usePlatform.tsx";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import NavItem from "./NavItem.tsx";
 import { navbarHeight } from "./constants.ts";
-import { Buttons, Logo } from "$store/components/header/Header.tsx";
+import { Buttons, Logo } from "../../components/header/Header.tsx";
 
 // Make it sure to render it on the server only. DO NOT render it on an island
 function Navbar({
