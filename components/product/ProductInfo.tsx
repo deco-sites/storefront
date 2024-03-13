@@ -6,10 +6,12 @@ import AddToCartButtonVNDA from "../../islands/AddToCartButton/vnda.tsx";
 import AddToCartButtonVTEX from "../../islands/AddToCartButton/vtex.tsx";
 import AddToCartButtonWake from "../../islands/AddToCartButton/wake.tsx";
 import AddToCartButtonNuvemshop from "../../islands/AddToCartButton/nuvemshop.tsx";
+import AddToCartButtonWap from "../../islands/AddToCartButton/wap.tsx";
 import OutOfStock from "../../islands/OutOfStock.tsx";
 import ShippingSimulation from "../../islands/ShippingSimulation.tsx";
 import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
 import WishlistButtonWake from "../../islands/WishlistButton/wake.tsx";
+import WishlistButtonWap from "../../islands/WishlistButton/wap.tsx";
 import { formatPrice } from "../../sdk/format.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
@@ -68,6 +70,10 @@ function ProductInfo({ page, layout }: Props) {
     price,
     listPrice,
   });
+
+  const attributoSimples = product.additionalProperty?.find(
+    (p) => p.valueReference === "ATRIBUTO SIMPLES",
+  );
 
   return (
     <div class="flex flex-col px-4" id={id}>
@@ -131,6 +137,22 @@ function ProductInfo({ page, layout }: Props) {
                     productID={productID}
                   />
                   <WishlistButtonWake
+                    variant="full"
+                    productID={productID}
+                    productGroupID={productGroupID}
+                  />
+                </>
+              )}
+              {platform === "wap" && (
+                <>
+                  <AddToCartButtonWap
+                    eventParams={{ items: [eventItem] }}
+                    productID={productID}
+                    idAtributoSimples={Number(
+                      attributoSimples?.propertyID || 0,
+                    )}
+                  />
+                  <WishlistButtonWap
                     variant="full"
                     productID={productID}
                     productGroupID={productGroupID}

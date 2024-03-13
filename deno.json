@@ -31,19 +31,10 @@
   "githooks": {
     "pre-commit": "check"
   },
-  "exclude": [
-    "node_modules",
-    "static/",
-    "README.md",
-    "_fresh",
-    "**/_fresh/*"
-  ],
+  "exclude": ["node_modules", "static/", "README.md", "_fresh", "**/_fresh/*"],
   "lint": {
     "rules": {
-      "tags": [
-        "fresh",
-        "recommended"
-      ]
+      "tags": ["fresh", "recommended"]
     }
   },
   "nodeModulesDir": true,

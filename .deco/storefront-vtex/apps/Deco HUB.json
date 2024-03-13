@@ -1,1 +1,5 @@
-{"apps":[],"enableAdmin":false,"__resolveType":"deco-sites/storefront/apps/decohub.ts"}
+{
+  "apps": [],
+  "enableAdmin": false,
+  "__resolveType": "deco-sites/storefront/apps/decohub.ts"
+}

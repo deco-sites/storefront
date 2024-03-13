@@ -7,6 +7,7 @@ import CartButtonVDNA from "../../islands/Header/Cart/vnda.tsx";
 import CartButtonVTEX from "../../islands/Header/Cart/vtex.tsx";
 import CartButtonWake from "../../islands/Header/Cart/wake.tsx";
 import CartButtonNuvemshop from "../../islands/Header/Cart/nuvemshop.tsx";
+import CartButtonWap from "../../islands/Header/Cart/wap.tsx";
 import Searchbar from "../../islands/Header/Searchbar.tsx";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
@@ -16,16 +17,21 @@ import { navbarHeight } from "./constants.ts";
 import { Buttons, Logo } from "../../components/header/Header.tsx";
 
 // Make it sure to render it on the server only. DO NOT render it on an island
-function Navbar(
-  { items, searchbar, logo, buttons, logoPosition = "left", device }: {
-    items: SiteNavigationElement[];
-    searchbar?: SearchbarProps;
-    logo?: Logo;
-    buttons?: Buttons;
-    logoPosition?: "left" | "center";
-    device: "mobile" | "desktop" | "tablet";
-  },
-) {
+function Navbar({
+  items,
+  searchbar,
+  logo,
+  buttons,
+  logoPosition = "left",
+  device,
+}: {
+  items: SiteNavigationElement[];
+  searchbar?: SearchbarProps;
+  logo?: Logo;
+  buttons?: Buttons;
+  logoPosition?: "left" | "center";
+  device: "mobile" | "desktop" | "tablet";
+}) {
   const platform = usePlatform();
 
   // Mobile header
@@ -60,6 +66,7 @@ function Navbar(
           {platform === "linx" && <CartButtonLinx />}
           {platform === "shopify" && <CartButtonShopify />}
           {platform === "nuvemshop" && <CartButtonNuvemshop />}
+          {platform === "wap" && <CartButtonWap />}
         </div>
       </div>
     );
@@ -81,11 +88,7 @@ function Navbar(
         }`}
       >
         {logo && (
-          <a
-            href="/"
-            aria-label="Store logo"
-            class="block"
-          >
+          <a href="/" aria-label="Store logo" class="block">
             <Image
               src={logo.src}
               alt={logo.alt}
@@ -98,7 +101,8 @@ function Navbar(
       <div class="flex-none flex items-center justify-end gap-6 col-span-1">
         {!buttons?.hideSearchButton && (
           <div class="flex items-center text-xs font-thin gap-1">
-            <SearchButton />SEARCH
+            <SearchButton />
+            SEARCH
           </div>
         )}
 
@@ -138,6 +142,7 @@ function Navbar(
             {platform === "linx" && <CartButtonLinx />}
             {platform === "shopify" && <CartButtonShopify />}
             {platform === "nuvemshop" && <CartButtonNuvemshop />}
+            {platform === "wap" && <CartButtonWap />}
           </div>
         )}
       </div>

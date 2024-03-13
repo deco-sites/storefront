@@ -1,1 +1,17 @@
-{"form":{"helpText":"<p>By subscribing you agree to with our <u>Privacy Policy</u>.</p>","buttonText":"Subscribe","placeholder":"Enter your email"},"title":"Newsletter","layout":{"content":{"border":false,"bgColor":"Reverse","alignment":"Side to side"},"headerFontSize":"Large"},"__resolveType":"deco-sites/storefront/sections/Newsletter/Newsletter.tsx"}
+{
+  "form": {
+    "helpText": "<p>By subscribing you agree to with our <u>Privacy Policy</u>.</p>",
+    "buttonText": "Subscribe",
+    "placeholder": "Enter your email"
+  },
+  "title": "Newsletter",
+  "layout": {
+    "content": {
+      "border": false,
+      "bgColor": "Reverse",
+      "alignment": "Side to side"
+    },
+    "headerFontSize": "Large"
+  },
+  "__resolveType": "deco-sites/storefront/sections/Newsletter/Newsletter.tsx"
+}
