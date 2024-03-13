@@ -145,7 +145,9 @@
             "w": 24,
             "h": 24,
             "x": 0,
-            "y": 0
+            "y": 0,
+            "moved": false,
+            "static": false
           }
         ],
         "tabs": {
@@ -441,6 +443,65 @@
       },
       {
         "readonly": false,
+        "icon": "files",
+        "layout": [
+          {
+            "i": "Home:/:files:cms:edit",
+            "w": 6,
+            "h": 24,
+            "x": 0,
+            "y": 0,
+            "moved": false,
+            "static": false
+          },
+          {
+            "i": "Home:/:files:cms:preview",
+            "w": 18,
+            "h": 24,
+            "x": 6,
+            "y": 0,
+            "moved": false,
+            "static": false
+          }
+        ],
+        "tabs": {
+          "Home:/:files:cms:edit": {
+            "title": "Home",
+            "subtitle": "/",
+            "icon": "files",
+            "blockType": "pages",
+            "model": {
+              "__signal": {
+                "blockId": "pages/pages-home-c4bcbfb771e9.json"
+              }
+            },
+            "children": "cms:edit",
+            "id": "Home:/:files:cms:edit",
+            "state": {
+              "__signal": null
+            }
+          },
+          "Home:/:files:cms:preview": {
+            "title": "Home",
+            "subtitle": "/",
+            "icon": "files",
+            "blockType": "pages",
+            "model": {
+              "__signal": {
+                "blockId": "pages/pages-home-c4bcbfb771e9.json"
+              }
+            },
+            "children": "cms:preview",
+            "id": "Home:/:files:cms:preview",
+            "state": {
+              "__signal": null
+            }
+          }
+        },
+        "name": "Home Pages"
+      },
+      {
+        "readonly": false,
         "icon": "rocket",
         "layout": [
           {
@@ -539,7 +600,7 @@
       "descriptionTemplate": "%s | Deco.cx"
     },
     "theme": {
-      "__resolveType": "Fashion theme"
+      "__resolveType": "Fashion theme.json"
     },
     "global": [
       {
@@ -823,7 +884,7 @@
         "__resolveType": "website/sections/Seo/Seo.tsx"
       },
       {
-        "__resolveType": "Header - 01"
+        "__resolveType": "Header - 01.json"
       },
       {
         "variants": [
@@ -1003,7 +1064,7 @@
         "__resolveType": "deco-sites/storefront/sections/Product/ProductShelf.tsx"
       },
       {
-        "__resolveType": "Shoppable Banner - 01"
+        "__resolveType": "Shoppable Banner - 01.json"
       },
       {
         "list": [
@@ -1136,7 +1197,7 @@
               "headerAlignment": "center"
             },
             "cardLayout": {
-              "__resolveType": "Product Card Layout - 01"
+              "__resolveType": "Product Card Layout - 01.json"
             },
             "__resolveType": "deco-sites/storefront/sections/Product/ProductShelfTabbed.tsx"
           }
@@ -1177,7 +1238,7 @@
         "__resolveType": "deco-sites/storefront/sections/Content/BlogPosts.tsx"
       },
       {
-        "__resolveType": "Footer - 04"
+        "__resolveType": "Footer - 04.json"
       },
       {
         "logo": {
@@ -1205,16 +1266,16 @@
     "sections": [
       {
         "jsonLD": {
-          "__resolveType": "PLP Loader"
+          "__resolveType": "PLP Loader.json"
         },
         "__resolveType": "commerce/sections/Seo/SeoPLP.tsx"
       },
       {
-        "__resolveType": "Header - 01"
+        "__resolveType": "Header - 01.json"
       },
       {
         "page": {
-          "__resolveType": "PLP Loader"
+          "__resolveType": "PLP Loader.json"
         },
         "layout": {
           "columns": {
@@ -1225,13 +1286,13 @@
           "pagination": "show-more"
         },
         "cardLayout": {
-          "__resolveType": "Product Card Layout - 01"
+          "__resolveType": "Product Card Layout - 01.json"
         },
         "startingPage": 1,
         "__resolveType": "deco-sites/storefront/sections/Product/SearchResult.tsx"
       },
       {
-        "__resolveType": "Footer - 01"
+        "__resolveType": "Footer - 01.json"
       }
     ],
     "__resolveType": "website/pages/Page.tsx"
@@ -1245,7 +1306,7 @@
         "__resolveType": "website/sections/Seo/Seo.tsx"
       },
       {
-        "__resolveType": "Header - 01"
+        "__resolveType": "Header - 01.json"
       },
       {
         "dots": false,
@@ -1368,7 +1429,7 @@
         "__resolveType": "deco-sites/storefront/sections/Product/ProductShelf.tsx"
       },
       {
-        "__resolveType": "Shoppable Banner - 01"
+        "__resolveType": "Shoppable Banner - 01.json"
       },
       {
         "list": [
@@ -1495,7 +1556,7 @@
           "headerAlignment": "center"
         },
         "cardLayout": {
-          "__resolveType": "Product Card Layout - 01"
+          "__resolveType": "Product Card Layout - 01.json"
         },
         "__resolveType": "deco-sites/storefront/sections/Product/ProductShelfTabbed.tsx"
       },
@@ -1533,7 +1594,7 @@
         "__resolveType": "deco-sites/storefront/sections/Content/BlogPosts.tsx"
       },
       {
-        "__resolveType": "Footer - 04"
+        "__resolveType": "Footer - 04.json"
       }
     ],
     "__resolveType": "website/pages/Page.tsx"
@@ -1543,7 +1604,7 @@
     "path": "/offline",
     "sections": [
       {
-        "__resolveType": "Header - 01"
+        "__resolveType": "Header - 01.json"
       },
       {
         "title": "Oh no! You are offline!",
@@ -1557,13 +1618,13 @@
           "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
         },
         "cardLayout": {
-          "__resolveType": "Product Card Layout - 01"
+          "__resolveType": "Product Card Layout - 01.json"
         },
         "description": "Maybe take some time to explore",
         "__resolveType": "deco-sites/storefront/sections/Product/ProductShelf.tsx"
       },
       {
-        "__resolveType": "Footer - 01"
+        "__resolveType": "Footer - 01.json"
       }
     ],
     "__resolveType": "website/pages/Page.tsx"
@@ -1577,7 +1638,7 @@
     "sections": [
       {
         "jsonLD": {
-          "__resolveType": "PDP Loader"
+          "__resolveType": "PDP Loader.json"
         },
         "jsonLDs": [
           {}
@@ -1585,11 +1646,11 @@
         "__resolveType": "commerce/sections/Seo/SeoPDP.tsx"
       },
       {
-        "__resolveType": "Header - 01"
+        "__resolveType": "Header - 01.json"
       },
       {
         "page": {
-          "__resolveType": "PDP Loader"
+          "__resolveType": "PDP Loader.json"
         },
         "__resolveType": "deco-sites/storefront/sections/Product/ProductDetails.tsx"
       },
@@ -1606,7 +1667,7 @@
         "__resolveType": "deco-sites/storefront/sections/Product/ProductShelf.tsx"
       },
       {
-        "__resolveType": "Footer - 01"
+        "__resolveType": "Footer - 01.json"
       }
     ],
     "__resolveType": "website/pages/Page.tsx"
@@ -1622,11 +1683,11 @@
         "descriptionTemplate": "%s | Deco.cx"
       },
       {
-        "__resolveType": "Header - 01"
+        "__resolveType": "Header - 01.json"
       },
       {
         "page": {
-          "__resolveType": "PLP Loader"
+          "__resolveType": "PLP Loader.json"
         },
         "layout": {
           "columns": {
@@ -1638,7 +1699,7 @@
         "__resolveType": "deco-sites/storefront/sections/Product/SearchResult.tsx"
       },
       {
-        "__resolveType": "Footer - 01"
+        "__resolveType": "Footer - 01.json"
       }
     ],
     "__resolveType": "website/pages/Page.tsx"
@@ -3231,7 +3292,7 @@
       "Use this template to create your store at deco.cx"
     ],
     "navItems": {
-      "__resolveType": "navbar"
+      "__resolveType": "navbar.json"
     },
     "products": [],
     "searchbar": {
@@ -3242,7 +3303,7 @@
           "count": 4,
           "__resolveType": "vtex/loaders/intelligentSearch/suggestions.ts"
         },
-        "__resolveType": "resolved"
+        "__resolveType": "resolved.json"
       },
       "placeholder": "What are you looking for?"
     },
