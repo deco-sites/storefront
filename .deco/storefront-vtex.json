@@ -8,42 +8,54 @@
             "w": 8,
             "h": 12,
             "x": 0,
-            "y": 0
+            "y": 0,
+            "moved": false,
+            "static": false
           },
           {
             "i": "analytics",
             "w": 8,
             "h": 12,
             "x": 8,
-            "y": 0
+            "y": 0,
+            "moved": false,
+            "static": false
           },
           {
             "i": "pages",
             "w": 8,
             "h": 12,
             "x": 16,
-            "y": 0
+            "y": 0,
+            "moved": false,
+            "static": false
           },
           {
             "i": "psi",
             "w": 8,
             "h": 12,
             "x": 0,
-            "y": 1
+            "y": 12,
+            "moved": false,
+            "static": false
           },
           {
             "i": "releases",
             "w": 8,
             "h": 12,
             "x": 8,
-            "y": 1
+            "y": 12,
+            "moved": false,
+            "static": false
           },
           {
             "i": "issues",
             "w": 8,
             "h": 12,
             "x": 16,
-            "y": 1
+            "y": 12,
+            "moved": false,
+            "static": false
           }
         ],
         "tabs": {
@@ -407,9 +419,7 @@
             "w": 24,
             "h": 24,
             "x": 0,
-            "y": 0,
-            "moved": false,
-            "static": false
+            "y": 0
           }
         ],
         "tabs": {
