@@ -36,8 +36,7 @@ function WishlistButton({
           idAtributoSimples: 0,
           idUnidadeVenda: 0,
           parametroAdicional: "",
-        })
-      }
+        })}
       addItem={() =>
         addItem({
           idProduto: Number(productID),
@@ -45,8 +44,7 @@ function WishlistButton({
           idUnidadeVenda: 0,
           quantidade: 1,
           parametroAdicional: "",
-        })
-      }
+        })}
     />
   );
 }

@@ -1,10 +1,13 @@
 import SearchResult, {
   Props as SearchResultProps,
 } from "$store/components/search/SearchResult.tsx";
+import { ProductListingPage } from "apps/commerce/types.ts";
+import { AppContext } from "$store/apps/site.ts";
+import { SectionProps } from "deco/mod.ts";
 
 export type Props = SearchResultProps;
 
-function WishlistGallery(props: Props) {
+function WishlistGallery(props: SectionProps<typeof loader>) {
   const isEmpty = !props.page || props.page.products.length === 0;
 
   if (isEmpty) {
@@ -23,5 +26,12 @@ function WishlistGallery(props: Props) {
 
   return <SearchResult {...props} />;
 }
+
+export const loader = (props: Props, req: Request) => {
+  return {
+    ...props,
+    url: req.url,
+  };
+};
 
 export default WishlistGallery;

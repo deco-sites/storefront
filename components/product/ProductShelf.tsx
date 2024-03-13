@@ -11,6 +11,7 @@ import { useOffer } from "$store/sdk/useOffer.ts";
 import { usePlatform } from "$store/sdk/usePlatform.tsx";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import { clx } from "$store/sdk/clx.ts";
 
 export interface Props {
   products: Product[] | null;
@@ -67,17 +68,21 @@ function ProductShelf({
 
       <div
         id={id}
-        class={`grid ${
-          layout?.showArrows ? "grid-cols-[48px_1fr_48px]" : ""
-        } px-0 md:px-5 container`}
+        class={clx(
+          "grid",
+          layout?.showArrows && "grid-cols-[48px_1fr_48px]",
+          "px-0 md:px-5 container",
+        )}
       >
         <Slider class="carousel carousel-center sm:carousel-end sm:gap-1 row-start-2 row-end-5">
           {products?.map((product, index) => (
             <Slider.Item
               index={index}
-              class={`carousel-item ${
-                slideDesktop[layout?.numberOfSliders?.desktop ?? 3]
-              } ${slideMobile[layout?.numberOfSliders?.mobile ?? 1]}`}
+              class={clx(
+                "carousel-item",
+                slideDesktop[layout?.numberOfSliders?.desktop ?? 3],
+                slideMobile[layout?.numberOfSliders?.mobile ?? 1],
+              )}
             >
               <ProductCard
                 product={product}

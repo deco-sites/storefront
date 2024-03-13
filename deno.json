@@ -1,9 +1,9 @@
 {
   "imports": {
     "$store/": "./",
-    "deco/": "https://denopkg.com/deco-cx/deco@1.53.2/",
-    "apps/": "../apps/",
-    "$fresh/": "https://deno.land/x/fresh@1.6.3/",
+    "deco/": "https://denopkg.com/deco-cx/deco@1.57.4/",
+    "apps/": "https://denopkg.com/deco-cx/apps@0.35.4/",
+    "$fresh/": "https://deno.land/x/fresh@1.6.5/",
     "preact": "https://esm.sh/preact@10.19.2",
     "preact/": "https://esm.sh/preact@10.19.2/",
     "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.2.2",
@@ -14,7 +14,7 @@
     "daisyui": "npm:daisyui@4.6.0"
   },
   "tasks": {
-    "start": "deno task bundle && deno run -A --unstable-kv --env --watch=tailwind.css,sections/,functions/,loaders/,actions/,workflows/,accounts/,.env dev.ts",
+    "start": "deno task generate-icons && deno task bundle && deno run -A --unstable --env --watch=tailwind.css,sections/,functions/,loaders/,actions/,workflows/,accounts/,.env dev.ts",
     "gen": "deno run -A dev.ts --gen-only",
     "play": "USE_LOCAL_STORAGE_ONLY=true deno task start",
     "component": "deno eval 'import \"deco/scripts/component.ts\"'",
@@ -26,7 +26,8 @@
     "bundle": "deno eval 'import \"deco/scripts/apps/bundle.ts\"' deco-sites/storefront",
     "cache_clean": "rm deno.lock; deno cache -r main.ts",
     "build": "deno run -A dev.ts build",
-    "preview": "deno run -A main.ts"
+    "preview": "deno run -A main.ts",
+    "generate-icons": "deno run -A --unstable static/generate-icons.ts"
   },
   "githooks": {
     "pre-commit": "check"

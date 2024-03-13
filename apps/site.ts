@@ -70,7 +70,8 @@ export default function Site(
   if (firstRun) {
     firstRun = false;
     console.info(
-      ` 🐁 ${rgb24("Storefront", color("deco"))} | ${rgb24(_platform, color(_platform))
+      ` 🐁 ${rgb24("Storefront", color("deco"))} | ${
+        rgb24(_platform, color(_platform))
       } \n`,
     );
   }
@@ -87,4 +88,4 @@ export default function Site(
   };
 }
 
-export { onBeforeResolveProps } from "apps/website/mod.ts";
+export { onBeforeResolveProps, Preview } from "apps/website/mod.ts";
