@@ -36,8 +36,8 @@ async function generateIconsFile() {
     // Remove the existing AvailableIcons constant from the content
     existingContent = existingContent.replace(/export const AvailableIcons = { [^}]* };/g, '');
     // Adds all existing icons plus the new ones to the AvailableIcons constant
-    const allIcons = [...existingIcons, ...newIcons];
-    const availableIconsString = `export const AvailableIcons = { ${allIcons.join(', ')} };`;
+    const allIconsFiltered = [...existingIcons, ...newIcons].filter(icon => icon !== "AvailableIcons");
+    const availableIconsString = `export const AvailableIcons = { ${allIconsFiltered.join(', ')} };`;
     existingContent += `\n${availableIconsString}`;
 
     await Deno.writeTextFile(outputFilePath, existingContent, { create: true });
