@@ -145,9 +145,7 @@
             "w": 24,
             "h": 24,
             "x": 0,
-            "y": 0,
-            "moved": false,
-            "static": false
+            "y": 0
           }
         ],
         "tabs": {
@@ -440,65 +438,6 @@
         "name": "Domains",
         "icon": "adjustments-horizontal",
         "readonly": true
-      },
-      {
-        "readonly": false,
-        "icon": "files",
-        "layout": [
-          {
-            "i": "Home:/:files:cms:edit",
-            "w": 6,
-            "h": 24,
-            "x": 0,
-            "y": 0,
-            "moved": false,
-            "static": false
-          },
-          {
-            "i": "Home:/:files:cms:preview",
-            "w": 18,
-            "h": 24,
-            "x": 6,
-            "y": 0,
-            "moved": false,
-            "static": false
-          }
-        ],
-        "tabs": {
-          "Home:/:files:cms:edit": {
-            "title": "Home",
-            "subtitle": "/",
-            "icon": "files",
-            "blockType": "pages",
-            "model": {
-              "__signal": {
-                "blockId": "pages/pages-home-c4bcbfb771e9.json"
-              }
-            },
-            "children": "cms:edit",
-            "id": "Home:/:files:cms:edit",
-            "state": {
-              "__signal": null
-            }
-          },
-          "Home:/:files:cms:preview": {
-            "title": "Home",
-            "subtitle": "/",
-            "icon": "files",
-            "blockType": "pages",
-            "model": {
-              "__signal": {
-                "blockId": "pages/pages-home-c4bcbfb771e9.json"
-              }
-            },
-            "children": "cms:preview",
-            "id": "Home:/:files:cms:preview",
-            "state": {
-              "__signal": null
-            }
-          }
-        },
-        "name": "Home Pages"
       },
       {
         "readonly": false,
