@@ -1,4 +1,5 @@
-import Icon, { AvailableIcons } from "../../components/ui/Icon.tsx";
+import Icon from "../../components/ui/Icon.tsx";
+import { AvailableIcons } from "../../components/ui/IconTypes.ts";
 
 export interface SlideProps {
   label?: string;

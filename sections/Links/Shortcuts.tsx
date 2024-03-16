@@ -1,5 +1,5 @@
 import Icon from "../../components/ui/Icon.tsx";
-import { AvailableIcons } from "../../components/ui/Icon.tsx";
+import { AvailableIcons } from "../../components/ui/IconTypes.ts";
 
 export interface Shortcut {
   label?: string;
