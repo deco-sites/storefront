@@ -1,5 +1,6 @@
 # Sales Assistant Documentation
 
+
 ## Integrating Sales Assistant into Your Online Store
 
 The Sales Assistant is a tool designed to enhance customer interaction in your
