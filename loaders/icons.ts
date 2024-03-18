@@ -10,7 +10,7 @@ import {
   Lowercase,
   Right,
   Uppercase,
-} from "../utils/adminIcons.ts";
+} from "../static/adminIcons.ts";
 
 const icons = [
   { component: Left, label: "Left", prop: "alignment" },

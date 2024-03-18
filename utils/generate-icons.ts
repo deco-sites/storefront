@@ -2,7 +2,7 @@ import { existsSync } from "https://deno.land/std/fs/mod.ts";
 import { exec } from "https://deno.land/x/exec/mod.ts";
 
 const spriteFilePath = "static/sprites.svg";
-const adminIconsFilePath = "utils/adminIcons.ts";
+const adminIconsFilePath = "static/adminIcons.ts";
 const iconsFolderPath = "static/icons";
 const typeFileIconPath = "components/ui/IconTypes.ts";
 

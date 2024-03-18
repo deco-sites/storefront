@@ -1,5 +1,5 @@
 import { allowCorsFor, FnContext } from "deco/mod.ts";
-import { AvailableIcons } from "../utils/adminIcons.ts";
+import { AvailableIcons } from "../static/adminIcons.ts";
 
 const icons = Object.keys(AvailableIcons).map((iconName) => ({
   component: AvailableIcons[iconName as keyof typeof AvailableIcons],
