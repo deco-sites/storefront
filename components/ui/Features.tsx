@@ -1,5 +1,4 @@
-import Icon from "../../components/ui/Icon.tsx";
-import { AvailableIcons } from "./IconTypes.ts";
+import Icon, { AvailableIcons } from "../../components/ui/Icon.tsx";
 
 /**
  * @titleBy title

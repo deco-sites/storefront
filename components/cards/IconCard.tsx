@@ -1,5 +1,4 @@
-import Icon from "../../components/ui/Icon.tsx";
-import { AvailableIcons } from "../ui/IconTypes.ts";
+import Icon, { AvailableIcons } from "../../components/ui/Icon.tsx";
 import { clx } from "../../sdk/clx.ts";
 import {
   borderColorClasses2,

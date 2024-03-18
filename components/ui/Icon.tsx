@@ -2,6 +2,8 @@ import { asset } from "$fresh/runtime.ts";
 import type { JSX } from "preact";
 import { AvailableIcons } from "./IconTypes.ts";
 
+export type { AvailableIcons };
+
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**
    * Symbol id from element to render. Take a look at `/static/icons.svg`.
