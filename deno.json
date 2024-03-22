@@ -1,7 +1,7 @@
 {
   "imports": {
-    "deco/": "https://denopkg.com/deco-cx/deco@1.57.28/",
-    "apps/": "https://denopkg.com/deco-cx/apps@0.35.14/",
+    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.57.28/",
+    "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.35.14/",
     "$fresh/": "https://deno.land/x/fresh@1.6.5/",
     "preact": "https://esm.sh/preact@10.19.2",
     "preact/": "https://esm.sh/preact@10.19.2/",
@@ -9,7 +9,7 @@
     "@preact/signals": "https://esm.sh/*@preact/signals@1.2.1",
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.0",
     "std/": "https://deno.land/std@0.190.0/",
-    "partytown/": "https://denopkg.com/deco-cx/partytown@0.4.8/",
+    "partytown/": "https://cdn.jsdelivr.net/gh/deco-cx/partytown@0.4.8/",
     "daisyui": "npm:daisyui@4.6.0"
   },
   "tasks": {
@@ -36,7 +36,8 @@
     "static/",
     "README.md",
     "_fresh",
-    "**/_fresh/*"
+    "**/_fresh/*",
+    ".deco"
   ],
   "lint": {
     "rules": {
