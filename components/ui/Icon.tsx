@@ -1,8 +1,7 @@
 import { asset } from "$fresh/runtime.ts";
 import type { JSX } from "preact";
 import { AvailableIcons } from "./IconTypes.ts";
-
-export type { AvailableIcons };
+export type { AvailableIcons } from "./IconTypes.ts";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**
