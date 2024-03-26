@@ -88,19 +88,18 @@ function Header({
           menu={{ items }}
           searchbar={searchbar}
           platform={platform}
-        >
-          <div class="bg-base-100 fixed w-full z-50">
-            {alerts && alerts.length > 0 && <Alert alerts={alerts} />}
-            <Navbar
-              device={device}
-              items={items}
-              searchbar={searchbar && { ...searchbar, platform }}
-              logo={logo}
-              logoPosition={logoPosition}
-              buttons={buttons}
-            />
-          </div>
-        </Drawers>
+        />
+        <div class="bg-base-100 fixed w-full z-40">
+          {alerts && alerts.length > 0 && <Alert alerts={alerts} />}
+          <Navbar
+            device={device}
+            items={items}
+            searchbar={searchbar && { ...searchbar, platform }}
+            logo={logo}
+            logoPosition={logoPosition}
+            buttons={buttons}
+          />
+        </div>
       </header>
     </>
   );
