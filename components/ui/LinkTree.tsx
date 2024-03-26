@@ -1,13 +1,13 @@
 import { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
-import Icon, { AvailableIcons } from "../../components/ui/Icon.tsx";
+import Icon, { AvailableIcons } from "../ui/Icon.tsx";
 import type { ComponentChildren } from "preact";
 
 export interface Props {
-  header: Header;
-  links: Links;
+  header?: Header;
   social?: Social[];
-  background: Background;
+  links?: Links;
+  background?: Background;
   footer?: Footer;
 }
 
@@ -22,7 +22,7 @@ export interface Header {
    * @format color
    * @description color to be used in title and description
    */
-  textColor: string;
+  textColor?: string;
 }
 
 export interface Logo {
@@ -35,40 +35,8 @@ export interface Logo {
   link?: string;
 }
 
-export interface Links {
-  items?: Link[];
-  style: Style;
-}
-
-export interface Link {
-  /** @description 20px transparent png recommended */
-  icon?: AvailableIcons;
-  label: string;
-  /** @format textarea */
-  href: string;
-}
-
-export interface Style {
-  /**
-   * @format color
-   * @description color to be used in link's text
-   */
-  textColor: string;
-  gradientColors: Gradient;
-}
-
-export interface Gradient {
-  /** @description multiple colors will create a gradient effect */
-  neutral: Neutral[];
-}
-
-export interface Neutral {
-  /**  @format color */
-  color: string;
-}
-
 export interface Social {
-  href: string;
+  href?: string;
   label:
     | "Instagram"
     | "Facebook"
@@ -80,6 +48,46 @@ export interface Social {
   iconColor?: string;
   /** @description width of the SVG line */
   strokeWidth?: number;
+}
+
+export interface Links {
+  list?: (Link | Image)[];
+  style?: Style;
+}
+
+export interface Image {
+  /** @description alternative text */
+  label?: string;
+  src?: ImageWidget;
+  width?: number;
+  height?: number;
+}
+
+export interface Link {
+  /** @format textarea */
+  label?: string;
+  href?: string;
+  icon?: AvailableIcons | Image;
+}
+
+export interface Style {
+  /**
+   * @format color
+   * @description color to be used in link's text
+   */
+  textColor?: string;
+  gradientColors?: Gradient;
+  border?: boolean;
+}
+
+export interface Gradient {
+  /** @description multiple colors will create a gradient effect */
+  neutral: Neutral[];
+}
+
+export interface Neutral {
+  /**  @format color */
+  color: string;
 }
 
 export interface Background {
@@ -104,10 +112,10 @@ function Links(props: Props) {
   const logo = (
     <Image
       decoding="async"
-      src={header.logo?.img || ""}
-      alt={header.logo?.alt}
-      width={header.logo?.width || 171}
-      height={header.logo?.height || 60}
+      src={header?.logo?.img || ""}
+      alt={header?.logo?.alt}
+      width={header?.logo?.width || 104}
+      height={header?.logo?.height || 104}
     />
   );
 
@@ -116,26 +124,33 @@ function Links(props: Props) {
     : logo;
 
   const ColorsNeutralAndHover = {
-    color: links.style?.textColor,
+    color: links?.style?.textColor,
     backgroundImage: `linear-gradient(to right, ${
-      links.style?.gradientColors.neutral.map((color) => color.color).join(
+      links?.style?.gradientColors?.neutral.map((color) => color.color).join(
         ", ",
       )
     })`,
   };
+  function isImage(icon: AvailableIcons | Image): icon is Image {
+    return (icon as Image).src !== undefined;
+  }
+
+  function isLink(list: Link | Image): list is Link {
+    return (list as Link).href !== undefined;
+  }
 
   return (
     <BaseContainer background={background}>
-      <header class="flex flex-col justify-center items-center gap-4">
+      <header class="flex flex-col gap-4 items-center justify-center">
         {header?.logo?.img && (
-          <div class="rounded-full p-4">
+          <div class="p-4 rounded-full">
             {maybeLink}
           </div>
         )}
 
         {header?.title && (
           <h1
-            class="text-5xl font-bold text-center"
+            class="text-6xl text-center"
             style={{ color: header.textColor }}
           >
             {header?.title}
@@ -151,49 +166,15 @@ function Links(props: Props) {
         )}
       </header>
 
-      <main class="w-full">
-        <ul class="flex flex-col justify-center items-center gap-4">
-          {links?.items?.map((link) => (
-            <li class="w-full">
-              <a
-                target="_blank"
-                href={link.href}
-                class="group h-[52px] px-6 rounded-full flex justify-start items-center font-bold gap-4"
-                style={ColorsNeutralAndHover}
-              >
-                {Boolean(link.icon) && (
-                  <Icon
-                    size={20}
-                    id={link.icon!}
-                    strokeWidth={2.5}
-                  />
-                )}
-
-                <span class="w-full text-center text-sm">
-                  {link.label}
-                </span>
-
-                <Icon
-                  size={20}
-                  id="share"
-                  strokeWidth={2}
-                  class="opacity-0 group-hover:opacity-100"
-                />
-              </a>
-            </li>
-          ))}
-        </ul>
-      </main>
-
-      <footer class="flex flex-1 flex-col">
-        <ul class="flex flex-row gap-4 mb-10 justify-center items-center">
+      <main class="w-full flex flex-col">
+        <ul class="flex flex-row gap-4 items-center justify-center mb-10">
           {social?.map((link) => (
             <li>
               <a
                 target="_blank"
                 href={link.href}
                 title={link.label}
-                class="text-white block rounded"
+                class="block rounded text-white"
               >
                 <Icon
                   size={20}
@@ -206,17 +187,73 @@ function Links(props: Props) {
             </li>
           ))}
         </ul>
+        <ul class="flex flex-col gap-4 items-center justify-center">
+          {links?.list?.map((list: Link | Image, index: number) => {
+            if (isLink(list)) {
+              return (
+                <li class="w-full" key={index}>
+                  <a
+                    target="_blank"
+                    href={list.href}
+                    class={`flex gap-4 group h-[52px] items-center justify-start px-2 rounded-full ${
+                      links?.style?.border ? "border border-base-content" : ""
+                    } w-full`}
+                    style={ColorsNeutralAndHover}
+                  >
+                    {list.icon && !isImage(list.icon) && (
+                      <Icon
+                        size={20}
+                        id={list.icon}
+                        strokeWidth={2}
+                      />
+                    )}
 
+                    {list.icon && isImage(list.icon) && (
+                      <Image
+                        src={list.icon.src || ""}
+                        alt={list.icon.label}
+                        width={list.icon.width || 36}
+                        height={list.icon.height || 36}
+                      />
+                    )}
+                    <span class="text-center text-sm w-full">
+                      {list.label}
+                    </span>
+
+                    <Icon
+                      size={20}
+                      id="share"
+                      strokeWidth={2}
+                      class="group-hover:opacity-100 opacity-0"
+                    />
+                  </a>
+                </li>
+              );
+            } else {
+              return (
+                <Image
+                  src={list.src || ""}
+                  alt={list.label}
+                  width={list.width || 688}
+                  height={list.height || 344}
+                />
+              );
+            }
+          })}
+        </ul>
+      </main>
+
+      <footer class="flex flex-1 flex-col">
         {props.footer && (props.footer.image || props.footer.text) && (
           <div class="mt-auto">
             <a
               href={props.footer.url}
-              class="text-xs flex flex-row items-center justify-center gap-1"
+              class="flex flex-row gap-1 items-center justify-center text-xs"
               target="_blank"
             >
               {props.footer.text && (
                 <p
-                  style={{ color: header.textColor }}
+                  style={{ color: header?.textColor }}
                 >
                   {props.footer.text}
                 </p>
@@ -255,7 +292,7 @@ function BaseContainer(props: {
         backgroundColor: backgroundColors ? backgroundColors : undefined,
       }}
     >
-      <div class="flex flex-col items-center gap-12 p-10 max-w-[640px] w-full">
+      <div class="flex flex-col gap-12 items-center max-w-[746px] p-10 w-full">
         {props.children}
       </div>
     </div>
