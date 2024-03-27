@@ -131,7 +131,7 @@ export interface Props {
   buttonStyle?: Button;
   otherStyles?: Miscellaneous;
   font?: Font;
-  /**
+  /** 
    * @description This is the admin's color-scheme mode
    */
   mode?: "dark" | "light";
@@ -280,12 +280,6 @@ export function Preview(props: Props) {
   const adminColorMode = props.mode === "dark" ? "dark" : "light";
   return (
     <>
-      {
-        /* This stylesheet is used to simulate the colors from the admin's color schema (admin's light or dark mode), which are not accessible in the site's color schema.
-        * This is a temporary solution until the admin's color schema is accessible.
-        * TODO(@carol): Change this temporary solution.
-       */
-      }
       <style>
         {`
           :root {
@@ -361,27 +355,25 @@ export function Preview(props: Props) {
         `}
       </style>
       <Section {...props} />
-      <div class={`grid grid-flow-row md:grid-flow-col ${adminColorMode}`}>
-        <div class="flex flex-col gap-4 text-base w-full">
-          <div>Components and styles</div>
-          <div class="flex flex-col w-full gap-2">
-            <PreviewContainer title="Text colors" mode={adminColorMode}>
-              <TextColorsPreview />
-            </PreviewContainer>
-            <PreviewContainer title="Button styles" mode={adminColorMode}>
-              <ButtonStylesPreview />
-            </PreviewContainer>
-            <PreviewContainer title="Button colors" mode={adminColorMode}>
-              <ButtonColorsPreview />
-            </PreviewContainer>
-            <PreviewContainer title="Button sizes" mode={adminColorMode}>
-              <ButtonSizesPreview />
-            </PreviewContainer>
-          </div>
+      <div className={`flex flex-col gap-4 text-base w-full ${adminColorMode}`}>
+        <div>Components and styles</div>
+        <div className="flex flex-col w-full gap-2">
+          <PreviewContainer title="Text colors" mode={adminColorMode}>
+            <TextColorsPreview />
+          </PreviewContainer>
+          <PreviewContainer title="Button styles" mode={adminColorMode}>            
+            <ButtonStylesPreview />
+          </PreviewContainer>
+          <PreviewContainer title="Button colors" mode={adminColorMode}>            
+            <ButtonColorsPreview />
+          </PreviewContainer>
+          <PreviewContainer title="Button sizes" mode={adminColorMode}>            
+            <ButtonSizesPreview />
+          </PreviewContainer>
         </div>
       </div>
       {props.font?.family && (
-        <div class="text-center py-2">
+        <div className="text-center py-2">
           Font: {props.font.family}
         </div>
       )}
@@ -390,164 +382,99 @@ export function Preview(props: Props) {
 }
 
 const ButtonSizesPreview = () => {
+  const buttonSizes = {
+    lg: 'Large',
+    md: 'Normal',
+    sm: 'Small',
+    xs: 'Tiny'
+  };
+
+  const buttonStyles = ['', 'primary', 'secondary', 'tertiary', 'accent'];
+
+  const renderButtonRow = (style) => (
+    <div className="flex flex-row gap-2 items-center">
+      {Object.entries(buttonSizes).map(([sizeCode, sizeText]) => (
+        <button className={`btn capitalize btn-${sizeCode} ${style ? `btn-${style}` : ''}`}>
+          {sizeText}
+        </button>
+      ))}
+    </div>
+  );
+
   return (
-    <div class="bg-base-100 rounded-lg flex flex-col p-2 gap-2">
-      <div class="flex flex-row gap-2 items-center">
-        <button class="btn btn-lg">Large</button>
-        <button class="btn btn-md">Normal</button>
-        <button class="btn btn-sm">Small</button>
-        <button class="btn btn-xs">Tiny</button>
-      </div>
-      <div class="flex flex-row gap-2 items-center">
-        <button class="btn btn-lg btn-primary">Large</button>
-        <button class="btn btn-md btn-primary">Normal</button>
-        <button class="btn btn-sm btn-primary">Small</button>
-        <button class="btn btn-xs btn-primary">Tiny</button>
-      </div>
-      <div class="flex flex-row gap-2 items-center">
-        <button class="btn btn-lg btn-secondary">Large</button>
-        <button class="btn btn-md btn-secondary">Normal</button>
-        <button class="btn btn-sm btn-secondary">Small</button>
-        <button class="btn btn-xs btn-secondary">Tiny</button>
-      </div>
-      <div class="flex flex-row gap-2 items-center">
-        <button class="btn btn-lg btn-tertiary">Large</button>
-        <button class="btn btn-md btn-tertiary">Normal</button>
-        <button class="btn btn-sm btn-tertiary">Small</button>
-        <button class="btn btn-xs btn-tertiary">Tiny</button>
-      </div>
-      <div class="flex flex-row gap-2 items-center">
-        <button class="btn btn-lg btn-accent">Large</button>
-        <button class="btn btn-md btn-accent">Normal</button>
-        <button class="btn btn-sm btn-accent">Small</button>
-        <button class="btn btn-xs btn-accent">Tiny</button>
-      </div>
+    <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-col p-2 gap-2">
+      {buttonStyles.map(style => renderButtonRow(style))}
     </div>
   );
 };
 
 const ButtonColorsPreview = () => {
+  const buttonTypesClasses = ['btn', 'btn-outline', 'btn-ghost', 'btn-link'];
+  const buttonColorsClasses = ['', 'btn-primary', 'btn-secondary', 'btn-tertiary', 'btn-accent'];
+
+  const renderButtonRow = (type) => (
+    <div className="flex flex-row gap-2">
+      {buttonColorsClasses.map(color => (
+        <button className={`btn btn-xs md:btn-sm capitalize ${color} ${type}`}>
+          {color ? color.split('-')[1] : 'Button'}
+        </button>
+      ))}
+    </div>
+  );
+
   return (
-    <div class="bg-base-100 rounded-lg flex flex-col p-2 gap-2">
-      <div class="flex flex-row gap-2">
-        <button class="btn btn-xs md:btn-sm">Button</button>
-        <button class="btn btn-xs md:btn-sm btn-primary">
-          Primary
-        </button>
-        <button class="btn btn-xs md:btn-sm btn-secondary">
-          Secondary
-        </button>
-        <button class="btn btn-xs md:btn-sm btn-tertiary">
-          Tertiary
-        </button>
-        <button class="btn btn-xs md:btn-sm btn-accent">
-          Accent
-        </button>
-      </div>
-      <div class="flex flex-row gap-2">
-        <button class="btn btn-xs md:btn-sm btn-outline">
-          Button
-        </button>
-        <button class="btn btn-xs md:btn-sm btn-primary btn-outline">
-          Primary
-        </button>
-        <button class="btn btn-xs md:btn-sm btn-secondary btn-outline">
-          Secondary
-        </button>
-        <button class="btn btn-xs md:btn-sm btn-tertiary btn-outline">
-          Tertiary
-        </button>
-        <button class="btn btn-xs md:btn-sm btn-accent btn-outline">
-          Accent
-        </button>
-      </div>
-      <div class="flex flex-row gap-2">
-        <button class="btn btn-xs md:btn-sm btn-ghost">Button</button>
-        <button class="btn btn-xs md:btn-sm btn-primary btn-ghost">
-          Primary
-        </button>
-        <button class="btn btn-xs md:btn-sm btn-secondary btn-ghost">
-          Secondary
-        </button>
-        <button class="btn btn-xs md:btn-sm btn-tertiary btn-ghost">
-          Tertiary
-        </button>
-        <button class="btn btn-xs md:btn-sm btn-accent btn-ghost">
-          Accent
-        </button>
-      </div>
-      <div class="flex flex-row gap-2">
-        <button class="btn btn-xs md:btn-sm btn-link">Button</button>
-        <button class="btn btn-xs md:btn-sm btn-primary btn-link">
-          Primary
-        </button>
-        <button class="btn btn-xs md:btn-sm btn-secondary btn-link">
-          Secondary
-        </button>
-        <button class="btn btn-xs md:btn-sm btn-tertiary btn-link">
-          Tertiary
-        </button>
-        <button class="btn btn-xs md:btn-sm btn-accent btn-link">
-          Accent
-        </button>
-      </div>
+    <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-col p-2 gap-2">
+      {buttonTypesClasses.map(type => renderButtonRow(type))}
     </div>
   );
 };
+
 
 const ButtonStylesPreview = () => {
+  const buttonStylesClasses = ['', 'btn-outline', 'btn-ghost', 'btn-link'];
+
   return (
-    <div class="bg-base-100 rounded-lg flex flex-row p-2 gap-2">
-      <button class="btn btn-xs md:btn-sm">Button</button>
-      <button class="btn btn-xs md:btn-sm btn-outline">
-        Outline
-      </button>
-      <button class="btn btn-xs md:btn-sm btn-ghost">Ghost</button>
-      <button class="btn btn-xs md:btn-sm btn-link">Link</button>
+    <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-row p-2 gap-2">
+      {buttonStylesClasses.map(style => (
+        <button className={`btn btn-xs md:btn-sm capitalize ${style}`}>
+          {style ? style.split('-')[1] : 'Button'}
+        </button>
+      ))}
     </div>
   );
 };
+
 
 const TextColorsPreview = () => {
+  const textColorsClasses = ['', 'text-primary', 'text-secondary', 'text-tertiary', 'text-accent'];
+
   return (
-    <div class="bg-base-100 rounded-lg flex flex-row p-2 gap-2 text-sm md:text-base">
-      <div>Content</div>
-      <div class="text-primary">Primary</div>
-      <div class="text-secondary">Secondary</div>
-      <div class="text-tertiary">Tertiary</div>
-      <div class="text-accent">Accent</div>
+    <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-row p-2 gap-2 text-sm md:text-base">
+      {textColorsClasses.map(color => (
+        <div className={`${color} capitalize`}>
+          {color ? color.split('-')[1] : 'Content'}
+        </div>
+      ))}
     </div>
   );
 };
 
-const PreviewContainer = (
-  { mode, title, children }: {
-    mode: string;
-    title: string;
-    children: ComponentChildren;
-  },
-) => {
-  const borderClass = mode === "dark"
-    ? "border-color-dark"
-    : "border-color-light";
-  const btnOutlineClass = mode === "dark"
-    ? "btn-outline-dark"
-    : "btn-outline-light";
+const PreviewContainer = ({ mode, title, children }: { mode: string, title: string, children: ComponentChildren }) => {
+  const borderClass = mode === "dark" ? "border-color-dark" : "border-color-light";
+  const btnOutlineClass = mode === "dark" ? "btn-outline-dark" : "btn-outline-light"
   return (
-    <div
-      class={`border rounded-lg p-4 flex flex-col gap-2 grow ${borderClass}`}
-    >
-      <div class="flex flex-row justify-between items-center">
-        <div>{title}</div>
-        <button
+      <div className={`border rounded-lg p-4 flex flex-col gap-2 grow ${borderClass}`}>
+        <div className="flex flex-row justify-between items-center">
+          <div>{title}</div>
+          <button
           className={`btn-sm ${btnOutlineClass}`}
-        >
-          Show code
-        </button>
+          >
+            Show code
+          </button>
+        </div>
+        {children}
       </div>
-      {children}
-    </div>
-  );
-};
+  )
+}
 
 export default Section;
