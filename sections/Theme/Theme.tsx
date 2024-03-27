@@ -6,6 +6,7 @@
  */
 import SiteTheme, { Font } from "apps/website/components/Theme.tsx";
 import Color from "npm:colorjs.io";
+import type { ComponentChildren } from "preact";
 
 export interface ThemeColors {
   /**
@@ -130,6 +131,10 @@ export interface Props {
   buttonStyle?: Button;
   otherStyles?: Miscellaneous;
   font?: Font;
+  /**
+   * @description This is the admin's color-scheme mode
+   */
+  mode?: "dark" | "light";
 }
 
 type Theme =
@@ -272,181 +277,108 @@ function Section({
 }
 
 export function Preview(props: Props) {
+  const adminColorMode = props.mode === "dark" ? "dark" : "light";
   return (
     <>
+      {
+        /* This stylesheet is used to simulate the colors from the admin's color schema (admin's light or dark mode), which are not accessible in the site's color schema.
+        * This is a temporary solution until the admin's color schema is accessible.
+        * TODO(@carol): Change this temporary solution.
+       */
+      }
+      <style>
+        {`
+          :root {
+            --admin-color-dark-bg: #0d1717;
+            --admin-color-light-bg: #ffffff;
+            --admin-text-color-dark: #e4e7e7;
+            --admin-text-color-light: #162222;
+            --admin-border-color-light: #c9cfcf;
+            --admin-border-color-dark: #2f3c3c;
+            --admin-border-hover-color-light: #819292;
+            --admin-border-hover-color-dark: #949e9e;
+            --admin-hover-bg-color: #fafafa;
+          }
+
+          .dark {
+            background-color: var(--admin-color-dark-bg);
+            color: var(--admin-text-color-dark);
+          }
+
+          .light {
+            background-color: var(--admin-color-light-bg);
+            color: var(--admin-text-color-light);
+          }
+
+          .btn-outline-light, .btn-outline-dark {
+            background-color: transparent;
+            display: inline-flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            border: 1px solid;
+            border-radius: 0.5rem;
+          }
+
+          .btn-outline-light {
+            color: var(--admin-text-color-light);
+            border-color: var(--admin-border-color-light);
+          }
+
+          .btn-outline-dark {
+            color: var(--admin-text-color-dark);
+            border-color: var(--admin-border-color-dark);
+          }
+
+          .btn-outline-light:hover, .btn-outline-dark:hover {
+            background-color: var(--admin-hover-bg-color);
+            display: inline-flex;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+            border-radius: 0.5rem;
+          }
+
+          .btn-outline-light:hover {
+            border-color: var(--admin-border-hover-color-light);
+          }
+
+          .btn-outline-dark:hover {
+            border-color: var(--admin-border-hover-color-dark);
+          }
+
+          .border-color-dark {
+            border-color: var(--admin-border-color-dark);
+          }
+
+          .border-color-light {
+            border-color: var(--admin-border-color-light);
+          }
+        `}
+      </style>
       <Section {...props} />
-      <div class="grid grid-flow-row md:grid-flow-col">
-        <div class="flex flex-col gap-4 p-4 bg-base-100 text-base-content">
-          <div class="text-xl">The quick brown fox jumps over the lazy dog</div>
-          {" "}
-          <button class="btn">Default button</button>{" "}
-          <div class="flex flex-col gap-1">
-            <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm">A</button>{" "}
-              <button class="btn btn-sm btn-primary">A</button>{" "}
-              <button class="btn btn-sm btn-secondary">A</button>{" "}
-              <button class="btn btn-sm btn-accent">A</button>
-              {" "}
-            </div>
-            <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-primary btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-secondary btn-outline">A</button>
-              {" "}
-              <button class="btn btn-sm btn-accent btn-outline">A</button>
-              {" "}
-            </div>
-            {" "}
+      <div class={`grid grid-flow-row md:grid-flow-col ${adminColorMode}`}>
+        <div class="flex flex-col gap-4 text-base w-full">
+          <div>Components and styles</div>
+          <div class="flex flex-col w-full gap-2">
+            <PreviewContainer title="Text colors" mode={adminColorMode}>
+              <TextColorsPreview />
+            </PreviewContainer>
+            <PreviewContainer title="Button styles" mode={adminColorMode}>
+              <ButtonStylesPreview />
+            </PreviewContainer>
+            <PreviewContainer title="Button colors" mode={adminColorMode}>
+              <ButtonColorsPreview />
+            </PreviewContainer>
+            <PreviewContainer title="Button sizes" mode={adminColorMode}>
+              <ButtonSizesPreview />
+            </PreviewContainer>
           </div>
-          <div class="flex flex-col gap-2">
-            <span class="badge">Base</span>{" "}
-            <span class="badge badge-primary">Primary</span>{" "}
-            <span class="badge badge-secondary">Secondary</span>{" "}
-            <span class="badge badge-accent">Accent</span>
-            {" "}
-          </div>{" "}
-          <div class="flex flex-col">
-            <div class="text-base">Content</div>
-            <div class="text-base text-primary">Primary</div>
-            <div class="text-base text-secondary">Secondary</div>
-            <div class="text-base text-accent">Accent</div>
-          </div>
-          {" "}
-        </div>{" "}
-        <div class="flex flex-col gap-4 p-4 bg-base-content text-base-100">
-          <div class="text-xl">The quick brown fox jumps over the lazy dog</div>
-          {" "}
-          <button class="btn">Default button</button>{" "}
-          <div class="flex flex-col gap-1">
-            <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm">A</button>{" "}
-              <button class="btn btn-sm btn-primary">A</button>{" "}
-              <button class="btn btn-sm btn-secondary">A</button>{" "}
-              <button class="btn btn-sm btn-accent">A</button>
-              {" "}
-            </div>
-            <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm btn-primary btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-secondary btn-outline">A</button>
-              {" "}
-              <button class="btn btn-sm btn-accent btn-outline">A</button>
-              {" "}
-            </div>
-            {" "}
-          </div>
-          <div class="flex flex-col gap-2">
-            <span class="badge">Base</span>{" "}
-            <span class="badge badge-primary">Primary</span>{" "}
-            <span class="badge badge-secondary">Secondary</span>{" "}
-            <span class="badge badge-accent">Accent</span>
-            {" "}
-          </div>{" "}
-          <div class="flex flex-col">
-            <div class="text-base">Content</div>
-            <div class="text-base text-primary">Primary</div>
-            <div class="text-base text-secondary">Secondary</div>
-            <div class="text-base text-accent">Accent</div>
-          </div>
-          {" "}
-        </div>{" "}
-        <div class="flex flex-col gap-4 p-4 bg-primary text-primary-content">
-          <div class="text-xl">The quick brown fox jumps over the lazy dog</div>
-          {" "}
-          <button class="btn">Default button</button>{" "}
-          <div class="flex flex-col gap-1">
-            <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm">A</button>{" "}
-              <button class="btn btn-sm btn-secondary">A</button>{" "}
-              <button class="btn btn-sm btn-accent">A</button>
-              {" "}
-            </div>
-            <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-secondary btn-outline">A</button>
-              {" "}
-              <button class="btn btn-sm btn-accent btn-outline">A</button>
-              {" "}
-            </div>
-            {" "}
-          </div>
-          <div class="flex flex-col gap-2">
-            <span class="badge">Base</span>{" "}
-            <span class="badge badge-secondary">Secondary</span>{" "}
-            <span class="badge badge-accent">Accent</span>
-            {" "}
-          </div>{" "}
-          <div class="flex flex-col">
-            <div class="text-base">Content</div>
-            <div class="text-base text-secondary">Secondary</div>
-            <div class="text-base text-accent">Accent</div>
-          </div>
-          {" "}
-        </div>{" "}
-        <div class="flex flex-col gap-4 p-4 bg-secondary text-secondary-content">
-          <div class="text-xl">The quick brown fox jumps over the lazy dog</div>
-          {" "}
-          <button class="btn">Default button</button>{" "}
-          <div class="flex flex-col gap-1">
-            <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm">A</button>{" "}
-              <button class="btn btn-sm btn-primary">A</button>{" "}
-              <button class="btn btn-sm btn-accent">A</button>
-              {" "}
-            </div>
-            <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-primary btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-accent btn-outline">A</button>
-              {" "}
-            </div>
-            {" "}
-          </div>
-          <div class="flex flex-col gap-2">
-            <span class="badge">Base</span>{" "}
-            <span class="badge badge-primary">Primary</span>{" "}
-            <span class="badge badge-accent">Accent</span>
-            {" "}
-          </div>{" "}
-          <div class="flex flex-col">
-            <div class="text-base">Content</div>
-            <div class="text-base text-primary">Primary</div>
-            <div class="text-base text-accent">Accent</div>
-          </div>
-          {" "}
-        </div>{" "}
-        <div class="flex flex-col gap-4 p-4 bg-accent text-accent-content">
-          <div class="text-xl">The quick brown fox jumps over the lazy dog</div>
-          {" "}
-          <button class="btn">Default button</button>{" "}
-          <div class="flex flex-col gap-1">
-            <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm">A</button>{" "}
-              <button class="btn btn-sm btn-primary">A</button>{" "}
-              <button class="btn btn-sm btn-secondary">A</button>
-              {" "}
-            </div>
-            <div class="flex flex-wrap gap-1">
-              <button class="btn btn-sm btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-primary btn-outline">A</button>{" "}
-              <button class="btn btn-sm btn-secondary btn-outline">A</button>
-              {" "}
-            </div>
-            {" "}
-          </div>
-          <div class="flex flex-col gap-2">
-            <span class="badge">Base</span>{" "}
-            <span class="badge badge-primary">Primary</span>{" "}
-            <span class="badge badge-secondary">Secondary</span>
-            {" "}
-          </div>{" "}
-          <div class="flex flex-col">
-            <div class="text-base">Content</div>
-            <div class="text-base text-primary">Primary</div>
-            <div class="text-base text-secondary">Secondary</div>
-          </div>
-          {" "}
         </div>
-        {" "}
       </div>
       {props.font?.family && (
         <div class="text-center py-2">
@@ -456,5 +388,166 @@ export function Preview(props: Props) {
     </>
   );
 }
+
+const ButtonSizesPreview = () => {
+  return (
+    <div class="bg-base-100 rounded-lg flex flex-col p-2 gap-2">
+      <div class="flex flex-row gap-2 items-center">
+        <button class="btn btn-lg">Large</button>
+        <button class="btn btn-md">Normal</button>
+        <button class="btn btn-sm">Small</button>
+        <button class="btn btn-xs">Tiny</button>
+      </div>
+      <div class="flex flex-row gap-2 items-center">
+        <button class="btn btn-lg btn-primary">Large</button>
+        <button class="btn btn-md btn-primary">Normal</button>
+        <button class="btn btn-sm btn-primary">Small</button>
+        <button class="btn btn-xs btn-primary">Tiny</button>
+      </div>
+      <div class="flex flex-row gap-2 items-center">
+        <button class="btn btn-lg btn-secondary">Large</button>
+        <button class="btn btn-md btn-secondary">Normal</button>
+        <button class="btn btn-sm btn-secondary">Small</button>
+        <button class="btn btn-xs btn-secondary">Tiny</button>
+      </div>
+      <div class="flex flex-row gap-2 items-center">
+        <button class="btn btn-lg btn-tertiary">Large</button>
+        <button class="btn btn-md btn-tertiary">Normal</button>
+        <button class="btn btn-sm btn-tertiary">Small</button>
+        <button class="btn btn-xs btn-tertiary">Tiny</button>
+      </div>
+      <div class="flex flex-row gap-2 items-center">
+        <button class="btn btn-lg btn-accent">Large</button>
+        <button class="btn btn-md btn-accent">Normal</button>
+        <button class="btn btn-sm btn-accent">Small</button>
+        <button class="btn btn-xs btn-accent">Tiny</button>
+      </div>
+    </div>
+  );
+};
+
+const ButtonColorsPreview = () => {
+  return (
+    <div class="bg-base-100 rounded-lg flex flex-col p-2 gap-2">
+      <div class="flex flex-row gap-2">
+        <button class="btn btn-xs md:btn-sm">Button</button>
+        <button class="btn btn-xs md:btn-sm btn-primary">
+          Primary
+        </button>
+        <button class="btn btn-xs md:btn-sm btn-secondary">
+          Secondary
+        </button>
+        <button class="btn btn-xs md:btn-sm btn-tertiary">
+          Tertiary
+        </button>
+        <button class="btn btn-xs md:btn-sm btn-accent">
+          Accent
+        </button>
+      </div>
+      <div class="flex flex-row gap-2">
+        <button class="btn btn-xs md:btn-sm btn-outline">
+          Button
+        </button>
+        <button class="btn btn-xs md:btn-sm btn-primary btn-outline">
+          Primary
+        </button>
+        <button class="btn btn-xs md:btn-sm btn-secondary btn-outline">
+          Secondary
+        </button>
+        <button class="btn btn-xs md:btn-sm btn-tertiary btn-outline">
+          Tertiary
+        </button>
+        <button class="btn btn-xs md:btn-sm btn-accent btn-outline">
+          Accent
+        </button>
+      </div>
+      <div class="flex flex-row gap-2">
+        <button class="btn btn-xs md:btn-sm btn-ghost">Button</button>
+        <button class="btn btn-xs md:btn-sm btn-primary btn-ghost">
+          Primary
+        </button>
+        <button class="btn btn-xs md:btn-sm btn-secondary btn-ghost">
+          Secondary
+        </button>
+        <button class="btn btn-xs md:btn-sm btn-tertiary btn-ghost">
+          Tertiary
+        </button>
+        <button class="btn btn-xs md:btn-sm btn-accent btn-ghost">
+          Accent
+        </button>
+      </div>
+      <div class="flex flex-row gap-2">
+        <button class="btn btn-xs md:btn-sm btn-link">Button</button>
+        <button class="btn btn-xs md:btn-sm btn-primary btn-link">
+          Primary
+        </button>
+        <button class="btn btn-xs md:btn-sm btn-secondary btn-link">
+          Secondary
+        </button>
+        <button class="btn btn-xs md:btn-sm btn-tertiary btn-link">
+          Tertiary
+        </button>
+        <button class="btn btn-xs md:btn-sm btn-accent btn-link">
+          Accent
+        </button>
+      </div>
+    </div>
+  );
+};
+
+const ButtonStylesPreview = () => {
+  return (
+    <div class="bg-base-100 rounded-lg flex flex-row p-2 gap-2">
+      <button class="btn btn-xs md:btn-sm">Button</button>
+      <button class="btn btn-xs md:btn-sm btn-outline">
+        Outline
+      </button>
+      <button class="btn btn-xs md:btn-sm btn-ghost">Ghost</button>
+      <button class="btn btn-xs md:btn-sm btn-link">Link</button>
+    </div>
+  );
+};
+
+const TextColorsPreview = () => {
+  return (
+    <div class="bg-base-100 rounded-lg flex flex-row p-2 gap-2 text-sm md:text-base">
+      <div>Content</div>
+      <div class="text-primary">Primary</div>
+      <div class="text-secondary">Secondary</div>
+      <div class="text-tertiary">Tertiary</div>
+      <div class="text-accent">Accent</div>
+    </div>
+  );
+};
+
+const PreviewContainer = (
+  { mode, title, children }: {
+    mode: string;
+    title: string;
+    children: ComponentChildren;
+  },
+) => {
+  const borderClass = mode === "dark"
+    ? "border-color-dark"
+    : "border-color-light";
+  const btnOutlineClass = mode === "dark"
+    ? "btn-outline-dark"
+    : "btn-outline-light";
+  return (
+    <div
+      class={`border rounded-lg p-4 flex flex-col gap-2 grow ${borderClass}`}
+    >
+      <div class="flex flex-row justify-between items-center">
+        <div>{title}</div>
+        <button
+          className={`btn-sm ${btnOutlineClass}`}
+        >
+          Show code
+        </button>
+      </div>
+      {children}
+    </div>
+  );
+};
 
 export default Section;
