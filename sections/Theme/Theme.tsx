@@ -131,7 +131,7 @@ export interface Props {
   buttonStyle?: Button;
   otherStyles?: Miscellaneous;
   font?: Font;
-  /** 
+  /**
    * @description This is the admin's color-scheme mode
    */
   mode?: "dark" | "light";
@@ -333,7 +333,7 @@ export function Preview(props: Props) {
           }
 
           .btn-outline-light:hover, .btn-outline-dark:hover {
-            background-color: var(--admin-hover-bg-color);
+            background-color: transparent);
             display: inline-flex;
             flex-wrap: nowrap;
             align-items: center;
@@ -364,16 +364,32 @@ export function Preview(props: Props) {
       <div className={`flex flex-col gap-4 text-base w-full ${adminColorMode}`}>
         <div>Components and styles</div>
         <div className="flex flex-col w-full gap-2">
-          <PreviewContainer title="Text colors" mode={adminColorMode}>
+          <PreviewContainer
+            title="Text colors"
+            mode={adminColorMode}
+            codeString={snippets.textColors}
+          >
             <TextColorsPreview />
           </PreviewContainer>
-          <PreviewContainer title="Button styles" mode={adminColorMode}>            
+          <PreviewContainer
+            title="Button styles"
+            mode={adminColorMode}
+            codeString={snippets.buttonStyles}
+          >
             <ButtonStylesPreview />
           </PreviewContainer>
-          <PreviewContainer title="Button colors" mode={adminColorMode}>            
+          <PreviewContainer
+            title="Button colors"
+            mode={adminColorMode}
+            codeString={snippets.buttonColors}
+          >
             <ButtonColorsPreview />
           </PreviewContainer>
-          <PreviewContainer title="Button sizes" mode={adminColorMode}>            
+          <PreviewContainer
+            title="Button sizes"
+            mode={adminColorMode}
+            codeString={snippets.buttonSizes}
+          >
             <ButtonSizesPreview />
           </PreviewContainer>
         </div>
@@ -389,18 +405,22 @@ export function Preview(props: Props) {
 
 const ButtonSizesPreview = () => {
   const buttonSizes = {
-    lg: 'Large',
-    md: 'Normal',
-    sm: 'Small',
-    xs: 'Tiny'
+    lg: "Large",
+    md: "Normal",
+    sm: "Small",
+    xs: "Tiny",
   };
 
-  const buttonStyles = ['', 'primary', 'secondary', 'tertiary', 'accent'];
+  const buttonStyles = ["", "primary", "secondary", "accent"];
 
   const renderButtonRow = (style: string) => (
     <div className="flex flex-row gap-2 items-center">
       {Object.entries(buttonSizes).map(([sizeCode, sizeText]) => (
-        <button className={`btn capitalize btn-${sizeCode} ${style ? `btn-${style}` : ''}`}>
+        <button
+          className={`btn capitalize btn-${sizeCode} ${
+            style ? `btn-${style}` : ""
+          }`}
+        >
           {sizeText}
         </button>
       ))}
@@ -409,20 +429,25 @@ const ButtonSizesPreview = () => {
 
   return (
     <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-col p-2 gap-2">
-      {buttonStyles.map(style => renderButtonRow(style))}
+      {buttonStyles.map((style) => renderButtonRow(style))}
     </div>
   );
 };
 
 const ButtonColorsPreview = () => {
-  const buttonTypesClasses = ['btn', 'btn-outline', 'btn-ghost', 'btn-link'];
-  const buttonColorsClasses = ['', 'btn-primary', 'btn-secondary', 'btn-tertiary', 'btn-accent'];
+  const buttonTypesClasses = ["btn", "btn-outline", "btn-ghost", "btn-link"];
+  const buttonColorsClasses = [
+    "",
+    "btn-primary",
+    "btn-secondary",
+    "btn-accent",
+  ];
 
   const renderButtonRow = (type: string) => (
     <div className="flex flex-row gap-2">
-      {buttonColorsClasses.map(color => (
+      {buttonColorsClasses.map((color) => (
         <button className={`btn btn-xs md:btn-sm capitalize ${color} ${type}`}>
-          {color ? color.split('-')[1] : 'Button'}
+          {color ? color.split("-")[1] : "Button"}
         </button>
       ))}
     </div>
@@ -430,57 +455,169 @@ const ButtonColorsPreview = () => {
 
   return (
     <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-col p-2 gap-2">
-      {buttonTypesClasses.map(type => renderButtonRow(type))}
+      {buttonTypesClasses.map((type) => renderButtonRow(type))}
     </div>
   );
 };
 
-
 const ButtonStylesPreview = () => {
-  const buttonStylesClasses = ['', 'btn-outline', 'btn-ghost', 'btn-link'];
+  const buttonStylesClasses = ["", "btn-outline", "btn-ghost", "btn-link"];
 
   return (
     <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-row p-2 gap-2">
-      {buttonStylesClasses.map(style => (
+      {buttonStylesClasses.map((style) => (
         <button className={`btn btn-xs md:btn-sm capitalize ${style}`}>
-          {style ? style.split('-')[1] : 'Button'}
+          {style ? style.split("-")[1] : "Button"}
         </button>
       ))}
     </div>
   );
 };
 
-
 const TextColorsPreview = () => {
-  const textColorsClasses = ['', 'text-primary', 'text-secondary', 'text-tertiary', 'text-accent'];
+  const textColorsClasses = [
+    "",
+    "text-primary",
+    "text-secondary",
+    "text-accent",
+  ];
 
   return (
     <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-row p-2 gap-2 text-sm md:text-base">
-      {textColorsClasses.map(color => (
+      {textColorsClasses.map((color) => (
         <div className={`${color} capitalize`}>
-          {color ? color.split('-')[1] : 'Content'}
+          {color ? color.split("-")[1] : "Content"}
         </div>
       ))}
     </div>
   );
 };
 
-const PreviewContainer = ({ mode, title, children }: { mode: string, title: string, children: ComponentChildren }) => {
-  const borderClass = mode === "dark" ? "border-color-dark" : "border-color-light";
-  const btnOutlineClass = mode === "dark" ? "btn-outline-dark" : "btn-outline-light"
+const PreviewContainer = (
+  { mode, title, children, codeString }: {
+    mode: string;
+    title: string;
+    children: ComponentChildren;
+    codeString: string;
+  },
+) => {
+  const borderClass = mode === "dark"
+    ? "border-color-dark"
+    : "border-color-light";
+  const btnOutlineClass = mode === "dark"
+    ? "btn-outline-dark"
+    : "btn-outline-light";
+  const checkboxId = `show-code-${title.replace(/\s+/g, "-").toLowerCase()}`;
+  const codeBlockId = `code-block-${title.replace(/\s+/g, "-").toLowerCase()}`;
+
+  // Estilos dinâmicos adicionados para esconder/mostrar labels baseado no estado do checkbox
+  const dynamicStyle = `
+    #${codeBlockId} {
+      display: none;
+    }
+    #${checkboxId}:checked ~ #${codeBlockId} {
+      display: block;
+    }
+    #${checkboxId}:checked ~ .show-label {
+      display: none;
+    }
+    #${checkboxId}:not(:checked) ~ .hide-label {
+      display: none;
+    }
+    #${checkboxId}:checked ~ .hide-label {
+      background-color: ${mode === "dark" ? "var(--admin-hover-bg-color)" : "var(--admin-text-color-light)"};
+      color: ${mode === "dark" ? "var(--admin-text-color-light)" : "var(--admin-hover-bg-color)"};
+    }
+  `;
+
   return (
-      <div className={`border rounded-lg p-4 flex flex-col gap-2 grow ${borderClass}`}>
-        <div className="flex flex-row justify-between items-center">
-          <div>{title}</div>
-          <button
-          className={`btn-sm ${btnOutlineClass}`}
-          >
-            Show code
-          </button>
+    <>
+      <style>{dynamicStyle}</style>
+      <div className={`border p-4 flex flex-col gap-2 grow relative ${borderClass} rounded-lg`}>
+        <div>
+          <div className="my-1">{title}</div>
+          <div>
+            <input type="checkbox" id={checkboxId} className="sr-only" />
+            {/* Label for "Show code" */}
+            <label htmlFor={checkboxId} className={`btn btn-sm absolute right-4 top-4 ${btnOutlineClass} show-label`}>
+              Show code
+            </label>
+            {/* Label for "Hide code" */}
+            <label htmlFor={checkboxId} className={`btn btn-sm absolute right-4 top-4 ${btnOutlineClass} hide-label`}>
+              Hide code
+            </label>
+            <div id={codeBlockId} className={`mt-4 mb-2 text-xs md:text-sm ${mode === "dark" ? "bg-slate-800" : "bg-slate-100"}`}>
+              <pre className="p-4 overflow-x-auto">{codeString}</pre>
+            </div>
+          </div>
         </div>
         {children}
       </div>
-  )
-}
+    </>
+  );
+};
+
+
+// TODO(@carol): find a way to make these snippets more dynamic
+const snippets = {
+  textColors: `
+  <div>Content</div>
+  <div class="text-primary">Primary</div>
+  <div class="text-secondary">Secondary</div>
+  <div class="text-accent">Accent</div>`,
+  buttonStyles: `
+  <button class="btn btn-sm">Button</button>
+  <button class="btn btn-sm btn-outline">Outline</button>
+  <button class="btn btn-sm btn-ghost">Ghost</button>
+  <button class="btn btn-sm btn-link">Link</button>`,
+  buttonColors: `
+  {/* First row */}
+  <button class="btn btn-sm">Button</button>
+  <button class="btn btn-sm btn-primary">Primary</button>
+  <button class="btn btn-sm btn-secondary">Secondary</button>
+  <button class="btn btn-sm btn-accent">Accent</button>
+
+  {/* Second row */}
+  <button class="btn btn-sm btn-outline">Button</button>
+  <button class="btn btn-sm btn-primary btn-outline">Primary</button>
+  <button class="btn btn-sm btn-secondary btn-outline">Secondary</button>
+  <button class="btn btn-sm btn-accent btn-outline">Accent</button>
+
+  {/* Third row */}
+  <button class="btn btn-sm btn-ghost">Button</button>
+  <button class="btn btn-sm btn-primary btn-ghost">Primary</button>
+  <button class="btn btn-sm btn-secondary btn-ghost">Secondary</button>
+  <button class="btn btn-sm btn-accent btn-ghost">Accent</button>
+
+  {/* Fourth row */}
+  <button class="btn btn-sm btn-link">Button</button>
+  <button class="btn btn-sm btn-primary btn-link">Primary</button>
+  <button class="btn btn-sm btn-secondary btn-link">Secondary</button>
+  <button class="btn btn-sm btn-accent btn-link">Accent</button>`,
+  buttonSizes: `
+  {/* First row */}
+  <button class="btn btn-lg">Large</button>
+  <button class="btn btn-md">Normal</button>
+  <button class="btn btn-sm">Small</button>
+  <button class="btn btn-xs">Tiny</button>
+
+  {/* Second row */}
+  <button class="btn btn-lg btn-primary">Large</button>
+  <button class="btn btn-md btn-primary">Normal</button>
+  <button class="btn btn-sm btn-primary">Small</button>
+  <button class="btn btn-xs btn-primary">Tiny</button>
+
+  {/* Third row */}
+  <button class="btn btn-lg btn-secondary">Large</button>
+  <button class="btn btn-md btn-secondary">Normal</button>
+  <button class="btn btn-sm btn-secondary">Small</button>
+  <button class="btn btn-xs btn-secondary">Tiny</button>
+  
+  {/* Fourth row */}
+  <button class="btn btn-lg btn-accent">Large</button>
+  <button class="btn btn-md btn-accent">Normal</button>
+  <button class="btn btn-sm btn-accent">Small</button>
+  <button class="btn btn-xs btn-accent">Tiny</button>`,
+};
 
 export default Section;
