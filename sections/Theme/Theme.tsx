@@ -280,6 +280,12 @@ export function Preview(props: Props) {
   const adminColorMode = props.mode === "dark" ? "dark" : "light";
   return (
     <>
+      {
+        /* This stylesheet is used to simulate the colors from the admin's color schema (admin's light or dark mode), which are not accessible in the site's color schema.
+        * This is a temporary solution until the admin's color schema is accessible.
+        * TODO(@carol): Change this temporary solution.
+       */
+      }
       <style>
         {`
           :root {
