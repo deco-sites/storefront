@@ -383,7 +383,7 @@ export function Preview(props: Props) {
           {" "}
         </div>{" "}
         <div class="flex flex-col gap-4 p-4 bg-secondary text-secondary-content">
-          <div class="text-xl">The quick brown fox jumps over the lazy dog</div>
+          <div class="text-xl">The quick brown fox jumps over the lazy dog </div>
           {" "}
           <button class="btn">Default button</button>{" "}
           <div class="flex flex-col gap-1">
