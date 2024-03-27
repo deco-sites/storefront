@@ -19,14 +19,13 @@ export default function Main(
   return (
     <div class="flex flex-col items-center max-w-[688px] mx-auto w-full lg:px-0 px-6">
       {social && social?.length > 0 && (
-        <ul class="flex flex-row gap-4 items-center justify-center my-3">
+        <ul class="flex flex-row gap-4 items-center justify-center my-8">
           {social?.map((link) => (
             <li>
               <a
                 target="_blank"
                 href={link.href}
                 title={link.label}
-                class="block rounded"
               >
                 <Icon
                   size={20}
@@ -47,7 +46,7 @@ export default function Main(
                   <a
                     target="_blank"
                     href={list.href}
-                    class={`flex min-h-[52px] items-center justify-start px-2 rounded-full border border-base-content w-full`}
+                    class={`flex min-h-[52px] items-center justify-start px-2 rounded-full border border-base-content w-full bg-base-100`}
                   >
                     {list.icon && !isImage(list.icon) && (
                       <Icon
@@ -66,7 +65,7 @@ export default function Main(
                         height={list.icon.height || 36}
                       />
                     )}
-                    <span class="text-center text-sm w-full">
+                    <span class="text-center text-sm w-full text-base-content">
                       {list.text}
                     </span>
 

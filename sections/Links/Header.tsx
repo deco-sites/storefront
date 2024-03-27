@@ -30,11 +30,11 @@ export default function Header(
     <header class="flex flex-col gap-4 items-center justify-center max-w-[746px] mx-auto pt-10 w-full lg:px-0 px-6">
       {header.logo?.img && <div class="p-4 rounded-full">{maybeLink}</div>}
       {header.title && (
-        <h1 class="lg:text-6xl text-4xl text-center">
+        <h1 class="lg:text-6xl text-4xl text-center text-base-content">
           {header.title}
         </h1>
       )}
-      {header.description && <p>{header.description}</p>}
+      {header.description && <p class="text-base-content">{header.description}</p>}
     </header>
   );
 }
