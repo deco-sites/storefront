@@ -539,11 +539,11 @@ const PreviewContainer = (
           <div>
             <input type="checkbox" id={checkboxId} className="sr-only" />
             {/* Label for "Show code" */}
-            <label htmlFor={checkboxId} className={`btn btn-sm absolute right-4 top-4 ${btnOutlineClass} show-label`}>
+            <label htmlFor={checkboxId} className={`btn-sm absolute right-4 top-4 ${btnOutlineClass} show-label`}>
               Show code
             </label>
             {/* Label for "Hide code" */}
-            <label htmlFor={checkboxId} className={`btn btn-sm absolute right-4 top-4 ${btnOutlineClass} hide-label`}>
+            <label htmlFor={checkboxId} className={`btn-sm absolute right-4 top-4 ${btnOutlineClass} hide-label`}>
               Hide code
             </label>
             <div id={codeBlockId} className={`mt-4 mb-2 text-xs md:text-sm ${mode === "dark" ? "bg-slate-800" : "bg-slate-100"}`}>
