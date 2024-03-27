@@ -397,7 +397,7 @@ const ButtonSizesPreview = () => {
 
   const buttonStyles = ['', 'primary', 'secondary', 'tertiary', 'accent'];
 
-  const renderButtonRow = (style) => (
+  const renderButtonRow = (style: string) => (
     <div className="flex flex-row gap-2 items-center">
       {Object.entries(buttonSizes).map(([sizeCode, sizeText]) => (
         <button className={`btn capitalize btn-${sizeCode} ${style ? `btn-${style}` : ''}`}>
@@ -418,7 +418,7 @@ const ButtonColorsPreview = () => {
   const buttonTypesClasses = ['btn', 'btn-outline', 'btn-ghost', 'btn-link'];
   const buttonColorsClasses = ['', 'btn-primary', 'btn-secondary', 'btn-tertiary', 'btn-accent'];
 
-  const renderButtonRow = (type) => (
+  const renderButtonRow = (type: string) => (
     <div className="flex flex-row gap-2">
       {buttonColorsClasses.map(color => (
         <button className={`btn btn-xs md:btn-sm capitalize ${color} ${type}`}>
