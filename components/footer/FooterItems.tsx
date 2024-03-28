@@ -1,5 +1,3 @@
-import Icon, { AvailableIcons } from "../../components/ui/Icon.tsx";
-
 export type Item = {
   label: string;
   href: string;
