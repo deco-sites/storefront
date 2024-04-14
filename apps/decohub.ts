@@ -7,7 +7,7 @@ import Decohub from "apps/decohub/mod.ts";
  * @logo https://raw.githubusercontent.com/deco-cx/apps/main/decohub/logo.png
  */
 export default function App(...params: Parameters<typeof Decohub>) {
-  return Decohub(...params)
+  return Decohub(...params);
 }
 
-export {  Preview } from "apps/decohub/mod.ts";
+export { Preview } from "apps/decohub/mod.ts";
