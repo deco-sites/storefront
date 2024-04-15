@@ -1,12 +1,11 @@
+import type { ProductListingPage } from "apps/commerce/types.ts";
+import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { SendEventOnView } from "../../components/Analytics.tsx";
-import { Layout as CardLayout } from "../../components/product/ProductCard.tsx";
 import Filters from "../../components/search/Filters.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import SearchControls from "../../islands/SearchControls.tsx";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
-import type { ProductListingPage } from "apps/commerce/types.ts";
-import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
 
 export type Format = "Show More" | "Pagination";
@@ -30,7 +29,6 @@ export interface Props {
   /** @title Integration */
   page: ProductListingPage | null;
   layout?: Layout;
-  cardLayout?: CardLayout;
 
   /** @description 0 for ?page=0 as your first page */
   startingPage?: 0 | 1;
@@ -47,7 +45,6 @@ function NotFound() {
 function Result({
   page,
   layout,
-  cardLayout,
   startingPage = 0,
   url: _url,
 }: Omit<Props, "page"> & {
@@ -91,7 +88,7 @@ function Result({
             <ProductGallery
               products={products}
               offset={offset}
-              layout={{ card: cardLayout, columns: layout?.columns, format }}
+              layout={{ columns: layout?.columns, format }}
               pageInfo={pageInfo}
               url={url}
             />
