@@ -7,6 +7,7 @@
 import SiteTheme, { Font } from "apps/website/components/Theme.tsx";
 import Color from "npm:colorjs.io";
 import type { ComponentChildren } from "preact";
+import { clx } from "../../sdk/clx.ts";
 
 export interface ThemeColors {
   /**
@@ -361,9 +362,9 @@ export function Preview(props: Props) {
         `}
       </style>
       <Section {...props} />
-      <div className={`flex flex-col gap-4 text-base w-full ${adminColorMode}`}>
+      <div class={`flex flex-col gap-4 text-base w-full ${adminColorMode}`}>
         <div>Components and styles</div>
-        <div className="flex flex-col w-full gap-2">
+        <div class="flex flex-col w-full gap-2">
           <PreviewContainer
             title="Text colors"
             mode={adminColorMode}
@@ -395,7 +396,7 @@ export function Preview(props: Props) {
         </div>
       </div>
       {props.font?.family && (
-        <div className="text-center py-2">
+        <div class="text-center py-2">
           Font: {props.font.family}
         </div>
       )}
@@ -414,10 +415,10 @@ const ButtonSizesPreview = () => {
   const buttonStyles = ["", "primary", "secondary", "accent"];
 
   const renderButtonRow = (style: string) => (
-    <div className="flex flex-row gap-2 items-center">
+    <div class="flex flex-row gap-2 items-center">
       {Object.entries(buttonSizes).map(([sizeCode, sizeText]) => (
         <button
-          className={`btn capitalize btn-${sizeCode} ${
+          class={`btn capitalize btn-${sizeCode} ${
             style ? `btn-${style}` : ""
           }`}
         >
@@ -428,7 +429,7 @@ const ButtonSizesPreview = () => {
   );
 
   return (
-    <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-col p-2 gap-2">
+    <div class="bg-base-100 overflow-x-auto rounded-lg flex flex-col p-2 gap-2">
       {buttonStyles.map((style) => renderButtonRow(style))}
     </div>
   );
@@ -444,9 +445,9 @@ const ButtonColorsPreview = () => {
   ];
 
   const renderButtonRow = (type: string) => (
-    <div className="flex flex-row gap-2">
+    <div class="flex flex-row gap-2">
       {buttonColorsClasses.map((color) => (
-        <button className={`btn btn-xs md:btn-sm capitalize ${color} ${type}`}>
+        <button class={`btn btn-xs md:btn-sm capitalize ${color} ${type}`}>
           {color ? color.split("-")[1] : "Button"}
         </button>
       ))}
@@ -454,7 +455,7 @@ const ButtonColorsPreview = () => {
   );
 
   return (
-    <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-col p-2 gap-2">
+    <div class="bg-base-100 overflow-x-auto rounded-lg flex flex-col p-2 gap-2">
       {buttonTypesClasses.map((type) => renderButtonRow(type))}
     </div>
   );
@@ -464,9 +465,9 @@ const ButtonStylesPreview = () => {
   const buttonStylesClasses = ["", "btn-outline", "btn-ghost", "btn-link"];
 
   return (
-    <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-row p-2 gap-2">
+    <div class="bg-base-100 overflow-x-auto rounded-lg flex flex-row p-2 gap-2">
       {buttonStylesClasses.map((style) => (
-        <button className={`btn btn-xs md:btn-sm capitalize ${style}`}>
+        <button class={`btn btn-xs md:btn-sm capitalize ${style}`}>
           {style ? style.split("-")[1] : "Button"}
         </button>
       ))}
@@ -483,9 +484,9 @@ const TextColorsPreview = () => {
   ];
 
   return (
-    <div className="bg-base-100 overflow-x-auto rounded-lg flex flex-row p-2 gap-2 text-sm md:text-base">
+    <div class="bg-base-100 overflow-x-auto rounded-lg flex flex-row p-2 gap-2 text-sm md:text-base">
       {textColorsClasses.map((color) => (
-        <div className={`${color} capitalize`}>
+        <div class={`${color} capitalize`}>
           {color ? color.split("-")[1] : "Content"}
         </div>
       ))}
@@ -525,29 +526,63 @@ const PreviewContainer = (
       display: none;
     }
     #${checkboxId}:checked ~ .hide-label {
-      background-color: ${mode === "dark" ? "var(--admin-hover-bg-color)" : "var(--admin-text-color-light)"};
-      color: ${mode === "dark" ? "var(--admin-text-color-light)" : "var(--admin-hover-bg-color)"};
+      background-color: ${
+    mode === "dark"
+      ? "var(--admin-hover-bg-color)"
+      : "var(--admin-text-color-light)"
+  };
+      color: ${
+    mode === "dark"
+      ? "var(--admin-text-color-light)"
+      : "var(--admin-hover-bg-color)"
+  };
     }
   `;
 
   return (
     <>
       <style>{dynamicStyle}</style>
-      <div className={`border p-4 flex flex-col gap-2 grow relative ${borderClass} rounded-lg`}>
+      <div
+        class={clx(
+          `border p-4 flex flex-col gap-2 grow relative`,
+          borderClass,
+          `rounded-lg`,
+        )}
+      >
         <div>
-          <div className="my-1">{title}</div>
+          <div class="my-1">{title}</div>
           <div>
-            <input type="checkbox" id={checkboxId} className="sr-only" />
+            <input type="checkbox" id={checkboxId} class="sr-only" />
             {/* Label for "Show code" */}
-            <label htmlFor={checkboxId} className={`btn-sm absolute right-4 top-4 ${btnOutlineClass} show-label`}>
+            <label
+              htmlFor={checkboxId}
+              class={clx(
+                `btn-sm absolute right-4 top-4`,
+                btnOutlineClass,
+                `show-label`,
+              )}
+            >
               Show code
             </label>
             {/* Label for "Hide code" */}
-            <label htmlFor={checkboxId} className={`btn-sm absolute right-4 top-4 ${btnOutlineClass} hide-label`}>
+            <label
+              htmlFor={checkboxId}
+              class={clx(
+                `btn-sm absolute right-4 top-4`,
+                btnOutlineClass,
+                `hide-label`,
+              )}
+            >
               Hide code
             </label>
-            <div id={codeBlockId} className={`mt-4 mb-2 text-xs md:text-sm ${mode === "dark" ? "bg-slate-800" : "bg-slate-100"}`}>
-              <pre className="p-4 overflow-x-auto">{codeString}</pre>
+            <div
+              id={codeBlockId}
+              class={clx(
+                "mt-4 mb-2 text-xs md:text-sm",
+                mode === "dark" ? "bg-slate-800" : "bg-slate-100",
+              )}
+            >
+              <pre class="p-4 overflow-x-auto">{codeString}</pre>
             </div>
           </div>
         </div>
@@ -556,7 +591,6 @@ const PreviewContainer = (
     </>
   );
 };
-
 
 // TODO(@carol): find a way to make these snippets more dynamic
 const snippets = {

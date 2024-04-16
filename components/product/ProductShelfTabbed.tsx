@@ -1,7 +1,8 @@
+import type { Product } from "apps/commerce/types.ts";
+import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import { SendEventOnView } from "../../components/Analytics.tsx";
-import ProductCard, {
-  Layout as cardLayout,
-} from "../../components/product/ProductCard.tsx";
+import ProductCard from "../../components/product/ProductCard.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Header from "../../components/ui/SectionHeader.tsx";
 import Slider from "../../components/ui/Slider.tsx";
@@ -9,9 +10,6 @@ import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
-import type { Product } from "apps/commerce/types.ts";
-import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 
 /** @titleBy title */
 interface Tab {
@@ -27,7 +25,6 @@ export interface Props {
     headerAlignment?: "center" | "left";
     headerfontSize?: "Normal" | "Large";
   };
-  cardLayout?: cardLayout;
   tabIndex?: number;
 }
 
@@ -36,7 +33,6 @@ function TabbedProductShelf({
   title,
   description,
   layout,
-  cardLayout,
   tabIndex,
 }: Props) {
   const id = useId();
@@ -85,7 +81,6 @@ function TabbedProductShelf({
               <ProductCard
                 product={product}
                 itemListName={title}
-                layout={cardLayout}
                 platform={platform}
                 index={index}
               />

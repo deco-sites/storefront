@@ -1,8 +1,8 @@
 {
   "imports": {
-    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.60.20/",
-    "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.35.35/",
-    "$fresh/": "https://deno.land/x/fresh@1.6.5/",
+    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.60.25/",
+    "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.36.0/",
+    "$fresh/": "https://deno.land/x/fresh@1.6.3/",
     "preact": "https://esm.sh/preact@10.19.2",
     "preact/": "https://esm.sh/preact@10.19.2/",
     "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.2.2",
@@ -28,9 +28,7 @@
     "preview": "deno run -A main.ts",
     "generate-icons": "deno run -A --unstable static/generate-icons.ts"
   },
-  "githooks": {
-    "pre-commit": "check"
-  },
+  "githooks": { "pre-commit": "check" },
   "exclude": [
     "node_modules",
     "static/",
@@ -39,14 +37,7 @@
     "**/_fresh/*",
     ".deco"
   ],
-  "lint": {
-    "rules": {
-      "tags": [
-        "fresh",
-        "recommended"
-      ]
-    }
-  },
+  "lint": { "rules": { "tags": ["fresh", "recommended"] } },
   "nodeModulesDir": true,
   "compilerOptions": {
     "jsx": "react-jsx",
