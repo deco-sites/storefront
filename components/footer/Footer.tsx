@@ -135,17 +135,21 @@ function Footer({
   mobileApps = { apple: "/", android: "/" },
   regionOptions = { currency: [], language: [] },
   extraLinks = [],
-  backToTheTop
+  backToTheTop,
 }: Props) {
   const _logo = <Logo logo={logo} />;
-  const _newsletter = <Newsletter
-    content={newsletter}
-  />
-  const _sectionLinks = <FooterItems
-    sections={sections}
-    justify={false}
-  />
-  const _social = <Social content={social}/>;
+  const _newsletter = (
+    <Newsletter
+      content={newsletter}
+    />
+  );
+  const _sectionLinks = (
+    <FooterItems
+      sections={sections}
+      justify={false}
+    />
+  );
+  const _social = <Social content={social} />;
   const _payments = <PaymentMethods content={payments} />;
   const _apps = <MobileApps content={mobileApps} />;
   const _region = <RegionSelector content={regionOptions} />;
