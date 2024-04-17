@@ -19,12 +19,6 @@ export interface Props {
     description?: string;
   };
   list?: Category[];
-  layout?: {
-    categoryCard?: {
-      textPosition?: "top" | "bottom";
-      textAlignment?: "center" | "left";
-    };
-  };
 }
 
 function CardText(
@@ -104,12 +98,6 @@ function CategoryList(props: Props) {
       description: "",
     },
     list = DEFAULT_LIST,
-    layout = {
-      categoryCard: {
-        textPosition: "top",
-        textAlignment: "center",
-      },
-    },
   } = props;
 
   return (
@@ -137,15 +125,11 @@ function CategoryList(props: Props) {
               href={href}
               class="flex flex-col gap-4 lg:w-[280px] w-40 lg:h-auto"
             >
-              {layout.categoryCard?.textPosition === "top" &&
-                (
-                  <CardText
-                    tag={tag}
-                    label={label}
-                    description={description}
-                    alignment={layout?.categoryCard?.textAlignment}
-                  />
-                )}
+              <CardText
+                tag={tag}
+                label={label}
+                description={description}
+              />
               {image &&
                 (
                   <figure>
@@ -158,15 +142,6 @@ function CategoryList(props: Props) {
                       loading="lazy"
                     />
                   </figure>
-                )}
-              {layout.categoryCard?.textPosition === "bottom" &&
-                (
-                  <CardText
-                    tag={tag}
-                    label={label}
-                    description={description}
-                    alignment={layout?.categoryCard?.textAlignment}
-                  />
                 )}
             </a>
             {buttonText &&

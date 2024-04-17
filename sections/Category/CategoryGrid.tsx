@@ -23,12 +23,6 @@ export interface Props {
     description?: string;
   };
   list?: CategoryGridProps[];
-  layout?: {
-    categoryCard?: {
-      textPosition?: "top" | "bottom";
-      textAlignment?: "center" | "left";
-    };
-  };
 }
 
 const DEFAULT_LIST = [
@@ -70,12 +64,6 @@ function CategoryGrid(props: Props) {
       description: "Your description",
     },
     list = DEFAULT_LIST,
-    layout = {
-      categoryCard: {
-        textPosition: "bottom",
-        textAlignment: "left",
-      },
-    },
   } = props;
 
   return (
@@ -97,15 +85,7 @@ function CategoryGrid(props: Props) {
           <div>
             <a
               href={href}
-              class={`relative flex ${
-                layout.categoryCard?.textAlignment === "left"
-                  ? "justify-start"
-                  : "justify-start items-center"
-              } ${
-                layout.categoryCard?.textPosition === "bottom"
-                  ? "flex-col-reverse"
-                  : "flex-col"
-              }`}
+              class="relative flex justify-start items-center flex-col"
             >
               {image &&
                 (
