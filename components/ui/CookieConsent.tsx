@@ -66,12 +66,8 @@ function CookieConsent(props: Props) {
         id={id}
         class="transform-gpu translate-y-[200%] transition fixed bottom-0 lg:bottom-2 w-screen z-50 lg:flex lg:justify-center"
       >
-        <div
-          class="p-4 mx-4 my-2 flex flex-col gap-4 shadow bg-base-100 rounded border border-base-200 lg:w-[520px] lg:flex-row lg:items-end"
-        >
-          <div
-            class="flex-auto flex flex-col gap-4 lg:gap-2"
-          >
+        <div class="p-4 mx-4 my-2 flex flex-col gap-4 shadow bg-base-100 rounded border border-base-200 lg:w-[520px] lg:flex-row lg:items-end">
+          <div class="flex-auto flex flex-col gap-4 lg:gap-2">
             <h3 class="text-xl">{title}</h3>
             {text && (
               <div
