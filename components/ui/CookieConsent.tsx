@@ -37,10 +37,6 @@ export interface Props {
     allowText: string;
     cancelText?: string;
   };
-  layout?: {
-    position?: "Expanded" | "Left" | "Center" | "Right";
-    content?: "Tiled" | "Piled up";
-  };
 }
 
 const DEFAULT_PROPS = {
@@ -55,15 +51,11 @@ const DEFAULT_PROPS = {
     allowText: "Aceitar",
     cancelText: "Fechar",
   },
-  layout: {
-    position: "Expanded",
-    content: "Tiled",
-  },
 };
 
 function CookieConsent(props: Props) {
   const id = useId();
-  const { title, text, policy, buttons, layout } = {
+  const { title, text, policy, buttons } = {
     ...DEFAULT_PROPS,
     ...props,
   };
@@ -72,40 +64,13 @@ function CookieConsent(props: Props) {
     <>
       <div
         id={id}
-        class={`
-          transform-gpu translate-y-[200%] transition fixed bottom-0 lg:bottom-2 w-screen z-50 lg:flex
-          ${layout?.position === "Left" ? "lg:justify-start" : ""}
-          ${layout?.position === "Center" ? "lg:justify-center" : ""}
-          ${layout?.position === "Right" ? "lg:justify-end" : ""}
-        `}
+        class="transform-gpu translate-y-[200%] transition fixed bottom-0 lg:bottom-2 w-screen z-50 lg:flex lg:justify-center"
       >
         <div
-          class={`
-          p-4 mx-4 my-2 flex flex-col gap-4 shadow bg-base-100 rounded border border-base-200 
-          ${
-            !layout?.position || layout?.position === "Expanded"
-              ? "lg:container lg:mx-auto"
-              : `
-            ${layout?.content === "Piled up" ? "lg:w-[480px]" : ""}
-            ${
-                !layout?.content || layout?.content === "Tiled"
-                  ? "lg:w-[520px]"
-                  : ""
-              }
-          `
-          }
-          ${
-            !layout?.content || layout?.content === "Tiled"
-              ? "lg:flex-row lg:items-end"
-              : ""
-          }
-          
-        `}
+          class="p-4 mx-4 my-2 flex flex-col gap-4 shadow bg-base-100 rounded border border-base-200 lg:w-[520px] lg:flex-row lg:items-end"
         >
           <div
-            class={`flex-auto flex flex-col gap-4 ${
-              !layout?.content || layout?.content === "Tiled" ? "lg:gap-2" : ""
-            }`}
+            class="flex-auto flex flex-col gap-4 lg:gap-2"
           >
             <h3 class="text-xl">{title}</h3>
             {text && (
@@ -121,11 +86,7 @@ function CookieConsent(props: Props) {
           </div>
 
           <div
-            class={`flex flex-col gap-2 ${
-              !layout?.position || layout?.position === "Expanded"
-                ? "lg:flex-row"
-                : ""
-            }`}
+            class={`flex flex-col gap-2 lg:flex-row`}
           >
             <button class="btn" data-button-cc-accept>
               {buttons.allowText}
