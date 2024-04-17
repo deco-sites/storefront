@@ -82,9 +82,11 @@ function CategoryGrid(props: Props) {
     <div
       id={id}
       class="container mt-16"
-    > 
+    >
       <div class="flex flex-col gap-2">
-        <h2 class="text-base-content text-center text-3xl font-semibold">{header.title}</h2>
+        <h2 class="text-base-content text-center text-3xl font-semibold">
+          {header.title}
+        </h2>
         <p class="text-base-content text-center">{header.description}</p>
       </div>
 

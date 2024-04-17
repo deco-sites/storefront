@@ -49,7 +49,9 @@ export default function Benefits(
 
     return (
       <div
-        class={`flex gap-4 ${showDivider ? "pb-4 lg:pr-8 lg:border-r lg:border-b-0" : ""}`}
+        class={`flex gap-4 ${
+          showDivider ? "pb-4 lg:pr-8 lg:border-r lg:border-b-0" : ""
+        }`}
       >
         <div class="flex-none">
           <Icon
@@ -62,14 +64,10 @@ export default function Benefits(
           />
         </div>
         <div class="flex-auto flex flex-col gap-1 lg:gap-2">
-          <div
-            class="text-base lg:text-xl leading-7 text-base-content"
-          >
+          <div class="text-base lg:text-xl leading-7 text-base-content">
             {benefit.label}
           </div>
-          <p
-            class="text-sm leading-5 text-neutral"
-          >
+          <p class="text-sm leading-5 text-neutral">
             {benefit.description}
           </p>
         </div>
@@ -80,7 +78,9 @@ export default function Benefits(
   return (
     <div class="w-full container px-4 py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 lg:px-0">
       <div class="flex flex-col gap-2">
-        <h2 class="text-base-content text-center text-3xl font-semibold">{title}</h2>
+        <h2 class="text-base-content text-center text-3xl font-semibold">
+          {title}
+        </h2>
         <p class="text-center">{description}</p>
       </div>
       <div class="w-full flex justify-center">

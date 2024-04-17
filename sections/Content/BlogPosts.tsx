@@ -119,9 +119,11 @@ function BlogPosts({
   return (
     <div class="w-full container py-8 flex flex-col gap-6 pb-16">
       <div class="px-9">
-       <div class="flex flex-col gap-2">
-        <h2 class="text-base-content text-center text-3xl font-semibold">{title}</h2>
-      </div>
+        <div class="flex flex-col gap-2">
+          <h2 class="text-base-content text-center text-3xl font-semibold">
+            {title}
+          </h2>
+        </div>
       </div>
       <div
         id={id}

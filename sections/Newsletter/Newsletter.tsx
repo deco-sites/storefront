@@ -1,4 +1,3 @@
-
 export interface Form {
   placeholder?: string;
   buttonText?: string;
@@ -21,7 +20,7 @@ const DEFAULT_PROPS: Props = {
     buttonText: "Inscrever",
     helpText:
       'Ao se inscrever, você concorda com nossa <a class="link" href="/politica-de-privacidade">Política de privacidade</a>.',
-  }
+  },
 };
 
 export default function Newsletter(props: Props) {
@@ -29,7 +28,9 @@ export default function Newsletter(props: Props) {
 
   const headerLayout = (
     <div class="flex flex-col gap-2">
-      <h2 class="text-base-content text-center text-3xl font-semibold">{title}</h2>
+      <h2 class="text-base-content text-center text-3xl font-semibold">
+        {title}
+      </h2>
       <p class="text-center">{description}</p>
     </div>
   );
@@ -59,12 +60,8 @@ export default function Newsletter(props: Props) {
   );
 
   return (
-    <div
-      class="bg-transparent p-0"
-    >
-      <div
-          class="container flex flex-col rounded p-4 gap-6 lg:p-16 lg:gap-12 bg-transparent"
-        >
+    <div class="bg-transparent p-0">
+      <div class="container flex flex-col rounded p-4 gap-6 lg:p-16 lg:gap-12 bg-transparent">
         {headerLayout}
         <div class="flex justify-center">
           {formLayout}

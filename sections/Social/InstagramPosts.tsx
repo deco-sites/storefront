@@ -71,7 +71,9 @@ export default function InstagramPosts({
   return (
     <div class="w-full container px-4 py-8 flex flex-col gap-14 lg:gap-20 lg:py-10 lg:px-0">
       <div class="flex flex-col gap-2">
-        <h2 class="text-base-content text-center text-3xl font-semibold">{title}</h2>
+        <h2 class="text-base-content text-center text-3xl font-semibold">
+          {title}
+        </h2>
         <p class="text-center">{description}</p>
       </div>
       <div

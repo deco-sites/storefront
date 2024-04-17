@@ -116,9 +116,11 @@ function CategoryList(props: Props) {
     <div
       id={id}
       class="container py-8 flex flex-col gap-8 lg:gap-10 text-base-content"
-    > 
+    >
       <div class="flex flex-col gap-2">
-        <h2 class="text-base-content text-center text-3xl font-semibold">{header.title}</h2>
+        <h2 class="text-base-content text-center text-3xl font-semibold">
+          {header.title}
+        </h2>
         <p class="text-base-content text-center">{header.description}</p>
       </div>
 

@@ -173,7 +173,9 @@ export default function Gallery(props: Props) {
   return (
     <section class="container px-4 py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 lg:px-0">
       <div class="flex flex-col gap-2">
-        <h2 class="text-base-content text-center text-3xl font-semibold">{title}</h2>
+        <h2 class="text-base-content text-center text-3xl font-semibold">
+          {title}
+        </h2>
         <p class="text-center">{description}</p>
       </div>
       <ul class="grid grid-flow-col grid-cols-2 grid-rows-6 gap-4 list-none">
