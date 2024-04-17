@@ -1,0 +1,1 @@
+{"form":{"helpText":"<p>By subscribing you agree to with our <u>Privacy Policy</u>.</p>","buttonText":"Subscribe","placeholder":"Enter your email"},"title":"Newsletter","layout":{"header":{"fontSize":"Small"},"content":{"border":true,"bgColor":"Reverse","alignment":"Left"},"headerFontSize":"Large"},"__resolveType":"site/sections/Newsletter/Newsletter.tsx"}
