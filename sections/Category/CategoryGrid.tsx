@@ -1,4 +1,3 @@
-import Header from "../../components/ui/SectionHeader.tsx";
 import { useId } from "../../sdk/useId.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
@@ -25,7 +24,6 @@ export interface Props {
   };
   list?: CategoryGridProps[];
   layout?: {
-    headerAlignment?: "center" | "left";
     categoryCard?: {
       textPosition?: "top" | "bottom";
       textAlignment?: "center" | "left";
@@ -73,7 +71,6 @@ function CategoryGrid(props: Props) {
     },
     list = DEFAULT_LIST,
     layout = {
-      headerAlignment: "center",
       categoryCard: {
         textPosition: "bottom",
         textAlignment: "left",
@@ -85,12 +82,11 @@ function CategoryGrid(props: Props) {
     <div
       id={id}
       class="container mt-16"
-    >
-      <Header
-        title={header.title}
-        description={header.description || ""}
-        alignment={layout.headerAlignment || "center"}
-      />
+    > 
+      <div class="flex flex-col gap-2">
+        <h2 class="text-base-content text-center text-3xl font-semibold">{header.title}</h2>
+        <p class="text-base-content text-center">{header.description}</p>
+      </div>
 
       <div class="grid md:grid-cols-2 grid-cols-1 mt-6">
         {list.map((

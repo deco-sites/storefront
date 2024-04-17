@@ -1,7 +1,6 @@
 import Icon from "../../components/ui/Icon.tsx";
 import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import Header from "../../components/ui/SectionHeader.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
@@ -14,8 +13,6 @@ export interface Props {
       mobile?: 1 | 2 | 3 | 4 | 5;
       desktop?: 1 | 2 | 3 | 4 | 5;
     };
-    headerAlignment?: "center" | "left";
-    headerfontSize?: "Normal" | "Large" | "Small";
     showArrows?: boolean;
   };
 }
@@ -37,8 +34,6 @@ function BlogPosts({
       mobile: 1,
       desktop: 3,
     },
-    headerAlignment: "center",
-    headerfontSize: "Normal",
     showArrows: false,
   } as Props["layout"],
   posts = [
@@ -124,11 +119,9 @@ function BlogPosts({
   return (
     <div class="w-full container py-8 flex flex-col gap-6 pb-16">
       <div class="px-9">
-        <Header
-          title={title || "BlogPosts"}
-          fontSize={layout?.headerfontSize || "Normal"}
-          alignment={layout?.headerAlignment || "center"}
-        />
+       <div class="flex flex-col gap-2">
+        <h2 class="text-base-content text-center text-3xl font-semibold">{title}</h2>
+      </div>
       </div>
       <div
         id={id}

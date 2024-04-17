@@ -1,6 +1,4 @@
 import { Picture, Source } from "apps/website/components/Picture.tsx";
-import Image from "apps/website/components/Image.tsx";
-import Header from "../../components/ui/SectionHeader.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
 /**
@@ -38,16 +36,6 @@ export interface Props {
    */
   banners?: Banner[];
   layout?: {
-    /**
-     * @description Aplique borda a sua imagem
-     */
-    borderRadius?: {
-      /** @default none */
-      mobile?: BorderRadius;
-      /** @default none */
-      desktop?: BorderRadius;
-    };
-    headerAlignment?: "center" | "left";
     mobile?: "Asymmetric" | "Symmetrical";
     desktop?: "Asymmetric" | "Symmetrical";
   };
@@ -112,11 +100,6 @@ const DEFAULT_PROPS: Props = {
     },
   ],
   "layout": {
-    "borderRadius": {
-      "mobile": "3xl",
-      "desktop": "2xl",
-    },
-    "headerAlignment": "center",
     "mobile": "Asymmetric",
     "desktop": "Asymmetric",
   },
@@ -189,15 +172,14 @@ export default function Gallery(props: Props) {
 
   return (
     <section class="container px-4 py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 lg:px-0">
-      <Header
-        title={title}
-        description={description}
-        alignment={layout?.headerAlignment || "center"}
-      />
+      <div class="flex flex-col gap-2">
+        <h2 class="text-base-content text-center text-3xl font-semibold">{title}</h2>
+        <p class="text-center">{description}</p>
+      </div>
       <ul class="grid grid-flow-col grid-cols-2 grid-rows-6 gap-4 list-none">
         {banners?.map((banner, index) => (
           <li class={`${mobileItemLayout(index)} ${desktopItemLayout(index)}`}>
-            <Banner {...banner} borderRadius={props.layout?.borderRadius} />
+            <Banner {...banner} />
           </li>
         ))}
       </ul>

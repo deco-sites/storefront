@@ -73,7 +73,7 @@ function Banner(props: SectionProps<ReturnType<typeof loader>>) {
             {title}
           </span>
         </h1>
-        <h2>
+        <h2 class="text-base-content text-center text-3xl font-semibold">
           <span class="text-xl font-medium text-base-100">
             {subtitle}
           </span>

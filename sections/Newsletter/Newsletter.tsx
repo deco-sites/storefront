@@ -1,4 +1,3 @@
-import Header from "../../components/ui/SectionHeader.tsx";
 
 export interface Form {
   placeholder?: string;
@@ -7,35 +6,11 @@ export interface Form {
   helpText?: string;
 }
 
-interface Content {
-  border?: boolean;
-  /**
-   * @format button-group
-   * @options deco-sites/storefront/loaders/icons.ts
-   */
-  alignment?: "Left" | "Center" | "Right";
-  bgColor?: "Normal" | "Reverse";
-}
-
-interface Header {
-  /**
-   * @format button-group
-   * @options deco-sites/storefront/loaders/icons.ts
-   */
-  fontSize?: "Small" | "Normal" | "Large";
-}
-
-interface Layout {
-  header?: Header;
-  content?: Content;
-}
-
 export interface Props {
   title?: string;
   /** @format textarea */
   description?: string;
   form?: Form;
-  layout?: Layout;
 }
 
 const DEFAULT_PROPS: Props = {
@@ -46,31 +21,17 @@ const DEFAULT_PROPS: Props = {
     buttonText: "Inscrever",
     helpText:
       'Ao se inscrever, você concorda com nossa <a class="link" href="/politica-de-privacidade">Política de privacidade</a>.',
-  },
-  layout: {
-    header: {
-      fontSize: "Large",
-    },
-    content: {
-      border: false,
-      alignment: "Left",
-    },
-  },
+  }
 };
 
 export default function Newsletter(props: Props) {
-  const { title, description, form, layout } = { ...DEFAULT_PROPS, ...props };
-  const isReverse = layout?.content?.bgColor === "Reverse";
-  const bordered = Boolean(layout?.content?.border);
+  const { title, description, form } = { ...DEFAULT_PROPS, ...props };
 
   const headerLayout = (
-    <Header
-      title={title}
-      description={description}
-      alignment={layout?.content?.alignment === "Left" ? "left" : "center"}
-      colorReverse={isReverse}
-      fontSize={layout?.header?.fontSize}
-    />
+    <div class="flex flex-col gap-2">
+      <h2 class="text-base-content text-center text-3xl font-semibold">{title}</h2>
+      <p class="text-center">{description}</p>
+    </div>
   );
 
   const formLayout = form && (
@@ -82,7 +43,7 @@ export default function Newsletter(props: Props) {
           placeholder={form.placeholder}
         />
         <button
-          class={`btn ${isReverse ? "btn-accent" : ""}`}
+          class="btn"
           type="submit"
         >
           {form.buttonText}
@@ -97,49 +58,18 @@ export default function Newsletter(props: Props) {
     </form>
   );
 
-  const bgLayout = isReverse
-    ? "bg-secondary text-secondary-content"
-    : "bg-transparent";
-
   return (
     <div
-      class={`${
-        bordered
-          ? isReverse ? "bg-secondary-content" : "bg-secondary"
-          : bgLayout
-      } ${bordered ? "p-4 lg:p-16" : "p-0"}`}
+      class="bg-transparent p-0"
     >
-      {(!layout?.content?.alignment ||
-        layout?.content?.alignment === "Center") && (
-        <div
-          class={`container flex flex-col rounded p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
+      <div
+          class="container flex flex-col rounded p-4 gap-6 lg:p-16 lg:gap-12 bg-transparent"
         >
-          {headerLayout}
-          <div class="flex justify-center">
-            {formLayout}
-          </div>
+        {headerLayout}
+        <div class="flex justify-center">
+          {formLayout}
         </div>
-      )}
-      {layout?.content?.alignment === "Left" && (
-        <div
-          class={`container flex flex-col rounded p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
-        >
-          {headerLayout}
-          <div class="flex justify-start">
-            {formLayout}
-          </div>
-        </div>
-      )}
-      {layout?.content?.alignment === "Right" && (
-        <div
-          class={`container flex flex-col rounded justify-between lg:flex-row p-4 gap-6 lg:p-16 lg:gap-12 ${bgLayout}`}
-        >
-          {headerLayout}
-          <div class="flex justify-center">
-            {formLayout}
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 }

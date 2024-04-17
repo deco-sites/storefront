@@ -1,4 +1,3 @@
-import Header from "../../components/ui/SectionHeader.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
@@ -21,7 +20,6 @@ export interface Props {
   };
   list?: Category[];
   layout?: {
-    headerAlignment?: "center" | "left";
     categoryCard?: {
       textPosition?: "top" | "bottom";
       textAlignment?: "center" | "left";
@@ -107,7 +105,6 @@ function CategoryList(props: Props) {
     },
     list = DEFAULT_LIST,
     layout = {
-      headerAlignment: "center",
       categoryCard: {
         textPosition: "top",
         textAlignment: "center",
@@ -118,13 +115,12 @@ function CategoryList(props: Props) {
   return (
     <div
       id={id}
-      class="container py-8 flex flex-col gap-8 lg:gap-10 text-base-content  lg:py-10"
-    >
-      <Header
-        title={header.title}
-        description={header.description || ""}
-        alignment={layout.headerAlignment || "center"}
-      />
+      class="container py-8 flex flex-col gap-8 lg:gap-10 text-base-content"
+    > 
+      <div class="flex flex-col gap-2">
+        <h2 class="text-base-content text-center text-3xl font-semibold">{header.title}</h2>
+        <p class="text-base-content text-center">{header.description}</p>
+      </div>
 
       <Slider class="carousel carousel-start gap-4 lg:gap-8 row-start-2 row-end-5">
         {list.map((

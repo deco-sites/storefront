@@ -1,5 +1,4 @@
 import Image from "apps/website/components/Image.tsx";
-import Header from "../../components/ui/SectionHeader.tsx";
 import { useMemo } from "preact/hooks";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
@@ -12,9 +11,6 @@ export interface Props {
   title?: string;
   description?: string;
   images?: Image[];
-  layout?: {
-    headerAlignment?: "center" | "left";
-  };
 }
 
 const IMAGES = [
@@ -35,7 +31,6 @@ function Logos(props: Props) {
     title,
     description,
     images,
-    layout,
   } = props;
   const list = useMemo(
     () =>
@@ -47,11 +42,10 @@ function Logos(props: Props) {
 
   return (
     <div class="w-full container px-4 py-8 flex flex-col gap-8 lg:gap-12 lg:py-10 lg:px-0">
-      <Header
-        title={title}
-        description={description}
-        alignment={layout?.headerAlignment || "center"}
-      />
+      <div class="flex flex-col gap-2">
+        <h2 class="text-base-content text-center text-3xl font-semibold">{title}</h2>
+        <p class="text-center">{description}</p>
+      </div>
       <div class="w-full text-center items-center">
         {list.map((element) => (
           <div class="w-36 lg:w-40 h-17 lg:h-20 px-4 lg:px-6 py-6 lg:py-4 inline-block align-middle">
