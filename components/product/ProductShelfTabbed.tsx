@@ -4,7 +4,6 @@ import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import ProductCard from "../../components/product/ProductCard.tsx";
 import Icon from "../../components/ui/Icon.tsx";
-import Header from "../../components/ui/SectionHeader.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
@@ -21,10 +20,6 @@ export interface Props {
   tabs: Tab[];
   title?: string;
   description?: string;
-  layout?: {
-    headerAlignment?: "center" | "left";
-    headerfontSize?: "Normal" | "Large";
-  };
   tabIndex?: number;
 }
 
@@ -32,7 +27,6 @@ function TabbedProductShelf({
   tabs,
   title,
   description,
-  layout,
   tabIndex,
 }: Props) {
   const id = useId();
@@ -48,12 +42,12 @@ function TabbedProductShelf({
 
   return (
     <div class="w-full container  py-8 flex flex-col gap-8 lg:gap-12 lg:py-10">
-      <Header
-        title={title || ""}
-        description={description || ""}
-        fontSize={layout?.headerfontSize || "Large"}
-        alignment={layout?.headerAlignment || "center"}
-      />
+      <div class="flex flex-col gap-2">
+        <h2 class="text-base-content text-center text-3xl font-semibold">
+          {title}
+        </h2>
+        <p class="text-center">{description}</p>
+      </div>
 
       <div class="flex justify-center">
         <div class="tabs tabs-boxed">
@@ -94,7 +88,7 @@ function TabbedProductShelf({
               <Icon size={24} id="ChevronLeft" strokeWidth={3} />
             </Slider.PrevButton>
           </div>
-          <div class="hidden relative sm:block z-10 col-start-3 row-start-3">
+          <div class="hidden relative sm:block z-10 col-start-3 row-start-3 font-">
             <Slider.NextButton class="btn btn-circle btn-outline absolute left-1/2 bg-base-100">
               <Icon size={24} id="ChevronRight" strokeWidth={3} />
             </Slider.NextButton>

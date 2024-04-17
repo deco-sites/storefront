@@ -1,4 +1,3 @@
-import Header from "../../components/ui/SectionHeader.tsx";
 import { useId } from "../../sdk/useId.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
@@ -24,13 +23,6 @@ export interface Props {
     description?: string;
   };
   list?: CategoryGridProps[];
-  layout?: {
-    headerAlignment?: "center" | "left";
-    categoryCard?: {
-      textPosition?: "top" | "bottom";
-      textAlignment?: "center" | "left";
-    };
-  };
 }
 
 const DEFAULT_LIST = [
@@ -72,13 +64,6 @@ function CategoryGrid(props: Props) {
       description: "Your description",
     },
     list = DEFAULT_LIST,
-    layout = {
-      headerAlignment: "center",
-      categoryCard: {
-        textPosition: "bottom",
-        textAlignment: "left",
-      },
-    },
   } = props;
 
   return (
@@ -86,11 +71,12 @@ function CategoryGrid(props: Props) {
       id={id}
       class="container mt-16"
     >
-      <Header
-        title={header.title}
-        description={header.description || ""}
-        alignment={layout.headerAlignment || "center"}
-      />
+      <div class="flex flex-col gap-2">
+        <h2 class="text-base-content text-center text-3xl font-semibold">
+          {header.title}
+        </h2>
+        <p class="text-base-content text-center">{header.description}</p>
+      </div>
 
       <div class="grid md:grid-cols-2 grid-cols-1 mt-6">
         {list.map((
@@ -99,15 +85,7 @@ function CategoryGrid(props: Props) {
           <div>
             <a
               href={href}
-              class={`relative flex ${
-                layout.categoryCard?.textAlignment === "left"
-                  ? "justify-start"
-                  : "justify-start items-center"
-              } ${
-                layout.categoryCard?.textPosition === "bottom"
-                  ? "flex-col-reverse"
-                  : "flex-col"
-              }`}
+              class="relative flex justify-start items-center flex-col"
             >
               {image &&
                 (

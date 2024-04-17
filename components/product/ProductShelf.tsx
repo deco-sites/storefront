@@ -1,7 +1,6 @@
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import ProductCard from "../../components/product/ProductCard.tsx";
 import Icon from "../../components/ui/Icon.tsx";
-import Header from "../../components/ui/SectionHeader.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
@@ -20,8 +19,6 @@ export interface Props {
       mobile?: 1 | 2 | 3 | 4 | 5;
       desktop?: 1 | 2 | 3 | 4 | 5;
     };
-    headerAlignment?: "center" | "left";
-    headerfontSize?: "Normal" | "Large" | "Small";
     showArrows?: boolean;
   };
 }
@@ -55,12 +52,12 @@ function ProductShelf({
   };
   return (
     <div class="w-full container py-8 flex flex-col gap-6 lg:py-10">
-      <Header
-        title={title || ""}
-        description={description || ""}
-        fontSize={layout?.headerfontSize || "Large"}
-        alignment={layout?.headerAlignment || "center"}
-      />
+      <div class="flex flex-col gap-2">
+        <h2 class="text-base-content text-center text-3xl font-semibold">
+          {title}
+        </h2>
+        <p class="text-center">{description}</p>
+      </div>
 
       <div
         id={id}

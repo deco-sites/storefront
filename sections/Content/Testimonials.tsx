@@ -1,6 +1,5 @@
 import Icon from "../../components/ui/Icon.tsx";
 import Image from "apps/website/components/Image.tsx";
-import Header from "../../components/ui/SectionHeader.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
@@ -26,7 +25,6 @@ export interface Props {
   testimonials?: Testimonial[];
   layout?: {
     variation?: "Grid" | "Slider";
-    headerAlignment?: "center" | "left";
   };
 }
 
@@ -78,7 +76,6 @@ const DEFAULT_PROPS: Props = {
   }],
   "layout": {
     "variation": "Grid",
-    "headerAlignment": "center",
   },
 };
 
@@ -134,11 +131,12 @@ export default function Testimonials(
 
   return (
     <div class="w-full container px-4 py-8 flex flex-col gap-14 lg:gap-20 lg:py-10 lg:px-0">
-      <Header
-        title={title}
-        description={description}
-        alignment={layout?.headerAlignment || "center"}
-      />
+      <div class="flex flex-col gap-2">
+        <h2 class="text-base-content text-center text-3xl font-semibold">
+          {title}
+        </h2>
+        <p class="text-center">{description}</p>
+      </div>
 
       {layout?.variation === "Grid" && (
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">

@@ -13,20 +13,11 @@ export interface Props {
 
   title?: {
     content?: string;
-    layout?: {
-      position?: "justify-start" | "justify-center" | "justify-end";
-    };
   };
   text?: {
     content?: string;
-    layout?: {
-      position?: "text-center" | "text-left" | "text-right";
-    };
   };
   link?: {
-    layout?: {
-      position?: "justify-start" | "justify-center" | "justify-end";
-    };
     text: string;
     href: string;
   };
@@ -47,21 +38,12 @@ export interface Pin {
 
 const DEFAULT_PROPS: Props = {
   title: {
-    layout: {
-      position: "justify-center",
-    },
     content: "Collection",
   },
   text: {
-    layout: {
-      position: "text-center",
-    },
     content: "Your text",
   },
   link: {
-    layout: {
-      position: "justify-center",
-    },
     href: "#",
     text: "Text link",
   },
@@ -128,13 +110,13 @@ export default function ShoppableBanner(props: Props) {
           ))}
         </figure>
         <div class="flex flex-col justify-center gap-6 py-20 px-8 bg-neutral-content">
-          <h2 class={`card-title flex ${title?.layout?.position}`}>
+          <h2 class="card-title flex justify-center">
             {title?.content}
           </h2>
-          <p class={`text-base-content ${text?.layout?.position}`}>
+          <p class="text-base-content justify-center">
             {text?.content}
           </p>
-          <div class={`card-actions ${link?.layout?.position}`}>
+          <div class="card-actions $justify-center">
             <a class="underline" href={link?.href}>{link?.text}</a>
           </div>
         </div>
