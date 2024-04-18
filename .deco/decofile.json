@@ -1,75 +1,335 @@
 {
-  "Fun": {
-    "fonts": {
-      "fontFamily": "'Comic Sans MS'"
-    },
-    "mainColors": {
-      "primary": "#ff7598",
-      "base-100": "#ffee00",
-      "tertiary": "#c07ecc",
-      "secondary": "#75d1f0"
-    },
-    "buttonStyle": {
-      "--border-btn": "1px",
-      "--rounded-btn": "0.8rem",
-      "--animation-btn": "0.25s",
-      "--btn-text-case": "lowercase",
-      "--btn-focus-scale": "0.95"
-    },
-    "colorScheme": "light",
-    "otherStyles": {
-      "--tab-border": "1px",
-      "--tab-radius": "0.5rem",
-      "--rounded-box": "1rem",
-      "--rounded-badge": "1.9rem",
-      "--animation-input": "0.2s"
-    },
-    "__resolveType": "site/sections/Theme/Theme.tsx",
-    "complementaryColors": {
-      "primary": {
-        "primary-content": "#000000"
+  "Banner Grid - 01": {
+    "title": "Summer bags",
+    "banners": [
+      {
+        "alt": "a",
+        "href": "a",
+        "srcMobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/82727553-f670-4e7c-b9c2-9452aed1955f",
+        "srcDesktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/7b3a9d75-57a5-43cf-a3c5-f689a997f24e"
       },
-      "tertiary": {
-        "tertiary-content": "#000000"
-      },
-      "secondary": {
-        "secondary-content": "#000000"
+      {
+        "alt": "a",
+        "href": "a",
+        "srcMobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/c5c6bdf6-5555-488c-8b14-719e4158dea6",
+        "srcDesktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/3e2b7824-d75c-4704-8d32-621bfc9b20cf"
       }
-    }
+    ],
+    "borderRadius": {
+      "mobile": "3xl",
+      "desktop": "3xl"
+    },
+    "itemsPerLine": {
+      "mobile": 2,
+      "desktop": 2
+    },
+    "__resolveType": "site/sections/Images/BannerGrid.tsx"
   },
-  "Luxury": {
-    "fonts": {
-      "fontFamily": "'Georgia'"
-    },
-    "mainColors": {
-      "primary": "#000000",
-      "base-100": "#09090b",
-      "tertiary": "#513448",
-      "secondary": "#152747"
-    },
-    "buttonStyle": {
-      "--border-btn": "1px",
-      "--rounded-btn": "0.2rem",
-      "--animation-btn": "0.25s",
-      "--btn-text-case": "normal-case",
-      "--btn-focus-scale": "0.95"
-    },
-    "colorScheme": "light",
-    "otherStyles": {
-      "--tab-border": "1px",
-      "--tab-radius": "0.5rem",
-      "--rounded-box": "1rem",
-      "--rounded-badge": "1.9rem",
-      "--animation-input": "0.2s"
-    },
-    "__resolveType": "site/sections/Theme/Theme.tsx",
-    "complementaryColors": {
-      "base": {
-        "base-200": "#171618",
-        "base-300": "#2e2d2f",
-        "base-content": "#dca54c"
+  "Benefits - 01": {
+    "title": "Take a look at our benefits",
+    "benefits": [
+      {
+        "icon": "Truck",
+        "label": "Free Shipping Worldwide",
+        "description": "Shop online with no additional fees!"
+      },
+      {
+        "icon": "Phone",
+        "label": "24/7 Online Support",
+        "description": "Instant assistance anytime"
+      },
+      {
+        "icon": "Discount",
+        "label": "15% on the first purchase",
+        "description": "Discount for new customers"
+      },
+      {
+        "icon": "ArrowsPointingOut",
+        "label": "Hassle-Free Returns",
+        "description": "Easy and Convenient Return Policy"
       }
-    }
+    ],
+    "__resolveType": "site/sections/Content/Benefits.tsx"
+  },
+  "Benefits - 02": {
+    "title": "Take a look at our benefits ",
+    "layout": {
+      "variation": "Color reverse",
+      "headerAlignment": "center"
+    },
+    "benefits": [
+      {
+        "icon": "Truck",
+        "label": "Free Shipping Worldwide",
+        "description": "Shop online with no additional fees!"
+      },
+      {
+        "icon": "Phone",
+        "label": "24/7 Online Support",
+        "description": "Instant assistance anytime"
+      },
+      {
+        "icon": "Discount",
+        "label": "15% on the first purchase",
+        "description": "Discount for new customers"
+      },
+      {
+        "icon": "ArrowsPointingOut",
+        "label": "Easy Hassle-Free Returns",
+        "description": "Easy and Convenient Return Policy"
+      }
+    ],
+    "__resolveType": "site/sections/Content/Benefits.tsx"
+  },
+  "Benefits - 03": {
+    "title": "Take a look at our benefits ",
+    "layout": {
+      "variation": "With border",
+      "headerAlignment": "center"
+    },
+    "benefits": [
+      {
+        "icon": "Truck",
+        "label": "Free Shipping Worldwide",
+        "description": "Shop online with no additional fees!"
+      },
+      {
+        "icon": "Phone",
+        "label": "24/7 Online Support",
+        "description": "Instant assistance anytime"
+      },
+      {
+        "icon": "Discount",
+        "label": "15% on the first purchase",
+        "description": "Discount for new customers"
+      },
+      {
+        "icon": "ArrowsPointingOut",
+        "label": "Easy Hassle-Free Returns",
+        "description": "Easy and Convenient Return Policy"
+      }
+    ],
+    "__resolveType": "site/sections/Content/Benefits.tsx"
+  },
+  "Campaign Timer - 01": {
+    "link": {
+      "href": "https://github.com/deco-cx",
+      "text": "Visit our GitHub"
+    },
+    "text": "<p>Design, develop and deliver complete experiences</p>",
+    "labels": {
+      "expired": " "
+    },
+    "layout": {
+      "textPosition": "After counter"
+    },
+    "__resolveType": "site/sections/Miscellaneous/CampaignTimer.tsx"
+  },
+  "Campaign Timer - 02": {
+    "link": {
+      "href": "/",
+      "text": "View products"
+    },
+    "text": "<p>15% discount on all products!</p>",
+    "labels": {
+      "hours": "hr",
+      "expired": "Promotion expired.",
+      "minutes": "min",
+      "seconds": "sec"
+    },
+    "layout": {
+      "textPosition": "After counter"
+    },
+    "expiresAt": "2023-06-07T00:00:00.000Z",
+    "__resolveType": "site/sections/Miscellaneous/CampaignTimer.tsx"
+  },
+  "Campaing Timer - Github": {
+    "link": {
+      "href": "https://github.com/deco-cx",
+      "text": "Visit our GitHub"
+    },
+    "text": "<p>Design, develop and deliver complete experiences</p>",
+    "labels": {
+      "expired": " "
+    },
+    "layout": {
+      "textPosition": "After counter"
+    },
+    "__resolveType": "site/sections/Miscellaneous/CampaignTimer.tsx"
+  },
+  "Carousel - 01": {
+    "images": [
+      {
+        "alt": "/feminino",
+        "action": {
+          "href": "https://www.deco.cx/",
+          "label": "deco.cx",
+          "title": "VTEX Store",
+          "subTitle": "Visit our site and start building now:"
+        },
+        "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/24278f9e-412d-4a8a-b2d3-57353bb1b368",
+        "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/96e58473-71aa-4419-af42-7d1a3d66b1ae"
+      },
+      {
+        "alt": "/feminino",
+        "action": {
+          "href": "https://www.deco.cx/",
+          "label": "deco.cx",
+          "title": "VTEX Store",
+          "subTitle": "Visit our site and start building now:"
+        },
+        "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/eeaa624c-a3e1-45e8-a6fe-034233cfbcd0",
+        "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/7949d031-9a79-4639-b85e-62fd90af85a9"
+      },
+      {
+        "alt": "/feminino",
+        "action": {
+          "href": "https://www.deco.cx/",
+          "label": "deco.cx",
+          "title": "VTEX Store",
+          "subTitle": "Visit our site and start building now:"
+        },
+        "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/ae89571c-4a7c-44bf-9aeb-a341fd049d19",
+        "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/7ec121e4-5cfe-4b7b-b942-d1ed4493803d"
+      }
+    ],
+    "preload": true,
+    "__resolveType": "site/sections/Images/Carousel.tsx"
+  },
+  "Category Banner - 01": {
+    "banners": [
+      {
+        "image": {
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/91102b71-4832-486a-b683-5f7b06f649af",
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/ec597b6a-dcf1-48ca-a99d-95b3c6304f96"
+        },
+        "title": "Woman",
+        "matcher": "/feminino/*",
+        "subtitle": "As"
+      },
+      {
+        "image": {
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/91102b71-4832-486a-b683-5f7b06f649af",
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/ec597b6a-dcf1-48ca-a99d-95b3c6304f96"
+        },
+        "title": "Woman",
+        "matcher": "/*",
+        "subtitle": "As"
+      }
+    ],
+    "__resolveType": "site/sections/Category/CategoryBanner.tsx"
+  },
+  "Category List - 01": {
+    "list": [
+      {
+        "href": "/masculino",
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/5a8edfec-400f-421f-b436-4ce23d2b13e7",
+        "label": "Dresses",
+        "description": "Amazing"
+      },
+      {
+        "href": "/feminino",
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/7363da7a-8530-4e19-8b76-6f92c4da3f1e",
+        "label": "Bags",
+        "description": "Bags"
+      },
+      {
+        "href": "/",
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/33755494-9104-410e-9e48-256aef7fc113",
+        "label": "Shoes",
+        "description": "New deals"
+      },
+      {
+        "href": "/",
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/2d507523-6f5a-4bb5-98d5-d9c944b35845",
+        "label": "Jackets",
+        "description": "New colors"
+      },
+      {
+        "href": "/",
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/907b5510-d4a0-4d75-b2bf-c0c9e9b0ba68",
+        "label": "Jeans",
+        "description": "Amazing"
+      },
+      {
+        "href": "/",
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/40eb7c93-59a7-4963-9917-32508c56e4cc",
+        "label": "Shorts",
+        "description": "Summer"
+      }
+    ],
+    "header": {
+      "title": "Categories",
+      "description": "Take a look at our categories"
+    },
+    "layout": {
+      "categoryCard": {
+        "textPosition": "top",
+        "textAlignment": "center"
+      },
+      "headerAlignment": "center"
+    },
+    "__resolveType": "site/sections/Category/CategoryList.tsx"
+  },
+  "Cookie Consent - 01": {
+    "text": "<p>We use cookies to personalize ads and improve your experience on the site.</p>",
+    "title": "Cookies",
+    "layout": {
+      "content": "Piled up",
+      "position": "Expanded"
+    },
+    "policy": {
+      "link": "/",
+      "text": "Find out more about privacy policy"
+    },
+    "buttons": {
+      "allowText": "Accept",
+      "cancelText": "Close"
+    },
+    "__resolveType": "site/sections/Miscellaneous/CookieConsent.tsx"
+  },
+  "Cookie Consent - 02": {
+    "text": "<p>We use cookies to personalize ads and improve your experience on the site.</p>",
+    "title": "Cookies",
+    "layout": {
+      "content": "Piled up",
+      "position": "Left"
+    },
+    "policy": {
+      "link": "/",
+      "text": "Find out more about privacy policy"
+    },
+    "buttons": {
+      "allowText": "Accept",
+      "cancelText": "Close"
+    },
+    "__resolveType": "site/sections/Miscellaneous/CookieConsent.tsx"
+  },
+  "Cookie Consent - 03": {
+    "text": "<p>We use cookies to personalize ads and improve your experience on the site.</p>",
+    "title": "Cookies",
+    "layout": {
+      "content": "Tiled",
+      "position": "Right"
+    },
+    "policy": {
+      "link": "/",
+      "text": "Find out more about privacy policy"
+    },
+    "buttons": {
+      "allowText": "Accept",
+      "cancelText": "Close"
+    },
+    "__resolveType": "site/sections/Miscellaneous/CookieConsent.tsx"
+  },
+  "Deco HUB": {
+    "apps": [],
+    "enableAdmin": false,
+    "__resolveType": "site/apps/decohub.ts"
+  },
+  "Desktop": {
+    "desktop": true,
+    "__resolveType": "website/matchers/device.ts"
   },
   "FAQ - 01": {
     "title": "FAQ",
@@ -172,15 +432,38 @@
     "description": "Your Questions Answered",
     "__resolveType": "site/sections/Content/Faq.tsx"
   },
-  "Lemonade": {
-    "fonts": {
-      "fontFamily": "'Albert Sans'"
+  "Fashion theme": {
+    "font": {
+      "fonts": [
+        {
+          "family": "Poppins",
+          "variations": [
+            {
+              "weight": "400"
+            },
+            {
+              "weight": "600"
+            },
+            {
+              "weight": "700"
+            }
+          ]
+        }
+      ],
+      "__resolveType": "website/loaders/fonts/googleFonts.ts"
     },
+    "fonts": [
+      {
+        "fontFamily": "Poppins"
+      }
+    ],
     "mainColors": {
-      "primary": "#519903",
+      "neutral": "#f9f9f9",
+      "primary": "#384c53",
+      "warning": "#e08e00",
       "base-100": "#ffffff",
-      "tertiary": "#F7F9CA",
-      "secondary": "#E9E92E"
+      "tertiary": "#ffeaaf",
+      "secondary": "#ffeaaf"
     },
     "buttonStyle": {
       "--border-btn": "1px",
@@ -189,95 +472,23 @@
       "--btn-text-case": "normal-case",
       "--btn-focus-scale": "0.95"
     },
+    "colorScheme": "light",
+    "otherStyles": {
+      "--tab-border": "1px",
+      "--tab-radius": "0.5rem",
+      "--rounded-box": "1rem",
+      "--rounded-badge": "1.9rem",
+      "--animation-input": "0.2s"
+    },
     "__resolveType": "site/sections/Theme/Theme.tsx",
     "complementaryColors": {
       "primary": {
-        "primary-content": "#deebd1"
+        "primary-content": "#ffffff"
       },
-      "tertiary": {
-        "tertiary-content": "#2f2f28"
-      },
-      "secondary": {
-        "secondary-content": "#2e2d14"
-      }
+      "base-200": "#ffffff",
+      "base-300": "#ffffff",
+      "neutral-content": "#f9f9f9"
     }
-  },
-  "Halloween": {
-    "fonts": {
-      "fontFamily": "'Courier New'"
-    },
-    "mainColors": {
-      "primary": "#f28c18",
-      "base-100": "#212121",
-      "tertiary": "#51a800",
-      "secondary": "#6d3a9c"
-    },
-    "buttonStyle": {
-      "--border-btn": "3px",
-      "--rounded-btn": "2rem",
-      "--animation-btn": "0.25s",
-      "--btn-text-case": "uppercase",
-      "--btn-focus-scale": "1.05"
-    },
-    "__resolveType": "site/sections/Theme/Theme.tsx"
-  },
-  "Logos - 01": {
-    "title": "Our Partners",
-    "images": [
-      {
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/d00893c6-3074-418f-b36d-28ad45fffaad",
-        "altText": "test"
-      },
-      {
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/52aff497-3311-4fca-a470-5e8b8a19c54b",
-        "altText": "test"
-      },
-      {
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/c970b103-9ad4-43c0-b5bd-93e4f84de82b",
-        "altText": "/"
-      },
-      {
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/f01c7ebf-07bb-4ae6-a2df-a6e302996d5c",
-        "altText": "/"
-      },
-      {
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/d45c6c35-4db1-4665-af19-18b54ee8d808",
-        "altText": "/"
-      },
-      {
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/62e1174b-c04f-48ef-aa3c-1b531ae2a2d8",
-        "altText": "/"
-      },
-      {
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/168815f2-fc66-422f-8f5f-86af1e787fc3",
-        "altText": "/"
-      },
-      {
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/942eb0da-d408-4477-ba59-b089119138af",
-        "altText": "/"
-      },
-      {
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/5851e5e4-b986-4958-b8d6-12eb620ab575",
-        "altText": "/"
-      },
-      {
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/74e4fe58-93e3-42c0-ba97-92626bc3d412",
-        "altText": "/"
-      },
-      {
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/62805daf-19bc-4800-93c8-2c06a5859c1f",
-        "altText": "/"
-      },
-      {
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/1ef3c4e3-e024-42cf-8798-02bfdc48102a",
-        "altText": "/"
-      }
-    ],
-    "layout": {
-      "headerAlignment": "center"
-    },
-    "description": "Take a look at our Partner Agencies",
-    "__resolveType": "site/sections/Content/Logos.tsx"
   },
   "Footer - 01": {
     "logo": {
@@ -1314,6 +1525,63 @@
       ]
     }
   },
+  "Fun": {
+    "fonts": {
+      "fontFamily": "'Comic Sans MS'"
+    },
+    "mainColors": {
+      "primary": "#ff7598",
+      "base-100": "#ffee00",
+      "tertiary": "#c07ecc",
+      "secondary": "#75d1f0"
+    },
+    "buttonStyle": {
+      "--border-btn": "1px",
+      "--rounded-btn": "0.8rem",
+      "--animation-btn": "0.25s",
+      "--btn-text-case": "lowercase",
+      "--btn-focus-scale": "0.95"
+    },
+    "colorScheme": "light",
+    "otherStyles": {
+      "--tab-border": "1px",
+      "--tab-radius": "0.5rem",
+      "--rounded-box": "1rem",
+      "--rounded-badge": "1.9rem",
+      "--animation-input": "0.2s"
+    },
+    "__resolveType": "site/sections/Theme/Theme.tsx",
+    "complementaryColors": {
+      "primary": {
+        "primary-content": "#000000"
+      },
+      "tertiary": {
+        "tertiary-content": "#000000"
+      },
+      "secondary": {
+        "secondary-content": "#000000"
+      }
+    }
+  },
+  "Halloween": {
+    "fonts": {
+      "fontFamily": "'Courier New'"
+    },
+    "mainColors": {
+      "primary": "#f28c18",
+      "base-100": "#212121",
+      "tertiary": "#51a800",
+      "secondary": "#6d3a9c"
+    },
+    "buttonStyle": {
+      "--border-btn": "3px",
+      "--rounded-btn": "2rem",
+      "--animation-btn": "0.25s",
+      "--btn-text-case": "uppercase",
+      "--btn-focus-scale": "1.05"
+    },
+    "__resolveType": "site/sections/Theme/Theme.tsx"
+  },
   "Header - 01": {
     "cart": {
       "freeShippingObjectiveQuantity": 600
@@ -1349,604 +1617,6 @@
     },
     "logoPosition": "center",
     "__resolveType": "site/sections/Header/Header.tsx"
-  },
-  "Benefits - 01": {
-    "title": "Take a look at our benefits",
-    "benefits": [
-      {
-        "icon": "Truck",
-        "label": "Free Shipping Worldwide",
-        "description": "Shop online with no additional fees!"
-      },
-      {
-        "icon": "Phone",
-        "label": "24/7 Online Support",
-        "description": "Instant assistance anytime"
-      },
-      {
-        "icon": "Discount",
-        "label": "15% on the first purchase",
-        "description": "Discount for new customers"
-      },
-      {
-        "icon": "ArrowsPointingOut",
-        "label": "Hassle-Free Returns",
-        "description": "Easy and Convenient Return Policy"
-      }
-    ],
-    "__resolveType": "site/sections/Content/Benefits.tsx"
-  },
-  "Benefits - 02": {
-    "title": "Take a look at our benefits ",
-    "layout": {
-      "variation": "Color reverse",
-      "headerAlignment": "center"
-    },
-    "benefits": [
-      {
-        "icon": "Truck",
-        "label": "Free Shipping Worldwide",
-        "description": "Shop online with no additional fees!"
-      },
-      {
-        "icon": "Phone",
-        "label": "24/7 Online Support",
-        "description": "Instant assistance anytime"
-      },
-      {
-        "icon": "Discount",
-        "label": "15% on the first purchase",
-        "description": "Discount for new customers"
-      },
-      {
-        "icon": "ArrowsPointingOut",
-        "label": "Easy Hassle-Free Returns",
-        "description": "Easy and Convenient Return Policy"
-      }
-    ],
-    "__resolveType": "site/sections/Content/Benefits.tsx"
-  },
-  "Benefits - 03": {
-    "title": "Take a look at our benefits ",
-    "layout": {
-      "variation": "With border",
-      "headerAlignment": "center"
-    },
-    "benefits": [
-      {
-        "icon": "Truck",
-        "label": "Free Shipping Worldwide",
-        "description": "Shop online with no additional fees!"
-      },
-      {
-        "icon": "Phone",
-        "label": "24/7 Online Support",
-        "description": "Instant assistance anytime"
-      },
-      {
-        "icon": "Discount",
-        "label": "15% on the first purchase",
-        "description": "Discount for new customers"
-      },
-      {
-        "icon": "ArrowsPointingOut",
-        "label": "Easy Hassle-Free Returns",
-        "description": "Easy and Convenient Return Policy"
-      }
-    ],
-    "__resolveType": "site/sections/Content/Benefits.tsx"
-  },
-  "Carousel - 01": {
-    "images": [
-      {
-        "alt": "/feminino",
-        "action": {
-          "href": "https://www.deco.cx/",
-          "label": "deco.cx",
-          "title": "VTEX Store",
-          "subTitle": "Visit our site and start building now:"
-        },
-        "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/24278f9e-412d-4a8a-b2d3-57353bb1b368",
-        "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/96e58473-71aa-4419-af42-7d1a3d66b1ae"
-      },
-      {
-        "alt": "/feminino",
-        "action": {
-          "href": "https://www.deco.cx/",
-          "label": "deco.cx",
-          "title": "VTEX Store",
-          "subTitle": "Visit our site and start building now:"
-        },
-        "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/eeaa624c-a3e1-45e8-a6fe-034233cfbcd0",
-        "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/7949d031-9a79-4639-b85e-62fd90af85a9"
-      },
-      {
-        "alt": "/feminino",
-        "action": {
-          "href": "https://www.deco.cx/",
-          "label": "deco.cx",
-          "title": "VTEX Store",
-          "subTitle": "Visit our site and start building now:"
-        },
-        "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/ae89571c-4a7c-44bf-9aeb-a341fd049d19",
-        "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/7ec121e4-5cfe-4b7b-b942-d1ed4493803d"
-      }
-    ],
-    "preload": true,
-    "__resolveType": "site/sections/Images/Carousel.tsx"
-  },
-  "Fashion theme": {
-    "font": {
-      "fonts": [
-        {
-          "family": "Poppins",
-          "variations": [
-            {
-              "weight": "400"
-            },
-            {
-              "weight": "600"
-            },
-            {
-              "weight": "700"
-            }
-          ]
-        }
-      ],
-      "__resolveType": "website/loaders/fonts/googleFonts.ts"
-    },
-    "fonts": [
-      {
-        "fontFamily": "Poppins"
-      }
-    ],
-    "mainColors": {
-      "neutral": "#f9f9f9",
-      "primary": "#384c53",
-      "warning": "#e08e00",
-      "base-100": "#ffffff",
-      "tertiary": "#ffeaaf",
-      "secondary": "#ffeaaf"
-    },
-    "buttonStyle": {
-      "--border-btn": "1px",
-      "--rounded-btn": "0.2rem",
-      "--animation-btn": "0.25s",
-      "--btn-text-case": "normal-case",
-      "--btn-focus-scale": "0.95"
-    },
-    "colorScheme": "light",
-    "otherStyles": {
-      "--tab-border": "1px",
-      "--tab-radius": "0.5rem",
-      "--rounded-box": "1rem",
-      "--rounded-badge": "1.9rem",
-      "--animation-input": "0.2s"
-    },
-    "__resolveType": "site/sections/Theme/Theme.tsx",
-    "complementaryColors": {
-      "primary": {
-        "primary-content": "#ffffff"
-      },
-      "base-200": "#ffffff",
-      "base-300": "#ffffff",
-      "neutral-content": "#f9f9f9"
-    }
-  },
-  "LinkTree - 01": {
-    "links": {
-      "items": [
-        {
-          "href": "https://www.deco.cx/",
-          "icon": "Deco",
-          "label": "you can add links here"
-        },
-        {
-          "href": "https://www.deco.cx/",
-          "icon": "Discount",
-          "label": "by editing on the left side panel"
-        },
-        {
-          "href": "https://www.deco.cx/",
-          "icon": "ChevronLeft",
-          "label": "<- try it by clicking on \"Links\""
-        },
-        {
-          "href": "https://deco.cx/discord",
-          "icon": "Discord",
-          "label": "join our community — discord server",
-          "strokeWidth": 10
-        },
-        {
-          "href": "https://www.deco.cx/",
-          "icon": "ChevronDown",
-          "label": "don't forget to change the social links"
-        }
-      ],
-      "style": {
-        "textColor": "#000000",
-        "gradientColors": {
-          "neutral": [
-            {
-              "color": "#2fd07f"
-            },
-            {
-              "color": "#1ae000"
-            }
-          ]
-        },
-        "backgroundColors": {
-          "hover": [
-            {
-              "color": "#6b6b6b"
-            },
-            {
-              "color": "#c4c4c4"
-            }
-          ],
-          "neutral": [
-            {
-              "color": "#919191"
-            },
-            {
-              "color": "#cccccc"
-            }
-          ]
-        }
-      }
-    },
-    "header": {
-      "link": "https://deco.cx",
-      "logo": {
-        "img": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3fa15eff-add9-4974-864c-7f952bca5180",
-        "width": 150,
-        "height": 63
-      },
-      "title": "Link List",
-      "textColor": "#000000",
-      "description": "Add a longer description here. This can be as long as required. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. "
-    },
-    "social": [
-      {
-        "href": "/",
-        "label": "Instagram",
-        "iconColor": "#000000"
-      },
-      {
-        "href": "/",
-        "label": "Facebook",
-        "iconColor": "#000000"
-      },
-      {
-        "href": "/",
-        "label": "Linkedin",
-        "iconColor": "#000000"
-      },
-      {
-        "href": "/",
-        "label": "WhatsApp",
-        "iconColor": "#000000"
-      },
-      {
-        "href": "/",
-        "label": "Discord",
-        "iconColor": "#000000"
-      },
-      {
-        "href": "/",
-        "label": "Tiktok",
-        "iconColor": "#000000"
-      }
-    ],
-    "background": {
-      "backgroundColor": "#e5fbe5"
-    },
-    "__resolveType": "site/sections/Links/LinkTree.tsx"
-  },
-  "Shortcuts - 01": {
-    "layout": {
-      "tooltip": true
-    },
-    "onHover": "Show label",
-    "shortcuts": [
-      {
-        "icon": "WhatsApp",
-        "link": "/",
-        "label": "WhatsApp"
-      },
-      {
-        "icon": "Message",
-        "link": "/",
-        "label": "Chat"
-      },
-      {
-        "icon": "Ruler",
-        "link": "/",
-        "label": "Measurements"
-      },
-      {
-        "icon": "Truck",
-        "link": "/",
-        "label": "Shipping"
-      },
-      {
-        "icon": "ArrowsPointingOut",
-        "link": "/",
-        "label": "Returns"
-      }
-    ],
-    "__resolveType": "site/sections/Links/Shortcuts.tsx"
-  },
-  "Newsletter - 01": {
-    "form": {
-      "helpText": "<p>By subscribing you agree to with our <u>Privacy Policy</u>.</p>",
-      "buttonText": "Subscribe",
-      "placeholder": "Enter your email"
-    },
-    "title": "Newsletter",
-    "layout": {
-      "header": {
-        "fontSize": "Small"
-      },
-      "content": {
-        "border": false,
-        "bgColor": "Reverse",
-        "alignment": "Left"
-      },
-      "headerFontSize": "Large"
-    },
-    "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
-  },
-  "Newsletter - 02": {
-    "form": {
-      "helpText": "<p>By subscribing you agree to with our <u>Privacy Policy</u>.</p>",
-      "buttonText": "Subscribe",
-      "placeholder": "Enter your email"
-    },
-    "title": "Sign up for our newsletter",
-    "layout": {
-      "content": {
-        "border": false,
-        "bgColor": "Reverse",
-        "alignment": "Center"
-      },
-      "headerFontSize": "Large"
-    },
-    "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
-  },
-  "Newsletter - 03": {
-    "form": {
-      "helpText": "<p>By subscribing you agree to with our <u>Privacy Policy</u>.</p>",
-      "buttonText": "Subscribe",
-      "placeholder": "Enter your email"
-    },
-    "title": "Sign up for our newsletter",
-    "layout": {
-      "content": {
-        "border": false,
-        "bgColor": "Reverse",
-        "alignment": "Left"
-      },
-      "headerFontSize": "Large"
-    },
-    "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
-  },
-  "Newsletter - 04": {
-    "form": {
-      "helpText": "<p>By subscribing you agree to with our <u>Privacy Policy</u>.</p>",
-      "buttonText": "Subscribe",
-      "placeholder": "Enter your email"
-    },
-    "title": "Newsletter",
-    "layout": {
-      "header": {
-        "fontSize": "Small"
-      },
-      "content": {
-        "border": true,
-        "bgColor": "Reverse",
-        "alignment": "Left"
-      },
-      "headerFontSize": "Large"
-    },
-    "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
-  },
-  "Newsletter - 05": {
-    "form": {
-      "helpText": "<p>By subscribing you agree to with our <u>Privacy Policy</u>.</p>",
-      "buttonText": "Subscribe",
-      "placeholder": "Enter your email"
-    },
-    "title": "Sign up for our newsletter",
-    "layout": {
-      "content": {
-        "border": true,
-        "bgColor": "Reverse",
-        "alignment": "Center"
-      },
-      "headerFontSize": "Large"
-    },
-    "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
-  },
-  "Newsletter - 06": {
-    "form": {
-      "helpText": "<p>By subscribing you agree to with our <u>Privacy Policy</u>.</p>",
-      "buttonText": "Subscribe",
-      "placeholder": "Enter your email"
-    },
-    "title": "Sign up for our newsletter",
-    "layout": {
-      "content": {
-        "border": true,
-        "bgColor": "Reverse",
-        "alignment": "Left"
-      },
-      "headerFontSize": "Large"
-    },
-    "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
-  },
-  "Banner Grid - 01": {
-    "title": "Summer bags",
-    "banners": [
-      {
-        "alt": "a",
-        "href": "a",
-        "srcMobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/82727553-f670-4e7c-b9c2-9452aed1955f",
-        "srcDesktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/7b3a9d75-57a5-43cf-a3c5-f689a997f24e"
-      },
-      {
-        "alt": "a",
-        "href": "a",
-        "srcMobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/c5c6bdf6-5555-488c-8b14-719e4158dea6",
-        "srcDesktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/3e2b7824-d75c-4704-8d32-621bfc9b20cf"
-      }
-    ],
-    "borderRadius": {
-      "mobile": "3xl",
-      "desktop": "3xl"
-    },
-    "itemsPerLine": {
-      "mobile": 2,
-      "desktop": 2
-    },
-    "__resolveType": "site/sections/Images/BannerGrid.tsx"
-  },
-  "Testimonials - 01": {
-    "title": "Testimonials",
-    "layout": {
-      "variation": "Grid",
-      "headerAlignment": "center"
-    },
-    "description": "Take a look at what our customers are saying",
-    "testimonials": [
-      {
-        "text": "Love shopping at Fashion! Quality products, exceptional service. Hassle-free returns and free shipping. My go-to for stylish fashion!",
-        "user": {
-          "name": "Rafael Crespo",
-          "avatar": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/6a595043-fb5b-43b4-b6dd-bd3154e4e595"
-        },
-        "image": {
-          "alt": "deco",
-          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/d0a79cf6-6825-4624-884c-f30bda6c3daf"
-        }
-      },
-      {
-        "text": "Thrilled with my first Fashion purchase. Seamless process, prompt delivery with free shipping. Exceeded expectations in style and quality!",
-        "user": {
-          "name": "Tiago Gimenes",
-          "avatar": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/850df7f9-120e-4155-ae79-c76e737535ee"
-        },
-        "image": {
-          "alt": "deco",
-          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/9dc5dddc-f8b5-4f70-847b-1f91b84ad7dc"
-        }
-      },
-      {
-        "text": "Fashion is my favorite online retailer. On-trend selection, exceptional quality. Easy returns and 24/7 online support. A delightful shopping experience!",
-        "user": {
-          "name": "Maria Luiza Aires",
-          "avatar": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/8327a46f-bb4e-4ae8-8cf2-963d530d3066"
-        },
-        "image": {
-          "alt": "deco",
-          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/ca4c79ea-5bd9-42d3-a60a-07c99c5f45c4"
-        }
-      }
-    ],
-    "__resolveType": "site/sections/Content/Testimonials.tsx"
-  },
-  "Testimonials - 02": {
-    "title": "Testimonials",
-    "layout": {
-      "variation": "Slider",
-      "headerAlignment": "center"
-    },
-    "description": "Take a look at what our customers are saying",
-    "testimonials": [
-      {
-        "text": "I can't say enough about my experience shopping at this online fashion store. The website design is not only visually stunning but also incredibly user-friendly. It's a pleasure to browse through their extensive collection of fashionable clothing and accessories. The seamless checkout process makes purchasing items a breeze, and the fast and reliable shipping ensures I receive my orders in no time.",
-        "user": {
-          "name": "Rafael Crespo",
-          "avatar": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/6a595043-fb5b-43b4-b6dd-bd3154e4e595"
-        },
-        "image": {
-          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/d0a79cf6-6825-4624-884c-f30bda6c3daf"
-        }
-      },
-      {
-        "text": "Thrilled with my first Fashion purchase. Seamless process, prompt delivery with free shipping. Exceeded expectations in style and quality!",
-        "user": {
-          "name": "Tiago Gimenes",
-          "avatar": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/850df7f9-120e-4155-ae79-c76e737535ee"
-        },
-        "image": {
-          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/9dc5dddc-f8b5-4f70-847b-1f91b84ad7dc"
-        }
-      },
-      {
-        "text": "Fashion is my favorite online retailer. On-trend selection, exceptional quality. Easy returns and 24/7 online support. A delightful shopping experience!",
-        "user": {
-          "name": "Maria Luiza Aires",
-          "avatar": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/8327a46f-bb4e-4ae8-8cf2-963d530d3066"
-        },
-        "image": {
-          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/ca4c79ea-5bd9-42d3-a60a-07c99c5f45c4"
-        }
-      }
-    ],
-    "__resolveType": "site/sections/Content/Testimonials.tsx"
-  },
-  "Category List - 01": {
-    "list": [
-      {
-        "href": "/masculino",
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/5a8edfec-400f-421f-b436-4ce23d2b13e7",
-        "label": "Dresses",
-        "description": "Amazing"
-      },
-      {
-        "href": "/feminino",
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/7363da7a-8530-4e19-8b76-6f92c4da3f1e",
-        "label": "Bags",
-        "description": "Bags"
-      },
-      {
-        "href": "/",
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/33755494-9104-410e-9e48-256aef7fc113",
-        "label": "Shoes",
-        "description": "New deals"
-      },
-      {
-        "href": "/",
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/2d507523-6f5a-4bb5-98d5-d9c944b35845",
-        "label": "Jackets",
-        "description": "New colors"
-      },
-      {
-        "href": "/",
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/907b5510-d4a0-4d75-b2bf-c0c9e9b0ba68",
-        "label": "Jeans",
-        "description": "Amazing"
-      },
-      {
-        "href": "/",
-        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/40eb7c93-59a7-4963-9917-32508c56e4cc",
-        "label": "Shorts",
-        "description": "Summer"
-      }
-    ],
-    "header": {
-      "title": "Categories",
-      "description": "Take a look at our categories"
-    },
-    "layout": {
-      "categoryCard": {
-        "textPosition": "top",
-        "textAlignment": "center"
-      },
-      "headerAlignment": "center"
-    },
-    "__resolveType": "site/sections/Category/CategoryList.tsx"
   },
   "Image Gallery - 01": {
     "title": "New collections",
@@ -2068,6 +1738,417 @@
     ],
     "description": "Discover the collections of the season",
     "__resolveType": "site/sections/Images/ImageGallery.tsx"
+  },
+  "Lemonade": {
+    "fonts": {
+      "fontFamily": "'Albert Sans'"
+    },
+    "mainColors": {
+      "primary": "#519903",
+      "base-100": "#ffffff",
+      "tertiary": "#F7F9CA",
+      "secondary": "#E9E92E"
+    },
+    "buttonStyle": {
+      "--border-btn": "1px",
+      "--rounded-btn": "0.2rem",
+      "--animation-btn": "0.25s",
+      "--btn-text-case": "normal-case",
+      "--btn-focus-scale": "0.95"
+    },
+    "__resolveType": "site/sections/Theme/Theme.tsx",
+    "complementaryColors": {
+      "primary": {
+        "primary-content": "#deebd1"
+      },
+      "tertiary": {
+        "tertiary-content": "#2f2f28"
+      },
+      "secondary": {
+        "secondary-content": "#2e2d14"
+      }
+    }
+  },
+  "LinkTree - 01": {
+    "links": {
+      "items": [
+        {
+          "href": "https://www.deco.cx/",
+          "icon": "Deco",
+          "label": "you can add links here"
+        },
+        {
+          "href": "https://www.deco.cx/",
+          "icon": "Discount",
+          "label": "by editing on the left side panel"
+        },
+        {
+          "href": "https://www.deco.cx/",
+          "icon": "ChevronLeft",
+          "label": "<- try it by clicking on \"Links\""
+        },
+        {
+          "href": "https://deco.cx/discord",
+          "icon": "Discord",
+          "label": "join our community — discord server",
+          "strokeWidth": 10
+        },
+        {
+          "href": "https://www.deco.cx/",
+          "icon": "ChevronDown",
+          "label": "don't forget to change the social links"
+        }
+      ],
+      "style": {
+        "textColor": "#000000",
+        "gradientColors": {
+          "neutral": [
+            {
+              "color": "#2fd07f"
+            },
+            {
+              "color": "#1ae000"
+            }
+          ]
+        },
+        "backgroundColors": {
+          "hover": [
+            {
+              "color": "#6b6b6b"
+            },
+            {
+              "color": "#c4c4c4"
+            }
+          ],
+          "neutral": [
+            {
+              "color": "#919191"
+            },
+            {
+              "color": "#cccccc"
+            }
+          ]
+        }
+      }
+    },
+    "header": {
+      "link": "https://deco.cx",
+      "logo": {
+        "img": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3fa15eff-add9-4974-864c-7f952bca5180",
+        "width": 150,
+        "height": 63
+      },
+      "title": "Link List",
+      "textColor": "#000000",
+      "description": "Add a longer description here. This can be as long as required. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet. "
+    },
+    "social": [
+      {
+        "href": "/",
+        "label": "Instagram",
+        "iconColor": "#000000"
+      },
+      {
+        "href": "/",
+        "label": "Facebook",
+        "iconColor": "#000000"
+      },
+      {
+        "href": "/",
+        "label": "Linkedin",
+        "iconColor": "#000000"
+      },
+      {
+        "href": "/",
+        "label": "WhatsApp",
+        "iconColor": "#000000"
+      },
+      {
+        "href": "/",
+        "label": "Discord",
+        "iconColor": "#000000"
+      },
+      {
+        "href": "/",
+        "label": "Tiktok",
+        "iconColor": "#000000"
+      }
+    ],
+    "background": {
+      "backgroundColor": "#e5fbe5"
+    },
+    "__resolveType": "site/sections/Links/LinkTree.tsx"
+  },
+  "Logos - 01": {
+    "title": "Our Partners",
+    "images": [
+      {
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/d00893c6-3074-418f-b36d-28ad45fffaad",
+        "altText": "test"
+      },
+      {
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/52aff497-3311-4fca-a470-5e8b8a19c54b",
+        "altText": "test"
+      },
+      {
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/c970b103-9ad4-43c0-b5bd-93e4f84de82b",
+        "altText": "/"
+      },
+      {
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/f01c7ebf-07bb-4ae6-a2df-a6e302996d5c",
+        "altText": "/"
+      },
+      {
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/d45c6c35-4db1-4665-af19-18b54ee8d808",
+        "altText": "/"
+      },
+      {
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/62e1174b-c04f-48ef-aa3c-1b531ae2a2d8",
+        "altText": "/"
+      },
+      {
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/168815f2-fc66-422f-8f5f-86af1e787fc3",
+        "altText": "/"
+      },
+      {
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/942eb0da-d408-4477-ba59-b089119138af",
+        "altText": "/"
+      },
+      {
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/5851e5e4-b986-4958-b8d6-12eb620ab575",
+        "altText": "/"
+      },
+      {
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/74e4fe58-93e3-42c0-ba97-92626bc3d412",
+        "altText": "/"
+      },
+      {
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/62805daf-19bc-4800-93c8-2c06a5859c1f",
+        "altText": "/"
+      },
+      {
+        "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/1ef3c4e3-e024-42cf-8798-02bfdc48102a",
+        "altText": "/"
+      }
+    ],
+    "layout": {
+      "headerAlignment": "center"
+    },
+    "description": "Take a look at our Partner Agencies",
+    "__resolveType": "site/sections/Content/Logos.tsx"
+  },
+  "Luxury": {
+    "fonts": {
+      "fontFamily": "'Georgia'"
+    },
+    "mainColors": {
+      "primary": "#000000",
+      "base-100": "#09090b",
+      "tertiary": "#513448",
+      "secondary": "#152747"
+    },
+    "buttonStyle": {
+      "--border-btn": "1px",
+      "--rounded-btn": "0.2rem",
+      "--animation-btn": "0.25s",
+      "--btn-text-case": "normal-case",
+      "--btn-focus-scale": "0.95"
+    },
+    "colorScheme": "light",
+    "otherStyles": {
+      "--tab-border": "1px",
+      "--tab-radius": "0.5rem",
+      "--rounded-box": "1rem",
+      "--rounded-badge": "1.9rem",
+      "--animation-input": "0.2s"
+    },
+    "__resolveType": "site/sections/Theme/Theme.tsx",
+    "complementaryColors": {
+      "base": {
+        "base-200": "#171618",
+        "base-300": "#2e2d2f",
+        "base-content": "#dca54c"
+      }
+    }
+  },
+  "Mobile": {
+    "mobile": true,
+    "__resolveType": "website/matchers/device.ts"
+  },
+  "Newsletter - 01": {
+    "form": {
+      "helpText": "<p>By subscribing you agree to with our <u>Privacy Policy</u>.</p>",
+      "buttonText": "Subscribe",
+      "placeholder": "Enter your email"
+    },
+    "title": "Newsletter",
+    "layout": {
+      "header": {
+        "fontSize": "Small"
+      },
+      "content": {
+        "border": false,
+        "bgColor": "Reverse",
+        "alignment": "Left"
+      },
+      "headerFontSize": "Large"
+    },
+    "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
+  },
+  "Newsletter - 02": {
+    "form": {
+      "helpText": "<p>By subscribing you agree to with our <u>Privacy Policy</u>.</p>",
+      "buttonText": "Subscribe",
+      "placeholder": "Enter your email"
+    },
+    "title": "Sign up for our newsletter",
+    "layout": {
+      "content": {
+        "border": false,
+        "bgColor": "Reverse",
+        "alignment": "Center"
+      },
+      "headerFontSize": "Large"
+    },
+    "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
+  },
+  "Newsletter - 03": {
+    "form": {
+      "helpText": "<p>By subscribing you agree to with our <u>Privacy Policy</u>.</p>",
+      "buttonText": "Subscribe",
+      "placeholder": "Enter your email"
+    },
+    "title": "Sign up for our newsletter",
+    "layout": {
+      "content": {
+        "border": false,
+        "bgColor": "Reverse",
+        "alignment": "Left"
+      },
+      "headerFontSize": "Large"
+    },
+    "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
+  },
+  "Newsletter - 04": {
+    "form": {
+      "helpText": "<p>By subscribing you agree to with our <u>Privacy Policy</u>.</p>",
+      "buttonText": "Subscribe",
+      "placeholder": "Enter your email"
+    },
+    "title": "Newsletter",
+    "layout": {
+      "header": {
+        "fontSize": "Small"
+      },
+      "content": {
+        "border": true,
+        "bgColor": "Reverse",
+        "alignment": "Left"
+      },
+      "headerFontSize": "Large"
+    },
+    "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
+  },
+  "Newsletter - 05": {
+    "form": {
+      "helpText": "<p>By subscribing you agree to with our <u>Privacy Policy</u>.</p>",
+      "buttonText": "Subscribe",
+      "placeholder": "Enter your email"
+    },
+    "title": "Sign up for our newsletter",
+    "layout": {
+      "content": {
+        "border": true,
+        "bgColor": "Reverse",
+        "alignment": "Center"
+      },
+      "headerFontSize": "Large"
+    },
+    "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
+  },
+  "Newsletter - 06": {
+    "form": {
+      "helpText": "<p>By subscribing you agree to with our <u>Privacy Policy</u>.</p>",
+      "buttonText": "Subscribe",
+      "placeholder": "Enter your email"
+    },
+    "title": "Sign up for our newsletter",
+    "layout": {
+      "content": {
+        "border": true,
+        "bgColor": "Reverse",
+        "alignment": "Left"
+      },
+      "headerFontSize": "Large"
+    },
+    "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
+  },
+  "PDP Loader": {
+    "data": {
+      "slug": {
+        "param": "slug",
+        "__resolveType": "website/functions/requestToParam.ts"
+      },
+      "__resolveType": "vtex/loaders/intelligentSearch/productDetailsPage.ts"
+    },
+    "extensions": [
+      {
+        "__resolveType": "vtex/loaders/product/extensions/detailsPage.ts"
+      }
+    ],
+    "__resolveType": "commerce/loaders/product/extensions/detailsPage.ts"
+  },
+  "PLP Loader": {
+    "data": {
+      "sort": "price:desc",
+      "count": 8,
+      "fuzzy": "automatic",
+      "pageOffset": 1,
+      "__resolveType": "vtex/loaders/intelligentSearch/productListingPage.ts",
+      "selectedFacets": []
+    },
+    "extensions": [
+      {
+        "__resolveType": "vtex/loaders/product/extensions/listingPage.ts"
+      }
+    ],
+    "__resolveType": "commerce/loaders/product/extensions/listingPage.ts"
+  },
+  "Product Card Layout - 01": {
+    "layout": {
+      "hide": {},
+      "show": {
+        "cta": true,
+        "allPrices": true,
+        "productName": true,
+        "skuSelector": true,
+        "installments": true,
+        "productDescription": true
+      },
+      "basics": {
+        "oldPriceSize": "Small",
+        "contentAlignment": "Left"
+      },
+      "onMouseOver": {
+        "card": "None",
+        "image": "Change image",
+        "showCta": true,
+        "showCardShadow": true,
+        "showSkuSelector": true,
+        "showFavoriteIcon": true
+      },
+      "elementsPositions": {
+        "skuSelector": "Top",
+        "favoriteIcon": "Top right"
+      },
+      "backgroundAndBorder": {
+        "shadow": "None",
+        "bgColor": "Transparent",
+        "borderColor": "Transparent",
+        "borderRadius": "None"
+      }
+    },
+    "__resolveType": "site/loaders/Layouts/ProductCard.tsx"
   },
   "Product Shelf - 01": {
     "title": "Teste",
@@ -2281,111 +2362,29 @@
     "description": "The best selection for you",
     "__resolveType": "site/sections/Product/ProductShelf.tsx"
   },
-  "Campaign Timer - 01": {
-    "link": {
-      "href": "https://github.com/deco-cx",
-      "text": "Visit our GitHub"
-    },
-    "text": "<p>Design, develop and deliver complete experiences</p>",
-    "labels": {
-      "expired": " "
-    },
-    "layout": {
-      "textPosition": "After counter"
-    },
-    "__resolveType": "site/sections/Miscellaneous/CampaignTimer.tsx"
-  },
-  "Campaign Timer - 02": {
-    "link": {
-      "href": "/",
-      "text": "View products"
-    },
-    "text": "<p>15% discount on all products!</p>",
-    "labels": {
-      "hours": "hr",
-      "expired": "Promotion expired.",
-      "minutes": "min",
-      "seconds": "sec"
-    },
-    "layout": {
-      "textPosition": "After counter"
-    },
-    "expiresAt": "2023-06-07T00:00:00.000Z",
-    "__resolveType": "site/sections/Miscellaneous/CampaignTimer.tsx"
-  },
-  "Cookie Consent - 01": {
-    "text": "<p>We use cookies to personalize ads and improve your experience on the site.</p>",
-    "title": "Cookies",
-    "layout": {
-      "content": "Piled up",
-      "position": "Expanded"
-    },
-    "policy": {
-      "link": "/",
-      "text": "Find out more about privacy policy"
-    },
-    "buttons": {
-      "allowText": "Accept",
-      "cancelText": "Close"
-    },
-    "__resolveType": "site/sections/Miscellaneous/CookieConsent.tsx"
-  },
-  "Cookie Consent - 02": {
-    "text": "<p>We use cookies to personalize ads and improve your experience on the site.</p>",
-    "title": "Cookies",
-    "layout": {
-      "content": "Piled up",
-      "position": "Left"
-    },
-    "policy": {
-      "link": "/",
-      "text": "Find out more about privacy policy"
-    },
-    "buttons": {
-      "allowText": "Accept",
-      "cancelText": "Close"
-    },
-    "__resolveType": "site/sections/Miscellaneous/CookieConsent.tsx"
-  },
-  "Cookie Consent - 03": {
-    "text": "<p>We use cookies to personalize ads and improve your experience on the site.</p>",
-    "title": "Cookies",
-    "layout": {
-      "content": "Tiled",
-      "position": "Right"
-    },
-    "policy": {
-      "link": "/",
-      "text": "Find out more about privacy policy"
-    },
-    "buttons": {
-      "allowText": "Accept",
-      "cancelText": "Close"
-    },
-    "__resolveType": "site/sections/Miscellaneous/CookieConsent.tsx"
-  },
-  "Category Banner - 01": {
-    "banners": [
+  "SLIDER": {
+    "content": [
       {
-        "image": {
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/91102b71-4832-486a-b683-5f7b06f649af",
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/ec597b6a-dcf1-48ca-a99d-95b3c6304f96"
-        },
-        "title": "Woman",
-        "matcher": "/feminino/*",
-        "subtitle": "As"
-      },
-      {
-        "image": {
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/91102b71-4832-486a-b683-5f7b06f649af",
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/ec597b6a-dcf1-48ca-a99d-95b3c6304f96"
-        },
-        "title": "Woman",
-        "matcher": "/*",
-        "subtitle": "As"
+        "label": "HOT SALE",
+        "repeat": 30
       }
     ],
-    "__resolveType": "site/sections/Category/CategoryBanner.tsx"
+    "__resolveType": "site/sections/Miscellaneous/Slide.tsx"
+  },
+  "Search Loader": {
+    "data": {
+      "facets": [],
+      "hitsPerPage": 12,
+      "startingPage": 0,
+      "__resolveType": "algolia/loaders/product/listingPage.ts",
+      "sortFacetValuesBy": "count"
+    },
+    "extensions": [
+      {
+        "__resolveType": "vtex/loaders/product/extensions/listingPage.ts"
+      }
+    ],
+    "__resolveType": "commerce/loaders/product/extensions/listingPage.ts"
   },
   "Shoppable Banner - 01": {
     "link": {
@@ -2440,538 +2439,147 @@
     },
     "__resolveType": "site/sections/Images/ShoppableBanner.tsx"
   },
-  "Campaing Timer - Github": {
-    "link": {
-      "href": "https://github.com/deco-cx",
-      "text": "Visit our GitHub"
-    },
-    "text": "<p>Design, develop and deliver complete experiences</p>",
-    "labels": {
-      "expired": " "
-    },
+  "Shortcuts - 01": {
     "layout": {
-      "textPosition": "After counter"
+      "tooltip": true
     },
-    "__resolveType": "site/sections/Miscellaneous/CampaignTimer.tsx"
+    "onHover": "Show label",
+    "shortcuts": [
+      {
+        "icon": "WhatsApp",
+        "link": "/",
+        "label": "WhatsApp"
+      },
+      {
+        "icon": "Message",
+        "link": "/",
+        "label": "Chat"
+      },
+      {
+        "icon": "Ruler",
+        "link": "/",
+        "label": "Measurements"
+      },
+      {
+        "icon": "Truck",
+        "link": "/",
+        "label": "Shipping"
+      },
+      {
+        "icon": "ArrowsPointingOut",
+        "link": "/",
+        "label": "Returns"
+      }
+    ],
+    "__resolveType": "site/sections/Links/Shortcuts.tsx"
   },
-  "pages-home-c4bcbfb771e9": {
-    "name": "Home",
-    "path": "/",
-    "sections": [
+  "Testimonials - 01": {
+    "title": "Testimonials",
+    "layout": {
+      "variation": "Grid",
+      "headerAlignment": "center"
+    },
+    "description": "Take a look at what our customers are saying",
+    "testimonials": [
       {
-        "noIndexing": false,
-        "__resolveType": "website/sections/Seo/Seo.tsx"
-      },
-      {
-        "__resolveType": "Header - 01"
-      },
-      {
-        "dots": false,
-        "arrows": true,
-        "images": [
-          {
-            "alt": "Feminino",
-            "action": {
-              "href": "/feminino",
-              "label": "Explore collection",
-              "title": "VTEX Store",
-              "subTitle": "Visit our site and start building now:"
-            },
-            "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-            "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
-          },
-          {
-            "alt": "Masculino",
-            "action": {
-              "href": "/masculino",
-              "label": "Explore collection",
-              "title": "VTEX Store",
-              "subTitle": "Visit our site and start building now:"
-            },
-            "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-            "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
-          },
-          {
-            "alt": "Vestidos",
-            "action": {
-              "href": "/feminino/roupas/vestidos",
-              "label": "Explore collection",
-              "title": "VTEX Store",
-              "subTitle": "Visit our site and start building now:"
-            },
-            "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-            "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
-          }
-        ],
-        "preload": true,
-        "__resolveType": "site/sections/Images/Carousel.tsx"
-      },
-      {
-        "content": [
-          {
-            "label": "HOT SALE",
-            "repeat": 30
-          }
-        ],
-        "__resolveType": "site/sections/Miscellaneous/Slide.tsx"
-      },
-      {
-        "link": {
-          "href": "https://github.com/deco-cx",
-          "text": "Visit our GitHub"
+        "text": "Love shopping at Fashion! Quality products, exceptional service. Hassle-free returns and free shipping. My go-to for stylish fashion!",
+        "user": {
+          "name": "Rafael Crespo",
+          "avatar": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/6a595043-fb5b-43b4-b6dd-bd3154e4e595"
         },
-        "text": "<p>Design, develop and deliver complete experiences</p>",
-        "labels": {
-          "days": "days",
-          "hours": "hours",
-          "expired": " Expired!",
-          "minutes": "minutes",
-          "seconds": "seconds"
-        },
-        "layout": {
-          "textPosition": "After counter"
-        },
-        "expiresAt": "2024-03-15T17:23:00.000Z",
-        "__resolveType": "site/sections/Miscellaneous/CampaignTimer.tsx"
-      },
-      {
-        "content": [
-          {
-            "label": "HOT SALE",
-            "repeat": 30
-          }
-        ],
-        "__resolveType": "site/sections/Miscellaneous/Slide.tsx"
-      },
-      {
-        "layout": {
-          "showArrows": true
-        },
-        "products": {
-          "props": {
-            "sort": "price:desc",
-            "count": 6,
-            "collection": "139"
-          },
-          "crossSelling": "similars",
-          "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
-        },
-        "cardLayout": {
-          "layout": {
-            "hide": {
-              "allPrices": false,
-              "favoriteIcon": true,
-              "installments": false,
-              "productDescription": true
-            },
-            "basics": {
-              "oldPriceSize": "Normal",
-              "contentAlignment": "Left"
-            },
-            "onMouseOver": {
-              "card": "None",
-              "image": "Change image",
-              "showCta": true,
-              "showCardShadow": false,
-              "showSkuSelector": false,
-              "showFavoriteIcon": false
-            },
-            "elementsPositions": {
-              "skuSelector": "Bottom",
-              "favoriteIcon": "Top right"
-            }
-          },
-          "__resolveType": "site/loaders/Layouts/ProductCard.tsx"
-        },
-        "__resolveType": "site/sections/Product/ProductShelf.tsx"
-      },
-      {
-        "__resolveType": "Shoppable Banner - 01"
-      },
-      {
-        "list": [
-          {
-            "href": "/",
-            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/01c01ba9-ac16-4371-82ca-b93d17545f9c",
-            "label": "Your Collection",
-            "buttonText": "Explore collection"
-          },
-          {
-            "href": "/",
-            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/9b80d57d-64b0-4eef-a3cd-fa8daafaae9c",
-            "label": "Your Collection",
-            "buttonText": "Explore collection"
-          },
-          {
-            "href": "/",
-            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/ed4c0eb3-96ab-484f-b293-e91d196a5063",
-            "label": "Your Collection",
-            "buttonText": "Explore collection"
-          },
-          {
-            "href": "/",
-            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/b9882ff7-3dbc-43e4-9813-5cec23c012cd",
-            "label": "Your Collection",
-            "buttonText": "Explore collection"
-          }
-        ],
-        "header": {
-          "title": "Explore Our Categories"
-        },
-        "layout": {
-          "categoryCard": {
-            "textPosition": "bottom",
-            "textAlignment": "left"
-          }
-        },
-        "__resolveType": "site/sections/Category/CategoryGrid.tsx"
-      },
-      {
         "image": {
-          "alt": "Collection Image",
-          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/165c770b-cbbc-48c0-81ad-c732d527c77c",
-          "href": "/feminino"
-        },
-        "section": {
-          "title": "Summer Vibes",
-          "layout": {
-            "showArrows": true,
-            "headerfontSize": "Normal",
-            "headerAlignment": "center",
-            "numberOfSliders": {
-              "mobile": 1,
-              "desktop": 1
-            }
-          },
-          "products": {
-            "props": {
-              "sort": "price:desc",
-              "count": 3,
-              "query": "camisa"
-            },
-            "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
-          },
-          "cardLayout": {
-            "layout": {
-              "hide": {
-                "allPrices": false,
-                "favoriteIcon": true,
-                "installments": true,
-                "productDescription": true
-              },
-              "basics": {
-                "oldPriceSize": "Normal",
-                "contentAlignment": "Left"
-              },
-              "onMouseOver": {
-                "card": "None",
-                "image": "Change image",
-                "showCta": true,
-                "showCardShadow": false,
-                "showSkuSelector": true,
-                "showFavoriteIcon": false
-              },
-              "elementsPositions": {
-                "skuSelector": "Bottom",
-                "favoriteIcon": "Top right"
-              }
-            },
-            "__resolveType": "site/loaders/Layouts/ProductCard.tsx"
-          },
-          "__resolveType": "site/sections/Product/ProductShelf.tsx"
-        },
-        "__resolveType": "site/sections/Product/ShelfWithImage.tsx"
+          "alt": "deco",
+          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/d0a79cf6-6825-4624-884c-f30bda6c3daf"
+        }
       },
       {
-        "tabs": [
-          {
-            "title": "Woman",
-            "products": {
-              "props": {
-                "sort": "price:desc",
-                "count": 8,
-                "query": "vestido"
-              },
-              "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
-            }
-          },
-          {
-            "title": "Man",
-            "products": {
-              "props": {
-                "sort": "price:desc",
-                "count": 8,
-                "collection": "140"
-              },
-              "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
-            }
-          }
-        ],
-        "title": "Best Sellers",
-        "layout": {
-          "headerfontSize": "Large",
-          "headerAlignment": "center"
+        "text": "Thrilled with my first Fashion purchase. Seamless process, prompt delivery with free shipping. Exceeded expectations in style and quality!",
+        "user": {
+          "name": "Tiago Gimenes",
+          "avatar": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/850df7f9-120e-4155-ae79-c76e737535ee"
         },
-        "cardLayout": {
-          "__resolveType": "Product Card Layout - 01"
-        },
-        "__resolveType": "site/sections/Product/ProductShelfTabbed.tsx"
+        "image": {
+          "alt": "deco",
+          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/9dc5dddc-f8b5-4f70-847b-1f91b84ad7dc"
+        }
       },
       {
-        "posts": [
-          {
-            "alt": "Item of the Summer",
-            "date": "January 15, 2024",
-            "href": "/",
-            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/7e80b083-d1ff-480d-b3a3-b744b69402b1",
-            "label": "Item of the Summer",
-            "author": "deco.cx",
-            "description": "Lorem ipsum dolor sit amet consectetur. Condimentum dolor ultrices commodo et. Blandit vel est sodales tincidunt aliquam tincidunt. "
-          },
-          {
-            "alt": "Item of the Summer",
-            "date": "January 15, 2024",
-            "href": "/",
-            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/a3f329d8-795c-4c3b-8049-ede939d599ef",
-            "label": "Item of the Summer",
-            "author": "deco.cx",
-            "description": "Lorem ipsum dolor sit amet consectetur. Condimentum dolor ultrices commodo et. Blandit vel est sodales tincidunt aliquam tincidunt. "
-          },
-          {
-            "alt": "Item of the Summer",
-            "date": "January 15, 2024",
-            "href": "/",
-            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/7e80b083-d1ff-480d-b3a3-b744b69402b1",
-            "label": "Item of the Summer",
-            "author": "deco.cx",
-            "description": "Lorem ipsum dolor sit amet consectetur.  Condimentum dolor ultrices commodo et. Blandit vel est sodales tincidunt aliquam tincidunt. "
-          }
-        ],
-        "title": "Blogposts",
-        "__resolveType": "site/sections/Content/BlogPosts.tsx"
-      },
-      {
-        "__resolveType": "Footer - 04"
+        "text": "Fashion is my favorite online retailer. On-trend selection, exceptional quality. Easy returns and 24/7 online support. A delightful shopping experience!",
+        "user": {
+          "name": "Maria Luiza Aires",
+          "avatar": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/8327a46f-bb4e-4ae8-8cf2-963d530d3066"
+        },
+        "image": {
+          "alt": "deco",
+          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/ca4c79ea-5bd9-42d3-a60a-07c99c5f45c4"
+        }
       }
     ],
-    "__resolveType": "website/pages/Page.tsx"
+    "__resolveType": "site/sections/Content/Testimonials.tsx"
   },
-  "pages-offline-b9c52de8c7b3": {
-    "name": "Offline",
-    "path": "/offline",
-    "sections": [
-      {
-        "__resolveType": "Header - 01"
-      },
-      {
-        "title": "Oh no! You are offline!",
-        "products": {
-          "props": {
-            "ids": [],
-            "sort": "price:desc",
-            "count": 4,
-            "collection": "139"
-          },
-          "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
-        },
-        "cardLayout": {
-          "__resolveType": "Product Card Layout - 01"
-        },
-        "description": "Maybe take some time to explore",
-        "__resolveType": "site/sections/Product/ProductShelf.tsx"
-      },
-      {
-        "__resolveType": "Footer - 01"
-      }
-    ],
-    "__resolveType": "website/pages/Page.tsx"
-  },
-  "pages-category-7493d4326022": {
-    "name": "Category",
-    "path": "/*",
-    "default": {
-      "possiblePaths": []
-    },
-    "sections": [
-      {
-        "jsonLD": {
-          "__resolveType": "PLP Loader"
-        },
-        "__resolveType": "commerce/sections/Seo/SeoPLP.tsx"
-      },
-      {
-        "__resolveType": "Header - 01"
-      },
-      {
-        "page": {
-          "__resolveType": "PLP Loader"
-        },
-        "layout": {
-          "columns": {
-            "mobile": 2,
-            "desktop": 4
-          },
-          "variant": "aside",
-          "pagination": "show-more"
-        },
-        "cardLayout": {
-          "__resolveType": "Product Card Layout - 01"
-        },
-        "startingPage": 1,
-        "__resolveType": "site/sections/Product/SearchResult.tsx"
-      },
-      {
-        "__resolveType": "Footer - 01"
-      }
-    ],
-    "__resolveType": "website/pages/Page.tsx"
-  },
-  "pages-productpage-ce4850591828": {
-    "name": "Product Page",
-    "path": "/:slug/p",
-    "default": {
-      "possiblePaths": []
-    },
-    "sections": [
-      {
-        "jsonLD": {
-          "__resolveType": "PDP Loader"
-        },
-        "jsonLDs": [
-          {}
-        ],
-        "__resolveType": "commerce/sections/Seo/SeoPDP.tsx"
-      },
-      {
-        "__resolveType": "Header - 01"
-      },
-      {
-        "page": {
-          "__resolveType": "PDP Loader"
-        },
-        "__resolveType": "site/sections/Product/ProductDetails.tsx"
-      },
-      {
-        "title": "You may also like",
-        "products": {
-          "slug": {
-            "param": "slug",
-            "__resolveType": "website/functions/requestToParam.ts"
-          },
-          "crossSelling": "whosawalsosaw",
-          "__resolveType": "vtex/loaders/legacy/relatedProductsLoader.ts"
-        },
-        "__resolveType": "site/sections/Product/ProductShelf.tsx"
-      },
-      {
-        "__resolveType": "Footer - 01"
-      }
-    ],
-    "__resolveType": "website/pages/Page.tsx"
-  },
-  "Product Card Layout - 01": {
+  "Testimonials - 02": {
+    "title": "Testimonials",
     "layout": {
-      "hide": {},
-      "show": {
-        "cta": true,
-        "allPrices": true,
-        "productName": true,
-        "skuSelector": true,
-        "installments": true,
-        "productDescription": true
-      },
-      "basics": {
-        "oldPriceSize": "Small",
-        "contentAlignment": "Left"
-      },
-      "onMouseOver": {
-        "card": "None",
-        "image": "Change image",
-        "showCta": true,
-        "showCardShadow": true,
-        "showSkuSelector": true,
-        "showFavoriteIcon": true
-      },
-      "elementsPositions": {
-        "skuSelector": "Top",
-        "favoriteIcon": "Top right"
-      },
-      "backgroundAndBorder": {
-        "shadow": "None",
-        "bgColor": "Transparent",
-        "borderColor": "Transparent",
-        "borderRadius": "None"
-      }
+      "variation": "Slider",
+      "headerAlignment": "center"
     },
-    "__resolveType": "site/loaders/Layouts/ProductCard.tsx"
-  },
-  "Deco HUB": {
-    "apps": [],
-    "enableAdmin": false,
-    "__resolveType": "site/apps/decohub.ts"
+    "description": "Take a look at what our customers are saying",
+    "testimonials": [
+      {
+        "text": "I can't say enough about my experience shopping at this online fashion store. The website design is not only visually stunning but also incredibly user-friendly. It's a pleasure to browse through their extensive collection of fashionable clothing and accessories. The seamless checkout process makes purchasing items a breeze, and the fast and reliable shipping ensures I receive my orders in no time.",
+        "user": {
+          "name": "Rafael Crespo",
+          "avatar": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/6a595043-fb5b-43b4-b6dd-bd3154e4e595"
+        },
+        "image": {
+          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/d0a79cf6-6825-4624-884c-f30bda6c3daf"
+        }
+      },
+      {
+        "text": "Thrilled with my first Fashion purchase. Seamless process, prompt delivery with free shipping. Exceeded expectations in style and quality!",
+        "user": {
+          "name": "Tiago Gimenes",
+          "avatar": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/850df7f9-120e-4155-ae79-c76e737535ee"
+        },
+        "image": {
+          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/9dc5dddc-f8b5-4f70-847b-1f91b84ad7dc"
+        }
+      },
+      {
+        "text": "Fashion is my favorite online retailer. On-trend selection, exceptional quality. Easy returns and 24/7 online support. A delightful shopping experience!",
+        "user": {
+          "name": "Maria Luiza Aires",
+          "avatar": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/8327a46f-bb4e-4ae8-8cf2-963d530d3066"
+        },
+        "image": {
+          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/ca4c79ea-5bd9-42d3-a60a-07c99c5f45c4"
+        }
+      }
+    ],
+    "__resolveType": "site/sections/Content/Testimonials.tsx"
   },
   "Workflows": {
     "__resolveType": "decohub/apps/workflows.ts"
   },
-  "vtex-trigger": {
-    "product": [
-      {
-        "__resolveType": "algolia/workflows/index/product.ts"
-      }
-    ],
-    "__resolveType": "vtex/workflows/events.ts"
-  },
-  "vtex": {
-    "appKey": {
-      "name": "VTEX_APP_KEY",
-      "encrypted": "8743320a7efa8cda4acaadb91cddaf95c237e168693d964d4527b558f09b522751c5d5b5789ab3084a35ae27f4420e3e",
+  "algolia": {
+    "adminApiKey": {
+      "name": "ALGOLIA_ADMIN_API_KEY",
+      "encrypted": "6907fce3daa50f6821fd81da0cf4a3fc0f29f589a2b2f1d97f30bf2169250560eee6dc8e83c730202df34d29accee12f",
       "__resolveType": "website/loaders/secret.ts"
     },
-    "account": "bravtexfashionstore",
-    "appToken": {
-      "name": "VTEX_APP_TOKEN",
-      "encrypted": "a111f1ed5510b0d595f6e82336ccf45cc7c663802047914f3e6854ff55811313519f7b086553a43d2388cdcd3afdafe1fea84d83ab4925e708315eeb4336e0dec48859421a803d589b0bfc86bdab73111595a3d2b092f4c39581d14c80ee8d9c39c2612d784f7ab83fbd534b62e321f8c2d6d4fb274879721c3d9bedcb4e5b0b57ad581360762167d9239afc37752f74",
-      "__resolveType": "website/loaders/secret.ts"
-    },
-    "platform": "vtex",
-    "publicUrl": "fashion.bravtexstores.com.br",
-    "salesChannel": "1",
-    "__resolveType": "decohub/apps/vtex.ts",
-    "defaultSegment": {
-      "channelPrivacy": "public"
-    }
+    "searchApiKey": "c1db0c388028afd574750a0f3abc911d",
+    "__resolveType": "decohub/apps/algolia.ts",
+    "applicationId": "3MINZHT36Y"
   },
-  "pages-search-2f446eadce44": {
-    "name": "Search",
-    "path": "/s",
-    "sections": [
-      {
-        "type": "website",
-        "__resolveType": "website/sections/Seo/Seo.tsx",
-        "titleTemplate": "%s | Deco.cx",
-        "descriptionTemplate": "%s | Deco.cx"
-      },
-      {
-        "__resolveType": "Header - 01"
-      },
-      {
-        "page": {
-          "__resolveType": "PLP Loader"
-        },
-        "layout": {
-          "columns": {
-            "mobile": 2,
-            "desktop": 4
-          },
-          "variant": "aside"
-        },
-        "__resolveType": "site/sections/Product/SearchResult.tsx"
-      },
-      {
-        "__resolveType": "Footer - 01"
-      }
-    ],
-    "__resolveType": "website/pages/Page.tsx"
+  "brand-assistant": {
+    "__resolveType": "decohub/apps/brand-assistant.ts"
+  },
+  "files": {
+    "__resolveType": "decohub/apps/files.ts"
+  },
+  "implementation": {
+    "__resolveType": "decohub/apps/implementation.ts",
+    "expectedGoLive": "2023-11-30"
   },
   "navbar": {
     "items": [
@@ -3089,100 +2697,6 @@
       }
     ],
     "__resolveType": "commerce/loaders/navbar.ts"
-  },
-  "weather": {
-    "__resolveType": "decohub/apps/weather.ts"
-  },
-  "PDP Loader": {
-    "data": {
-      "slug": {
-        "param": "slug",
-        "__resolveType": "website/functions/requestToParam.ts"
-      },
-      "__resolveType": "vtex/loaders/intelligentSearch/productDetailsPage.ts"
-    },
-    "extensions": [
-      {
-        "__resolveType": "vtex/loaders/product/extensions/detailsPage.ts"
-      }
-    ],
-    "__resolveType": "commerce/loaders/product/extensions/detailsPage.ts"
-  },
-  "plausible": {
-    "__resolveType": "decohub/apps/analytics.ts"
-  },
-  "implementation": {
-    "__resolveType": "decohub/apps/implementation.ts",
-    "expectedGoLive": "2023-11-30"
-  },
-  "PLP Loader": {
-    "data": {
-      "sort": "price:desc",
-      "count": 8,
-      "fuzzy": "automatic",
-      "pageOffset": 1,
-      "__resolveType": "vtex/loaders/intelligentSearch/productListingPage.ts",
-      "selectedFacets": []
-    },
-    "extensions": [
-      {
-        "__resolveType": "vtex/loaders/product/extensions/listingPage.ts"
-      }
-    ],
-    "__resolveType": "commerce/loaders/product/extensions/listingPage.ts"
-  },
-  "Search Loader": {
-    "data": {
-      "facets": [],
-      "hitsPerPage": 12,
-      "startingPage": 0,
-      "__resolveType": "algolia/loaders/product/listingPage.ts",
-      "sortFacetValuesBy": "count"
-    },
-    "extensions": [
-      {
-        "__resolveType": "vtex/loaders/product/extensions/listingPage.ts"
-      }
-    ],
-    "__resolveType": "commerce/loaders/product/extensions/listingPage.ts"
-  },
-  "files": {
-    "__resolveType": "decohub/apps/files.ts"
-  },
-  "algolia": {
-    "adminApiKey": {
-      "name": "ALGOLIA_ADMIN_API_KEY",
-      "encrypted": "6907fce3daa50f6821fd81da0cf4a3fc0f29f589a2b2f1d97f30bf2169250560eee6dc8e83c730202df34d29accee12f",
-      "__resolveType": "website/loaders/secret.ts"
-    },
-    "searchApiKey": "c1db0c388028afd574750a0f3abc911d",
-    "__resolveType": "decohub/apps/algolia.ts",
-    "applicationId": "3MINZHT36Y"
-  },
-  "brand-assistant": {
-    "__resolveType": "decohub/apps/brand-assistant.ts"
-  },
-  "sales-assistant": {
-    "assistants": [
-      {
-        "name": "storefront",
-        "categories": {
-          "__resolveType": "vtex/loaders/categories/tree.ts",
-          "categoryLevels": 3
-        },
-        "topSearches": {
-          "__resolveType": "vtex/loaders/intelligentSearch/topsearches.ts"
-        },
-        "__resolveType": "brand-assistant/loaders/assistant.ts",
-        "productsSample": [],
-        "welcomeMessage": "Hello! 👋 Thank you for visiting our store. If you need help finding the perfect product, I'm here to help.",
-        "personalization": {
-          "mood": "Friendly"
-        }
-      }
-    ],
-    "assistantId": "asst_vwWNeBUSmBlKe88mXq7qlU7f",
-    "__resolveType": "decohub/apps/ai-assistants.ts"
   },
   "pages-aiassistant-c38e51d3049a": {
     "name": "AI Assistant",
@@ -3566,13 +3080,477 @@
     ],
     "__resolveType": "website/pages/Page.tsx"
   },
-  "Mobile": {
-    "mobile": true,
-    "__resolveType": "website/matchers/device.ts"
+  "pages-category-7493d4326022": {
+    "name": "Category",
+    "path": "/*",
+    "default": {
+      "possiblePaths": []
+    },
+    "sections": [
+      {
+        "jsonLD": {
+          "__resolveType": "PLP Loader"
+        },
+        "__resolveType": "commerce/sections/Seo/SeoPLP.tsx"
+      },
+      {
+        "__resolveType": "Header - 01"
+      },
+      {
+        "page": {
+          "__resolveType": "PLP Loader"
+        },
+        "layout": {
+          "columns": {
+            "mobile": 2,
+            "desktop": 4
+          },
+          "variant": "aside",
+          "pagination": "show-more"
+        },
+        "cardLayout": {
+          "__resolveType": "Product Card Layout - 01"
+        },
+        "startingPage": 1,
+        "__resolveType": "site/sections/Product/SearchResult.tsx"
+      },
+      {
+        "__resolveType": "Footer - 01"
+      }
+    ],
+    "__resolveType": "website/pages/Page.tsx"
   },
-  "Desktop": {
-    "desktop": true,
-    "__resolveType": "website/matchers/device.ts"
+  "pages-home-c4bcbfb771e9": {
+    "name": "Home",
+    "path": "/",
+    "sections": [
+      {
+        "noIndexing": false,
+        "__resolveType": "website/sections/Seo/Seo.tsx"
+      },
+      {
+        "__resolveType": "Header - 01"
+      },
+      {
+        "__resolveType": "site/sections/Images/Carousel.tsx",
+        "dots": false,
+        "arrows": true,
+        "images": [
+          {
+            "alt": "Feminino",
+            "action": {
+              "href": "/feminino",
+              "label": "Explore collection",
+              "title": "VTEX Store",
+              "subTitle": "Visit our site and start building now:"
+            },
+            "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
+            "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
+          },
+          {
+            "alt": "Masculino",
+            "action": {
+              "href": "/masculino",
+              "label": "Explore collection",
+              "title": "VTEX Store",
+              "subTitle": "Visit our site and start building now:"
+            },
+            "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
+            "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
+          },
+          {
+            "alt": "Vestidos",
+            "action": {
+              "href": "/feminino/roupas/vestidos",
+              "label": "Explore collection",
+              "title": "VTEX Store",
+              "subTitle": "Visit our site and start building now:"
+            },
+            "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
+            "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
+          }
+        ],
+        "preload": true
+      },
+      {
+        "content": [
+          {
+            "label": "HOT SALE",
+            "repeat": 30
+          }
+        ],
+        "__resolveType": "site/sections/Miscellaneous/Slide.tsx"
+      },
+      {
+        "link": {
+          "href": "https://github.com/deco-cx",
+          "text": "Visit our GitHub"
+        },
+        "text": "<p>Design, develop and deliver complete experiences</p>",
+        "labels": {
+          "days": "days",
+          "hours": "hours",
+          "expired": " Expired!",
+          "minutes": "minutes",
+          "seconds": "seconds"
+        },
+        "layout": {
+          "textPosition": "After counter"
+        },
+        "expiresAt": "2024-03-15T17:23:00.000Z",
+        "__resolveType": "site/sections/Miscellaneous/CampaignTimer.tsx"
+      },
+      {
+        "content": [
+          {
+            "label": "HOT SALE",
+            "repeat": 30
+          }
+        ],
+        "__resolveType": "site/sections/Miscellaneous/Slide.tsx"
+      },
+      {
+        "layout": {
+          "showArrows": true
+        },
+        "products": {
+          "props": {
+            "sort": "price:desc",
+            "count": 6,
+            "collection": "139"
+          },
+          "crossSelling": "similars",
+          "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
+        },
+        "cardLayout": {
+          "layout": {
+            "hide": {
+              "allPrices": false,
+              "favoriteIcon": true,
+              "installments": false,
+              "productDescription": true
+            },
+            "basics": {
+              "oldPriceSize": "Normal",
+              "contentAlignment": "Left"
+            },
+            "onMouseOver": {
+              "card": "None",
+              "image": "Change image",
+              "showCta": true,
+              "showCardShadow": false,
+              "showSkuSelector": false,
+              "showFavoriteIcon": false
+            },
+            "elementsPositions": {
+              "skuSelector": "Bottom",
+              "favoriteIcon": "Top right"
+            }
+          },
+          "__resolveType": "site/loaders/Layouts/ProductCard.tsx"
+        },
+        "__resolveType": "site/sections/Product/ProductShelf.tsx"
+      },
+      {
+        "__resolveType": "Shoppable Banner - 01"
+      },
+      {
+        "list": [
+          {
+            "href": "/",
+            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/01c01ba9-ac16-4371-82ca-b93d17545f9c",
+            "label": "Your Collection",
+            "buttonText": "Explore collection"
+          },
+          {
+            "href": "/",
+            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/9b80d57d-64b0-4eef-a3cd-fa8daafaae9c",
+            "label": "Your Collection",
+            "buttonText": "Explore collection"
+          },
+          {
+            "href": "/",
+            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/ed4c0eb3-96ab-484f-b293-e91d196a5063",
+            "label": "Your Collection",
+            "buttonText": "Explore collection"
+          },
+          {
+            "href": "/",
+            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/b9882ff7-3dbc-43e4-9813-5cec23c012cd",
+            "label": "Your Collection",
+            "buttonText": "Explore collection"
+          }
+        ],
+        "header": {
+          "title": "Explore Our Categories"
+        },
+        "layout": {
+          "categoryCard": {
+            "textPosition": "bottom",
+            "textAlignment": "left"
+          }
+        },
+        "__resolveType": "site/sections/Category/CategoryGrid.tsx"
+      },
+      {
+        "image": {
+          "alt": "Collection Image",
+          "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/165c770b-cbbc-48c0-81ad-c732d527c77c",
+          "href": "/feminino"
+        },
+        "section": {
+          "title": "Summer Vibes",
+          "layout": {
+            "showArrows": true,
+            "headerfontSize": "Normal",
+            "headerAlignment": "center",
+            "numberOfSliders": {
+              "mobile": 1,
+              "desktop": 1
+            }
+          },
+          "products": {
+            "props": {
+              "sort": "price:desc",
+              "count": 3,
+              "query": "camisa"
+            },
+            "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
+          },
+          "cardLayout": {
+            "layout": {
+              "hide": {
+                "allPrices": false,
+                "favoriteIcon": true,
+                "installments": true,
+                "productDescription": true
+              },
+              "basics": {
+                "oldPriceSize": "Normal",
+                "contentAlignment": "Left"
+              },
+              "onMouseOver": {
+                "card": "None",
+                "image": "Change image",
+                "showCta": true,
+                "showCardShadow": false,
+                "showSkuSelector": true,
+                "showFavoriteIcon": false
+              },
+              "elementsPositions": {
+                "skuSelector": "Bottom",
+                "favoriteIcon": "Top right"
+              }
+            },
+            "__resolveType": "site/loaders/Layouts/ProductCard.tsx"
+          },
+          "__resolveType": "site/sections/Product/ProductShelf.tsx"
+        },
+        "__resolveType": "site/sections/Product/ShelfWithImage.tsx"
+      },
+      {
+        "tabs": [
+          {
+            "title": "Woman",
+            "products": {
+              "props": {
+                "sort": "price:desc",
+                "count": 8,
+                "query": "vestido"
+              },
+              "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
+            }
+          },
+          {
+            "title": "Man",
+            "products": {
+              "props": {
+                "sort": "price:desc",
+                "count": 8,
+                "collection": "140"
+              },
+              "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
+            }
+          }
+        ],
+        "title": "Best Sellers",
+        "layout": {
+          "headerfontSize": "Large",
+          "headerAlignment": "center"
+        },
+        "cardLayout": {
+          "__resolveType": "Product Card Layout - 01"
+        },
+        "__resolveType": "site/sections/Product/ProductShelfTabbed.tsx"
+      },
+      {
+        "posts": [
+          {
+            "alt": "Item of the Summer",
+            "date": "January 15, 2024",
+            "href": "/",
+            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/7e80b083-d1ff-480d-b3a3-b744b69402b1",
+            "label": "Item of the Summer",
+            "author": "deco.cx",
+            "description": "Lorem ipsum dolor sit amet consectetur. Condimentum dolor ultrices commodo et. Blandit vel est sodales tincidunt aliquam tincidunt. "
+          },
+          {
+            "alt": "Item of the Summer",
+            "date": "January 15, 2024",
+            "href": "/",
+            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/a3f329d8-795c-4c3b-8049-ede939d599ef",
+            "label": "Item of the Summer",
+            "author": "deco.cx",
+            "description": "Lorem ipsum dolor sit amet consectetur. Condimentum dolor ultrices commodo et. Blandit vel est sodales tincidunt aliquam tincidunt. "
+          },
+          {
+            "alt": "Item of the Summer",
+            "date": "January 15, 2024",
+            "href": "/",
+            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/7e80b083-d1ff-480d-b3a3-b744b69402b1",
+            "label": "Item of the Summer",
+            "author": "deco.cx",
+            "description": "Lorem ipsum dolor sit amet consectetur.  Condimentum dolor ultrices commodo et. Blandit vel est sodales tincidunt aliquam tincidunt. "
+          }
+        ],
+        "title": "Blogposts",
+        "__resolveType": "site/sections/Content/BlogPosts.tsx"
+      },
+      {
+        "__resolveType": "Footer - 04"
+      }
+    ],
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "pages-offline-b9c52de8c7b3": {
+    "name": "Offline",
+    "path": "/offline",
+    "sections": [
+      {
+        "__resolveType": "Header - 01"
+      },
+      {
+        "title": "Oh no! You are offline!",
+        "products": {
+          "props": {
+            "ids": [],
+            "sort": "price:desc",
+            "count": 4,
+            "collection": "139"
+          },
+          "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
+        },
+        "cardLayout": {
+          "__resolveType": "Product Card Layout - 01"
+        },
+        "description": "Maybe take some time to explore",
+        "__resolveType": "site/sections/Product/ProductShelf.tsx"
+      },
+      {
+        "__resolveType": "Footer - 01"
+      }
+    ],
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "pages-productpage-ce4850591828": {
+    "name": "Product Page",
+    "path": "/:slug/p",
+    "default": {
+      "possiblePaths": []
+    },
+    "sections": [
+      {
+        "jsonLD": {
+          "__resolveType": "PDP Loader"
+        },
+        "jsonLDs": [
+          {}
+        ],
+        "__resolveType": "commerce/sections/Seo/SeoPDP.tsx"
+      },
+      {
+        "__resolveType": "Header - 01"
+      },
+      {
+        "page": {
+          "__resolveType": "PDP Loader"
+        },
+        "__resolveType": "site/sections/Product/ProductDetails.tsx"
+      },
+      {
+        "title": "You may also like",
+        "products": {
+          "slug": {
+            "param": "slug",
+            "__resolveType": "website/functions/requestToParam.ts"
+          },
+          "crossSelling": "whosawalsosaw",
+          "__resolveType": "vtex/loaders/legacy/relatedProductsLoader.ts"
+        },
+        "__resolveType": "site/sections/Product/ProductShelf.tsx"
+      },
+      {
+        "__resolveType": "Footer - 01"
+      }
+    ],
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "pages-search-2f446eadce44": {
+    "name": "Search",
+    "path": "/s",
+    "sections": [
+      {
+        "type": "website",
+        "__resolveType": "website/sections/Seo/Seo.tsx",
+        "titleTemplate": "%s | Deco.cx",
+        "descriptionTemplate": "%s | Deco.cx"
+      },
+      {
+        "__resolveType": "Header - 01"
+      },
+      {
+        "page": {
+          "__resolveType": "PLP Loader"
+        },
+        "layout": {
+          "columns": {
+            "mobile": 2,
+            "desktop": 4
+          },
+          "variant": "aside"
+        },
+        "__resolveType": "site/sections/Product/SearchResult.tsx"
+      },
+      {
+        "__resolveType": "Footer - 01"
+      }
+    ],
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "plausible": {
+    "__resolveType": "decohub/apps/analytics.ts"
+  },
+  "sales-assistant": {
+    "assistants": [
+      {
+        "name": "storefront",
+        "categories": {
+          "__resolveType": "vtex/loaders/categories/tree.ts",
+          "categoryLevels": 3
+        },
+        "topSearches": {
+          "__resolveType": "vtex/loaders/intelligentSearch/topsearches.ts"
+        },
+        "__resolveType": "brand-assistant/loaders/assistant.ts",
+        "productsSample": [],
+        "welcomeMessage": "Hello! 👋 Thank you for visiting our store. If you need help finding the perfect product, I'm here to help.",
+        "personalization": {
+          "mood": "Friendly"
+        }
+      }
+    ],
+    "assistantId": "asst_vwWNeBUSmBlKe88mXq7qlU7f",
+    "__resolveType": "decohub/apps/ai-assistants.ts"
   },
   "site": {
     "seo": {
@@ -3631,13 +3609,35 @@
     "__resolveType": "site/apps/site.ts",
     "firstByteThresholdMS": true
   },
-  "SLIDER": {
-    "content": [
+  "vtex-trigger": {
+    "product": [
       {
-        "label": "HOT SALE",
-        "repeat": 30
+        "__resolveType": "algolia/workflows/index/product.ts"
       }
     ],
-    "__resolveType": "site/sections/Miscellaneous/Slide.tsx"
+    "__resolveType": "vtex/workflows/events.ts"
+  },
+  "vtex": {
+    "appKey": {
+      "name": "VTEX_APP_KEY",
+      "encrypted": "8743320a7efa8cda4acaadb91cddaf95c237e168693d964d4527b558f09b522751c5d5b5789ab3084a35ae27f4420e3e",
+      "__resolveType": "website/loaders/secret.ts"
+    },
+    "account": "bravtexfashionstore",
+    "appToken": {
+      "name": "VTEX_APP_TOKEN",
+      "encrypted": "a111f1ed5510b0d595f6e82336ccf45cc7c663802047914f3e6854ff55811313519f7b086553a43d2388cdcd3afdafe1fea84d83ab4925e708315eeb4336e0dec48859421a803d589b0bfc86bdab73111595a3d2b092f4c39581d14c80ee8d9c39c2612d784f7ab83fbd534b62e321f8c2d6d4fb274879721c3d9bedcb4e5b0b57ad581360762167d9239afc37752f74",
+      "__resolveType": "website/loaders/secret.ts"
+    },
+    "platform": "vtex",
+    "publicUrl": "fashion.bravtexstores.com.br",
+    "salesChannel": "1",
+    "__resolveType": "decohub/apps/vtex.ts",
+    "defaultSegment": {
+      "channelPrivacy": "public"
+    }
+  },
+  "weather": {
+    "__resolveType": "decohub/apps/weather.ts"
   }
 }

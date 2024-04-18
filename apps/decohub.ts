@@ -1,4 +1,4 @@
-import Decohub from "apps/decohub/mod.ts";
+import Decohub, { State } from "apps/decohub/mod.ts";
 
 /**
  * @title Deco Hub
@@ -6,8 +6,8 @@ import Decohub from "apps/decohub/mod.ts";
  * @category Tool
  * @logo https://raw.githubusercontent.com/deco-cx/apps/main/decohub/logo.png
  */
-export default function App(...params: Parameters<typeof Decohub>) {
-  return Decohub(...params);
+export default function App(params: State) {
+  return Decohub(params);
 }
 
 export { Preview } from "apps/decohub/mod.ts";
