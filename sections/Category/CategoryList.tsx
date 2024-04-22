@@ -1,4 +1,3 @@
-import Header from "../../components/ui/SectionHeader.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
@@ -20,13 +19,6 @@ export interface Props {
     description?: string;
   };
   list?: Category[];
-  layout?: {
-    headerAlignment?: "center" | "left";
-    categoryCard?: {
-      textPosition?: "top" | "bottom";
-      textAlignment?: "center" | "left";
-    };
-  };
 }
 
 function CardText(
@@ -106,25 +98,19 @@ function CategoryList(props: Props) {
       description: "",
     },
     list = DEFAULT_LIST,
-    layout = {
-      headerAlignment: "center",
-      categoryCard: {
-        textPosition: "top",
-        textAlignment: "center",
-      },
-    },
   } = props;
 
   return (
     <div
       id={id}
-      class="container py-8 flex flex-col gap-8 lg:gap-10 text-base-content  lg:py-10"
+      class="container py-8 flex flex-col gap-8 lg:gap-10 text-base-content"
     >
-      <Header
-        title={header.title}
-        description={header.description || ""}
-        alignment={layout.headerAlignment || "center"}
-      />
+      <div class="flex flex-col gap-2">
+        <h2 class="text-base-content text-center text-3xl font-semibold">
+          {header.title}
+        </h2>
+        <p class="text-base-content text-center">{header.description}</p>
+      </div>
 
       <Slider class="carousel carousel-start gap-4 lg:gap-8 row-start-2 row-end-5">
         {list.map((
@@ -139,15 +125,11 @@ function CategoryList(props: Props) {
               href={href}
               class="flex flex-col gap-4 lg:w-[280px] w-40 lg:h-auto"
             >
-              {layout.categoryCard?.textPosition === "top" &&
-                (
-                  <CardText
-                    tag={tag}
-                    label={label}
-                    description={description}
-                    alignment={layout?.categoryCard?.textAlignment}
-                  />
-                )}
+              <CardText
+                tag={tag}
+                label={label}
+                description={description}
+              />
               {image &&
                 (
                   <figure>
@@ -160,15 +142,6 @@ function CategoryList(props: Props) {
                       loading="lazy"
                     />
                   </figure>
-                )}
-              {layout.categoryCard?.textPosition === "bottom" &&
-                (
-                  <CardText
-                    tag={tag}
-                    label={label}
-                    description={description}
-                    alignment={layout?.categoryCard?.textAlignment}
-                  />
                 )}
             </a>
             {buttonText &&

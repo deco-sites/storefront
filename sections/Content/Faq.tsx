@@ -1,5 +1,3 @@
-import Header from "../../components/ui/SectionHeader.tsx";
-
 export interface Question {
   question: string;
   /** @format html */
@@ -21,10 +19,6 @@ export interface Props {
   description?: string;
   questions?: Question[];
   contact?: Contact;
-  layout?: {
-    variation?: "Compact" | "Full" | "Side to side";
-    headerAlignment?: "center" | "left";
-  };
 }
 
 const DEFAULT_PROPS = {
@@ -90,64 +84,23 @@ export default function FAQ(props: Props) {
     title,
     description,
     contact,
-    layout,
   } = { ...DEFAULT_PROPS, ...props };
 
   return (
-    <>
-      {(!layout?.variation || layout?.variation === "Compact") && (
-        <div class="w-full container px-4 py-8 flex flex-col gap-4 lg:gap-8 lg:py-10 lg:px-40">
-          <div class="flex flex-col gap-8 lg:gap-10">
-            <Header
-              title={title || ""}
-              description={description || ""}
-              alignment={layout?.headerAlignment || "center"}
-            />
-            <div class="join join-vertical w-full">
-              {questions.map((question) => <Question {...question} />)}
-            </div>
-          </div>
-
-          <Contact {...contact} />
+    <div class="w-full container px-4 py-8 flex flex-col gap-4 lg:gap-8 lg:py-10 lg:px-40">
+      <div class="flex flex-col gap-8 lg:gap-10">
+        <div class="flex flex-col gap-2">
+          <h2 class="text-base-content text-center text-3xl font-semibold">
+            {title}
+          </h2>
+          <p class="text-center">{description}</p>
         </div>
-      )}
-
-      {layout?.variation === "Full" && (
-        <div class="w-full container px-4 py-8 flex flex-col gap-4 lg:gap-8 lg:py-10 lg:px-0">
-          <div class="flex flex-col gap-8 lg:gap-10">
-            <Header
-              title={title || ""}
-              description={description || ""}
-              alignment={layout?.headerAlignment || "center"}
-            />
-            <div class="join join-vertical w-full">
-              {questions.map((question) => <Question {...question} />)}
-            </div>
-          </div>
-
-          <Contact {...contact} />
+        <div class="join join-vertical w-full">
+          {questions.map((question) => <Question {...question} />)}
         </div>
-      )}
+      </div>
 
-      {layout?.variation === "Side to side" && (
-        <div class="w-full container px-4 py-8 grid gap-8 grid-flow-row grid-cols-1 lg:grid-flow-col lg:grid-cols-2 lg:grid-rows-2 lg:py-10 lg:px-0">
-          <div class="order-1 lg:order-1">
-            <Header
-              title={title || ""}
-              description={description || ""}
-              alignment={layout?.headerAlignment || "center"}
-            />
-          </div>
-          <div class="order-2 lg:order-3 lg:row-span-2">
-            <div class="join join-vertical">
-              {questions.map((question) => <Question {...question} />)}
-            </div>
-          </div>
-          <div class="order-3 lg:order-2">
-            <Contact {...contact} />
-          </div>
-        </div>
-      )}
-    </>
+      <Contact {...contact} />
+    </div>
   );
 }

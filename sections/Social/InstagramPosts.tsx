@@ -1,9 +1,7 @@
 import type { SectionProps } from "deco/mod.ts";
 import Image from "apps/website/components/Image.tsx";
-import Header from "../../components/ui/SectionHeader.tsx";
 
 export interface layout {
-  headerAlignment?: "center" | "left";
   /** @description Default is 12 */
   numberOfPosts?: number;
   /** @description Up to 6. Default is 4 */
@@ -72,12 +70,11 @@ export default function InstagramPosts({
 }: SectionProps<typeof loader>) {
   return (
     <div class="w-full container px-4 py-8 flex flex-col gap-14 lg:gap-20 lg:py-10 lg:px-0">
-      <Header
-        title={title}
-        description={description}
-        alignment={layout?.headerAlignment || "center"}
-      />
-      <div class="hidden lg:grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4 lg:grid-cols-5 lg:grid-cols-6">
+      <div class="flex flex-col gap-2">
+        <h2 class="text-base-content text-center text-3xl font-semibold">
+          {title}
+        </h2>
+        <p class="text-center">{description}</p>
       </div>
       <div
         class={`grid grid-cols-2 lg:grid-cols-${

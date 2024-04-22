@@ -1685,10 +1685,13 @@
     },
     "title": "Newsletter",
     "layout": {
+      "header": {
+        "fontSize": "Small"
+      },
       "content": {
         "border": false,
         "bgColor": "Reverse",
-        "alignment": "Side to side"
+        "alignment": "Left"
       },
       "headerFontSize": "Large"
     },
@@ -1736,10 +1739,13 @@
     },
     "title": "Newsletter",
     "layout": {
+      "header": {
+        "fontSize": "Small"
+      },
       "content": {
         "border": true,
         "bgColor": "Reverse",
-        "alignment": "Side to side"
+        "alignment": "Left"
       },
       "headerFontSize": "Large"
     },
@@ -2460,16 +2466,6 @@
         "__resolveType": "Header - 01"
       },
       {
-        "__resolveType": "deco-sites/storefront/sections/Miscellaneous/Slide.tsx",
-        "content": [
-          {
-            "label": "HOT SALE",
-            "repeat": 30
-          }
-        ]
-      },
-      {
-        "__resolveType": "deco-sites/storefront/sections/Images/Carousel.tsx",
         "dots": false,
         "arrows": true,
         "images": [
@@ -2507,7 +2503,17 @@
             "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
           }
         ],
-        "preload": true
+        "preload": true,
+        "__resolveType": "deco-sites/storefront/sections/Images/Carousel.tsx"
+      },
+      {
+        "content": [
+          {
+            "label": "HOT SALE",
+            "repeat": 30
+          }
+        ],
+        "__resolveType": "deco-sites/storefront/sections/Miscellaneous/Slide.tsx"
       },
       {
         "link": {
@@ -3624,5 +3630,14 @@
     "platform": "vtex",
     "__resolveType": "deco-sites/storefront/apps/site.ts",
     "firstByteThresholdMS": true
+  },
+  "SLIDER": {
+    "content": [
+      {
+        "label": "HOT SALE",
+        "repeat": 30
+      }
+    ],
+    "__resolveType": "deco-sites/storefront/sections/Miscellaneous/Slide.tsx"
   }
 }
