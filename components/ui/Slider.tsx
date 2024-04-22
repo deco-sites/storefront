@@ -228,6 +228,7 @@ function JS({
   return (
     <script
       src={scriptAsDataURI(setup, { rootId, scroll, interval, infinite })}
+      defer
     />
   );
 }
