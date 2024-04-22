@@ -1,14 +1,13 @@
+import type { Product } from "apps/commerce/types.ts";
+import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import ProductCard from "../../components/product/ProductCard.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Slider from "../../components/ui/Slider.tsx";
-import SliderJS from "../../islands/SliderJS.tsx";
+import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
-import type { Product } from "apps/commerce/types.ts";
-import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import { clx } from "../../sdk/clx.ts";
 
 export interface Props {
   products: Product[] | null;
@@ -101,7 +100,7 @@ function ProductShelf({
             </div>
           </>
         )}
-        <SliderJS rootId={id} />
+        <Slider.JS rootId={id} />
         <SendEventOnView
           id={id}
           event={{

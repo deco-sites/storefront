@@ -1,8 +1,7 @@
-import Icon from "../../components/ui/Icon.tsx";
-import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import Image from "apps/website/components/Image.tsx";
+import Icon from "../../components/ui/Icon.tsx";
 import Slider from "../../components/ui/Slider.tsx";
-import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
@@ -158,7 +157,7 @@ function BlogPosts({
             </div>
           </>
         )}
-        <SliderJS rootId={id} />
+        <Slider.JS rootId={id} />
       </div>
     </div>
   );
