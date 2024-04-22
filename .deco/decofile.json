@@ -2571,9 +2571,6 @@
     "__resolveType": "decohub/apps/algolia.ts",
     "applicationId": "3MINZHT36Y"
   },
-  "brand-assistant": {
-    "__resolveType": "decohub/apps/brand-assistant.ts"
-  },
   "files": {
     "__resolveType": "decohub/apps/files.ts"
   },
@@ -3122,7 +3119,6 @@
   },
   "pages-home-c4bcbfb771e9": {
     "name": "Home",
-    "path": "/",
     "sections": [
       {
         "noIndexing": false,
@@ -3420,7 +3416,8 @@
         "__resolveType": "Footer - 04"
       }
     ],
-    "__resolveType": "website/pages/Page.tsx"
+    "__resolveType": "website/pages/Page.tsx",
+    "path": "/"
   },
   "pages-offline-b9c52de8c7b3": {
     "name": "Offline",
@@ -3530,28 +3527,6 @@
   "plausible": {
     "__resolveType": "decohub/apps/analytics.ts"
   },
-  "sales-assistant": {
-    "assistants": [
-      {
-        "name": "storefront",
-        "categories": {
-          "__resolveType": "vtex/loaders/categories/tree.ts",
-          "categoryLevels": 3
-        },
-        "topSearches": {
-          "__resolveType": "vtex/loaders/intelligentSearch/topsearches.ts"
-        },
-        "__resolveType": "brand-assistant/loaders/assistant.ts",
-        "productsSample": [],
-        "welcomeMessage": "Hello! 👋 Thank you for visiting our store. If you need help finding the perfect product, I'm here to help.",
-        "personalization": {
-          "mood": "Friendly"
-        }
-      }
-    ],
-    "assistantId": "asst_vwWNeBUSmBlKe88mXq7qlU7f",
-    "__resolveType": "decohub/apps/ai-assistants.ts"
-  },
   "site": {
     "seo": {
       "type": "website",
@@ -3618,17 +3593,7 @@
     "__resolveType": "vtex/workflows/events.ts"
   },
   "vtex": {
-    "appKey": {
-      "name": "VTEX_APP_KEY",
-      "encrypted": "8743320a7efa8cda4acaadb91cddaf95c237e168693d964d4527b558f09b522751c5d5b5789ab3084a35ae27f4420e3e",
-      "__resolveType": "website/loaders/secret.ts"
-    },
     "account": "bravtexfashionstore",
-    "appToken": {
-      "name": "VTEX_APP_TOKEN",
-      "encrypted": "a111f1ed5510b0d595f6e82336ccf45cc7c663802047914f3e6854ff55811313519f7b086553a43d2388cdcd3afdafe1fea84d83ab4925e708315eeb4336e0dec48859421a803d589b0bfc86bdab73111595a3d2b092f4c39581d14c80ee8d9c39c2612d784f7ab83fbd534b62e321f8c2d6d4fb274879721c3d9bedcb4e5b0b57ad581360762167d9239afc37752f74",
-      "__resolveType": "website/loaders/secret.ts"
-    },
     "platform": "vtex",
     "publicUrl": "fashion.bravtexstores.com.br",
     "salesChannel": "1",
