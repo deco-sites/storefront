@@ -6,7 +6,6 @@ import ProductCard from "../../components/product/ProductCard.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Header from "../../components/ui/SectionHeader.tsx";
 import Slider from "../../components/ui/Slider.tsx";
-import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
@@ -100,7 +99,7 @@ function TabbedProductShelf({
             </Slider.NextButton>
           </div>
         </>
-        <SliderJS rootId={id} />
+        <Slider.JS rootId={id} />
         <SendEventOnView
           id={id}
           event={{

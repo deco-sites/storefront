@@ -1,10 +1,9 @@
-import Icon from "../../components/ui/Icon.tsx";
+import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
+import Icon from "../../components/ui/Icon.tsx";
 import Header from "../../components/ui/SectionHeader.tsx";
 import Slider from "../../components/ui/Slider.tsx";
-import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
-import type { ImageWidget } from "apps/admin/widgets.ts";
 
 export interface Testimonial {
   text?: string;
@@ -175,7 +174,7 @@ export default function Testimonials(
               </Slider.NextButton>
             </div>
           </>
-          <SliderJS rootId={id} />
+          <Slider.JS rootId={id} />
         </div>
       )}
     </div>

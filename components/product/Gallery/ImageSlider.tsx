@@ -3,7 +3,6 @@ import Image from "apps/website/components/Image.tsx";
 import Icon from "../../../components/ui/Icon.tsx";
 import Slider from "../../../components/ui/Slider.tsx";
 import ProductImageZoom from "../../../islands/ProductImageZoom.tsx";
-import SliderJS from "../../../islands/SliderJS.tsx";
 import { useId } from "../../../sdk/useId.ts";
 
 export interface Props {
@@ -105,7 +104,7 @@ export default function GallerySlider(props: Props) {
         ))}
       </ul>
 
-      <SliderJS rootId={id} />
+      <Slider.JS rootId={id} />
     </div>
   );
 }
