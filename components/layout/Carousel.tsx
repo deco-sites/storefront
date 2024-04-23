@@ -3,7 +3,7 @@ import { ComponentChildren, toChildArray } from "preact";
 import { useId } from "preact/hooks";
 import Icon from "../../components/ui/Icon.tsx";
 import Slider from "../../components/ui/Slider.tsx";
-import { ButtonColor, buttonClasses, grid } from "../../constants.tsx";
+import { buttonClasses, ButtonColor, grid } from "../../constants.tsx";
 import { clx } from "../../sdk/clx.ts";
 
 interface Layout {
