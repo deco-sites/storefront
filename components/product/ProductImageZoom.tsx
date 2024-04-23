@@ -1,12 +1,11 @@
+import { useSignal } from "@preact/signals";
+import type { ImageObject } from "apps/commerce/types.ts";
+import Image from "apps/website/components/Image.tsx";
 import Button from "../../components/ui/Button.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Modal from "../../components/ui/Modal.tsx";
 import Slider from "../../components/ui/Slider.tsx";
-import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
-import { useSignal } from "@preact/signals";
-import type { ImageObject } from "apps/commerce/types.ts";
-import Image from "apps/website/components/Image.tsx";
 
 export interface Props {
   images: ImageObject[];
@@ -59,7 +58,7 @@ function ProductImageZoom({ images, width, height }: Props) {
               <Icon size={24} id="ChevronRight" strokeWidth={3} />
             </Slider.NextButton>
 
-            <SliderJS rootId={id} />
+            <Slider.JS rootId={id} />
           </div>
         </Modal>
       </div>

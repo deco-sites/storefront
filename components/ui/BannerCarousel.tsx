@@ -1,3 +1,5 @@
+import type { ImageWidget } from "apps/admin/widgets.ts";
+import { Picture, Source } from "apps/website/components/Picture.tsx";
 import {
   SendEventOnClick,
   SendEventOnView,
@@ -5,11 +7,7 @@ import {
 import Button from "../../components/ui/Button.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Slider from "../../components/ui/Slider.tsx";
-import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
-import type { ImageWidget } from "apps/admin/widgets.ts";
-import { Picture, Source } from "apps/website/components/Picture.tsx";
-import Image from "apps/website/components/Image.tsx";
 
 /**
  * @titleBy alt
@@ -255,7 +253,7 @@ function BannerCarousel(props: Props) {
 
       {props.dots && <Dots images={images} interval={interval} />}
 
-      <SliderJS rootId={id} interval={interval && interval * 1e3} infinite />
+      <Slider.JS rootId={id} interval={interval && interval * 1e3} infinite />
     </div>
   );
 }

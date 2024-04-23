@@ -1,9 +1,8 @@
+import type { ImageWidget } from "apps/admin/widgets.ts";
+import Image from "apps/website/components/Image.tsx";
 import Header from "../../components/ui/SectionHeader.tsx";
 import Slider from "../../components/ui/Slider.tsx";
-import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
-import Image from "apps/website/components/Image.tsx";
-import type { ImageWidget } from "apps/admin/widgets.ts";
 
 export interface Category {
   tag?: string;
@@ -177,7 +176,7 @@ function CategoryList(props: Props) {
         ))}
       </Slider>
 
-      <SliderJS rootId={id} />
+      <Slider.JS rootId={id} />
     </div>
   );
 }
