@@ -43,7 +43,7 @@ instructions below to integrate the Sales Assistant into your online store.
      `islands` directory.
 
 2. **Customize Chat Name:**
-   - In the `Chat.tsx` file, update the chat name in the WebSocket call. Replace
+   - In the `ShopAssistant.tsx` file, update the chat name in the WebSocket call. Replace
      `name` with the name of your Brand Assistant.
 
 ```typescript
