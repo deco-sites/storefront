@@ -3603,6 +3603,9 @@
       },
       {
         "__resolveType": "analytics/sections/Analytics/DecoAnalytics.tsx"
+      },
+      {
+        "__resolveType": "htmx/sections/htmx.tsx"
       }
     ],
     "routes": [
@@ -3634,7 +3637,13 @@
     },
     "platform": "vtex",
     "__resolveType": "site/apps/site.ts",
-    "firstByteThresholdMS": true
+    "firstByteThresholdMS": true,
+    "abTesting": {
+      "replaces": [],
+      "includeScriptsToHead": {
+        "includes": []
+      }
+    }
   },
   "vtex-trigger": {
     "product": [
