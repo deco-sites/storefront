@@ -3253,7 +3253,7 @@
         "content": [
           {
             "label": "HOT SALE",
-            "repeat": 30
+            "repeat": 15
           }
         ]
       },
@@ -3660,5 +3660,8 @@
   "Teste AB": {
     "__resolveType": "website/matchers/random.ts",
     "traffic": 0.5
+  },
+  "htmx": {
+    "__resolveType": "decohub/apps/htmx.ts"
   }
 }
