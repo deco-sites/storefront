@@ -117,7 +117,7 @@ function Searchbar({
         <Button
           type="button"
           class="join-item btn-ghost btn-square hidden sm:inline-flex"
-          onClick={() => displaySearchPopup.value = false}
+          onClick={() => (displaySearchPopup.value = false)}
           ariaLabel={displaySearchPopup.value ? "open search" : "search closed"}
         >
           <Icon id="XMark" size={24} strokeWidth={2} />
@@ -129,23 +129,18 @@ function Searchbar({
       >
         <div class="gap-4 grid grid-cols-1 sm:grid-rows-1 sm:grid-cols-[150px_1fr]">
           <div class="flex flex-col gap-6">
-            <span
-              class="font-medium text-xl"
-              role="heading"
-              aria-level={3}
-            >
+            <span class="font-medium text-xl" role="heading" aria-level={3}>
               Sugestões
             </span>
             <ul id="search-suggestion" class="flex flex-col gap-6">
               {searches.map(({ term }) => (
                 <li>
-                  <a href={`/s?q=${term}`} class="flex gap-4 items-center">
+                  <a
+                    href={`${action}?${name}=${term}`}
+                    class="flex gap-4 items-center"
+                  >
                     <span>
-                      <Icon
-                        id="MagnifyingGlass"
-                        size={24}
-                        strokeWidth={0.01}
-                      />
+                      <Icon id="MagnifyingGlass" size={24} strokeWidth={0.01} />
                     </span>
                     <span dangerouslySetInnerHTML={{ __html: term }} />
                   </a>
@@ -154,11 +149,7 @@ function Searchbar({
             </ul>
           </div>
           <div class="flex flex-col pt-6 md:pt-0 gap-6 overflow-x-hidden">
-            <span
-              class="font-medium text-xl"
-              role="heading"
-              aria-level={3}
-            >
+            <span class="font-medium text-xl" role="heading" aria-level={3}>
               Produtos sugeridos
             </span>
             <Slider class="carousel">
