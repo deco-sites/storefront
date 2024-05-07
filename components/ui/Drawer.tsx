@@ -1,10 +1,9 @@
-import { useId } from "../../sdk/useId.ts";
-import { useSignal } from "@preact/signals";
+import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import { ComponentChildren } from "preact";
-import { useEffect } from "preact/hooks";
+import { clx } from "../../sdk/clx.ts";
+import { useId } from "../../sdk/useId.ts";
 
-interface Props {
-  onClose?: () => void;
+export interface Props {
   open?: boolean;
   class?: string;
   loading?: "eager" | "lazy";
@@ -13,54 +12,54 @@ interface Props {
   id?: string;
 }
 
-function Drawer(props: Props) {
-  const {
-    children,
-    aside,
-    open,
-    onClose,
-    class: _class = "",
-    loading = "lazy",
-    id = useId(),
-  } = props;
-  const lazy = useSignal(loading === "lazy" && !open);
+const script = (id: string) => {
+  const handler = (e: KeyboardEvent) => {
+    if (e.key !== "Escape" && e.keyCode !== 27) {
+      return;
+    }
 
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) =>
-      (e.key === "Escape" || e.keyCode === 27) && open && onClose?.();
+    const input = document.getElementById(id) as HTMLInputElement | null;
 
-    addEventListener("keydown", handler);
+    if (!input) {
+      return;
+    }
 
-    return () => {
-      removeEventListener("keydown", handler);
-    };
-  }, [open]);
+    input.checked = false;
+  };
 
-  useEffect(() => {
-    lazy.value = false;
-  }, []);
+  addEventListener("keydown", handler);
+};
 
+function Drawer({
+  children,
+  aside,
+  open,
+  class: _class = "",
+  id = useId(),
+}: Props) {
   return (
-    <div class={`drawer ${_class}`}>
-      <input
-        id={id}
-        name={id}
-        checked={open}
-        type="checkbox"
-        class="drawer-toggle"
-        onChange={(e) => e.currentTarget.checked === false && onClose?.()}
-        aria-label={open ? "open drawer" : "closed drawer"}
-      />
+    <>
+      <div class={clx("drawer", _class)}>
+        <input
+          id={id}
+          name={id}
+          checked={open}
+          type="checkbox"
+          class="drawer-toggle"
+          aria-label={open ? "open drawer" : "closed drawer"}
+        />
 
-      <div class="drawer-content">
-        {children}
+        <div class="drawer-content">
+          {children}
+        </div>
+
+        <aside class="drawer-side h-full z-50 overflow-hidden">
+          <label for={id} class="drawer-overlay" />
+          {aside}
+        </aside>
       </div>
-
-      <aside class="drawer-side h-full z-50 overflow-hidden">
-        <label for={id} class="drawer-overlay" />
-        {!lazy.value && aside}
-      </aside>
-    </div>
+      <script defer src={scriptAsDataURI(script, id)} />
+    </>
   );
 }
 

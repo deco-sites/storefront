@@ -1,5 +1,5 @@
-// import { platform } from "../../apps/storefront.ts";
-import { lazy } from "preact/compat";
+import { IS_BROWSER } from "$fresh/runtime.ts";
+import { lazy, Suspense } from "preact/compat";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 
 const CartVTEX = lazy(() => import("./vtex/Cart.tsx"));
@@ -13,7 +13,11 @@ export interface Props {
   platform: ReturnType<typeof usePlatform>;
 }
 
-function Cart({ platform }: Props) {
+function Switcher({ platform }: Props) {
+  if (!IS_BROWSER) {
+    return null;
+  }
+
   if (platform === "vtex") {
     return <CartVTEX />;
   }
@@ -39,6 +43,20 @@ function Cart({ platform }: Props) {
   }
 
   return null;
+}
+
+function Cart(props: Props) {
+  return (
+    <Suspense
+      fallback={
+        <div class="w-screen flex items-center justify-center">
+          <span class="loading loading-ring" />
+        </div>
+      }
+    >
+      <Switcher {...props} />
+    </Suspense>
+  );
 }
 
 export default Cart;

@@ -1,11 +1,11 @@
-import { AppContext } from "../../apps/site.ts";
-import type { Props as SearchbarProps } from "../../components/search/Searchbar.tsx";
-import Drawers from "../../islands/Header/Drawers.tsx";
-import { usePlatform } from "../../sdk/usePlatform.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import type { SectionProps } from "deco/types.ts";
+import { AppContext } from "../../apps/site.ts";
+import type { Props as SearchbarProps } from "../../components/search/Searchbar.tsx";
+import { usePlatform } from "../../sdk/usePlatform.tsx";
 import Alert from "./Alert.tsx";
+import Drawers from "./Drawers.tsx";
 import Navbar from "./Navbar.tsx";
 import { headerHeight } from "./constants.ts";
 
@@ -82,27 +82,25 @@ function Header({
   const items = navItems ?? [];
 
   return (
-    <>
-      <header style={{ height: headerHeight }}>
-        <Drawers
-          menu={{ items }}
-          searchbar={searchbar}
-          platform={platform}
-        >
-          <div class="bg-base-100 fixed w-full z-50">
-            {alerts && alerts.length > 0 && <Alert alerts={alerts} />}
-            <Navbar
-              device={device}
-              items={items}
-              searchbar={searchbar && { ...searchbar, platform }}
-              logo={logo}
-              logoPosition={logoPosition}
-              buttons={buttons}
-            />
-          </div>
-        </Drawers>
-      </header>
-    </>
+    <header style={{ height: headerHeight }}>
+      <Drawers
+        menu={{ items }}
+        searchbar={searchbar}
+        platform={platform}
+      >
+        <div class="bg-base-100 fixed w-full z-50">
+          {alerts && alerts.length > 0 && <Alert alerts={alerts} />}
+          <Navbar
+            device={device}
+            items={items}
+            searchbar={searchbar && { ...searchbar, platform }}
+            logo={logo}
+            logoPosition={logoPosition}
+            buttons={buttons}
+          />
+        </div>
+      </Drawers>
+    </header>
   );
 }
 

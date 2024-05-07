@@ -2,7 +2,7 @@ import { AnalyticsItem } from "apps/commerce/types.ts";
 import Button from "../../../components/ui/Button.tsx";
 import { sendEvent } from "../../../sdk/analytics.tsx";
 import { formatPrice } from "../../../sdk/format.ts";
-import { useUI } from "../../../sdk/useUI.ts";
+import { MINICART_DRAWER_ID } from "../../../sdk/useUI.ts";
 import CartItem, { Item, Props as ItemProps } from "./CartItem.tsx";
 import Coupon, { Props as CouponProps } from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
@@ -49,7 +49,7 @@ function Cart({
         ? (
           <div class="flex flex-col gap-6">
             <span class="font-medium text-2xl">Sua sacola está vazia</span>
-            <label for="minicart" class="btn btn-outline">
+            <label for={MINICART_DRAWER_ID} class="btn btn-outline">
               Escolher produtos
             </label>
           </div>

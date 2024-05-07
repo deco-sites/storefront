@@ -1,16 +1,17 @@
-import type { Props as MenuProps } from "../../components/header/Menu.tsx";
-import Cart from "../../components/minicart/Cart.tsx";
+import type { ComponentChildren } from "preact";
 import type { Props as SearchbarProps } from "../../components/search/Searchbar.tsx";
-import Button from "../../components/ui/Button.tsx";
+import Searchbar from "../../components/search/Searchbar.tsx";
 import Drawer from "../../components/ui/Drawer.tsx";
 import Icon from "../../components/ui/Icon.tsx";
-import { useUI } from "../../sdk/useUI.ts";
+import Cart from "../../islands/Cart.tsx";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
-import type { ComponentChildren } from "preact";
-import { lazy, Suspense } from "preact/compat";
-
-const Menu = lazy(() => import("../../components/header/Menu.tsx"));
-const Searchbar = lazy(() => import("../../components/search/Searchbar.tsx"));
+import {
+  MINICART_DRAWER_ID,
+  SEARCHBAR_DRAWER_ID,
+  SIDEMENU_DRAWER_ID,
+} from "../../sdk/useUI.ts";
+import type { Props as MenuProps } from "./Menu.tsx";
+import Menu from "./Menu.tsx";
 
 export interface Props {
   menu: MenuProps;
@@ -23,10 +24,9 @@ export interface Props {
 }
 
 const Aside = (
-  { title, onClose, drawer, children }: {
+  { title, drawer, children }: {
     title: string;
-    onClose?: () => void;
-    drawer?: string;
+    drawer: string;
     children: ComponentChildren;
   },
 ) => (
@@ -35,50 +35,29 @@ const Aside = (
       <h1 class="px-4 py-3">
         <span class="font-medium text-2xl">{title}</span>
       </h1>
-      {onClose && (
-        <Button aria-label="X" class="btn btn-ghost" onClick={onClose}>
-          <Icon id="XMark" size={24} strokeWidth={2} />
-        </Button>
-      )}
-      {drawer && (
-        <label for={drawer} aria-label="X" class="btn btn-ghost">
-          <Icon id="XMark" size={24} strokeWidth={2} />
-        </label>
-      )}
+      <label for={drawer} aria-label="X" class="btn btn-ghost">
+        <Icon id="XMark" size={24} strokeWidth={2} />
+      </label>
     </div>
-    <Suspense
-      fallback={
-        <div class="w-screen flex items-center justify-center">
-          <span class="loading loading-ring" />
-        </div>
-      }
-    >
-      {children}
-    </Suspense>
+    {children}
   </div>
 );
 
 function Drawers({ menu, searchbar, children, platform }: Props) {
-  const { displayMenu, displaySearchDrawer } = useUI();
-
   return (
-    <>
-      <Drawer // left drawer
-        open={displayMenu.value || displaySearchDrawer.value}
-        onClose={() => {
-          displayMenu.value = false;
-          displaySearchDrawer.value = false;
-        }}
+    <Drawer
+      id={SIDEMENU_DRAWER_ID}
+      aside={
+        <Aside title="Menu" drawer={SIDEMENU_DRAWER_ID}>
+          <Menu {...menu} />
+        </Aside>
+      }
+    >
+      <Drawer
+        id={SEARCHBAR_DRAWER_ID}
         aside={
-          <Aside
-            onClose={() => {
-              displayMenu.value = false;
-              displaySearchDrawer.value = false;
-            }}
-            title={displayMenu.value ? "Menu" : "Buscar"}
-          >
-            {displayMenu.value && <Menu {...menu} />}
-            {searchbar && displaySearchDrawer.value && (
+          <Aside title="Search" drawer={SEARCHBAR_DRAWER_ID}>
+            {searchbar && (
               <div class="w-screen">
                 <Searchbar {...searchbar} />
               </div>
@@ -86,20 +65,19 @@ function Drawers({ menu, searchbar, children, platform }: Props) {
           </Aside>
         }
       >
-        {children}
+        <Drawer
+          id={MINICART_DRAWER_ID}
+          class="drawer-end"
+          aside={
+            <Aside title="My Bag" drawer={MINICART_DRAWER_ID}>
+              <Cart platform={platform} />
+            </Aside>
+          }
+        >
+          {children}
+        </Drawer>
       </Drawer>
-      <Drawer // right drawer
-        id="minicart"
-        class="drawer-end"
-        aside={
-          <Aside title="My Bag" drawer="minicart">
-            <Cart platform={platform} />
-          </Aside>
-        }
-      >
-        {children}
-      </Drawer>
-    </>
+    </Drawer>
   );
 }
 

@@ -1,8 +1,7 @@
 import { AnalyticsItem } from "apps/commerce/types.ts";
-import Button from "../../../../components/ui/Button.tsx";
 import Icon from "../../../../components/ui/Icon.tsx";
 import { sendEvent } from "../../../../sdk/analytics.tsx";
-import { useUI } from "../../../../sdk/useUI.ts";
+import { MINICART_DRAWER_ID } from "../../../../sdk/useUI.ts";
 
 interface Props {
   loading: boolean;
@@ -32,7 +31,7 @@ function CartButton({ loading, currency, total, items }: Props) {
       </span>
 
       <label
-        for="minicart"
+        for={MINICART_DRAWER_ID}
         class="btn btn-circle btn-sm btn-ghost"
         aria-label="open cart"
         data-deco="open-cart"
