@@ -12,6 +12,7 @@ import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import SearchControls from "./Controls.tsx";
+import { Head } from "$fresh/runtime.ts";
 
 export interface Layout {
   /**
@@ -70,6 +71,14 @@ function PageResult(props: SectionProps<typeof loader>) {
   const platform = usePlatform();
   const nextPageUrl = useUrlRebased(pageInfo.nextPage, url);
   const prevPageUrl = useUrlRebased(pageInfo.previousPage, url);
+  const { "f-partial": partialPrev } = usePartialSection({
+    href: prevPageUrl,
+    props: { partial: "hideMore" },
+  });
+  const { "f-partial": partialNext } = usePartialSection({
+    href: nextPageUrl,
+    props: { partial: "hideLess" },
+  });
 
   const infinite = layout?.pagination !== "pagination";
 
@@ -85,10 +94,8 @@ function PageResult(props: SectionProps<typeof loader>) {
           rel="prev"
           class="btn btn-ghost"
           hx-swap="outerHTML"
-          hx-get={usePartialSection({
-            href: prevPageUrl,
-            props: { partial: "hideMore" },
-          })["f-partial"]}
+          hx-get={partialPrev}
+          preload="mouseover"
         >
           <span class="inline [.htmx-request_&]:hidden">
             Show Less
@@ -126,10 +133,8 @@ function PageResult(props: SectionProps<typeof loader>) {
                 (!nextPageUrl || partial === "hideMore") && "hidden",
               )}
               hx-swap="outerHTML"
-              hx-get={usePartialSection({
-                href: nextPageUrl,
-                props: { partial: "hideLess" },
-              })["f-partial"]}
+              hx-get={partialNext}
+              preload="mouseover"
             >
               <span class="inline [.htmx-request_&]:hidden">
                 Show More
