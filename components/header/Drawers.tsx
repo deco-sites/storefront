@@ -23,9 +23,10 @@ export interface Props {
 }
 
 const Aside = (
-  { title, onClose, children }: {
+  { title, onClose, drawer, children }: {
     title: string;
     onClose?: () => void;
+    drawer?: string;
     children: ComponentChildren;
   },
 ) => (
@@ -38,6 +39,11 @@ const Aside = (
         <Button aria-label="X" class="btn btn-ghost" onClick={onClose}>
           <Icon id="XMark" size={24} strokeWidth={2} />
         </Button>
+      )}
+      {drawer && (
+        <label for={drawer} aria-label="X" class="btn btn-ghost">
+          <Icon id="XMark" size={24} strokeWidth={2} />
+        </label>
       )}
     </div>
     <Suspense
@@ -53,7 +59,7 @@ const Aside = (
 );
 
 function Drawers({ menu, searchbar, children, platform }: Props) {
-  const { displayCart, displayMenu, displaySearchDrawer } = useUI();
+  const { displayMenu, displaySearchDrawer } = useUI();
 
   return (
     <>
@@ -83,14 +89,10 @@ function Drawers({ menu, searchbar, children, platform }: Props) {
         {children}
       </Drawer>
       <Drawer // right drawer
+        id="minicart"
         class="drawer-end"
-        open={displayCart.value !== false}
-        onClose={() => displayCart.value = false}
         aside={
-          <Aside
-            title="Minha sacola"
-            onClose={() => displayCart.value = false}
-          >
+          <Aside title="My Bag" drawer="minicart">
             <Cart platform={platform} />
           </Aside>
         }

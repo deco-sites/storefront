@@ -12,7 +12,6 @@ export interface Props {
 
 const useAddToCart = ({ eventParams, onAddItem }: Props) => {
   const [loading, setLoading] = useState(false);
-  const { displayCart } = useUI();
 
   const onClick = async (e: MouseEvent) => {
     e.preventDefault();
@@ -28,7 +27,10 @@ const useAddToCart = ({ eventParams, onAddItem }: Props) => {
         params: eventParams,
       });
 
-      displayCart.value = true;
+      const input = document.getElementById("minicart") as HTMLInputElement;
+      if (input) {
+        input.checked = true;
+      }
     } finally {
       setLoading(false);
     }
