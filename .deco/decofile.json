@@ -3102,7 +3102,7 @@
             "mobile": 2,
             "desktop": 4
           },
-          "variant": "aside",
+          "filters": "aside",
           "pagination": "show-more"
         },
         "cardLayout": {

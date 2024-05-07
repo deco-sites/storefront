@@ -1,65 +1,71 @@
-import { useMemo } from "preact/hooks";
 import { ProductListingPage } from "apps/commerce/types.ts";
-import type { JSX } from "preact";
+import { scriptAsDataURI } from "apps/utils/dataURI.ts";
+import { JSX } from "preact";
 
 const SORT_QUERY_PARAM = "sort";
 const PAGE_QUERY_PARAM = "page";
 
-const useSort = () =>
-  useMemo(() => {
-    const urlSearchParams = new URLSearchParams(
-      globalThis.window.location?.search,
-    );
-    return urlSearchParams.get(SORT_QUERY_PARAM) ?? "";
-  }, []);
+export type Props = Pick<ProductListingPage, "sortOptions"> & { url: string };
 
-// TODO: Replace with "search utils"
-const applySort = (e: JSX.TargetedEvent<HTMLSelectElement, Event>) => {
-  const urlSearchParams = new URLSearchParams(
-    globalThis.window.location.search,
-  );
+const getUrl = (href: string, value: string) => {
+  const url = new URL(href);
 
-  urlSearchParams.delete(PAGE_QUERY_PARAM);
-  urlSearchParams.set(SORT_QUERY_PARAM, e.currentTarget.value);
-  globalThis.window.location.search = urlSearchParams.toString();
+  url.searchParams.delete(PAGE_QUERY_PARAM);
+  url.searchParams.set(SORT_QUERY_PARAM, value);
+
+  return url.href;
 };
 
-export type Props = Pick<ProductListingPage, "sortOptions">;
+const script = (id: string) => {
+  document.getElementById(id)?.addEventListener(
+    "change",
+    function (e) {
+      window.location.href =
+        (e as JSX.TargetedEvent<HTMLSelectElement, Event>).currentTarget.value;
+    },
+  );
+};
 
-// TODO: move this to the loader
-const portugueseMappings = {
+const labels: Record<string, string> = {
   "relevance:desc": "Relevância",
   "price:desc": "Maior Preço",
   "price:asc": "Menor Preço",
   "orders:desc": "Mais vendidos",
   "name:desc": "Nome - de Z a A",
   "name:asc": "Nome - de A a Z",
-  // "release:desc": "Relevância - Decrescente",
+  "release:desc": "Lançamento",
   "discount:desc": "Maior desconto",
 };
 
-function Sort({ sortOptions }: Props) {
-  const sort = useSort();
+function Sort({ sortOptions, url }: Props) {
+  const current = getUrl(
+    url,
+    new URL(url).searchParams.get(SORT_QUERY_PARAM) ?? "",
+  );
+  const options = sortOptions?.map(({ value, label }) => ({
+    value: getUrl(url, value),
+    label,
+  }));
 
   return (
     <>
-      <label for="sort" class="sr-only">Ordenar por</label>
+      <label for="sort" class="sr-only">Sort by</label>
       <select
         id="sort"
         name="sort"
-        onInput={applySort}
-        class="w-min h-[36px] px-1 rounded m-2 text-base-content cursor-pointer outline-none"
+        class="select select-bordered w-full max-w-sm rounded-lg"
       >
-        {sortOptions.map(({ value, label }) => ({
-          value,
-          label: portugueseMappings[label as keyof typeof portugueseMappings] ??
-            label,
-        })).filter(({ label }) => label).map(({ value, label }) => (
-          <option key={value} value={value} selected={value === sort}>
-            <span class="text-sm">{label}</span>
+        {options.map(({ value, label }) => (
+          <option
+            label={labels[label] ?? label}
+            value={value}
+            selected={value === current}
+          >
+            {label}
           </option>
         ))}
       </select>
+      <script src={scriptAsDataURI(script, "sort")} />
     </>
   );
 }

@@ -1,28 +1,24 @@
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import { scriptAsDataURI } from "apps/utils/dataURI.ts";
+import { usePartialSection } from "deco/hooks/usePartialSection.ts";
+import { SectionProps } from "deco/mod.ts";
 import { SendEventOnView } from "../../components/Analytics.tsx";
+import ProductCard from "../../components/product/ProductCard.tsx";
 import Filters from "../../components/search/Filters.tsx";
 import Icon from "../../components/ui/Icon.tsx";
-import SearchControls from "../../islands/SearchControls.tsx";
+import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
-import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
-
-export type Format = "Show More" | "Pagination";
+import { usePlatform } from "../../sdk/usePlatform.tsx";
+import SearchControls from "./Controls.tsx";
 
 export interface Layout {
   /**
-   * @description Use drawer for mobile like behavior on desktop. Aside for rendering the filters alongside the products
-   */
-  variant?: "aside" | "drawer";
-  /**
-   * @description Number of products per line on grid
-   */
-  columns?: Columns;
-  /**
+   * @title Pagination
    * @description Format of the pagination
    */
-  format?: Format;
+  pagination?: "show-more" | "pagination";
 }
 
 export interface Props {
@@ -32,6 +28,9 @@ export interface Props {
 
   /** @description 0 for ?page=0 as your first page */
   startingPage?: 0 | 1;
+
+  /** @hidden */
+  partial?: "hideMore" | "hideLess";
 }
 
 function NotFound() {
@@ -42,66 +41,109 @@ function NotFound() {
   );
 }
 
-function Result({
-  page,
-  layout,
-  startingPage = 0,
-  url: _url,
-}: Omit<Props, "page"> & {
-  page: ProductListingPage;
-  url: string;
-}) {
-  const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
+const useUrlRebased = (overrides: string | undefined, base: string) => {
+  let url: string | undefined = undefined;
+
+  if (overrides) {
+    const temp = new URL(overrides, base);
+    const final = new URL(base);
+
+    final.pathname = temp.pathname;
+    for (const [key, value] of temp.searchParams.entries()) {
+      final.searchParams.set(key, value);
+    }
+
+    url = final.href;
+  }
+
+  return url;
+};
+
+function PageResult(props: SectionProps<typeof loader>) {
+  const { layout, startingPage = 0, url, partial } = props;
+  const page = props.page!;
+  const { products, pageInfo } = page;
   const perPage = pageInfo?.recordPerPage || products.length;
-  const url = new URL(_url);
-
-  const { format = "Show More" } = layout ?? {};
-
-  const id = useId();
-
   const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
   const offset = zeroIndexedOffsetPage * perPage;
 
-  const isPartial = url.searchParams.get("partial") === "true";
-  const isFirstPage = !pageInfo.previousPage;
+  const platform = usePlatform();
+  const nextPageUrl = useUrlRebased(pageInfo.nextPage, url);
+  const prevPageUrl = useUrlRebased(pageInfo.previousPage, url);
+
+  const infinite = layout?.pagination !== "pagination";
 
   return (
-    <>
-      <div class="container px-4 sm:py-10">
-        {(isFirstPage || !isPartial) && (
-          <SearchControls
-            sortOptions={sortOptions}
-            filters={filters}
-            breadcrumb={breadcrumb}
-            displayFilter={layout?.variant === "drawer"}
-          />
+    <div class="grid grid-flow-row grid-cols-1 place-items-center">
+      <div
+        class={clx(
+          "pb-2 sm:pb-10",
+          (!prevPageUrl || partial === "hideLess") && "hidden",
         )}
+      >
+        <a
+          rel="prev"
+          class="btn btn-ghost"
+          hx-swap="outerHTML"
+          hx-get={usePartialSection({
+            href: prevPageUrl,
+            props: { partial: "hideMore" },
+          })["f-partial"]}
+        >
+          <span class="inline [.htmx-request_&]:hidden">
+            Show Less
+          </span>
+          <span class="loading loading-spinner hidden [.htmx-request_&]:block" />
+        </a>
+      </div>
 
-        <div class="flex flex-row">
-          {layout?.variant === "aside" && filters.length > 0 &&
-            (isFirstPage || !isPartial) && (
-            <aside class="hidden sm:block w-min min-w-[250px]">
-              <Filters filters={filters} />
-            </aside>
-          )}
-          <div class="flex-grow" id={id}>
-            <ProductGallery
-              products={products}
-              offset={offset}
-              layout={{ columns: layout?.columns, format }}
-              pageInfo={pageInfo}
-              url={url}
-            />
-          </div>
-        </div>
+      <div
+        data-product-list
+        class={clx(
+          "grid items-center",
+          "grid-cols-2 gap-2",
+          "sm:grid-cols-4 sm:gap-10",
+        )}
+      >
+        {products?.map((product, index) => (
+          <ProductCard
+            key={`product-card-${product.productID}`}
+            product={product}
+            preload={index === 0}
+            index={offset + index}
+            platform={platform}
+          />
+        ))}
+      </div>
 
-        {format == "Pagination" && (
-          <div class="flex justify-center my-4">
-            <div class="join">
+      <div class={clx("pt-2 sm:pt-10")}>
+        {infinite
+          ? (
+            <a
+              rel="next"
+              class={clx(
+                "btn btn-ghost",
+                (!nextPageUrl || partial === "hideMore") && "hidden",
+              )}
+              hx-swap="outerHTML"
+              hx-get={usePartialSection({
+                href: nextPageUrl,
+                props: { partial: "hideLess" },
+              })["f-partial"]}
+            >
+              <span class="inline [.htmx-request_&]:hidden">
+                Show More
+              </span>
+              <span class="loading loading-spinner hidden [.htmx-request_&]:block" />
+            </a>
+          )
+          : (
+            <div class={clx("join", infinite && "hidden")}>
               <a
-                aria-label="previous page link"
                 rel="prev"
-                href={pageInfo.previousPage ?? "#"}
+                aria-label="previous page link"
+                href={prevPageUrl ?? "#"}
+                disabled={!prevPageUrl}
                 class="btn btn-ghost join-item"
               >
                 <Icon id="ChevronLeft" size={24} strokeWidth={2} />
@@ -110,17 +152,92 @@ function Result({
                 Page {zeroIndexedOffsetPage + 1}
               </span>
               <a
-                aria-label="next page link"
                 rel="next"
-                href={pageInfo.nextPage ?? "#"}
+                aria-label="next page link"
+                href={nextPageUrl ?? "#"}
+                disabled={!nextPageUrl}
                 class="btn btn-ghost join-item"
               >
                 <Icon id="ChevronRight" size={24} strokeWidth={2} />
               </a>
             </div>
-          </div>
-        )}
+          )}
       </div>
+    </div>
+  );
+}
+
+const setPageQuerystring = (page: string, id: string) => {
+  const element = document.getElementById(id)?.querySelector(
+    "[data-product-list]",
+  );
+
+  if (!element) {
+    return;
+  }
+
+  new IntersectionObserver((entries) => {
+    const url = new URL(location.href);
+
+    const prevPage = url.searchParams.get("page");
+
+    for (let it = 0; it < entries.length; it++) {
+      if (entries[it].isIntersecting) {
+        url.searchParams.set("page", page);
+      } else if (
+        typeof history.state?.prevPage === "string" &&
+        history.state?.prevPage !== page
+      ) {
+        url.searchParams.set("page", history.state.prevPage);
+      }
+    }
+
+    history.replaceState({ prevPage }, "", url.href);
+  }).observe(element);
+};
+
+function Result(props: SectionProps<typeof loader>) {
+  const { startingPage = 0, url, partial } = props;
+  const page = props.page!;
+  const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
+  const perPage = pageInfo?.recordPerPage || products.length;
+  const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
+  const offset = zeroIndexedOffsetPage * perPage;
+
+  const id = useId();
+
+  return (
+    <>
+      <div id={id}>
+        {partial
+          ? <PageResult {...props} />
+          : (
+            <div class="container px-4 sm:px-0 py-4 sm:py-10 flex flex-col gap-2 items-center justify-center">
+              <SearchControls
+                url={url}
+                sortOptions={sortOptions}
+                filters={filters}
+                breadcrumb={breadcrumb}
+              />
+
+              <div class="grid place-items-center grid-cols-1 sm:grid-cols-[250px_1fr]">
+                <aside class="hidden sm:block self-start">
+                  <Filters filters={filters} />
+                </aside>
+
+                <div>
+                  <PageResult {...props} />
+                </div>
+              </div>
+            </div>
+          )}
+      </div>
+
+      <script
+        src={scriptAsDataURI(setPageQuerystring, `${pageInfo.currentPage}`, id)}
+        defer
+      />
+
       <SendEventOnView
         id={id}
         event={{
@@ -144,9 +261,10 @@ function Result({
   );
 }
 
-function SearchResult(
-  { page, ...props }: ReturnType<typeof loader>,
-) {
+function SearchResult({
+  page,
+  ...props
+}: SectionProps<typeof loader>) {
   if (!page) {
     return <NotFound />;
   }

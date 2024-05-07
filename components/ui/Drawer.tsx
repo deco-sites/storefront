@@ -10,6 +10,7 @@ interface Props {
   loading?: "eager" | "lazy";
   children: ComponentChildren;
   aside: ComponentChildren;
+  id?: string;
 }
 
 function Drawer(props: Props) {
@@ -20,9 +21,9 @@ function Drawer(props: Props) {
     onClose,
     class: _class = "",
     loading = "lazy",
+    id = useId(),
   } = props;
   const lazy = useSignal(loading === "lazy" && !open);
-  const id = useId();
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) =>
@@ -43,6 +44,7 @@ function Drawer(props: Props) {
     <div class={`drawer ${_class}`}>
       <input
         id={id}
+        name={id}
         checked={open}
         type="checkbox"
         class="drawer-toggle"
