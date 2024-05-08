@@ -39,7 +39,7 @@ function Drawer({
 }: Props) {
   return (
     <>
-      <div class={clx("drawer", _class)} popover>
+      <div class={clx("drawer", _class)}>
         <input
           id={id}
           name={id}

@@ -27,7 +27,6 @@ function ProductImageZoom({ images, width, height }: Props) {
       </Button>
       <div id={id}>
         <Modal
-          loading="lazy"
           open={open.value}
           onClose={() => open.value = false}
         >
