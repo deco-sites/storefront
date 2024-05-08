@@ -7,7 +7,7 @@ export interface Props {
   open?: boolean;
   class?: string;
   loading?: "eager" | "lazy";
-  children: ComponentChildren;
+  children?: ComponentChildren;
   aside: ComponentChildren;
   id?: string;
 }
@@ -39,7 +39,7 @@ function Drawer({
 }: Props) {
   return (
     <>
-      <div class={clx("drawer", _class)}>
+      <div class={clx("drawer", _class)} popover>
         <input
           id={id}
           name={id}

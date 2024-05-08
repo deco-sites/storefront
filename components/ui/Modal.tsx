@@ -1,55 +1,40 @@
 import { useId } from "../../sdk/useId.ts";
-import { useSignal } from "@preact/signals";
+import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import { ComponentChildren } from "preact";
-import { useEffect, useState } from "preact/hooks";
 
 interface Props {
-  onClose?: () => void;
   open?: boolean;
-  class?: string;
-  style?: string;
   children?: ComponentChildren;
-  loading?: "eager" | "lazy";
+  id?: string;
 }
 
-function Modal(props: Props) {
-  const {
-    children,
-    open,
-    onClose,
-    loading = "lazy",
-  } = props;
-  const lazy = useSignal(loading === "lazy" && !open);
-  const id = useId();
+const script = (id: string) => {
+  const handler = (e: KeyboardEvent) => {
+    if (e.key !== "Escape" && e.keyCode !== 27) {
+      return;
+    }
 
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) =>
-      (e.key === "Escape" || e.keyCode === 27) && open && onClose?.();
+    const input = document.getElementById(id) as HTMLInputElement | null;
 
-    addEventListener("keydown", handler);
+    if (!input) {
+      return;
+    }
 
-    return () => {
-      removeEventListener("keydown", handler);
-    };
-  }, [open]);
+    input.checked = false;
+  };
 
-  useEffect(() => {
-    lazy.value = false;
-  }, []);
+  addEventListener("keydown", handler);
+};
 
+function Modal({ children, open, id = useId() }: Props) {
   return (
     <>
-      <input
-        id={id}
-        checked={open}
-        type="checkbox"
-        class="modal-toggle"
-        onChange={(e) => e.currentTarget.checked === false && onClose?.()}
-      />
+      <input id={id} checked={open} type="checkbox" class="modal-toggle" />
       <div class="modal">
-        {!lazy.value && children}
+        {children}
         <label class="modal-backdrop" for={id}>Close</label>
       </div>
+      <script defer src={scriptAsDataURI(script, id)} />
     </>
   );
 }

@@ -3,17 +3,12 @@
  * like clicking on add to cart and the cart modal being displayed
  */
 
-import { signal } from "@preact/signals";
-
-const displaySearchPopup = signal(false);
-
 export const MINICART_DRAWER_ID = "minicart-drawer";
 export const SIDEMENU_DRAWER_ID = "sidemenu-drawer";
 export const SEARCHBAR_DRAWER_ID = "searchbar-drawer";
-
-const state = {
-  displaySearchPopup,
-};
+export const SEARCHBAR_POPUP_ID = "searchbar-popup";
+export const SEARCHBAR_SUGGESTION_ID = "searchbar-suggestion";
+export const SEARCHBAR_INPUT_FORM_ID = "searchbar-form";
 
 // Keyboard event listeners
 addEventListener("keydown", (e: KeyboardEvent) => {
@@ -21,8 +16,14 @@ addEventListener("keydown", (e: KeyboardEvent) => {
 
   // Open Searchbar on meta+k
   if (e.metaKey === true && isK) {
-    displaySearchPopup.value = true;
+    const input = document.getElementById(SEARCHBAR_POPUP_ID) as
+      | HTMLInputElement
+      | null;
+
+    if (input) {
+      input.checked = true;
+
+      document.getElementById(SEARCHBAR_INPUT_FORM_ID)?.focus();
+    }
   }
 });
-
-export const useUI = () => state;

@@ -1,21 +1,14 @@
 import type { ComponentChildren } from "preact";
-import type { Props as SearchbarProps } from "../../components/search/Searchbar.tsx";
-import Searchbar from "../../components/search/Searchbar.tsx";
 import Drawer from "../../components/ui/Drawer.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Cart from "../../islands/Cart.tsx";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
-import {
-  MINICART_DRAWER_ID,
-  SEARCHBAR_DRAWER_ID,
-  SIDEMENU_DRAWER_ID,
-} from "../../sdk/useUI.ts";
+import { MINICART_DRAWER_ID, SIDEMENU_DRAWER_ID } from "../../sdk/useUI.ts";
 import type { Props as MenuProps } from "./Menu.tsx";
 import Menu from "./Menu.tsx";
 
 export interface Props {
   menu: MenuProps;
-  searchbar?: SearchbarProps;
   /**
    * @ignore_gen true
    */
@@ -23,7 +16,7 @@ export interface Props {
   platform: ReturnType<typeof usePlatform>;
 }
 
-const Aside = (
+export const Aside = (
   { title, drawer, children }: {
     title: string;
     drawer: string;
@@ -43,7 +36,7 @@ const Aside = (
   </div>
 );
 
-function Drawers({ menu, searchbar, children, platform }: Props) {
+function Drawers({ menu, children, platform }: Props) {
   return (
     <Drawer
       id={SIDEMENU_DRAWER_ID}
@@ -54,28 +47,15 @@ function Drawers({ menu, searchbar, children, platform }: Props) {
       }
     >
       <Drawer
-        id={SEARCHBAR_DRAWER_ID}
+        id={MINICART_DRAWER_ID}
+        class="drawer-end"
         aside={
-          <Aside title="Search" drawer={SEARCHBAR_DRAWER_ID}>
-            {searchbar && (
-              <div class="w-screen">
-                <Searchbar {...searchbar} />
-              </div>
-            )}
+          <Aside title="My Bag" drawer={MINICART_DRAWER_ID}>
+            <Cart platform={platform} />
           </Aside>
         }
       >
-        <Drawer
-          id={MINICART_DRAWER_ID}
-          class="drawer-end"
-          aside={
-            <Aside title="My Bag" drawer={MINICART_DRAWER_ID}>
-              <Cart platform={platform} />
-            </Aside>
-          }
-        >
-          {children}
-        </Drawer>
+        {children}
       </Drawer>
     </Drawer>
   );
