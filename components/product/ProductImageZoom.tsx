@@ -1,7 +1,5 @@
-import { useSignal } from "@preact/signals";
 import type { ImageObject } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
-import Button from "../../components/ui/Button.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Modal from "../../components/ui/Modal.tsx";
 import Slider from "../../components/ui/Slider.tsx";
@@ -15,21 +13,15 @@ export interface Props {
 
 function ProductImageZoom({ images, width, height }: Props) {
   const id = useId();
-  const open = useSignal(false);
+  const container = `${id}-container`;
 
   return (
     <>
-      <Button
-        class="hidden sm:inline-flex btn-ghost"
-        onClick={() => open.value = true}
-      >
+      <label class="hidden sm:inline-flex btn btn-ghost" for={id}>
         <Icon id="Zoom" size={24} />
-      </Button>
-      <div id={id}>
-        <Modal
-          open={open.value}
-          onClose={() => open.value = false}
-        >
+      </label>
+      <div id={container}>
+        <Modal id={id}>
           <div class="modal-box w-11/12 max-w-7xl grid grid-cols-[48px_1fr_48px] grid-rows-1 place-items-center">
             <Slider class="carousel col-span-full col-start-1 row-start-1 row-span-full h-full w-full">
               {images.map((image, index) => (
@@ -57,7 +49,7 @@ function ProductImageZoom({ images, width, height }: Props) {
               <Icon size={24} id="ChevronRight" strokeWidth={3} />
             </Slider.NextButton>
 
-            <Slider.JS rootId={id} />
+            <Slider.JS rootId={container} />
           </div>
         </Modal>
       </div>

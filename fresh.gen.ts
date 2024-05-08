@@ -18,7 +18,6 @@ import * as $Header_Cart_vtex from "./islands/Header/Cart/vtex.tsx";
 import * as $Header_Cart_wake from "./islands/Header/Cart/wake.tsx";
 import * as $Newsletter from "./islands/Newsletter.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
-import * as $ProductImageZoom from "./islands/ProductImageZoom.tsx";
 import * as $ShippingSimulation from "./islands/ShippingSimulation.tsx";
 import * as $WishlistButton_vtex from "./islands/WishlistButton/vtex.tsx";
 import * as $WishlistButton_wake from "./islands/WishlistButton/wake.tsx";
@@ -44,7 +43,6 @@ const manifest = {
     "./islands/Header/Cart/wake.tsx": $Header_Cart_wake,
     "./islands/Newsletter.tsx": $Newsletter,
     "./islands/OutOfStock.tsx": $OutOfStock,
-    "./islands/ProductImageZoom.tsx": $ProductImageZoom,
     "./islands/ShippingSimulation.tsx": $ShippingSimulation,
     "./islands/WishlistButton/vtex.tsx": $WishlistButton_vtex,
     "./islands/WishlistButton/wake.tsx": $WishlistButton_wake,
