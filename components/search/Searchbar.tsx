@@ -99,9 +99,6 @@ export default function Searchbar(
           class="input input-bordered join-item flex-grow"
           name={NAME}
           placeholder={placeholder}
-          role="combobox"
-          aria-controls={SEARCHBAR_SUGGESTION_ID}
-          aria-haspopup="listbox"
           autocomplete="off"
           hx-post={useSection({
             props: {
