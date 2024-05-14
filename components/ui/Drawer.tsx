@@ -2,6 +2,7 @@ import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import { ComponentChildren } from "preact";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
+import Icon from "./Icon.tsx";
 
 export interface Props {
   open?: boolean;
@@ -53,7 +54,7 @@ function Drawer({
           {children}
         </div>
 
-        <aside class="drawer-side h-full z-50 overflow-hidden">
+        <aside class="drawer-side h-full z-40 overflow-hidden">
           <label for={id} class="drawer-overlay" />
           {aside}
         </aside>
@@ -62,5 +63,29 @@ function Drawer({
     </>
   );
 }
+
+function Aside(
+  { title, drawer, children }: {
+    title: string;
+    drawer: string;
+    children: ComponentChildren;
+  },
+) {
+  return (
+    <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y max-w-[100vw]">
+      <div class="flex justify-between items-center">
+        <h1 class="px-4 py-3">
+          <span class="font-medium text-2xl">{title}</span>
+        </h1>
+        <label for={drawer} aria-label="X" class="btn btn-ghost">
+          <Icon id="XMark" size={24} strokeWidth={2} />
+        </label>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+Drawer.Aside = Aside;
 
 export default Drawer;

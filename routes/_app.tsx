@@ -1,7 +1,6 @@
 import { asset, Head } from "$fresh/runtime.ts";
 import { defineApp } from "$fresh/server.ts";
 import { Context } from "deco/deco.ts";
-import Theme from "../sections/Theme/Theme.tsx";
 
 const sw = () =>
   addEventListener("load", () =>
@@ -13,9 +12,6 @@ export default defineApp(async (_req, ctx) => {
 
   return (
     <>
-      {/* Include default fonts and css vars */}
-      <Theme />
-
       {/* Include Icons and manifest */}
       <Head>
         {/* Enable View Transitions API */}
@@ -33,12 +29,12 @@ export default defineApp(async (_req, ctx) => {
 
       {/* Rest of Preact tree */}
       <ctx.Component />
-
-      {/* Include service worker */}
-      <script
-        type="module"
-        dangerouslySetInnerHTML={{ __html: `(${sw})();` }}
-      />
     </>
   );
 });
+
+// {/* Include service worker */}
+// <script
+//   type="module"
+//   dangerouslySetInnerHTML={{ __html: `(${sw})();` }}
+// />

@@ -1,4 +1,5 @@
 import type { BreadcrumbList } from "apps/commerce/types.ts";
+import { relative } from "../../sdk/url.ts";
 
 interface Props {
   itemListElement: BreadcrumbList["itemListElement"];
@@ -14,7 +15,7 @@ function Breadcrumb({ itemListElement = [] }: Props) {
           .filter(({ name, item }) => name && item)
           .map(({ name, item }) => (
             <li>
-              <a href={item}>{name}</a>
+              <a href={relative(item)}>{name}</a>
             </li>
           ))}
       </ul>

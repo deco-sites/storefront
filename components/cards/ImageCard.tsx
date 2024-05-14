@@ -1,6 +1,6 @@
-import { ButtonType, getButtonClasses } from "../../constants.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
+import { ButtonType } from "../../constants.tsx";
 
 interface Style {
   /** @description In px */
@@ -99,7 +99,7 @@ function Card(
         )}
       </a>
       {buttonText && (
-        <a href={href} class={getButtonClasses(style?.button || {})}>
+        <a href={href} class="btn">
           {buttonText}
         </a>
       )}

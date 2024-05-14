@@ -1,22 +1,17 @@
+import { ProductDetailsPage } from "apps/commerce/types.ts";
+import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
-import AddToCartButtonLinx from "../../islands/AddToCartButton/linx.tsx";
-import AddToCartButtonShopify from "../../islands/AddToCartButton/shopify.tsx";
-import AddToCartButtonVNDA from "../../islands/AddToCartButton/vnda.tsx";
-import AddToCartButtonVTEX from "../../islands/AddToCartButton/vtex.tsx";
-import AddToCartButtonWake from "../../islands/AddToCartButton/wake.tsx";
-import AddToCartButtonNuvemshop from "../../islands/AddToCartButton/nuvemshop.tsx";
-import OutOfStock from "../../islands/OutOfStock.tsx";
-import ShippingSimulation from "../../islands/ShippingSimulation.tsx";
-import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
-import WishlistButtonWake from "../../islands/WishlistButton/wake.tsx";
+import { useAddToCart } from "../../sdk/cart/useAddToCart.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
-import { ProductDetailsPage } from "apps/commerce/types.ts";
-import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import { Form as ShippingSimulation } from "../../sections/Product/ShippingSimulation.tsx";
+import AddToCartButton from "./AddToCartButton.tsx";
+import OutOfStock from "./OutOfStock.tsx";
 import ProductSelector from "./ProductVariantSelector.tsx";
+import WishlistButton from "../wishlist/WishlistButton.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -39,14 +34,7 @@ function ProductInfo({ page, layout }: Props) {
   }
 
   const { breadcrumbList, product } = page;
-  const {
-    productID,
-    offers,
-    name = "",
-    gtin,
-    isVariantOf,
-    additionalProperty = [],
-  } = product;
+  const { productID, offers, name = "", gtin, isVariantOf } = product;
   const description = product.description || isVariantOf?.description;
   const {
     price = 0,
@@ -68,6 +56,8 @@ function ProductInfo({ page, layout }: Props) {
     price,
     listPrice,
   });
+
+  const addToCartProps = useAddToCart({ seller, productID });
 
   return (
     <div class="flex flex-col px-4" id={id}>
@@ -110,60 +100,18 @@ function ProductInfo({ page, layout }: Props) {
         {availability === "https://schema.org/InStock"
           ? (
             <>
-              {platform === "vtex" && (
-                <>
-                  <AddToCartButtonVTEX
-                    eventParams={{ items: [eventItem] }}
-                    productID={productID}
-                    seller={seller}
-                  />
-                  <WishlistButtonVtex
-                    variant="full"
-                    productID={productID}
-                    productGroupID={productGroupID}
-                  />
-                </>
-              )}
-              {platform === "wake" && (
-                <>
-                  <AddToCartButtonWake
-                    eventParams={{ items: [eventItem] }}
-                    productID={productID}
-                  />
-                  <WishlistButtonWake
-                    variant="full"
-                    productID={productID}
-                    productGroupID={productGroupID}
-                  />
-                </>
-              )}
-              {platform === "linx" && (
-                <AddToCartButtonLinx
-                  eventParams={{ items: [eventItem] }}
-                  productID={productID}
-                  productGroupID={productGroupID}
-                />
-              )}
-              {platform === "vnda" && (
-                <AddToCartButtonVNDA
-                  eventParams={{ items: [eventItem] }}
-                  productID={productID}
-                  additionalProperty={additionalProperty}
-                />
-              )}
-              {platform === "shopify" && (
-                <AddToCartButtonShopify
-                  eventParams={{ items: [eventItem] }}
-                  productID={productID}
-                />
-              )}
-              {platform === "nuvemshop" && (
-                <AddToCartButtonNuvemshop
-                  productGroupID={productGroupID}
-                  eventParams={{ items: [eventItem] }}
-                  additionalProperty={additionalProperty}
-                />
-              )}
+              <AddToCartButton
+                class="btn-primary"
+                minicart={addToCartProps}
+                event={{ name: "add_to_cart", params: { items: [eventItem] } }}
+              />
+              {/* @ts-expect-error todo @gimenes */}
+              <WishlistButton
+                isUserLoggedIn={true}
+                productID={productID}
+                productGroupID={productGroupID}
+              />
+              {/* todo @gimenes: add wishlist back */}
             </>
           )
           : <OutOfStock productID={productID} />}
@@ -172,13 +120,11 @@ function ProductInfo({ page, layout }: Props) {
       <div class="mt-8">
         {platform === "vtex" && (
           <ShippingSimulation
-            items={[
-              {
-                id: Number(product.sku),
-                quantity: 1,
-                seller: seller,
-              },
-            ]}
+            items={[{
+              id: Number(product.sku),
+              quantity: 1,
+              seller: seller,
+            }]}
           />
         )}
       </div>

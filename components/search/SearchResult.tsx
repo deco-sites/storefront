@@ -1,7 +1,7 @@
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
-import { usePartialSection } from "deco/hooks/usePartialSection.ts";
+import { useSection } from "deco/hooks/usePartialSection.ts";
 import { SectionProps } from "deco/mod.ts";
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import ProductCard from "../../components/product/ProductCard.tsx";
@@ -10,9 +10,7 @@ import Icon from "../../components/ui/Icon.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
-import { usePlatform } from "../../sdk/usePlatform.tsx";
 import SearchControls from "./Controls.tsx";
-import { Head } from "$fresh/runtime.ts";
 
 export interface Layout {
   /**
@@ -68,14 +66,13 @@ function PageResult(props: SectionProps<typeof loader>) {
   const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
   const offset = zeroIndexedOffsetPage * perPage;
 
-  const platform = usePlatform();
   const nextPageUrl = useUrlRebased(pageInfo.nextPage, url);
   const prevPageUrl = useUrlRebased(pageInfo.previousPage, url);
-  const { "f-partial": partialPrev } = usePartialSection({
+  const partialPrev = useSection({
     href: prevPageUrl,
     props: { partial: "hideMore" },
   });
-  const { "f-partial": partialNext } = usePartialSection({
+  const partialNext = useSection({
     href: nextPageUrl,
     props: { partial: "hideLess" },
   });
@@ -93,9 +90,8 @@ function PageResult(props: SectionProps<typeof loader>) {
         <a
           rel="prev"
           class="btn btn-ghost"
-          hx-swap="outerHTML"
+          hx-swap="outerHTML show:parent:top"
           hx-get={partialPrev}
-          preload="mouseover"
         >
           <span class="inline [.htmx-request_&]:hidden">
             Show Less
@@ -118,7 +114,6 @@ function PageResult(props: SectionProps<typeof loader>) {
             product={product}
             preload={index === 0}
             index={offset + index}
-            platform={platform}
           />
         ))}
       </div>
@@ -132,9 +127,8 @@ function PageResult(props: SectionProps<typeof loader>) {
                 "btn btn-ghost",
                 (!nextPageUrl || partial === "hideMore") && "hidden",
               )}
-              hx-swap="outerHTML"
+              hx-swap="outerHTML show:parent:top"
               hx-get={partialNext}
-              preload="mouseover"
             >
               <span class="inline [.htmx-request_&]:hidden">
                 Show More
@@ -230,7 +224,7 @@ function Result(props: SectionProps<typeof loader>) {
                   <Filters filters={filters} />
                 </aside>
 
-                <div>
+                <div class="self-start">
                   <PageResult {...props} />
                 </div>
               </div>

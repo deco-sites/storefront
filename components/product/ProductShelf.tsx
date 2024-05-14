@@ -8,7 +8,6 @@ import Slider from "../../components/ui/Slider.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
-import { usePlatform } from "../../sdk/usePlatform.tsx";
 
 export interface Props {
   products: Product[] | null;
@@ -32,7 +31,6 @@ function ProductShelf({
   layout,
 }: Props) {
   const id = useId();
-  const platform = usePlatform();
 
   if (!products || products.length === 0) {
     return null;
@@ -82,7 +80,6 @@ function ProductShelf({
               <ProductCard
                 product={product}
                 itemListName={title}
-                platform={platform}
                 index={index}
               />
             </Slider.Item>

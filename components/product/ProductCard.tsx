@@ -1,18 +1,16 @@
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
-import type { Platform } from "../../apps/site.ts";
 import { SendEventOnClick } from "../../components/Analytics.tsx";
 import Avatar from "../../components/ui/Avatar.tsx";
-import {
-  default as WishlistButtonVtex,
-  default as WishlistButtonWake,
-} from "../../islands/WishlistButton/vtex.tsx";
+import { useAddToCart } from "../../sdk/cart/useAddToCart.ts";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { relative } from "../../sdk/url.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
+import WishlistButton from "../wishlist/WishlistButton.tsx";
+import AddToCartButton from "./AddToCartButton.tsx";
 
 interface Props {
   product: Product;
@@ -24,8 +22,6 @@ interface Props {
 
   /** @description index of the product card in the list */
   index?: number;
-
-  platform?: Platform;
 }
 
 const WIDTH = 200;
@@ -35,7 +31,6 @@ function ProductCard({
   product,
   preload,
   itemListName,
-  platform,
   index,
 }: Props) {
   const { url, productID, name, image: images, offers, isVariantOf } = product;
@@ -44,11 +39,13 @@ function ProductCard({
   const productGroupID = isVariantOf?.productGroupID;
   const description = product.description || isVariantOf?.description;
   const [front, back] = images ?? [];
-  const { listPrice, price, installments } = useOffer(offers);
+  const { listPrice, price, installments, seller = "1" } = useOffer(offers);
   const possibilities = useVariantPossibilities(hasVariant, product);
   const variants = Object.entries(Object.values(possibilities)[0] ?? {});
   const relativeUrl = relative(url);
   const aspectRatio = `${WIDTH} / ${HEIGHT}`;
+  const addToCartProps = useAddToCart({ productID, seller });
+  const eventItem = mapProductToAnalyticsItem({ product, price, listPrice });
 
   return (
     <div
@@ -75,7 +72,7 @@ function ProductCard({
         }}
       />
 
-      <div class="flex flex-col gap-2 lg:group-hover:-translate-y-2">
+      <div class="flex flex-col gap-2">
         <figure
           class="relative overflow-hidden"
           style={{ aspectRatio }}
@@ -98,16 +95,12 @@ function ProductCard({
               OFF
             </div>
             <div class="lg:group-hover:block">
-              {platform === "vtex" && (
-                <WishlistButtonVtex
-                  productGroupID={productGroupID}
+              {productGroupID && (
+                // @ts-expect-error todo @gimenes
+                <WishlistButton
+                  variant="icon"
                   productID={productID}
-                />
-              )}
-              {platform === "wake" && (
-                <WishlistButtonWake
                   productGroupID={productGroupID}
-                  productID={productID}
                 />
               )}
             </div>
@@ -208,13 +201,10 @@ function ProductCard({
           ou {installments}
         </span>
 
-        <a
-          href={relativeUrl}
-          aria-label="view product"
-          class="btn btn-block"
-        >
-          Ver produto
-        </a>
+        <AddToCartButton
+          minicart={addToCartProps}
+          event={{ name: "add_to_cart", params: { items: [eventItem] } }}
+        />
       </div>
     </div>
   );

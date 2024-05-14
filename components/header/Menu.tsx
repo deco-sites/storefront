@@ -2,7 +2,7 @@ import Icon from "../../components/ui/Icon.tsx";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 
 export interface Props {
-  items: SiteNavigationElement[];
+  navItems: SiteNavigationElement[];
 }
 
 function MenuItem({ item }: { item: SiteNavigationElement }) {
@@ -26,11 +26,11 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
   );
 }
 
-function Menu({ items }: Props) {
+function Menu({ navItems }: Props) {
   return (
     <div class="flex flex-col h-full">
       <ul class="px-4 flex-grow flex flex-col divide-y divide-base-200">
-        {items.map((item) => (
+        {navItems.map((item) => (
           <li>
             <MenuItem item={item} />
           </li>

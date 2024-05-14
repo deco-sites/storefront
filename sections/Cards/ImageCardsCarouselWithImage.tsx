@@ -1,12 +1,9 @@
-import SimpleImage, {
-  Props as SimpleImageProps,
-} from "../../components/ui/SimpleImage.tsx";
-
 import ImageCardsCarousel, {
   Props as CarouselProps,
 } from "../../components/cards/ImageCardsCarousel.tsx";
-import { clx } from "../../sdk/clx.ts";
-import { flex } from "../../constants.tsx";
+import SimpleImage, {
+  Props as SimpleImageProps,
+} from "../../components/ui/SimpleImage.tsx";
 
 export interface Props {
   image?: SimpleImageProps;
@@ -20,12 +17,7 @@ export default function Section({
   carousel,
 }: Props) {
   return (
-    <div
-      class={clx(
-        "flex flex-col lg:flex-row items-center gap-8",
-        image.position ? flex.position[image.position] : flex.position["Left"],
-      )}
-    >
+    <div class="flex flex-col lg:flex-row items-center gap-8">
       <SimpleImage width={image.width || "30%"} {...image} />
       <div class="flex-auto">
         <ImageCardsCarousel {...carousel} />

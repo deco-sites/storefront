@@ -8,7 +8,6 @@ import Header from "../../components/ui/SectionHeader.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
-import { usePlatform } from "../../sdk/usePlatform.tsx";
 
 /** @titleBy title */
 interface Tab {
@@ -35,7 +34,6 @@ function TabbedProductShelf({
   tabIndex,
 }: Props) {
   const id = useId();
-  const platform = usePlatform();
   const ti = typeof tabIndex === "number"
     ? Math.min(Math.max(tabIndex, 0), tabs.length)
     : 0;
@@ -80,7 +78,6 @@ function TabbedProductShelf({
               <ProductCard
                 product={product}
                 itemListName={title}
-                platform={platform}
                 index={index}
               />
             </Slider.Item>
