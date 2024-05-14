@@ -1,13 +1,79 @@
 import { AnalyticsItem } from "apps/commerce/types.ts";
+import { OrderForm } from "apps/vtex/utils/types.ts";
+import { Resolved } from "deco/mod.ts";
+import { AppContext } from "../../apps/site.ts";
+import { useMinicart as useMinicartVTEX } from "../../sdk/cart/vtex.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { useId } from "../../sdk/useId.ts";
+import { usePlatform } from "../../sdk/usePlatform.tsx";
 import { MINICART_DRAWER_ID } from "../../sdk/useUI.ts";
 import { SendEventOnClick, SendEventOnView } from "../Analytics.tsx";
 import Coupon, { Props as CouponProps } from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
 import CartItem, { Item, Props as ItemProps } from "./Item.tsx";
+import { ComponentProps as IComponentProps } from "../../sections/Component.tsx";
 
 export interface Props {
+  cart: Resolved<OrderForm | null>;
+}
+
+const invoke = <T,>(
+  { __resolveType, ...props }: Resolved<T>,
+  ctx: AppContext,
+  form?: Record<string, unknown>,
+) =>
+  // deno-lint-ignore no-explicit-any
+  (ctx as any).invoke(__resolveType, { ...props, ...form }) as Promise<T>;
+
+export const action = async (
+  { cart }: Props,
+  req: Request,
+  ctx: AppContext,
+) => {
+  const platform = usePlatform();
+
+  if (!cart) {
+    throw new Error("Missing cart loader props");
+  }
+
+  // Props from forms inside the cart, like coupons etc.
+  // Input names are used as keys and must match action prop keys
+  const form = Object.fromEntries([
+    ...(await req.formData()).entries(),
+  ]);
+
+  if (platform === "vtex") {
+    return useMinicartVTEX({
+      cart: await invoke(cart, ctx, form),
+      url: req.url,
+    });
+  }
+
+  throw new Error(`Unsupported platform: ${platform}`);
+};
+
+export const loader = async (
+  { cart }: Props,
+  req: Request,
+  ctx: AppContext,
+) => {
+  const platform = usePlatform();
+
+  if (!cart) {
+    throw new Error("Missing cart loader props");
+  }
+
+  if (platform === "vtex") {
+    return useMinicartVTEX({
+      cart: await invoke(cart, ctx),
+      url: req.url,
+    });
+  }
+
+  throw new Error(`Unsupported platform: ${platform}`);
+};
+
+export interface ComponentProps {
   data: {
     items: Item[];
     total: number;
@@ -44,7 +110,7 @@ function Cart({
   useAddCoupon,
   useAnalyticsItem,
   useUpdateQuantity,
-}: Props) {
+}: IComponentProps<typeof loader, typeof action>) {
   const isEmtpy = items.length === 0;
   const beginCheckout = useId();
   const analyticsItems = items

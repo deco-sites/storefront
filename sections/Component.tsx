@@ -1,21 +1,30 @@
 import { useSection } from "deco/hooks/usePartialSection.ts";
-import { AppContext } from "../apps/site.ts";
+import type { AppContext } from "../apps/site.ts";
+import type { SectionProps } from "deco/mod.ts";
+import { toFileUrl } from "std/path/mod.ts";
 
 interface Props {
   component: string;
   props?: Record<string, unknown>;
 }
 
-export const useComponent = (
+export type ComponentProps<LoaderFunc, ActionFunc = LoaderFunc> = SectionProps<
+  LoaderFunc,
+  ActionFunc
+>;
+
+const ROOT = toFileUrl(Deno.cwd()).href;
+
+export const useComponent = <T = Record<string, unknown>>(
   component: string,
-  props?: Record<string, unknown>,
+  props?: T,
   otherProps: { href?: string } = {},
 ) =>
   useSection({
     ...otherProps,
     props: {
       props,
-      component,
+      component: component.replace(ROOT, ""),
       __resolveType: "site/sections/Component.tsx",
     },
   });
@@ -27,10 +36,12 @@ export const loader = async (
   req: Request,
   ctx: AppContext,
 ) => {
-  const { default: Component, loader = identity } = await import(component);
+  const { default: Component, loader, action } = await import(
+    `${ROOT}${component}`
+  );
 
   return {
-    props: await loader(props, req, ctx),
+    props: await (loader || action || identity)(props, req, ctx),
     Component,
   };
 };
@@ -40,10 +51,12 @@ export const action = async (
   req: Request,
   ctx: AppContext,
 ) => {
-  const { default: Component, action = identity } = await import(component);
+  const { default: Component, action, loader } = await import(
+    `${ROOT}${component}`
+  );
 
   return {
-    props: await action(props, req, ctx),
+    props: await (action || loader || identity)(props, req, ctx),
     Component,
   };
 };

@@ -3,13 +3,11 @@ import { Props as AddItemsProps } from "apps/vtex/actions/cart/addItems.ts";
 import { Props as UpdateCartProps } from "apps/vtex/actions/cart/updateItems.ts";
 import { itemToAnalyticsItem } from "apps/vtex/hooks/useCart.ts";
 import { OrderForm, OrderFormItem } from "apps/vtex/utils/types.ts";
-import { Props as CartProps } from "../../components/minicart/Minicart.tsx";
-import { Props as MinicartProps } from "../../sections/Cart/Minicart.tsx";
 import { asResolved } from "deco/mod.ts";
+import { ComponentProps, Props } from "../../components/minicart/Minicart.tsx";
 
-export const useRevealCart = (): MinicartProps => {
+export const useRevealCart = (): Props => {
   return {
-    partial: "inner",
     cart: asResolved({ __resolveType: "vtex/loaders/cart.ts" }) as any,
   };
 };
@@ -17,14 +15,13 @@ export const useRevealCart = (): MinicartProps => {
 export const useAddToCart = (
   seller: string,
   productID: string,
-): MinicartProps => {
+): Props => {
   const action: AddItemsProps = {
     allowedOutdatedData: ["paymentData"],
     orderItems: [{ quantity: 1, seller, id: productID }],
   };
 
   return {
-    partial: "inner",
     cart: asResolved({
       __resolveType: "vtex/actions/cart/addItems.ts",
       ...action,
@@ -35,14 +32,13 @@ export const useAddToCart = (
 const useUpdateQuantity = (
   quantity: number,
   index: number,
-): MinicartProps => {
+): Props => {
   const action: UpdateCartProps = {
     allowedOutdatedData: ["paymentData"],
     orderItems: [{ quantity, index }],
   };
 
   return ({
-    partial: "inner",
     cart: asResolved({
       __resolveType: "vtex/actions/cart/updateItems.ts",
       ...action,
@@ -63,9 +59,8 @@ const useAnalyticsItem =
     return itemToAnalyticsItem({ ...item, detailUrl, coupon }, index);
   };
 
-const useAddCoupon = (): MinicartProps => {
+const useAddCoupon = (): Props => {
   return {
-    partial: "inner",
     cart: asResolved({
       __resolveType: "vtex/actions/cart/updateCoupons.ts",
     }) as any,
@@ -74,7 +69,7 @@ const useAddCoupon = (): MinicartProps => {
 
 export const useMinicart = (
   { cart, url }: { cart: OrderForm | null; url: string },
-): CartProps => {
+): ComponentProps => {
   const { items, totalizers } = cart ?? { items: [] };
   const total = totalizers?.find((item) => item.id === "Items")?.value || 0;
   const discounts =

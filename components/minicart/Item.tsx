@@ -1,13 +1,13 @@
 import { AnalyticsItem } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
-import { useSection } from "deco/hooks/usePartialSection.ts";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { useId } from "../../sdk/useId.ts";
 import { MINICART_CONTAINER_ID } from "../../sdk/useUI.ts";
-import { Props as MinicartProps } from "../../sections/Cart/Minicart.tsx";
+import { useComponent } from "../../sections/Component.tsx";
 import { SendEventOnClick } from "../Analytics.tsx";
 import Icon from "../ui/Icon.tsx";
+import { Props as MinicartProps } from "./Minicart.tsx";
 
 export interface Item {
   image: {
@@ -78,12 +78,10 @@ function CartItem({
             hx-disabled-elt="this"
             hx-target={`#${MINICART_CONTAINER_ID}`}
             hx-indicator={`#${MINICART_CONTAINER_ID}`}
-            hx-post={useSection({
-              props: {
-                __resolveType: "site/sections/Cart/Minicart.tsx",
-                ...useUpdateQuantity(0, index),
-              },
-            })}
+            hx-post={useComponent(
+              import.meta.resolve("./Minicart.tsx"),
+              useUpdateQuantity(0, index),
+            )}
           >
             <Icon id="Trash" size={24} />
           </button>
@@ -108,12 +106,10 @@ function CartItem({
             hx-disabled-elt="this"
             hx-target={`#${MINICART_CONTAINER_ID}`}
             hx-indicator={`#${MINICART_CONTAINER_ID}`}
-            hx-post={useSection({
-              props: {
-                __resolveType: "site/sections/Cart/Minicart.tsx",
-                ...useUpdateQuantity(quantity - 1, index),
-              },
-            })}
+            hx-post={useComponent(
+              import.meta.resolve("./Minicart.tsx"),
+              useUpdateQuantity(quantity - 1, index),
+            )}
           >
             -
           </button>
@@ -135,12 +131,10 @@ function CartItem({
             hx-disabled-elt="this"
             hx-target={`#${MINICART_CONTAINER_ID}`}
             hx-indicator={`#${MINICART_CONTAINER_ID}`}
-            hx-post={useSection({
-              props: {
-                __resolveType: "site/sections/Cart/Minicart.tsx",
-                ...useUpdateQuantity(quantity + 1, index),
-              },
-            })}
+            hx-post={useComponent(
+              import.meta.resolve("./Minicart.tsx"),
+              useUpdateQuantity(quantity + 1, index),
+            )}
           >
             +
           </button>

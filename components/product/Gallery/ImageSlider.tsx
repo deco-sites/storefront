@@ -23,14 +23,15 @@ export interface Props {
  */
 export default function GallerySlider(props: Props) {
   const id = useId();
+  const zoomId = `${id}-zoom`;
 
   if (!props.page) {
     throw new Error("Missing Product Details Page Info");
   }
 
   const {
-    page: { product: { image: images = [] } },
     layout,
+    page: { product: { image: images = [] } },
   } = props;
 
   const { width, height } = layout || { width: 300, height: 370 };
@@ -38,73 +39,79 @@ export default function GallerySlider(props: Props) {
   const aspectRatio = `${width} / ${height}`;
 
   return (
-    <div id={id} class="grid grid-flow-row sm:grid-flow-col">
-      {/* Image Slider */}
-      <div class="relative order-1 sm:order-2">
-        <Slider class="carousel carousel-center gap-6 w-screen sm:w-[40vw]">
-          {images.map((img, index) => (
-            <Slider.Item
-              index={index}
-              class="carousel-item w-full"
-            >
-              <Image
-                class="w-full"
-                sizes="(max-width: 640px) 100vw, 40vw"
-                style={{ aspectRatio }}
-                src={img.url!}
-                alt={img.alternateName}
-                width={width}
-                height={height}
-                // Preload LCP image for better web vitals
-                preload={index === 0}
-                loading={index === 0 ? "eager" : "lazy"}
-              />
-            </Slider.Item>
-          ))}
-        </Slider>
+    <>
+      <div id={id} class="grid grid-flow-row sm:grid-flow-col">
+        {/* Image Slider */}
+        <div class="relative order-1 sm:order-2">
+          <Slider class="carousel carousel-center gap-6 w-screen sm:w-[40vw]">
+            {images.map((img, index) => (
+              <Slider.Item
+                index={index}
+                class="carousel-item w-full"
+              >
+                <Image
+                  class="w-full"
+                  sizes="(max-width: 640px) 100vw, 40vw"
+                  style={{ aspectRatio }}
+                  src={img.url!}
+                  alt={img.alternateName}
+                  width={width}
+                  height={height}
+                  // Preload LCP image for better web vitals
+                  preload={index === 0}
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
+              </Slider.Item>
+            ))}
+          </Slider>
 
-        <Slider.PrevButton
-          class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline"
-          disabled
-        >
-          <Icon size={24} id="ChevronLeft" strokeWidth={3} />
-        </Slider.PrevButton>
+          <Slider.PrevButton
+            class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline"
+            disabled
+          >
+            <Icon size={24} id="ChevronLeft" strokeWidth={3} />
+          </Slider.PrevButton>
 
-        <Slider.NextButton
-          class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline"
-          disabled={images.length < 2}
-        >
-          <Icon size={24} id="ChevronRight" strokeWidth={3} />
-        </Slider.NextButton>
+          <Slider.NextButton
+            class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline"
+            disabled={images.length < 2}
+          >
+            <Icon size={24} id="ChevronRight" strokeWidth={3} />
+          </Slider.NextButton>
 
-        <div class="absolute top-2 right-2 bg-base-100 rounded-full">
-          <ProductImageZoom
-            images={images}
-            width={700}
-            height={Math.trunc(700 * height / width)}
-          />
+          <div class="absolute top-2 right-2 bg-base-100 rounded-full">
+            <label class="btn btn-ghost hidden sm:inline-flex" for={zoomId}>
+              <Icon id="Zoom" size={24} />
+            </label>
+          </div>
         </div>
+
+        {/* Dots */}
+        <ul class="carousel carousel-center gap-1 px-4 sm:px-0 sm:flex-col order-2 sm:order-1">
+          {images.map((img, index) => (
+            <li class="carousel-item min-w-[63px] sm:min-w-[100px]">
+              <Slider.Dot index={index}>
+                <Image
+                  style={{ aspectRatio }}
+                  class="group-disabled:border-base-300 border rounded "
+                  width={100}
+                  height={123}
+                  src={img.url!}
+                  alt={img.alternateName}
+                />
+              </Slider.Dot>
+            </li>
+          ))}
+        </ul>
+
+        <Slider.JS rootId={id} />
       </div>
-
-      {/* Dots */}
-      <ul class="carousel carousel-center gap-1 px-4 sm:px-0 sm:flex-col order-2 sm:order-1">
-        {images.map((img, index) => (
-          <li class="carousel-item min-w-[63px] sm:min-w-[100px]">
-            <Slider.Dot index={index}>
-              <Image
-                style={{ aspectRatio }}
-                class="group-disabled:border-base-300 border rounded "
-                width={100}
-                height={123}
-                src={img.url!}
-                alt={img.alternateName}
-              />
-            </Slider.Dot>
-          </li>
-        ))}
-      </ul>
-
-      <Slider.JS rootId={id} />
-    </div>
+      <ProductImageZoom
+        id={zoomId}
+        images={images}
+        width={700}
+        height={Math.trunc(700 * height / width)}
+      />
+    </>
   );
 }

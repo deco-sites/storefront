@@ -1,19 +1,53 @@
 import { Suggestion } from "apps/commerce/types.ts";
-import { clx } from "../../sdk/clx.ts";
-import ProductCard from "../product/ProductCard.tsx";
-import Icon from "../ui/Icon.tsx";
-import Slider from "../ui/Slider.tsx";
-import { ACTION, NAME } from "./Searchbar.tsx";
+import { Resolved } from "deco/mod.ts";
+import type { AppContext } from "../../../apps/site.ts";
+import { clx } from "../../../sdk/clx.ts";
+import { ComponentProps } from "../../../sections/Component.tsx";
+import ProductCard from "../../product/ProductCard.tsx";
+import Icon from "../../ui/Icon.tsx";
+import Slider from "../../ui/Slider.tsx";
+import { ACTION, NAME } from "./Form.tsx";
 
-export interface SuggestionProps {
+export interface Props {
   /**
    * @title Suggestions Integration
    * @todo: improve this typings ({query: string, count: number}) => Suggestions
    */
-  suggestion?: Suggestion | null;
+  loader: Resolved<Suggestion | null>;
 }
 
-function Suggestions({ suggestion }: SuggestionProps) {
+export const action = async (props: Props, req: Request, ctx: AppContext) => {
+  const { loader: { __resolveType, ...loaderProps } } = props;
+
+  const form = await req.formData();
+  const query = `${form.get(NAME ?? "q")}`;
+
+  // @ts-expect-error This is a dynamic resolved loader
+  const suggestion = await ctx.invoke(__resolveType, {
+    ...loaderProps,
+    query,
+  }) as Suggestion | null;
+
+  return { suggestion };
+};
+
+export const loader = async (props: Props, req: Request, ctx: AppContext) => {
+  const { loader: { __resolveType, ...loaderProps } } = props;
+
+  const query = new URL(req.url).searchParams.get(NAME ?? "q");
+
+  // @ts-expect-error This is a dynamic resolved loader
+  const suggestion = await ctx.invoke(__resolveType, {
+    ...loaderProps,
+    query,
+  }) as Suggestion | null;
+
+  return { suggestion };
+};
+
+function Suggestions(
+  { suggestion }: ComponentProps<typeof loader, typeof action>,
+) {
   const { products = [], searches = [] } = suggestion ?? {};
   const hasProducts = Boolean(products.length);
   const hasTerms = Boolean(searches.length);

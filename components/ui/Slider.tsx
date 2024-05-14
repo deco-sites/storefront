@@ -202,33 +202,16 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
   prev?.addEventListener("click", onClickPrev);
   next?.addEventListener("click", onClickNext);
 
-  const timeout = interval && setInterval(onClickNext, interval);
-
-  // Unregister callbacks
-  return () => {
-    for (let it = 0; it < (dots?.length ?? 0); it++) {
-      dots?.item(it).removeEventListener("click", () => goToItem(it));
-    }
-
-    prev?.removeEventListener("click", onClickPrev);
-    next?.removeEventListener("click", onClickNext);
-
-    observer.disconnect();
-
-    clearInterval(timeout);
-  };
+  if (interval) {
+    setInterval(onClickNext, interval);
+  }
 };
 
-function JS({
-  rootId,
-  scroll = "smooth",
-  interval,
-  infinite = false,
-}: Props) {
+function JS({ rootId, scroll = "smooth", interval, infinite = false }: Props) {
   return (
     <script
-      src={scriptAsDataURI(setup, { rootId, scroll, interval, infinite })}
       defer
+      src={scriptAsDataURI(setup, { rootId, scroll, interval, infinite })}
     />
   );
 }

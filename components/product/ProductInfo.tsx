@@ -7,7 +7,7 @@ import { formatPrice } from "../../sdk/format.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
-import { Form as ShippingSimulation } from "../../sections/Product/ShippingSimulation.tsx";
+import ShippingSimulationForm from "../shipping/Form.tsx";
 import AddToCartButton from "./AddToCartButton.tsx";
 import OutOfStock from "./OutOfStock.tsx";
 import ProductSelector from "./ProductVariantSelector.tsx";
@@ -119,7 +119,7 @@ function ProductInfo({ page, layout }: Props) {
       {/* Shipping Simulation */}
       <div class="mt-8">
         {platform === "vtex" && (
-          <ShippingSimulation
+          <ShippingSimulationForm
             items={[{
               id: Number(product.sku),
               quantity: 1,

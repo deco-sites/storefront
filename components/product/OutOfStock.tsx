@@ -1,6 +1,6 @@
 import type { Product } from "apps/commerce/types.ts";
-import { useSection } from "deco/hooks/usePartialSection.ts";
 import { AppContext } from "../../apps/site.ts";
+import { useComponent } from "../../sections/Component.tsx";
 
 export interface Props {
   productID: Product["productID"];
@@ -22,10 +22,6 @@ export const action = async (props: Props, req: Request, ctx: AppContext) => {
   return props;
 };
 
-export const loader = (props: Props) => {
-  return props;
-};
-
 export default function Notify({ productID }: Props) {
   return (
     <form
@@ -33,12 +29,7 @@ export default function Notify({ productID }: Props) {
       hx-sync="this:replace"
       hx-indicator="this"
       hx-swap="none"
-      hx-post={useSection({
-        props: {
-          __resolveType: "site/sections/Product/OutOfStock.tsx",
-          productID,
-        },
-      })}
+      hx-post={useComponent<Props>(import.meta.url, { productID })}
     >
       <span class="text-base">Este produto está indisponivel no momento</span>
       <span class="text-sm">Avise-me quando estiver disponivel</span>

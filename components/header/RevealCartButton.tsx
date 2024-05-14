@@ -1,7 +1,7 @@
-import { useSection } from "deco/hooks/usePartialSection.ts";
 import { useId } from "../../sdk/useId.ts";
 import { MINICART_CONTAINER_ID, MINICART_DRAWER_ID } from "../../sdk/useUI.ts";
-import { type Props as MinicartProps } from "../../sections/Cart/Minicart.tsx";
+import { useComponent } from "../../sections/Component.tsx";
+import { type Props as MinicartProps } from "../minicart/Minicart.tsx";
 import Icon from "../ui/Icon.tsx";
 
 interface Props {
@@ -35,12 +35,10 @@ function CartButton({ minicart }: Props) {
         data-deco="open-cart"
         class="btn btn-circle btn-sm btn-ghost"
         hx-target={`#${MINICART_CONTAINER_ID}`}
-        hx-post={useSection({
-          props: {
-            __resolveType: "site/sections/Cart/Minicart.tsx",
-            ...minicart,
-          },
-        })}
+        hx-post={useComponent(
+          import.meta.resolve("../minicart/Minicart.tsx"),
+          minicart,
+        )}
       >
         <Icon id="ShoppingCart" size={24} strokeWidth={2} />
       </label>

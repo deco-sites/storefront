@@ -47,7 +47,7 @@ export default function WishlistButton({
         id={id}
         aria-label="Add to wishlist"
         class={clx(
-          "btn",
+          "btn no-animation",
           variant === "icon"
             ? "btn-circle btn-ghost"
             : "btn-primary btn-outline gap-2 w-full",

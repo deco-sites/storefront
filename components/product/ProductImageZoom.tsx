@@ -6,54 +6,49 @@ import Slider from "../../components/ui/Slider.tsx";
 import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
-  images: ImageObject[];
+  id?: string;
   width: number;
   height: number;
+  images: ImageObject[];
 }
 
-function ProductImageZoom({ images, width, height }: Props) {
-  const id = useId();
+function ProductImageZoom({ images, width, height, id = useId() }: Props) {
   const container = `${id}-container`;
 
   return (
-    <>
-      <label class="hidden sm:inline-flex btn btn-ghost" for={id}>
-        <Icon id="Zoom" size={24} />
-      </label>
-      <div id={container}>
-        <Modal id={id}>
-          <div class="modal-box w-11/12 max-w-7xl grid grid-cols-[48px_1fr_48px] grid-rows-1 place-items-center">
-            <Slider class="carousel col-span-full col-start-1 row-start-1 row-span-full h-full w-full">
-              {images.map((image, index) => (
-                <Slider.Item
-                  index={index}
-                  class="carousel-item w-full h-full justify-center items-center"
-                >
-                  <Image
-                    style={{ aspectRatio: `${width} / ${height}` }}
-                    src={image.url!}
-                    alt={image.alternateName}
-                    width={width}
-                    height={height}
-                    class="h-full w-auto"
-                  />
-                </Slider.Item>
-              ))}
-            </Slider>
+    <Modal id={id}>
+      <div
+        id={container}
+        class="modal-box w-11/12 max-w-7xl grid grid-cols-[48px_1fr_48px] grid-rows-1 place-items-center"
+      >
+        <Slider class="carousel col-span-full col-start-1 row-start-1 row-span-full h-full w-full">
+          {images.map((image, index) => (
+            <Slider.Item
+              index={index}
+              class="carousel-item w-full h-full justify-center items-center"
+            >
+              <Image
+                style={{ aspectRatio: `${width} / ${height}` }}
+                src={image.url!}
+                alt={image.alternateName}
+                width={width}
+                height={height}
+                class="h-full w-auto"
+              />
+            </Slider.Item>
+          ))}
+        </Slider>
 
-            <Slider.PrevButton class="btn btn-circle btn-outline col-start-1 col-end-2 row-start-1 row-span-full">
-              <Icon size={24} id="ChevronLeft" strokeWidth={3} />
-            </Slider.PrevButton>
+        <Slider.PrevButton class="btn btn-circle btn-outline col-start-1 col-end-2 row-start-1 row-span-full">
+          <Icon size={24} id="ChevronLeft" strokeWidth={3} />
+        </Slider.PrevButton>
 
-            <Slider.NextButton class="btn btn-circle btn-outline col-start-3 col-end-4 row-start-1 row-span-full">
-              <Icon size={24} id="ChevronRight" strokeWidth={3} />
-            </Slider.NextButton>
-
-            <Slider.JS rootId={container} />
-          </div>
-        </Modal>
+        <Slider.NextButton class="btn btn-circle btn-outline col-start-3 col-end-4 row-start-1 row-span-full">
+          <Icon size={24} id="ChevronRight" strokeWidth={3} />
+        </Slider.NextButton>
       </div>
-    </>
+      <Slider.JS rootId={container} />
+    </Modal>
   );
 }
 

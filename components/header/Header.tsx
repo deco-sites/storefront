@@ -12,7 +12,7 @@ import {
   SEARCHBAR_POPUP_ID,
   SIDEMENU_DRAWER_ID,
 } from "../../sdk/useUI.ts";
-import Searchbar, { SearchbarProps } from "../search/Searchbar.tsx";
+import Searchbar, { SearchbarProps } from "../search/Searchbar/Form.tsx";
 import Drawer from "../ui/Drawer.tsx";
 import Icon from "../ui/Icon.tsx";
 import Modal from "../ui/Modal.tsx";

@@ -11,14 +11,15 @@
 
 import { Suggestion } from "apps/commerce/types.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
-import { useSection } from "deco/hooks/usePartialSection.ts";
 import { asResolved, Resolved } from "deco/mod.ts";
-import Icon from "../../components/ui/Icon.tsx";
+import { useId } from "../../../sdk/useId.ts";
 import {
   SEARCHBAR_INPUT_FORM_ID,
   SEARCHBAR_POPUP_ID,
-  SEARCHBAR_SUGGESTION_ID,
-} from "../../sdk/useUI.ts";
+} from "../../../sdk/useUI.ts";
+import { useComponent } from "../../../sections/Component.tsx";
+import Icon from "../../ui/Icon.tsx";
+import { Props as SuggestionProps } from "./Suggestions.tsx";
 
 // When user clicks on the search button, navigate it to
 export const ACTION = "/s";
@@ -72,6 +73,8 @@ const script = (formId: string, name: string, popupId: string) => {
 export default function Searchbar(
   { placeholder = "What are you looking for?", loader }: SearchbarProps,
 ) {
+  const suggestionsSlot = useId();
+
   return (
     <div
       class="w-full grid gap-8 px-4 py-6"
@@ -80,7 +83,7 @@ export default function Searchbar(
       <form id={SEARCHBAR_INPUT_FORM_ID} action={ACTION} class="join">
         <button
           type="submit"
-          class="btn join-item btn-square"
+          class="btn join-item btn-square no-animation"
           aria-label="Search"
           for={SEARCHBAR_INPUT_FORM_ID}
           tabIndex={-1}
@@ -100,15 +103,13 @@ export default function Searchbar(
           name={NAME}
           placeholder={placeholder}
           autocomplete="off"
-          hx-post={useSection({
-            props: {
-              __resolveType: "site/sections/Header/SearchSuggestions.tsx",
-              loader: asResolved(loader),
-            },
-          })}
-          hx-trigger="input changed delay:300ms, search"
+          hx-target={`#${suggestionsSlot}`}
+          hx-post={useComponent<SuggestionProps>(
+            import.meta.resolve("./Suggestions.tsx"),
+            { loader: asResolved(loader) },
+          )}
+          hx-trigger={`input changed delay:300ms, ${NAME}`}
           hx-indicator={`#${SEARCHBAR_INPUT_FORM_ID}`}
-          hx-target={`#${SEARCHBAR_SUGGESTION_ID}`}
         />
         <label
           type="button"
@@ -121,7 +122,7 @@ export default function Searchbar(
       </form>
 
       {/* Suggestions slot */}
-      <div id={SEARCHBAR_SUGGESTION_ID} />
+      <div id={suggestionsSlot} />
 
       {/* Send search events as the user types */}
       <script

@@ -41,7 +41,6 @@ function VariantSelector({ product }: Props) {
                   <label
                     class="avatar cursor-pointer"
                     hx-get={useSection({ href: relativeLink })}
-                    hx-indicator="this"
                   >
                     {/* Checkbox for radio button on the frontend */}
                     <input

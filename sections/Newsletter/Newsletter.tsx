@@ -1,7 +1,7 @@
-import { useSection } from "deco/hooks/usePartialSection.ts";
 import { AppContext } from "../../apps/site.ts";
 import Header from "../../components/ui/SectionHeader.tsx";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
+import { useComponent } from "../Component.tsx";
 
 export interface Form {
   placeholder?: string;
@@ -56,7 +56,7 @@ export default function Newsletter({
           <form
             hx-target="closest section"
             hx-swap="outerHTML"
-            hx-post={useSection()}
+            hx-post={useComponent(import.meta.url)}
             class="flex flex-col gap-4"
           >
             <div class="flex flex-col lg:flex-row gap-3">

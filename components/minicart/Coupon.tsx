@@ -1,7 +1,7 @@
-import { useSection } from "deco/hooks/usePartialSection.ts";
 import { useId } from "preact/hooks";
 import { MINICART_CONTAINER_ID } from "../../sdk/useUI.ts";
-import { Props as MinicartProps } from "../../sections/Cart/Minicart.tsx";
+import { useComponent } from "../../sections/Component.tsx";
+import { Props as MinicartProps } from "./Minicart.tsx";
 
 export interface Props {
   coupon?: string;
@@ -38,12 +38,10 @@ function Coupon({ coupon, useAddCoupon }: Props) {
         class="join peer-checked:inline-flex hidden"
         hx-disabled-elt="button"
         hx-target={`#${MINICART_CONTAINER_ID}`}
-        hx-post={useSection({
-          props: {
-            __resolveType: "site/sections/Cart/Minicart.tsx",
-            ...useAddCoupon(),
-          },
-        })}
+        hx-post={useComponent(
+          import.meta.resolve("./Minicart.tsx"),
+          useAddCoupon(),
+        )}
       >
         <input
           name="text"

@@ -8,5 +8,4 @@ export const MINICART_DRAWER_ID = "minicart-drawer";
 export const SIDEMENU_DRAWER_ID = "sidemenu-drawer";
 export const SEARCHBAR_DRAWER_ID = "searchbar-drawer";
 export const SEARCHBAR_POPUP_ID = "searchbar-popup";
-export const SEARCHBAR_SUGGESTION_ID = "searchbar-suggestion";
 export const SEARCHBAR_INPUT_FORM_ID = "searchbar-form";
