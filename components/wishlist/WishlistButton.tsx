@@ -1,10 +1,9 @@
-import { SectionProps } from "deco/mod.ts";
-import Icon from "../ui/Icon.tsx";
+import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import { clx } from "../../sdk/clx.ts";
+import { useId } from "../../sdk/useId.ts";
 import { useComponent } from "../../sections/Component.tsx";
 import { SendEventOnClick } from "../Analytics.tsx";
-import { useId } from "../../sdk/useId.ts";
-import { scriptAsDataURI } from "../../../apps/utils/dataURI.ts";
+import Icon from "../ui/Icon.tsx";
 
 interface Props {
   productID: string;
