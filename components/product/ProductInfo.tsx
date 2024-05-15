@@ -2,16 +2,15 @@ import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
-import { useAddToCart } from "../../sdk/cart/useAddToCart.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import ShippingSimulationForm from "../shipping/Form.tsx";
+import WishlistButton from "../wishlist/WishlistButton.tsx";
 import AddToCartButton from "./AddToCartButton.tsx";
 import OutOfStock from "./OutOfStock.tsx";
 import ProductSelector from "./ProductVariantSelector.tsx";
-import WishlistButton from "../wishlist/WishlistButton.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
@@ -57,7 +56,7 @@ function ProductInfo({ page, layout }: Props) {
     listPrice,
   });
 
-  const addToCartProps = useAddToCart({ seller, productID });
+  const minicart = platform === "vtex" ? { seller, productID } : null;
 
   return (
     <div class="flex flex-col px-4" id={id}>
@@ -97,12 +96,12 @@ function ProductInfo({ page, layout }: Props) {
       </div>
       {/* Add to Cart and Favorites button */}
       <div class="mt-4 sm:mt-10 flex flex-col gap-2">
-        {availability === "https://schema.org/InStock"
+        {availability === "https://schema.org/InStock" && minicart
           ? (
             <>
               <AddToCartButton
                 class="btn-primary"
-                minicart={addToCartProps}
+                minicart={minicart}
                 event={{ name: "add_to_cart", params: { items: [eventItem] } }}
               />
               {/* @ts-expect-error todo @gimenes */}

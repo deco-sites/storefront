@@ -1,12 +1,8 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import type { SiteNavigationElement } from "apps/commerce/types.ts";
+import type { Person, SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
-import { useSection } from "deco/hooks/usePartialSection.ts";
-import type { SectionProps } from "deco/types.ts";
-import { AppContext } from "../../apps/site.ts";
-import { useCart as useCartVTEX } from "../../sdk/cart/vtex.ts";
+import { useDevice } from "deco/hooks/useDevice.ts";
 import { clx } from "../../sdk/clx.ts";
-import { usePlatform } from "../../sdk/usePlatform.tsx";
 import {
   MINICART_CONTAINER_ID,
   MINICART_DRAWER_ID,
@@ -14,14 +10,16 @@ import {
   SEARCHBAR_POPUP_ID,
   SIDEMENU_DRAWER_ID,
 } from "../../sdk/useUI.ts";
+import { type Minicart } from "../minicart/Minicart.tsx";
 import Searchbar, { SearchbarProps } from "../search/Searchbar/Form.tsx";
 import Drawer from "../ui/Drawer.tsx";
 import Icon from "../ui/Icon.tsx";
 import Modal from "../ui/Modal.tsx";
 import Alert from "./Alert.tsx";
+import Bag from "./Bag.tsx";
 import Menu from "./Menu.tsx";
 import NavItem from "./NavItem.tsx";
-import RevealCartButton from "./RevealCartButton.tsx";
+import Login from "./Login.tsx";
 import { headerHeight, navbarHeight } from "./constants.ts";
 
 export interface Logo {
@@ -31,7 +29,7 @@ export interface Logo {
   height?: number;
 }
 
-export interface Props {
+export interface SectionProps {
   alerts?: string[];
 
   /**
@@ -49,25 +47,15 @@ export interface Props {
   /** @title Logo */
   logo?: Logo;
 
-  /** @hidden */
-  mode?: "private" | "public";
+  minicart?: Minicart;
+
+  user?: Person | null;
 }
 
-const useCart = () => {
-  const platform = usePlatform();
-
-  if (platform === "vtex") {
-    return useCartVTEX();
-  }
-
-  throw new Error(`Unsupported platform: ${platform}`);
-};
+type Props = Omit<SectionProps, "alert"> & { loading?: "lazy" | "eager" };
 
 function Desktop(
-  { navItems, logo, searchbar, cart }: Omit<
-    SectionProps<typeof loader>,
-    "device" | "alerts"
-  >,
+  { navItems, logo, searchbar, minicart, user, loading }: Props,
 ) {
   return (
     <>
@@ -79,6 +67,7 @@ function Desktop(
           <Searchbar {...searchbar} />
         </div>
       </Modal>
+
       <div class="grid grid-cols-3 items-center border-b border-base-200 w-full px-6">
         <ul class="flex gap-6 col-span-1 justify-start">
           {navItems!.map((item) => <NavItem item={item} />)}
@@ -105,14 +94,7 @@ function Desktop(
             <span>SEARCH</span>
           </label>
 
-          <a
-            class="btn btn-sm btn-ghost font-thin no-animation"
-            href="/account"
-            aria-label="Account"
-          >
-            <Icon id="User" size={20} strokeWidth={0.4} />
-            <span>ACCOUNT</span>
-          </a>
+          <Login user={user} loading={loading} />
 
           <a
             class="btn btn-sm btn-ghost font-thin no-animation"
@@ -124,7 +106,7 @@ function Desktop(
           </a>
 
           <div class="flex items-center text-xs font-thin">
-            <RevealCartButton minicart={useCart()} {...cart} />
+            <Bag loading={loading} minicart={minicart} />
           </div>
         </div>
       </div>
@@ -133,10 +115,7 @@ function Desktop(
 }
 
 function Mobile(
-  { navItems, logo, searchbar, cart }: Omit<
-    SectionProps<typeof loader>,
-    "device" | "alerts"
-  >,
+  { navItems, logo, searchbar, minicart, loading }: Props,
 ) {
   return (
     <>
@@ -154,10 +133,11 @@ function Mobile(
         id={SIDEMENU_DRAWER_ID}
         aside={
           <Drawer.Aside title="Menu" drawer={SIDEMENU_DRAWER_ID}>
-            <Menu navItems={navItems!} />
+            {loading === "eager" && <Menu navItems={navItems!} />}
           </Drawer.Aside>
         }
       />
+
       <div
         style={{ height: navbarHeight }}
         class="grid grid-cols-3 justify-between items-center border-b border-base-200 w-full px-6 pb-6 gap-2"
@@ -193,54 +173,12 @@ function Mobile(
           >
             <Icon id="MagnifyingGlass" size={20} strokeWidth={0.1} />
           </label>
-          <RevealCartButton minicart={useCart()} {...cart} />
+          <Bag loading={loading} minicart={minicart} />
         </div>
       </div>
     </>
   );
 }
-
-function MinicartDrawer() {
-  return (
-    <Drawer
-      id={MINICART_DRAWER_ID}
-      class="drawer-end z-50"
-      aside={
-        <Drawer.Aside title="My Bag" drawer={MINICART_DRAWER_ID}>
-          <div
-            data-minicart-container
-            id={MINICART_CONTAINER_ID}
-            style={{ minWidth: "calc(min(100vw, 425px))", maxWidth: "425px" }}
-            class={clx(
-              "h-full flex flex-col bg-base-100 items-center justify-center overflow-auto",
-              "[.htmx-request&]:pointer-events-none",
-              "[[data-minicart-container]&_section]:contents",
-            )}
-          >
-            <span class="loading loading-lg" />
-          </div>
-        </Drawer.Aside>
-      }
-    />
-  );
-}
-
-export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
-  if (props.mode !== "private") {
-    return { ...props, device: ctx.device };
-  }
-
-  const { cart: { __resolveType, ...cartProps } } = useCart();
-  const cart = await ctx.invoke(__resolveType, cartProps);
-
-  return {
-    device: ctx.device,
-    ...props,
-    cart: {
-      totalItems: cart.items.length,
-    },
-  };
-};
 
 function Header({
   alerts = [],
@@ -252,45 +190,51 @@ function Header({
     height: 16,
     alt: "Logo",
   },
-  searchbar,
-  device,
-  mode,
   ...props
-}: SectionProps<typeof loader>) {
-  const hxTags = mode !== "private"
-    ? {
-      "hx-get": useSection({ props: { mode: "private", device } }),
-      "hx-trigger": "intersect once",
-      "hx-target": "closest section",
-      "hx-swap": "outerHTML",
-    }
-    : null;
+}: Props) {
+  const device = useDevice();
 
   return (
-    <header style={{ height: headerHeight }} {...hxTags}>
-      <MinicartDrawer />
+    <header style={{ height: headerHeight }}>
+      {/* Minicart Drawer */}
+      <Drawer
+        id={MINICART_DRAWER_ID}
+        class="drawer-end z-50"
+        aside={
+          <Drawer.Aside title="My Bag" drawer={MINICART_DRAWER_ID}>
+            <div
+              data-minicart-container
+              id={MINICART_CONTAINER_ID}
+              style={{
+                minWidth: "calc(min(100vw, 425px))",
+                maxWidth: "425px",
+              }}
+              class={clx(
+                "h-full flex flex-col bg-base-100 items-center justify-center overflow-auto",
+                "[.htmx-request&]:pointer-events-none",
+                "[[data-minicart-container]&_section]:contents",
+              )}
+            >
+              <span class="loading loading-lg" />
+            </div>
+          </Drawer.Aside>
+        }
+      />
+
       <div class="bg-base-100 fixed w-full z-40">
         {alerts.length > 0 && <Alert alerts={alerts} />}
         {device === "desktop"
-          ? (
-            <Desktop
-              navItems={navItems}
-              logo={logo}
-              searchbar={searchbar}
-              {...props}
-            />
-          )
-          : (
-            <Mobile
-              navItems={navItems}
-              logo={logo}
-              searchbar={searchbar}
-              {...props}
-            />
-          )}
+          ? <Desktop navItems={navItems} logo={logo} {...props} />
+          : <Mobile navItems={navItems} logo={logo} {...props} />}
       </div>
     </header>
   );
 }
 
-export default Header;
+export function LoadingFallback(props: SectionProps) {
+  return <Header {...props} loading="lazy" />;
+}
+
+export default function Section(props: SectionProps) {
+  return <Header {...props} loading="eager" />;
+}

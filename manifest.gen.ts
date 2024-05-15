@@ -2,12 +2,16 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
+import * as $$$$$$$$$0 from "./actions/minicart/add.ts";
+import * as $$$$$$$$$1 from "./actions/minicart/coupon.ts";
+import * as $$$$$$$$$2 from "./actions/minicart/update.ts";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 import * as $$$2 from "./loaders/availableIcons.ts";
 import * as $$$3 from "./loaders/icons.ts";
 import * as $$$0 from "./loaders/Layouts/ProductCard.tsx";
 import * as $$$1 from "./loaders/List/Sections.tsx";
+import * as $$$4 from "./loaders/minicart.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/Cards/IconCardsCarousel.tsx";
 import * as $$$$$$2 from "./sections/Cards/IconCardsCarouselWithImage.tsx";
@@ -62,6 +66,7 @@ const manifest = {
     "site/loaders/icons.ts": $$$3,
     "site/loaders/Layouts/ProductCard.tsx": $$$0,
     "site/loaders/List/Sections.tsx": $$$1,
+    "site/loaders/minicart.ts": $$$4,
   },
   "sections": {
     "site/sections/Animation/Animation.tsx": $$$$$$0,
@@ -111,6 +116,11 @@ const manifest = {
     "site/sections/Social/InstagramPosts.tsx": $$$$$$44,
     "site/sections/Social/WhatsApp.tsx": $$$$$$45,
     "site/sections/Theme/Theme.tsx": $$$$$$46,
+  },
+  "actions": {
+    "site/actions/minicart/add.ts": $$$$$$$$$0,
+    "site/actions/minicart/coupon.ts": $$$$$$$$$1,
+    "site/actions/minicart/update.ts": $$$$$$$$$2,
   },
   "apps": {
     "site/apps/decohub.ts": $$$$$$$$$$$0,

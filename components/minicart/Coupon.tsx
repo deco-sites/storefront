@@ -1,16 +1,12 @@
 import { useId } from "preact/hooks";
 import { MINICART_CONTAINER_ID } from "../../sdk/useUI.ts";
-import { useComponent } from "../../sections/Component.tsx";
-import { Props as MinicartProps } from "./Minicart.tsx";
 
 export interface Props {
   coupon?: string;
-  useAddCoupon: () => MinicartProps;
+  useAddCoupon: () => string;
 }
 
 function Coupon({ coupon, useAddCoupon }: Props) {
-  // const [loading, setLoading] = useState(false);
-  // const [display, setDisplay] = useState(false);
   const formToggle = useId();
 
   return (
@@ -38,10 +34,7 @@ function Coupon({ coupon, useAddCoupon }: Props) {
         class="join peer-checked:inline-flex hidden"
         hx-disabled-elt="button"
         hx-target={`#${MINICART_CONTAINER_ID}`}
-        hx-post={useComponent(
-          import.meta.resolve("./Minicart.tsx"),
-          useAddCoupon(),
-        )}
+        hx-post={useAddCoupon()}
       >
         <input
           name="text"

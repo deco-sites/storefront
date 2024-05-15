@@ -3,7 +3,7 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 import Image from "apps/website/components/Image.tsx";
 import { SendEventOnClick } from "../../components/Analytics.tsx";
 import Avatar from "../../components/ui/Avatar.tsx";
-import { useAddToCart } from "../../sdk/cart/useAddToCart.ts";
+import { useAddToCart } from "../../sdk/cart.ts";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { relative } from "../../sdk/url.ts";
@@ -44,7 +44,6 @@ function ProductCard({
   const variants = Object.entries(Object.values(possibilities)[0] ?? {});
   const relativeUrl = relative(url);
   const aspectRatio = `${WIDTH} / ${HEIGHT}`;
-  const addToCartProps = useAddToCart({ productID, seller });
   const eventItem = mapProductToAnalyticsItem({ product, price, listPrice });
 
   return (
@@ -202,7 +201,7 @@ function ProductCard({
         </span>
 
         <AddToCartButton
-          minicart={addToCartProps}
+          minicart={{ productID, seller }}
           event={{ name: "add_to_cart", params: { items: [eventItem] } }}
         />
       </div>

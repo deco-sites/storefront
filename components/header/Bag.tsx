@@ -1,16 +1,18 @@
-import { clx } from "../../sdk/clx.ts";
-import { useId } from "../../sdk/useId.ts";
+import { useCart } from "../../sdk/cart.ts";
 import { MINICART_CONTAINER_ID, MINICART_DRAWER_ID } from "../../sdk/useUI.ts";
-import { useComponent } from "../../sections/Component.tsx";
-import { type Props as MinicartProps } from "../minicart/Minicart.tsx";
+import { type Minicart } from "../minicart/Minicart.tsx";
 import Icon from "../ui/Icon.tsx";
 
 interface Props {
-  totalItems?: number;
-  minicart?: MinicartProps;
+  minicart?: Minicart;
+  loading?: "lazy" | "eager";
 }
 
-function CartButton({ minicart, totalItems = 0 }: Props) {
+function Bag({ minicart, loading }: Props) {
+  const totalItems = loading === "eager" && minicart
+    ? minicart.data.items.length ?? 0
+    : 0;
+
   return (
     <label
       class="indicator"
@@ -18,10 +20,7 @@ function CartButton({ minicart, totalItems = 0 }: Props) {
       aria-label="open cart"
       data-deco="open-cart"
       hx-target={`#${MINICART_CONTAINER_ID}`}
-      hx-post={useComponent(
-        import.meta.resolve("../minicart/Minicart.tsx"),
-        minicart,
-      )}
+      hx-post={useCart()}
     >
       {totalItems > 0 && (
         <span class="indicator-item badge badge-secondary badge-sm">
@@ -36,4 +35,4 @@ function CartButton({ minicart, totalItems = 0 }: Props) {
   );
 }
 
-export default CartButton;
+export default Bag;

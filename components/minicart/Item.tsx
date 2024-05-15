@@ -4,10 +4,8 @@ import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { useId } from "../../sdk/useId.ts";
 import { MINICART_CONTAINER_ID } from "../../sdk/useUI.ts";
-import { useComponent } from "../../sections/Component.tsx";
 import { SendEventOnClick } from "../Analytics.tsx";
 import Icon from "../ui/Icon.tsx";
-import { Props as MinicartProps } from "./Minicart.tsx";
 
 export interface Item {
   image: {
@@ -29,7 +27,7 @@ export interface Props {
   locale: string;
   currency: string;
 
-  useUpdateQuantity: (quantity: number, index: number) => MinicartProps;
+  useUpdateQuantity: (quantity: number, index: number) => string;
   useAnalyticsItem: (index: number) => AnalyticsItem | null | undefined;
 }
 
@@ -78,10 +76,7 @@ function CartItem({
             hx-disabled-elt="this"
             hx-target={`#${MINICART_CONTAINER_ID}`}
             hx-indicator={`#${MINICART_CONTAINER_ID}`}
-            hx-post={useComponent(
-              import.meta.resolve("./Minicart.tsx"),
-              useUpdateQuantity(0, index),
-            )}
+            hx-post={useUpdateQuantity(0, index)}
           >
             <Icon id="Trash" size={24} />
           </button>
@@ -106,10 +101,7 @@ function CartItem({
             hx-disabled-elt="this"
             hx-target={`#${MINICART_CONTAINER_ID}`}
             hx-indicator={`#${MINICART_CONTAINER_ID}`}
-            hx-post={useComponent(
-              import.meta.resolve("./Minicart.tsx"),
-              useUpdateQuantity(quantity - 1, index),
-            )}
+            hx-post={useUpdateQuantity(quantity - 1, index)}
           >
             -
           </button>
@@ -131,10 +123,7 @@ function CartItem({
             hx-disabled-elt="this"
             hx-target={`#${MINICART_CONTAINER_ID}`}
             hx-indicator={`#${MINICART_CONTAINER_ID}`}
-            hx-post={useComponent(
-              import.meta.resolve("./Minicart.tsx"),
-              useUpdateQuantity(quantity + 1, index),
-            )}
+            hx-post={useUpdateQuantity(quantity + 1, index)}
           >
             +
           </button>

@@ -1,5 +1,5 @@
 import { itemToAnalyticsItem, useCart } from "apps/shopify/hooks/useCart.ts";
-import Button from "../../../components/header/RevealCartButton.tsx";
+import Button from "../../../components/header/Bag.tsx";
 
 function CartButton() {
   const { cart, loading } = useCart();
