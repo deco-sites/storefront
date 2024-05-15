@@ -6,7 +6,7 @@ import { OrderForm, OrderFormItem } from "apps/vtex/utils/types.ts";
 import { asResolved } from "deco/mod.ts";
 import { ComponentProps, Props } from "../../components/minicart/Minicart.tsx";
 
-export const useRevealCart = (): Props => {
+export const useCart = (): Props => {
   return {
     cart: asResolved({ __resolveType: "vtex/loaders/cart.ts" }) as any,
   };

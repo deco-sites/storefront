@@ -1,9 +1,11 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
+import { useSection } from "deco/hooks/usePartialSection.ts";
 import type { SectionProps } from "deco/types.ts";
 import { AppContext } from "../../apps/site.ts";
-import { useRevealCart as useMinicartVTEX } from "../../sdk/cart/vtex.ts";
+import { useCart as useCartVTEX } from "../../sdk/cart/vtex.ts";
+import { clx } from "../../sdk/clx.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import {
   MINICART_CONTAINER_ID,
@@ -21,7 +23,6 @@ import Menu from "./Menu.tsx";
 import NavItem from "./NavItem.tsx";
 import RevealCartButton from "./RevealCartButton.tsx";
 import { headerHeight, navbarHeight } from "./constants.ts";
-import { clx } from "../../sdk/clx.ts";
 
 export interface Logo {
   src: ImageWidget;
@@ -47,20 +48,23 @@ export interface Props {
 
   /** @title Logo */
   logo?: Logo;
+
+  /** @hidden */
+  mode?: "private" | "public";
 }
 
-const useMinicart = () => {
+const useCart = () => {
   const platform = usePlatform();
 
   if (platform === "vtex") {
-    return useMinicartVTEX();
+    return useCartVTEX();
   }
 
   throw new Error(`Unsupported platform: ${platform}`);
 };
 
 function Desktop(
-  { navItems, logo, searchbar }: Omit<
+  { navItems, logo, searchbar, cart }: Omit<
     SectionProps<typeof loader>,
     "device" | "alerts"
   >,
@@ -75,7 +79,7 @@ function Desktop(
           <Searchbar {...searchbar} />
         </div>
       </Modal>
-      <div class="hidden sm:grid sm:grid-cols-3 items-center border-b border-base-200 w-full px-6">
+      <div class="grid grid-cols-3 items-center border-b border-base-200 w-full px-6">
         <ul class="flex gap-6 col-span-1 justify-start">
           {navItems!.map((item) => <NavItem item={item} />)}
         </ul>
@@ -94,7 +98,7 @@ function Desktop(
         <div class="flex-none flex items-center justify-end gap-2 col-span-1">
           <label
             for={SEARCHBAR_POPUP_ID}
-            class="btn btn-sm btn-ghost font-thin"
+            class="btn btn-sm btn-ghost font-thin no-animation"
             aria-label="search icon button"
           >
             <Icon id="MagnifyingGlass" size={20} strokeWidth={0.1} />
@@ -102,7 +106,7 @@ function Desktop(
           </label>
 
           <a
-            class="btn btn-sm btn-ghost font-thin"
+            class="btn btn-sm btn-ghost font-thin no-animation"
             href="/account"
             aria-label="Account"
           >
@@ -111,7 +115,7 @@ function Desktop(
           </a>
 
           <a
-            class="btn btn-sm btn-ghost font-thin"
+            class="btn btn-sm btn-ghost font-thin no-animation"
             href="/wishlist"
             aria-label="Wishlist"
           >
@@ -120,7 +124,7 @@ function Desktop(
           </a>
 
           <div class="flex items-center text-xs font-thin">
-            <RevealCartButton minicart={useMinicart()} />
+            <RevealCartButton minicart={useCart()} {...cart} />
           </div>
         </div>
       </div>
@@ -129,7 +133,7 @@ function Desktop(
 }
 
 function Mobile(
-  { navItems, logo, searchbar }: Omit<
+  { navItems, logo, searchbar, cart }: Omit<
     SectionProps<typeof loader>,
     "device" | "alerts"
   >,
@@ -156,7 +160,7 @@ function Mobile(
       />
       <div
         style={{ height: navbarHeight }}
-        class="lg:hidden grid grid-cols-3 justify-between items-center border-b border-base-200 w-full px-6 pb-6 gap-2"
+        class="grid grid-cols-3 justify-between items-center border-b border-base-200 w-full px-6 pb-6 gap-2"
       >
         <label
           for={SIDEMENU_DRAWER_ID}
@@ -189,7 +193,7 @@ function Mobile(
           >
             <Icon id="MagnifyingGlass" size={20} strokeWidth={0.1} />
           </label>
-          <RevealCartButton minicart={useMinicart()} />
+          <RevealCartButton minicart={useCart()} {...cart} />
         </div>
       </div>
     </>
@@ -221,54 +225,72 @@ function MinicartDrawer() {
   );
 }
 
-function Header({ alerts, device, ...props }: SectionProps<typeof loader>) {
+export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
+  if (props.mode !== "private") {
+    return { ...props, device: ctx.device };
+  }
+
+  const { cart: { __resolveType, ...cartProps } } = useCart();
+  const cart = await ctx.invoke(__resolveType, cartProps);
+
+  return {
+    device: ctx.device,
+    ...props,
+    cart: {
+      totalItems: cart.items.length,
+    },
+  };
+};
+
+function Header({
+  alerts = [],
+  navItems = [],
+  logo = {
+    src:
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/986b61d4-3847-4867-93c8-b550cb459cc7",
+    width: 100,
+    height: 16,
+    alt: "Logo",
+  },
+  searchbar,
+  device,
+  mode,
+  ...props
+}: SectionProps<typeof loader>) {
+  const hxTags = mode !== "private"
+    ? {
+      "hx-get": useSection({ props: { mode: "private", device } }),
+      "hx-trigger": "intersect once",
+      "hx-target": "closest section",
+      "hx-swap": "outerHTML",
+    }
+    : null;
+
   return (
-    <header style={{ height: headerHeight }}>
+    <header style={{ height: headerHeight }} {...hxTags}>
       <MinicartDrawer />
       <div class="bg-base-100 fixed w-full z-40">
         {alerts.length > 0 && <Alert alerts={alerts} />}
-        {device === "desktop" ? <Desktop {...props} /> : <Mobile {...props} />}
+        {device === "desktop"
+          ? (
+            <Desktop
+              navItems={navItems}
+              logo={logo}
+              searchbar={searchbar}
+              {...props}
+            />
+          )
+          : (
+            <Mobile
+              navItems={navItems}
+              logo={logo}
+              searchbar={searchbar}
+              {...props}
+            />
+          )}
       </div>
     </header>
   );
 }
-
-export const loader = (
-  {
-    alerts = [],
-    navItems = [
-      {
-        "@type": "SiteNavigationElement",
-        name: "Feminino",
-        url: "/",
-      },
-      {
-        "@type": "SiteNavigationElement",
-        name: "Masculino",
-        url: "/",
-      },
-      {
-        "@type": "SiteNavigationElement",
-        name: "Sale",
-        url: "/",
-      },
-      {
-        "@type": "SiteNavigationElement",
-        name: "Linktree",
-        url: "/",
-      },
-    ],
-    logo = {
-      src:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/986b61d4-3847-4867-93c8-b550cb459cc7",
-      width: 100,
-      height: 16,
-      alt: "Logo",
-    },
-    searchbar,
-  }: Props,
-  _req: Request,
-  ctx: AppContext,
-) => ({ logo, searchbar, alerts, navItems, device: ctx.device });
 
 export default Header;

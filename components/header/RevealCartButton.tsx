@@ -1,3 +1,4 @@
+import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { MINICART_CONTAINER_ID, MINICART_DRAWER_ID } from "../../sdk/useUI.ts";
 import { useComponent } from "../../sections/Component.tsx";
@@ -5,44 +6,33 @@ import { type Props as MinicartProps } from "../minicart/Minicart.tsx";
 import Icon from "../ui/Icon.tsx";
 
 interface Props {
-  // loading: boolean;
-  // currency: string;
-  // total: number;
-  // items: AnalyticsItem[];
+  totalItems?: number;
   minicart?: MinicartProps;
 }
 
-function CartButton({ minicart }: Props) {
-  // const totalItems = items.length;
-  const id = useId();
-
+function CartButton({ minicart, totalItems = 0 }: Props) {
   return (
-    <div class="indicator">
-      {
-        /* <span
-        class={`indicator-item badge badge-secondary badge-sm ${
-          totalItems === 0 ? "hidden" : ""
-        }`}
-      >
-        {totalItems > 9 ? "9+" : totalItems}
-      </span> */
-      }
+    <label
+      class="indicator"
+      for={MINICART_DRAWER_ID}
+      aria-label="open cart"
+      data-deco="open-cart"
+      hx-target={`#${MINICART_CONTAINER_ID}`}
+      hx-post={useComponent(
+        import.meta.resolve("../minicart/Minicart.tsx"),
+        minicart,
+      )}
+    >
+      {totalItems > 0 && (
+        <span class="indicator-item badge badge-secondary badge-sm">
+          {totalItems > 9 ? "9+" : totalItems}
+        </span>
+      )}
 
-      <label
-        id={id}
-        for={MINICART_DRAWER_ID}
-        aria-label="open cart"
-        data-deco="open-cart"
-        class="btn btn-circle btn-sm btn-ghost"
-        hx-target={`#${MINICART_CONTAINER_ID}`}
-        hx-post={useComponent(
-          import.meta.resolve("../minicart/Minicart.tsx"),
-          minicart,
-        )}
-      >
+      <span class="btn btn-circle btn-sm btn-ghost no-animation">
         <Icon id="ShoppingCart" size={24} strokeWidth={2} />
-      </label>
-    </div>
+      </span>
+    </label>
   );
 }
 
