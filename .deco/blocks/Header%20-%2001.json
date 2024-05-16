@@ -8,19 +8,12 @@
   },
   "searchbar": {
     "placeholder": "What are you looking for?",
-    "loader": {
-      "data": {
-        "__resolveType": "wake/loaders/suggestion.ts"
-      },
-      "__resolveType": "resolved"
-    }
+    "loader": null
   },
   "minicart": {
     "__resolveType": "site/loaders/minicart.ts"
   },
-  "user": {
-    "__resolveType": "wake/loaders/user.ts"
-  },
+  "user": null,
   "logo": {
     "alt": "Glamour logo by deco",
     "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/986b61d4-3847-4867-93c8-b550cb459cc7",

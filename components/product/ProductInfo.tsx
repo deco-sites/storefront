@@ -74,6 +74,16 @@ function ProductInfo({ page }: Props) {
       productVariantId: Number(productID),
       quantity: 1,
     }
+    : platform === 'nuvemshop'
+    ? {
+      quantity: 1,
+      itemId: Number(productGroupID),
+      add_to_cart_enhanced: "1",
+      attributes: Object.fromEntries(
+          additionalProperty.map(({ name, value }) => [name, value])
+      )
+        
+    }
     : null;
 
   return (

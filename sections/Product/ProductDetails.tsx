@@ -1,8 +1,8 @@
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import ImageGallerySlider from "../../components/product/Gallery/ImageSlider.tsx";
 import ProductInfo from "../../components/product/ProductInfo.tsx";
-import NotFound from "../../sections/Product/NotFound.tsx";
 import { clx } from "../../sdk/clx.ts";
+import NotFound from "../../sections/Product/NotFound.tsx";
 
 export interface Props {
   /** @title Integration */
@@ -10,7 +10,7 @@ export interface Props {
 }
 
 export default function ProductDetails({ page }: Props) {
-  if (!page?.seo) {
+  if (!page) {
     return <NotFound />;
   }
 

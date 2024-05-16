@@ -4,7 +4,7 @@
       "param": "slug",
       "__resolveType": "website/functions/requestToParam.ts"
     },
-    "__resolveType": "wake/loaders/productDetailsPage.ts"
+    "__resolveType": "nuvemshop/loaders/productDetailsPage.ts"
   },
   "extensions": [],
   "__resolveType": "commerce/loaders/product/extensions/detailsPage.ts"

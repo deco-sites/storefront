@@ -1,6 +1,6 @@
 {
   "data": {
-    "__resolveType": "wake/loaders/productListingPage.ts"
+    "__resolveType": "nuvemshop/loaders/productListingPage.ts"
   },
   "extensions": [],
   "__resolveType": "commerce/loaders/product/extensions/listingPage.ts"
