@@ -4,15 +4,17 @@ import { usePlatform } from "../../sdk/usePlatform.tsx";
 
 import vtex, { Props as VTEX } from "../../sdk/cart/vtex/add.ts";
 import vnda, { Props as VNDA } from "../../sdk/cart/vnda/add.ts";
+import wake, { Props as WAKE } from "../../sdk/cart/wake/add.ts";
 import shopify, { Props as Shopify } from "../../sdk/cart/shopify/add.ts";
 
-export type Props = VTEX | Shopify | VNDA;
+export type Props = VTEX | Shopify | VNDA | WAKE;
 
 // @gimenes remove once all platforms are supported
 // deno-lint-ignore no-explicit-any
 const actions: Record<string, any> = {
   vtex,
   vnda,
+  wake,
   shopify,
 };
 

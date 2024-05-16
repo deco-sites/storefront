@@ -1,13 +1,13 @@
 import { itemToAnalyticsItem } from "apps/shopify/hooks/useCart.ts";
-import {
-  CartFragment,
-} from "apps/shopify/utils/storefront/storefront.graphql.gen.ts";
+import type a from "apps/shopify/loaders/cart.ts";
 import { AppContext } from "apps/shopify/mod.ts";
 import { Minicart } from "../../../components/minicart/Minicart.tsx";
 import { useUpdateQuantity } from "../../cart.ts";
 
+type Cart = Awaited<ReturnType<typeof a>>;
+
 const useAnalyticsItem =
-  (items: CartFragment["lines"]["nodes"]) => (index: number) => {
+  (items: NonNullable<Cart>["lines"]["nodes"]) => (index: number) => {
     const item = items[index];
 
     if (!item) {
@@ -19,7 +19,7 @@ const useAnalyticsItem =
 
 const locale = "pt-BR";
 
-export const cartFromFragment = (cart: CartFragment | null): Minicart => {
+export const cartFrom = (cart: Cart): Minicart => {
   const items = cart?.lines?.nodes ?? [];
   const coupons = cart?.discountCodes;
   const coupon = coupons && coupons[0]?.applicable
@@ -74,10 +74,9 @@ async function loader(
   _req: Request,
   ctx: AppContext,
 ): Promise<Minicart> {
-  const fragment = await ctx.invoke("shopify/loaders/cart.ts");
+  const response = await ctx.invoke("shopify/loaders/cart.ts");
 
-  return cartFromFragment(fragment);
+  return cartFrom(response);
 }
 
 export default loader;
-cartFromFragment;

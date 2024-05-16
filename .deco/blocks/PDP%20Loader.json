@@ -4,7 +4,7 @@
       "param": "slug",
       "__resolveType": "website/functions/requestToParam.ts"
     },
-    "__resolveType": "vnda/loaders/productDetailsPage.ts"
+    "__resolveType": "wake/loaders/productDetailsPage.ts"
   },
   "extensions": [],
   "__resolveType": "commerce/loaders/product/extensions/detailsPage.ts"

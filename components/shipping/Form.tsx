@@ -21,6 +21,7 @@ export default function Form({ items }: Props) {
       <form
         class="join"
         hx-target={`#${slot}`}
+        hx-swap="innerHTML"
         hx-sync="this:replace"
         hx-post={useComponent(import.meta.resolve("./Results.tsx"), {
           items,

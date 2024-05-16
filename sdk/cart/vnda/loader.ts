@@ -1,8 +1,10 @@
 import { itemToAnalyticsItem } from "apps/vnda/hooks/useCart.ts";
-import { type Cart } from "apps/vnda/loaders/cart.ts";
+import type a from "apps/vnda/loaders/cart.ts";
 import { AppContext } from "apps/vnda/mod.ts";
 import { Minicart } from "../../../components/minicart/Minicart.tsx";
 import { useUpdateQuantity } from "../../cart.ts";
+
+type Cart = Awaited<ReturnType<typeof a>>;
 
 const useAnalyticsItem =
   (items: NonNullable<Cart["orderForm"]>["items"]) => (index: number) => {
@@ -21,7 +23,7 @@ const normalizeUrl = (url: string) =>
 const locale = "pt-BR";
 const currency = "BRL";
 
-export const cartFrom = (cart: Cart | null): Minicart => {
+export const cartFrom = (cart: Cart): Minicart => {
   const items = cart?.orderForm?.items ?? [];
   const total = cart?.orderForm?.total ?? 0;
   const subtotal = cart?.orderForm?.subtotal ?? 0;

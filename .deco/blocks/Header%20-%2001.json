@@ -1,1 +1,30 @@
-{"logo":{"alt":"Glamour logo by deco","src":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/986b61d4-3847-4867-93c8-b550cb459cc7","width":100,"height":16},"alerts":["Use this template to create your store at deco.cx"],"navItems":{"__resolveType":"navbar"},"__resolveType":"site/sections/Header/Header.tsx","searchbar":{"placeholder":"What are you looking for?","loader":{"data":null,"__resolveType":"resolved"}},"minicart":{"__resolveType":"site/loaders/minicart.ts"},"mode":"private","user":null}
+{
+  "__resolveType": "site/sections/Header/Header.tsx",
+  "alerts": [
+    "Use this template to create your store at deco.cx"
+  ],
+  "navItems": {
+    "__resolveType": "navbar"
+  },
+  "searchbar": {
+    "placeholder": "What are you looking for?",
+    "loader": {
+      "data": {
+        "__resolveType": "wake/loaders/suggestion.ts"
+      },
+      "__resolveType": "resolved"
+    }
+  },
+  "minicart": {
+    "__resolveType": "site/loaders/minicart.ts"
+  },
+  "user": {
+    "__resolveType": "wake/loaders/user.ts"
+  },
+  "logo": {
+    "alt": "Glamour logo by deco",
+    "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/986b61d4-3847-4867-93c8-b550cb459cc7",
+    "width": 100,
+    "height": 16
+  }
+}

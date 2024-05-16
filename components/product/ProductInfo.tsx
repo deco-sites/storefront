@@ -69,6 +69,11 @@ function ProductInfo({ page }: Props) {
         additionalProperty.map(({ name, value }) => [name, value]),
       ),
     }
+    : platform === "wake"
+    ? {
+      productVariantId: Number(productID),
+      quantity: 1,
+    }
     : null;
 
   return (

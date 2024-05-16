@@ -111,6 +111,7 @@ export default function Searchbar(
           })}
           hx-trigger={`input changed delay:300ms, ${NAME}`}
           hx-indicator={`#${SEARCHBAR_INPUT_FORM_ID}`}
+          hx-swap="innerHTML"
         />
         <label
           type="button"

@@ -1,6 +1,6 @@
 import { Props as UpdateCartProps } from "apps/vtex/actions/cart/updateItems.ts";
 import { AppContext } from "apps/vtex/mod.ts";
-import { orderFormToCart } from "./loader.ts";
+import { cartFrom } from "./loader.ts";
 
 export interface Props {
   quantity: number;
@@ -22,7 +22,7 @@ async function action(
     props,
   );
 
-  return orderFormToCart(form, req.url);
+  return cartFrom(form, req.url);
 }
 
 export default action;

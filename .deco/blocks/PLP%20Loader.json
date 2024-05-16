@@ -1,11 +1,6 @@
 {
   "data": {
-    "sort": "price:desc",
-    "count": 8,
-    "fuzzy": "automatic",
-    "pageOffset": 1,
-    "__resolveType": "vnda/loaders/productListingPage.ts",
-    "selectedFacets": []
+    "__resolveType": "wake/loaders/productListingPage.ts"
   },
   "extensions": [],
   "__resolveType": "commerce/loaders/product/extensions/listingPage.ts"

@@ -4,6 +4,7 @@ import { usePlatform } from "../sdk/usePlatform.tsx";
 
 import vtex from "../sdk/cart/vtex/loader.ts";
 import vnda from "../sdk/cart/vnda/loader.ts";
+import wake from "../sdk/cart/wake/loader.ts";
 import shopify from "../sdk/cart/shopify/loader.ts";
 
 // @gimenes remove once all platforms are supported
@@ -11,6 +12,7 @@ import shopify from "../sdk/cart/shopify/loader.ts";
 const loaders: Record<string, any> = {
   vtex,
   vnda,
+  wake,
   shopify,
 };
 
