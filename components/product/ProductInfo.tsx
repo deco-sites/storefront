@@ -25,7 +25,14 @@ function ProductInfo({ page }: Props) {
   }
 
   const { breadcrumbList, product } = page;
-  const { productID, offers, name = "", gtin, isVariantOf } = product;
+  const {
+    productID,
+    offers,
+    name = "",
+    gtin,
+    isVariantOf,
+    additionalProperty = [],
+  } = product;
   const { name: groupName = "" } = isVariantOf ?? {};
   const description = product.description || isVariantOf?.description;
   const title = groupName.length > name.length ? `${groupName} ${name}` : name;
@@ -54,6 +61,14 @@ function ProductInfo({ page }: Props) {
     ? { seller, productID }
     : platform === "shopify"
     ? { lines: { merchandiseId: productID } }
+    : platform === "vnda"
+    ? {
+      quantity: 1,
+      itemId: productID,
+      attributes: Object.fromEntries(
+        additionalProperty.map(({ name, value }) => [name, value]),
+      ),
+    }
     : null;
 
   return (

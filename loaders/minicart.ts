@@ -3,12 +3,14 @@ import { Minicart } from "../components/minicart/Minicart.tsx";
 import { usePlatform } from "../sdk/usePlatform.tsx";
 
 import vtex from "../sdk/cart/vtex/loader.ts";
+import vnda from "../sdk/cart/vnda/loader.ts";
 import shopify from "../sdk/cart/shopify/loader.ts";
 
 // @gimenes remove once all platforms are supported
 // deno-lint-ignore no-explicit-any
 const loaders: Record<string, any> = {
   vtex,
+  vnda,
   shopify,
 };
 

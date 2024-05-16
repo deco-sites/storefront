@@ -1,5 +1,4 @@
 import { AnalyticsItem } from "apps/commerce/types.ts";
-import { useCart } from "../../sdk/cart.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { useId } from "../../sdk/useId.ts";
 import { MINICART_DRAWER_ID } from "../../sdk/useUI.ts";
@@ -17,6 +16,7 @@ export interface Minicart {
     coupon?: string;
   };
   options: {
+    enableCoupon?: boolean;
     freeShippingTarget: number;
     checkoutHref: string;
     locale: string;
@@ -39,6 +39,7 @@ function Cart({
     options: {
       locale,
       currency,
+      enableCoupon = true,
       freeShippingTarget,
       checkoutHref,
     },
@@ -116,7 +117,7 @@ function Cart({
                       {formatPrice(subtotal, currency, locale)}
                     </span>
                   </div>
-                  <Coupon coupon={coupon} />
+                  {enableCoupon && <Coupon coupon={coupon} />}
                 </div>
 
                 {/* Total */}

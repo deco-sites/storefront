@@ -1,5 +1,5 @@
 {
-  "name": "Home",
+  "__resolveType": "website/pages/Page.tsx",
   "sections": [
     {
       "__resolveType": "website/sections/Seo/SeoV2.tsx"
@@ -21,7 +21,7 @@
                 "action": {
                   "href": "/feminino",
                   "label": "Explore collection",
-                  "title": "Shopify Store",
+                  "title": "VNDA Store",
                   "subTitle": "Visit our site and start building now:"
                 },
                 "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
@@ -32,7 +32,7 @@
                 "action": {
                   "href": "/masculino",
                   "label": "Explore collection",
-                  "title": "Shopify Store",
+                  "title": "VNDA Store",
                   "subTitle": "Visit our site and start building now:"
                 },
                 "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
@@ -43,7 +43,7 @@
                 "action": {
                   "href": "/feminino/roupas/vestidos",
                   "label": "Explore collection",
-                  "title": "Shopify Store",
+                  "title": "VNDA Store",
                   "subTitle": "Visit our site and start building now:"
                 },
                 "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
@@ -67,7 +67,7 @@
                 "action": {
                   "href": "/feminino",
                   "label": "Explore collection",
-                  "title": "Shopify Store",
+                  "title": "VNDA Store",
                   "subTitle": "Visit our site and start building now:"
                 },
                 "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
@@ -78,7 +78,7 @@
                 "action": {
                   "href": "/masculino",
                   "label": "Explore collection",
-                  "title": "Shopify Store",
+                  "title": "VNDA Store",
                   "subTitle": "Visit our site and start building now:"
                 },
                 "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
@@ -89,7 +89,7 @@
                 "action": {
                   "href": "/feminino/roupas/vestidos",
                   "label": "Explore collection",
-                  "title": "Shopify Store",
+                  "title": "VNDA Store",
                   "subTitle": "Visit our site and start building now:"
                 },
                 "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
@@ -151,8 +151,12 @@
           "count": 6,
           "collection": "Masculino"
         },
-        "__resolveType": "shopify/loaders/ProductList.ts"
-      }
+        "__resolveType": "vnda/loaders/productList.ts",
+        "count": 8,
+        "term": "test"
+      },
+      "title": "Summer",
+      "description": "Shiny new look"
     },
     {
       "__resolveType": "Shoppable Banner - 01"
@@ -219,7 +223,8 @@
             "count": 3,
             "collection": "a"
           },
-          "__resolveType": "shopify/loaders/ProductList.ts"
+          "__resolveType": "vnda/loaders/productList.ts",
+          "count": 3
         },
         "__resolveType": "site/sections/Product/ProductShelf.tsx"
       }
@@ -236,7 +241,10 @@
               "count": 8,
               "query": "vestido"
             },
-            "__resolveType": "shopify/loaders/ProductList.ts"
+            "__resolveType": "vnda/loaders/productList.ts",
+            "term": "teste",
+            "count": 6,
+            "wildcard": false
           }
         },
         {
@@ -247,7 +255,9 @@
               "count": 8,
               "collection": "140"
             },
-            "__resolveType": "shopify/loaders/ProductList.ts"
+            "__resolveType": "vnda/loaders/productList.ts",
+            "count": 6,
+            "term": "teste"
           }
         }
       ],
@@ -296,6 +306,6 @@
       "__resolveType": "Footer - 04"
     }
   ],
-  "__resolveType": "website/pages/Page.tsx",
+  "name": "Home",
   "path": "/"
 }

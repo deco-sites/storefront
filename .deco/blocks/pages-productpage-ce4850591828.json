@@ -1,6 +1,6 @@
 {
   "name": "Product Page",
-  "path": "/products/:slug",
+  "path": "/produto/:slug",
   "default": {
     "possiblePaths": []
   },
@@ -22,28 +22,6 @@
         "__resolveType": "PDP Loader"
       },
       "__resolveType": "site/sections/Product/ProductDetails.tsx"
-    },
-    {
-      "title": "You may also like",
-      "products": {
-        "crossSelling": "whosawalsosaw",
-        "__resolveType": "shopify/loaders/RelatedProducts.ts",
-        "props": {
-          "sort": ""
-        },
-        "filters": {
-          "tags": [],
-          "productTypes": [],
-          "productVendors": [],
-          "variantOptions": []
-        },
-        "slug": {
-          "__resolveType": "website/functions/requestToParam.ts",
-          "param": "slug"
-        },
-        "count": 8
-      },
-      "__resolveType": "site/sections/Product/ProductShelf.tsx"
     },
     {
       "__resolveType": "Footer - 01"

@@ -32,23 +32,8 @@ export default function GallerySlider(props: Props) {
 
   const {
     layout,
-    page: { product: { image = [] } },
+    page: { product: { image: images = [] } },
   } = props;
-  const images = [
-    ...image,
-    ...image,
-    ...image,
-    ...image,
-    ...image,
-    ...image,
-    ...image,
-    ...image,
-    ...image,
-    ...image,
-    ...image,
-    ...image,
-    ...image,
-  ];
 
   const { width, height } = layout || { width: 300, height: 370 };
 

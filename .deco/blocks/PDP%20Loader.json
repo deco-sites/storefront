@@ -4,7 +4,7 @@
       "param": "slug",
       "__resolveType": "website/functions/requestToParam.ts"
     },
-    "__resolveType": "shopify/loaders/ProductDetailsPage.ts"
+    "__resolveType": "vnda/loaders/productDetailsPage.ts"
   },
   "extensions": [],
   "__resolveType": "commerce/loaders/product/extensions/detailsPage.ts"

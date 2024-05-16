@@ -35,7 +35,15 @@ function ProductCard({
 }: Props) {
   const platform = usePlatform();
 
-  const { url, productID, name, image: images, offers, isVariantOf } = product;
+  const {
+    url,
+    productID,
+    name,
+    image: images,
+    offers,
+    isVariantOf,
+    additionalProperty = [],
+  } = product;
   const id = `product-card-${productID}`;
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const productGroupID = isVariantOf?.productGroupID;
@@ -52,6 +60,14 @@ function ProductCard({
     ? { seller, productID }
     : platform === "shopify"
     ? { lines: { merchandiseId: productID } }
+    : platform === "vnda"
+    ? {
+      quantity: 1,
+      itemId: productID,
+      attributes: Object.fromEntries(
+        additionalProperty.map(({ name, value }) => [name, value]),
+      ),
+    }
     : null;
 
   return (

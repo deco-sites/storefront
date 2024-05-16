@@ -4,7 +4,7 @@
     "count": 8,
     "fuzzy": "automatic",
     "pageOffset": 1,
-    "__resolveType": "shopify/loaders/ProductListingPage.ts",
+    "__resolveType": "vnda/loaders/productListingPage.ts",
     "selectedFacets": []
   },
   "extensions": [],

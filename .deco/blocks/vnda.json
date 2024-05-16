@@ -1,0 +1,12 @@
+{
+  "account": "template1",
+  "sandbox": true,
+  "platform": "vnda",
+  "authToken": {
+    "name": "VNDA_AUTH_TOKEN",
+    "encrypted": "ef74ce723ff8c19427cb680180b1ca70d2d8472d36017f616d9a82ac7dfa4ec8",
+    "__resolveType": "website/loaders/secret.ts"
+  },
+  "publicUrl": "template1.vnda.dev",
+  "__resolveType": "decohub/apps/vnda.ts"
+}
