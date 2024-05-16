@@ -147,10 +147,8 @@
         "showArrows": true
       },
       "products": {
-        "__resolveType": "nuvemshop/loaders/productList.ts",
-        "sort": "price-ascending",
-        "term": "velas",
-        "limit": 8
+        "path": "/listas/principal-principal",
+        "__resolveType": "linx/loaders/product/list.ts"
       },
       "title": "Summer",
       "description": "Shiny new look"
@@ -215,10 +213,8 @@
           }
         },
         "products": {
-          "__resolveType": "nuvemshop/loaders/productList.ts",
-          "sort": "user",
-          "term": "decoração",
-          "limit": 8
+          "path": "/listas/principal-principal",
+          "__resolveType": "linx/loaders/product/list.ts"
         },
         "__resolveType": "site/sections/Product/ProductShelf.tsx"
       }
@@ -230,19 +226,15 @@
         {
           "title": "Woman",
           "products": {
-            "__resolveType": "nuvemshop/loaders/productList.ts",
-            "sort": "user",
-            "term": "decoração",
-            "limit": 8
+            "path": "/listas/principal-principal",
+            "__resolveType": "linx/loaders/product/list.ts"
           }
         },
         {
           "title": "Man",
           "products": {
-            "__resolveType": "nuvemshop/loaders/productList.ts",
-            "sort": "user",
-            "term": "decoração",
-            "limit": 8
+            "path": "/listas/principal-principal",
+            "__resolveType": "linx/loaders/product/list.ts"
           }
         }
       ],

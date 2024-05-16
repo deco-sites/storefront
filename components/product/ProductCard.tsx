@@ -82,6 +82,12 @@ function ProductCard({
         additionalProperty.map(({ name, value }) => [name, value]),
       ),
     }
+    : platform === "linx"
+    ? {
+      ProductID: productGroupID,
+      SkuID: productID,
+      Quantity: 1,
+    }
     : null;
 
   return (

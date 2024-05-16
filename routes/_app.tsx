@@ -29,12 +29,11 @@ export default defineApp(async (_req, ctx) => {
 
       {/* Rest of Preact tree */}
       <ctx.Component />
+
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{ __html: `(${sw})();` }}
+      />
     </>
   );
 });
-
-// {/* Include service worker */}
-// <script
-//   type="module"
-//   dangerouslySetInnerHTML={{ __html: `(${sw})();` }}
-// />

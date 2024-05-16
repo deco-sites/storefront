@@ -4,6 +4,7 @@ import { usePlatform } from "../../sdk/usePlatform.tsx";
 
 import vtex from "../../sdk/cart/vtex/coupon.ts";
 import wake from "../../sdk/cart/wake/coupon.ts";
+import linx from "../../sdk/cart/linx/coupon.ts";
 import shopify from "../../sdk/cart/shopify/coupon.ts";
 
 // @gimenes remove once all platforms are supported
@@ -11,6 +12,7 @@ import shopify from "../../sdk/cart/shopify/coupon.ts";
 const actions: Record<string, any> = {
   vtex,
   wake,
+  linx,
   shopify,
 };
 

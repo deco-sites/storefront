@@ -5,6 +5,7 @@ import { usePlatform } from "../sdk/usePlatform.tsx";
 import vtex from "../sdk/cart/vtex/loader.ts";
 import vnda from "../sdk/cart/vnda/loader.ts";
 import wake from "../sdk/cart/wake/loader.ts";
+import linx from "../sdk/cart/linx/loader.ts";
 import shopify from "../sdk/cart/shopify/loader.ts";
 import nuvemshop from "../sdk/cart/nuvemshop/loader.ts";
 
@@ -14,6 +15,7 @@ const loaders: Record<string, any> = {
   vtex,
   vnda,
   wake,
+  linx,
   shopify,
   nuvemshop,
 };

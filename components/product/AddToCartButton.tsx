@@ -6,7 +6,6 @@ import { useAddToCart } from "../../sdk/cart.ts";
 import { clx } from "../../sdk/clx.ts";
 import { MINICART_CONTAINER_ID, MINICART_DRAWER_ID } from "../../sdk/useUI.ts";
 import { SendEventOnClick } from "../Analytics.tsx";
-import { scriptAsDataURI } from "deco/utils/dataURI.ts";
 
 export interface Props extends JSX.HTMLAttributes<HTMLLabelElement> {
   /** @description: sku name */

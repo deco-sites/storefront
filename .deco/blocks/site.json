@@ -29,7 +29,27 @@
   ],
   "routes": [
     {
-      "__resolveType": "nuvemshop/loaders/proxy.ts"
+      "pages": [
+        {
+          "page": {
+            "__resolveType": "pages-category-7493d4326022"
+          },
+          "selected": "category"
+        },
+        {
+          "page": {
+            "__resolveType": "pages-productpage-ce4850591828"
+          },
+          "selected": "product"
+        },
+        {
+          "page": {
+            "__resolveType": "pages-category-7493d4326022"
+          },
+          "selected": "search"
+        }
+      ],
+      "__resolveType": "linx/loaders/pages.ts"
     },
     {
       "__resolveType": "website/loaders/pages.ts"
@@ -44,7 +64,7 @@
   "commerce": {
     "platform": "other"
   },
-  "platform": "nuvemshop",
+  "platform": "linx",
   "__resolveType": "site/apps/site.ts",
   "firstByteThresholdMS": true,
   "abTesting": {

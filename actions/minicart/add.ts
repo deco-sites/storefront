@@ -5,17 +5,17 @@ import { usePlatform } from "../../sdk/usePlatform.tsx";
 import vtex, { Props as VTEX } from "../../sdk/cart/vtex/add.ts";
 import vnda, { Props as VNDA } from "../../sdk/cart/vnda/add.ts";
 import wake, { Props as WAKE } from "../../sdk/cart/wake/add.ts";
+import linx, { Props as Linx } from "../../sdk/cart/linx/add.ts";
 import shopify, { Props as Shopify } from "../../sdk/cart/shopify/add.ts";
 import nuvemshop, { Props as NuvemShop } from "../../sdk/cart/nuvemshop/add.ts";
 
-export type Props = VTEX | Shopify | VNDA | WAKE | NuvemShop;
+export type Props = VTEX | Shopify | VNDA | WAKE | NuvemShop | Linx;
 
-// @gimenes remove once all platforms are supported
-// deno-lint-ignore no-explicit-any
-const actions: Record<string, any> = {
+const actions = {
   vtex,
   vnda,
   wake,
+  linx,
   nuvemshop,
   shopify,
 };

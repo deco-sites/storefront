@@ -1,6 +1,6 @@
 {
   "data": {
-    "__resolveType": "nuvemshop/loaders/productListingPage.ts"
+    "__resolveType": "linx/loaders/product/listingPage.ts"
   },
   "extensions": [],
   "__resolveType": "commerce/loaders/product/extensions/listingPage.ts"

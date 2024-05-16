@@ -1,10 +1,6 @@
 {
   "data": {
-    "slug": {
-      "param": "slug",
-      "__resolveType": "website/functions/requestToParam.ts"
-    },
-    "__resolveType": "nuvemshop/loaders/productDetailsPage.ts"
+    "__resolveType": "linx/loaders/product/detailsPage.ts"
   },
   "extensions": [],
   "__resolveType": "commerce/loaders/product/extensions/detailsPage.ts"
