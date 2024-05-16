@@ -10,8 +10,6 @@ async function action(props: Props, _req: Request, ctx: AppContext) {
     props,
   );
 
-  
-
   return cartFrom(response);
 }
 

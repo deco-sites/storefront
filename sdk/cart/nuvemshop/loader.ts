@@ -20,8 +20,6 @@ const useAnalyticsItem =
 const locale = "pt-BR";
 
 export const cartFrom = (cart: Cart | null): Minicart => {
-  
-
   const items = cart?.products ?? [];
   const coupons = cart?.coupon;
   const coupon = coupons?.[0] as string | undefined;

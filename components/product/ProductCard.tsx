@@ -73,15 +73,14 @@ function ProductCard({
       productVariantId: Number(productID),
       quantity: 1,
     }
-    : platform === 'nuvemshop'
+    : platform === "nuvemshop"
     ? {
       quantity: 1,
       itemId: Number(productGroupID),
       add_to_cart_enhanced: "1",
       attributes: Object.fromEntries(
-          additionalProperty.map(({ name, value }) => [name, value])
-      )
-        
+        additionalProperty.map(({ name, value }) => [name, value]),
+      ),
     }
     : null;
 
