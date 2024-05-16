@@ -3,11 +3,15 @@ import { type Minicart } from "../../components/minicart/Minicart.tsx";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 
 import vtex, { Props as VTEX } from "../../sdk/cart/vtex/update.ts";
+import shopify, { Props as Shopify } from "../../sdk/cart/shopify/update.ts";
 
-export type Props = VTEX;
+export type Props = VTEX | Shopify;
 
+// @gimenes remove once all platforms are supported
+// deno-lint-ignore no-explicit-any
 const actions: Record<string, any> = {
   vtex,
+  shopify,
 };
 
 function loader(

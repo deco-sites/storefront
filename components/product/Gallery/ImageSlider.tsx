@@ -4,6 +4,7 @@ import ProductImageZoom from "../../../components/product/ProductImageZoom.tsx";
 import Icon from "../../../components/ui/Icon.tsx";
 import Slider from "../../../components/ui/Slider.tsx";
 import { useId } from "../../../sdk/useId.ts";
+import { clx } from "../../../sdk/clx.ts";
 
 export interface Props {
   /** @title Integration */
@@ -31,8 +32,23 @@ export default function GallerySlider(props: Props) {
 
   const {
     layout,
-    page: { product: { image: images = [] } },
+    page: { product: { image = [] } },
   } = props;
+  const images = [
+    ...image,
+    ...image,
+    ...image,
+    ...image,
+    ...image,
+    ...image,
+    ...image,
+    ...image,
+    ...image,
+    ...image,
+    ...image,
+    ...image,
+    ...image,
+  ];
 
   const { width, height } = layout || { width: 300, height: 370 };
 
@@ -40,10 +56,10 @@ export default function GallerySlider(props: Props) {
 
   return (
     <>
-      <div id={id} class="grid grid-flow-row sm:grid-flow-col">
+      <div id={id} class="grid grid-flow-row sm:grid-flow-col gap-2">
         {/* Image Slider */}
-        <div class="relative order-1 sm:order-2">
-          <Slider class="carousel carousel-center gap-6 w-screen sm:w-[40vw]">
+        <div class="relative order-1 sm:order-2 h-min">
+          <Slider class="carousel carousel-center gap-6 w-full">
             {images.map((img, index) => (
               <Slider.Item
                 index={index}
@@ -87,9 +103,17 @@ export default function GallerySlider(props: Props) {
         </div>
 
         {/* Dots */}
-        <ul class="carousel carousel-center gap-1 px-4 sm:px-0 sm:flex-col order-2 sm:order-1">
+        <ul
+          class={clx(
+            "carousel carousel-center",
+            "sm:carousel-vertical",
+            "gap-1 px-4 order-2",
+            "sm:gap-2 sm:px-0 sm:order-1",
+          )}
+          style={{ maxHeight: "600px" }}
+        >
           {images.map((img, index) => (
-            <li class="carousel-item min-w-[63px] sm:min-w-[100px]">
+            <li class="carousel-item">
               <Slider.Dot index={index}>
                 <Image
                   style={{ aspectRatio }}

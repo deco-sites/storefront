@@ -30,6 +30,7 @@ function AddToCartButton({ event, minicart, class: _class }: Props) {
         hx-disabled-elt="this"
         hx-target={`#${MINICART_CONTAINER_ID}`}
         hx-post={useAddToCart(minicart)}
+        hx-swap="innerHTML"
       >
         Adicionar à Sacola
       </label>

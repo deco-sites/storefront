@@ -3,9 +3,13 @@ import { type Minicart } from "../../components/minicart/Minicart.tsx";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 
 import vtex from "../../sdk/cart/vtex/coupon.ts";
+import shopify from "../../sdk/cart/shopify/coupon.ts";
 
+// @gimenes remove once all platforms are supported
+// deno-lint-ignore no-explicit-any
 const actions: Record<string, any> = {
   vtex,
+  shopify,
 };
 
 async function loader(

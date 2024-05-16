@@ -1,28 +1,16 @@
-import { Props as UpdateCartProps } from "apps/vtex/actions/cart/updateItems.ts";
-import { AppContext } from "apps/vtex/mod.ts";
-import { orderFormToCart } from "./loader.ts";
+import a from "apps/shopify/actions/cart/updateItems.ts";
+import { AppContext } from "apps/shopify/mod.ts";
+import { cartFromFragment } from "./loader.ts";
 
-export interface Props {
-  quantity: number;
-  index: number;
-}
+export type Props = Parameters<typeof a>[0];
 
-async function action(
-  { quantity, index }: Props,
-  req: Request,
-  ctx: AppContext,
-) {
-  const props: UpdateCartProps = {
-    allowedOutdatedData: ["paymentData"],
-    orderItems: [{ quantity, index }],
-  };
-
-  const form = await ctx.invoke(
-    "vtex/actions/cart/updateItems.ts",
+async function action(props: Props, _req: Request, ctx: AppContext) {
+  const fragment = await ctx.invoke(
+    "shopify/actions/cart/updateItems.ts",
     props,
   );
 
-  return orderFormToCart(form, req.url);
+  return cartFromFragment(fragment);
 }
 
 export default action;

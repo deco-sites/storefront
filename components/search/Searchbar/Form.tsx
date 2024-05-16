@@ -70,10 +70,12 @@ const script = (formId: string, name: string, popupId: string) => {
   });
 };
 
+const Suggestions = import.meta.resolve("./Suggestions.tsx");
+
 export default function Searchbar(
   { placeholder = "What are you looking for?", loader }: SearchbarProps,
 ) {
-  const suggestionsSlot = useId();
+  const slot = useId();
 
   return (
     <div
@@ -103,11 +105,10 @@ export default function Searchbar(
           name={NAME}
           placeholder={placeholder}
           autocomplete="off"
-          hx-target={`#${suggestionsSlot}`}
-          hx-post={useComponent<SuggestionProps>(
-            import.meta.resolve("./Suggestions.tsx"),
-            { loader: asResolved(loader) },
-          )}
+          hx-target={`#${slot}`}
+          hx-post={loader && useComponent<SuggestionProps>(Suggestions, {
+            loader: asResolved(loader),
+          })}
           hx-trigger={`input changed delay:300ms, ${NAME}`}
           hx-indicator={`#${SEARCHBAR_INPUT_FORM_ID}`}
         />
@@ -122,7 +123,7 @@ export default function Searchbar(
       </form>
 
       {/* Suggestions slot */}
-      <div id={suggestionsSlot} />
+      <div id={slot} />
 
       {/* Send search events as the user types */}
       <script

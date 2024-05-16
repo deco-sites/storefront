@@ -14,17 +14,9 @@ import ProductSelector from "./ProductVariantSelector.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
-  layout?: {
-    /**
-     * @title Product Name
-     * @description How product title will be displayed. Concat to concatenate product and sku names.
-     * @default product
-     */
-    name?: "concat" | "productGroup" | "product";
-  };
 }
 
-function ProductInfo({ page, layout }: Props) {
+function ProductInfo({ page }: Props) {
   const platform = usePlatform();
   const id = useId();
 
@@ -34,7 +26,9 @@ function ProductInfo({ page, layout }: Props) {
 
   const { breadcrumbList, product } = page;
   const { productID, offers, name = "", gtin, isVariantOf } = product;
+  const { name: groupName = "" } = isVariantOf ?? {};
   const description = product.description || isVariantOf?.description;
+  const title = groupName.length > name.length ? `${groupName} ${name}` : name;
   const {
     price = 0,
     listPrice,
@@ -56,7 +50,11 @@ function ProductInfo({ page, layout }: Props) {
     listPrice,
   });
 
-  const minicart = platform === "vtex" ? { seller, productID } : null;
+  const minicart = platform === "vtex"
+    ? { seller, productID }
+    : platform === "shopify"
+    ? { lines: { merchandiseId: productID } }
+    : null;
 
   return (
     <div class="flex flex-col px-4" id={id}>
@@ -67,13 +65,7 @@ function ProductInfo({ page, layout }: Props) {
           {gtin && <span class="text-sm text-base-300">Cod. {gtin}</span>}
         </div>
         <h1>
-          <span class="font-medium text-xl capitalize">
-            {layout?.name === "concat"
-              ? `${isVariantOf?.name} ${name}`
-              : layout?.name === "productGroup"
-              ? isVariantOf?.name
-              : name}
-          </span>
+          <span class="font-medium text-xl capitalize">{title}</span>
         </h1>
       </div>
       {/* Prices */}
@@ -96,21 +88,26 @@ function ProductInfo({ page, layout }: Props) {
       </div>
       {/* Add to Cart and Favorites button */}
       <div class="mt-4 sm:mt-10 flex flex-col gap-2">
-        {availability === "https://schema.org/InStock" && minicart
+        {availability === "https://schema.org/InStock"
           ? (
             <>
-              <AddToCartButton
-                class="btn-primary"
-                minicart={minicart}
-                event={{ name: "add_to_cart", params: { items: [eventItem] } }}
-              />
+              {minicart && (
+                <AddToCartButton
+                  class="btn-primary"
+                  minicart={minicart}
+                  event={{
+                    name: "add_to_cart",
+                    params: { items: [eventItem] },
+                  }}
+                />
+              )}
+              {/* todo @gimenes: add wishlist back */}
               {/* @ts-expect-error todo @gimenes */}
               <WishlistButton
                 isUserLoggedIn={true}
                 productID={productID}
                 productGroupID={productGroupID}
               />
-              {/* todo @gimenes: add wishlist back */}
             </>
           )
           : <OutOfStock productID={productID} />}

@@ -2,6 +2,7 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { Person, SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { useDevice } from "deco/hooks/useDevice.ts";
+import { useSection } from "deco/hooks/usePartialSection.ts";
 import { clx } from "../../sdk/clx.ts";
 import {
   MINICART_CONTAINER_ID,
@@ -17,9 +18,9 @@ import Icon from "../ui/Icon.tsx";
 import Modal from "../ui/Modal.tsx";
 import Alert from "./Alert.tsx";
 import Bag from "./Bag.tsx";
+import Login from "./Login.tsx";
 import Menu from "./Menu.tsx";
 import NavItem from "./NavItem.tsx";
-import Login from "./Login.tsx";
 import { headerHeight, navbarHeight } from "./constants.ts";
 
 export interface Logo {
@@ -195,7 +196,16 @@ function Header({
   const device = useDevice();
 
   return (
-    <header style={{ height: headerHeight }}>
+    <header
+      style={{ height: headerHeight }}
+      // Refetch the header in two situations
+      // 1. When the window is resized so we have a gracefull Developer Experience
+      // 2. When the user changes tab, so we can update the minicart badge when the user comes back
+      hx-trigger="resize from:window, visibilitychange[document.visibilityState === 'visible'] from:document"
+      hx-get={useSection()}
+      hx-target="closest section"
+      hx-swap="outerHTML"
+    >
       {/* Minicart Drawer */}
       <Drawer
         id={MINICART_DRAWER_ID}

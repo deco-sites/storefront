@@ -2,7 +2,7 @@ import { itemToAnalyticsItem } from "apps/vtex/hooks/useCart.ts";
 import { AppContext } from "apps/vtex/mod.ts";
 import { OrderForm, OrderFormItem } from "apps/vtex/utils/types.ts";
 import { Minicart } from "../../../components/minicart/Minicart.tsx";
-import { useAddCoupon, useUpdateQuantity } from "../../cart.ts";
+import { useUpdateQuantity } from "../../cart.ts";
 
 const useAnalyticsItem =
   (items: OrderFormItem[], coupon: string | undefined, url: string) =>
@@ -52,7 +52,6 @@ export const orderFormToCart = (
       checkoutHref: "/checkout",
     },
 
-    useAddCoupon,
     useUpdateQuantity: (quantity: number, index: number) =>
       useUpdateQuantity({ quantity, index }),
     useAnalyticsItem: useAnalyticsItem(items, coupon, url),

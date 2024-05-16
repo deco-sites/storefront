@@ -1,20 +1,17 @@
-import { Props as ActionProps } from "apps/vtex/actions/cart/updateCoupons.ts";
-import { AppContext } from "apps/vtex/mod.ts";
-import { orderFormToCart } from "./loader.ts";
+import { AppContext } from "apps/shopify/mod.ts";
+import { cartFromFragment } from "./loader.ts";
 
-export type Props = ActionProps;
+export type Props = { text: string };
 
-async function action(
-  props: Props,
-  req: Request,
-  ctx: AppContext,
-) {
-  const form = await ctx.invoke(
-    "vtex/actions/cart/updateCoupons.ts",
-    props,
+async function action(props: Props, _req: Request, ctx: AppContext) {
+  const { text } = props;
+
+  const fragment = await ctx.invoke(
+    "shopify/actions/cart/updateCoupons.ts",
+    { discountCodes: [text] },
   );
 
-  return orderFormToCart(form, req.url);
+  return cartFromFragment(fragment);
 }
 
 export default action;

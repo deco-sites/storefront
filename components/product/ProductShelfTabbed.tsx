@@ -39,10 +39,6 @@ function TabbedProductShelf({
     : 0;
   const { products } = tabs[ti];
 
-  if (!products || products.length === 0) {
-    return null;
-  }
-
   return (
     <div class="w-full container  py-8 flex flex-col gap-8 lg:gap-12 lg:py-10">
       <Header
@@ -67,55 +63,59 @@ function TabbedProductShelf({
         </div>
       </div>
 
-      <div
-        id={id}
-        class="container grid grid-cols-[48px_1fr_48px] px-0 sm:px-5"
-      >
-        <Slider class="carousel carousel-center sm:carousel-end gap-6 col-span-full row-start-2 row-end-5">
-          {products?.map((product, index) => (
-            <Slider.Item
-              index={index}
-              class="carousel-item w-[270px] sm:w-[292px] first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-0"
-            >
-              <ProductCard
-                product={product}
-                itemListName={title}
-                index={index}
-              />
-            </Slider.Item>
-          ))}
-        </Slider>
+      {!products?.length
+        ? <div class="flex justify-center items-center">No Products found</div>
+        : (
+          <div
+            id={id}
+            class="container grid grid-cols-[48px_1fr_48px] px-0 sm:px-5"
+          >
+            <Slider class="carousel carousel-center sm:carousel-end gap-6 col-span-full row-start-2 row-end-5">
+              {products.map((product, index) => (
+                <Slider.Item
+                  index={index}
+                  class="carousel-item w-[270px] sm:w-[292px] first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-0"
+                >
+                  <ProductCard
+                    product={product}
+                    itemListName={title}
+                    index={index}
+                  />
+                </Slider.Item>
+              ))}
+            </Slider>
 
-        <>
-          <div class="hidden relative sm:block z-10 col-start-1 row-start-3">
-            <Slider.PrevButton class="btn btn-circle btn-outline absolute right-1/2 bg-base-100">
-              <Icon size={24} id="ChevronLeft" strokeWidth={3} />
-            </Slider.PrevButton>
+            <>
+              <div class="hidden relative sm:block z-10 col-start-1 row-start-3">
+                <Slider.PrevButton class="btn btn-circle btn-outline absolute right-1/2 bg-base-100">
+                  <Icon size={24} id="ChevronLeft" strokeWidth={3} />
+                </Slider.PrevButton>
+              </div>
+              <div class="hidden relative sm:block z-10 col-start-3 row-start-3">
+                <Slider.NextButton class="btn btn-circle btn-outline absolute left-1/2 bg-base-100">
+                  <Icon size={24} id="ChevronRight" strokeWidth={3} />
+                </Slider.NextButton>
+              </div>
+            </>
+            <Slider.JS rootId={id} />
+            <SendEventOnView
+              id={id}
+              event={{
+                name: "view_item_list",
+                params: {
+                  item_list_name: title,
+                  items: products.map((product, index) =>
+                    mapProductToAnalyticsItem({
+                      index,
+                      product,
+                      ...(useOffer(product.offers)),
+                    })
+                  ),
+                },
+              }}
+            />
           </div>
-          <div class="hidden relative sm:block z-10 col-start-3 row-start-3">
-            <Slider.NextButton class="btn btn-circle btn-outline absolute left-1/2 bg-base-100">
-              <Icon size={24} id="ChevronRight" strokeWidth={3} />
-            </Slider.NextButton>
-          </div>
-        </>
-        <Slider.JS rootId={id} />
-        <SendEventOnView
-          id={id}
-          event={{
-            name: "view_item_list",
-            params: {
-              item_list_name: title,
-              items: products.map((product, index) =>
-                mapProductToAnalyticsItem({
-                  index,
-                  product,
-                  ...(useOffer(product.offers)),
-                })
-              ),
-            },
-          }}
-        />
-      </div>
+        )}
     </div>
   );
 }

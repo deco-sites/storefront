@@ -21,6 +21,7 @@ function Bag({ minicart, loading }: Props) {
       data-deco="open-cart"
       hx-target={`#${MINICART_CONTAINER_ID}`}
       hx-post={useCart()}
+      hx-swap="innerHTML"
     >
       {totalItems > 0 && (
         <span class="indicator-item badge badge-secondary badge-sm">

@@ -3,13 +3,17 @@ import { Minicart } from "../components/minicart/Minicart.tsx";
 import { usePlatform } from "../sdk/usePlatform.tsx";
 
 import vtex from "../sdk/cart/vtex/loader.ts";
+import shopify from "../sdk/cart/shopify/loader.ts";
 
+// @gimenes remove once all platforms are supported
+// deno-lint-ignore no-explicit-any
 const loaders: Record<string, any> = {
   vtex,
+  shopify,
 };
 
 function loader(
-  _props: unknown,
+  props: unknown,
   req: Request,
   ctx: AppContext,
 ): Promise<Minicart> {
@@ -21,7 +25,7 @@ function loader(
     throw new Error(`Unsupported platform: ${platform}`);
   }
 
-  return loader(_props, req, ctx);
+  return loader(props, req, ctx);
 }
 
 export default loader;

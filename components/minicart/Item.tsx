@@ -77,6 +77,7 @@ function CartItem({
             hx-target={`#${MINICART_CONTAINER_ID}`}
             hx-indicator={`#${MINICART_CONTAINER_ID}`}
             hx-post={useUpdateQuantity(0, index)}
+            hx-swap="innerHTML"
           >
             <Icon id="Trash" size={24} />
           </button>
@@ -102,6 +103,7 @@ function CartItem({
             hx-target={`#${MINICART_CONTAINER_ID}`}
             hx-indicator={`#${MINICART_CONTAINER_ID}`}
             hx-post={useUpdateQuantity(quantity - 1, index)}
+            hx-swap="innerHTML"
           >
             -
           </button>
@@ -124,6 +126,7 @@ function CartItem({
             hx-target={`#${MINICART_CONTAINER_ID}`}
             hx-indicator={`#${MINICART_CONTAINER_ID}`}
             hx-post={useUpdateQuantity(quantity + 1, index)}
+            hx-swap="innerHTML"
           >
             +
           </button>

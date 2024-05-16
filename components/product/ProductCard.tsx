@@ -3,11 +3,11 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 import Image from "apps/website/components/Image.tsx";
 import { SendEventOnClick } from "../../components/Analytics.tsx";
 import Avatar from "../../components/ui/Avatar.tsx";
-import { useAddToCart } from "../../sdk/cart.ts";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { relative } from "../../sdk/url.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
+import { usePlatform } from "../../sdk/usePlatform.tsx";
 import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
 import WishlistButton from "../wishlist/WishlistButton.tsx";
 import AddToCartButton from "./AddToCartButton.tsx";
@@ -33,6 +33,8 @@ function ProductCard({
   itemListName,
   index,
 }: Props) {
+  const platform = usePlatform();
+
   const { url, productID, name, image: images, offers, isVariantOf } = product;
   const id = `product-card-${productID}`;
   const hasVariant = isVariantOf?.hasVariant ?? [];
@@ -45,6 +47,12 @@ function ProductCard({
   const relativeUrl = relative(url);
   const aspectRatio = `${WIDTH} / ${HEIGHT}`;
   const eventItem = mapProductToAnalyticsItem({ product, price, listPrice });
+
+  const minicart = platform === "vtex"
+    ? { seller, productID }
+    : platform === "shopify"
+    ? { lines: { merchandiseId: productID } }
+    : null;
 
   return (
     <div
@@ -200,10 +208,12 @@ function ProductCard({
           ou {installments}
         </span>
 
-        <AddToCartButton
-          minicart={{ productID, seller }}
-          event={{ name: "add_to_cart", params: { items: [eventItem] } }}
-        />
+        {minicart && (
+          <AddToCartButton
+            minicart={minicart}
+            event={{ name: "add_to_cart", params: { items: [eventItem] } }}
+          />
+        )}
       </div>
     </div>
   );

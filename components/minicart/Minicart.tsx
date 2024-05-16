@@ -1,9 +1,10 @@
 import { AnalyticsItem } from "apps/commerce/types.ts";
+import { useCart } from "../../sdk/cart.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { useId } from "../../sdk/useId.ts";
 import { MINICART_DRAWER_ID } from "../../sdk/useUI.ts";
 import { SendEventOnClick, SendEventOnView } from "../Analytics.tsx";
-import Coupon, { Props as CouponProps } from "./Coupon.tsx";
+import Coupon from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
 import CartItem, { Item, Props as ItemProps } from "./Item.tsx";
 
@@ -22,7 +23,6 @@ export interface Minicart {
     currency: string;
   };
 
-  useAddCoupon?: CouponProps["useAddCoupon"];
   useAnalyticsItem: ItemProps["useAnalyticsItem"];
   useUpdateQuantity: ItemProps["useUpdateQuantity"];
 }
@@ -42,7 +42,6 @@ function Cart({
       freeShippingTarget,
       checkoutHref,
     },
-    useAddCoupon,
     useAnalyticsItem,
     useUpdateQuantity,
   },
@@ -117,9 +116,7 @@ function Cart({
                       {formatPrice(subtotal, currency, locale)}
                     </span>
                   </div>
-                  {useAddCoupon && (
-                    <Coupon useAddCoupon={useAddCoupon} coupon={coupon} />
-                  )}
+                  <Coupon coupon={coupon} />
                 </div>
 
                 {/* Total */}
