@@ -31,7 +31,7 @@ export default defineApp(async (_req, ctx) => {
       {/* Rest of Preact tree */}
       <ctx.Component />
 
-      <script defer dangerouslySetInnerHTML={{ __html: scriptAsDataURI(sw) }} />
+      <script defer src={scriptAsDataURI(sw)} />
     </>
   );
 });
