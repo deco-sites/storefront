@@ -1,4 +1,3 @@
-import { Head } from "$fresh/runtime.ts";
 import type { Product } from "apps/commerce/types.ts";
 import { useSection } from "deco/hooks/usePartialSection.ts";
 import { clx } from "../../sdk/clx.ts";
@@ -15,6 +14,23 @@ const ringClass = clx(
   "ring-1 ring-offset-4",
   "ring-base-300 peer-checked:ring-base-content",
 );
+
+const colors: Record<string, string | undefined> = {
+  "Dark Mode": "black",
+  "White Mode": "white",
+};
+
+export const Ring = (
+  { value, class: _class }: { value: string; class?: string },
+) => {
+  const color = colors[value] ?? "transparent";
+
+  return (
+    <span style={{ backgroundColor: color }} class={clx(ringClass, _class)}>
+      {color === "transparent" ? value.substring(0, 2) : null}
+    </span>
+  );
+};
 
 function VariantSelector({ product }: Props) {
   const { url, isVariantOf } = product;
@@ -35,6 +51,7 @@ function VariantSelector({ product }: Props) {
           <ul class="flex flex-row gap-4">
             {Object.entries(possibilities[name]).map(([value, link]) => {
               const relativeLink = relative(link);
+              const color = colors[value] ?? "transparent";
 
               return (
                 <li class="h-6 w-6">
@@ -49,14 +66,10 @@ function VariantSelector({ product }: Props) {
                       name={name}
                       checked={relativeLink === relativeUrl}
                     />
-                    <span
-                      class={clx(
-                        ringClass,
-                        "block [.htmx-request_&]:hidden",
-                      )}
-                    >
-                      {value.substring(0, 2)}
-                    </span>
+                    <Ring
+                      value={value}
+                      class="block [.htmx-request_&]:hidden"
+                    />
                     {/* Loading spinner */}
                     <span
                       class={clx(

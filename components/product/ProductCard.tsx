@@ -2,7 +2,6 @@ import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
 import { SendEventOnClick } from "../../components/Analytics.tsx";
-import Avatar from "../../components/ui/Avatar.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { relative } from "../../sdk/url.ts";
@@ -11,6 +10,7 @@ import { usePlatform } from "../../sdk/usePlatform.tsx";
 import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
 import WishlistButton from "../wishlist/WishlistButton.tsx";
 import AddToCartButton from "./AddToCartButton.tsx";
+import { Ring } from "./ProductVariantSelector.tsx";
 
 interface Props {
   product: Product;
@@ -197,23 +197,16 @@ function ProductCard({
         </figure>
 
         {/* SKU Selector */}
-        <ul class="flex items-center justify-center gap-2">
-          {variants
-            .map(([value, link]) => [value, relative(link)] as const)
-            .map(([value, link]) => (
-              <li>
-                <a href={link}>
-                  <Avatar
-                    content={value}
-                    variant={link === relativeUrl
-                      ? "active"
-                      : link
-                      ? "default"
-                      : "disabled"}
-                  />
-                </a>
-              </li>
-            ))}
+        <ul class={clx("flex items-center justify-center gap-4", "min-h-8")}>
+          {variants.length > 1 &&
+            variants.map(([value, link]) => [value, relative(link)] as const)
+              .map(([value, link]) => (
+                <li>
+                  <a href={link} class="avatar cursor-pointer">
+                    <Ring value={value} />
+                  </a>
+                </li>
+              ))}
         </ul>
 
         {/* Name/Description */}
