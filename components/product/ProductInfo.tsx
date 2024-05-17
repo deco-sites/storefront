@@ -33,9 +33,8 @@ function ProductInfo({ page }: Props) {
     isVariantOf,
     additionalProperty = [],
   } = product;
-  const { name: groupName = "" } = isVariantOf ?? {};
   const description = product.description || isVariantOf?.description;
-  const title = groupName.length > name.length ? `${groupName} ${name}` : name;
+  const title = isVariantOf?.name ?? product.name;
   const {
     price = 0,
     listPrice,

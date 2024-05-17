@@ -80,7 +80,7 @@ function Desktop(
                 src={logo.src}
                 alt={logo.alt}
                 width={logo.width || 100}
-                height={logo.height || 13}
+                height={logo.height || 23}
               />
             </a>
           )}

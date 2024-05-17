@@ -38,7 +38,6 @@ function ProductCard({
   const {
     url,
     productID,
-    name,
     image: images,
     offers,
     isVariantOf,
@@ -47,6 +46,7 @@ function ProductCard({
   const id = `product-card-${productID}`;
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const productGroupID = isVariantOf?.productGroupID;
+  const title = isVariantOf?.name ?? product.name;
   const description = product.description || isVariantOf?.description;
   const [front, back] = images ?? [];
   const { listPrice, price, installments, seller = "1" } = useOffer(offers);
@@ -220,7 +220,7 @@ function ProductCard({
         <div class="flex flex-col">
           <h2
             class="truncate text-base lg:text-lg uppercase"
-            dangerouslySetInnerHTML={{ __html: name ?? "" }}
+            dangerouslySetInnerHTML={{ __html: title ?? "" }}
           />
 
           <div

@@ -12,7 +12,7 @@
           "count": 4,
           "collection": "Feminino"
         },
-        "__resolveType": "wake/loaders/productList.ts"
+        "__resolveType": "shopify/loaders/ProductList.ts"
       },
       "description": "Maybe take some time to explore",
       "__resolveType": "site/sections/Product/ProductShelf.tsx"

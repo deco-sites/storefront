@@ -1,6 +1,11 @@
 {
   "data": {
-    "__resolveType": "linx/loaders/product/listingPage.ts"
+    "sort": "price:desc",
+    "count": 8,
+    "fuzzy": "automatic",
+    "pageOffset": 1,
+    "__resolveType": "shopify/loaders/ProductListingPage.ts",
+    "selectedFacets": []
   },
   "extensions": [],
   "__resolveType": "commerce/loaders/product/extensions/listingPage.ts"
