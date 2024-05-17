@@ -1,6 +1,7 @@
 import { asset, Head } from "$fresh/runtime.ts";
 import { defineApp } from "$fresh/server.ts";
 import { Context } from "deco/deco.ts";
+import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 
 const sw = () =>
   addEventListener("load", () =>
@@ -30,10 +31,7 @@ export default defineApp(async (_req, ctx) => {
       {/* Rest of Preact tree */}
       <ctx.Component />
 
-      <script
-        type="module"
-        dangerouslySetInnerHTML={{ __html: `(${sw})();` }}
-      />
+      <script defer dangerouslySetInnerHTML={{ __html: scriptAsDataURI(sw) }} />
     </>
   );
 });
