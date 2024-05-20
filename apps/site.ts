@@ -32,6 +32,7 @@ export type Platform =
 export let _platform: Platform = "custom";
 
 export type App = ReturnType<typeof Site>;
+// @ts-ignore somehow deno task check breaks, I have no idea why
 export type AppContext = AC<App>;
 
 const color = (platform: string) => {

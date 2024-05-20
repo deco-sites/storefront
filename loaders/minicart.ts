@@ -9,7 +9,6 @@ import linx from "../sdk/cart/linx/loader.ts";
 import shopify from "../sdk/cart/shopify/loader.ts";
 import nuvemshop from "../sdk/cart/nuvemshop/loader.ts";
 
-// @gimenes remove once all platforms are supported
 // deno-lint-ignore no-explicit-any
 const loaders: Record<string, any> = {
   vtex,

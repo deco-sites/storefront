@@ -13,7 +13,6 @@ import nuvemshop, {
 
 export type Props = VTEX | Shopify | VNDA | WAKE | NuvemShop | Linx;
 
-// @gimenes remove once all platforms are supported
 // deno-lint-ignore no-explicit-any
 const actions: Record<string, any> = {
   vtex,

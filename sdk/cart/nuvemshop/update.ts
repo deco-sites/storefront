@@ -10,7 +10,9 @@ async function action(props: Props, _req: Request, ctx: AppContext) {
     props,
   );
 
-  return cartFrom(response);
+  // TODO: improve nuvemshop typings
+  // deno-lint-ignore no-explicit-any
+  return cartFrom(response as any);
 }
 
 export default action;

@@ -7,7 +7,6 @@ import wake from "../../sdk/cart/wake/coupon.ts";
 import linx from "../../sdk/cart/linx/coupon.ts";
 import shopify from "../../sdk/cart/shopify/coupon.ts";
 
-// @gimenes remove once all platforms are supported
 // deno-lint-ignore no-explicit-any
 const actions: Record<string, any> = {
   vtex,

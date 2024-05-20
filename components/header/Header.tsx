@@ -2,7 +2,7 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { Person, SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { useDevice } from "deco/hooks/useDevice.ts";
-import { useSection } from "deco/hooks/usePartialSection.ts";
+import { useSection } from "deco/hooks/useSection.ts";
 import { clx } from "../../sdk/clx.ts";
 import {
   MINICART_CONTAINER_ID,

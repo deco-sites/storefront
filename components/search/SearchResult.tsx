@@ -1,7 +1,7 @@
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
-import { useSection } from "deco/hooks/usePartialSection.ts";
+import { useSection } from "deco/hooks/useSection.ts";
 import { SectionProps } from "deco/mod.ts";
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import ProductCard from "../../components/product/ProductCard.tsx";

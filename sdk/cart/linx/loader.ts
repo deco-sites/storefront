@@ -26,7 +26,7 @@ export const cartFrom = (cart: Cart): Minicart => {
 
   const total = cart?.Basket?.Total ?? 0;
   const subtotal = cart?.Basket?.SubTotal ?? 0;
-  const coupon = cart?.Basket?.Coupons?.[0]?.Code ?? undefined;
+  const coupon = cart?.Basket?.Coupons?.[0]?.Code ?? "";
 
   return {
     data: {

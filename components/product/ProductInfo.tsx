@@ -25,14 +25,7 @@ function ProductInfo({ page }: Props) {
   }
 
   const { breadcrumbList, product } = page;
-  const {
-    productID,
-    offers,
-    name = "",
-    gtin,
-    isVariantOf,
-    additionalProperty = [],
-  } = product;
+  const { productID, offers, gtin, isVariantOf } = product;
   const description = product.description || isVariantOf?.description;
   const title = isVariantOf?.name ?? product.name;
   const {
@@ -55,40 +48,6 @@ function ProductInfo({ page }: Props) {
     price,
     listPrice,
   });
-
-  const minicart = platform === "vtex"
-    ? { seller, productID }
-    : platform === "shopify"
-    ? { lines: { merchandiseId: productID } }
-    : platform === "vnda"
-    ? {
-      quantity: 1,
-      itemId: productID,
-      attributes: Object.fromEntries(
-        additionalProperty.map(({ name, value }) => [name, value]),
-      ),
-    }
-    : platform === "wake"
-    ? {
-      productVariantId: Number(productID),
-      quantity: 1,
-    }
-    : platform === "nuvemshop"
-    ? {
-      quantity: 1,
-      itemId: Number(productGroupID),
-      add_to_cart_enhanced: "1",
-      attributes: Object.fromEntries(
-        additionalProperty.map(({ name, value }) => [name, value]),
-      ),
-    }
-    : platform === "linx"
-    ? {
-      ProductID: productGroupID,
-      SkuID: productID,
-      Quantity: 1,
-    }
-    : null;
 
   return (
     <div class="flex flex-col px-4" id={id}>
@@ -125,16 +84,16 @@ function ProductInfo({ page }: Props) {
         {availability === "https://schema.org/InStock"
           ? (
             <>
-              {minicart && (
+              {price && listPrice && (
                 <AddToCartButton
+                  listPrice={listPrice}
+                  product={product}
+                  seller={seller}
+                  price={price}
                   class="btn-primary"
-                  minicart={minicart}
-                  event={{
-                    name: "add_to_cart",
-                    params: { items: [eventItem] },
-                  }}
                 />
               )}
+
               {/* todo @gimenes: add wishlist back */}
               {/* @ts-expect-error todo @gimenes */}
               <WishlistButton

@@ -1,7 +1,6 @@
-import { Picture, Source } from "apps/website/components/Picture.tsx";
-import Image from "apps/website/components/Image.tsx";
-import Header from "../../components/ui/SectionHeader.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import { Picture, Source } from "apps/website/components/Picture.tsx";
+import Header from "../../components/ui/SectionHeader.tsx";
 
 /**
  * @titleBy alt

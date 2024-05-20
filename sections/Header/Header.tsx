@@ -1,2 +1,1 @@
-export { default } from "../../components/header/Header.tsx";
-export * from "../../components/header/Header.tsx";
+export { default, LoadingFallback } from "../../components/header/Header.tsx";

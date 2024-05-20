@@ -41,7 +41,6 @@ function ProductCard({
     image: images,
     offers,
     isVariantOf,
-    additionalProperty = [],
   } = product;
   const id = `product-card-${productID}`;
   const hasVariant = isVariantOf?.hasVariant ?? [];
@@ -54,41 +53,6 @@ function ProductCard({
   const variants = Object.entries(Object.values(possibilities)[0] ?? {});
   const relativeUrl = relative(url);
   const aspectRatio = `${WIDTH} / ${HEIGHT}`;
-  const eventItem = mapProductToAnalyticsItem({ product, price, listPrice });
-
-  const minicart = platform === "vtex"
-    ? { seller, productID }
-    : platform === "shopify"
-    ? { lines: { merchandiseId: productID } }
-    : platform === "vnda"
-    ? {
-      quantity: 1,
-      itemId: productID,
-      attributes: Object.fromEntries(
-        additionalProperty.map(({ name, value }) => [name, value]),
-      ),
-    }
-    : platform === "wake"
-    ? {
-      productVariantId: Number(productID),
-      quantity: 1,
-    }
-    : platform === "nuvemshop"
-    ? {
-      quantity: 1,
-      itemId: Number(productGroupID),
-      add_to_cart_enhanced: "1",
-      attributes: Object.fromEntries(
-        additionalProperty.map(({ name, value }) => [name, value]),
-      ),
-    }
-    : platform === "linx"
-    ? {
-      ProductID: productGroupID,
-      SkuID: productID,
-      Quantity: 1,
-    }
-    : null;
 
   return (
     <div
@@ -237,10 +201,12 @@ function ProductCard({
           ou {installments}
         </span>
 
-        {minicart && (
+        {price && listPrice && (
           <AddToCartButton
-            minicart={minicart}
-            event={{ name: "add_to_cart", params: { items: [eventItem] } }}
+            product={product}
+            price={price}
+            listPrice={listPrice}
+            seller={seller}
           />
         )}
       </div>

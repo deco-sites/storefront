@@ -1,4 +1,4 @@
-import { useSection } from "deco/hooks/usePartialSection.ts";
+import { useSection } from "deco/hooks/useSection.ts";
 import type { AppContext } from "../apps/site.ts";
 import type { SectionProps } from "deco/mod.ts";
 import { toFileUrl } from "std/path/mod.ts";

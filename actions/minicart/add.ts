@@ -11,7 +11,8 @@ import nuvemshop, { Props as NuvemShop } from "../../sdk/cart/nuvemshop/add.ts";
 
 export type Props = VTEX | Shopify | VNDA | WAKE | NuvemShop | Linx;
 
-const actions = {
+// deno-lint-ignore no-explicit-any
+const actions: Record<string, any> = {
   vtex,
   vnda,
   wake,
