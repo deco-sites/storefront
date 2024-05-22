@@ -1,11 +1,24 @@
 {
-  "name": "Home",
+  "name": "Home for Mobile App",
+  "path": "/app",
   "sections": [
     {
-      "__resolveType": "website/sections/Seo/SeoV2.tsx"
+      "__resolveType": "Header - 01"
     },
     {
-      "__resolveType": "Header - 01"
+      "__resolveType": "site/sections/Product/ProductShelf.tsx",
+      "layout": {
+        "showArrows": true
+      },
+      "products": {
+        "props": {
+          "sort": "price:desc",
+          "count": 6,
+          "collection": "139"
+        },
+        "crossSelling": "similars",
+        "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
+      }
     },
     {
       "__resolveType": "website/flags/multivariate/section.ts",
@@ -142,21 +155,6 @@
       ]
     },
     {
-      "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "layout": {
-        "showArrows": true
-      },
-      "products": {
-        "props": {
-          "sort": "price:desc",
-          "count": 6,
-          "collection": "139"
-        },
-        "crossSelling": "similars",
-        "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
-      }
-    },
-    {
       "__resolveType": "Shoppable Banner - 01"
     },
     {
@@ -227,7 +225,6 @@
       }
     },
     {
-      "title": "Best Sellers",
       "__resolveType": "site/sections/Product/ProductShelfTabbed.tsx",
       "tabs": [
         {
@@ -253,14 +250,15 @@
           }
         }
       ],
+      "title": "Best Sellers",
       "layout": {
         "headerfontSize": "Large",
         "headerAlignment": "center"
       }
     },
     {
-      "__resolveType": "site/sections/Content/BlogPosts.tsx",
       "title": "Blogposts",
+      "__resolveType": "site/sections/Content/BlogPosts.tsx",
       "posts": [
         {
           "alt": "Item of the Summer",
@@ -292,12 +290,8 @@
       ]
     },
     {
-      "__resolveType": "Newsletter - 01"
-    },
-    {
       "__resolveType": "Footer - 04"
     }
   ],
-  "__resolveType": "website/pages/Page.tsx",
-  "path": "/"
+  "__resolveType": "website/pages/Page.tsx"
 }

@@ -9,10 +9,12 @@
       "title": "Oh no! You are offline!",
       "products": {
         "props": {
+          "ids": [],
+          "sort": "price:desc",
           "count": 4,
-          "collection": "Feminino"
+          "collection": "139"
         },
-        "__resolveType": "shopify/loaders/ProductList.ts"
+        "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
       },
       "description": "Maybe take some time to explore",
       "__resolveType": "site/sections/Product/ProductShelf.tsx"
