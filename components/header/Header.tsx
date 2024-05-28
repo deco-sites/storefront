@@ -4,12 +4,13 @@ import Image from "apps/website/components/Image.tsx";
 import { useDevice } from "deco/hooks/useDevice.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 import {
+  HEADER_HEIGHT,
   MINICART_CONTAINER_ID,
   MINICART_DRAWER_ID,
+  NAVBAR_HEIGHT,
   SEARCHBAR_DRAWER_ID,
   SEARCHBAR_POPUP_ID,
   SIDEMENU_DRAWER_ID,
-  HEADER_HEIGHT, NAVBAR_HEIGHT,
 } from "../../constants.ts";
 import { clx } from "../../sdk/clx.ts";
 import { type Minicart } from "../minicart/Minicart.tsx";
