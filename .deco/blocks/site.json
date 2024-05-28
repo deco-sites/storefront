@@ -18,7 +18,10 @@
     },
     {
       "__resolveType": "website/sections/Analytics/Analytics.tsx",
-      "dangerouslyRunOnMainThread": true
+      "dangerouslyRunOnMainThread": true,
+      "trackingIds": [
+        "GTM-KVXHNCM"
+      ]
     },
     {
       "__resolveType": "analytics/sections/Analytics/DecoAnalytics.tsx"
@@ -60,5 +63,7 @@
       "includes": []
     }
   },
-  "flavor": "{\"framework\":\"fresh\"}"
+  "flavor": {
+    "framework": "htmx"
+  }
 }

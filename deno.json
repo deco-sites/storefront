@@ -1,7 +1,7 @@
 {
   "imports": {
-    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.67.1/",
-    "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.41.0/",
+    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.68.1/",
+    "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.44.0/",
     "$fresh/": "https://deno.land/x/fresh@1.6.8/",
     "preact": "https://esm.sh/preact@10.19.6",
     "preact/": "https://esm.sh/preact@10.19.6/",
@@ -9,7 +9,6 @@
     "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1",
     "std/": "https://deno.land/std@0.190.0/",
-    "partytown/": "https://cdn.jsdelivr.net/gh/deco-cx/partytown@0.4.8/",
     "daisyui": "npm:daisyui@4.6.0"
   },
   "tasks": {
