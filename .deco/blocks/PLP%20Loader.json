@@ -1,0 +1,1 @@
+{"data":{"sort":"price:desc","count":8,"fuzzy":"automatic","pageOffset":1,"__resolveType":"vtex/loaders/intelligentSearch/productListingPage.ts","selectedFacets":[]},"extensions":[{"__resolveType":"vtex/loaders/product/extensions/listingPage.ts"}],"__resolveType":"commerce/loaders/product/extensions/listingPage.ts"}
