@@ -1,9 +1,9 @@
 import { AnalyticsItem } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
+import { useId } from "preact/hooks";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
-import { useId } from "../../sdk/useId.ts";
-import { MINICART_CONTAINER_ID } from "../../sdk/useUI.ts";
+import { MINICART_CONTAINER_ID } from "../../constants.ts";
 import { SendEventOnClick } from "../Analytics.tsx";
 import Icon from "../ui/Icon.tsx";
 

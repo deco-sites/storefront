@@ -1,11 +1,10 @@
 import type { ProductListingPage } from "apps/commerce/types.ts";
+import { useId } from "preact/hooks";
 import Filters from "../../components/search/Filters.tsx";
 import Sort from "../../components/search/Sort.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
-import Button from "../../components/ui/Button.tsx";
 import Drawer from "../../components/ui/Drawer.tsx";
 import Icon from "../../components/ui/Icon.tsx";
-import { useId } from "../../sdk/useId.ts";
 
 export type Props =
   & Pick<

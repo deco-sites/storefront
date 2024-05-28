@@ -18,7 +18,7 @@ export type Props = {
    */
   platform: Platform;
   theme?: Section;
-} & CommerceProps;
+} & Omit<CommerceProps, "commerce">;
 
 export type Platform =
   | "vtex"
@@ -67,7 +67,7 @@ let firstRun = true;
 export default function Site(
   { theme, ...state }: Props,
 ): A<Manifest, Props, [ReturnType<typeof commerce>]> {
-  _platform = state.platform || state.commerce?.platform || "custom";
+  _platform = state.platform || "custom";
 
   // Prevent console.logging twice
   if (firstRun) {

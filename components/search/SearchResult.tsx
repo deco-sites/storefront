@@ -3,12 +3,12 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 import { SectionProps } from "deco/mod.ts";
+import { useId } from "preact/hooks";
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import ProductCard from "../../components/product/ProductCard.tsx";
 import Filters from "../../components/search/Filters.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import { clx } from "../../sdk/clx.ts";
-import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import SearchControls from "./Controls.tsx";
 

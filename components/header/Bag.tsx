@@ -1,5 +1,5 @@
 import { useCart } from "../../sdk/cart.ts";
-import { MINICART_CONTAINER_ID, MINICART_DRAWER_ID } from "../../sdk/useUI.ts";
+import { MINICART_CONTAINER_ID, MINICART_DRAWER_ID } from "../../constants.ts";
 import { type Minicart } from "../minicart/Minicart.tsx";
 import Icon from "../ui/Icon.tsx";
 

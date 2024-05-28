@@ -12,11 +12,11 @@
 import { Suggestion } from "apps/commerce/types.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import { asResolved, Resolved } from "deco/mod.ts";
-import { useId } from "../../../sdk/useId.ts";
+import { useId } from "preact/hooks";
 import {
   SEARCHBAR_INPUT_FORM_ID,
   SEARCHBAR_POPUP_ID,
-} from "../../../sdk/useUI.ts";
+} from "../../../constants.ts";
 import { useComponent } from "../../../sections/Component.tsx";
 import Icon from "../../ui/Icon.tsx";
 import { Props as SuggestionProps } from "./Suggestions.tsx";

@@ -1,9 +1,9 @@
 import type { ImageObject } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
+import { useId } from "preact/hooks";
 import Icon from "../../components/ui/Icon.tsx";
 import Modal from "../../components/ui/Modal.tsx";
 import Slider from "../../components/ui/Slider.tsx";
-import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
   id?: string;

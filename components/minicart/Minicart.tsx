@@ -1,7 +1,7 @@
 import { AnalyticsItem } from "apps/commerce/types.ts";
+import { useId } from "preact/hooks";
 import { formatPrice } from "../../sdk/format.ts";
-import { useId } from "../../sdk/useId.ts";
-import { MINICART_DRAWER_ID } from "../../sdk/useUI.ts";
+import { MINICART_DRAWER_ID } from "../../constants.ts";
 import { SendEventOnClick, SendEventOnView } from "../Analytics.tsx";
 import Coupon from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";

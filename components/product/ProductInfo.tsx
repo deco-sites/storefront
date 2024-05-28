@@ -1,9 +1,9 @@
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import { useId } from "preact/hooks";
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
 import { formatPrice } from "../../sdk/format.ts";
-import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import ShippingSimulationForm from "../shipping/Form.tsx";

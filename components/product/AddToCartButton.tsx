@@ -4,7 +4,7 @@ import { JSX } from "preact";
 import { useId } from "preact/hooks";
 import { useAddToCart } from "../../sdk/cart.ts";
 import { clx } from "../../sdk/clx.ts";
-import { MINICART_CONTAINER_ID, MINICART_DRAWER_ID } from "../../sdk/useUI.ts";
+import { MINICART_CONTAINER_ID, MINICART_DRAWER_ID } from "../../constants.ts";
 import { SendEventOnClick } from "../Analytics.tsx";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 

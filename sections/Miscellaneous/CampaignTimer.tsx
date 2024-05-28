@@ -1,6 +1,6 @@
-import { useId } from "../../sdk/useId.ts";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
+import { useId } from "preact/hooks";
 
 export interface Props {
   /**

@@ -3,14 +3,15 @@ import type { Person, SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { useDevice } from "deco/hooks/useDevice.ts";
 import { useSection } from "deco/hooks/useSection.ts";
-import { clx } from "../../sdk/clx.ts";
 import {
   MINICART_CONTAINER_ID,
   MINICART_DRAWER_ID,
   SEARCHBAR_DRAWER_ID,
   SEARCHBAR_POPUP_ID,
   SIDEMENU_DRAWER_ID,
-} from "../../sdk/useUI.ts";
+  HEADER_HEIGHT, NAVBAR_HEIGHT,
+} from "../../constants.ts";
+import { clx } from "../../sdk/clx.ts";
 import { type Minicart } from "../minicart/Minicart.tsx";
 import Searchbar, { SearchbarProps } from "../search/Searchbar/Form.tsx";
 import Drawer from "../ui/Drawer.tsx";
@@ -21,7 +22,6 @@ import Bag from "./Bag.tsx";
 import Login from "./Login.tsx";
 import Menu from "./Menu.tsx";
 import NavItem from "./NavItem.tsx";
-import { headerHeight, navbarHeight } from "./constants.ts";
 
 export interface Logo {
   src: ImageWidget;
@@ -63,7 +63,7 @@ function Desktop(
       <Modal id={SEARCHBAR_POPUP_ID}>
         <div
           class="absolute top-0 bg-base-100 container"
-          style={{ marginTop: headerHeight }}
+          style={{ marginTop: HEADER_HEIGHT }}
         >
           <Searchbar {...searchbar} />
         </div>
@@ -140,7 +140,7 @@ function Mobile(
       />
 
       <div
-        style={{ height: navbarHeight }}
+        style={{ height: NAVBAR_HEIGHT }}
         class="grid grid-cols-3 justify-between items-center border-b border-base-200 w-full px-6 pb-6 gap-2"
       >
         <label
@@ -154,7 +154,7 @@ function Mobile(
           <a
             href="/"
             class="flex-grow inline-flex items-center justify-center"
-            style={{ minHeight: navbarHeight }}
+            style={{ minHeight: NAVBAR_HEIGHT }}
             aria-label="Store logo"
           >
             <Image
@@ -197,7 +197,7 @@ function Header({
 
   return (
     <header
-      style={{ height: headerHeight }}
+      style={{ height: HEADER_HEIGHT }}
       // Refetch the header in two situations
       // 1. When the window is resized so we have a gracefull Developer Experience
       // 2. When the user changes tab, so we can update the minicart badge when the user comes back

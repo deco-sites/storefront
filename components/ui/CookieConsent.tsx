@@ -1,4 +1,4 @@
-import { useId } from "../../sdk/useId.ts";
+import { useId } from "preact/hooks";
 
 const script = (id: string) => {
   const callback = () => {

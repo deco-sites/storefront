@@ -1,7 +1,7 @@
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import { ComponentChildren } from "preact";
+import { useId } from "preact/hooks";
 import { clx } from "../../sdk/clx.ts";
-import { useId } from "../../sdk/useId.ts";
 import Icon from "./Icon.tsx";
 
 export interface Props {
