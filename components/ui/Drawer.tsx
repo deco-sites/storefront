@@ -59,7 +59,7 @@ function Drawer({
           {aside}
         </aside>
       </div>
-      <script defer src={scriptAsDataURI(script, id)} />
+      <script type="module" src={scriptAsDataURI(script, id)} />
     </>
   );
 }

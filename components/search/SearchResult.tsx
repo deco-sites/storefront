@@ -4,11 +4,11 @@ import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 import { SectionProps } from "deco/mod.ts";
 import { useId } from "preact/hooks";
-import { SendEventOnView } from "../../components/Analytics.tsx";
 import ProductCard from "../../components/product/ProductCard.tsx";
 import Filters from "../../components/search/Filters.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import { clx } from "../../sdk/clx.ts";
+import { useSendEvent } from "../Analytics.tsx";
 import { useOffer } from "../../sdk/useOffer.ts";
 import SearchControls from "./Controls.tsx";
 
@@ -203,11 +203,28 @@ function Result(props: SectionProps<typeof loader>) {
   const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
   const offset = zeroIndexedOffsetPage * perPage;
 
+  const viewItemListEvent = useSendEvent({
+    name: "view_item_list",
+    params: {
+      // TODO: get category name from search or cms setting
+      item_list_name: breadcrumb.itemListElement?.at(-1)?.name,
+      item_list_id: breadcrumb.itemListElement?.at(-1)?.item,
+      items: page.products?.map((product, index) =>
+        mapProductToAnalyticsItem({
+          ...(useOffer(product.offers)),
+          index: offset + index,
+          product,
+          breadcrumbList: page.breadcrumb,
+        })
+      ),
+    },
+  }, "view");
+
   const id = useId();
 
   return (
     <>
-      <div id={id}>
+      <div id={id} {...viewItemListEvent}>
         {partial
           ? <PageResult {...props} />
           : (
@@ -233,28 +250,8 @@ function Result(props: SectionProps<typeof loader>) {
       </div>
 
       <script
+        type="module"
         src={scriptAsDataURI(setPageQuerystring, `${pageInfo.currentPage}`, id)}
-        defer
-      />
-
-      <SendEventOnView
-        id={id}
-        event={{
-          name: "view_item_list",
-          params: {
-            // TODO: get category name from search or cms setting
-            item_list_name: breadcrumb.itemListElement?.at(-1)?.name,
-            item_list_id: breadcrumb.itemListElement?.at(-1)?.item,
-            items: page.products?.map((product, index) =>
-              mapProductToAnalyticsItem({
-                ...(useOffer(product.offers)),
-                index: offset + index,
-                product,
-                breadcrumbList: page.breadcrumb,
-              })
-            ),
-          },
-        }}
       />
     </>
   );

@@ -617,7 +617,8 @@
           "viewId": "Properties",
           "id": "%2F.deco%2Fblocks%2Fsite.json::Properties::list::Properties::%7B%7D",
           "state": {
-            "__signal": null
+            "__signal": null,
+            "value": null
           }
         },
         "%2F.deco%2Fblocks%2Fsite.json::Preview::world::Preview::%7B%7D": {
@@ -677,7 +678,7 @@
             "content": [
               {
                 "type": "stack",
-                "width": 50,
+                "width": 33.333333333333336,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
@@ -698,7 +699,7 @@
               },
               {
                 "type": "stack",
-                "width": 50,
+                "width": 33.333333333333336,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
@@ -711,6 +712,27 @@
                     "componentName": "component",
                     "componentState": {
                       "id": "%2F.deco%2Fblocks%2Fpages-home-c4bcbfb771e9.json::Preview::world::Preview::%7B%7D"
+                    },
+                    "isClosable": true,
+                    "reorderEnabled": true
+                  }
+                ]
+              },
+              {
+                "type": "stack",
+                "width": 33.33333333333333,
+                "isClosable": true,
+                "reorderEnabled": true,
+                "title": "",
+                "activeItemIndex": 0,
+                "content": [
+                  {
+                    "id": "%2F.deco%2Fblocks%2Fpages-home-c4bcbfb771e9.json::JSON%20Properties::braces::JSON%20Properties::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2Fpages-home-c4bcbfb771e9.json::JSON%20Properties::braces::JSON%20Properties::%7B%7D\" />",
+                    "type": "component",
+                    "componentName": "component",
+                    "componentState": {
+                      "id": "%2F.deco%2Fblocks%2Fpages-home-c4bcbfb771e9.json::JSON%20Properties::braces::JSON%20Properties::%7B%7D"
                     },
                     "isClosable": true,
                     "reorderEnabled": true
@@ -735,7 +757,8 @@
           "viewId": "Properties",
           "id": "%2F.deco%2Fblocks%2Fpages-home-c4bcbfb771e9.json::Properties::list::Properties::%7B%7D",
           "state": {
-            "__signal": null
+            "__signal": null,
+            "value": null
           }
         },
         "%2F.deco%2Fblocks%2Fpages-home-c4bcbfb771e9.json::Preview::world::Preview::%7B%7D": {
@@ -748,8 +771,45 @@
           "state": {
             "__signal": null
           }
+        },
+        "%2F.deco%2Fblocks%2Fpages-home-c4bcbfb771e9.json::JSON%20Properties::braces::JSON%20Properties::%7B%7D": {
+          "name": "JSON Properties",
+          "icon": "braces",
+          "accepts": "function",
+          "render": "function",
+          "viewId": "JSON Properties",
+          "id": "%2F.deco%2Fblocks%2Fpages-home-c4bcbfb771e9.json::JSON%20Properties::braces::JSON%20Properties::%7B%7D",
+          "state": {
+            "__signal": null
+          }
         }
       }
+    },
+    {
+      "id": "deco-records",
+      "name": "Records",
+      "pinned": true,
+      "icon": "database",
+      "layout": [],
+      "tabs": {
+        "deco-records::Deco%20Records::database::Deco%20Records::%7B%7D": {
+          "name": "Deco Records",
+          "icon": "database",
+          "render": "function",
+          "viewId": "Deco Records",
+          "id": "deco-records::Deco%20Records::database::Deco%20Records::%7B%7D",
+          "state": {
+            "__signal": null
+          }
+        }
+      },
+      "tags": [
+        {
+          "label": "BETA",
+          "color": "positive"
+        }
+      ],
+      "category": "Content"
     }
   ]
 }

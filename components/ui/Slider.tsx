@@ -210,7 +210,7 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
 function JS({ rootId, scroll = "smooth", interval, infinite = false }: Props) {
   return (
     <script
-      defer
+      type="module"
       src={scriptAsDataURI(setup, { rootId, scroll, interval, infinite })}
     />
   );

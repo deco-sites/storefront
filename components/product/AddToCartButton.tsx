@@ -1,11 +1,10 @@
 import { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { JSX } from "preact";
-import { useId } from "preact/hooks";
+import { MINICART_CONTAINER_ID, MINICART_DRAWER_ID } from "../../constants.ts";
 import { useAddToCart } from "../../sdk/cart.ts";
 import { clx } from "../../sdk/clx.ts";
-import { MINICART_CONTAINER_ID, MINICART_DRAWER_ID } from "../../constants.ts";
-import { SendEventOnClick } from "../Analytics.tsx";
+import { useSendEvent } from "../Analytics.tsx";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 
 export interface Props extends JSX.HTMLAttributes<HTMLLabelElement> {
@@ -20,11 +19,14 @@ export interface Props extends JSX.HTMLAttributes<HTMLLabelElement> {
 function AddToCartButton(
   { product, price, listPrice, seller, class: _class }: Props,
 ) {
-  const id = useId();
   const platform = usePlatform();
   const item = mapProductToAnalyticsItem({ product, price, listPrice });
   const { additionalProperty = [], isVariantOf, productID } = product;
   const productGroupID = isVariantOf?.productGroupID;
+  const addToCartEvent = useSendEvent({
+    name: "add_to_cart",
+    params: { items: [item] },
+  }, "click");
 
   const props = platform === "vtex"
     ? { seller, productID }
@@ -65,25 +67,19 @@ function AddToCartButton(
   }
 
   return (
-    <>
-      <label
-        id={id}
-        for={MINICART_DRAWER_ID}
-        data-deco="add-to-cart"
-        class={clx("btn no-animation", _class)}
-        hx-disabled-elt="this"
-        hx-target={`#${MINICART_CONTAINER_ID}`}
-        // deno-lint-ignore no-explicit-any
-        hx-post={useAddToCart(props as any)}
-        hx-swap="innerHTML"
-      >
-        Adicionar à Sacola
-      </label>
-      <SendEventOnClick
-        event={{ name: "add_to_cart", params: { items: [item] } }}
-        id={id}
-      />
-    </>
+    <label
+      {...addToCartEvent}
+      for={MINICART_DRAWER_ID}
+      data-deco="add-to-cart"
+      class={clx("btn no-animation", _class)}
+      hx-disabled-elt="this"
+      hx-target={`#${MINICART_CONTAINER_ID}`}
+      // deno-lint-ignore no-explicit-any
+      hx-post={useAddToCart(props as any)}
+      hx-swap="innerHTML"
+    >
+      Adicionar à Sacola
+    </label>
   );
 }
 

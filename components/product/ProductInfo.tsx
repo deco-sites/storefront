@@ -1,9 +1,9 @@
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { useId } from "preact/hooks";
-import { SendEventOnView } from "../../components/Analytics.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
 import { formatPrice } from "../../sdk/format.ts";
+import { useSendEvent } from "../Analytics.tsx";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import ShippingSimulationForm from "../shipping/Form.tsx";
@@ -42,15 +42,22 @@ function ProductInfo({ page }: Props) {
     numberOfItems: breadcrumbList.numberOfItems - 1,
   };
 
-  const eventItem = mapProductToAnalyticsItem({
-    product,
-    breadcrumbList: breadcrumb,
-    price,
-    listPrice,
-  });
+  const viewItemEvent = useSendEvent({
+    name: "view_item",
+    params: {
+      item_list_id: "product",
+      item_list_name: "Product",
+      items: [mapProductToAnalyticsItem({
+        product,
+        breadcrumbList: breadcrumb,
+        price,
+        listPrice,
+      })],
+    },
+  }, "view");
 
   return (
-    <div class="flex flex-col px-4" id={id}>
+    <div {...viewItemEvent} class="flex flex-col px-4" id={id}>
       <Breadcrumb itemListElement={breadcrumb.itemListElement} />
       {/* Code and name */}
       <div class="mt-4 sm:mt-8">
@@ -131,18 +138,6 @@ function ProductInfo({ page }: Props) {
           )}
         </span>
       </div>
-      {/* Analytics Event */}
-      <SendEventOnView
-        id={id}
-        event={{
-          name: "view_item",
-          params: {
-            item_list_id: "product",
-            item_list_name: "Product",
-            items: [eventItem],
-          },
-        }}
-      />
     </div>
   );
 }

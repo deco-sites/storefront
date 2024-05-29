@@ -1,9 +1,9 @@
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
-import { SendEventOnClick } from "../../components/Analytics.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
+import { useSendEvent } from "../Analytics.tsx";
 import { relative } from "../../sdk/url.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
@@ -42,7 +42,6 @@ function ProductCard({
     offers,
     isVariantOf,
   } = product;
-  const id = `product-card-${productID}`;
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const productGroupID = isVariantOf?.productGroupID;
   const title = isVariantOf?.name ?? product.name;
@@ -54,31 +53,28 @@ function ProductCard({
   const relativeUrl = relative(url);
   const aspectRatio = `${WIDTH} / ${HEIGHT}`;
 
+  {/* Add click event to dataLayer */}
+  const event = useSendEvent({
+    name: "select_item" as const,
+    params: {
+      item_list_name: itemListName,
+      items: [
+        mapProductToAnalyticsItem({
+          product,
+          price,
+          listPrice,
+          index,
+        }),
+      ],
+    },
+  }, "click");
+
   return (
     <div
-      id={id}
+      {...event}
       data-deco="view-product"
       class="card card-compact group w-full lg:border lg:border-transparent lg:hover:border-inherit lg:p-4"
     >
-      {/* Add click event to dataLayer */}
-      <SendEventOnClick
-        id={id}
-        event={{
-          name: "select_item" as const,
-          params: {
-            item_list_name: itemListName,
-            items: [
-              mapProductToAnalyticsItem({
-                product,
-                price,
-                listPrice,
-                index,
-              }),
-            ],
-          },
-        }}
-      />
-
       <div class="flex flex-col gap-2">
         <figure
           class="relative overflow-hidden"

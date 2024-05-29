@@ -1,63 +1,104 @@
 import type { AnalyticsEvent } from "apps/commerce/types.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 
-/**
- * This function is usefull for sending events on click. Works with both Server and Islands components
- */
-export const SendEventOnClick = <E extends AnalyticsEvent>({ event, id }: {
-  event: E;
-  id: string;
-}) => (
-  <script
-    defer
-    src={scriptAsDataURI(
-      (id: string, event: AnalyticsEvent) => {
-        const elem = document.getElementById(id);
+declare global {
+  interface Window {
+    DECO_ANALYTICS_NODES: WeakMap<Element, boolean>;
+  }
+}
 
-        if (!elem) {
-          return console.warn(
-            `Could not find element ${id}. Click event will not be send. This will cause loss in analytics`,
-          );
-        }
+const script = () => {
+  globalThis.window.DECO_ANALYTICS_NODES ||= new WeakMap();
 
-        elem.addEventListener("click", () => {
-          globalThis.window.DECO.events.dispatch(event);
-        });
-      },
-      id,
-      event,
-    )}
-  />
-);
+  const init = () => {
+    const seen = globalThis.window.DECO_ANALYTICS_NODES;
 
-export const SendEventOnView = <E extends AnalyticsEvent>(
-  { event, id }: { event: E; id: string },
-) => (
-  <script
-    defer
-    src={scriptAsDataURI(
-      (id: string, event: E) => {
-        const elem = document.getElementById(id);
+    function sendEvent(e: Element | null) {
+      const event = e?.getAttribute("data-event");
 
-        if (!elem) {
-          return console.warn(
-            `Could not find element ${id}. Click event will not be send. This will cause loss in analytics`,
-          );
-        }
+      if (!event) {
+        return;
+      }
 
-        const observer = new IntersectionObserver((items) => {
-          for (const item of items) {
-            if (!item.isIntersecting) continue;
+      const decoded = JSON.parse(decodeURIComponent(event));
+      globalThis.window.DECO.events.dispatch(decoded);
+    }
 
-            globalThis.window.DECO.events.dispatch(event);
-            observer.unobserve(elem);
+    function handleClick(e: Event) {
+      e.stopPropagation();
+      sendEvent(e.currentTarget as HTMLElement | null);
+    }
+
+    // Only available on newer safari versions
+    const handleView = typeof IntersectionObserver !== "undefined"
+      ? new IntersectionObserver((items) => {
+        for (const item of items) {
+          const { isIntersecting, target } = item;
+
+          if (!isIntersecting) {
+            continue;
           }
-        });
 
-        observer.observe(elem);
-      },
-      id,
-      event,
-    )}
-  />
-);
+          handleView!.unobserve(target);
+          sendEvent(target);
+        }
+      })
+      : null;
+
+    const traverse = () => {
+      const start = performance.now();
+
+      document.querySelectorAll("[data-event]").forEach((node) => {
+        if (seen.has(node)) {
+          return;
+        }
+
+        seen.set(node, true);
+
+        const maybeMode = node.getAttribute("data-event-mode");
+        const mode = maybeMode === "click" ? "click" : "view";
+
+        if (mode === "click") {
+          node.addEventListener("click", handleClick, { passive: true });
+
+          return;
+        }
+
+        if (mode === "view") {
+          handleView?.observe(node);
+
+          return;
+        }
+      });
+
+      performance.measure("analytics", { start });
+    };
+
+    const observer = new MutationObserver(traverse);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    traverse();
+  };
+
+  if (document.readyState === "complete") {
+    init();
+  } else {
+    addEventListener("DOMContentLoaded", init);
+  }
+};
+
+function Analytics() {
+  return <script type="module" src={scriptAsDataURI(script)} />;
+}
+
+export const useSendEvent = <E extends AnalyticsEvent>(
+  event: E,
+  mode: "click" | "view",
+) => {
+  return {
+    ["data-event"]: encodeURIComponent(JSON.stringify(event)),
+    ["data-event-mode"]: mode,
+  };
+};
+
+export default Analytics;

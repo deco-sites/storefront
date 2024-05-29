@@ -1,10 +1,9 @@
 import { AnalyticsItem } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
-import { useId } from "preact/hooks";
+import { MINICART_CONTAINER_ID } from "../../constants.ts";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
-import { MINICART_CONTAINER_ID } from "../../constants.ts";
-import { SendEventOnClick } from "../Analytics.tsx";
+import { useSendEvent } from "../Analytics.tsx";
 import Icon from "../ui/Icon.tsx";
 
 export interface Item {
@@ -41,12 +40,32 @@ function CartItem({
   useUpdateQuantity,
   useAnalyticsItem,
 }: Props) {
-  const removeID = useId();
-  const increaseID = useId();
-  const decreaseID = useId();
   const { image, name, price: { sale, list }, quantity } = item;
   const isGift = sale < 0.01;
   const analyticsItem = useAnalyticsItem(index);
+
+  const removeEvent = analyticsItem
+    ? useSendEvent({
+      name: "remove_from_cart",
+      params: { items: [analyticsItem] },
+    }, "click")
+    : null;
+  const decreaseEvent = analyticsItem
+    ? useSendEvent({
+      name: "remove_from_cart",
+      params: {
+        items: [{ ...analyticsItem, quantity: quantity - 1 }],
+      },
+    }, "click")
+    : null;
+  const increaseEvent = analyticsItem
+    ? useSendEvent({
+      name: "add_to_cart",
+      params: {
+        items: [{ ...analyticsItem, quantity: quantity + 1 }],
+      },
+    }, "click")
+    : null;
 
   return (
     <div
@@ -70,7 +89,7 @@ function CartItem({
         <div class="flex justify-between items-center">
           <span>{name}</span>
           <button
-            id={removeID}
+            {...removeEvent}
             disabled={isGift}
             class={clx(isGift ? "hidden" : "btn btn-ghost btn-square")}
             hx-disabled-elt="this"
@@ -96,7 +115,7 @@ function CartItem({
         {/* Quantity Selector */}
         <div class={clx(isGift ? "hidden" : "join border rounded-none w-min")}>
           <button
-            id={decreaseID}
+            {...decreaseEvent}
             class="btn btn-square btn-ghost join-item"
             disabled={quantity <= 1}
             hx-disabled-elt="this"
@@ -120,7 +139,7 @@ function CartItem({
             readonly
           />
           <button
-            id={increaseID}
+            {...increaseEvent}
             class="btn btn-square btn-ghost join-item"
             hx-disabled-elt="this"
             hx-target={`#${MINICART_CONTAINER_ID}`}
@@ -132,39 +151,6 @@ function CartItem({
           </button>
         </div>
       </div>
-
-      {/* Analytics events */}
-      {analyticsItem
-        ? (
-          <>
-            <SendEventOnClick
-              id={removeID}
-              event={{
-                name: "remove_from_cart",
-                params: { items: [analyticsItem] },
-              }}
-            />
-            <SendEventOnClick
-              id={decreaseID}
-              event={{
-                name: "remove_from_cart",
-                params: {
-                  items: [{ ...analyticsItem, quantity: quantity - 1 }],
-                },
-              }}
-            />
-            <SendEventOnClick
-              id={increaseID}
-              event={{
-                name: "add_to_cart",
-                params: {
-                  items: [{ ...analyticsItem, quantity: quantity + 1 }],
-                },
-              }}
-            />
-          </>
-        )
-        : null}
     </div>
   );
 }

@@ -131,7 +131,7 @@ function CampaignTimer({
           </div>
         </div>
       </div>
-      <script defer src={scriptAsDataURI(snippet, expiresAt, id)} />
+      <script type="module" src={scriptAsDataURI(snippet, expiresAt, id)} />
     </>
   );
 }

@@ -1,13 +1,10 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import { useId } from "preact/hooks";
-import {
-  SendEventOnClick,
-  SendEventOnView,
-} from "../../components/Analytics.tsx";
 import Button from "../../components/ui/Button.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Slider from "../../components/ui/Slider.tsx";
+import { useSendEvent } from "../Analytics.tsx";
 
 /**
  * @titleBy alt
@@ -100,7 +97,7 @@ const DEFAULT_PROPS = {
 };
 
 function BannerItem(
-  { image, lcp, id }: { image: Banner; lcp?: boolean; id: string },
+  { image, lcp }: { image: Banner; lcp?: boolean },
 ) {
   const {
     alt,
@@ -108,10 +105,19 @@ function BannerItem(
     desktop,
     action,
   } = image;
+  const params = { promotion_name: image.alt };
+  const selectPromotionEvent = useSendEvent(
+    { name: "select_promotion", params },
+    "click",
+  );
+  const viewPromotionEvent = useSendEvent(
+    { name: "view_promotion", params },
+    "view",
+  );
 
   return (
     <a
-      id={id}
+      {...selectPromotionEvent}
       href={action?.href ?? "#"}
       aria-label={action?.label}
       class="relative overflow-y-hidden w-full"
@@ -132,7 +138,7 @@ function BannerItem(
           </Button>
         </div>
       )}
-      <Picture preload={lcp}>
+      <Picture preload={lcp} {...viewPromotionEvent}>
         <Source
           media="(max-width: 767px)"
           fetchPriority={lcp ? "high" : "auto"}
@@ -227,26 +233,14 @@ function BannerCarousel(props: Props) {
       class="grid grid-cols-[48px_1fr_48px] sm:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min min-h-[660px]"
     >
       <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
-        {images?.map((image, index) => {
-          const params = { promotion_name: image.alt };
-          return (
-            <Slider.Item index={index} class="carousel-item w-full">
-              <BannerItem
-                image={image}
-                lcp={index === 0 && preload}
-                id={`${id}::${index}`}
-              />
-              <SendEventOnClick
-                id={`${id}::${index}`}
-                event={{ name: "select_promotion", params }}
-              />
-              <SendEventOnView
-                id={`${id}::${index}`}
-                event={{ name: "view_promotion", params }}
-              />
-            </Slider.Item>
-          );
-        })}
+        {images?.map((image, index) => (
+          <Slider.Item index={index} class="carousel-item w-full">
+            <BannerItem
+              image={image}
+              lcp={index === 0 && preload}
+            />
+          </Slider.Item>
+        ))}
       </Slider>
 
       {props.arrows && <Buttons />}

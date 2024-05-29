@@ -1,12 +1,12 @@
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { useId } from "preact/hooks";
-import { SendEventOnView } from "../../components/Analytics.tsx";
 import ProductCard from "../../components/product/ProductCard.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Header from "../../components/ui/SectionHeader.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import { clx } from "../../sdk/clx.ts";
+import { useSendEvent } from "../Analytics.tsx";
 import { useOffer } from "../../sdk/useOffer.ts";
 
 export interface Props {
@@ -24,6 +24,22 @@ export interface Props {
   };
 }
 
+const slideDesktop = {
+  1: "md:w-full",
+  2: "md:w-1/2",
+  3: "md:w-1/3",
+  4: "md:w-1/4",
+  5: "md:w-1/5",
+};
+
+const slideMobile = {
+  1: "w-full",
+  2: "w-1/2",
+  3: "w-1/3",
+  4: "w-1/4",
+  5: "w-1/5",
+};
+
 function ProductShelf({
   products,
   title,
@@ -35,21 +51,21 @@ function ProductShelf({
   if (!products || products.length === 0) {
     return null;
   }
-  const slideDesktop = {
-    1: "md:w-full",
-    2: "md:w-1/2",
-    3: "md:w-1/3",
-    4: "md:w-1/4",
-    5: "md:w-1/5",
-  };
 
-  const slideMobile = {
-    1: "w-full",
-    2: "w-1/2",
-    3: "w-1/3",
-    4: "w-1/4",
-    5: "w-1/5",
-  };
+  const viewItemListEvent = useSendEvent({
+    name: "view_item_list",
+    params: {
+      item_list_name: title,
+      items: products.map((product, index) =>
+        mapProductToAnalyticsItem({
+          index,
+          product,
+          ...(useOffer(product.offers)),
+        })
+      ),
+    },
+  }, "view");
+
   return (
     <div class="w-full container py-8 flex flex-col gap-6 lg:py-10">
       <Header
@@ -66,6 +82,7 @@ function ProductShelf({
           layout?.showArrows && "grid-cols-[48px_1fr_48px]",
           "px-0 md:px-5 container",
         )}
+        {...viewItemListEvent}
       >
         <Slider class="carousel carousel-center gap-6 sm:carousel-end row-start-2 row-end-5">
           {products?.map((product, index) => (
@@ -101,22 +118,6 @@ function ProductShelf({
           </>
         )}
         <Slider.JS rootId={id} />
-        <SendEventOnView
-          id={id}
-          event={{
-            name: "view_item_list",
-            params: {
-              item_list_name: title,
-              items: products.map((product, index) =>
-                mapProductToAnalyticsItem({
-                  index,
-                  product,
-                  ...(useOffer(product.offers)),
-                })
-              ),
-            },
-          }}
-        />
       </div>
     </div>
   );

@@ -34,7 +34,7 @@ function Modal({ children, open, id = useId() }: Props) {
         {children}
         <label class="modal-backdrop" for={id}>Close</label>
       </div>
-      <script defer src={scriptAsDataURI(script, id)} />
+      <script type="module" src={scriptAsDataURI(script, id)} />
     </>
   );
 }

@@ -8,294 +8,326 @@
       "__resolveType": "Header - 01"
     },
     {
-      "__resolveType": "website/flags/multivariate/section.ts",
-      "variants": [
+      "__resolveType": "site/sections/Images/Carousel.tsx",
+      "dots": false,
+      "arrows": true,
+      "images": [
         {
-          "value": {
-            "__resolveType": "site/sections/Images/Carousel.tsx",
-            "dots": false,
-            "arrows": true,
-            "images": [
-              {
-                "alt": "Feminino",
-                "action": {
-                  "href": "/feminino",
-                  "label": "Explore collection",
-                  "title": "VTEX Store",
-                  "subTitle": "Visit our site and start building now:"
-                },
-                "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-                "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
-              },
-              {
-                "alt": "Masculino",
-                "action": {
-                  "href": "/masculino",
-                  "label": "Explore collection",
-                  "title": "VTEX Store",
-                  "subTitle": "Visit our site and start building now:"
-                },
-                "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-                "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
-              },
-              {
-                "alt": "Vestidos",
-                "action": {
-                  "href": "/feminino/roupas/vestidos",
-                  "label": "Explore collection",
-                  "title": "VTEX Store",
-                  "subTitle": "Visit our site and start building now:"
-                },
-                "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-                "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
-              }
-            ],
-            "preload": true
+          "alt": "Feminino",
+          "action": {
+            "href": "/feminino",
+            "label": "Explore collection",
+            "title": "VTEX Store",
+            "subTitle": "Visit our site and start building now:"
           },
-          "rule": {
-            "__resolveType": "Teste AB"
-          }
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
         },
         {
-          "value": {
-            "__resolveType": "site/sections/Images/Carousel.tsx",
-            "dots": false,
-            "arrows": true,
-            "images": [
-              {
-                "alt": "Feminino",
-                "action": {
-                  "href": "/feminino",
-                  "label": "Explore collection",
-                  "title": "VTEX Store",
-                  "subTitle": "Visit our site and start building now:"
-                },
-                "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-                "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
-              },
-              {
-                "alt": "Masculino",
-                "action": {
-                  "href": "/masculino",
-                  "label": "Explore collection",
-                  "title": "VTEX Store",
-                  "subTitle": "Visit our site and start building now:"
-                },
-                "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-                "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
-              },
-              {
-                "alt": "Vestidos",
-                "action": {
-                  "href": "/feminino/roupas/vestidos",
-                  "label": "Explore collection",
-                  "title": "VTEX Store",
-                  "subTitle": "Visit our site and start building now:"
-                },
-                "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-                "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
-              }
-            ],
-            "preload": true
+          "alt": "Masculino",
+          "action": {
+            "href": "/masculino",
+            "label": "Explore collection",
+            "title": "VTEX Store",
+            "subTitle": "Visit our site and start building now:"
           },
-          "rule": {
-            "__resolveType": "website/matchers/always.ts"
-          }
-        }
-      ]
-    },
-    {
-      "__resolveType": "site/sections/Miscellaneous/Slide.tsx",
-      "content": [
-        {
-          "label": "HOT SALE",
-          "repeat": 30
-        }
-      ]
-    },
-    {
-      "__resolveType": "site/sections/Miscellaneous/CampaignTimer.tsx",
-      "link": {
-        "href": "https://github.com/deco-cx",
-        "text": "Visit our GitHub"
-      },
-      "text": "<p>Design, develop and deliver complete experiences</p>",
-      "labels": {
-        "days": "days",
-        "hours": "hours",
-        "expired": " Expired!",
-        "minutes": "minutes",
-        "seconds": "seconds"
-      },
-      "layout": {
-        "textPosition": "After counter"
-      },
-      "expiresAt": "2024-03-15T17:23:00.000Z"
-    },
-    {
-      "__resolveType": "site/sections/Miscellaneous/Slide.tsx",
-      "content": [
-        {
-          "label": "HOT SALE",
-          "repeat": 15
-        }
-      ]
-    },
-    {
-      "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "layout": {
-        "showArrows": true
-      },
-      "products": {
-        "props": {
-          "sort": "price:desc",
-          "count": 6,
-          "collection": "139"
-        },
-        "crossSelling": "similars",
-        "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
-      }
-    },
-    {
-      "__resolveType": "Shoppable Banner - 01"
-    },
-    {
-      "__resolveType": "site/sections/Category/CategoryGrid.tsx",
-      "list": [
-        {
-          "href": "/",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/01c01ba9-ac16-4371-82ca-b93d17545f9c",
-          "label": "Your Collection",
-          "buttonText": "Explore collection"
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
         },
         {
-          "href": "/",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/9b80d57d-64b0-4eef-a3cd-fa8daafaae9c",
-          "label": "Your Collection",
-          "buttonText": "Explore collection"
-        },
-        {
-          "href": "/",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/ed4c0eb3-96ab-484f-b293-e91d196a5063",
-          "label": "Your Collection",
-          "buttonText": "Explore collection"
-        },
-        {
-          "href": "/",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/b9882ff7-3dbc-43e4-9813-5cec23c012cd",
-          "label": "Your Collection",
-          "buttonText": "Explore collection"
+          "alt": "Vestidos",
+          "action": {
+            "href": "/feminino/roupas/vestidos",
+            "label": "Explore collection",
+            "title": "VTEX Store",
+            "subTitle": "Visit our site and start building now:"
+          },
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
         }
       ],
-      "header": {
-        "title": "Explore Our Categories"
-      },
-      "layout": {
-        "categoryCard": {
-          "textPosition": "bottom",
-          "textAlignment": "left"
+      "preload": true
+    },
+    {
+      "__resolveType": "htmx/sections/Deferred.tsx",
+      "sections": [
+        {
+          "__resolveType": "site/sections/Miscellaneous/Slide.tsx",
+          "content": [
+            {
+              "label": "HOT SALE",
+              "repeat": 30
+            }
+          ]
         }
+      ],
+      "trigger": {
+        "type": "intersect"
       }
     },
     {
-      "__resolveType": "site/sections/Product/ShelfWithImage.tsx",
-      "image": {
-        "alt": "Collection Image",
-        "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/165c770b-cbbc-48c0-81ad-c732d527c77c",
-        "href": "/feminino"
-      },
-      "section": {
-        "title": "Summer Vibes",
-        "layout": {
-          "showArrows": true,
-          "headerfontSize": "Normal",
-          "headerAlignment": "center",
-          "numberOfSliders": {
-            "mobile": 1,
-            "desktop": 1
-          }
-        },
-        "products": {
-          "props": {
-            "sort": "price:desc",
-            "count": 3,
-            "query": "camisa"
+      "__resolveType": "htmx/sections/Deferred.tsx",
+      "sections": [
+        {
+          "__resolveType": "site/sections/Miscellaneous/CampaignTimer.tsx",
+          "link": {
+            "href": "https://github.com/deco-cx",
+            "text": "Visit our GitHub"
           },
-          "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
-        },
-        "__resolveType": "site/sections/Product/ProductShelf.tsx"
+          "text": "<p>Design, develop and deliver complete experiences</p>",
+          "labels": {
+            "days": "days",
+            "hours": "hours",
+            "expired": " Expired!",
+            "minutes": "minutes",
+            "seconds": "seconds"
+          },
+          "layout": {
+            "textPosition": "After counter"
+          },
+          "expiresAt": "2024-03-15T17:23:00.000Z"
+        }
+      ],
+      "trigger": {
+        "type": "intersect"
       }
     },
     {
-      "title": "Best Sellers",
-      "__resolveType": "site/sections/Product/ProductShelfTabbed.tsx",
-      "tabs": [
+      "__resolveType": "htmx/sections/Deferred.tsx",
+      "sections": [
         {
-          "title": "Woman",
+          "__resolveType": "site/sections/Miscellaneous/Slide.tsx",
+          "content": [
+            {
+              "label": "HOT SALE",
+              "repeat": 15
+            }
+          ]
+        }
+      ],
+      "trigger": {
+        "type": "intersect"
+      }
+    },
+    {
+      "__resolveType": "htmx/sections/Deferred.tsx",
+      "sections": [
+        {
+          "__resolveType": "site/sections/Product/ProductShelf.tsx",
+          "layout": {
+            "showArrows": true
+          },
           "products": {
             "props": {
               "sort": "price:desc",
-              "count": 8,
-              "query": "vestido"
+              "count": 6,
+              "collection": "139"
             },
-            "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
-          }
-        },
-        {
-          "title": "Man",
-          "products": {
-            "props": {
-              "sort": "price:desc",
-              "count": 8,
-              "collection": "140"
-            },
+            "crossSelling": "similars",
             "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
           }
         }
       ],
-      "layout": {
-        "headerfontSize": "Large",
-        "headerAlignment": "center"
+      "trigger": {
+        "type": "intersect"
       }
     },
     {
-      "__resolveType": "site/sections/Content/BlogPosts.tsx",
-      "title": "Blogposts",
-      "posts": [
+      "__resolveType": "htmx/sections/Deferred.tsx",
+      "sections": [
         {
-          "alt": "Item of the Summer",
-          "date": "January 15, 2024",
-          "href": "/",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/7e80b083-d1ff-480d-b3a3-b744b69402b1",
-          "label": "Item of the Summer",
-          "author": "deco.cx",
-          "description": "Lorem ipsum dolor sit amet consectetur. Condimentum dolor ultrices commodo et. Blandit vel est sodales tincidunt aliquam tincidunt. "
-        },
-        {
-          "alt": "Item of the Summer",
-          "date": "January 15, 2024",
-          "href": "/",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/a3f329d8-795c-4c3b-8049-ede939d599ef",
-          "label": "Item of the Summer",
-          "author": "deco.cx",
-          "description": "Lorem ipsum dolor sit amet consectetur. Condimentum dolor ultrices commodo et. Blandit vel est sodales tincidunt aliquam tincidunt. "
-        },
-        {
-          "alt": "Item of the Summer",
-          "date": "January 15, 2024",
-          "href": "/",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/7e80b083-d1ff-480d-b3a3-b744b69402b1",
-          "label": "Item of the Summer",
-          "author": "deco.cx",
-          "description": "Lorem ipsum dolor sit amet consectetur.  Condimentum dolor ultrices commodo et. Blandit vel est sodales tincidunt aliquam tincidunt. "
+          "__resolveType": "Shoppable Banner - 01"
         }
-      ]
+      ],
+      "trigger": {
+        "type": "intersect"
+      }
     },
     {
-      "__resolveType": "Newsletter - 01"
+      "__resolveType": "htmx/sections/Deferred.tsx",
+      "sections": [
+        {
+          "__resolveType": "site/sections/Category/CategoryGrid.tsx",
+          "list": [
+            {
+              "href": "/",
+              "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/01c01ba9-ac16-4371-82ca-b93d17545f9c",
+              "label": "Your Collection",
+              "buttonText": "Explore collection"
+            },
+            {
+              "href": "/",
+              "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/9b80d57d-64b0-4eef-a3cd-fa8daafaae9c",
+              "label": "Your Collection",
+              "buttonText": "Explore collection"
+            },
+            {
+              "href": "/",
+              "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/ed4c0eb3-96ab-484f-b293-e91d196a5063",
+              "label": "Your Collection",
+              "buttonText": "Explore collection"
+            },
+            {
+              "href": "/",
+              "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/b9882ff7-3dbc-43e4-9813-5cec23c012cd",
+              "label": "Your Collection",
+              "buttonText": "Explore collection"
+            }
+          ],
+          "header": {
+            "title": "Explore Our Categories"
+          },
+          "layout": {
+            "categoryCard": {
+              "textPosition": "bottom",
+              "textAlignment": "left"
+            }
+          }
+        }
+      ],
+      "trigger": {
+        "type": "intersect"
+      }
     },
     {
-      "__resolveType": "Footer - 04"
+      "__resolveType": "htmx/sections/Deferred.tsx",
+      "sections": [
+        {
+          "__resolveType": "site/sections/Product/ShelfWithImage.tsx",
+          "image": {
+            "alt": "Collection Image",
+            "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/165c770b-cbbc-48c0-81ad-c732d527c77c",
+            "href": "/feminino"
+          },
+          "section": {
+            "title": "Summer Vibes",
+            "layout": {
+              "showArrows": true,
+              "headerfontSize": "Normal",
+              "headerAlignment": "center",
+              "numberOfSliders": {
+                "mobile": 1,
+                "desktop": 1
+              }
+            },
+            "products": {
+              "props": {
+                "sort": "price:desc",
+                "count": 3,
+                "query": "camisa"
+              },
+              "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
+            },
+            "__resolveType": "site/sections/Product/ProductShelf.tsx"
+          }
+        }
+      ],
+      "trigger": {
+        "type": "intersect"
+      }
+    },
+    {
+      "__resolveType": "htmx/sections/Deferred.tsx",
+      "sections": [
+        {
+          "title": "Best Sellers",
+          "__resolveType": "site/sections/Product/ProductShelfTabbed.tsx",
+          "tabs": [
+            {
+              "title": "Woman",
+              "products": {
+                "props": {
+                  "sort": "price:desc",
+                  "count": 8,
+                  "query": "vestido"
+                },
+                "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
+              }
+            },
+            {
+              "title": "Man",
+              "products": {
+                "props": {
+                  "sort": "price:desc",
+                  "count": 8,
+                  "collection": "140"
+                },
+                "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
+              }
+            }
+          ],
+          "layout": {
+            "headerfontSize": "Large",
+            "headerAlignment": "center"
+          }
+        }
+      ],
+      "trigger": {
+        "type": "intersect"
+      }
+    },
+    {
+      "__resolveType": "htmx/sections/Deferred.tsx",
+      "sections": [
+        {
+          "__resolveType": "site/sections/Content/BlogPosts.tsx",
+          "title": "Blogposts",
+          "posts": [
+            {
+              "alt": "Item of the Summer",
+              "date": "January 15, 2024",
+              "href": "/",
+              "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/7e80b083-d1ff-480d-b3a3-b744b69402b1",
+              "label": "Item of the Summer",
+              "author": "deco.cx",
+              "description": "Lorem ipsum dolor sit amet consectetur. Condimentum dolor ultrices commodo et. Blandit vel est sodales tincidunt aliquam tincidunt. "
+            },
+            {
+              "alt": "Item of the Summer",
+              "date": "January 15, 2024",
+              "href": "/",
+              "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/a3f329d8-795c-4c3b-8049-ede939d599ef",
+              "label": "Item of the Summer",
+              "author": "deco.cx",
+              "description": "Lorem ipsum dolor sit amet consectetur. Condimentum dolor ultrices commodo et. Blandit vel est sodales tincidunt aliquam tincidunt. "
+            },
+            {
+              "alt": "Item of the Summer",
+              "date": "January 15, 2024",
+              "href": "/",
+              "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/7e80b083-d1ff-480d-b3a3-b744b69402b1",
+              "label": "Item of the Summer",
+              "author": "deco.cx",
+              "description": "Lorem ipsum dolor sit amet consectetur.  Condimentum dolor ultrices commodo et. Blandit vel est sodales tincidunt aliquam tincidunt. "
+            }
+          ]
+        }
+      ],
+      "trigger": {
+        "type": "intersect"
+      }
+    },
+    {
+      "__resolveType": "htmx/sections/Deferred.tsx",
+      "sections": [
+        {
+          "__resolveType": "Newsletter - 01"
+        }
+      ],
+      "trigger": {
+        "type": "intersect"
+      }
+    },
+    {
+      "__resolveType": "htmx/sections/Deferred.tsx",
+      "sections": [
+        {
+          "__resolveType": "Footer - 04"
+        }
+      ],
+      "trigger": {
+        "type": "intersect"
+      }
     }
   ],
   "__resolveType": "website/pages/Page.tsx",

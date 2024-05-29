@@ -1,3 +1,4 @@
+import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import { useId } from "preact/hooks";
 
 const script = (id: string) => {
@@ -136,10 +137,7 @@ function CookieConsent(props: Props) {
           </div>
         </div>
       </div>
-      <script
-        type="module"
-        dangerouslySetInnerHTML={{ __html: `(${script})("${id}");` }}
-      />
+      <script type="module" src={scriptAsDataURI(script, id)} />
     </>
   );
 }

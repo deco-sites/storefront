@@ -1,8 +1,8 @@
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import { useId } from "preact/hooks";
 import { clx } from "../../sdk/clx.ts";
+import { useSendEvent } from "../Analytics.tsx";
 import { useComponent } from "../../sections/Component.tsx";
-import { SendEventOnClick } from "../Analytics.tsx";
 import Icon from "../ui/Icon.tsx";
 
 interface Props {
@@ -40,11 +40,23 @@ export default function WishlistButton({
   productGroupID: string;
 }) {
   const id = useId();
+  const addToWishlistEvent = useSendEvent({
+    name: "add_to_wishlist",
+    params: {
+      items: [
+        {
+          item_id: productID,
+          item_group_id: productGroupID,
+          quantity: 1,
+        },
+      ],
+    },
+  }, "click");
 
   return (
     <>
       <button
-        id={id}
+        {...addToWishlistEvent}
         aria-label="Add to wishlist"
         class={clx(
           "btn no-animation",
@@ -77,30 +89,12 @@ export default function WishlistButton({
 
       {!isUserLoggedIn && (
         <script
-          defer
+          type="module"
           src={scriptAsDataURI((id: string) =>
             document.getElementById(id)?.addEventListener("click", () =>
               globalThis.window.alert(
                 "Please log in before adding to your wishlist",
               )), id)}
-        />
-      )}
-
-      {!inWishlist && isUserLoggedIn && (
-        <SendEventOnClick
-          id={id}
-          event={{
-            name: "add_to_wishlist",
-            params: {
-              items: [
-                {
-                  item_id: productID,
-                  item_group_id: productGroupID,
-                  quantity: 1,
-                },
-              ],
-            },
-          }}
         />
       )}
     </>

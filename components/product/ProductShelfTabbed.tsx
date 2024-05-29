@@ -2,11 +2,11 @@ import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 import { useId } from "preact/hooks";
-import { SendEventOnView } from "../../components/Analytics.tsx";
 import ProductCard from "../../components/product/ProductCard.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Header from "../../components/ui/SectionHeader.tsx";
 import Slider from "../../components/ui/Slider.tsx";
+import { useSendEvent } from "../Analytics.tsx";
 import { useOffer } from "../../sdk/useOffer.ts";
 
 /** @titleBy title */
@@ -38,6 +38,19 @@ function TabbedProductShelf({
     ? Math.min(Math.max(tabIndex, 0), tabs.length)
     : 0;
   const { products } = tabs[ti];
+  const viewItemListEvent = useSendEvent({
+    name: "view_item_list",
+    params: {
+      item_list_name: title,
+      items: products?.map((product, index) =>
+        mapProductToAnalyticsItem({
+          index,
+          product,
+          ...(useOffer(product.offers)),
+        })
+      ) ?? [],
+    },
+  }, "view");
 
   return (
     <div class="w-full container  py-8 flex flex-col gap-8 lg:gap-12 lg:py-10">
@@ -68,6 +81,7 @@ function TabbedProductShelf({
         : (
           <div
             id={id}
+            {...viewItemListEvent}
             class="container grid grid-cols-[48px_1fr_48px] px-0 sm:px-5"
           >
             <Slider class="carousel carousel-center sm:carousel-end gap-6 col-span-full row-start-2 row-end-5">
@@ -98,22 +112,6 @@ function TabbedProductShelf({
               </div>
             </>
             <Slider.JS rootId={id} />
-            <SendEventOnView
-              id={id}
-              event={{
-                name: "view_item_list",
-                params: {
-                  item_list_name: title,
-                  items: products.map((product, index) =>
-                    mapProductToAnalyticsItem({
-                      index,
-                      product,
-                      ...(useOffer(product.offers)),
-                    })
-                  ),
-                },
-              }}
-            />
           </div>
         )}
     </div>

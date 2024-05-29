@@ -128,7 +128,7 @@ export default function Searchbar(
 
       {/* Send search events as the user types */}
       <script
-        defer
+        type="module"
         src={scriptAsDataURI(
           script,
           SEARCHBAR_INPUT_FORM_ID,

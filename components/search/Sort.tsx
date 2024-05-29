@@ -65,7 +65,7 @@ function Sort({ sortOptions, url }: Props) {
           </option>
         ))}
       </select>
-      <script src={scriptAsDataURI(script, "sort")} />
+      <script type="module" src={scriptAsDataURI(script, "sort")} />
     </>
   );
 }
