@@ -1,6 +1,6 @@
-import { useId } from "preact/hooks";
 import { MINICART_CONTAINER_ID } from "../../constants.ts";
 import { useAddCoupon } from "../../sdk/cart.ts";
+import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
   coupon?: string;

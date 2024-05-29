@@ -1,8 +1,8 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
-import { useId } from "preact/hooks";
 import Button from "../../components/ui/Button.tsx";
 import Header from "../../components/ui/SectionHeader.tsx";
+import { useId } from "../../sdk/useId.ts";
 
 export interface CategoryGridProps {
   href?: string;

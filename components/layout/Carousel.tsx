@@ -1,9 +1,9 @@
 import type { Section } from "deco/blocks/section.ts";
 import { ComponentChildren, toChildArray } from "preact";
-import { useId } from "preact/hooks";
 import Icon from "../../components/ui/Icon.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import { clx } from "../../sdk/clx.ts";
+import { useId } from "../../sdk/useId.ts";
 
 /**
  * @title Carousel

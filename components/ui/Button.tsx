@@ -1,4 +1,3 @@
-import { forwardRef } from "preact/compat";
 import type { JSX } from "preact";
 
 export type Props =
@@ -8,7 +7,7 @@ export type Props =
     ariaLabel?: string;
   };
 
-const Button = forwardRef<HTMLButtonElement, Props>(({
+function Button({
   type = "button",
   class: _class = "",
   loading,
@@ -16,17 +15,18 @@ const Button = forwardRef<HTMLButtonElement, Props>(({
   ariaLabel,
   children,
   ...props
-}, ref) => (
-  <button
-    {...props}
-    className={`btn no-animation ${_class}`}
-    disabled={disabled || loading}
-    aria-label={ariaLabel || props["aria-label"]}
-    type={type}
-    ref={ref}
-  >
-    {loading ? <span class="loading loading-spinner" /> : children}
-  </button>
-));
+}: Props) {
+  return (
+    <button
+      {...props}
+      className={`btn no-animation ${_class}`}
+      disabled={disabled || loading}
+      aria-label={ariaLabel || props["aria-label"]}
+      type={type}
+    >
+      {loading ? <span class="loading loading-spinner" /> : children}
+    </button>
+  );
+}
 
 export default Button;

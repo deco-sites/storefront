@@ -1,10 +1,10 @@
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
-import { useId } from "preact/hooks";
 import ProductImageZoom from "../../../components/product/ProductImageZoom.tsx";
 import Icon from "../../../components/ui/Icon.tsx";
 import Slider from "../../../components/ui/Slider.tsx";
 import { clx } from "../../../sdk/clx.ts";
+import { useId } from "../../../sdk/useId.ts";
 
 export interface Props {
   /** @title Integration */

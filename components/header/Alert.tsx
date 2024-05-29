@@ -1,5 +1,5 @@
-import { useId } from "preact/hooks";
 import Slider from "../../components/ui/Slider.tsx";
+import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
   alerts?: string[];

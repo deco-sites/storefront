@@ -1,4 +1,3 @@
-import { useMemo } from "preact/hooks";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
 export interface Image {
@@ -34,13 +33,9 @@ function Partners(props: Props) {
     title,
     rowImages,
   } = props;
-  const list = useMemo(
-    () =>
-      rowImages && rowImages.length > 0
-        ? rowImages
-        : [{ colImages: Array(20).fill(null).map((_, i) => IMAGES[i % 2]) }],
-    [],
-  );
+  const list = rowImages && rowImages.length > 0
+    ? rowImages
+    : [{ colImages: Array(20).fill(null).map((_, i) => IMAGES[i % 2]) }];
 
   return (
     <div class="w-full pb-16">

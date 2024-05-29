@@ -1,6 +1,6 @@
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import { ComponentChildren } from "preact";
-import { useId } from "preact/hooks";
+import { useId } from "../../sdk/useId.ts";
 
 interface Props {
   open?: boolean;

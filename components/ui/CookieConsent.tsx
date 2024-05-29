@@ -1,5 +1,5 @@
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
-import { useId } from "preact/hooks";
+import { useId } from "../../sdk/useId.ts";
 
 const script = (id: string) => {
   const callback = () => {

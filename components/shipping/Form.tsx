@@ -1,5 +1,5 @@
 import type { SKU } from "apps/vtex/utils/types.ts";
-import { useId } from "preact/hooks";
+import { useId } from "../../sdk/useId.ts";
 import { useComponent } from "../../sections/Component.tsx";
 
 export interface Props {

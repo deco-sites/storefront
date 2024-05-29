@@ -1,11 +1,11 @@
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import { useId } from "preact/hooks";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
 import { formatPrice } from "../../sdk/format.ts";
-import { useSendEvent } from "../Analytics.tsx";
+import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
+import { useSendEvent } from "../Analytics.tsx";
 import ShippingSimulationForm from "../shipping/Form.tsx";
 import WishlistButton from "../wishlist/WishlistButton.tsx";
 import AddToCartButton from "./AddToCartButton.tsx";

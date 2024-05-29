@@ -1,9 +1,9 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
-import { useId } from "preact/hooks";
 import Button from "../../components/ui/Button.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Slider from "../../components/ui/Slider.tsx";
+import { useId } from "../../sdk/useId.ts";
 import { useSendEvent } from "../Analytics.tsx";
 
 /**

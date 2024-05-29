@@ -1,6 +1,6 @@
-import { Section } from "deco/blocks/section.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
-import { useId } from "preact/hooks";
+import { Section } from "deco/blocks/section.ts";
+import { useId } from "../../sdk/useId.ts";
 
 interface Children {
   section: Section;

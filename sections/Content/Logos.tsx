@@ -1,6 +1,5 @@
 import Image from "apps/website/components/Image.tsx";
 import Header from "../../components/ui/SectionHeader.tsx";
-import { useMemo } from "preact/hooks";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
 export interface Image {
@@ -37,13 +36,9 @@ function Logos(props: Props) {
     images,
     layout,
   } = props;
-  const list = useMemo(
-    () =>
-      images && images.length > 0
-        ? images
-        : Array(20).fill(null).map((_, i) => IMAGES[i % 2]),
-    [],
-  );
+  const list = images && images.length > 0
+    ? images
+    : Array(20).fill(null).map((_, i) => IMAGES[i % 2]);
 
   return (
     <div class="w-full container px-4 py-8 flex flex-col gap-8 lg:gap-12 lg:py-10 lg:px-0">
