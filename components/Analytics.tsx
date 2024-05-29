@@ -55,16 +55,16 @@ const script = () => {
 
         seen.set(node, true);
 
-        const maybeMode = node.getAttribute("data-event-mode");
-        const mode = maybeMode === "click" ? "click" : "view";
+        const maybeTrigger = node.getAttribute("data-event-trigger");
+        const on = maybeTrigger === "click" ? "click" : "view";
 
-        if (mode === "click") {
+        if (on === "click") {
           node.addEventListener("click", handleClick, { passive: true });
 
           return;
         }
 
-        if (mode === "view") {
+        if (on === "view") {
           handleView?.observe(node);
 
           return;
@@ -93,11 +93,11 @@ function Analytics() {
 
 export const useSendEvent = <E extends AnalyticsEvent>(
   event: E,
-  mode: "click" | "view",
+  on: "click" | "view",
 ) => {
   return {
     ["data-event"]: encodeURIComponent(JSON.stringify(event)),
-    ["data-event-mode"]: mode,
+    ["data-event-trigger"]: on,
   };
 };
 
