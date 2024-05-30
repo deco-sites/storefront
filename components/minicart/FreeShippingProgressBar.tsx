@@ -1,5 +1,6 @@
-import Icon from "../ui/Icon.tsx";
 import { formatPrice } from "../../sdk/format.ts";
+import { useId } from "../../sdk/useId.ts";
+import Icon from "../ui/Icon.tsx";
 
 interface Props {
   total: number;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 function FreeShippingProgressBar({ target, total, currency, locale }: Props) {
+  const id = useId();
   const remaining = target - total;
   const percent = Math.floor((total / target) * 100);
 
@@ -18,14 +20,15 @@ function FreeShippingProgressBar({ target, total, currency, locale }: Props) {
         <Icon id="Truck" size={24} />
         {remaining > 0
           ? (
-            <span>
+            <label for={id}>
               Faltam {formatPrice(remaining, currency, locale)}{" "}
               para ganhar frete grátis!
-            </span>
+            </label>
           )
-          : <span>Você ganhou frete grátis!</span>}
+          : <label for={id}>Você ganhou frete grátis!</label>}
       </div>
       <progress
+        id={id}
         class="progress progress-primary w-full"
         value={percent}
         max={100}

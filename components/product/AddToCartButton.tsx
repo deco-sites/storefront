@@ -24,9 +24,9 @@ function AddToCartButton(
   const { additionalProperty = [], isVariantOf, productID } = product;
   const productGroupID = isVariantOf?.productGroupID;
   const addToCartEvent = useSendEvent({
-    name: "add_to_cart",
-    params: { items: [item] },
-  }, "click");
+    on: "click",
+    event: { name: "add_to_cart", params: { items: [item] } },
+  });
 
   const props = platform === "vtex"
     ? { seller, productID }
@@ -73,6 +73,7 @@ function AddToCartButton(
       data-deco="add-to-cart"
       class={clx("btn no-animation", _class)}
       hx-disabled-elt="this"
+      hx-indicator={`#${MINICART_CONTAINER_ID}`}
       hx-target={`#${MINICART_CONTAINER_ID}`}
       // deno-lint-ignore no-explicit-any
       hx-post={useAddToCart(props as any)}

@@ -1,5 +1,4 @@
-import { MINICART_CONTAINER_ID } from "../../constants.ts";
-import { useAddCoupon } from "../../sdk/cart.ts";
+import { MINICART_FORM_ID } from "../../constants.ts";
 import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
@@ -14,12 +13,7 @@ function Coupon({ coupon }: Props) {
       <span class="text-sm">Cupom de desconto</span>
 
       {/* Hidden checkbox trick */}
-      <input
-        data-form-toggle
-        type="checkbox"
-        id={formToggle}
-        class="hidden peer"
-      />
+      <input type="checkbox" id={formToggle} class="hidden peer" />
 
       {/* Displayed when checkbox is checked=false */}
       <label
@@ -30,24 +24,24 @@ function Coupon({ coupon }: Props) {
       </label>
 
       {/* Displayed when checkbox is checked=true */}
-      <form
-        class="join peer-checked:inline-flex hidden"
-        hx-disabled-elt="button"
-        hx-target={`#${MINICART_CONTAINER_ID}`}
-        hx-post={useAddCoupon()}
-        hx-swap="innerHTML"
-      >
+      <div class="join peer-checked:inline-flex hidden">
         <input
-          name="text"
+          form={MINICART_FORM_ID}
+          name="coupon"
           class="input join-item"
           type="text"
           value={coupon ?? ""}
           placeholder={"Cupom"}
         />
-        <button class="btn join-item" type="submit">
+        <button
+          form={MINICART_FORM_ID}
+          class="btn join-item"
+          name="action"
+          value="setCoupon"
+        >
           Ok
         </button>
-      </form>
+      </div>
     </div>
   );
 }

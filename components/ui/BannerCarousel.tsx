@@ -106,14 +106,14 @@ function BannerItem(
     action,
   } = image;
   const params = { promotion_name: image.alt };
-  const selectPromotionEvent = useSendEvent(
-    { name: "select_promotion", params },
-    "click",
-  );
-  const viewPromotionEvent = useSendEvent(
-    { name: "view_promotion", params },
-    "view",
-  );
+  const selectPromotionEvent = useSendEvent({
+    on: "click",
+    event: { name: "select_promotion", params },
+  });
+  const viewPromotionEvent = useSendEvent({
+    on: "view",
+    event: { name: "view_promotion", params },
+  });
 
   return (
     <a

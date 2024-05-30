@@ -204,21 +204,24 @@ function Result(props: SectionProps<typeof loader>) {
   const offset = zeroIndexedOffsetPage * perPage;
 
   const viewItemListEvent = useSendEvent({
-    name: "view_item_list",
-    params: {
-      // TODO: get category name from search or cms setting
-      item_list_name: breadcrumb.itemListElement?.at(-1)?.name,
-      item_list_id: breadcrumb.itemListElement?.at(-1)?.item,
-      items: page.products?.map((product, index) =>
-        mapProductToAnalyticsItem({
-          ...(useOffer(product.offers)),
-          index: offset + index,
-          product,
-          breadcrumbList: page.breadcrumb,
-        })
-      ),
+    on: "view",
+    event: {
+      name: "view_item_list",
+      params: {
+        // TODO: get category name from search or cms setting
+        item_list_name: breadcrumb.itemListElement?.at(-1)?.name,
+        item_list_id: breadcrumb.itemListElement?.at(-1)?.item,
+        items: page.products?.map((product, index) =>
+          mapProductToAnalyticsItem({
+            ...(useOffer(product.offers)),
+            index: offset + index,
+            product,
+            breadcrumbList: page.breadcrumb,
+          })
+        ),
+      },
     },
-  }, "view");
+  });
 
   const id = useId();
 

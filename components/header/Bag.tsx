@@ -2,6 +2,7 @@ import { useCart } from "../../sdk/cart.ts";
 import { MINICART_CONTAINER_ID, MINICART_DRAWER_ID } from "../../constants.ts";
 import { type Minicart } from "../minicart/Minicart.tsx";
 import Icon from "../ui/Icon.tsx";
+import { clx } from "../../sdk/clx.ts";
 
 interface Props {
   minicart?: Minicart;
@@ -23,13 +24,14 @@ function Bag({ minicart, loading }: Props) {
       hx-post={useCart()}
       hx-swap="innerHTML"
     >
-      {totalItems > 0 && (
-        <span class="indicator-item badge badge-secondary badge-sm">
-          {totalItems > 9 ? "9+" : totalItems}
-        </span>
-      )}
-
-      <span class="btn btn-circle btn-sm btn-ghost no-animation">
+      <span
+        data-minicart-items-count={totalItems > 9 ? "9+" : totalItems}
+        class={clx(
+          "btn btn-circle btn-sm btn-ghost no-animation",
+          totalItems > 0 &&
+            "after:indicator-item after:badge after:badge-secondary after:badge-sm after:content-[attr(data-minicart-items-count)] after:font-thin",
+        )}
+      >
         <Icon id="ShoppingCart" size={24} strokeWidth={2} />
       </span>
     </label>

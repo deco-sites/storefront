@@ -41,17 +41,20 @@ export default function WishlistButton({
 }) {
   const id = useId();
   const addToWishlistEvent = useSendEvent({
-    name: "add_to_wishlist",
-    params: {
-      items: [
-        {
-          item_id: productID,
-          item_group_id: productGroupID,
-          quantity: 1,
-        },
-      ],
+    on: "click",
+    event: {
+      name: "add_to_wishlist",
+      params: {
+        items: [
+          {
+            item_id: productID,
+            item_group_id: productGroupID,
+            quantity: 1,
+          },
+        ],
+      },
     },
-  }, "click");
+  });
 
   return (
     <>

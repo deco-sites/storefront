@@ -1,82 +1,83 @@
 import { AnalyticsItem } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
-import { MINICART_CONTAINER_ID } from "../../constants.ts";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { useSendEvent } from "../Analytics.tsx";
 import Icon from "../ui/Icon.tsx";
 
-export interface Item {
-  image: {
-    src: string;
-    alt: string;
-  };
-  name: string;
-  quantity: number;
-  price: {
-    sale: number;
-    list: number;
-  };
-}
+export type Item = AnalyticsItem & {
+  listPrice: number;
+  image: string;
+};
 
 export interface Props {
   item: Item;
   index: number;
-
   locale: string;
   currency: string;
-
-  useUpdateQuantity: (quantity: number, index: number) => string;
-  useAnalyticsItem: (index: number) => AnalyticsItem | null | undefined;
 }
 
 const QUANTITY_MAX_VALUE = 100;
 
-function CartItem({
-  item,
-  index,
-  locale,
-  currency,
-  useUpdateQuantity,
-  useAnalyticsItem,
-}: Props) {
-  const { image, name, price: { sale, list }, quantity } = item;
-  const isGift = sale < 0.01;
-  const analyticsItem = useAnalyticsItem(index);
+function CartItem({ item, index, locale, currency }: Props) {
+  const { image, listPrice, price = Infinity, quantity } = item;
+  const isGift = price < 0.01;
 
-  const removeEvent = analyticsItem
-    ? useSendEvent({
+  // deno-lint-ignore no-explicit-any
+  const name = (item as any).item_name;
+
+  const removeFromCartEvent = useSendEvent({
+    on: "click",
+    event: {
       name: "remove_from_cart",
-      params: { items: [analyticsItem] },
-    }, "click")
-    : null;
-  const decreaseEvent = analyticsItem
-    ? useSendEvent({
+      params: { items: [item] },
+    },
+  });
+
+  const decreaseEvent = useSendEvent({
+    on: "click",
+    event: {
       name: "remove_from_cart",
-      params: {
-        items: [{ ...analyticsItem, quantity: quantity - 1 }],
-      },
-    }, "click")
-    : null;
-  const increaseEvent = analyticsItem
-    ? useSendEvent({
+      params: { items: [{ ...item, quantity: quantity - 1 }] },
+    },
+  });
+
+  const increaseEvent = useSendEvent({
+    on: "click",
+    event: {
       name: "add_to_cart",
-      params: {
-        items: [{ ...analyticsItem, quantity: quantity + 1 }],
+      params: { items: [{ ...item, quantity: quantity + 1 }] },
+    },
+  });
+
+  const changeEvent = useSendEvent(
+    {
+      on: "change",
+      event: {
+        name: "add_to_cart",
+        params: { items: [item] },
       },
-    }, "click")
-    : null;
+      onBeforeSend: (e, target) => ({
+        ...e,
+        params: {
+          ...e.params,
+          items: [{
+            ...e.params.items[0],
+            quantity: Number((target as HTMLInputElement).value),
+          }],
+        },
+      }),
+    },
+  );
 
   return (
-    <div
+    <fieldset
       class="grid grid-rows-1 gap-2"
-      style={{
-        gridTemplateColumns: "auto 1fr",
-      }}
+      style={{ gridTemplateColumns: "auto 1fr" }}
     >
       <Image
-        {...image}
-        src={image.src.replace("55-55", "255-255")}
+        alt={name}
+        src={image}
         style={{ aspectRatio: "108 / 150" }}
         width={108}
         height={150}
@@ -87,16 +88,13 @@ function CartItem({
       <div class="flex flex-col gap-2">
         {/* Name and Remove button */}
         <div class="flex justify-between items-center">
-          <span>{name}</span>
+          <legend>{name}</legend>
           <button
-            {...removeEvent}
+            {...removeFromCartEvent}
+            name="action"
+            value={`remove::${index}`}
             disabled={isGift}
             class={clx(isGift ? "hidden" : "btn btn-ghost btn-square")}
-            hx-disabled-elt="this"
-            hx-target={`#${MINICART_CONTAINER_ID}`}
-            hx-indicator={`#${MINICART_CONTAINER_ID}`}
-            hx-post={useUpdateQuantity(0, index)}
-            hx-swap="innerHTML"
           >
             <Icon id="Trash" size={24} />
           </button>
@@ -105,10 +103,10 @@ function CartItem({
         {/* Price Block */}
         <div class="flex items-center gap-2">
           <span class="line-through text-sm">
-            {formatPrice(list, currency, locale)}
+            {formatPrice(listPrice, currency, locale)}
           </span>
           <span class="text-sm text-secondary">
-            {isGift ? "Grátis" : formatPrice(sale, currency, locale)}
+            {isGift ? "Grátis" : formatPrice(price, currency, locale)}
           </span>
         </div>
 
@@ -116,42 +114,45 @@ function CartItem({
         <div class={clx(isGift ? "hidden" : "join border rounded-none w-min")}>
           <button
             {...decreaseEvent}
+            name="action"
+            value={`decrease::${index}`}
             class="btn btn-square btn-ghost join-item"
             disabled={quantity <= 1}
-            hx-disabled-elt="this"
-            hx-target={`#${MINICART_CONTAINER_ID}`}
-            hx-indicator={`#${MINICART_CONTAINER_ID}`}
-            hx-post={useUpdateQuantity(quantity - 1, index)}
-            hx-swap="innerHTML"
           >
             -
           </button>
-          <input
-            class="input text-center join-item [appearance:textfield]"
-            type="number"
-            inputMode="numeric"
-            pattern="[0-9]*"
-            max={QUANTITY_MAX_VALUE}
-            min={1}
-            value={quantity}
-            maxLength={3}
-            size={3}
-            readonly
-          />
+          <div
+            class="has-[:invalid]:tooltip has-[:invalid]:tooltip-error has-[:invalid]:tooltip-open has-[:invalid]:tooltip-bottom"
+            data-tip="Quantity must be higher than 1"
+          >
+            <input
+              {...changeEvent}
+              name={`item::${index}`}
+              class={clx(
+                "input text-center join-item [appearance:textfield]",
+                "invalid:input-error",
+              )}
+              type="number"
+              inputMode="numeric"
+              max={QUANTITY_MAX_VALUE}
+              min={1}
+              value={quantity}
+              maxLength={3}
+              size={3}
+            />
+          </div>
           <button
             {...increaseEvent}
+            name="action"
+            value={`increase::${index}`}
             class="btn btn-square btn-ghost join-item"
-            hx-disabled-elt="this"
-            hx-target={`#${MINICART_CONTAINER_ID}`}
-            hx-indicator={`#${MINICART_CONTAINER_ID}`}
-            hx-post={useUpdateQuantity(quantity + 1, index)}
-            hx-swap="innerHTML"
+            disabled={quantity >= QUANTITY_MAX_VALUE}
           >
             +
           </button>
         </div>
       </div>
-    </div>
+    </fieldset>
   );
 }
 

@@ -2,25 +2,8 @@ import { itemToAnalyticsItem } from "apps/vtex/hooks/useCart.ts";
 import type a from "apps/vtex/loaders/cart.ts";
 import { AppContext } from "apps/vtex/mod.ts";
 import { Minicart } from "../../../components/minicart/Minicart.tsx";
-import { useUpdateQuantity } from "../../cart.ts";
 
-type Cart = Awaited<ReturnType<typeof a>>;
-
-const useAnalyticsItem = (
-  items: NonNullable<Cart["items"]>,
-  coupon: string | undefined,
-  url: string,
-) =>
-(index: number) => {
-  const item = items[index];
-  const detailUrl = new URL(item.detailUrl, url).href;
-
-  if (!item) {
-    return null;
-  }
-
-  return itemToAnalyticsItem({ ...item, detailUrl, coupon }, index);
-};
+export type Cart = Awaited<ReturnType<typeof a>>;
 
 export const cartFrom = (form: Cart, url: string): Minicart => {
   const { items, totalizers } = form ?? { items: [] };
@@ -32,16 +15,18 @@ export const cartFrom = (form: Cart, url: string): Minicart => {
   const coupon = form?.marketingData?.coupon ?? undefined;
 
   return {
+    original: form as unknown as Record<string, unknown>,
     data: {
-      items: items.map((item) => ({
-        image: { src: item.imageUrl, alt: item.skuName },
-        quantity: item.quantity,
-        name: item.name,
-        price: {
-          sale: item.sellingPrice / 100,
-          list: item.listPrice / 100,
-        },
-      })),
+      items: items.map((item, index) => {
+        const detailUrl = new URL(item.detailUrl, url).href;
+
+        return {
+          ...itemToAnalyticsItem({ ...item, detailUrl, coupon }, index),
+          image: item.imageUrl,
+          listPrice: item.listPrice / 100,
+        };
+      }),
+
       total: (total - discounts) / 100,
       subtotal: total / 100,
       discounts: discounts / 100,
@@ -53,10 +38,6 @@ export const cartFrom = (form: Cart, url: string): Minicart => {
       freeShippingTarget: 1000,
       checkoutHref: "/checkout",
     },
-
-    useUpdateQuantity: (quantity: number, index: number) =>
-      useUpdateQuantity({ quantity, index }),
-    useAnalyticsItem: useAnalyticsItem(items, coupon, url),
   };
 };
 

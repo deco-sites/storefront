@@ -3,11 +3,10 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 import Image from "apps/website/components/Image.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
-import { useSendEvent } from "../Analytics.tsx";
 import { relative } from "../../sdk/url.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
-import { usePlatform } from "../../sdk/usePlatform.tsx";
 import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
+import { useSendEvent } from "../Analytics.tsx";
 import WishlistButton from "../wishlist/WishlistButton.tsx";
 import AddToCartButton from "./AddToCartButton.tsx";
 import { Ring } from "./ProductVariantSelector.tsx";
@@ -33,8 +32,6 @@ function ProductCard({
   itemListName,
   index,
 }: Props) {
-  const platform = usePlatform();
-
   const {
     url,
     productID,
@@ -55,19 +52,22 @@ function ProductCard({
 
   {/* Add click event to dataLayer */}
   const event = useSendEvent({
-    name: "select_item" as const,
-    params: {
-      item_list_name: itemListName,
-      items: [
-        mapProductToAnalyticsItem({
-          product,
-          price,
-          listPrice,
-          index,
-        }),
-      ],
+    on: "click",
+    event: {
+      name: "select_item" as const,
+      params: {
+        item_list_name: itemListName,
+        items: [
+          mapProductToAnalyticsItem({
+            product,
+            price,
+            listPrice,
+            index,
+          }),
+        ],
+      },
     },
-  }, "click");
+  });
 
   return (
     <div

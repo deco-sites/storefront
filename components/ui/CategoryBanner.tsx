@@ -1,7 +1,6 @@
+import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { SectionProps } from "deco/types.ts";
-import type { ImageWidget } from "apps/admin/widgets.ts";
-import Image from "apps/website/components/Image.tsx";
 
 /**
  * @titleBy matcher

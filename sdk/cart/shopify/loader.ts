@@ -2,20 +2,8 @@ import { itemToAnalyticsItem } from "apps/shopify/hooks/useCart.ts";
 import type a from "apps/shopify/loaders/cart.ts";
 import { AppContext } from "apps/shopify/mod.ts";
 import { Minicart } from "../../../components/minicart/Minicart.tsx";
-import { useUpdateQuantity } from "../../cart.ts";
 
-type Cart = Awaited<ReturnType<typeof a>>;
-
-const useAnalyticsItem =
-  (items: NonNullable<Cart>["lines"]["nodes"]) => (index: number) => {
-    const item = items[index];
-
-    if (!item) {
-      return null;
-    }
-
-    return itemToAnalyticsItem(item, index);
-  };
+export type Cart = Awaited<ReturnType<typeof a>>;
 
 const locale = "pt-BR";
 
@@ -33,18 +21,12 @@ export const cartFrom = (cart: Cart): Minicart => {
     : "";
 
   return {
+    original: cart as unknown as Record<string, unknown>,
     data: {
-      items: items?.map((item) => ({
-        image: {
-          src: item.merchandise.image?.url ?? "",
-          alt: item.merchandise.image?.altText ?? "",
-        },
-        quantity: item.quantity,
-        name: item.merchandise.product.title,
-        price: {
-          sale: item.cost.compareAtAmountPerQuantity?.amount,
-          list: item.cost.amountPerQuantity.amount,
-        },
+      items: items?.map((item, index) => ({
+        image: item.merchandise.image?.url ?? "",
+        listPrice: item.cost.amountPerQuantity.amount,
+        ...itemToAnalyticsItem(item, index),
       })),
       total: total,
       subtotal: subTotal,
@@ -57,15 +39,6 @@ export const cartFrom = (cart: Cart): Minicart => {
       freeShippingTarget: 1000,
       checkoutHref,
     },
-
-    useUpdateQuantity: (quantity: number, index: number) =>
-      useUpdateQuantity({
-        lines: [{
-          id: items[index].id,
-          quantity: quantity,
-        }],
-      }),
-    useAnalyticsItem: useAnalyticsItem(items),
   };
 };
 

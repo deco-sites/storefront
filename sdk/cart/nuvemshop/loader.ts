@@ -2,20 +2,8 @@ import { itemToAnalyticsItem } from "apps/nuvemshop/hooks/useCart.ts";
 import type a from "apps/nuvemshop/loaders/cart.ts";
 import { AppContext } from "apps/nuvemshop/mod.ts";
 import { Minicart } from "../../../components/minicart/Minicart.tsx";
-import { useUpdateQuantity } from "../../cart.ts";
 
-type Cart = Awaited<ReturnType<typeof a>>;
-
-const useAnalyticsItem =
-  (items: NonNullable<NonNullable<Cart>["products"]>) => (index: number) => {
-    const item = items[index];
-
-    if (!item) {
-      return null;
-    }
-
-    return itemToAnalyticsItem(item, index);
-  };
+export type Cart = Awaited<ReturnType<typeof a>>;
 
 const locale = "pt-BR";
 
@@ -29,18 +17,12 @@ export const cartFrom = (cart: Cart | null): Minicart => {
   const checkoutHref = `/checkout/v3/start/${cart?.id}/${cart?.token}`;
 
   return {
+    original: cart as unknown as Record<string, unknown>,
     data: {
-      items: items?.map((item) => ({
-        image: {
-          src: item.image.src,
-          alt: item.image.alt[0] as string,
-        },
-        quantity: item.quantity,
-        name: item.name,
-        price: {
-          sale: Number(item.price),
-          list: Number(item.compare_at_price),
-        },
+      items: items?.map((item, index) => ({
+        image: item.image.src,
+        listPrice: Number(item.compare_at_price),
+        ...itemToAnalyticsItem(item, index),
       })),
       total,
       subtotal,
@@ -54,10 +36,6 @@ export const cartFrom = (cart: Cart | null): Minicart => {
       freeShippingTarget: 1000,
       checkoutHref,
     },
-
-    useUpdateQuantity: (quantity: number, index: number) =>
-      useUpdateQuantity({ quantity, itemId: items[index].id }),
-    useAnalyticsItem: useAnalyticsItem(items),
   };
 };
 

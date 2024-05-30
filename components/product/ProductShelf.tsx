@@ -53,18 +53,21 @@ function ProductShelf({
   }
 
   const viewItemListEvent = useSendEvent({
-    name: "view_item_list",
-    params: {
-      item_list_name: title,
-      items: products.map((product, index) =>
-        mapProductToAnalyticsItem({
-          index,
-          product,
-          ...(useOffer(product.offers)),
-        })
-      ),
+    on: "view",
+    event: {
+      name: "view_item_list",
+      params: {
+        item_list_name: title,
+        items: products.map((product, index) =>
+          mapProductToAnalyticsItem({
+            index,
+            product,
+            ...(useOffer(product.offers)),
+          })
+        ),
+      },
     },
-  }, "view");
+  });
 
   return (
     <div class="w-full container py-8 flex flex-col gap-6 lg:py-10">

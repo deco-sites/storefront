@@ -2,20 +2,8 @@ import { itemToAnalyticsItem } from "apps/vnda/hooks/useCart.ts";
 import type a from "apps/vnda/loaders/cart.ts";
 import { AppContext } from "apps/vnda/mod.ts";
 import { Minicart } from "../../../components/minicart/Minicart.tsx";
-import { useUpdateQuantity } from "../../cart.ts";
 
-type Cart = Awaited<ReturnType<typeof a>>;
-
-const useAnalyticsItem =
-  (items: NonNullable<Cart["orderForm"]>["items"]) => (index: number) => {
-    const item = items[index];
-
-    if (!item) {
-      return null;
-    }
-
-    return itemToAnalyticsItem(item, index);
-  };
+export type Cart = Awaited<ReturnType<typeof a>>;
 
 const normalizeUrl = (url: string) =>
   url.startsWith("//") ? `https:${url}` : url;
@@ -32,18 +20,12 @@ export const cartFrom = (cart: Cart): Minicart => {
   const token = cart?.orderForm?.token;
 
   return {
+    original: cart,
     data: {
-      items: items.map((item) => ({
-        image: {
-          src: normalizeUrl(item.image_url ?? ""),
-          alt: item.product_name,
-        },
-        quantity: item.quantity,
-        name: item.variant_name,
-        price: {
-          sale: item.variant_price,
-          list: item.variant_price,
-        },
+      items: items.map((item, index) => ({
+        image: normalizeUrl(item.image_url ?? ""),
+        listPrice: item.variant_price,
+        ...itemToAnalyticsItem(item, index),
       })),
       total,
       subtotal,
@@ -57,15 +39,6 @@ export const cartFrom = (cart: Cart): Minicart => {
       enableCoupon: false, // We still do not support coupon on vnda
       checkoutHref: `/checkout/${token}`,
     },
-
-    useUpdateQuantity: (quantity: number, index: number) => {
-      const item = items[index];
-
-      if (!item || typeof item.id === "undefined") return "";
-
-      return useUpdateQuantity({ quantity, itemId: item.id });
-    },
-    useAnalyticsItem: useAnalyticsItem(items),
   };
 };
 

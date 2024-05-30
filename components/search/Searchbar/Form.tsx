@@ -99,7 +99,7 @@ export default function Searchbar(
           />
         </button>
         <input
-          autofocus
+          autoFocus
           tabIndex={0}
           class="input input-bordered join-item flex-grow"
           name={NAME}

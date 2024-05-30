@@ -120,11 +120,6 @@ const LAYOUT = {
 
 function Footer({
   logo,
-  newsletter = {
-    title: "Newsletter",
-    description: "",
-    form: { placeholder: "", buttonText: "", helpText: "" },
-  },
   sections = [{
     "label": "Sobre",
     "items": [

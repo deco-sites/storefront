@@ -1,12 +1,19 @@
-import { AnalyticsItem } from "apps/commerce/types.ts";
-import { MINICART_DRAWER_ID } from "../../constants.ts";
+import { AnalyticsEvent } from "apps/commerce/types.ts";
+import { scriptAsDataURI } from "apps/utils/dataURI.ts";
+import {
+  MINICART_CONTAINER_ID,
+  MINICART_DRAWER_ID,
+  MINICART_FORM_ID,
+} from "../../constants.ts";
+import { useSubmitCart } from "../../sdk/cart.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { useSendEvent } from "../Analytics.tsx";
 import Coupon from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
-import CartItem, { Item, Props as ItemProps } from "./Item.tsx";
+import CartItem, { Item } from "./Item.tsx";
 
 export interface Minicart {
+  original: Record<string, unknown>;
   data: {
     items: Item[];
     total: number;
@@ -21,13 +28,48 @@ export interface Minicart {
     locale: string;
     currency: string;
   };
-
-  useAnalyticsItem: ItemProps["useAnalyticsItem"];
-  useUpdateQuantity: ItemProps["useUpdateQuantity"];
 }
+
+const script = (containerId: string, count: number) => {
+  function exposeCart() {
+    const container = document.getElementById(containerId) as
+      | HTMLDivElement
+      | null;
+
+    const input = container?.querySelector('input[name="original"]') as
+      | HTMLInputElement
+      | null;
+
+    if (!input) {
+      return;
+    }
+
+    const original = JSON.parse(decodeURIComponent(input.value));
+
+    globalThis.window.STOREFRONT ||= {};
+    globalThis.window.STOREFRONT.CART = original;
+  }
+
+  function adjustCartCounter() {
+    const element = document.querySelector("[data-minicart-items-count]");
+
+    if (!element) {
+      return;
+    }
+
+    element.setAttribute(
+      "data-minicart-items-count",
+      count > 9 ? "9+" : count.toString(),
+    );
+  }
+
+  exposeCart();
+  adjustCartCounter();
+};
 
 function Cart({
   cart: {
+    original,
     data: {
       items,
       total,
@@ -42,23 +84,25 @@ function Cart({
       freeShippingTarget,
       checkoutHref,
     },
-    useAnalyticsItem,
-    useUpdateQuantity,
   },
 }: { cart: Minicart }) {
   const count = items.length;
-  const analyticsItems = items
-    .map((_, index) => useAnalyticsItem(index))
-    .filter((x): x is AnalyticsItem => Boolean(x));
 
   const beginCheckoutEvent = useSendEvent({
-    name: "begin_checkout",
-    params: { coupon, currency, value: total, items: analyticsItems },
-  }, "click");
-  const viewCartEvent = useSendEvent({
-    name: "view_cart",
-    params: { currency, value: total, items: analyticsItems },
-  }, "view");
+    on: "click",
+    event: {
+      name: "begin_checkout",
+      params: { coupon, currency, value: total, items },
+    },
+  });
+
+  const viewCartEvent = useSendEvent<AnalyticsEvent>({
+    on: "view",
+    event: {
+      name: "view_cart",
+      params: { currency, value: total, items },
+    },
+  });
 
   return (
     <div
@@ -90,23 +134,39 @@ function Cart({
             </div>
 
             {/* Cart Items */}
-            <ul
-              role="list"
-              class="mt-6 px-2 flex-grow overflow-y-auto flex flex-col gap-6 w-full"
+            <form
+              id={MINICART_FORM_ID}
+              class="contents"
+              hx-disabled-elt="this"
+              hx-trigger="submit, change"
+              hx-target={`#${MINICART_CONTAINER_ID}`}
+              hx-indicator={`#${MINICART_CONTAINER_ID}`}
+              hx-post={useSubmitCart()}
+              hx-swap="innerHTML"
             >
-              {items.map((item, index) => (
-                <li key={index}>
-                  <CartItem
-                    item={item}
-                    index={index}
-                    locale={locale}
-                    currency={currency}
-                    useAnalyticsItem={useAnalyticsItem}
-                    useUpdateQuantity={useUpdateQuantity}
-                  />
-                </li>
-              ))}
-            </ul>
+              <ul
+                role="list"
+                class="mt-6 px-2 flex-grow overflow-y-auto flex flex-col gap-6 w-full"
+              >
+                {items.map((item, index) => (
+                  <li>
+                    <CartItem
+                      item={item}
+                      index={index}
+                      locale={locale}
+                      currency={currency}
+                    />
+                  </li>
+                ))}
+              </ul>
+
+              {/* This contains the original platform cart. Integrations usually use this value */}
+              <input
+                type="hidden"
+                name="original"
+                value={encodeURIComponent(JSON.stringify(original))}
+              />
+            </form>
 
             {/* Cart Footer */}
             <footer class="w-full">
@@ -122,9 +182,9 @@ function Cart({
                 )}
                 <div class="w-full flex justify-between px-4 text-sm">
                   <span>Subtotal</span>
-                  <span>
+                  <output name="subtotal" form={MINICART_FORM_ID}>
                     {formatPrice(subtotal, currency, locale)}
-                  </span>
+                  </output>
                 </div>
                 {enableCoupon && <Coupon coupon={coupon} />}
               </div>
@@ -133,9 +193,13 @@ function Cart({
               <div class="border-t border-base-200 pt-4 flex flex-col justify-end items-end gap-2 mx-4">
                 <div class="flex justify-between items-center w-full">
                   <span>Total</span>
-                  <span class="font-medium text-xl">
+                  <output
+                    name="total"
+                    form={MINICART_FORM_ID}
+                    class="font-medium text-xl"
+                  >
                     {formatPrice(total, currency, locale)}
-                  </span>
+                  </output>
                 </div>
                 <span class="text-sm text-base-300">
                   Taxas e fretes serão calculados no checkout
@@ -156,6 +220,7 @@ function Cart({
             </footer>
           </>
         )}
+      <script src={scriptAsDataURI(script, MINICART_CONTAINER_ID, count)} />
     </div>
   );
 }

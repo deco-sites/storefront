@@ -2,21 +2,8 @@ import { itemToAnalyticsItem } from "apps/linx/hooks/useCart.ts";
 import type a from "apps/linx/loaders/cart.ts";
 import { AppContext } from "apps/linx/mod.ts";
 import { Minicart } from "../../../components/minicart/Minicart.tsx";
-import { useUpdateQuantity } from "../../cart.ts";
 
-type Cart = Awaited<ReturnType<typeof a>>;
-
-const useAnalyticsItem =
-  (items: NonNullable<NonNullable<Cart>["Basket"]>["Items"], coupon: string) =>
-  (index: number) => {
-    const item = items[index];
-
-    if (!item) {
-      return null;
-    }
-
-    return itemToAnalyticsItem(item, coupon, index);
-  };
+export type Cart = Awaited<ReturnType<typeof a>>;
 
 const locale = "pt-BR";
 const currency = "BRL";
@@ -29,12 +16,12 @@ export const cartFrom = (cart: Cart): Minicart => {
   const coupon = cart?.Basket?.Coupons?.[0]?.Code ?? "";
 
   return {
+    original: cart as unknown as Record<string, unknown>,
     data: {
-      items: items.map((item) => ({
-        image: { src: item!.ImagePath!, alt: "product image" },
-        quantity: item!.Quantity!,
-        name: item!.Name!,
-        price: { sale: item!.RetailPrice!, list: item!.ListPrice! },
+      items: items.map((item, index) => ({
+        image: item.ImagePath,
+        listPrice: item.ListPrice,
+        ...itemToAnalyticsItem(item, coupon, index),
       })),
       total,
       subtotal,
@@ -47,13 +34,12 @@ export const cartFrom = (cart: Cart): Minicart => {
       freeShippingTarget: 1000,
       checkoutHref: "/carrinho",
     },
-
-    useUpdateQuantity: (quantity: number, index: number) =>
-      useUpdateQuantity({
-        Quantity: quantity,
-        BasketItemID: items[index]?.BasketItemID,
-      }),
-    useAnalyticsItem: useAnalyticsItem(items, coupon),
+    // useUpdateQuantity: (quantity: number, index: number) =>
+    //   useUpdateQuantity({
+    //     Quantity: quantity,
+    //     BasketItemID: items[index]?.BasketItemID,
+    //   }),
+    // useAnalyticsItem: useAnalyticsItem(items, coupon),
   };
 };
 

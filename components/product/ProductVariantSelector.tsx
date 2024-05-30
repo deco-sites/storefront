@@ -51,7 +51,6 @@ function VariantSelector({ product }: Props) {
           <ul class="flex flex-row gap-4">
             {Object.entries(possibilities[name]).map(([value, link]) => {
               const relativeLink = relative(link);
-              const color = colors[value] ?? "transparent";
 
               return (
                 <li class="h-6 w-6">

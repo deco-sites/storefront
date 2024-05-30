@@ -43,18 +43,21 @@ function ProductInfo({ page }: Props) {
   };
 
   const viewItemEvent = useSendEvent({
-    name: "view_item",
-    params: {
-      item_list_id: "product",
-      item_list_name: "Product",
-      items: [mapProductToAnalyticsItem({
-        product,
-        breadcrumbList: breadcrumb,
-        price,
-        listPrice,
-      })],
+    on: "view",
+    event: {
+      name: "view_item",
+      params: {
+        item_list_id: "product",
+        item_list_name: "Product",
+        items: [mapProductToAnalyticsItem({
+          product,
+          breadcrumbList: breadcrumb,
+          price,
+          listPrice,
+        })],
+      },
     },
-  }, "view");
+  });
 
   return (
     <div {...viewItemEvent} class="flex flex-col px-4" id={id}>

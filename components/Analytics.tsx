@@ -1,31 +1,45 @@
 import type { AnalyticsEvent } from "apps/commerce/types.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 
-declare global {
-  interface Window {
-    DECO_ANALYTICS_NODES: WeakMap<Element, boolean>;
-  }
-}
-
 const script = () => {
-  globalThis.window.DECO_ANALYTICS_NODES ||= new WeakMap();
+  globalThis.window.STOREFRONT ||= {};
+  globalThis.window.STOREFRONT.ANALYTICS ||= new WeakMap();
 
   const init = () => {
-    const seen = globalThis.window.DECO_ANALYTICS_NODES;
+    const seen = globalThis.window.STOREFRONT.ANALYTICS!;
+
+    function identity<T>(x: T) {
+      return x;
+    }
 
     function sendEvent(e: Element | null) {
       const event = e?.getAttribute("data-event");
+      const maybeBeforeSend = e?.getAttribute("data-before-send");
+
+      const beforeSend = maybeBeforeSend
+        ? new Function(
+          `return ${decodeURIComponent(maybeBeforeSend)}`,
+        )()
+        : identity;
 
       if (!event) {
         return;
       }
 
       const decoded = JSON.parse(decodeURIComponent(event));
-      globalThis.window.DECO.events.dispatch(decoded);
+      const transformed = beforeSend(decoded, e);
+
+      console.log("Sending event", transformed);
+
+      globalThis.window.DECO.events.dispatch(transformed);
     }
 
     function handleClick(e: Event) {
       e.stopPropagation();
+      sendEvent(e.currentTarget as HTMLElement | null);
+    }
+
+    function handleChange(e: Event) {
       sendEvent(e.currentTarget as HTMLElement | null);
     }
 
@@ -56,7 +70,11 @@ const script = () => {
         seen.set(node, true);
 
         const maybeTrigger = node.getAttribute("data-event-trigger");
-        const on = maybeTrigger === "click" ? "click" : "view";
+        const on = maybeTrigger === "click"
+          ? "click"
+          : maybeTrigger === "change"
+          ? "change"
+          : "view";
 
         if (on === "click") {
           node.addEventListener("click", handleClick, { passive: true });
@@ -66,6 +84,12 @@ const script = () => {
 
         if (on === "view") {
           handleView?.observe(node);
+
+          return;
+        }
+
+        if (on === "change") {
+          node.addEventListener("change", handleChange, { passive: true });
 
           return;
         }
@@ -91,13 +115,21 @@ function Analytics() {
   return <script type="module" src={scriptAsDataURI(script)} />;
 }
 
+export interface Options<E extends AnalyticsEvent> {
+  event: E;
+  on: "click" | "view" | "change";
+  onBeforeSend?: (event: E, currrentTarget: HTMLElement) => E;
+}
+
 export const useSendEvent = <E extends AnalyticsEvent>(
-  event: E,
-  on: "click" | "view",
+  { event, on, onBeforeSend }: Options<E>,
 ) => {
+  const onBeforeStr = onBeforeSend?.toString();
+
   return {
     ["data-event"]: encodeURIComponent(JSON.stringify(event)),
     ["data-event-trigger"]: on,
+    ["data-before-send"]: onBeforeStr && encodeURIComponent(onBeforeStr),
   };
 };
 

@@ -222,7 +222,7 @@ function Header({
               }}
               class={clx(
                 "h-full flex flex-col bg-base-100 items-center justify-center overflow-auto",
-                "[.htmx-request&]:pointer-events-none",
+                "[.htmx-request&]:pointer-events-none [.htmx-request&]:opacity-60 [.htmx-request&]:cursor-wait transition-opacity duration-300",
                 "[[data-minicart-container]&_section]:contents",
               )}
             >
