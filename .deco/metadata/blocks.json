@@ -195,10 +195,6 @@
     "blockType": "sections",
     "__resolveType": "site/sections/Content/Testimonials.tsx"
   },
-  "/.deco/blocks/files.json": {
-    "blockType": "apps",
-    "__resolveType": "decohub/apps/files.ts"
-  },
   "/.deco/blocks/navbar.json": {
     "blockType": "loaders",
     "__resolveType": "commerce/loaders/navbar.ts"
@@ -290,5 +286,9 @@
   "/.deco/blocks/deco-analytics.json": {
     "blockType": "apps",
     "__resolveType": "site/apps/deco/analytics.ts"
+  },
+  "/.deco/blocks/Preview%20vtex%2Floaders%2Fnavbar.ts.json": {
+    "blockType": "loaders",
+    "__resolveType": "vtex/loaders/navbar.ts"
   }
 }

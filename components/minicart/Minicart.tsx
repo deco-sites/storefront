@@ -30,12 +30,12 @@ export interface Minicart {
   };
 }
 
-const script = (containerId: string, count: number) => {
-  function exposeCart() {
-    const container = document.getElementById(containerId) as
-      | HTMLDivElement
-      | null;
+const script = (containerId: string) => {
+  const container = document.getElementById(containerId) as
+    | HTMLDivElement
+    | null;
 
+  function exposeCartToWindow() {
     const input = container?.querySelector('input[name="original"]') as
       | HTMLInputElement
       | null;
@@ -50,21 +50,39 @@ const script = (containerId: string, count: number) => {
     globalThis.window.STOREFRONT.CART = original;
   }
 
-  function adjustCartCounter() {
-    const element = document.querySelector("[data-minicart-items-count]");
+  function adjustQuantities() {
+    const items = container?.querySelectorAll("[data-item-id]");
 
-    if (!element) {
-      return;
-    }
-
-    element.setAttribute(
+    // Set minicart items count on header
+    const count = items?.length ?? 0;
+    document.querySelector("[data-minicart-items-count]")?.setAttribute(
       "data-minicart-items-count",
       count > 9 ? "9+" : count.toString(),
     );
+
+    // Set minicart quantities on dom items
+    items?.forEach((item) => {
+      const id = item.getAttribute("data-item-id");
+      const quantity = item.querySelector("input")?.value;
+
+      document.querySelectorAll(
+        `[data-add-to-cart][data-product-id="${id}"]`,
+      )?.forEach((container) => {
+        container.querySelector('input[type="checkbox"]')?.setAttribute(
+          "checked",
+          "true",
+        );
+
+        const input = container.querySelector('input[type="number"]');
+
+        input?.setAttribute("value", quantity ?? "1");
+        input?.removeAttribute("disabled");
+      });
+    });
   }
 
-  exposeCart();
-  adjustCartCounter();
+  exposeCartToWindow();
+  adjustQuantities();
 };
 
 function Cart({
@@ -220,7 +238,7 @@ function Cart({
             </footer>
           </>
         )}
-      <script src={scriptAsDataURI(script, MINICART_CONTAINER_ID, count)} />
+      <script src={scriptAsDataURI(script, MINICART_CONTAINER_ID)} />
     </div>
   );
 }

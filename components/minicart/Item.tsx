@@ -72,6 +72,8 @@ function CartItem({ item, index, locale, currency }: Props) {
 
   return (
     <fieldset
+      // deno-lint-ignore no-explicit-any
+      data-item-id={(item as any).item_id}
       class="grid grid-rows-1 gap-2"
       style={{ gridTemplateColumns: "auto 1fr" }}
     >

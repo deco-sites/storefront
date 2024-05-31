@@ -1,1 +1,4768 @@
-{"items":[{"url":"/feminino","name":"Feminino","@type":"SiteNavigationElement","image":[{"url":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/7733d479-0fd1-4f33-bed9-6f9e170655d6","@type":"ImageObject"}],"children":[{"url":"/feminino/saias","name":"Novidades","@type":"SiteNavigationElement","children":[{"url":"/feminino/vestidos","name":"Mais vendidos","@type":"SiteNavigationElement"},{"url":"/feminino/vestidos","name":"Parcerias","@type":"SiteNavigationElement"}]}]},{"url":"/masculino","name":"Masculino","@type":"SiteNavigationElement","image":[{"url":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/575c3b0f-1a2e-4ecb-aaad-532671dc553d","@type":"ImageObject"}],"children":[{"url":"/masculino","name":"Novidades","@type":"SiteNavigationElement","children":[{"url":"/masculino","name":"Mais vendidos","@type":"SiteNavigationElement"},{"url":"/masculino","name":"Parcerias","@type":"SiteNavigationElement"}]}]},{"url":"/sale","name":"Sale","@type":"SiteNavigationElement","image":[{"url":"https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/5e9310c0-c725-4643-ade3-f92a505bd1d6","@type":"ImageObject"}],"children":[{"url":"/feminino","name":"Feminino","@type":"SiteNavigationElement","children":[{"url":"/feminino","name":"Camisetas","@type":"SiteNavigationElement"},{"url":"/feminino","name":"Camisas","@type":"SiteNavigationElement"}]},{"url":"/masculino","name":"Masculino","@type":"SiteNavigationElement","children":[{"url":"/masculino","name":"Camisetas","@type":"SiteNavigationElement"},{"url":"/masculino","name":"Regatas","@type":"SiteNavigationElement"}]}]},{"url":"/linktree","name":"Link Tree","@type":"SiteNavigationElement"}],"__resolveType":"commerce/loaders/navbar.ts"}
+{
+  "items": [
+    {
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bebes-e-infantil/infantil",
+          "name": "Infantil",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebes-e-infantil/infantil/outros",
+              "name": "Outros",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebes-e-infantil/infantil/caixa-organizadora",
+              "name": "Caixa Organizadora",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebes-e-infantil/infantil/triciclo",
+              "name": "Triciclo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebes-e-infantil/infantil/pratos",
+              "name": "Pratos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebes-e-infantil/infantil/copos-e-canecas",
+              "name": "Copos e Canecas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebes-e-infantil/infantil/inflaveis",
+              "name": "Infláveis",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebes-e-infantil/infantil/talheres",
+              "name": "Talheres",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bebes-e-infantil/bebes",
+          "name": "Bebês",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebes-e-infantil/bebes/banheiras",
+              "name": "Banheiras",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebes-e-infantil/bebes/mamadeira",
+              "name": "Mamadeira",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebes-e-infantil/bebes/brinquedos",
+              "name": "Brinquedos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebes-e-infantil/bebes/chupeta",
+              "name": "Chupeta",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebes-e-infantil/bebes/acessorios",
+              "name": "Acessórios",
+              "children": []
+            }
+          ]
+        }
+      ],
+      "@type": "SiteNavigationElement",
+      "url": "/bebes-e-infantil",
+      "name": "Bebês e Infantil"
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/carnes-e-aves",
+      "name": "Carnes e Aves",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/carnes-e-aves/carnes",
+          "name": "Carnes",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/carnes-e-aves/carnes/outros-cortes-de-carnes",
+              "name": "Outros Cortes de Carnes",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/carnes-e-aves/carnes/carne-moida",
+              "name": "Carne Moída",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/carnes-e-aves/carnes/suinas",
+              "name": "Suínas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/carnes-e-aves/carnes/carnes-especiais",
+              "name": "Carnes Especiais",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/carnes-e-aves/carnes/bovinas",
+              "name": "Bovinas",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/carnes-e-aves/aves",
+          "name": "Aves",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/carnes-e-aves/aves/outras-aves",
+              "name": "Outras Aves",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/carnes-e-aves/aves/aves-especiais",
+              "name": "Aves Especiais",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/carnes-e-aves/aves/natalinas",
+              "name": "Natalinas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/carnes-e-aves/aves/frango-inteiro",
+              "name": "Frango Inteiro",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/carnes-e-aves/aves/cortes-de-frango",
+              "name": "Cortes de Frango",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/cama-mesa-e-banho",
+      "name": "Cama, Mesa e Banho",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/cama-mesa-e-banho/banho",
+          "name": "Banho",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/cama-mesa-e-banho/banho/kit-toalha",
+              "name": "Kit Toalha",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/cama-mesa-e-banho/banho/toalha-de-banho",
+              "name": "Toalha de Banho",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/cama-mesa-e-banho/banho/tapete-para-banheiro",
+              "name": "Tapete para Banheiro",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/cama-mesa-e-banho/banho/toalha-de-rosto",
+              "name": "Toalha de Rosto",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/cama-mesa-e-banho/mesa",
+          "name": "Mesa",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/cama-mesa-e-banho/mesa/outros",
+              "name": "Outros",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/cama-mesa-e-banho/mesa/toalha-e-trilho-de-mesa",
+              "name": "Toalha e Trilho de Mesa",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/cama-mesa-e-banho/mesa/jogo-americano",
+              "name": "Jogo Americano",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/cama-mesa-e-banho/cama",
+          "name": "Cama",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/cama-mesa-e-banho/cama/jogo-de-cama",
+              "name": "Jogo de Cama",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/cama-mesa-e-banho/cama/manta-colcha-e-cobre-leito",
+              "name": "Manta, Colcha e Cobre Leito",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/cama-mesa-e-banho/cama/travesseiro",
+              "name": "Travesseiro",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/cama-mesa-e-banho/cama/fronha-e-porta-travesseiro",
+              "name": "Fronha e Porta Travesseiro",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/cama-mesa-e-banho/cama/edredom",
+              "name": "Edredom",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/cama-mesa-e-banho/cama/lencol",
+              "name": "Lençol",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/cama-mesa-e-banho/cama/outros",
+              "name": "Outros",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/frios-e-laticinios",
+      "name": "Frios e Laticínios",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/frios-e-laticinios/linguica",
+          "name": "Linguiça",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/linguica/suina",
+              "name": "Suína",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/linguica/outras-linguicas",
+              "name": "Outras Linguiças",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/linguica/calabresa",
+              "name": "Calabresa",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/linguica/portuguesa",
+              "name": "Portuguesa",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/linguica/pernil",
+              "name": "Pernil",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/linguica/frango",
+              "name": "Frango",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/linguica/mista-fina",
+              "name": "Mista Fina",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/linguica/paio",
+              "name": "Paio",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/linguica/toscana",
+              "name": "Toscana",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/frios-e-laticinios/lacteos",
+          "name": "Lácteos",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/lacteos/requeijao-cremoso",
+              "name": "Requeijão Cremoso",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/lacteos/creme-de-leite-fresco",
+              "name": "Creme de Leite Fresco",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/lacteos/coalhada",
+              "name": "Coalhada",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/lacteos/margarina",
+              "name": "Margarina",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/lacteos/manteiga",
+              "name": "Manteiga",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/lacteos/creme-de-queijo",
+              "name": "Creme de Queijo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/lacteos/chantily",
+              "name": "Chantily",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/lacteos/outros-lacteos",
+              "name": "Outros Lácteos",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/frios-e-laticinios/salsicha",
+          "name": "Salsicha",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/salsicha/hot-dog",
+              "name": "Hot Dog",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/salsicha/salsichao",
+              "name": "Salsichão",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/salsicha/frango",
+              "name": "Frango",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/salsicha/viena",
+              "name": "Viena",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/salsicha/outras-salsichas",
+              "name": "Outras Salsichas",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/frios-e-laticinios/frios",
+          "name": "Frios",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/frios/peito-de-peru",
+              "name": "Peito de Peru",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/frios/tabua-de-frios",
+              "name": "Tábua de Frios",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/frios/outros-frios",
+              "name": "Outros Frios",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/frios/lombo",
+              "name": "Lombo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/frios/presunto",
+              "name": "Presunto",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/frios/copa",
+              "name": "Copa",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/frios/mortadela",
+              "name": "Mortadela",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/frios/salame",
+              "name": "Salame",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/frios-e-laticinios/leite-aromatizado",
+          "name": "Leite Aromatizado",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/leite-aromatizado/leite-aromatizado",
+              "name": "Leite Aromatizado",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/frios-e-laticinios/massa-fresca",
+          "name": "Massa Fresca",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/massa-fresca/pastel-e-pizza",
+              "name": "Pastel e Pizza",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/massa-fresca/recheadas",
+              "name": "Recheadas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/massa-fresca/outras-massas-frescas",
+              "name": "Outras Massas Frescas",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/frios-e-laticinios/iogurte",
+          "name": "Iogurte",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/iogurte/polpa",
+              "name": "Polpa",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/iogurte/petit-suisse",
+              "name": "Petit Suisse",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/iogurte/sem-lactose",
+              "name": "Sem Lactose",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/iogurte/natural",
+              "name": "Natural",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/iogurte/outros-iogurtes",
+              "name": "Outros Iogurtes",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/iogurte/grego",
+              "name": "Grego",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/iogurte/funcional",
+              "name": "Funcional",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/iogurte/leite-fermentado",
+              "name": "Leite Fermentado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/iogurte/liquido",
+              "name": "Líquido",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/iogurte/bebida-lactea",
+              "name": "Bebida Láctea",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/iogurte/sobremesas",
+              "name": "Sobremesas",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/frios-e-laticinios/queijo",
+          "name": "Queijo",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/estepe",
+              "name": "Estepe",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/mussarela",
+              "name": "Mussarela",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/gouda",
+              "name": "Gouda",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/cream-cheese",
+              "name": "Cream Cheese",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/gruyere",
+              "name": "Gruyere",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/cottage",
+              "name": "Cottage",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/coalho",
+              "name": "Coalho",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/bufala",
+              "name": "Búfala",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/reino",
+              "name": "Reino",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/prato",
+              "name": "Prato",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/minas-padrao",
+              "name": "Minas Padrão",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/parmesao",
+              "name": "Parmesão",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/provolone",
+              "name": "Provolone",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/ralado",
+              "name": "Ralado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/ricota",
+              "name": "Ricota",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/emmental",
+              "name": "Emmental",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/processado",
+              "name": "Processado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/brie",
+              "name": "Brie",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/gorgonzola",
+              "name": "Gorgonzola",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/cammembert",
+              "name": "Cammembert",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/minas-frescal",
+              "name": "Minas Frescal",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/frios-e-laticinios/queijo/outros-queijos",
+              "name": "Outros Queijos",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/bebida-alcoolica",
+      "name": "Bebida Alcoólica",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bebida-alcoolica/aperitivo",
+          "name": "Aperitivo",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/aperitivo/coquetel",
+              "name": "Coquetel",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/aperitivo/licor",
+              "name": "Licor",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/aperitivo/vermouth",
+              "name": "Vermouth",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/aperitivo/ice-e-bebida-mista",
+              "name": "Ice e Bebida Mista",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/aperitivo/outros-aperitivos",
+              "name": "Outros Aperitivos",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bebida-alcoolica/vinhos-e-espumantes",
+          "name": "Vinhos e Espumantes",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/vinhos-e-espumantes/espumantes",
+              "name": "Espumantes",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/vinhos-e-espumantes/vinho-tinto",
+              "name": "Vinho Tinto",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/vinhos-e-espumantes/vinho-branco",
+              "name": "Vinho Branco",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/vinhos-e-espumantes/outros-espumantes",
+              "name": "Outros Espumantes",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/vinhos-e-espumantes/vinho-rose",
+              "name": "Vinho Rosé",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/vinhos-e-espumantes/outros-vinhos",
+              "name": "Outros Vinhos",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bebida-alcoolica/destilado",
+          "name": "Destilado",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/destilado/gin",
+              "name": "Gin",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/destilado/outros-destilados",
+              "name": "Outros Destilados",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/destilado/aguardente",
+              "name": "Aguardente",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/destilado/cachaca",
+              "name": "Cachaça",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/destilado/whisky",
+              "name": "Whisky",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/destilado/vodka",
+              "name": "Vodka",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/destilado/conhaque",
+              "name": "Conhaque",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/destilado/tequila",
+              "name": "Tequila",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/destilado/rum",
+              "name": "Rum",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bebida-alcoolica/cerveja",
+          "name": "Cerveja",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/cerveja/convencional",
+              "name": "Convencional",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/cerveja/escura",
+              "name": "Escura",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/cerveja/sem-alcool",
+              "name": "Sem Álcool",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/cerveja/outras-cervejas",
+              "name": "Outras Cervejas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-alcoolica/cerveja/especiais",
+              "name": "Especiais",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/utilidades-e-casa",
+      "name": "Utilidades e Casa",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/quadros-espelhos-e-relogios",
+          "name": "Quadros, Espelhos e Relógios",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/quadros-espelhos-e-relogios/espelhos",
+              "name": "Espelhos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/quadros-espelhos-e-relogios/relogios",
+              "name": "Relógios",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/quadros-espelhos-e-relogios/quadros-e-placas",
+              "name": "Quadros e Placas",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/utilidades-eletricas",
+          "name": "Utilidades Elétricas",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utilidades-eletricas/duchas-e-chuveiros",
+              "name": "Duchas e Chuveiros",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utilidades-eletricas/extensoes-fios-e-cabos",
+              "name": "Extensões, Fios e Cabos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utilidades-eletricas/adaptadores-plugs-e-pinos",
+              "name": "Adaptadores, Plugs e Pinos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utilidades-eletricas/resistencia",
+              "name": "Resistência",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utilidades-eletricas/outras-utilidades-eletricas",
+              "name": "Outras Utilidades Elétricas",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/festinha",
+          "name": "Festinha",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/festinha/kit-festinha",
+              "name": "Kit Festinha",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/festinha/talheres",
+              "name": "Talheres",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/festinha/copos-e-tacas",
+              "name": "Copos e Taças",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/festinha/guardanapo-de-papel",
+              "name": "Guardanapo de Papel",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/festinha/forminha",
+              "name": "Forminha",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/festinha/velas",
+              "name": "Velas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/festinha/convite",
+              "name": "Convite",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/festinha/pratos",
+              "name": "Pratos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/festinha/outros",
+              "name": "Outros",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/festinha/baloes-e-bexigas",
+              "name": "Balões e Bexigas",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/almofadas-e-capas",
+          "name": "Almofadas e Capas",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/almofadas-e-capas/capas",
+              "name": "Capas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/almofadas-e-capas/almofadas",
+              "name": "Almofadas",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/porta-retrato",
+          "name": "Porta Retrato",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/porta-retrato/porta-retrato",
+              "name": "Porta Retrato",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/acessorios-de-bricolagem",
+          "name": "Acessórios de Bricolagem",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/acessorios-de-bricolagem/outros-acessorios-de-bricolagem",
+              "name": "Outros Acessórios de Bricolagem",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/acessorios-de-bricolagem/utilidades",
+              "name": "Utilidades",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/acessorios-de-bricolagem/para-fixar",
+              "name": "Para Fixar",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/acessorios-de-bricolagem/cadeado",
+              "name": "Cadeado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/acessorios-de-bricolagem/colas",
+              "name": "Colas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/acessorios-de-bricolagem/fitas",
+              "name": "Fitas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/acessorios-de-bricolagem/escada",
+              "name": "Escada",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/velas",
+          "name": "Velas",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/velas/decorativas",
+              "name": "Decorativas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/velas/aromaticas",
+              "name": "Aromáticas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/velas/castical---porta-velas",
+              "name": "Castiçal - Porta Velas",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/ferramentas",
+          "name": "Ferramentas",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/ferramentas/serras",
+              "name": "Serras",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/ferramentas/ferramentas-manuais",
+              "name": "Ferramentas Manuais",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/ferramentas/furadeira-e-parafusadeira",
+              "name": "Furadeira e Parafusadeira",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/ferramentas/acessorios-para-ferramentas",
+              "name": "Acessórios para Ferramentas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/ferramentas/maletas-e-caixas-para-ferramentas",
+              "name": "Maletas e Caixas para Ferramentas",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/descartaveis-para-cozinha",
+          "name": "Descartáveis para Cozinha",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/descartaveis-para-cozinha/assadeiras-e-bandejas",
+              "name": "Assadeiras e Bandejas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/descartaveis-para-cozinha/fosforo",
+              "name": "Fósforo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/descartaveis-para-cozinha/outros-descartaveis-para-cozinha",
+              "name": "Outros Descartáveis para Cozinha",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/descartaveis-para-cozinha/velas",
+              "name": "Velas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/descartaveis-para-cozinha/papel-aluminio-e-filme-pvc",
+              "name": "Papel Alumínio e Filme Pvc",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/descartaveis-para-cozinha/saco-para-freezer",
+              "name": "Saco para Freezer",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/descartaveis-para-cozinha/palito-para-dente",
+              "name": "Palito para Dente",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/descartaveis-para-cozinha/filtros-de-papel",
+              "name": "Filtros de Papel",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/lampadas-e-pilhas",
+          "name": "Lâmpadas e Pilhas",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/lampadas-e-pilhas/lampadas-halogenas",
+              "name": "Lâmpadas Halógenas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/lampadas-e-pilhas/pilhas",
+              "name": "Pilhas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/lampadas-e-pilhas/lampadas-compactas",
+              "name": "Lâmpadas Compactas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/lampadas-e-pilhas/lampadas-led",
+              "name": "Lâmpadas Led",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/lampadas-e-pilhas/luminarias-e-plafon",
+              "name": "Luminárias e Plafon",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/tapetes-e-capacho",
+          "name": "Tapetes e Capacho",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/tapetes-e-capacho/capacho",
+              "name": "Capacho",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/tapetes-e-capacho/tapete",
+              "name": "Tapete",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/plantas-artificiais-e-vasos",
+          "name": "Plantas Artificiais e Vasos",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/plantas-artificiais-e-vasos/vasos",
+              "name": "Vasos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/plantas-artificiais-e-vasos/flores-e-plantas-artificiais",
+              "name": "Flores e Plantas Artificiais",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/filtros-e-torneiras",
+          "name": "Filtros e Torneiras",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/filtros-e-torneiras/acessorios-para-filtros-e-torneiras",
+              "name": "Acessórios para Filtros e Torneiras",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/filtros-e-torneiras/filtros",
+              "name": "Filtros",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/filtros-e-torneiras/torneiras",
+              "name": "Torneiras",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/plasticos",
+          "name": "Plásticos",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/plasticos/talheres",
+              "name": "Talheres",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/plasticos/copos",
+              "name": "Copos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/plasticos/pratos",
+              "name": "Pratos",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/casa-em-geral",
+          "name": "Casa Em Geral",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/casa-em-geral/outras-utilidades-para-casa",
+              "name": "Outras Utilidades para Casa",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/casa-em-geral/lixeiras",
+              "name": "Lixeiras",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/casa-em-geral/cestos-organizadores",
+              "name": "Cestos Organizadores",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/higienicos",
+          "name": "Higiênicos",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/higienicos/guardanapo-de-papel",
+              "name": "Guardanapo de Papel",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/higienicos/papel-toalha",
+              "name": "Papel Toalha",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/higienicos/canudo",
+              "name": "Canudo",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/outros-artigos-para-decoracao",
+          "name": "Outros Artigos para Decoração",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/outros-artigos-para-decoracao/outros-artigos-para-decoracao",
+              "name": "Outros Artigos para Decoração",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/papelaria",
+          "name": "Papelaria",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/papelaria/embalagens",
+              "name": "Embalagens",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/papelaria/papelaria",
+              "name": "Papelaria",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/utilidades-e-casa/utensilios-para-cozinha",
+          "name": "Utensílios para Cozinha",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utensilios-para-cozinha/talheres",
+              "name": "Talheres",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utensilios-para-cozinha/prato",
+              "name": "Prato",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utensilios-para-cozinha/garrafas-termicas",
+              "name": "Garrafas Termicas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utensilios-para-cozinha/copo",
+              "name": "Copo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utensilios-para-cozinha/taca",
+              "name": "Taça",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utensilios-para-cozinha/acendedores",
+              "name": "Acendedores",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utensilios-para-cozinha/xicara",
+              "name": "Xícara",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utensilios-para-cozinha/panela",
+              "name": "Panela",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utensilios-para-cozinha/potes",
+              "name": "Potes",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utensilios-para-cozinha/assadeiras-formas-e-refratarios",
+              "name": "Assadeiras, Formas e Refratários",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utensilios-para-cozinha/outros-utensilios-para-cozinha",
+              "name": "Outros Utensílios para Cozinha",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utensilios-para-cozinha/canecas",
+              "name": "Canecas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utensilios-para-cozinha/sacolas-e-bolsas-termicas",
+              "name": "Sacolas e Bolsas Térmicas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/utilidades-e-casa/utensilios-para-cozinha/garrafas-e-jarras",
+              "name": "Garrafas e Jarras",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/peixaria",
+      "name": "Peixaria",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/peixaria/peixes-e-frutos-do-mar",
+          "name": "Peixes e Frutos do Mar",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/peixaria/peixes-e-frutos-do-mar/peixes",
+              "name": "Peixes",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/peixaria/peixes-e-frutos-do-mar/frutos-do-mar",
+              "name": "Frutos do Mar",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/peixaria/bacalhau",
+          "name": "Bacalhau",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/peixaria/bacalhau/bacalhau",
+              "name": "Bacalhau",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/pet-shop",
+      "name": "Pet Shop",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/pet-shop/outros-animais",
+          "name": "Outros Animais",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/pet-shop/outros-animais/acessorios",
+              "name": "Acessórios",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/pet-shop/outros-animais/alimentacao",
+              "name": "Alimentação",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/pet-shop/outros-animais/petiscos",
+              "name": "Petiscos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/pet-shop/outros-animais/produtos-de-higiene",
+              "name": "Produtos De Higiene",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/pet-shop/caes",
+          "name": "Cães",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/pet-shop/caes/acessorios",
+              "name": "Acessorios",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/pet-shop/caes/produtos-de-higiene",
+              "name": "Produtos De Higiene",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/pet-shop/caes/petiscos",
+              "name": "Petiscos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/pet-shop/caes/alimentacao",
+              "name": "Alimentação",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/pet-shop/gatos",
+          "name": "Gatos",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/pet-shop/gatos/acessorios",
+              "name": "Acessorios",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/pet-shop/gatos/produtos-de-higiene",
+              "name": "Produtos De Higiene",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/pet-shop/gatos/alimentacao",
+              "name": "Alimentação",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/pet-shop/gatos/petiscos",
+              "name": "Petiscos",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/vestuario",
+      "name": "Vestuário",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/vestuario/calcados",
+          "name": "Calçados",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/vestuario/calcados/sandalias",
+              "name": "Sandálias",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/saudaveis",
+      "name": "Saudáveis",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/saudaveis/integral",
+          "name": "Integral",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/integral/paes",
+              "name": "Pães",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/integral/outros",
+              "name": "Outros",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/integral/torradas",
+              "name": "Torradas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/integral/massas",
+              "name": "Massas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/integral/biscoito",
+              "name": "Biscoito",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/saudaveis/sem-lactose",
+          "name": "Sem Lactose",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/sem-lactose/paes",
+              "name": "Pães",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/sem-lactose/doces",
+              "name": "Doces",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/sem-lactose/salgadinhos",
+              "name": "Salgadinhos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/sem-lactose/iogurte",
+              "name": "Iogurte",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/sem-lactose/biscoito",
+              "name": "Biscoito",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/sem-lactose/torradas",
+              "name": "Torradas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/sem-lactose/preparo-para-sobremesa",
+              "name": "Preparo Para Sobremesa",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/sem-lactose/outros",
+              "name": "Outros",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/saudaveis/vegano",
+          "name": "Vegano",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/vegano/vegano",
+              "name": "Vegano",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/saudaveis/diet",
+          "name": "Diet",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/diet/iogurte",
+              "name": "Iogurte",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/diet/refrigerante",
+              "name": "Refrigerante",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/diet/outros",
+              "name": "Outros",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/diet/preparo-para-sobremesa",
+              "name": "Preparo Para Sobremesa",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/diet/achocolatado",
+              "name": "Achocolatado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/diet/biscoito",
+              "name": "Biscoito",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/diet/geleia",
+              "name": "Geleia",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/diet/suco",
+              "name": "Suco",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/diet/doces",
+              "name": "Doces",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/diet/shake",
+              "name": "Shake",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/diet/adocante",
+              "name": "Adoçante",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/saudaveis/plant-blased",
+          "name": "Plant Blased",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/plant-blased/plant-blased",
+              "name": "Plant Blased",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/saudaveis/sem-gluten",
+          "name": "Sem Glúten",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/sem-gluten/biscoito",
+              "name": "Biscoito",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/sem-gluten/salgadinhos",
+              "name": "Salgadinhos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/sem-gluten/outros",
+              "name": "Outros",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/sem-gluten/farinaceos",
+              "name": "Farináceos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/sem-gluten/torradas",
+              "name": "Torradas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/sem-gluten/paes",
+              "name": "Pães",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/saudaveis/light",
+          "name": "Light",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/light/preparo-para-sobremesa",
+              "name": "Preparo Para Sobremesa",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/light/achocolatado",
+              "name": "Achocolatado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/light/suco",
+              "name": "Suco",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/light/outros",
+              "name": "Outros",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/light/refrigerante",
+              "name": "Refrigerante",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/light/biscoito",
+              "name": "Biscoito",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/light/geleia",
+              "name": "Geleia",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/light/iogurte",
+              "name": "Iogurte",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/light/doces",
+              "name": "Doces",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/saudaveis/organico",
+          "name": "Orgânico",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/organico/refrigerante",
+              "name": "Refrigerante",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/organico/graos",
+              "name": "Grãos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/organico/cafe",
+              "name": "Café",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/organico/massas",
+              "name": "Massas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/organico/geleia",
+              "name": "Geleia",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/organico/azeite",
+              "name": "Azeite",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/organico/farinaceos",
+              "name": "Farináceos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/organico/outros",
+              "name": "Outros",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/organico/biscoito",
+              "name": "Biscoito",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/organico/suco",
+              "name": "Suco",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/organico/molhos",
+              "name": "Molhos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/organico/acucar",
+              "name": "Açúcar",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/saudaveis/vegetariano",
+          "name": "Vegetariano",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/saudaveis/vegetariano/vegetariano",
+              "name": "Vegetariano",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/jardinagem",
+      "name": "Jardinagem",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/jardinagem/floricultura",
+          "name": "Floricultura",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/jardinagem/floricultura/mudas",
+              "name": "Mudas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/jardinagem/floricultura/plantas",
+              "name": "Plantas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/jardinagem/floricultura/flores",
+              "name": "Flores",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/jardinagem/floricultura/sementes",
+              "name": "Sementes",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/jardinagem/floricultura/outros",
+              "name": "Outros",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/bazar",
+      "name": "Bazar",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bazar/cama-e-colchao",
+          "name": "Cama e Colchão",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/cama-e-colchao/base-box",
+              "name": "Base Box",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/cama-e-colchao/cama-box",
+              "name": "Cama Box",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/cama-e-colchao/colchao",
+              "name": "Colchão",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bazar/bicicleta",
+          "name": "Bicicleta",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/bicicleta/infantil",
+              "name": "Infantil",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/bicicleta/urbano-e-passeio",
+              "name": "Urbano e Passeio",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bazar/artigos-para-viagem",
+          "name": "Artigos Para Viagem",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/artigos-para-viagem/malas",
+              "name": "Malas",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bazar/mesa",
+          "name": "Mesa",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/mesa/mesa-para-area-externa",
+              "name": "Mesa Para Área Externa",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/mesa/mesa-para-escritorio",
+              "name": "Mesa Para Escritório",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bazar/moveis",
+          "name": "Móveis",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/moveis/cozinha-modulada",
+              "name": "Cozinha Modulada",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/moveis/estantes",
+              "name": "Estantes",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bazar/lazer",
+          "name": "Lazer",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/lazer/caixa-termica",
+              "name": "Caixa Térmica",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/lazer/tenda",
+              "name": "Tenda",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/lazer/churrasqueira",
+              "name": "Churrasqueira",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/lazer/colchao-inflavel-e-colchonete",
+              "name": "Colchão Inflável e Colchonete",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/lazer/piscina",
+              "name": "Piscina",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/lazer/ombrelone",
+              "name": "Ombrelone",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bazar/cadeiras",
+          "name": "Cadeiras",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/cadeiras/cadeira-para-area-externa",
+              "name": "Cadeira Para Área Externa",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bazar/cadeiras/cadeira-para-escritorio",
+              "name": "Cadeira Para Escritório",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/mercearia",
+      "name": "Mercearia",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/leite-liquido",
+          "name": "Leite Líquido",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/leite-liquido/desnatado",
+              "name": "Desnatado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/leite-liquido/semi-desnatado",
+              "name": "Semi Desnatado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/leite-liquido/integral",
+              "name": "Integral",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/leite-liquido/sem-lactose",
+              "name": "Sem Lactose",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/leite-liquido/outros-leites",
+              "name": "Outros Leites",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/adocante",
+          "name": "Adoçante",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/adocante/po",
+              "name": "Pó",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/adocante/liquido",
+              "name": "Liquido",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/conservas",
+          "name": "Conservas",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/conservas/seleta-de-legumes",
+              "name": "Seleta De Legumes",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/conservas/salsicha",
+              "name": "Salsicha",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/conservas/milho-verde",
+              "name": "Milho Verde",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/conservas/vegetais",
+              "name": "Vegetais",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/conservas/pates",
+              "name": "Pates",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/conservas/azeitona",
+              "name": "Azeitona",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/conservas/palmito",
+              "name": "Palmito",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/conservas/atum",
+              "name": "Atum",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/conservas/pimentas",
+              "name": "Pimentas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/conservas/antepasto",
+              "name": "Antepasto",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/conservas/sardinha",
+              "name": "Sardinha",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/conservas/ervilha",
+              "name": "Ervilha",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/conservas/cogumelo",
+              "name": "Cogumelo",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/bomboniere",
+          "name": "Bomboniere",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/bomboniere/biscoito-doce",
+              "name": "Biscoito Doce",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/bomboniere/biscoito-doce-diet",
+              "name": "Biscoito Doce Diet",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/bomboniere/chocolate-organico",
+              "name": "Chocolate Orgânico",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/bomboniere/chocolate-e-confeito",
+              "name": "Chocolate e Confeito",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/bomboniere/doces-massas",
+              "name": "Doces Massas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/bomboniere/biscoito-salgado",
+              "name": "Biscoito Salgado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/bomboniere/doces",
+              "name": "Doces",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/bomboniere/barra-de-cereal",
+              "name": "Barra De Cereal",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/bomboniere/chocolate-diet",
+              "name": "Chocolate Diet",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/bomboniere/biscoito-premium",
+              "name": "Biscoito Premium",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/bomboniere/biscoito-doce-sem-gluten",
+              "name": "Biscoito Doce Sem Gluten",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/bomboniere/goma-de-mascar",
+              "name": "Goma de Mascar",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/bomboniere/biscoito-doce-organico",
+              "name": "Biscoito Doce Orgânico",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/bomboniere/balas-e-pastilhas",
+              "name": "Balas e Pastilhas",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/acucar",
+          "name": "Açúcar",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/acucar/outros",
+              "name": "Outros",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/acucar/mascavo",
+              "name": "Mascavo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/acucar/organico",
+              "name": "Orgânico",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/acucar/refinado",
+              "name": "Refinado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/acucar/cristal",
+              "name": "Cristal",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/salgadinhos-e-snacks",
+          "name": "Salgadinhos e Snacks",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/salgadinhos-e-snacks/salgadinhos",
+              "name": "Salgadinhos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/salgadinhos-e-snacks/raizes",
+              "name": "Raizes",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/salgadinhos-e-snacks/nuts",
+              "name": "Nuts",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/salgadinhos-e-snacks/frutas-secas",
+              "name": "Frutas Secas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/salgadinhos-e-snacks/batata-palha",
+              "name": "Batata Palha",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/salgadinhos-e-snacks/pipocas",
+              "name": "Pipocas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/salgadinhos-e-snacks/nachos",
+              "name": "Nachos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/salgadinhos-e-snacks/batata",
+              "name": "Batata",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/salgadinhos-e-snacks/amendoim-e-castanha",
+              "name": "Amendoim e Castanha",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/massas",
+          "name": "Massas",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/massas/massas-fresca",
+              "name": "Massas Fresca",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/massas/lasanha",
+              "name": "Lasanha",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/massas/massas-seca",
+              "name": "Massas Seca",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/massas/macarrao-instantaneo",
+              "name": "Macarrão Instantâneo",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/sabores-do-mundo",
+          "name": "Sabores Do Mundo",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/sabores-do-mundo/kosher",
+              "name": "Kosher",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/sabores-do-mundo/oriental",
+              "name": "Oriental",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/sabores-do-mundo/arabe",
+              "name": "Arabe",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/sabores-do-mundo/mexicano",
+              "name": "Mexicano",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/leite-em-po",
+          "name": "Leite em Pó",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/leite-em-po/desnatado",
+              "name": "Desnatado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/leite-em-po/sem-lactose",
+              "name": "Sem Lactose",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/leite-em-po/integral",
+              "name": "Integral",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/leite-em-po/semi-desnatado",
+              "name": "Semi Desnatado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/leite-em-po/outros-leites",
+              "name": "Outros Leites",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/preparo-para-sobremesas",
+          "name": "Preparo Para Sobremesas",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/leite-de-coco",
+              "name": "Leite De Coco",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/pudim",
+              "name": "Pudim",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/mistura-para-bolo",
+              "name": "Mistura Para Bolo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/granulado",
+              "name": "Granulado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/doces-em-compotas",
+              "name": "Doces Em Compotas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/sorvete-em-po",
+              "name": "Sorvete Em Pó",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/maria-mole",
+              "name": "Maria Mole",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/chantily",
+              "name": "Chantily",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/chocolate-em-po",
+              "name": "Chocolate Em Pó",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/chocolate-em-barra",
+              "name": "Chocolate Em Barra",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/coco-ralado",
+              "name": "Coco Ralado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/leite-condensado",
+              "name": "Leite Condensado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/gelatina",
+              "name": "Gelatina",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/essencias",
+              "name": "Essencias",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/flan",
+              "name": "Flan",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/fermento-em-po",
+              "name": "Fermento Em Pó",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/creme-de-leite",
+              "name": "Creme De Leite",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/preparo-para-sobremesas/cobertura-de-sorvete",
+              "name": "Cobertura De Sorvete",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/alimento-infantil",
+          "name": "Alimento Infantil",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/alimento-infantil/formulas",
+              "name": "Formulas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/alimento-infantil/leite-em-po",
+              "name": "Leite Em Pó",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/alimento-infantil/alimento-infantil",
+              "name": "Alimento Infantil",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/alimento-infantil/papinhas",
+              "name": "Papinhas",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/molhos-e-condimentos",
+          "name": "Molhos e Condimentos",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/molhos-e-condimentos/vinagre",
+              "name": "Vinagre",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/molhos-e-condimentos/molho-pesto",
+              "name": "Molho Pesto",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/molhos-e-condimentos/molho-de-alho",
+              "name": "Molho De Alho",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/molhos-e-condimentos/molho-para-salada",
+              "name": "Molho Para Salada",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/molhos-e-condimentos/molho-barbecue",
+              "name": "Molho Barbecue",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/molhos-e-condimentos/molho-de-pimenta",
+              "name": "Molho De Pimenta",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/molhos-e-condimentos/azeite",
+              "name": "Azeite",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/molhos-e-condimentos/mostarda",
+              "name": "Mostarda",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/molhos-e-condimentos/ketchup",
+              "name": "Ketchup",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/molhos-e-condimentos/maionese",
+              "name": "Maionese",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/molhos-e-condimentos/molho-de-tomate",
+              "name": "Molho De Tomate",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/molhos-e-condimentos/molho-shoyo",
+              "name": "Molho Shoyo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/molhos-e-condimentos/outros",
+              "name": "Outros",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/molhos-e-condimentos/molho-branco",
+              "name": "Molho Branco",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/matinal",
+          "name": "Matinal",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/matinal/complemento-alimentar",
+              "name": "Complemento Alimentar",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/matinal/cha",
+              "name": "Chá",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/matinal/mel",
+              "name": "Mel",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/matinal/aveia",
+              "name": "Aveia",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/matinal/geleia",
+              "name": "Geleia",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/matinal/cereal",
+              "name": "Cereal",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/matinal/cafe-torrado-moido",
+              "name": "Café Torrado Moido",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/matinal/cappuccino",
+              "name": "Cappuccino",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/matinal/cafe-graos",
+              "name": "Café Grãos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/matinal/cafe-capsula",
+              "name": "Café Capsula",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/matinal/cafe-soluvel",
+              "name": "Café Soluvel",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/matinal/granola",
+              "name": "Granola",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/matinal/achocolatado",
+              "name": "Achocolatado",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/temperos",
+          "name": "Temperos",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/temperos/tempero-caldo",
+              "name": "Tempero Caldo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/temperos/sal",
+              "name": "Sal",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/temperos/tempero-po",
+              "name": "Tempero Pó",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/temperos/especiarias",
+              "name": "Especiarias",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/temperos/pimenta",
+              "name": "Pimenta",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/sopas-e-cremes",
+          "name": "Sopas E Cremes",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/sopas-e-cremes/creme",
+              "name": "Creme",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/sopas-e-cremes/sopa",
+              "name": "Sopa",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/alimentos-basicos",
+          "name": "Alimentos Basicos",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/alimentos-basicos/feijao",
+              "name": "Feijão",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/alimentos-basicos/arroz",
+              "name": "Arroz",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/alimentos-basicos/graos",
+              "name": "Grãos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/alimentos-basicos/farinaceos",
+              "name": "Farinaceos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/alimentos-basicos/oleo",
+              "name": "Oleo",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/natalinos",
+          "name": "Natalinos",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/natalinos/panetones-e-chocotones",
+              "name": "Panetones e Chocotones",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/natalinos/biscoitos",
+              "name": "Biscoitos",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/mercearia/pascoa",
+          "name": "Páscoa",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/pascoa/ovos-de-pascoa",
+              "name": "Ovos de Páscoa",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/pascoa/chocolates",
+              "name": "Chocolates",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/mercearia/pascoa/colombas",
+              "name": "Colombas",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/higiene-e-beleza",
+      "name": "Higiene e Beleza",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/higiene-e-beleza/infantil",
+          "name": "Infantil",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/infantil/shampoo",
+              "name": "Shampoo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/infantil/creme-dental",
+              "name": "Creme Dental",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/infantil/acessorios",
+              "name": "Acessórios",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/infantil/outros",
+              "name": "Outros",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/infantil/escova-dental",
+              "name": "Escova Dental",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/infantil/locao-perfume-deo-colonia",
+              "name": "Loção, Perfume, Deo Colônia",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/infantil/fralda-descartavel",
+              "name": "Fralda Descartável",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/infantil/condicionador",
+              "name": "Condicionador",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/infantil/talco",
+              "name": "Talco",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/infantil/pomada-para-assadura",
+              "name": "Pomada para Assadura",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/infantil/lenco-umedecido",
+              "name": "Lenço Umedecido",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/infantil/sabonete",
+              "name": "Sabonete",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/higiene-e-beleza/cuidado-com-o-corpo",
+          "name": "Cuidado com o Corpo",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-corpo/rosto",
+              "name": "Rosto",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-corpo/hidratantes",
+              "name": "Hidratantes",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-corpo/manicure",
+              "name": "Manicure",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-corpo/tratamento-facial",
+              "name": "Tratamento Facial",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-corpo/talco",
+              "name": "Talco",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-corpo/desodorante",
+              "name": "Desodorante",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-corpo/outros-cuidados-com-o-corpo",
+              "name": "Outros Cuidados com o Corpo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-corpo/perfume-deo-colonia",
+              "name": "Perfume, Deo Colônia",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-corpo/repelente",
+              "name": "Repelente",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-corpo/alcool-gel-e-higienizadores",
+              "name": "Álcool Gel e Higienizadores",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-corpo/sabonete",
+              "name": "Sabonete",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-corpo/protetor-solar",
+              "name": "Protetor Solar",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-corpo/acessorios",
+              "name": "Acessórios",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-corpo/produtos-para-os-pes",
+              "name": "Produtos para os Pés",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/higiene-e-beleza/barbearia-e-depilacao",
+          "name": "Barbearia e Depilação",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/barbearia-e-depilacao/carga-aparelho-para-barbear",
+              "name": "Carga Aparelho para Barbear",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/barbearia-e-depilacao/acessorios-para-barbear",
+              "name": "Acessórios para Barbear",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/barbearia-e-depilacao/locao-creme-para-barbear",
+              "name": "Loção, Creme para Barbear",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/barbearia-e-depilacao/aparelho-para-barbear",
+              "name": "Aparelho para Barbear",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/barbearia-e-depilacao/pos-barba",
+              "name": "Pós Barba",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/barbearia-e-depilacao/depilacao-feminina",
+              "name": "Depilação Feminina",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/barbearia-e-depilacao/espuma-para-barbear",
+              "name": "Espuma para Barbear",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/higiene-e-beleza/cuidado-com-o-cabelo",
+          "name": "Cuidado com o Cabelo",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-cabelo/mascara-capilar",
+              "name": "Máscara Capilar",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-cabelo/creme-alisante",
+              "name": "Creme Alisante",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-cabelo/outros-cuidados-com-o-cabelo",
+              "name": "Outros Cuidados com o Cabelo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-cabelo/condicionador",
+              "name": "Condicionador",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-cabelo/gel-fixador-mousse",
+              "name": "Gel, Fixador, Mousse",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-cabelo/umidificador",
+              "name": "Umidificador",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-cabelo/oleo-capilar",
+              "name": "Óleo Capilar",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-cabelo/kit-shampoo-e-condicionador",
+              "name": "Kit Shampoo e Condicionador",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-cabelo/coloracao",
+              "name": "Coloração",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-cabelo/reparador-de-pontas",
+              "name": "Reparador de Pontas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-cabelo/acessorios-para-cabelo",
+              "name": "Acessórios para Cabelo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-cabelo/shampoo",
+              "name": "Shampoo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/cuidado-com-o-cabelo/cremes-de-tratamento-pentear",
+              "name": "Cremes de Tratamento, Pentear",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/higiene-e-beleza/higiene-pessoal",
+          "name": "Higiene Pessoal",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/higiene-pessoal/protetor-diario",
+              "name": "Protetor Diário",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/higiene-pessoal/papel-higienico",
+              "name": "Papel Higiênico",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/higiene-pessoal/fralda-geriatrica",
+              "name": "Fralda Geriátrica",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/higiene-pessoal/absorvente-interno",
+              "name": "Absorvente Interno",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/higiene-pessoal/absorvente-convencional",
+              "name": "Absorvente Convencional",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/higiene-pessoal/lenco-umedecido",
+              "name": "Lenço Umedecido",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/higiene-pessoal/outros",
+              "name": "Outros",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/higiene-e-beleza/higiene-bucal",
+          "name": "Higiene Bucal",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/higiene-bucal/escova-dental",
+              "name": "Escova Dental",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/higiene-bucal/creme-dental",
+              "name": "Creme Dental",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/higiene-bucal/enxaguante-bucal",
+              "name": "Enxaguante Bucal",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/higiene-bucal/fio-dental",
+              "name": "Fio Dental",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/higiene-e-beleza/higiene-bucal/outros",
+              "name": "Outros",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/limpeza",
+      "name": "Limpeza",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/limpeza/casa-em-geral",
+          "name": "Casa Em Geral",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/agua-sanitaria",
+              "name": "Água Sanitária",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/desodorizadores",
+              "name": "Desodorizadores",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/pas",
+              "name": "Pás",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/limpa-vidros",
+              "name": "Limpa Vidros",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/rodos",
+              "name": "Rodos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/alcool-gel",
+              "name": "Álcool Gel",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/vassouras",
+              "name": "Vassouras",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/outros",
+              "name": "Outros",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/ceras",
+              "name": "Ceras",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/limpadores",
+              "name": "Limpadores",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/panos-e-flanelas",
+              "name": "Panos e Flanelas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/prendedores-de-roupas",
+              "name": "Prendedores De Roupas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/inseticida",
+              "name": "Inseticida",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/removedor",
+              "name": "Removedor",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/varais",
+              "name": "Varais",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/lustra-moveis",
+              "name": "Lustra Móveis",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/bacias-e-baldes",
+              "name": "Bacias e Baldes",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/casa-em-geral/alcool-liquido",
+              "name": "Álcool Líquido",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/limpeza/banheiro",
+          "name": "Banheiro",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/banheiro/desinfetante",
+              "name": "Desinfetante",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/banheiro/limpador-sanitario",
+              "name": "Limpador Sanitario",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/banheiro/saco-de-lixo",
+              "name": "Saco De Lixo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/banheiro/desinfetante-sanitario",
+              "name": "Desinfetante Sanitario",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/banheiro/tira-limo",
+              "name": "Tira Limo",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/limpeza/roupa",
+          "name": "Roupa",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/roupa/sabao-liquido",
+              "name": "Sabão Líquido",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/roupa/passa-roupa",
+              "name": "Passa Roupa",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/roupa/alvejante",
+              "name": "Alvejante",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/roupa/sabao-em-po",
+              "name": "Sabão Em Pó",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/roupa/amaciante",
+              "name": "Amaciante",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/roupa/anti-mofo",
+              "name": "Anti Mofo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/roupa/tira-mancha",
+              "name": "Tira Mancha",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/limpeza/cozinha",
+          "name": "Cozinha",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/cozinha/esponja",
+              "name": "Esponja",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/cozinha/la-de-aco",
+              "name": "Lã De Aço",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/cozinha/sabao-em-barra",
+              "name": "Sabão Em Barra",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/cozinha/saco-de-lixo",
+              "name": "Saco De Lixo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/cozinha/desengordurante",
+              "name": "Desengordurante",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/cozinha/saponaceo",
+              "name": "Saponaceo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/cozinha/sabao-em-pasta",
+              "name": "Sabão Em Pasta",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/cozinha/detergente",
+              "name": "Detergente",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/limpeza/cozinha/saco-de-lixo-para-pia",
+              "name": "Saco De Lixo Para Pia",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/automotivo",
+      "name": "Automotivo",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/automotivo/pneus",
+          "name": "Pneus",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/automotivo/pneus/pneus-motos",
+              "name": "Pneus Motos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/automotivo/pneus/pneus-carros",
+              "name": "Pneus Carros",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/automotivo/acessorios",
+          "name": "Acessórios",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/automotivo/acessorios/capacete",
+              "name": "Capacete",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/automotivo/acessorios/outros-acessorios",
+              "name": "Outros Acessórios",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/automotivo/acessorios/bebe-conforto-e-cadeirinha",
+              "name": "Bebê Conforto e Cadeirinha",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/automotivo/acessorios/capa-e-assento",
+              "name": "Capa e Assento",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/automotivo/manutencao",
+          "name": "Manutenção",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/automotivo/manutencao/filtro-lubrificante-e-fluido",
+              "name": "Filtro, Lubrificante e Flúido",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/automotivo/manutencao/bateria-e-cabo",
+              "name": "Bateria e Cabo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/automotivo/manutencao/outros",
+              "name": "Outros",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/automotivo/conservacao",
+          "name": "Conservação",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/automotivo/conservacao/outros",
+              "name": "Outros",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/automotivo/conservacao/higienizacao",
+              "name": "Higienização",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/automotivo/conservacao/cera-e-silicone",
+              "name": "Cera e Silicone",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/automotivo/conservacao/aromatizante-e-purificador",
+              "name": "Aromatizante e Purificador",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/bebida-nao-alcoolica",
+      "name": "Bebida Não Alcoólica",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bebida-nao-alcoolica/agua",
+          "name": "Água",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/agua/tonica",
+              "name": "Tônica",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/agua/sem-gas",
+              "name": "Sem Gás",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/agua/outras-aguas",
+              "name": "Outras Águas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/agua/saborizada",
+              "name": "Saborizada",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/agua/com-gas",
+              "name": "Com Gás",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/agua/agua-de-coco",
+              "name": "Água de Coco",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bebida-nao-alcoolica/bebida-vegetal",
+          "name": "Bebida Vegetal",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/bebida-vegetal/bebida-vegetal",
+              "name": "Bebida Vegetal",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bebida-nao-alcoolica/suco",
+          "name": "Suco",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/suco/outros-sucos",
+              "name": "Outros Sucos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/suco/refresco-em-po",
+              "name": "Refresco em Pó",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/suco/organico",
+              "name": "Orgânico",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/suco/bebida-mista",
+              "name": "Bebida Mista",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/suco/funcional",
+              "name": "Funcional",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/suco/nectar-e-suco",
+              "name": "Néctar e Suco",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/suco/concentrado",
+              "name": "Concentrado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/suco/integral",
+              "name": "Integral",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bebida-nao-alcoolica/refrigerante",
+          "name": "Refrigerante",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/refrigerante/outros-refrigerantes",
+              "name": "Outros Refrigerantes",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/refrigerante/convencional",
+              "name": "Convencional",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/refrigerante/zero-e-diet",
+              "name": "Zero e Diet",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bebida-nao-alcoolica/cha-pronto",
+          "name": "Chá Pronto",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/cha-pronto/cha-pronto",
+              "name": "Chá Pronto",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bebida-nao-alcoolica/isotonico",
+          "name": "Isotônico",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/isotonico/isotonico",
+              "name": "Isotônico",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/bebida-nao-alcoolica/energetico",
+          "name": "Energético",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/bebida-nao-alcoolica/energetico/energetico",
+              "name": "Energético",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/hortifruti",
+      "name": "Hortifruti",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/hortifruti/temperos",
+          "name": "Temperos",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/temperos/fresco",
+              "name": "Fresco",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/temperos/organico",
+              "name": "Orgânico",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/hortifruti/legume",
+          "name": "Legume",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/legume/organico",
+              "name": "Orgânico",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/legume/processado",
+              "name": "Processado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/legume/congelado",
+              "name": "Congelado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/legume/fresco",
+              "name": "Fresco",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/hortifruti/ovo",
+          "name": "Ovo",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/ovo/galinha",
+              "name": "Galinha",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/ovo/organico",
+              "name": "Orgânico",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/ovo/codorna",
+              "name": "Codorna",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/hortifruti/fruta",
+          "name": "Fruta",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/fruta/fresca",
+              "name": "Fresca",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/fruta/organica",
+              "name": "Orgânica",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/fruta/seca",
+              "name": "Seca",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/fruta/processada",
+              "name": "Processada",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/fruta/congelada",
+              "name": "Congelada",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/hortifruti/verdura",
+          "name": "Verdura",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/verdura/fresca",
+              "name": "Fresca",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/verdura/processada",
+              "name": "Processada",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/verdura/organica",
+              "name": "Orgânica",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/hortifruti/verdura/congelada",
+              "name": "Congelada",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/padaria",
+      "name": "Padaria",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/padaria/pao",
+          "name": "Pão",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/pao/leite-e-batata",
+              "name": "Leite e Batata",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/pao/outros-paes",
+              "name": "Outros Pães",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/pao/italiano",
+              "name": "Italiano",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/pao/alho",
+              "name": "Alho",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/pao/forma",
+              "name": "Forma",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/pao/zero",
+              "name": "Zero",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/pao/doce",
+              "name": "Doce",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/pao/sirio",
+              "name": "Sirio",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/pao/integral",
+              "name": "Integral",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/pao/graos",
+              "name": "Grãos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/pao/bisnagas",
+              "name": "Bisnagas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/pao/frances",
+              "name": "Francês",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/padaria/bolo",
+          "name": "Bolo",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/bolo/confeitado",
+              "name": "Confeitado",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/bolo/seco",
+              "name": "Seco",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/bolo/mini",
+              "name": "Mini",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/padaria/lanches",
+          "name": "Lanches",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/lanches/doces",
+              "name": "Doces",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/lanches/salgados",
+              "name": "Salgados",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/padaria/torrada",
+          "name": "Torrada",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/torrada/comum",
+              "name": "Comum",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/padaria/torrada/aperitivo-e-canape",
+              "name": "Aperitivo e Canapé",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/congelados",
+      "name": "Congelados",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/congelados/gelo",
+          "name": "Gelo",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/gelo/gelo",
+              "name": "Gelo",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/congelados/vegetal",
+          "name": "Vegetal",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/vegetal/ervilha",
+              "name": "Ervilha",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/vegetal/macaxeira-mandioca-ou-aipim",
+              "name": "Macaxeira, Mandioca ou Aipim",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/vegetal/outros-vegetais",
+              "name": "Outros Vegetais",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/vegetal/batata",
+              "name": "Batata",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/vegetal/couve-flor",
+              "name": "Couve Flor",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/vegetal/brocolis",
+              "name": "Brócolis",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/congelados/petiscos",
+          "name": "Petiscos",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/petiscos/pao-de-queijo",
+              "name": "Pão de Queijo",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/petiscos/empanados",
+              "name": "Empanados",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/petiscos/kibe",
+              "name": "Kibe",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/petiscos/culinaria-baiana",
+              "name": "Culinária Baiana",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/petiscos/coxinha",
+              "name": "Coxinha",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/petiscos/outros-petiscos",
+              "name": "Outros Petiscos",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/congelados/sobremesa",
+          "name": "Sobremesa",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/sobremesa/outras-sobremesas",
+              "name": "Outras Sobremesas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/sobremesa/fruta",
+              "name": "Fruta",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/sobremesa/polpa-de-fruta",
+              "name": "Polpa de Fruta",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/sobremesa/sorvete-convencional",
+              "name": "Sorvete Convencional",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/sobremesa/acai",
+              "name": "Açaí",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/sobremesa/sorvete-premium",
+              "name": "Sorvete Premium",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/congelados/hamburguer",
+          "name": "Hambúrguer",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/hamburguer/bovino",
+              "name": "Bovino",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/hamburguer/vegano",
+              "name": "Vegano",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/hamburguer/misto",
+              "name": "Misto",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/hamburguer/outros-hamburgueres",
+              "name": "Outros Hambúrgueres",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/hamburguer/frango",
+              "name": "Frango",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/hamburguer/soja",
+              "name": "Soja",
+              "children": []
+            }
+          ]
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/congelados/pratos-prontos",
+          "name": "Pratos Prontos",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/pratos-prontos/escondidinho",
+              "name": "Escondidinho",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/pratos-prontos/massas",
+              "name": "Massas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/pratos-prontos/lasanha",
+              "name": "Lasanha",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/pratos-prontos/outros-pratos-prontos",
+              "name": "Outros Pratos Prontos",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/congelados/pratos-prontos/pizza",
+              "name": "Pizza",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/combos-especiais",
+      "name": "Combos Especiais",
+      "children": [
+        {
+          "@type": "SiteNavigationElement",
+          "url": "/combos-especiais/combo",
+          "name": "Combo",
+          "children": [
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/combos-especiais/combo/bebidas",
+              "name": "Bebidas",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/combos-especiais/combo/cesta-basica",
+              "name": "Cesta Básica",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/combos-especiais/combo/churrasco",
+              "name": "Churrasco",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/combos-especiais/combo/hortifruti",
+              "name": "Hortifruti",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/combos-especiais/combo/limpeza",
+              "name": "Limpeza",
+              "children": []
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "url": "/combos-especiais/combo/sazonais",
+              "name": "Sazonais",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "__resolveType": "commerce/loaders/navbar.ts"
+}
