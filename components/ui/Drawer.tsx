@@ -1,5 +1,5 @@
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
-import { ComponentChildren } from "preact";
+import { type ComponentChildren } from "preact";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import Icon from "./Icon.tsx";
@@ -54,7 +54,13 @@ function Drawer({
           {children}
         </div>
 
-        <aside class="drawer-side h-full z-40 overflow-hidden">
+        <aside
+          data-aside
+          class={clx(
+            "drawer-side h-full z-40 overflow-hidden",
+            "[[data-aside]&_section]:contents", // lazy-loading via useSection
+          )}
+        >
           <label for={id} class="drawer-overlay" />
           {aside}
         </aside>
@@ -72,7 +78,11 @@ function Aside(
   },
 ) {
   return (
-    <div class="bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y max-w-[100vw]">
+    <div
+      data-aside
+      class="bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y"
+      style={{ maxWidth: "100vw" }}
+    >
       <div class="flex justify-between items-center">
         <h1 class="px-4 py-3">
           <span class="font-medium text-2xl">{title}</span>

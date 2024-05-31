@@ -8,6 +8,7 @@ import Slider from "../../components/ui/Slider.tsx";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { useSendEvent } from "../Analytics.tsx";
+import { clx } from "../../sdk/clx.ts";
 
 /** @titleBy title */
 interface Tab {
@@ -23,6 +24,8 @@ export interface Props {
     headerAlignment?: "center" | "left";
     headerfontSize?: "Normal" | "Large";
   };
+
+  /** @hide */
   tabIndex?: number;
 }
 
@@ -68,12 +71,13 @@ function TabbedProductShelf({
         <div class="tabs tabs-boxed">
           {tabs.map((tab, index) => (
             <button
-              class={`tab tab-lg ${index === ti ? "tab-active" : ""}`}
+              class={clx("tab tab-lg", index === ti && "tab-active", "gap-2")}
               hx-get={useSection({ props: { tabIndex: index } })}
               hx-swap="outerHTML"
               hx-target="closest section"
             >
-              {tab.title}
+              <span>{tab.title}</span>
+              <span class="[.htmx-request_&]:inline hidden loading loading-spinner loading-xs" />
             </button>
           ))}
         </div>

@@ -10,6 +10,7 @@ import {
   NAVBAR_HEIGHT,
   SEARCHBAR_DRAWER_ID,
   SEARCHBAR_POPUP_ID,
+  SIDEMENU_CONTAINER_ID,
   SIDEMENU_DRAWER_ID,
 } from "../../constants.ts";
 import { clx } from "../../sdk/clx.ts";
@@ -52,9 +53,13 @@ export interface SectionProps {
   minicart?: Minicart;
 
   user?: Person | null;
+
+  loading?: "lazy" | "eager" | "menu";
 }
 
-type Props = Omit<SectionProps, "alert"> & { loading?: "lazy" | "eager" };
+type Props = Omit<SectionProps, "alert" | "loading"> & {
+  loading: "lazy" | "eager";
+};
 
 function Desktop(
   { navItems, logo, searchbar, minicart, user, loading }: Props,
@@ -72,7 +77,7 @@ function Desktop(
 
       <div class="grid grid-cols-3 items-center border-b border-base-200 w-full px-6">
         <ul class="flex gap-6 col-span-1 justify-start">
-          {navItems!.map((item) => <NavItem item={item} />)}
+          {navItems?.map((item) => <NavItem item={item} />)}
         </ul>
         <div class="flex justify-center">
           {logo && (
@@ -117,7 +122,7 @@ function Desktop(
 }
 
 function Mobile(
-  { navItems, logo, searchbar, minicart, loading }: Props,
+  { logo, searchbar, minicart, loading }: Props,
 ) {
   return (
     <>
@@ -135,7 +140,13 @@ function Mobile(
         id={SIDEMENU_DRAWER_ID}
         aside={
           <Drawer.Aside title="Menu" drawer={SIDEMENU_DRAWER_ID}>
-            {loading === "eager" && <Menu navItems={navItems!} />}
+            <div
+              id={SIDEMENU_CONTAINER_ID}
+              class="h-full flex items-center justify-center"
+              style={{ minWidth: "100vw" }}
+            >
+              <span class="loading loading-spinner" />
+            </div>
           </Drawer.Aside>
         }
       />
@@ -148,6 +159,10 @@ function Mobile(
           for={SIDEMENU_DRAWER_ID}
           class="btn btn-circle md:btn-sm btn-xs btn-ghost"
           aria-label="open menu"
+          hx-target={`#${SIDEMENU_CONTAINER_ID}`}
+          hx-swap="outerHTML"
+          hx-trigger="click once"
+          hx-get={useSection({ props: { loading: "menu" } })}
         >
           <Icon id="Bars3" size={20} strokeWidth={0.01} />
         </label>
@@ -184,7 +199,6 @@ function Mobile(
 
 function Header({
   alerts = [],
-  navItems = [],
   logo = {
     src:
       "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/986b61d4-3847-4867-93c8-b550cb459cc7",
@@ -214,7 +228,6 @@ function Header({
         aside={
           <Drawer.Aside title="My Bag" drawer={MINICART_DRAWER_ID}>
             <div
-              data-minicart-container
               id={MINICART_CONTAINER_ID}
               style={{
                 minWidth: "calc(min(100vw, 425px))",
@@ -223,7 +236,6 @@ function Header({
               class={clx(
                 "h-full flex flex-col bg-base-100 items-center justify-center overflow-auto",
                 "[.htmx-request&]:pointer-events-none [.htmx-request&]:opacity-60 [.htmx-request&]:cursor-wait transition-opacity duration-300",
-                "[[data-minicart-container]&_section]:contents",
               )}
             >
               <span class="loading loading-lg" />
@@ -235,8 +247,8 @@ function Header({
       <div class="bg-base-100 fixed w-full z-40">
         {alerts.length > 0 && <Alert alerts={alerts} />}
         {device === "desktop"
-          ? <Desktop navItems={navItems} logo={logo} {...props} />
-          : <Mobile navItems={navItems} logo={logo} {...props} />}
+          ? <Desktop logo={logo} {...props} />
+          : <Mobile logo={logo} {...props} />}
       </div>
     </header>
   );
@@ -247,5 +259,9 @@ export function LoadingFallback(props: SectionProps) {
 }
 
 export default function Section(props: SectionProps) {
+  if (props.loading === "menu") {
+    return <Menu navItems={props.navItems ?? []} />;
+  }
+
   return <Header {...props} loading="eager" />;
 }
