@@ -28,7 +28,10 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
 
 function Menu({ navItems }: Props) {
   return (
-    <div class="flex flex-col h-full overflow-y-auto">
+    <div
+      class="flex flex-col h-full overflow-y-auto"
+      style={{ minWidth: "100vw" }}
+    >
       <ul class="px-4 flex-grow flex flex-col divide-y divide-base-200 overflow-y-auto">
         {navItems.map((item) => (
           <li>
