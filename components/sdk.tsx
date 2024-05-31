@@ -1,7 +1,7 @@
-import type { AnalyticsEvent } from "apps/commerce/types.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
+import { AnalyticsEvent } from "../../apps/commerce/types.ts";
 
-const script = () => {
+function script() {
   globalThis.window.STOREFRONT ||= {};
   globalThis.window.STOREFRONT.ANALYTICS ||= new WeakMap();
 
@@ -109,9 +109,9 @@ const script = () => {
   } else {
     addEventListener("DOMContentLoaded", init);
   }
-};
+}
 
-function Analytics() {
+function Component() {
   return <script type="module" src={scriptAsDataURI(script)} />;
 }
 
@@ -133,4 +133,4 @@ export const useSendEvent = <E extends AnalyticsEvent>(
   };
 };
 
-export default Analytics;
+export default Component;

@@ -9,7 +9,7 @@ import Icon from "../../components/ui/Icon.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
-import { useSendEvent } from "../Analytics.tsx";
+import { useSendEvent } from "../sdk.tsx";
 import SearchControls from "./Controls.tsx";
 
 export interface Layout {

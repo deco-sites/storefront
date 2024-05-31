@@ -7,7 +7,7 @@ import {
 } from "../../constants.ts";
 import { useSubmitCart } from "../../sdk/cart.ts";
 import { formatPrice } from "../../sdk/format.ts";
-import { useSendEvent } from "../Analytics.tsx";
+import { useSendEvent } from "../sdk.tsx";
 import Coupon from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
 import CartItem, { Item } from "./Item.tsx";

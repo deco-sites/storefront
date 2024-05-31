@@ -2,7 +2,7 @@ import { asset, Head } from "$fresh/runtime.ts";
 import { defineApp } from "$fresh/server.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import { Context } from "deco/deco.ts";
-import Analytics from "../components/Analytics.tsx";
+import Analytics from "../components/sdk.tsx";
 
 const sw = () =>
   addEventListener("load", () =>

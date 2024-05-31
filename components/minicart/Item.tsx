@@ -2,7 +2,7 @@ import { AnalyticsItem } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
-import { useSendEvent } from "../Analytics.tsx";
+import { useSendEvent } from "../sdk.tsx";
 import Icon from "../ui/Icon.tsx";
 
 export type Item = AnalyticsItem & {

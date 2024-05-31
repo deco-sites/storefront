@@ -2,7 +2,7 @@ import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useComponent } from "../../sections/Component.tsx";
-import { useSendEvent } from "../Analytics.tsx";
+import { useSendEvent } from "../sdk.tsx";
 import Icon from "../ui/Icon.tsx";
 
 interface Props {

@@ -6,7 +6,7 @@ import { useAddToCart } from "../../sdk/cart.ts";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
-import { useSendEvent } from "../Analytics.tsx";
+import { useSendEvent } from "../sdk.tsx";
 
 export interface Props extends JSX.HTMLAttributes<HTMLLabelElement> {
   product: Product;
@@ -80,7 +80,7 @@ function AddToCartButton(
         {...addToCartEvent}
         for={id}
         data-deco="add-to-cart"
-        class={clx("btn no-animation", _class, "peer-checked:hidden w-full")}
+        class={clx("btn hover:bg-[#f5f5f5] active:bg-black  no-animation", _class, "peer-checked:hidden w-full")}
         hx-disabled-elt="this"
         hx-indicator={`#${MINICART_CONTAINER_ID}`}
         hx-target={`#${MINICART_CONTAINER_ID}`}
