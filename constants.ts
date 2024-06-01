@@ -11,12 +11,3 @@ export const SEARCHBAR_INPUT_FORM_ID = "searchbar-form";
 
 export const HEADER_HEIGHT = "110px";
 export const NAVBAR_HEIGHT = "75px";
-
-declare global {
-  interface Window {
-    STOREFRONT: {
-      CART?: Record<string, unknown>;
-      ANALYTICS?: WeakMap<Element, boolean>;
-    };
-  }
-}

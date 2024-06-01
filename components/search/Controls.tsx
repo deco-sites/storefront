@@ -19,7 +19,6 @@ function SearchControls({ url, filters, breadcrumb, sortOptions }: Props) {
   return (
     <Drawer
       id={id}
-      loading="eager"
       aside={
         <>
           <div class="bg-base-100 flex flex-col h-full divide-y overflow-y-hidden">

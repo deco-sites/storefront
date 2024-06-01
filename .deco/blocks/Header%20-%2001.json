@@ -24,10 +24,11 @@
       "__resolveType": "resolved"
     }
   },
+  "mode": "private",
+  "variant": "full",
   "minicart": {
     "__resolveType": "site/loaders/minicart.ts"
   },
-  "mode": "private",
   "user": {
     "__resolveType": "vtex/loaders/user.ts"
   }

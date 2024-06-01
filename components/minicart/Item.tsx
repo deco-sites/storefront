@@ -2,7 +2,7 @@ import { AnalyticsItem } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
-import { useSendEvent } from "../sdk.tsx";
+import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import Icon from "../ui/Icon.tsx";
 
 export type Item = AnalyticsItem & {
@@ -115,9 +115,8 @@ function CartItem({ item, index, locale, currency }: Props) {
         {/* Quantity Selector */}
         <div class={clx(isGift ? "hidden" : "join border rounded-none w-min")}>
           <button
+            data-action-decrease
             {...decreaseEvent}
-            name="action"
-            value={`decrease::${index}`}
             class="btn btn-square btn-ghost join-item"
             disabled={quantity <= 1}
           >
@@ -128,6 +127,7 @@ function CartItem({ item, index, locale, currency }: Props) {
             data-tip="Quantity must be higher than 1"
           >
             <input
+              data-action-quantity
               {...changeEvent}
               name={`item::${index}`}
               class={clx(
@@ -144,9 +144,8 @@ function CartItem({ item, index, locale, currency }: Props) {
             />
           </div>
           <button
+            data-action-increase
             {...increaseEvent}
-            name="action"
-            value={`increase::${index}`}
             class="btn btn-square btn-ghost join-item"
             disabled={quantity >= QUANTITY_MAX_VALUE}
           >

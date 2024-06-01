@@ -1,5 +1,4 @@
 import { AnalyticsEvent } from "apps/commerce/types.ts";
-import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import {
   MINICART_CONTAINER_ID,
   MINICART_DRAWER_ID,
@@ -7,7 +6,7 @@ import {
 } from "../../constants.ts";
 import { useSubmitCart } from "../../sdk/cart.ts";
 import { formatPrice } from "../../sdk/format.ts";
-import { useSendEvent } from "../sdk.tsx";
+import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import Coupon from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
 import CartItem, { Item } from "./Item.tsx";
@@ -29,61 +28,6 @@ export interface Minicart {
     currency: string;
   };
 }
-
-const script = (containerId: string) => {
-  const container = document.getElementById(containerId) as
-    | HTMLDivElement
-    | null;
-
-  function exposeCartToWindow() {
-    const input = container?.querySelector('input[name="original"]') as
-      | HTMLInputElement
-      | null;
-
-    if (!input) {
-      return;
-    }
-
-    const original = JSON.parse(decodeURIComponent(input.value));
-
-    globalThis.window.STOREFRONT ||= {};
-    globalThis.window.STOREFRONT.CART = original;
-  }
-
-  function adjustQuantities() {
-    const items = container?.querySelectorAll("[data-item-id]");
-
-    // Set minicart items count on header
-    const count = items?.length ?? 0;
-    document.querySelector("[data-minicart-items-count]")?.setAttribute(
-      "data-minicart-items-count",
-      count > 9 ? "9+" : count.toString(),
-    );
-
-    // Set minicart quantities on dom items
-    items?.forEach((item) => {
-      const id = item.getAttribute("data-item-id");
-      const quantity = item.querySelector("input")?.value;
-
-      document.querySelectorAll(
-        `[data-add-to-cart][data-product-id="${id}"]`,
-      )?.forEach((container) => {
-        container.querySelector('input[type="checkbox"]')?.setAttribute(
-          "checked",
-          "true",
-        );
-
-        const input = container.querySelector('input[type="number"]');
-
-        input?.setAttribute("value", quantity ?? "1");
-        input?.removeAttribute("disabled");
-      });
-    });
-  }
-
-  exposeCartToWindow();
-  adjustQuantities();
-};
 
 function Cart({
   cart: {
@@ -200,7 +144,7 @@ function Cart({
                 )}
                 <div class="w-full flex justify-between px-4 text-sm">
                   <span>Subtotal</span>
-                  <output name="subtotal" form={MINICART_FORM_ID}>
+                  <output form={MINICART_FORM_ID}>
                     {formatPrice(subtotal, currency, locale)}
                   </output>
                 </div>
@@ -211,11 +155,7 @@ function Cart({
               <div class="border-t border-base-200 pt-4 flex flex-col justify-end items-end gap-2 mx-4">
                 <div class="flex justify-between items-center w-full">
                   <span>Total</span>
-                  <output
-                    name="total"
-                    form={MINICART_FORM_ID}
-                    class="font-medium text-xl"
-                  >
+                  <output form={MINICART_FORM_ID} class="font-medium text-xl">
                     {formatPrice(total, currency, locale)}
                   </output>
                 </div>
@@ -238,7 +178,6 @@ function Cart({
             </footer>
           </>
         )}
-      <script src={scriptAsDataURI(script, MINICART_CONTAINER_ID)} />
     </div>
   );
 }

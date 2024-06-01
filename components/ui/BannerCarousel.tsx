@@ -4,7 +4,7 @@ import Button from "../../components/ui/Button.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import { useId } from "../../sdk/useId.ts";
-import { useSendEvent } from "../sdk.tsx";
+import { useSendEvent } from "../../sdk/useSendEvent.ts";
 
 /**
  * @titleBy alt

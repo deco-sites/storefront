@@ -2,7 +2,7 @@ import { asset, Head } from "$fresh/runtime.ts";
 import { defineApp } from "$fresh/server.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 import { Context } from "deco/deco.ts";
-import Analytics from "../components/sdk.tsx";
+import Scripts from "../components/Scripts.tsx";
 
 const sw = () =>
   addEventListener("load", () =>
@@ -36,7 +36,7 @@ export default defineApp(async (_req, ctx) => {
       {/* Rest of Preact tree */}
       <ctx.Component />
 
-      <Analytics />
+      <Scripts />
       <script type="module" src={scriptAsDataURI(sw)} />
     </>
   );

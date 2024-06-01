@@ -14,7 +14,7 @@ import {
   SIDEMENU_DRAWER_ID,
 } from "../../constants.ts";
 import { clx } from "../../sdk/clx.ts";
-import { type Minicart } from "../minicart/Minicart.tsx";
+import Minicart, { type Minicart as IMinicart } from "../minicart/Minicart.tsx";
 import Searchbar, { SearchbarProps } from "../search/Searchbar/Form.tsx";
 import Drawer from "../ui/Drawer.tsx";
 import Icon from "../ui/Icon.tsx";
@@ -50,152 +50,146 @@ export interface SectionProps {
   /** @title Logo */
   logo?: Logo;
 
-  minicart?: Minicart;
+  minicart?: IMinicart;
 
   user?: Person | null;
 
-  loading?: "lazy" | "eager" | "menu";
+  variant?: "preview" | "full" | "menu";
 }
 
 type Props = Omit<SectionProps, "alert" | "loading"> & {
-  loading: "lazy" | "eager";
+  variant: "preview" | "full";
 };
 
-function Desktop(
-  { navItems, logo, searchbar, minicart, user, loading }: Props,
-) {
-  return (
-    <>
-      <Modal id={SEARCHBAR_POPUP_ID}>
-        <div
-          class="absolute top-0 bg-base-100 container"
-          style={{ marginTop: HEADER_HEIGHT }}
-        >
-          <Searchbar {...searchbar} />
-        </div>
-      </Modal>
-
-      <div class="grid grid-cols-3 items-center border-b border-base-200 w-full px-6">
-        <ul class="flex gap-6 col-span-1 justify-start">
-          {navItems?.map((item) => <NavItem item={item} />)}
-        </ul>
-        <div class="flex justify-center">
-          {logo && (
-            <a href="/" aria-label="Store logo">
-              <Image
-                src={logo.src}
-                alt={logo.alt}
-                width={logo.width || 100}
-                height={logo.height || 23}
-              />
-            </a>
-          )}
-        </div>
-        <div class="flex-none flex items-center justify-end gap-2 col-span-1">
-          <label
-            for={SEARCHBAR_POPUP_ID}
-            class="btn btn-sm btn-ghost font-thin no-animation"
-            aria-label="search icon button"
-          >
-            <Icon id="MagnifyingGlass" size={20} strokeWidth={0.1} />
-            <span>SEARCH</span>
-          </label>
-
-          <Login user={user} loading={loading} />
-
-          <a
-            class="btn btn-sm btn-ghost font-thin no-animation"
-            href="/wishlist"
-            aria-label="Wishlist"
-          >
-            <Icon id="Heart" size={24} strokeWidth={0.4} />
-            <span>WISHLIST</span>
-          </a>
-
-          <div class="flex items-center text-xs font-thin">
-            <Bag loading={loading} minicart={minicart} />
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
-
-function Mobile(
-  { logo, searchbar, minicart, loading }: Props,
-) {
-  return (
-    <>
-      <Drawer
-        id={SEARCHBAR_DRAWER_ID}
-        aside={
-          <Drawer.Aside title="Search" drawer={SEARCHBAR_DRAWER_ID}>
-            <div class="w-screen overflow-y-auto">
-              <Searchbar {...searchbar} />
-            </div>
-          </Drawer.Aside>
-        }
-      />
-      <Drawer
-        id={SIDEMENU_DRAWER_ID}
-        aside={
-          <Drawer.Aside title="Menu" drawer={SIDEMENU_DRAWER_ID}>
-            <div
-              id={SIDEMENU_CONTAINER_ID}
-              class="h-full flex items-center justify-center"
-              style={{ minWidth: "100vw" }}
-            >
-              <span class="loading loading-spinner" />
-            </div>
-          </Drawer.Aside>
-        }
-      />
-
+const Desktop = (
+  { navItems, logo, searchbar, user, variant }: Props,
+) => (
+  <>
+    <Modal id={SEARCHBAR_POPUP_ID}>
       <div
-        style={{ height: NAVBAR_HEIGHT }}
-        class="grid grid-cols-3 justify-between items-center border-b border-base-200 w-full px-6 pb-6 gap-2"
+        class="absolute top-0 bg-base-100 container"
+        style={{ marginTop: HEADER_HEIGHT }}
       >
-        <label
-          for={SIDEMENU_DRAWER_ID}
-          class="btn btn-circle md:btn-sm btn-xs btn-ghost"
-          aria-label="open menu"
-          hx-target={`#${SIDEMENU_CONTAINER_ID}`}
-          hx-swap="outerHTML"
-          hx-trigger="click once"
-          hx-get={useSection({ props: { loading: "menu" } })}
-        >
-          <Icon id="Bars3" size={20} strokeWidth={0.01} />
-        </label>
+        <Searchbar {...searchbar} />
+      </div>
+    </Modal>
+
+    <div class="grid grid-cols-3 items-center border-b border-base-200 w-full px-6">
+      <ul class="flex gap-6 col-span-1 justify-start">
+        {navItems?.slice(0, 4).map((item) => <NavItem item={item} />)}
+      </ul>
+      <div class="flex justify-center">
         {logo && (
-          <a
-            href="/"
-            class="flex-grow inline-flex items-center justify-center"
-            style={{ minHeight: NAVBAR_HEIGHT }}
-            aria-label="Store logo"
-          >
+          <a href="/" aria-label="Store logo">
             <Image
               src={logo.src}
               alt={logo.alt}
               width={logo.width || 100}
-              height={logo.height || 13}
+              height={logo.height || 23}
             />
           </a>
         )}
+      </div>
+      <div class="flex-none flex items-center justify-end gap-2 col-span-1">
+        <label
+          for={SEARCHBAR_POPUP_ID}
+          class="btn btn-sm btn-ghost font-thin no-animation"
+          aria-label="search icon button"
+        >
+          <Icon id="MagnifyingGlass" size={20} strokeWidth={0.1} />
+          <span>SEARCH</span>
+        </label>
 
-        <div class="flex justify-end gap-1">
-          <label
-            for={SEARCHBAR_DRAWER_ID}
-            class="btn btn-circle btn-sm btn-ghost"
-            aria-label="search icon button"
-          >
-            <Icon id="MagnifyingGlass" size={20} strokeWidth={0.1} />
-          </label>
-          <Bag loading={loading} minicart={minicart} />
+        <Login user={user} variant={variant} />
+
+        <a
+          class="btn btn-sm btn-ghost font-thin no-animation"
+          href="/wishlist"
+          aria-label="Wishlist"
+        >
+          <Icon id="Heart" size={24} strokeWidth={0.4} />
+          <span>WISHLIST</span>
+        </a>
+
+        <div class="flex items-center text-xs font-thin">
+          <Bag />
         </div>
       </div>
-    </>
-  );
-}
+    </div>
+  </>
+);
+
+const Mobile = ({ logo, searchbar }: Props) => (
+  <>
+    <Drawer
+      id={SEARCHBAR_DRAWER_ID}
+      aside={
+        <Drawer.Aside title="Search" drawer={SEARCHBAR_DRAWER_ID}>
+          <div class="w-screen overflow-y-auto">
+            <Searchbar {...searchbar} />
+          </div>
+        </Drawer.Aside>
+      }
+    />
+    <Drawer
+      id={SIDEMENU_DRAWER_ID}
+      aside={
+        <Drawer.Aside title="Menu" drawer={SIDEMENU_DRAWER_ID}>
+          <div
+            id={SIDEMENU_CONTAINER_ID}
+            class="h-full flex items-center justify-center"
+            style={{ minWidth: "100vw" }}
+          >
+            <span class="loading loading-spinner" />
+          </div>
+        </Drawer.Aside>
+      }
+    />
+
+    <div
+      style={{ height: NAVBAR_HEIGHT }}
+      class="grid grid-cols-3 justify-between items-center border-b border-base-200 w-full px-6 pb-6 gap-2"
+    >
+      <label
+        for={SIDEMENU_DRAWER_ID}
+        class="btn btn-circle md:btn-sm btn-xs btn-ghost"
+        aria-label="open menu"
+        hx-target={`#${SIDEMENU_CONTAINER_ID}`}
+        hx-swap="outerHTML"
+        hx-trigger="click once"
+        hx-get={useSection({ props: { variant: "menu" } })}
+      >
+        <Icon id="Bars3" size={20} strokeWidth={0.01} />
+      </label>
+      {logo && (
+        <a
+          href="/"
+          class="flex-grow inline-flex items-center justify-center"
+          style={{ minHeight: NAVBAR_HEIGHT }}
+          aria-label="Store logo"
+        >
+          <Image
+            src={logo.src}
+            alt={logo.alt}
+            width={logo.width || 100}
+            height={logo.height || 13}
+          />
+        </a>
+      )}
+
+      <div class="flex justify-end gap-1">
+        <label
+          for={SEARCHBAR_DRAWER_ID}
+          class="btn btn-circle btn-sm btn-ghost"
+          aria-label="search icon button"
+        >
+          <Icon id="MagnifyingGlass" size={20} strokeWidth={0.1} />
+        </label>
+        <Bag />
+      </div>
+    </div>
+  </>
+);
 
 function Header({
   alerts = [],
@@ -222,27 +216,29 @@ function Header({
       hx-swap="outerHTML"
     >
       {/* Minicart Drawer */}
-      <Drawer
-        id={MINICART_DRAWER_ID}
-        class="drawer-end z-50"
-        aside={
-          <Drawer.Aside title="My Bag" drawer={MINICART_DRAWER_ID}>
-            <div
-              id={MINICART_CONTAINER_ID}
-              style={{
-                minWidth: "calc(min(100vw, 425px))",
-                maxWidth: "425px",
-              }}
-              class={clx(
-                "h-full flex flex-col bg-base-100 items-center justify-center overflow-auto",
-                "[.htmx-request&]:pointer-events-none [.htmx-request&]:opacity-60 [.htmx-request&]:cursor-wait transition-opacity duration-300",
-              )}
-            >
-              <span class="loading loading-lg" />
-            </div>
-          </Drawer.Aside>
-        }
-      />
+      {props.variant === "full" && (
+        <Drawer
+          id={MINICART_DRAWER_ID}
+          class="drawer-end z-50"
+          aside={
+            <Drawer.Aside title="My Bag" drawer={MINICART_DRAWER_ID}>
+              <div
+                id={MINICART_CONTAINER_ID}
+                style={{
+                  minWidth: "calc(min(100vw, 425px))",
+                  maxWidth: "425px",
+                }}
+                class={clx(
+                  "h-full flex flex-col bg-base-100 items-center justify-center overflow-auto",
+                  "[.htmx-request&]:pointer-events-none [.htmx-request&]:opacity-60 [.htmx-request&]:cursor-wait transition-opacity duration-300",
+                )}
+              >
+                {props.minicart && <Minicart cart={props.minicart} />}
+              </div>
+            </Drawer.Aside>
+          }
+        />
+      )}
 
       <div class="bg-base-100 fixed w-full z-40">
         {alerts.length > 0 && <Alert alerts={alerts} />}
@@ -255,13 +251,13 @@ function Header({
 }
 
 export function LoadingFallback(props: SectionProps) {
-  return <Header {...props} loading="lazy" />;
+  return <Header {...props} variant="preview" />;
 }
 
 export default function Section(props: SectionProps) {
-  if (props.loading === "menu") {
+  if (props.variant === "menu") {
     return <Menu navItems={props.navItems ?? []} />;
   }
 
-  return <Header {...props} loading="eager" />;
+  return <Header {...props} variant="full" />;
 }

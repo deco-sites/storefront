@@ -3,11 +3,11 @@ import Icon from "../ui/Icon.tsx";
 
 interface Props {
   user?: Person | null;
-  loading?: "lazy" | "eager";
+  variant?: "preview" | "full";
 }
 
-function Login({ user, loading }: Props) {
-  if (loading === "lazy" || !user) {
+function Login({ user, variant }: Props) {
+  if (variant === "preview" || !user) {
     return (
       <a
         class="btn btn-sm btn-ghost font-thin no-animation"

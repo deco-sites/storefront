@@ -6,7 +6,7 @@ import { useAddToCart } from "../../sdk/cart.ts";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
-import { useSendEvent } from "../sdk.tsx";
+import { useSendEvent } from "../../sdk/useSendEvent.ts";
 
 export interface Props extends JSX.HTMLAttributes<HTMLLabelElement> {
   product: Product;
@@ -80,7 +80,11 @@ function AddToCartButton(
         {...addToCartEvent}
         for={id}
         data-deco="add-to-cart"
-        class={clx("btn hover:bg-[#f5f5f5] active:bg-black  no-animation", _class, "peer-checked:hidden w-full")}
+        class={clx(
+          "btn hover:bg-[#f5f5f5] active:bg-black  no-animation",
+          _class,
+          "peer-checked:hidden w-full",
+        )}
         hx-disabled-elt="this"
         hx-indicator={`#${MINICART_CONTAINER_ID}`}
         hx-target={`#${MINICART_CONTAINER_ID}`}
@@ -97,12 +101,7 @@ function AddToCartButton(
           "join border rounded-none w-min",
         )}
       >
-        <button
-          name="action"
-          // value={`decrease::${index}`}
-          class="btn btn-square btn-ghost join-item"
-          // disabled={quantity <= 1}
-        >
+        <button data-action-decrease class="btn btn-square btn-ghost join-item">
           -
         </button>
         <div
@@ -113,7 +112,7 @@ function AddToCartButton(
           data-tip="Quantity must be higher than 1"
         >
           <input
-            // name={`item::${index}`}
+            data-action-quantity
             class={clx(
               "input text-center join-item [appearance:textfield] flex-grow",
               "invalid:input-error peer disabled:hidden inline",
@@ -127,12 +126,7 @@ function AddToCartButton(
           />
           <span class="peer-disabled:inline hidden loading loading-spinner" />
         </div>
-        <button
-          name="action"
-          // value={`increase::${index}`}
-          class="btn btn-square btn-ghost join-item"
-          // disabled={quantity >= QUANTITY_MAX_VALUE}
-        >
+        <button data-action-increase class="btn btn-square btn-ghost join-item">
           +
         </button>
       </div>
