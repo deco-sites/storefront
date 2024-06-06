@@ -1,4 +1,4 @@
-import { AnalyticsEvent } from "../../apps/commerce/types.ts";
+import { AnalyticsEvent } from "apps/commerce/types.ts";
 
 export interface Options<E extends AnalyticsEvent> {
   event: E;
