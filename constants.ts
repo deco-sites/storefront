@@ -1,4 +1,3 @@
-export const MINICART_CONTAINER_ID = "minicart";
 export const MINICART_FORM_ID = "minicart-form";
 export const MINICART_DRAWER_ID = "minicart-drawer";
 

@@ -30,10 +30,10 @@ const actions: CartSubmitActions<AppContext> = {
 
     return cartFrom(response);
   },
-  setCoupon: async ({ text }, _req, ctx) => {
+  setCoupon: async ({ coupon }, _req, ctx) => {
     const response = await ctx.invoke(
       "linx/actions/cart/addCoupon.ts",
-      { CouponCode: text ?? undefined },
+      { CouponCode: coupon ?? undefined },
     );
 
     return cartFrom(response);

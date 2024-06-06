@@ -26,10 +26,10 @@ const actions: CartSubmitActions<AppContext> = {
 
     return cartFrom(response);
   },
-  setCoupon: async ({ text }, _req, ctx) => {
+  setCoupon: async ({ coupon }, _req, ctx) => {
     const response = await ctx.invoke(
       "shopify/actions/cart/updateCoupons.ts",
-      { discountCodes: [text ?? ""] },
+      { discountCodes: [coupon ?? ""] },
     );
 
     return cartFrom(response);

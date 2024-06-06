@@ -1,4 +1,4 @@
-import { scriptAsDataURI } from "apps/utils/dataURI.ts";
+import { useScript } from "apps/htmx/hooks/useScript.ts";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useComponent } from "../../sections/Component.tsx";
@@ -93,11 +93,13 @@ export default function WishlistButton({
       {!isUserLoggedIn && (
         <script
           type="module"
-          src={scriptAsDataURI((id: string) =>
-            document.getElementById(id)?.addEventListener("click", () =>
-              globalThis.window.alert(
-                "Please log in before adding to your wishlist",
-              )), id)}
+          dangerouslySetInnerHTML={{
+            __html: useScript((id: string) =>
+              document.getElementById(id)?.addEventListener("click", () =>
+                globalThis.window.alert(
+                  "Please log in before adding to your wishlist",
+                )), id),
+          }}
         />
       )}
     </>
