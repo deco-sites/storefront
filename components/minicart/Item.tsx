@@ -2,8 +2,9 @@ import { AnalyticsItem } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
-import { useSendEvent } from "../../sdk/useSendEvent.ts";
+import { useScript } from "apps/htmx/hooks/useScript.ts";
 import Icon from "../ui/Icon.tsx";
+import QuantitySelector from "../ui/QuantitySelector.tsx";
 
 export type Item = AnalyticsItem & {
   listPrice: number;
@@ -19,56 +20,22 @@ export interface Props {
 
 const QUANTITY_MAX_VALUE = 100;
 
+const removeItemHandler = () => {
+  const itemID = (event?.currentTarget as HTMLButtonElement | null)
+    ?.closest("fieldset")
+    ?.getAttribute("data-item-id");
+
+  if (typeof itemID === "string") {
+    window.STOREFRONT.CART?.setQuantity(itemID, 0);
+  }
+};
+
 function CartItem({ item, index, locale, currency }: Props) {
   const { image, listPrice, price = Infinity, quantity } = item;
   const isGift = price < 0.01;
 
   // deno-lint-ignore no-explicit-any
   const name = (item as any).item_name;
-
-  const removeFromCartEvent = useSendEvent({
-    on: "click",
-    event: {
-      name: "remove_from_cart",
-      params: { items: [item] },
-    },
-  });
-
-  const decreaseEvent = useSendEvent({
-    on: "click",
-    event: {
-      name: "remove_from_cart",
-      params: { items: [{ ...item, quantity: quantity - 1 }] },
-    },
-  });
-
-  const increaseEvent = useSendEvent({
-    on: "click",
-    event: {
-      name: "add_to_cart",
-      params: { items: [{ ...item, quantity: quantity + 1 }] },
-    },
-  });
-
-  const changeEvent = useSendEvent(
-    {
-      on: "change",
-      event: {
-        name: "add_to_cart",
-        params: { items: [item] },
-      },
-      onBeforeSend: (e, target) => ({
-        ...e,
-        params: {
-          ...e.params,
-          items: [{
-            ...e.params.items[0],
-            quantity: Number((target as HTMLInputElement).value),
-          }],
-        },
-      }),
-    },
-  );
 
   return (
     <fieldset
@@ -92,11 +59,8 @@ function CartItem({ item, index, locale, currency }: Props) {
         <div class="flex justify-between items-center">
           <legend>{name}</legend>
           <button
-            {...removeFromCartEvent}
-            name="action"
-            value={`remove::${index}`}
-            disabled={isGift}
-            class={clx(isGift ? "hidden" : "btn btn-ghost btn-square")}
+            class={clx(isGift && "hidden", "btn btn-ghost btn-square")}
+            hx-on:click={useScript(removeItemHandler)}
           >
             <Icon id="Trash" size={24} />
           </button>
@@ -113,44 +77,13 @@ function CartItem({ item, index, locale, currency }: Props) {
         </div>
 
         {/* Quantity Selector */}
-        <div class={clx(isGift ? "hidden" : "join border rounded-none w-min")}>
-          <button
-            data-action-decrease
-            {...decreaseEvent}
-            class="btn btn-square btn-ghost join-item"
-            disabled={quantity <= 1}
-          >
-            -
-          </button>
-          <div
-            class="has-[:invalid]:tooltip has-[:invalid]:tooltip-error has-[:invalid]:tooltip-open has-[:invalid]:tooltip-bottom"
-            data-tip="Quantity must be higher than 1"
-          >
-            <input
-              data-action-quantity
-              {...changeEvent}
-              name={`item::${index}`}
-              class={clx(
-                "input text-center join-item [appearance:textfield]",
-                "invalid:input-error",
-              )}
-              type="number"
-              inputMode="numeric"
-              max={QUANTITY_MAX_VALUE}
-              min={1}
-              value={quantity}
-              maxLength={3}
-              size={3}
-            />
-          </div>
-          <button
-            data-action-increase
-            {...increaseEvent}
-            class="btn btn-square btn-ghost join-item"
-            disabled={quantity >= QUANTITY_MAX_VALUE}
-          >
-            +
-          </button>
+        <div class={clx(isGift && "hidden")}>
+          <QuantitySelector
+            min={0}
+            max={QUANTITY_MAX_VALUE}
+            value={quantity}
+            name={`item::${index}`}
+          />
         </div>
       </div>
     </fieldset>

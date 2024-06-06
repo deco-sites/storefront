@@ -290,5 +290,9 @@
   "/.deco/blocks/Preview%20vtex%2Floaders%2Fnavbar.ts.json": {
     "blockType": "loaders",
     "__resolveType": "vtex/loaders/navbar.ts"
+  },
+  "/.deco/blocks/Preview%20%2Fsections%2FImages%2FCarousel.tsx.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Images/Carousel.tsx"
   }
 }

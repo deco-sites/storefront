@@ -28,7 +28,7 @@ export const cartFrom = (cart: Cart): Minicart => {
         listPrice: item.cost.amountPerQuantity.amount,
         ...itemToAnalyticsItem(item, index),
       })),
-      total: total,
+      value: total,
       subtotal: subTotal,
       discounts: 0,
       coupon: coupon,

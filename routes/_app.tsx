@@ -1,10 +1,12 @@
 import { asset, Head } from "$fresh/runtime.ts";
 import { defineApp } from "$fresh/server.ts";
-import { scriptAsDataURI } from "apps/utils/dataURI.ts";
+import { useScript } from "apps/htmx/hooks/useScript.ts";
 import { Context } from "deco/deco.ts";
-import Scripts from "../components/Scripts.tsx";
+import Analytics from "../components/Analytics.tsx";
+import { MINICART_FORM_ID } from "../constants.ts";
+import { cartScript } from "../sdk/cart.ts";
 
-const sw = () =>
+const serviceWorkerScript = () =>
   addEventListener("load", () =>
     navigator && navigator.serviceWorker &&
     navigator.serviceWorker.register("/sw.js"));
@@ -31,13 +33,25 @@ export default defineApp(async (_req, ctx) => {
 
         {/* Web Manifest */}
         <link rel="manifest" href={asset("/site.webmanifest")} />
+
+        <script
+          type="module"
+          dangerouslySetInnerHTML={{
+            __html: useScript(cartScript, MINICART_FORM_ID),
+          }}
+        />
       </Head>
 
       {/* Rest of Preact tree */}
       <ctx.Component />
 
-      <Scripts />
-      <script type="module" src={scriptAsDataURI(sw)} />
+      <Analytics />
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{
+          __html: useScript(serviceWorkerScript),
+        }}
+      />
     </>
   );
 });

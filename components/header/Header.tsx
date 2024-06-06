@@ -5,7 +5,6 @@ import { useDevice } from "deco/hooks/useDevice.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 import {
   HEADER_HEIGHT,
-  MINICART_CONTAINER_ID,
   MINICART_DRAWER_ID,
   NAVBAR_HEIGHT,
   SEARCHBAR_DRAWER_ID,
@@ -13,8 +12,7 @@ import {
   SIDEMENU_CONTAINER_ID,
   SIDEMENU_DRAWER_ID,
 } from "../../constants.ts";
-import { clx } from "../../sdk/clx.ts";
-import Minicart, { type Minicart as IMinicart } from "../minicart/Minicart.tsx";
+import Cart, { type Minicart } from "../minicart/Minicart.tsx";
 import Searchbar, { SearchbarProps } from "../search/Searchbar/Form.tsx";
 import Drawer from "../ui/Drawer.tsx";
 import Icon from "../ui/Icon.tsx";
@@ -50,7 +48,7 @@ export interface SectionProps {
   /** @title Logo */
   logo?: Logo;
 
-  minicart?: IMinicart;
+  minicart?: Minicart;
 
   user?: Person | null;
 
@@ -216,29 +214,25 @@ function Header({
       hx-swap="outerHTML"
     >
       {/* Minicart Drawer */}
-      {props.variant === "full" && (
-        <Drawer
-          id={MINICART_DRAWER_ID}
-          class="drawer-end z-50"
-          aside={
-            <Drawer.Aside title="My Bag" drawer={MINICART_DRAWER_ID}>
-              <div
-                id={MINICART_CONTAINER_ID}
-                style={{
-                  minWidth: "calc(min(100vw, 425px))",
-                  maxWidth: "425px",
-                }}
-                class={clx(
-                  "h-full flex flex-col bg-base-100 items-center justify-center overflow-auto",
-                  "[.htmx-request&]:pointer-events-none [.htmx-request&]:opacity-60 [.htmx-request&]:cursor-wait transition-opacity duration-300",
-                )}
-              >
-                {props.minicart && <Minicart cart={props.minicart} />}
-              </div>
-            </Drawer.Aside>
-          }
-        />
-      )}
+      <Drawer
+        id={MINICART_DRAWER_ID}
+        class="drawer-end z-50"
+        aside={
+          <Drawer.Aside title="My Bag" drawer={MINICART_DRAWER_ID}>
+            <div
+              class="h-full flex flex-col bg-base-100 items-center justify-center overflow-auto"
+              style={{
+                minWidth: "calc(min(100vw, 425px))",
+                maxWidth: "425px",
+              }}
+            >
+              {props.variant === "full" && props.minicart && (
+                <Cart cart={props.minicart} />
+              )}
+            </div>
+          </Drawer.Aside>
+        }
+      />
 
       <div class="bg-base-100 fixed w-full z-40">
         {alerts.length > 0 && <Alert alerts={alerts} />}

@@ -32,10 +32,10 @@ const actions: CartSubmitActions<AppContext> = {
 
     return cartFrom(response);
   },
-  setCoupon: async ({ text }, _req, ctx) => {
+  setCoupon: async ({ coupon }, _req, ctx) => {
     const response = await ctx.invoke(
       "wake/actions/cart/addCoupon.ts",
-      { coupon: text ?? undefined },
+      { coupon: coupon ?? undefined },
     )
       // When adding an invalid coupon, wake throws.
       // We should instead return the cart as is

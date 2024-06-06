@@ -23,7 +23,7 @@ export const cartFrom = (cart: Cart): Minicart => {
         listPrice: item.ListPrice,
         ...itemToAnalyticsItem(item, coupon, index),
       })),
-      total,
+      value,
       subtotal,
       discounts: 0,
       coupon,
