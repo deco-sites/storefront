@@ -44,7 +44,7 @@ const script = (formId: string, name: string, popupId: string) => {
   form?.addEventListener("submit", () => {
     const search_term = input?.value;
     if (search_term) {
-      globalThis.window.DECO.events.dispatch({
+      window.DECO.events.dispatch({
         name: "search",
         params: { search_term },
       });

@@ -4,7 +4,6 @@ import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
 import { formatPrice } from "../../sdk/format.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
-import { usePlatform } from "../../sdk/usePlatform.tsx";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import ShippingSimulationForm from "../shipping/Form.tsx";
 import WishlistButton from "../wishlist/WishlistButton.tsx";
@@ -17,7 +16,6 @@ interface Props {
 }
 
 function ProductInfo({ page }: Props) {
-  const platform = usePlatform();
   const id = useId();
 
   if (page === null) {
@@ -28,6 +26,7 @@ function ProductInfo({ page }: Props) {
   const { productID, offers, gtin, isVariantOf } = product;
   const description = product.description || isVariantOf?.description;
   const title = isVariantOf?.name ?? product.name;
+
   const {
     price = 0,
     listPrice,
@@ -35,12 +34,19 @@ function ProductInfo({ page }: Props) {
     installments,
     availability,
   } = useOffer(offers);
-  const productGroupID = isVariantOf?.productGroupID ?? "";
+
   const breadcrumb = {
     ...breadcrumbList,
     itemListElement: breadcrumbList?.itemListElement.slice(0, -1),
     numberOfItems: breadcrumbList.numberOfItems - 1,
   };
+
+  const item = mapProductToAnalyticsItem({
+    product,
+    breadcrumbList: breadcrumb,
+    price,
+    listPrice,
+  });
 
   const viewItemEvent = useSendEvent({
     on: "view",
@@ -49,12 +55,7 @@ function ProductInfo({ page }: Props) {
       params: {
         item_list_id: "product",
         item_list_name: "Product",
-        items: [mapProductToAnalyticsItem({
-          product,
-          breadcrumbList: breadcrumb,
-          price,
-          listPrice,
-        })],
+        items: [item],
       },
     },
   });
@@ -62,6 +63,7 @@ function ProductInfo({ page }: Props) {
   return (
     <div {...viewItemEvent} class="flex flex-col px-4" id={id}>
       <Breadcrumb itemListElement={breadcrumb.itemListElement} />
+
       {/* Code and name */}
       <div class="mt-4 sm:mt-8">
         <div>
@@ -71,6 +73,7 @@ function ProductInfo({ page }: Props) {
           <span class="font-medium text-xl capitalize">{title}</span>
         </h1>
       </div>
+
       {/* Prices */}
       <div class="mt-4">
         <div class="flex flex-row gap-2 items-center">
@@ -85,54 +88,42 @@ function ProductInfo({ page }: Props) {
         </div>
         <span class="text-sm text-base-300">{installments}</span>
       </div>
+
       {/* Sku Selector */}
       <div class="mt-4 sm:mt-6">
         <ProductSelector product={product} />
       </div>
+
       {/* Add to Cart and Favorites button */}
       <div class="mt-4 sm:mt-10 flex flex-col gap-2">
         {availability === "https://schema.org/InStock"
           ? (
             <>
-              {price && listPrice && (
-                <AddToCartButton
-                  listPrice={listPrice}
-                  product={product}
-                  seller={seller}
-                  price={price}
-                  class="btn-primary"
-                />
-              )}
-
-              {/* todo @gimenes: add wishlist back */}
-              {/* @ts-expect-error todo @gimenes */}
-              <WishlistButton
-                isUserLoggedIn={true}
-                productID={productID}
-                productGroupID={productGroupID}
+              <AddToCartButton
+                item={item}
+                seller={seller}
+                product={product}
+                class="btn-primary"
               />
+              <WishlistButton item={item} />
             </>
           )
           : <OutOfStock productID={productID} />}
       </div>
+
       {/* Shipping Simulation */}
       <div class="mt-8">
-        {platform === "vtex" && (
-          <ShippingSimulationForm
-            items={[{
-              id: Number(product.sku),
-              quantity: 1,
-              seller: seller,
-            }]}
-          />
-        )}
+        <ShippingSimulationForm
+          items={[{ id: Number(product.sku), quantity: 1, seller: seller }]}
+        />
       </div>
+
       {/* Description card */}
       <div class="mt-4 sm:mt-6">
         <span class="text-sm">
           {description && (
             <details>
-              <summary class="cursor-pointer">Descrição</summary>
+              <summary class="cursor-pointer">Description</summary>
               <div
                 class="ml-2 mt-2"
                 dangerouslySetInnerHTML={{ __html: description }}

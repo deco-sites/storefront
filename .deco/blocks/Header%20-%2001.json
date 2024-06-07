@@ -31,5 +31,8 @@
   },
   "user": {
     "__resolveType": "vtex/loaders/user.ts"
+  },
+  "wishlist": {
+    "__resolveType": "site/loaders/wishlist.ts"
   }
 }
