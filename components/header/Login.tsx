@@ -1,5 +1,7 @@
 import { Person } from "apps/commerce/types.ts";
 import Icon from "../ui/Icon.tsx";
+import { USER_ID } from "../../constants.ts";
+import { useScript } from "apps/htmx/hooks/useScript.ts";
 
 interface Props {
   user?: Person | null;

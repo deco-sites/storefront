@@ -1,17 +1,15 @@
-import { Product } from "apps/commerce/types.ts";
-import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import { AnalyticsItem, Product } from "apps/commerce/types.ts";
 import { useScript } from "apps/htmx/hooks/useScript.ts";
 import { JSX } from "preact";
 import { clx } from "../../sdk/clx.ts";
+import { useId } from "../../sdk/useId.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import QuantitySelector from "../ui/QuantitySelector.tsx";
-import { useId } from "../../sdk/useId.ts";
 
 export interface Props extends JSX.HTMLAttributes<HTMLLabelElement> {
   product: Product;
-  price: number;
-  listPrice: number;
   seller: string;
+  item: AnalyticsItem;
 }
 
 const onClick = () => {
@@ -24,7 +22,7 @@ const onClick = () => {
     ),
   );
 
-  const result = window.STOREFRONT.CART?.addToCart(item, platformProps);
+  const result = window.STOREFRONT.CART.addToCart(item, platformProps);
   button.disabled = Boolean(result);
 };
 
@@ -38,14 +36,14 @@ const onChange = () => {
     'input[type="checkbox"]',
   )!;
 
-  window.STOREFRONT.CART?.setQuantity(productID, quantity);
+  window.STOREFRONT.CART.setQuantity(productID, quantity);
   checkbox.checked = quantity > 0;
 };
 
 // Copy cart form values into AddToCartButton
 const onLoad = (id: string) => {
   const script = document.getElementById(id);
-  window.STOREFRONT.CART?.onChange((sdk) => {
+  window.STOREFRONT.CART.subscribe((sdk) => {
     const container = script?.closest("div[data-item]");
     const checkbox = container?.querySelector<HTMLInputElement>(
       `input[type="checkbox"]`,
@@ -127,8 +125,7 @@ const useAddToCart = ({ product, seller }: Props) => {
 
 function AddToCartButton(props: Props) {
   const id = useId();
-  const { product, price, listPrice } = props;
-  const item = mapProductToAnalyticsItem({ product, price, listPrice });
+  const { product, item } = props;
   const platformProps = useAddToCart(props);
 
   return (

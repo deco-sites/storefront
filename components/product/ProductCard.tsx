@@ -5,8 +5,8 @@ import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { relative } from "../../sdk/url.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
-import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
+import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
 import WishlistButton from "../wishlist/WishlistButton.tsx";
 import AddToCartButton from "./AddToCartButton.tsx";
 import { Ring } from "./ProductVariantSelector.tsx";
@@ -32,23 +32,25 @@ function ProductCard({
   itemListName,
   index,
 }: Props) {
-  const {
-    url,
-    productID,
-    image: images,
-    offers,
-    isVariantOf,
-  } = product;
+  const { url, image: images, offers, isVariantOf } = product;
   const hasVariant = isVariantOf?.hasVariant ?? [];
-  const productGroupID = isVariantOf?.productGroupID;
   const title = isVariantOf?.name ?? product.name;
   const description = product.description || isVariantOf?.description;
   const [front, back] = images ?? [];
-  const { listPrice, price, installments, seller = "1" } = useOffer(offers);
+
+  const {
+    listPrice,
+    price,
+    installments,
+    seller = "1",
+    availability,
+  } = useOffer(offers);
   const possibilities = useVariantPossibilities(hasVariant, product);
   const variants = Object.entries(Object.values(possibilities)[0] ?? {});
   const relativeUrl = relative(url);
   const aspectRatio = `${WIDTH} / ${HEIGHT}`;
+
+  const item = mapProductToAnalyticsItem({ product, price, listPrice, index });
 
   {/* Add click event to dataLayer */}
   const event = useSendEvent({
@@ -57,14 +59,7 @@ function ProductCard({
       name: "select_item" as const,
       params: {
         item_list_name: itemListName,
-        items: [
-          mapProductToAnalyticsItem({
-            product,
-            price,
-            listPrice,
-            index,
-          }),
-        ],
+        items: [item],
       },
     },
   });
@@ -72,7 +67,6 @@ function ProductCard({
   return (
     <div
       {...event}
-      data-deco="view-product"
       class="card card-compact group w-full lg:border lg:border-transparent lg:hover:border-inherit lg:p-4"
     >
       <div class="flex flex-col gap-2">
@@ -98,14 +92,7 @@ function ProductCard({
               OFF
             </div>
             <div class="lg:group-hover:block">
-              {productGroupID && (
-                // @ts-expect-error todo @gimenes
-                <WishlistButton
-                  variant="icon"
-                  productID={productID}
-                  productGroupID={productGroupID}
-                />
-              )}
+              <WishlistButton item={item} variant="icon" />
             </div>
           </div>
 
@@ -197,13 +184,8 @@ function ProductCard({
           ou {installments}
         </span>
 
-        {price && listPrice && (
-          <AddToCartButton
-            product={product}
-            price={price}
-            listPrice={listPrice}
-            seller={seller}
-          />
+        {availability === "https://schema.org/InStock" && (
+          <AddToCartButton product={product} seller={seller} item={item} />
         )}
       </div>
     </div>

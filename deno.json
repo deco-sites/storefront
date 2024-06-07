@@ -41,6 +41,9 @@
   ],
   "lint": {
     "rules": {
+      "exclude": [
+        "no-window"
+      ],
       "tags": [
         "fresh",
         "recommended"

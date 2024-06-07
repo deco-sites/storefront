@@ -3,6 +3,7 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $$$$$$$$$0 from "./actions/minicart/submit.ts";
+import * as $$$$$$$$$1 from "./actions/wishlist/submit.ts";
 import * as $$$$$$$$$$$0 from "./apps/deco/analytics.ts";
 import * as $$$$$$$$$$$1 from "./apps/deco/htmx.ts";
 import * as $$$$$$$$$$$2 from "./apps/deco/vtex.ts";
@@ -10,6 +11,7 @@ import * as $$$$$$$$$$$3 from "./apps/site.ts";
 import * as $$$0 from "./loaders/availableIcons.ts";
 import * as $$$1 from "./loaders/icons.ts";
 import * as $$$2 from "./loaders/minicart.ts";
+import * as $$$3 from "./loaders/wishlist.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/Category/CategoryBanner.tsx";
 import * as $$$$$$2 from "./sections/Category/CategoryGrid.tsx";
@@ -58,6 +60,7 @@ const manifest = {
     "site/loaders/availableIcons.ts": $$$0,
     "site/loaders/icons.ts": $$$1,
     "site/loaders/minicart.ts": $$$2,
+    "site/loaders/wishlist.ts": $$$3,
   },
   "sections": {
     "site/sections/Animation/Animation.tsx": $$$$$$0,
@@ -105,6 +108,7 @@ const manifest = {
   },
   "actions": {
     "site/actions/minicart/submit.ts": $$$$$$$$$0,
+    "site/actions/wishlist/submit.ts": $$$$$$$$$1,
   },
   "apps": {
     "site/apps/deco/analytics.ts": $$$$$$$$$$$0,

@@ -12,11 +12,13 @@ import {
   SIDEMENU_CONTAINER_ID,
   SIDEMENU_DRAWER_ID,
 } from "../../constants.ts";
+import UserProvider from "../user/Provider.tsx";
 import Cart, { type Minicart } from "../minicart/Minicart.tsx";
-import Searchbar, { SearchbarProps } from "../search/Searchbar/Form.tsx";
+import Searchbar, { type SearchbarProps } from "../search/Searchbar/Form.tsx";
 import Drawer from "../ui/Drawer.tsx";
 import Icon from "../ui/Icon.tsx";
 import Modal from "../ui/Modal.tsx";
+import WishlistProvider, { type Wishlist } from "../wishlist/Provider.tsx";
 import Alert from "./Alert.tsx";
 import Bag from "./Bag.tsx";
 import Login from "./Login.tsx";
@@ -51,6 +53,8 @@ export interface SectionProps {
   minicart?: Minicart;
 
   user?: Person | null;
+
+  wishlist?: Wishlist;
 
   variant?: "preview" | "full" | "menu";
 }
@@ -240,6 +244,9 @@ function Header({
           ? <Desktop logo={logo} {...props} />
           : <Mobile logo={logo} {...props} />}
       </div>
+
+      <WishlistProvider wishlist={props.wishlist ?? null} />
+      <UserProvider user={props.user ?? null} />
     </header>
   );
 }

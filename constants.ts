@@ -8,5 +8,10 @@ export const SEARCHBAR_DRAWER_ID = "searchbar-drawer";
 export const SEARCHBAR_POPUP_ID = "searchbar-popup";
 export const SEARCHBAR_INPUT_FORM_ID = "searchbar-form";
 
+export const USER_ID = "user-json";
+
+export const WISHLIST_ID = "wishlist-json";
+export const WISHLIST_FORM_ID = "wishlist-form";
+
 export const HEADER_HEIGHT = "110px";
 export const NAVBAR_HEIGHT = "75px";

@@ -741,7 +741,8 @@
           "viewId": "Properties",
           "id": "%2F.deco%2Fblocks%2Fsite.json::Properties::list::Properties::%7B%7D",
           "state": {
-            "__signal": null
+            "__signal": null,
+            "value": null
           }
         },
         "%2F.deco%2Fblocks%2Fsite.json::Preview::world::Preview::%7B%7D": {
@@ -1081,7 +1082,7 @@
             "content": [
               {
                 "type": "stack",
-                "width": 33.333333333333336,
+                "width": 33.33333333333334,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
@@ -1102,7 +1103,7 @@
               },
               {
                 "type": "stack",
-                "width": 33.333333333333336,
+                "width": 33.33333333333334,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
@@ -1123,7 +1124,7 @@
               },
               {
                 "type": "stack",
-                "width": 33.33333333333333,
+                "width": 33.333333333333336,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",

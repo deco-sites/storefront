@@ -2,9 +2,8 @@ import { asset, Head } from "$fresh/runtime.ts";
 import { defineApp } from "$fresh/server.ts";
 import { useScript } from "apps/htmx/hooks/useScript.ts";
 import { Context } from "deco/deco.ts";
-import Analytics from "../components/Analytics.tsx";
 import { MINICART_FORM_ID } from "../constants.ts";
-import { cartScript } from "../sdk/cart.ts";
+import SDKProvider from "../components/SDK.tsx";
 
 const serviceWorkerScript = () =>
   addEventListener("load", () =>
@@ -34,18 +33,12 @@ export default defineApp(async (_req, ctx) => {
         {/* Web Manifest */}
         <link rel="manifest" href={asset("/site.webmanifest")} />
 
-        <script
-          type="module"
-          dangerouslySetInnerHTML={{
-            __html: useScript(cartScript, MINICART_FORM_ID),
-          }}
-        />
+        <SDKProvider />
       </Head>
 
       {/* Rest of Preact tree */}
       <ctx.Component />
 
-      <Analytics />
       <script
         type="module"
         dangerouslySetInnerHTML={{
