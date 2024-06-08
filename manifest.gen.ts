@@ -11,7 +11,8 @@ import * as $$$$$$$$$$$3 from "./apps/site.ts";
 import * as $$$0 from "./loaders/availableIcons.ts";
 import * as $$$1 from "./loaders/icons.ts";
 import * as $$$2 from "./loaders/minicart.ts";
-import * as $$$3 from "./loaders/wishlist.ts";
+import * as $$$3 from "./loaders/user.ts";
+import * as $$$4 from "./loaders/wishlist.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/Category/CategoryBanner.tsx";
 import * as $$$$$$2 from "./sections/Category/CategoryGrid.tsx";
@@ -51,16 +52,18 @@ import * as $$$$$$35 from "./sections/Product/ProductShelfTabbed.tsx";
 import * as $$$$$$36 from "./sections/Product/SearchResult.tsx";
 import * as $$$$$$37 from "./sections/Product/ShelfWithImage.tsx";
 import * as $$$$$$38 from "./sections/Product/Wishlist.tsx";
-import * as $$$$$$39 from "./sections/Social/InstagramPosts.tsx";
-import * as $$$$$$40 from "./sections/Social/WhatsApp.tsx";
-import * as $$$$$$41 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$39 from "./sections/Session.tsx";
+import * as $$$$$$40 from "./sections/Social/InstagramPosts.tsx";
+import * as $$$$$$41 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$42 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "loaders": {
     "site/loaders/availableIcons.ts": $$$0,
     "site/loaders/icons.ts": $$$1,
     "site/loaders/minicart.ts": $$$2,
-    "site/loaders/wishlist.ts": $$$3,
+    "site/loaders/user.ts": $$$3,
+    "site/loaders/wishlist.ts": $$$4,
   },
   "sections": {
     "site/sections/Animation/Animation.tsx": $$$$$$0,
@@ -102,9 +105,10 @@ const manifest = {
     "site/sections/Product/SearchResult.tsx": $$$$$$36,
     "site/sections/Product/ShelfWithImage.tsx": $$$$$$37,
     "site/sections/Product/Wishlist.tsx": $$$$$$38,
-    "site/sections/Social/InstagramPosts.tsx": $$$$$$39,
-    "site/sections/Social/WhatsApp.tsx": $$$$$$40,
-    "site/sections/Theme/Theme.tsx": $$$$$$41,
+    "site/sections/Session.tsx": $$$$$$39,
+    "site/sections/Social/InstagramPosts.tsx": $$$$$$40,
+    "site/sections/Social/WhatsApp.tsx": $$$$$$41,
+    "site/sections/Theme/Theme.tsx": $$$$$$42,
   },
   "actions": {
     "site/actions/minicart/submit.ts": $$$$$$$$$0,

@@ -1,16 +1,33 @@
-import { Person } from "apps/commerce/types.ts";
-import Icon from "../ui/Icon.tsx";
-import { USER_ID } from "../../constants.ts";
 import { useScript } from "apps/htmx/hooks/useScript.ts";
+import Icon from "../ui/Icon.tsx";
+import { useId } from "../../sdk/useId.ts";
 
-interface Props {
-  user?: Person | null;
-  variant?: "preview" | "full";
-}
+const onLoad = (containerID: string) => {
+  window.STOREFRONT.USER.subscribe((sdk) => {
+    const container = document.getElementById(containerID) as HTMLDivElement;
 
-function Login({ user, variant }: Props) {
-  if (variant === "preview" || !user) {
-    return (
+    const nodes = container.querySelectorAll<HTMLAnchorElement>("a");
+
+    const login = nodes.item(0);
+    const account = nodes.item(1);
+
+    const user = sdk.getUser();
+
+    if (user?.email) {
+      login.classList.add("hidden");
+      account.classList.remove("hidden");
+    } else {
+      login.classList.remove("hidden");
+      account.classList.add("hidden");
+    }
+  });
+};
+
+function Login() {
+  const id = useId();
+
+  return (
+    <div id={id}>
       <a
         class="btn btn-sm btn-ghost font-thin no-animation"
         href="/login"
@@ -19,18 +36,19 @@ function Login({ user, variant }: Props) {
         <Icon id="User" size={20} strokeWidth={0.4} />
         <span>LOGIN</span>
       </a>
-    );
-  }
-
-  return (
-    <a
-      class="btn btn-sm btn-ghost font-thin no-animation"
-      href="/account"
-      aria-label="Account"
-    >
-      <Icon id="User" size={20} strokeWidth={0.4} />
-      <span>ACCOUNT</span>
-    </a>
+      <a
+        class="btn btn-sm btn-ghost font-thin no-animation hidden"
+        href="/account"
+        aria-label="Account"
+      >
+        <Icon id="User" size={20} strokeWidth={0.4} />
+        <span>ACCOUNT</span>
+      </a>
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{ __html: useScript(onLoad, id) }}
+      />
+    </div>
   );
 }
 

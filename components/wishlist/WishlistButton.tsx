@@ -13,7 +13,6 @@ interface Props {
 const onLoad = (id: string, productID: string) =>
   window.STOREFRONT.WISHLIST.subscribe((sdk) => {
     const button = document.getElementById(id) as HTMLButtonElement;
-
     const inWishlist = sdk.inWishlist(productID);
 
     button.disabled = false;
@@ -34,7 +33,6 @@ const onClick = (productID: string, productGroupID: string) => {
   const user = window.STOREFRONT.USER.getUser();
 
   if (user?.email) {
-    button.disabled = true;
     button.classList.add("htmx-request");
     window.STOREFRONT.WISHLIST.toggle(productID, productGroupID);
   } else {
@@ -59,6 +57,7 @@ function WishlistButton({ item, variant = "full" }: Props) {
     <>
       <button
         id={id}
+        data-wishlist-button
         disabled
         {...addToWishlistEvent}
         aria-label="Add to wishlist"

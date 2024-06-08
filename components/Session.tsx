@@ -1,7 +1,14 @@
-import { Person } from "apps/commerce/types.ts";
+import { Head } from "$fresh/runtime.ts";
+import { type Person } from "apps/commerce/types.ts";
 import { useScript } from "apps/htmx/hooks/useScript.ts";
+import { type AppContext } from "../apps/site.ts";
+import { MINICART_DRAWER_ID } from "../constants.ts";
+import { useComponent } from "../sections/Component.tsx";
 import { type Item } from "./minicart/Item.tsx";
-import { Wishlist } from "./wishlist/Provider.tsx";
+import CartProvider, { type Minicart } from "./minicart/Minicart.tsx";
+import Drawer from "./ui/Drawer.tsx";
+import UserProvider from "./user/Provider.tsx";
+import WishlistProvider, { type Wishlist } from "./wishlist/Provider.tsx";
 
 declare global {
   interface Window {
@@ -50,7 +57,7 @@ export interface SDK {
   };
 }
 
-export const sdk = () => {
+const sdk = () => {
   const target = new EventTarget();
 
   const createCartSDK = (): SDK["CART"] => {
@@ -274,13 +281,68 @@ export const sdk = () => {
   };
 };
 
-function SDK() {
-  return (
-    <script
-      type="module"
-      dangerouslySetInnerHTML={{ __html: useScript(sdk) }}
-    />
-  );
+export const action = async (_props: Props, _req: Request, ctx: AppContext) => {
+  const [minicart, wishlist, user] = await Promise.all([
+    ctx.invoke("site/loaders/minicart.ts"),
+    ctx.invoke("site/loaders/wishlist.ts"),
+    ctx.invoke("site/loaders/user.ts"),
+  ]);
+
+  return {
+    mode: "eager",
+    minicart,
+    wishlist,
+    user,
+  };
+};
+
+interface Props {
+  minicart?: Minicart | null;
+  wishlist?: Wishlist | null;
+  user?: Person | null;
+  mode?: "eager" | "lazy";
 }
 
-export default SDK;
+export default function Session(
+  { minicart, wishlist, user, mode = "lazy" }: Props,
+) {
+  if (mode === "lazy") {
+    return (
+      <>
+        <Head>
+          <script
+            type="module"
+            dangerouslySetInnerHTML={{ __html: useScript(sdk) }}
+          />
+        </Head>
+        <div hx-trigger="load" hx-post={useComponent(import.meta.url)} />
+      </>
+    );
+  }
+
+  return (
+    <>
+      {/* Minicart Drawer */}
+      <Drawer
+        id={MINICART_DRAWER_ID}
+        class="drawer-end z-50"
+        aside={
+          <Drawer.Aside title="My Bag" drawer={MINICART_DRAWER_ID}>
+            <div
+              class="h-full flex flex-col bg-base-100 items-center justify-center overflow-auto"
+              style={{
+                minWidth: "calc(min(100vw, 425px))",
+                maxWidth: "425px",
+              }}
+            >
+              <CartProvider cart={minicart!} />
+            </div>
+          </Drawer.Aside>
+        }
+      />
+
+      <WishlistProvider wishlist={wishlist ?? null} />
+      <UserProvider user={user ?? null} />
+    </>
+  );
+}

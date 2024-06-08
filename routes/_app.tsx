@@ -2,8 +2,6 @@ import { asset, Head } from "$fresh/runtime.ts";
 import { defineApp } from "$fresh/server.ts";
 import { useScript } from "apps/htmx/hooks/useScript.ts";
 import { Context } from "deco/deco.ts";
-import { MINICART_FORM_ID } from "../constants.ts";
-import SDKProvider from "../components/SDK.tsx";
 
 const serviceWorkerScript = () =>
   addEventListener("load", () =>
@@ -32,8 +30,6 @@ export default defineApp(async (_req, ctx) => {
 
         {/* Web Manifest */}
         <link rel="manifest" href={asset("/site.webmanifest")} />
-
-        <SDKProvider />
       </Head>
 
       {/* Rest of Preact tree */}

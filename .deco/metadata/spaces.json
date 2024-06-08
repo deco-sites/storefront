@@ -441,7 +441,7 @@
             "content": [
               {
                 "type": "stack",
-                "width": 26.54232424677188,
+                "width": 41.66666666666667,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
@@ -455,6 +455,7 @@
                     "componentState": {
                       "id": "%2F.deco%2Fblocks%2Fpages-home-c4bcbfb771e9.json::Properties::list::Properties::%7B%7D"
                     },
+                    "width": 30,
                     "isClosable": true,
                     "reorderEnabled": true
                   }
@@ -462,7 +463,7 @@
               },
               {
                 "type": "stack",
-                "width": 73.45767575322813,
+                "width": 58.333333333333336,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
@@ -476,6 +477,7 @@
                     "componentState": {
                       "id": "%2F.deco%2Fblocks%2Fpages-home-c4bcbfb771e9.json::Preview::world::Preview::%7B%7D"
                     },
+                    "width": 70,
                     "isClosable": true,
                     "reorderEnabled": true
                   }
@@ -497,6 +499,7 @@
           "accepts": "function",
           "render": "function",
           "viewId": "Properties",
+          "width": 30,
           "id": "%2F.deco%2Fblocks%2Fpages-home-c4bcbfb771e9.json::Properties::list::Properties::%7B%7D",
           "state": {
             "__signal": null
@@ -508,6 +511,7 @@
           "accepts": "function",
           "render": "function",
           "viewId": "Preview",
+          "width": 70,
           "id": "%2F.deco%2Fblocks%2Fpages-home-c4bcbfb771e9.json::Preview::world::Preview::%7B%7D",
           "state": {
             "__signal": null
@@ -764,7 +768,7 @@
           "viewId": "JSON Properties",
           "id": "%2F.deco%2Fblocks%2Fsite.json::JSON%20Properties::braces::JSON%20Properties::%7B%7D",
           "state": {
-            "__signal": "error"
+            "__signal": null
           }
         }
       }
@@ -1161,7 +1165,8 @@
           "viewId": "Properties",
           "id": "%2F.deco%2Fblocks%2FHeader%2520-%252001.json::Properties::list::Properties::%7B%7D",
           "state": {
-            "__signal": null
+            "__signal": null,
+            "value": null
           }
         },
         "%2F.deco%2Fblocks%2FHeader%2520-%252001.json::Preview::world::Preview::%7B%7D": {

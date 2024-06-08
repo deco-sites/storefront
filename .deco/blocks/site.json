@@ -23,6 +23,13 @@
     },
     {
       "__resolveType": "analytics/sections/Analytics/DecoAnalytics.tsx"
+    },
+    {
+      "__resolveType": "site/sections/Session.tsx",
+      "minicart": null,
+      "wishlist": null,
+      "mode": "lazy",
+      "user": null
     }
   ],
   "routes": [

@@ -31,11 +31,12 @@ function WishlistProvider({ wishlist }: { wishlist: Wishlist | null }) {
       id={WISHLIST_FORM_ID}
       hx-post={useComponent(import.meta.url)}
       hx-trigger="submit"
-      hx-sync="this:queue all"
+      hx-disabled-elt="button[data-wishlist-button]"
     >
       <input type="hidden" name="product-id" />
       <input type="hidden" name="product-group-id" />
       <button hidden />
+
       <script
         type="application/json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(wishlist) }}

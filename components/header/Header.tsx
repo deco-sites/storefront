@@ -1,24 +1,20 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import type { Person, SiteNavigationElement } from "apps/commerce/types.ts";
+import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { useDevice } from "deco/hooks/useDevice.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 import {
   HEADER_HEIGHT,
-  MINICART_DRAWER_ID,
   NAVBAR_HEIGHT,
   SEARCHBAR_DRAWER_ID,
   SEARCHBAR_POPUP_ID,
   SIDEMENU_CONTAINER_ID,
   SIDEMENU_DRAWER_ID,
 } from "../../constants.ts";
-import UserProvider from "../user/Provider.tsx";
-import Cart, { type Minicart } from "../minicart/Minicart.tsx";
 import Searchbar, { type SearchbarProps } from "../search/Searchbar/Form.tsx";
 import Drawer from "../ui/Drawer.tsx";
 import Icon from "../ui/Icon.tsx";
 import Modal from "../ui/Modal.tsx";
-import WishlistProvider, { type Wishlist } from "../wishlist/Provider.tsx";
 import Alert from "./Alert.tsx";
 import Bag from "./Bag.tsx";
 import Login from "./Login.tsx";
@@ -50,21 +46,13 @@ export interface SectionProps {
   /** @title Logo */
   logo?: Logo;
 
-  minicart?: Minicart;
-
-  user?: Person | null;
-
-  wishlist?: Wishlist;
-
-  variant?: "preview" | "full" | "menu";
+  variant?: "menu";
 }
 
-type Props = Omit<SectionProps, "alert" | "loading"> & {
-  variant: "preview" | "full";
-};
+type Props = Omit<SectionProps, "alert" | "variant">;
 
 const Desktop = (
-  { navItems, logo, searchbar, user, variant }: Props,
+  { navItems, logo, searchbar }: Props,
 ) => (
   <>
     <Modal id={SEARCHBAR_POPUP_ID}>
@@ -102,7 +90,7 @@ const Desktop = (
           <span>SEARCH</span>
         </label>
 
-        <Login user={user} variant={variant} />
+        <Login />
 
         <a
           class="btn btn-sm btn-ghost font-thin no-animation"
@@ -217,48 +205,20 @@ function Header({
       hx-target="closest section"
       hx-swap="outerHTML"
     >
-      {/* Minicart Drawer */}
-      <Drawer
-        id={MINICART_DRAWER_ID}
-        class="drawer-end z-50"
-        aside={
-          <Drawer.Aside title="My Bag" drawer={MINICART_DRAWER_ID}>
-            <div
-              class="h-full flex flex-col bg-base-100 items-center justify-center overflow-auto"
-              style={{
-                minWidth: "calc(min(100vw, 425px))",
-                maxWidth: "425px",
-              }}
-            >
-              {props.variant === "full" && props.minicart && (
-                <Cart cart={props.minicart} />
-              )}
-            </div>
-          </Drawer.Aside>
-        }
-      />
-
       <div class="bg-base-100 fixed w-full z-40">
         {alerts.length > 0 && <Alert alerts={alerts} />}
         {device === "desktop"
           ? <Desktop logo={logo} {...props} />
           : <Mobile logo={logo} {...props} />}
       </div>
-
-      <WishlistProvider wishlist={props.wishlist ?? null} />
-      <UserProvider user={props.user ?? null} />
     </header>
   );
 }
 
-export function LoadingFallback(props: SectionProps) {
-  return <Header {...props} variant="preview" />;
-}
-
-export default function Section(props: SectionProps) {
-  if (props.variant === "menu") {
+export default function Section({ variant, ...props }: SectionProps) {
+  if (variant === "menu") {
     return <Menu navItems={props.navItems ?? []} />;
   }
 
-  return <Header {...props} variant="full" />;
+  return <Header {...props} />;
 }

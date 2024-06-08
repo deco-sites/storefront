@@ -21,19 +21,27 @@ async function action(
     const vtex = ctx as unknown as AppContextVTEX;
 
     const list = await vtex.invoke("vtex/loaders/wishlist.ts");
-
     const item = list.find((i) => i.sku === productID);
 
-    const response = item
-      ? await vtex.invoke("vtex/actions/wishlist/removeItem.ts", item)
-      : await vtex.invoke("vtex/actions/wishlist/addItem.ts", {
-        sku: productID,
-        productId: productGroupID,
-      });
+    try {
+      const response = item
+        ? await vtex.invoke(
+          "vtex/actions/wishlist/removeItem.ts",
+          { id: item.id },
+        )
+        : await vtex.invoke(
+          "vtex/actions/wishlist/addItem.ts",
+          { sku: productID, productId: productGroupID },
+        );
 
-    return {
-      productIDs: response.map((item) => item.sku),
-    };
+      return {
+        productIDs: response.map((item) => item.sku),
+      };
+    } catch {
+      return {
+        productIDs: list.map((item) => item.sku),
+      };
+    }
   }
 
   throw new Error(`Unsupported platform: ${platform}`);
