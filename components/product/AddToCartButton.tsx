@@ -14,57 +14,57 @@ export interface Props extends JSX.HTMLAttributes<HTMLLabelElement> {
 
 const onClick = () => {
   event?.stopPropagation();
-  const button = event?.currentTarget as HTMLButtonElement;
-
+  const button = event?.currentTarget as HTMLButtonElement | null;
+  const container = button!.closest<HTMLDivElement>("div[data-cart-item]")!;
   const { item, platformProps } = JSON.parse(
-    decodeURIComponent(
-      button.closest("div[data-item]")!.getAttribute("data-item")!,
-    ),
+    decodeURIComponent(container.getAttribute("data-cart-item")!),
   );
-
-  const result = window.STOREFRONT.CART.addToCart(item, platformProps);
-  button.disabled = Boolean(result);
+  window.STOREFRONT.CART.addToCart(item, platformProps);
 };
 
 const onChange = () => {
   const input = event!.currentTarget as HTMLInputElement;
+  const productID = input!
+    .closest("div[data-cart-item]")!
+    .getAttribute("data-item-id")!;
   const quantity = Number(input.value);
 
-  const container = input.closest("div[data-item]")!;
-  const productID = container.getAttribute("data-item-id")!;
-  const checkbox = container.querySelector<HTMLInputElement>(
-    'input[type="checkbox"]',
-  )!;
+  if (!input.validity.valid) {
+    return;
+  }
 
   window.STOREFRONT.CART.setQuantity(productID, quantity);
-  checkbox.checked = quantity > 0;
 };
 
 // Copy cart form values into AddToCartButton
 const onLoad = (id: string) => {
-  const script = document.getElementById(id);
   window.STOREFRONT.CART.subscribe((sdk) => {
-    const container = script?.closest("div[data-item]");
+    const script = document.getElementById(id);
+    const container = script?.closest("div[data-cart-item]");
     const checkbox = container?.querySelector<HTMLInputElement>(
-      `input[type="checkbox"]`,
+      'input[type="checkbox"]',
     );
     const input = container?.querySelector<HTMLInputElement>(
-      `input[type="number"]`,
-    );
-    const button = container?.querySelector<HTMLButtonElement>(
-      `button`,
+      'input[type="number"]',
     );
     const itemID = container?.getAttribute("data-item-id")!;
 
     const quantity = sdk.getQuantity(itemID) || 0;
 
-    if (!input || !checkbox || !button) {
+    if (!input || !checkbox) {
       return;
     }
 
     input.value = quantity.toString();
     checkbox.checked = quantity > 0;
-    button.disabled = false;
+
+    // enable interactivity
+    container?.querySelectorAll<HTMLButtonElement>("button").forEach((node) =>
+      node.disabled = false
+    );
+    container?.querySelectorAll<HTMLButtonElement>("input").forEach((node) =>
+      node.disabled = false
+    );
   });
 };
 
@@ -131,9 +131,8 @@ function AddToCartButton(props: Props) {
   return (
     <div
       id={id}
-      data-add-to-cart
       data-item-id={product.productID}
-      data-item={encodeURIComponent(
+      data-cart-item={encodeURIComponent(
         JSON.stringify({ item, platformProps }),
       )}
       class={clx("flex", props.class?.toString())}
@@ -151,6 +150,7 @@ function AddToCartButton(props: Props) {
       {/* Quantity Input */}
       <div class="flex-grow hidden peer-checked:flex">
         <QuantitySelector
+          disabled
           min={0}
           max={100}
           hx-on:change={useScript(onChange)}

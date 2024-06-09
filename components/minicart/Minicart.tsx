@@ -44,6 +44,25 @@ const onLoad = (minicartFormID: string) => {
       }
     }).observe(form);
   }
+
+  // Disable form interactivity while cart is being submitted
+  document.body.addEventListener(
+    "htmx:before-send",
+    // deno-lint-ignore no-explicit-any
+    ({ detail: { elt } }: any) => {
+      if (elt !== form) {
+        return;
+      }
+
+      // Disable addToCart button interactivity
+      document.querySelectorAll("div[data-cart-item]").forEach((container) => {
+        container?.querySelectorAll("button")
+          .forEach((node) => node.disabled = true);
+        container?.querySelectorAll("input")
+          .forEach((node) => node.disabled = true);
+      });
+    },
+  );
 };
 
 const useSubmitCart = () =>

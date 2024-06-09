@@ -13,9 +13,6 @@ import WishlistProvider, { type Wishlist } from "./wishlist/Provider.tsx";
 declare global {
   interface Window {
     STOREFRONT: SDK;
-
-    // deno-lint-ignore no-explicit-any
-    htmx: any;
   }
 }
 
@@ -95,14 +92,17 @@ const sdk = () => {
         }
 
         input.value = quantity.toString();
-        input.dispatchEvent(new Event("change", { bubbles: true }));
 
-        window.DECO.events.dispatch({
-          name: item.quantity < input.valueAsNumber
-            ? "add_to_cart"
-            : "remove_from_cart",
-          params: { items: [{ ...item, quantity }] },
-        });
+        if (input.validity.valid) {
+          window.DECO.events.dispatch({
+            name: item.quantity < input.valueAsNumber
+              ? "add_to_cart"
+              : "remove_from_cart",
+            params: { items: [{ ...item, quantity }] },
+          });
+
+          input.dispatchEvent(new Event("change", { bubbles: true }));
+        }
 
         return true;
       },
@@ -149,10 +149,6 @@ const sdk = () => {
 
   const createAnalyticsSDK = () => {
     addEventListener("load", () => {
-      if (typeof window.htmx === "undefined") {
-        return console.warn("Missing htmx, events will not be send");
-      }
-
       function sendEvent(e: Element | null) {
         const event = e?.getAttribute("data-event");
 
@@ -185,25 +181,30 @@ const sdk = () => {
         })
         : null;
 
-      window.htmx.on(
+      document.body.addEventListener(
         "htmx:load",
-        (e: { detail: { elt: Element } }) =>
-          e.detail.elt.querySelectorAll("[data-event]").forEach((node) => {
-            const maybeTrigger = node.getAttribute("data-event-trigger");
-            const on = maybeTrigger === "click" ? "click" : "view";
+        (e) =>
+          (e as unknown as { detail: { elt: HTMLElement } })
+            .detail.elt.querySelectorAll("[data-event]").forEach(
+              (node) => {
+                const maybeTrigger = node.getAttribute("data-event-trigger");
+                const on = maybeTrigger === "click" ? "click" : "view";
 
-            if (on === "click") {
-              node.addEventListener("click", handleClick, { passive: true });
+                if (on === "click") {
+                  node.addEventListener("click", handleClick, {
+                    passive: true,
+                  });
 
-              return;
-            }
+                  return;
+                }
 
-            if (on === "view") {
-              handleView?.observe(node);
+                if (on === "view") {
+                  handleView?.observe(node);
 
-              return;
-            }
-          }),
+                  return;
+                }
+              },
+            ),
       );
     });
   };
