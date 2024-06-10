@@ -6,6 +6,7 @@ import { useComponent } from "../../sections/Component.tsx";
 import Coupon from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
 import CartItem, { Item } from "./Item.tsx";
+import { AppContext } from "../../apps/site.ts";
 
 export interface Minicart {
   original: Record<string, unknown>;
@@ -65,11 +66,6 @@ const onLoad = (minicartFormID: string) => {
   );
 };
 
-const useSubmitCart = () =>
-  useComponent(import.meta.url, {
-    cart: { __resolveType: "site/actions/minicart/submit.ts" },
-  });
-
 const sendBeginCheckoutEvent = () => {
   window.DECO.events.dispatch({
     name: "being_checkout",
@@ -77,7 +73,40 @@ const sendBeginCheckoutEvent = () => {
   });
 };
 
-function Cart({
+export const action = async (
+  _props: unknown,
+  req: Request,
+  ctx: AppContext,
+) =>
+  req.method === "PATCH"
+    ? ({ cart: await ctx.invoke("site/loaders/minicart.ts") }) // error fallback
+    : ({ cart: await ctx.invoke("site/actions/minicart/submit.ts") });
+
+export function ErrorFallback() {
+  return (
+    <div class="flex flex-col flex-grow justify-center items-center overflow-hidden w-full gap-2">
+      <div class="flex flex-col gap-1 p-6 justify-center items-center">
+        <span class="font-semibold">
+          Error while updating cart
+        </span>
+        <span class="text-sm text-center">
+          Click in the button below to retry or refresh the page
+        </span>
+      </div>
+
+      <button
+        class="btn btn-primary"
+        hx-patch={useComponent(import.meta.url)}
+        hx-swap="outerHTML"
+        hx-target="closest div"
+      >
+        Retry
+      </button>
+    </div>
+  );
+}
+
+export default function Cart({
   cart: {
     original,
     data: {
@@ -108,7 +137,7 @@ function Cart({
         hx-target="this"
         hx-indicator="this"
         hx-disabled-elt="this"
-        hx-post={useSubmitCart()}
+        hx-post={useComponent(import.meta.url)}
         hx-swap="outerHTML"
       >
         {/* Button to submit the form */}
@@ -245,5 +274,3 @@ function Cart({
     </>
   );
 }
-
-export default Cart;
