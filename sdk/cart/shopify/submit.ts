@@ -15,7 +15,7 @@ const actions: CartSubmitActions<AppContext> = {
     const props = {
       lines: items.map((item, index) => ({
         id: cart.lines.nodes[index].id,
-        quantity: item.quantity,
+        quantity: item,
       })),
     };
 

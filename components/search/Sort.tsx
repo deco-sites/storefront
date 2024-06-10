@@ -1,5 +1,5 @@
 import { ProductListingPage } from "apps/commerce/types.ts";
-import { useScript } from "apps/htmx/hooks/useScript.ts";
+import { useScriptAsDataURI } from "apps/utils/useScript.ts";
 import { JSX } from "preact";
 
 const SORT_QUERY_PARAM = "sort";
@@ -65,10 +65,7 @@ function Sort({ sortOptions, url }: Props) {
           </option>
         ))}
       </select>
-      <script
-        type="module"
-        dangerouslySetInnerHTML={{ __html: useScript(script, "sort") }}
-      />
+      <script type="module" src={useScriptAsDataURI(script, "sort")} />
     </>
   );
 }

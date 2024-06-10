@@ -1,5 +1,5 @@
 import { AnalyticsItem } from "apps/commerce/types.ts";
-import { useScript } from "apps/htmx/hooks/useScript.ts";
+import { useScript, useScriptAsDataURI } from "apps/utils/useScript.ts";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
@@ -81,12 +81,7 @@ function WishlistButton({ item, variant = "full" }: Props) {
         )}
         <span class="[.htmx-request_&]:inline hidden loading loading-spinner" />
       </button>
-      <script
-        type="module"
-        dangerouslySetInnerHTML={{
-          __html: useScript(onLoad, id, productID),
-        }}
-      />
+      <script type="module" src={useScriptAsDataURI(onLoad, id, productID)} />
     </>
   );
 }

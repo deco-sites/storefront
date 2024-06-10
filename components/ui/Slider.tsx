@@ -1,4 +1,4 @@
-import { useScript } from "apps/htmx/hooks/useScript.ts";
+import { useScriptAsDataURI } from "apps/utils/useScript.ts";
 import type { ComponentChildren, JSX } from "preact";
 
 function Dot({ index, children }: {
@@ -211,9 +211,7 @@ function JS({ rootId, scroll = "smooth", interval, infinite = false }: Props) {
   return (
     <script
       type="module"
-      dangerouslySetInnerHTML={{
-        __html: useScript(setup, { rootId, scroll, interval, infinite }),
-      }}
+      src={useScriptAsDataURI(setup, { rootId, scroll, interval, infinite })}
     />
   );
 }

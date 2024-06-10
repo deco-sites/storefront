@@ -23,7 +23,7 @@ export const cartFrom = (cart: Cart): Minicart => {
         listPrice: item.ListPrice,
         ...itemToAnalyticsItem(item, coupon, index),
       })),
-      value,
+      total,
       subtotal,
       discounts: 0,
       coupon,
@@ -34,12 +34,6 @@ export const cartFrom = (cart: Cart): Minicart => {
       freeShippingTarget: 1000,
       checkoutHref: "/carrinho",
     },
-    // useUpdateQuantity: (quantity: number, index: number) =>
-    //   useUpdateQuantity({
-    //     Quantity: quantity,
-    //     BasketItemID: items[index]?.BasketItemID,
-    //   }),
-    // useAnalyticsItem: useAnalyticsItem(items, coupon),
   };
 };
 

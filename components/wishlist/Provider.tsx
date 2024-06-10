@@ -1,4 +1,4 @@
-import { useScript } from "apps/htmx/hooks/useScript.ts";
+import { useScriptAsDataURI } from "apps/utils/useScript.ts";
 import { AppContext } from "../../apps/site.ts";
 import { WISHLIST_FORM_ID } from "../../constants.ts";
 import { useComponent } from "../../sections/Component.tsx";
@@ -43,9 +43,7 @@ function WishlistProvider({ wishlist }: { wishlist: Wishlist | null }) {
       />
       <script
         type="module"
-        dangerouslySetInnerHTML={{
-          __html: useScript(onLoad, WISHLIST_FORM_ID),
-        }}
+        src={useScriptAsDataURI(onLoad, WISHLIST_FORM_ID)}
       />
     </form>
   );

@@ -1,4 +1,4 @@
-import { useScript } from "apps/htmx/hooks/useScript.ts";
+import { useScriptAsDataURI } from "apps/utils/useScript.ts";
 import { Section } from "deco/blocks/section.ts";
 import { useId } from "../../sdk/useId.ts";
 
@@ -56,10 +56,7 @@ function Animation(
       >
         <Component {...props} />
       </div>
-      <script
-        type="module"
-        dangerouslySetInnerHTML={{ __html: useScript(snippet, id) }}
-      />
+      <script type="module" src={useScriptAsDataURI(snippet, id)} />
     </>
   );
 }

@@ -1,4 +1,5 @@
-import { useScript } from "apps/htmx/hooks/useScript.ts";
+import { useScript, useScriptAsDataURI } from "apps/utils/useScript.ts";
+import { AppContext } from "../../apps/site.ts";
 import { MINICART_DRAWER_ID, MINICART_FORM_ID } from "../../constants.ts";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
@@ -6,7 +7,6 @@ import { useComponent } from "../../sections/Component.tsx";
 import Coupon from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
 import CartItem, { Item } from "./Item.tsx";
-import { AppContext } from "../../apps/site.ts";
 
 export interface Minicart {
   original: Record<string, unknown>;
@@ -267,9 +267,7 @@ export default function Cart({
       </form>
       <script
         type="module"
-        dangerouslySetInnerHTML={{
-          __html: useScript(onLoad, MINICART_FORM_ID),
-        }}
+        src={useScriptAsDataURI(onLoad, MINICART_FORM_ID)}
       />
     </>
   );

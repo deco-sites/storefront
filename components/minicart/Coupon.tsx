@@ -1,5 +1,5 @@
 import { MINICART_FORM_ID } from "../../constants.ts";
-import { useScript } from "apps/htmx/hooks/useScript.ts";
+import { useScript } from "apps/utils/useScript.ts";
 
 export interface Props {
   coupon?: string;

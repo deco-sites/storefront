@@ -1,4 +1,4 @@
-import { useScript } from "apps/htmx/hooks/useScript.ts";
+import { scriptAsDataURI } from "deco/utils/dataURI.ts";
 import { useId } from "../../sdk/useId.ts";
 
 const script = (id: string) => {
@@ -137,10 +137,7 @@ function CookieConsent(props: Props) {
           </div>
         </div>
       </div>
-      <script
-        type="module"
-        dangerouslySetInnerHTML={{ __html: useScript(script, id) }}
-      />
+      <script type="module" src={scriptAsDataURI(script, id)} />
     </>
   );
 }

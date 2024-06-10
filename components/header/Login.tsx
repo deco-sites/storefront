@@ -1,6 +1,6 @@
-import { useScript } from "apps/htmx/hooks/useScript.ts";
-import Icon from "../ui/Icon.tsx";
+import { useScriptAsDataURI } from "apps/utils/useScript.ts";
 import { useId } from "../../sdk/useId.ts";
+import Icon from "../ui/Icon.tsx";
 
 const onLoad = (containerID: string) => {
   window.STOREFRONT.USER.subscribe((sdk) => {
@@ -44,10 +44,7 @@ function Login() {
         <Icon id="User" size={20} strokeWidth={0.4} />
         <span>ACCOUNT</span>
       </a>
-      <script
-        type="module"
-        dangerouslySetInnerHTML={{ __html: useScript(onLoad, id) }}
-      />
+      <script type="module" src={useScriptAsDataURI(onLoad, id)} />
     </div>
   );
 }

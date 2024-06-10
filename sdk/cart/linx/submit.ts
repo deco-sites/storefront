@@ -8,11 +8,11 @@ const actions: CartSubmitActions<AppContext> = {
 
     const index =
       cart?.Basket?.Items?.findIndex((product, index) =>
-        product?.Quantity !== items[index].quantity
+        product?.Quantity !== items[index]
       ) ?? -1;
 
     const BasketItemID = cart?.Basket?.Items?.[index]?.BasketItemID;
-    const Quantity = items[index].quantity;
+    const Quantity = items[index];
 
     if (
       typeof BasketItemID !== "string" ||

@@ -8,12 +8,12 @@ const actions: CartSubmitActions<AppContext> = {
 
     const index =
       cart.products?.findIndex((product, index) =>
-        product?.quantity !== items[index].quantity
+        product?.quantity !== items[index]
       ) ?? -1;
 
     const props = {
       productVariantId: cart.products?.[index]?.productVariantId,
-      quantity: items[index].quantity,
+      quantity: items[index],
     };
 
     if (
