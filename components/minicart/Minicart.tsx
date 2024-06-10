@@ -1,4 +1,4 @@
-import { useScript, useScriptAsDataURI } from "apps/utils/useScript.ts";
+import { useScript } from "apps/utils/useScript.ts";
 import { AppContext } from "../../apps/site.ts";
 import { MINICART_DRAWER_ID, MINICART_FORM_ID } from "../../constants.ts";
 import { clx } from "../../sdk/clx.ts";
@@ -26,8 +26,8 @@ export interface Minicart {
   };
 }
 
-const onLoad = (minicartFormID: string) => {
-  const form = document.getElementById(minicartFormID) as HTMLFormElement;
+const onLoad = (formID: string) => {
+  const form = document.getElementById(formID) as HTMLFormElement;
 
   window.STOREFRONT.CART.dispatch(form);
 
@@ -264,7 +264,9 @@ export default function Cart({
       </form>
       <script
         type="module"
-        src={useScriptAsDataURI(onLoad, MINICART_FORM_ID)}
+        dangerouslySetInnerHTML={{
+          __html: useScript(onLoad, MINICART_FORM_ID),
+        }}
       />
     </>
   );

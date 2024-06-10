@@ -10,7 +10,7 @@
  */
 
 import { Suggestion } from "apps/commerce/types.ts";
-import { useScriptAsDataURI } from "apps/utils/useScript.ts";
+import { useScript } from "apps/utils/useScript.ts";
 import { asResolved, Resolved } from "deco/mod.ts";
 import {
   SEARCHBAR_INPUT_FORM_ID,
@@ -129,12 +129,14 @@ export default function Searchbar(
       {/* Send search events as the user types */}
       <script
         type="module"
-        src={useScriptAsDataURI(
-          script,
-          SEARCHBAR_INPUT_FORM_ID,
-          NAME,
-          SEARCHBAR_POPUP_ID,
-        )}
+        dangerouslySetInnerHTML={{
+          __html: useScript(
+            script,
+            SEARCHBAR_INPUT_FORM_ID,
+            NAME,
+            SEARCHBAR_POPUP_ID,
+          ),
+        }}
       />
     </div>
   );

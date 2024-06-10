@@ -1,6 +1,6 @@
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import { useScriptAsDataURI } from "apps/utils/useScript.ts";
+import { useScript } from "apps/utils/useScript.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 import { SectionProps } from "deco/mod.ts";
 import ProductCard from "../../components/product/ProductCard.tsx";
@@ -254,11 +254,13 @@ function Result(props: SectionProps<typeof loader>) {
 
       <script
         type="module"
-        src={useScriptAsDataURI(
-          setPageQuerystring,
-          `${pageInfo.currentPage}`,
-          id,
-        )}
+        dangerouslySetInnerHTML={{
+          __html: useScript(
+            setPageQuerystring,
+            `${pageInfo.currentPage}`,
+            id,
+          ),
+        }}
       />
     </>
   );

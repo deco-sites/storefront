@@ -1,6 +1,6 @@
 import { asset, Head } from "$fresh/runtime.ts";
 import { defineApp } from "$fresh/server.ts";
-import { useScriptAsDataURI } from "apps/utils/useScript.ts";
+import { useScript } from "apps/utils/useScript.ts";
 import { Context } from "deco/deco.ts";
 
 const serviceWorkerScript = () =>
@@ -35,7 +35,10 @@ export default defineApp(async (_req, ctx) => {
       {/* Rest of Preact tree */}
       <ctx.Component />
 
-      <script type="module" src={useScriptAsDataURI(serviceWorkerScript)} />
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{ __html: useScript(serviceWorkerScript) }}
+      />
     </>
   );
 });

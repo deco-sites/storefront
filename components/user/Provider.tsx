@@ -1,5 +1,5 @@
 import { Person } from "apps/commerce/types.ts";
-import { useScriptAsDataURI } from "apps/utils/useScript.ts";
+import { useScript } from "apps/utils/useScript.ts";
 import { USER_ID } from "../../constants.ts";
 
 const onLoad = (jsonID: string) => {
@@ -15,7 +15,10 @@ function UserProvider({ user }: { user: Person | null }) {
         type="application/json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(user) }}
       />
-      <script type="module" src={useScriptAsDataURI(onLoad, USER_ID)} />
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{ __html: useScript(onLoad, USER_ID) }}
+      />
     </>
   );
 }

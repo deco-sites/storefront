@@ -1,6 +1,6 @@
 import { Head } from "$fresh/runtime.ts";
 import { type Person } from "apps/commerce/types.ts";
-import { useScriptAsDataURI } from "apps/utils/useScript.ts";
+import { useScript } from "apps/utils/useScript.ts";
 import { type AppContext } from "../apps/site.ts";
 import { MINICART_DRAWER_ID } from "../constants.ts";
 import { useComponent } from "../sections/Component.tsx";
@@ -325,7 +325,10 @@ export default function Session(
     return (
       <>
         <Head>
-          <script type="module" src={useScriptAsDataURI(sdk)} />
+          <script
+            type="module"
+            dangerouslySetInnerHTML={{ __html: useScript(sdk) }}
+          />
         </Head>
         <div hx-trigger="load" hx-post={useComponent(import.meta.url)} />
       </>

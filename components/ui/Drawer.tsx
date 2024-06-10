@@ -1,4 +1,4 @@
-import { useScriptAsDataURI } from "apps/utils/useScript.ts";
+import { useScript } from "apps/utils/useScript.ts";
 import { type ComponentChildren } from "preact";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
@@ -64,7 +64,10 @@ function Drawer({
           {aside}
         </aside>
       </div>
-      <script type="module" src={useScriptAsDataURI(script, id)} />
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{ __html: useScript(script, id) }}
+      />
     </>
   );
 }

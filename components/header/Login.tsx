@@ -1,4 +1,4 @@
-import { useScriptAsDataURI } from "apps/utils/useScript.ts";
+import { useScript } from "apps/utils/useScript.ts";
 import { useId } from "../../sdk/useId.ts";
 import Icon from "../ui/Icon.tsx";
 
@@ -44,7 +44,10 @@ function Login() {
         <Icon id="User" size={20} strokeWidth={0.4} />
         <span>ACCOUNT</span>
       </a>
-      <script type="module" src={useScriptAsDataURI(onLoad, id)} />
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{ __html: useScript(onLoad, id) }}
+      />
     </div>
   );
 }

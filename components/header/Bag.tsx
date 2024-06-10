@@ -1,4 +1,4 @@
-import { useScriptAsDataURI } from "apps/utils/useScript.ts";
+import { useScript } from "apps/utils/useScript.ts";
 import { MINICART_DRAWER_ID } from "../../constants.ts";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
@@ -43,7 +43,10 @@ function Bag() {
           <Icon id="ShoppingCart" size={24} strokeWidth={2} />
         </span>
       </label>
-      <script type="module" src={useScriptAsDataURI(onLoad, id)} />
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{ __html: useScript(onLoad, id) }}
+      />
     </>
   );
 }
