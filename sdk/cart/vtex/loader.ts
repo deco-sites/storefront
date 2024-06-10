@@ -16,7 +16,7 @@ export const cartFrom = (form: Cart, url: string): Minicart => {
 
   return {
     original: form as unknown as Record<string, unknown>,
-    data: {
+    storefront: {
       items: items.map((item, index) => {
         const detailUrl = new URL(item.detailUrl, url).href;
 
@@ -31,10 +31,8 @@ export const cartFrom = (form: Cart, url: string): Minicart => {
       subtotal: total / 100,
       discounts: discounts / 100,
       coupon: coupon,
-    },
-    options: {
-      currency: currency,
-      locale: locale,
+      locale,
+      currency,
       freeShippingTarget: 1000,
       checkoutHref: "/checkout",
     },

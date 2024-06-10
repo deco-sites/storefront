@@ -9,20 +9,20 @@ import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
 import CartItem, { Item } from "./Item.tsx";
 
 export interface Minicart {
+  /** Cart from the ecommerce platform */
   original: Record<string, unknown>;
-  data: {
+  /** Cart from storefront. This can be changed at your will */
+  storefront: {
     items: Item[];
     total: number;
     subtotal: number;
     discounts: number;
     coupon?: string;
-  };
-  options: {
+    locale: string;
+    currency: string;
     enableCoupon?: boolean;
     freeShippingTarget: number;
     checkoutHref: string;
-    locale: string;
-    currency: string;
   };
 }
 
@@ -109,14 +109,12 @@ export function ErrorFallback() {
 export default function Cart({
   cart: {
     original,
-    data: {
+    storefront: {
       items,
       total,
       subtotal,
       coupon,
       discounts,
-    },
-    options: {
       locale,
       currency,
       enableCoupon = true,
@@ -194,7 +192,6 @@ export default function Cart({
                 </div>
 
                 {/* Cart Items */}
-
                 <ul
                   role="list"
                   class="mt-6 px-2 flex-grow overflow-y-auto flex flex-col gap-6 w-full"
