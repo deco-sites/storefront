@@ -3,6 +3,16 @@ import { type CartSubmitActions } from "../../../actions/minicart/submit.ts";
 import { type Cart, cartFrom } from "./loader.ts";
 
 const actions: CartSubmitActions<AppContext> = {
+  addToCart: async ({ addToCart }, _req, ctx) => {
+    const response = await ctx.invoke(
+      "nuvemshop/actions/cart/addItems.ts",
+      // @ts-expect-error I don't know how to fix this
+      addToCart,
+    );
+
+    // deno-lint-ignore no-explicit-any
+    return cartFrom(response as any);
+  },
   setQuantity: async ({ items, original }, _req, ctx) => {
     const cart = original as Cart;
 

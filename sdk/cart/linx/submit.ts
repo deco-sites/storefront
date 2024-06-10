@@ -3,6 +3,15 @@ import { type CartSubmitActions } from "../../../actions/minicart/submit.ts";
 import { type Cart, cartFrom } from "./loader.ts";
 
 const actions: CartSubmitActions<AppContext> = {
+  addToCart: async ({ addToCart }, _req, ctx) => {
+    const response = await ctx.invoke(
+      "linx/actions/cart/addItem.ts",
+      // @ts-expect-error I don't know how to fix this
+      addToCart,
+    );
+
+    return cartFrom(response);
+  },
   setQuantity: async ({ items, original }, _req, ctx) => {
     const cart = original as Cart;
 
