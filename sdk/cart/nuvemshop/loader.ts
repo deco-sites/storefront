@@ -30,11 +30,10 @@ export const cartFrom = (cart: Cart | null): Minicart => {
       coupon,
       locale,
       currency,
-    enableCoupon: false,
-    freeShippingTarget: 1000,
-    checkoutHref,
+      enableCoupon: false,
+      freeShippingTarget: 1000,
+      checkoutHref,
     },
-    
   };
 };
 
