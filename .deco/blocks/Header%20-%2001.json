@@ -25,14 +25,5 @@
     }
   },
   "mode": "private",
-  "variant": "full",
-  "minicart": {
-    "__resolveType": "site/loaders/minicart.ts"
-  },
-  "user": {
-    "__resolveType": "vtex/loaders/user.ts"
-  },
-  "wishlist": {
-    "__resolveType": "site/loaders/wishlist.ts"
-  }
+  "variant": "full"
 }

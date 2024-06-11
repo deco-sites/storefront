@@ -8,6 +8,15 @@
       "__resolveType": "Header - 01"
     },
     {
+      "__resolveType": "site/sections/Miscellaneous/Slide.tsx",
+      "content": [
+        {
+          "label": "HOT SALE",
+          "repeat": 30
+        }
+      ]
+    },
+    {
       "__resolveType": "site/sections/Images/Carousel.tsx",
       "dots": false,
       "arrows": true,
@@ -53,7 +62,7 @@
       "content": [
         {
           "label": "HOT SALE",
-          "repeat": 30
+          "repeat": 15
         }
       ]
     },
@@ -75,15 +84,6 @@
         "textPosition": "After counter"
       },
       "expiresAt": "2024-03-15T17:23:00.000Z"
-    },
-    {
-      "__resolveType": "site/sections/Miscellaneous/Slide.tsx",
-      "content": [
-        {
-          "label": "HOT SALE",
-          "repeat": 15
-        }
-      ]
     },
     {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
