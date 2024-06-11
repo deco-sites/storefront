@@ -18,63 +18,54 @@ const actions: Record<string, CartSubmitActions> = {
   nuvemshop: nuvemshop as CartSubmitActions,
 };
 
-export interface CartSubmitActions<AC = unknown> {
-  setQuantity?: (
-    props: {
-      items: Array<{ index: number; quantity: number }>;
-      original: unknown;
-    },
-    req: Request,
-    ctx: AC,
-  ) => Promise<Minicart>;
-  setCoupon?: (
-    props: { text: string | null },
-    req: Request,
-    ctx: AC,
-  ) => Promise<Minicart>;
+interface CartForm {
+  items: number[];
+  coupon: string | null;
+  action: string | null;
+  original: unknown;
+  addToCart: unknown;
 }
 
-// Reconstruct the cart state from the received form data
-const cartFrom = (
-  form: FormData,
-): { coupon: string | null; items: number[] } => {
-  const coupon = form.get("coupon")?.toString() ?? null;
+export interface CartSubmitActions<AC = unknown> {
+  addToCart?: (props: CartForm, req: Request, ctx: AC) => Promise<Minicart>;
+  setQuantity?: (props: CartForm, req: Request, ctx: AC) => Promise<Minicart>;
+  setCoupon?: (props: CartForm, req: Request, ctx: AC) => Promise<Minicart>;
+}
 
-  const items: number[] = [];
-  for (const [key, value] of form.entries()) {
-    const [item, it] = key.split("::");
-    const index = Number(it);
-
-    if (item !== "item" || Number.isNaN(index)) {
-      continue;
-    }
-
-    items[index] = Number(value);
+const safeParse = (payload: string | null) => {
+  try {
+    return JSON.parse(payload || "null");
+  } catch {
+    return null;
   }
-
-  return { coupon, items };
 };
 
-// Update cart state based on the received action
-const applyVerb = (items: number[], verb: string, index: number) => {
-  const newItems = items.map((quantity, i) => {
-    if (i === index) {
-      return {
-        quantity: verb === "decrease"
-          ? quantity - 1
-          : verb === "increase"
-          ? quantity + 1
-          : verb === "remove"
-          ? 0
-          : quantity,
-        index: i,
-      };
+// Reconstruct the cart state from the received form data
+const cartFrom = (form: FormData) => {
+  const cart: CartForm = {
+    items: [],
+    coupon: null,
+    original: null,
+    action: null,
+    addToCart: null,
+  };
+
+  for (const [name, value] of form.entries()) {
+    if (name === "coupon") {
+      cart.coupon = value.toString();
+    } else if (name === "action") {
+      cart.action = value.toString();
+    } else if (name === "original") {
+      cart.original = safeParse(decodeURIComponent(value.toString()));
+    } else if (name.startsWith("item::")) {
+      const [_, it] = name.split("::");
+      cart.items[Number(it)] = Number(value);
+    } else if (name === "add-to-cart") {
+      cart.addToCart = safeParse(decodeURIComponent(value.toString()));
     }
+  }
 
-    return { quantity, index: i };
-  });
-
-  return newItems;
+  return cart;
 };
 
 async function action(
@@ -82,31 +73,21 @@ async function action(
   req: Request,
   ctx: AppContext,
 ): Promise<Minicart> {
-  try {
-    const { setQuantity, setCoupon } = actions[usePlatform()];
+  const { setQuantity, setCoupon, addToCart } = actions[usePlatform()];
 
-    const form = await req.formData();
+  const form = cartFrom(await req.formData());
 
-    // Original, platform specific cart state
-    const original = JSON.parse(
-      decodeURIComponent(form.get("original")?.toString() ?? ""),
-    );
+  const handler = form.action === "set-coupon"
+    ? setCoupon
+    : form.action === "add-to-cart"
+    ? addToCart
+    : setQuantity;
 
-    const [verb, it] = form.get("action")?.toString()?.split("::") ?? [];
-
-    const cart = cartFrom(form);
-
-    if (verb === "setCoupon") {
-      return setCoupon!({ text: cart.coupon }, req, ctx);
-    }
-
-    const newItems = applyVerb(cart.items, verb, Number(it));
-    return setQuantity!({ items: newItems, original }, req, ctx);
-  } catch (error) {
-    console.error(error);
-
-    throw error;
+  if (!handler) {
+    throw new Error(`Unsupported action on platform ${usePlatform()}`);
   }
+
+  return await handler(form, req, ctx);
 }
 
 export default action;

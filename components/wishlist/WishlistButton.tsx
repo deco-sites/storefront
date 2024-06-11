@@ -1,105 +1,92 @@
-import { scriptAsDataURI } from "apps/utils/dataURI.ts";
+import { AnalyticsItem } from "apps/commerce/types.ts";
+import { useScript } from "apps/utils/useScript.ts";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
-import { useComponent } from "../../sections/Component.tsx";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import Icon from "../ui/Icon.tsx";
 
 interface Props {
-  productID: string;
-  productGroupID?: string;
-  isUserLoggedIn: boolean;
-  variant?: "icon" | "full";
+  variant?: "full" | "icon";
+  item: AnalyticsItem;
 }
 
-export const loader = (props: Props) => {
-  return {
-    variant: props.variant,
-    inWishlist: false,
-  };
+const onLoad = (id: string, productID: string) =>
+  window.STOREFRONT.WISHLIST.subscribe((sdk) => {
+    const button = document.getElementById(id) as HTMLButtonElement;
+    const inWishlist = sdk.inWishlist(productID);
+
+    button.disabled = false;
+    button.classList.remove("htmx-request");
+    button.querySelector("svg")?.setAttribute(
+      "fill",
+      inWishlist ? "black" : "none",
+    );
+
+    const span = button.querySelector("span");
+    if (span) {
+      span.innerHTML = inWishlist ? "Remove from wishlist" : "Add to wishlist";
+    }
+  });
+
+const onClick = (productID: string, productGroupID: string) => {
+  const button = event?.currentTarget as HTMLButtonElement;
+  const user = window.STOREFRONT.USER.getUser();
+
+  if (user?.email) {
+    button.classList.add("htmx-request");
+    window.STOREFRONT.WISHLIST.toggle(productID, productGroupID);
+  } else {
+    window.alert(`Please login to add the product to your wishlist`);
+  }
 };
 
-export const action = (props: Props) => {
-  return {
-    variant: props.variant,
-    inWishlist: false,
-  };
-};
-
-export default function WishlistButton({
-  variant = "full",
-  inWishlist,
-  isUserLoggedIn,
-  productID,
-  productGroupID,
-}: {
-  variant?: "icon" | "full";
-  inWishlist: boolean;
-  isUserLoggedIn: boolean;
-  productID: string;
-  productGroupID: string;
-}) {
+function WishlistButton({ item, variant = "full" }: Props) {
+  // deno-lint-ignore no-explicit-any
+  const productID = (item as any).item_id;
+  const productGroupID = item.item_group_id ?? "";
   const id = useId();
   const addToWishlistEvent = useSendEvent({
     on: "click",
     event: {
       name: "add_to_wishlist",
-      params: {
-        items: [
-          {
-            item_id: productID,
-            item_group_id: productGroupID,
-            quantity: 1,
-          },
-        ],
-      },
+      params: { items: [item] },
     },
   });
 
   return (
     <>
       <button
+        id={id}
+        data-wishlist-button
+        disabled
         {...addToWishlistEvent}
         aria-label="Add to wishlist"
+        hx-on:click={useScript(onClick, productID, productGroupID)}
         class={clx(
           "btn no-animation",
           variant === "icon"
             ? "btn-circle btn-ghost"
             : "btn-primary btn-outline gap-2 w-full",
         )}
-        hx-post={isUserLoggedIn
-          ? useComponent(import.meta.url, {
-            productID,
-            productGroupID,
-          })
-          : undefined}
-        hx-swap="outerHTML"
       >
         <Icon
           class="[.htmx-request_&]:hidden"
           id="Heart"
           size={24}
           strokeWidth={2}
-          fill={inWishlist ? "black" : "none"}
+          fill="none"
         />
         {variant === "full" && (
-          <span class="[.htmx-request_&]:hidden">
-            {inWishlist ? "Remover" : "Favoritar"}
-          </span>
+          <span class="[.htmx-request_&]:hidden">Add to wishlist</span>
         )}
-        <span class="[.htmx-request_&]:inline hidden loading loading-xs loading-spinner" />
+        <span class="[.htmx-request_&]:inline hidden loading loading-spinner" />
       </button>
-
-      {!isUserLoggedIn && (
-        <script
-          type="module"
-          src={scriptAsDataURI((id: string) =>
-            document.getElementById(id)?.addEventListener("click", () =>
-              globalThis.window.alert(
-                "Please log in before adding to your wishlist",
-              )), id)}
-        />
-      )}
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{ __html: useScript(onLoad, id, productID) }}
+      />
     </>
   );
 }
+
+export default WishlistButton;

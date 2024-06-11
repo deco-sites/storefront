@@ -3,17 +3,26 @@ import { type CartSubmitActions } from "../../../actions/minicart/submit.ts";
 import { type Cart, cartFrom } from "./loader.ts";
 
 const actions: CartSubmitActions<AppContext> = {
+  addToCart: async ({ addToCart }, _req, ctx) => {
+    const response = await ctx.invoke(
+      "vnda/actions/cart/addItem.ts",
+      // @ts-expect-error I don't know how to fix this
+      addToCart,
+    );
+
+    return cartFrom(response);
+  },
   setQuantity: async ({ items, original }, _req, ctx) => {
     const cart = original as Cart;
 
     const index =
       cart?.orderForm?.items?.findIndex((product, index) =>
-        product?.quantity !== items[index].quantity
+        product?.quantity !== items[index]
       ) ?? -1;
 
     const props = {
       itemId: cart?.orderForm?.items?.[index]?.id,
-      quantity: items[index].quantity,
+      quantity: items[index],
     };
 
     if (

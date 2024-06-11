@@ -1,7 +1,7 @@
 {
-  "account": "prezunic",
+  "account": "bravtexfashionstore",
   "platform": "vtex",
-  "publicUrl": "www.prezunic.com.br",
+  "publicUrl": "fashion.bravtexstores.com.br",
   "salesChannel": "1",
   "defaultSegment": {
     "channelPrivacy": "public"

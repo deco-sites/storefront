@@ -1,4 +1,4 @@
-import { scriptAsDataURI } from "apps/utils/dataURI.ts";
+import { useScript } from "apps/utils/useScript.ts";
 import { Section } from "deco/blocks/section.ts";
 import { useId } from "../../sdk/useId.ts";
 
@@ -56,7 +56,10 @@ function Animation(
       >
         <Component {...props} />
       </div>
-      <script type="module" src={scriptAsDataURI(snippet, id)} />
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{ __html: useScript(snippet, id) }}
+      />
     </>
   );
 }

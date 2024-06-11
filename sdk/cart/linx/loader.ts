@@ -17,7 +17,7 @@ export const cartFrom = (cart: Cart): Minicart => {
 
   return {
     original: cart as unknown as Record<string, unknown>,
-    data: {
+    storefront: {
       items: items.map((item, index) => ({
         image: item.ImagePath,
         listPrice: item.ListPrice,
@@ -27,19 +27,11 @@ export const cartFrom = (cart: Cart): Minicart => {
       subtotal,
       discounts: 0,
       coupon,
-    },
-    options: {
       locale,
       currency,
       freeShippingTarget: 1000,
       checkoutHref: "/carrinho",
     },
-    // useUpdateQuantity: (quantity: number, index: number) =>
-    //   useUpdateQuantity({
-    //     Quantity: quantity,
-    //     BasketItemID: items[index]?.BasketItemID,
-    //   }),
-    // useAnalyticsItem: useAnalyticsItem(items, coupon),
   };
 };
 

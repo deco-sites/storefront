@@ -1,4 +1,4 @@
-import { scriptAsDataURI } from "apps/utils/dataURI.ts";
+import { scriptAsDataURI } from "deco/utils/dataURI.ts";
 import { useId } from "../../sdk/useId.ts";
 
 const script = (id: string) => {

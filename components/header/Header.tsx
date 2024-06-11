@@ -1,21 +1,17 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import type { Person, SiteNavigationElement } from "apps/commerce/types.ts";
+import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { useDevice } from "deco/hooks/useDevice.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 import {
   HEADER_HEIGHT,
-  MINICART_CONTAINER_ID,
-  MINICART_DRAWER_ID,
   NAVBAR_HEIGHT,
   SEARCHBAR_DRAWER_ID,
   SEARCHBAR_POPUP_ID,
   SIDEMENU_CONTAINER_ID,
   SIDEMENU_DRAWER_ID,
 } from "../../constants.ts";
-import { clx } from "../../sdk/clx.ts";
-import Minicart, { type Minicart as IMinicart } from "../minicart/Minicart.tsx";
-import Searchbar, { SearchbarProps } from "../search/Searchbar/Form.tsx";
+import Searchbar, { type SearchbarProps } from "../search/Searchbar/Form.tsx";
 import Drawer from "../ui/Drawer.tsx";
 import Icon from "../ui/Icon.tsx";
 import Modal from "../ui/Modal.tsx";
@@ -50,19 +46,13 @@ export interface SectionProps {
   /** @title Logo */
   logo?: Logo;
 
-  minicart?: IMinicart;
-
-  user?: Person | null;
-
-  variant?: "preview" | "full" | "menu";
+  variant?: "menu";
 }
 
-type Props = Omit<SectionProps, "alert" | "loading"> & {
-  variant: "preview" | "full";
-};
+type Props = Omit<SectionProps, "alert" | "variant">;
 
 const Desktop = (
-  { navItems, logo, searchbar, user, variant }: Props,
+  { navItems, logo, searchbar }: Props,
 ) => (
   <>
     <Modal id={SEARCHBAR_POPUP_ID}>
@@ -100,7 +90,7 @@ const Desktop = (
           <span>SEARCH</span>
         </label>
 
-        <Login user={user} variant={variant} />
+        <Login />
 
         <a
           class="btn btn-sm btn-ghost font-thin no-animation"
@@ -215,31 +205,6 @@ function Header({
       hx-target="closest section"
       hx-swap="outerHTML"
     >
-      {/* Minicart Drawer */}
-      {props.variant === "full" && (
-        <Drawer
-          id={MINICART_DRAWER_ID}
-          class="drawer-end z-50"
-          aside={
-            <Drawer.Aside title="My Bag" drawer={MINICART_DRAWER_ID}>
-              <div
-                id={MINICART_CONTAINER_ID}
-                style={{
-                  minWidth: "calc(min(100vw, 425px))",
-                  maxWidth: "425px",
-                }}
-                class={clx(
-                  "h-full flex flex-col bg-base-100 items-center justify-center overflow-auto",
-                  "[.htmx-request&]:pointer-events-none [.htmx-request&]:opacity-60 [.htmx-request&]:cursor-wait transition-opacity duration-300",
-                )}
-              >
-                {props.minicart && <Minicart cart={props.minicart} />}
-              </div>
-            </Drawer.Aside>
-          }
-        />
-      )}
-
       <div class="bg-base-100 fixed w-full z-40">
         {alerts.length > 0 && <Alert alerts={alerts} />}
         {device === "desktop"
@@ -250,14 +215,10 @@ function Header({
   );
 }
 
-export function LoadingFallback(props: SectionProps) {
-  return <Header {...props} variant="preview" />;
-}
-
-export default function Section(props: SectionProps) {
-  if (props.variant === "menu") {
+export default function Section({ variant, ...props }: SectionProps) {
+  if (variant === "menu") {
     return <Menu navItems={props.navItems ?? []} />;
   }
 
-  return <Header {...props} variant="full" />;
+  return <Header {...props} />;
 }

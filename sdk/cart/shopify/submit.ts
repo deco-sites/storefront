@@ -3,6 +3,15 @@ import { type CartSubmitActions } from "../../../actions/minicart/submit.ts";
 import { type Cart, cartFrom } from "./loader.ts";
 
 const actions: CartSubmitActions<AppContext> = {
+  addToCart: async ({ addToCart }, _req, ctx) => {
+    const response = await ctx.invoke(
+      "shopify/actions/cart/addItems.ts",
+      // @ts-expect-error I don't know how to fix this
+      addToCart,
+    );
+
+    return cartFrom(response);
+  },
   setQuantity: async ({ items, original }, _req, ctx) => {
     const cart = original as Cart;
 
@@ -15,7 +24,7 @@ const actions: CartSubmitActions<AppContext> = {
     const props = {
       lines: items.map((item, index) => ({
         id: cart.lines.nodes[index].id,
-        quantity: item.quantity,
+        quantity: item,
       })),
     };
 
@@ -26,10 +35,10 @@ const actions: CartSubmitActions<AppContext> = {
 
     return cartFrom(response);
   },
-  setCoupon: async ({ text }, _req, ctx) => {
+  setCoupon: async ({ coupon }, _req, ctx) => {
     const response = await ctx.invoke(
       "shopify/actions/cart/updateCoupons.ts",
-      { discountCodes: [text ?? ""] },
+      { discountCodes: [coupon ?? ""] },
     );
 
     return cartFrom(response);

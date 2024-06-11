@@ -18,7 +18,7 @@ export const cartFrom = (cart: Cart | null): Minicart => {
 
   return {
     original: cart as unknown as Record<string, unknown>,
-    data: {
+    storefront: {
       items: items?.map((item, index) => ({
         image: item.image.src,
         listPrice: Number(item.compare_at_price),
@@ -28,8 +28,6 @@ export const cartFrom = (cart: Cart | null): Minicart => {
       subtotal,
       discounts: 0,
       coupon,
-    },
-    options: {
       locale,
       currency,
       enableCoupon: false,

@@ -22,20 +22,18 @@ export const cartFrom = (cart: Cart): Minicart => {
 
   return {
     original: cart as unknown as Record<string, unknown>,
-    data: {
+    storefront: {
       items: items?.map((item, index) => ({
         image: item.merchandise.image?.url ?? "",
         listPrice: item.cost.amountPerQuantity.amount,
         ...itemToAnalyticsItem(item, index),
       })),
-      total: total,
+      total,
       subtotal: subTotal,
       discounts: 0,
       coupon: coupon,
-    },
-    options: {
-      currency: currency,
-      locale: locale,
+      currency,
+      locale,
       freeShippingTarget: 1000,
       checkoutHref,
     },

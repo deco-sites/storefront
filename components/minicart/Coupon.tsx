@@ -1,30 +1,30 @@
 import { MINICART_FORM_ID } from "../../constants.ts";
-import { useId } from "../../sdk/useId.ts";
+import { useScript } from "apps/utils/useScript.ts";
 
 export interface Props {
   coupon?: string;
 }
 
 function Coupon({ coupon }: Props) {
-  const formToggle = useId();
-
   return (
     <div class="flex justify-between items-center px-4">
       <span class="text-sm">Cupom de desconto</span>
 
-      {/* Hidden checkbox trick */}
-      <input type="checkbox" id={formToggle} class="hidden peer" />
-
-      {/* Displayed when checkbox is checked=false */}
-      <label
-        for={formToggle}
-        class="btn btn-ghost underline font-normal peer-checked:hidden no-animation"
+      <button
+        type="button"
+        class="btn btn-ghost underline font-normal no-animation"
+        hx-on:click={useScript(() => {
+          event?.stopPropagation();
+          const button = event?.currentTarget as HTMLButtonElement;
+          button.classList.add("hidden");
+          button.nextElementSibling?.classList.remove("hidden");
+        })}
       >
         {coupon || "Add"}
-      </label>
+      </button>
 
       {/* Displayed when checkbox is checked=true */}
-      <div class="join peer-checked:inline-flex hidden">
+      <div class="join hidden">
         <input
           form={MINICART_FORM_ID}
           name="coupon"
@@ -37,7 +37,7 @@ function Coupon({ coupon }: Props) {
           form={MINICART_FORM_ID}
           class="btn join-item"
           name="action"
-          value="setCoupon"
+          value="set-coupon"
         >
           Ok
         </button>

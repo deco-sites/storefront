@@ -1,6 +1,5 @@
 import { ProductListingPage } from "apps/commerce/types.ts";
-import { scriptAsDataURI } from "apps/utils/dataURI.ts";
-import { JSX } from "preact";
+import { useScript } from "apps/utils/useScript.ts";
 
 const SORT_QUERY_PARAM = "sort";
 const PAGE_QUERY_PARAM = "page";
@@ -14,16 +13,6 @@ const getUrl = (href: string, value: string) => {
   url.searchParams.set(SORT_QUERY_PARAM, value);
 
   return url.href;
-};
-
-const script = (id: string) => {
-  document.getElementById(id)?.addEventListener(
-    "change",
-    function (e) {
-      window.location.href =
-        (e as JSX.TargetedEvent<HTMLSelectElement, Event>).currentTarget.value;
-    },
-  );
 };
 
 const labels: Record<string, string> = {
@@ -51,9 +40,12 @@ function Sort({ sortOptions, url }: Props) {
     <>
       <label for="sort" class="sr-only">Sort by</label>
       <select
-        id="sort"
         name="sort"
         class="select select-bordered w-full max-w-sm rounded-lg"
+        hx-on:change={useScript(() => {
+          const select = event!.currentTarget as HTMLSelectElement;
+          window.location.href = select.value;
+        })}
       >
         {options.map(({ value, label }) => (
           <option
@@ -65,7 +57,6 @@ function Sort({ sortOptions, url }: Props) {
           </option>
         ))}
       </select>
-      <script type="module" src={scriptAsDataURI(script, "sort")} />
     </>
   );
 }

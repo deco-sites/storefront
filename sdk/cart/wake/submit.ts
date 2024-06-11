@@ -3,17 +3,26 @@ import { type CartSubmitActions } from "../../../actions/minicart/submit.ts";
 import { type Cart, cartFrom } from "./loader.ts";
 
 const actions: CartSubmitActions<AppContext> = {
+  addToCart: async ({ addToCart }, _req, ctx) => {
+    const response = await ctx.invoke(
+      "wake/actions/cart/addItem.ts",
+      // @ts-expect-error I don't know how to fix this
+      addToCart,
+    );
+
+    return cartFrom(response);
+  },
   setQuantity: async ({ items, original }, _req, ctx) => {
     const cart = original as Cart;
 
     const index =
       cart.products?.findIndex((product, index) =>
-        product?.quantity !== items[index].quantity
+        product?.quantity !== items[index]
       ) ?? -1;
 
     const props = {
       productVariantId: cart.products?.[index]?.productVariantId,
-      quantity: items[index].quantity,
+      quantity: items[index],
     };
 
     if (
@@ -32,10 +41,10 @@ const actions: CartSubmitActions<AppContext> = {
 
     return cartFrom(response);
   },
-  setCoupon: async ({ text }, _req, ctx) => {
+  setCoupon: async ({ coupon }, _req, ctx) => {
     const response = await ctx.invoke(
       "wake/actions/cart/addCoupon.ts",
-      { coupon: text ?? undefined },
+      { coupon: coupon ?? undefined },
     )
       // When adding an invalid coupon, wake throws.
       // We should instead return the cart as is

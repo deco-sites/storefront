@@ -10,7 +10,7 @@
  */
 
 import { Suggestion } from "apps/commerce/types.ts";
-import { scriptAsDataURI } from "apps/utils/dataURI.ts";
+import { useScript } from "apps/utils/useScript.ts";
 import { asResolved, Resolved } from "deco/mod.ts";
 import {
   SEARCHBAR_INPUT_FORM_ID,
@@ -44,7 +44,7 @@ const script = (formId: string, name: string, popupId: string) => {
   form?.addEventListener("submit", () => {
     const search_term = input?.value;
     if (search_term) {
-      globalThis.window.DECO.events.dispatch({
+      window.DECO.events.dispatch({
         name: "search",
         params: { search_term },
       });
@@ -129,12 +129,14 @@ export default function Searchbar(
       {/* Send search events as the user types */}
       <script
         type="module"
-        src={scriptAsDataURI(
-          script,
-          SEARCHBAR_INPUT_FORM_ID,
-          NAME,
-          SEARCHBAR_POPUP_ID,
-        )}
+        dangerouslySetInnerHTML={{
+          __html: useScript(
+            script,
+            SEARCHBAR_INPUT_FORM_ID,
+            NAME,
+            SEARCHBAR_POPUP_ID,
+          ),
+        }}
       />
     </div>
   );

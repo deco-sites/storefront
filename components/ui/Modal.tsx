@@ -1,4 +1,4 @@
-import { scriptAsDataURI } from "apps/utils/dataURI.ts";
+import { useScript } from "apps/utils/useScript.ts";
 import { ComponentChildren } from "preact";
 import { useId } from "../../sdk/useId.ts";
 
@@ -34,7 +34,10 @@ function Modal({ children, open, id = useId() }: Props) {
         {children}
         <label class="modal-backdrop" for={id}>Close</label>
       </div>
-      <script type="module" src={scriptAsDataURI(script, id)} />
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{ __html: useScript(script, id) }}
+      />
     </>
   );
 }

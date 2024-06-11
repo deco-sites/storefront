@@ -1,5 +1,5 @@
+import { useScript } from "apps/utils/useScript.ts";
 import type { ComponentChildren, JSX } from "preact";
-import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 
 function Dot({ index, children }: {
   index: number;
@@ -211,7 +211,9 @@ function JS({ rootId, scroll = "smooth", interval, infinite = false }: Props) {
   return (
     <script
       type="module"
-      src={scriptAsDataURI(setup, { rootId, scroll, interval, infinite })}
+      dangerouslySetInnerHTML={{
+        __html: useScript(setup, { rootId, scroll, interval, infinite }),
+      }}
     />
   );
 }
