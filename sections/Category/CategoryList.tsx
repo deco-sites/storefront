@@ -1,6 +1,6 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
-import Header from "../../components/ui/SectionHeader.tsx";
+import SectionHeader from "../../components/ui/Section.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import { useId } from "../../sdk/useId.ts";
 
@@ -119,7 +119,7 @@ function CategoryList(props: Props) {
       id={id}
       class="container py-8 flex flex-col gap-8 lg:gap-10 text-base-content  lg:py-10"
     >
-      <Header
+      <SectionHeader
         title={header.title}
         description={header.description || ""}
         alignment={layout.headerAlignment || "center"}

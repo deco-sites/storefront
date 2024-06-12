@@ -15,7 +15,7 @@ export default function Slide({
     {
       label: "Label",
       repeat: 30,
-      icon: "ChevronRight",
+      icon: "chevron-right",
     },
   ],
 }: Props) {
@@ -27,14 +27,7 @@ export default function Slide({
             <span class="text-sm font-extralight text-base-content whitespace-nowrap">
               {label}
             </span>
-            {icon && (
-              <Icon
-                id={icon}
-                name={icon}
-                width={24}
-                height={24}
-              />
-            )}
+            {icon && <Icon id={icon} name={icon} />}
           </>
         ))}
       </div>

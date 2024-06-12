@@ -4,7 +4,7 @@ import { usePlatform } from "../sdk/usePlatform.tsx";
 
 import { AppContext as AppContextVTEX } from "apps/vtex/mod.ts";
 
-function loader(
+async function loader(
   _: unknown,
   _req: Request,
   ctx: AppContext,
@@ -14,7 +14,10 @@ function loader(
   if (platform === "vtex") {
     const vtex = ctx as unknown as AppContextVTEX;
 
-    return vtex.invoke("vtex/loaders/user.ts");
+    return await vtex.invoke("vtex/loaders/user.ts");
+  }
+  if (platform === "shopify") {
+    return null;
   }
 
   throw new Error(`Unsupported platform: ${platform}`);

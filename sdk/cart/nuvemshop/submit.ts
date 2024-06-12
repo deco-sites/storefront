@@ -13,8 +13,8 @@ const actions: CartSubmitActions<AppContext> = {
     // deno-lint-ignore no-explicit-any
     return cartFrom(response as any);
   },
-  setQuantity: async ({ items, original }, _req, ctx) => {
-    const cart = original as Cart;
+  setQuantity: async ({ items, platformCart }, _req, ctx) => {
+    const cart = platformCart as Cart;
 
     const index =
       cart?.products?.findIndex((product, index) =>

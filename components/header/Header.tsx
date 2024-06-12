@@ -4,8 +4,9 @@ import Image from "apps/website/components/Image.tsx";
 import { useDevice } from "deco/hooks/useDevice.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 import {
-  HEADER_HEIGHT,
-  NAVBAR_HEIGHT,
+  HEADER_HEIGHT_DESKTOP,
+  HEADER_HEIGHT_MOBILE,
+  NAVBAR_HEIGHT_MOBILE,
   SEARCHBAR_DRAWER_ID,
   SEARCHBAR_POPUP_ID,
   SIDEMENU_CONTAINER_ID,
@@ -46,6 +47,7 @@ export interface SectionProps {
   /** @title Logo */
   logo?: Logo;
 
+  /** @hide true */
   variant?: "menu";
 }
 
@@ -58,7 +60,7 @@ const Desktop = (
     <Modal id={SEARCHBAR_POPUP_ID}>
       <div
         class="absolute top-0 bg-base-100 container"
-        style={{ marginTop: HEADER_HEIGHT }}
+        style={{ marginTop: HEADER_HEIGHT_MOBILE }}
       >
         <Searchbar {...searchbar} />
       </div>
@@ -86,7 +88,7 @@ const Desktop = (
           class="btn btn-sm btn-ghost font-thin no-animation"
           aria-label="search icon button"
         >
-          <Icon id="MagnifyingGlass" size={20} strokeWidth={0.1} />
+          <Icon id="search" />
           <span>SEARCH</span>
         </label>
 
@@ -97,7 +99,7 @@ const Desktop = (
           href="/wishlist"
           aria-label="Wishlist"
         >
-          <Icon id="Heart" size={24} strokeWidth={0.4} />
+          <Icon id="favorite" />
           <span>WISHLIST</span>
         </a>
 
@@ -137,25 +139,30 @@ const Mobile = ({ logo, searchbar }: Props) => (
     />
 
     <div
-      style={{ height: NAVBAR_HEIGHT }}
-      class="grid grid-cols-3 justify-between items-center border-b border-base-200 w-full px-6 pb-6 gap-2"
+      class="grid place-items-center w-screen px-5 gap-4"
+      style={{
+        height: NAVBAR_HEIGHT_MOBILE,
+        gridTemplateColumns:
+          "min-content auto min-content min-content min-content",
+      }}
     >
       <label
         for={SIDEMENU_DRAWER_ID}
-        class="btn btn-circle md:btn-sm btn-xs btn-ghost"
+        class="btn btn-square btn-sm btn-ghost"
         aria-label="open menu"
         hx-target={`#${SIDEMENU_CONTAINER_ID}`}
         hx-swap="outerHTML"
         hx-trigger="click once"
         hx-get={useSection({ props: { variant: "menu" } })}
       >
-        <Icon id="Bars3" size={20} strokeWidth={0.01} />
+        <Icon id="menu" />
       </label>
+
       {logo && (
         <a
           href="/"
           class="flex-grow inline-flex items-center justify-center"
-          style={{ minHeight: NAVBAR_HEIGHT }}
+          style={{ minHeight: NAVBAR_HEIGHT_MOBILE }}
           aria-label="Store logo"
         >
           <Image
@@ -167,16 +174,17 @@ const Mobile = ({ logo, searchbar }: Props) => (
         </a>
       )}
 
-      <div class="flex justify-end gap-1">
-        <label
-          for={SEARCHBAR_DRAWER_ID}
-          class="btn btn-circle btn-sm btn-ghost"
-          aria-label="search icon button"
-        >
-          <Icon id="MagnifyingGlass" size={20} strokeWidth={0.1} />
-        </label>
-        <Bag />
-      </div>
+      <label
+        for={SEARCHBAR_DRAWER_ID}
+        class="btn btn-square btn-sm btn-ghost"
+        aria-label="search icon button"
+      >
+        <Icon id="search" />
+      </label>
+
+      <Login />
+
+      <Bag />
     </div>
   </>
 );
@@ -196,7 +204,11 @@ function Header({
 
   return (
     <header
-      style={{ height: HEADER_HEIGHT }}
+      style={{
+        height: device === "desktop"
+          ? HEADER_HEIGHT_DESKTOP
+          : HEADER_HEIGHT_MOBILE,
+      }}
       // Refetch the header in two situations
       // 1. When the window is resized so we have a gracefull Developer Experience
       // 2. When the user changes tab, so we can update the minicart badge when the user comes back

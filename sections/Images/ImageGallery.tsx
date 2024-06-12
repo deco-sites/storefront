@@ -1,6 +1,6 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
-import Header from "../../components/ui/SectionHeader.tsx";
+import SectionHeader from "../../components/ui/Section.tsx";
 
 /**
  * @titleBy alt
@@ -188,7 +188,7 @@ export default function Gallery(props: Props) {
 
   return (
     <section class="container px-4 py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 lg:px-0">
-      <Header
+      <SectionHeader
         title={title}
         description={description}
         alignment={layout?.headerAlignment || "center"}

@@ -1,7 +1,7 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import Icon from "../../components/ui/Icon.tsx";
-import Header from "../../components/ui/SectionHeader.tsx";
+import SectionHeader from "../../components/ui/Section.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import { useId } from "../../sdk/useId.ts";
 
@@ -133,7 +133,7 @@ export default function Testimonials(
 
   return (
     <div class="w-full container px-4 py-8 flex flex-col gap-14 lg:gap-20 lg:py-10 lg:px-0">
-      <Header
+      <SectionHeader
         title={title}
         description={description}
         alignment={layout?.headerAlignment || "center"}
@@ -165,12 +165,12 @@ export default function Testimonials(
           <>
             <div class="z-10 absolute -left-2 lg:-left-8 top-1/2">
               <Slider.PrevButton class="btn btn-circle btn-outline">
-                <Icon size={24} id="ChevronLeft" strokeWidth={3} />
+                <Icon id="chevron-right" class="rotate-180" />
               </Slider.PrevButton>
             </div>
             <div class="z-10 absolute -right-2 lg:-right-8 top-1/2">
               <Slider.NextButton class="btn btn-circle btn-outline">
-                <Icon size={24} id="ChevronRight" strokeWidth={3} />
+                <Icon id="chevron-right" />
               </Slider.NextButton>
             </div>
           </>

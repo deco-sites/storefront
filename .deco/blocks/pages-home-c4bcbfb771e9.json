@@ -8,204 +8,207 @@
       "__resolveType": "Header - 01"
     },
     {
-      "__resolveType": "site/sections/Miscellaneous/Slide.tsx",
-      "content": [
-        {
-          "label": "HOT SALE",
-          "repeat": 30
-        }
-      ]
-    },
-    {
       "__resolveType": "site/sections/Images/Carousel.tsx",
-      "dots": false,
-      "arrows": true,
       "images": [
         {
-          "alt": "Feminino",
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/e5b17750-7164-45a5-9d3a-68076ab407db",
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f50d5ec4-c329-44c0-b504-f74155260d41",
+          "alt": "valentines",
           "action": {
-            "href": "/feminino",
-            "label": "Explore collection",
-            "title": "VTEX Store",
-            "subTitle": "Visit our site and start building now:"
-          },
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
+            "title": "Valentine's Day",
+            "subTitle": "Celebrate Love with Our Exclusive Offers",
+            "href": "#",
+            "label": "Enjoy!"
+          }
         },
         {
-          "alt": "Masculino",
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/e5b17750-7164-45a5-9d3a-68076ab407db",
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f50d5ec4-c329-44c0-b504-f74155260d41",
+          "alt": "Christmas",
           "action": {
-            "href": "/masculino",
-            "label": "Explore collection",
-            "title": "VTEX Store",
-            "subTitle": "Visit our site and start building now:"
-          },
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
-        },
-        {
-          "alt": "Vestidos",
-          "action": {
-            "href": "/feminino/roupas/vestidos",
-            "label": "Explore collection",
-            "title": "VTEX Store",
-            "subTitle": "Visit our site and start building now:"
-          },
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5"
-        }
-      ],
-      "preload": true
-    },
-    {
-      "__resolveType": "site/sections/Miscellaneous/Slide.tsx",
-      "content": [
-        {
-          "label": "HOT SALE",
-          "repeat": 15
+            "title": "Christmas",
+            "subTitle": "New deals for santa!",
+            "href": "#",
+            "label": "Enjoy!"
+          }
         }
       ]
     },
     {
-      "__resolveType": "site/sections/Miscellaneous/CampaignTimer.tsx",
-      "link": {
-        "href": "https://github.com/deco-cx",
-        "text": "Visit our GitHub"
-      },
-      "text": "<p>Design, develop and deliver complete experiences</p>",
-      "labels": {
-        "days": "days",
-        "hours": "hours",
-        "expired": " Expired!",
-        "minutes": "minutes",
-        "seconds": "seconds"
-      },
-      "layout": {
-        "textPosition": "After counter"
-      },
-      "expiresAt": "2024-03-15T17:23:00.000Z"
-    },
-    {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "layout": {
-        "showArrows": true
-      },
+      "title": "Make Mom's day",
+      "cta": "/mono",
       "products": {
+        "__resolveType": "shopify/loaders/ProductList.ts",
         "props": {
           "sort": "",
-          "count": 29,
-          "collection": "160"
+          "query": "stickers",
+          "count": 12
         },
-        "crossSelling": "similars",
-        "__resolveType": "vtex/loaders/legacy/productList.ts"
-      },
-      "title": "Ofertas do dia"
-    },
-    {
-      "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "layout": {
-        "showArrows": true
-      },
-      "products": {
-        "__resolveType": "vtex/loaders/legacy/productList.ts",
-        "props": {
-          "sort": "OrderByBestDiscountDESC",
-          "collection": "1060",
-          "count": 14
-        },
-        "crossSelling": "similars"
-      },
-      "title": "Ofertas prime"
-    },
-    {
-      "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "layout": {
-        "showArrows": true
-      },
-      "products": {
-        "__resolveType": "vtex/loaders/legacy/productList.ts",
-        "props": {
-          "sort": "",
-          "collection": "1045",
-          "count": 10
-        },
-        "crossSelling": "similars"
-      },
-      "title": "Especial Maturata"
-    },
-    {
-      "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "layout": {
-        "showArrows": true
-      },
-      "products": {
-        "__resolveType": "vtex/loaders/legacy/productList.ts",
-        "props": {
-          "sort": "OrderByBestDiscountDESC",
-          "count": 9,
-          "collection": "996"
-        },
-        "crossSelling": "similars"
-      },
-      "title": "Produtos com cashback"
-    },
-    {
-      "__resolveType": "site/sections/Product/ProductShelfTabbed.tsx",
-      "title": "Melhor de cada departamento",
-      "tabs": [
-        {
-          "title": "Aves",
-          "products": {
-            "props": {
-              "sort": "",
-              "count": 9,
-              "query": "vestido",
-              "collection": "619"
-            },
-            "__resolveType": "vtex/loaders/legacy/productList.ts"
-          }
-        },
-        {
-          "title": "Bovinos",
-          "products": {
-            "props": {
-              "sort": "",
-              "count": 9,
-              "collection": "621"
-            },
-            "__resolveType": "vtex/loaders/legacy/productList.ts"
-          }
-        },
-        {
-          "products": {
-            "__resolveType": "vtex/loaders/legacy/productList.ts",
-            "props": {
-              "sort": "",
-              "collection": "141",
-              "count": 9
-            }
-          },
-          "title": "Churrasco"
-        },
-        {
-          "products": {
-            "__resolveType": "vtex/loaders/legacy/productList.ts",
-            "props": {
-              "sort": "OrderByPriceDESC",
-              "collection": "620",
-              "count": 9
-            }
-          },
-          "title": "Suinos"
+        "filters": {
+          "tags": [],
+          "productTypes": [],
+          "productVendors": [],
+          "variantOptions": []
         }
-      ],
-      "layout": {
-        "headerfontSize": "Large",
-        "headerAlignment": "center"
       }
     },
     {
-      "__resolveType": "Footer - 04"
+      "__resolveType": "site/sections/Category/CategoryGrid.tsx",
+      "title": "Featured departments",
+      "cta": "/all",
+      "items": [
+        {
+          "label": "Grocery",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/9581289b-7ad3-462b-a680-47678f87c0fc",
+          "href": "/"
+        },
+        {
+          "href": "/",
+          "label": "Home",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/ec749573-4bf4-45d7-ac20-fc66e15cad6e"
+        },
+        {
+          "href": "/",
+          "label": "Furniture",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/d1731f58-3fff-46e6-9165-d4d698c4e199"
+        },
+        {
+          "href": "/",
+          "label": "Toys",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3a0e5e41-0875-43b9-aaff-27b400c5274c"
+        },
+        {
+          "href": "/",
+          "label": "Electronics",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/4e0b46e9-c5c3-4222-8c9e-4ce98f3d9ad9"
+        },
+        {
+          "href": "/",
+          "label": "Pets",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/edd5d0e2-9e02-4730-bef7-1f1cd750d579"
+        },
+        {
+          "href": "/",
+          "label": "Clothing & Shoes",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/ccb8fefc-3197-45a5-a085-3b6f493d08a0"
+        },
+        {
+          "href": "/",
+          "label": "Baby",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/8afd4bc6-b568-4999-b80d-ef36c78f1153"
+        },
+        {
+          "href": "/",
+          "label": "Sports & Outdoors",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/b81a2f89-0d91-44b6-ac4c-f7f092cf3c46"
+        },
+        {
+          "href": "/",
+          "label": "Beauty",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/6bc77133-8f09-4301-b54e-e4924b51a5c5"
+        },
+        {
+          "href": "/",
+          "label": "Health",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/a9a21762-d617-4b44-8b4f-ec31d36d42f2"
+        },
+        {
+          "href": "/",
+          "label": "Luggage",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/253fc321-0d8c-4f33-8ae6-3ba1ff18c619"
+        }
+      ]
+    },
+    {
+      "__resolveType": "site/sections/Images/Banner.tsx",
+      "title": "Get 40$ off",
+      "description": "<p><span style=\"color: rgb(92, 92, 92);\" data-mce-style=\"color: rgb(92, 92, 92);\">a future qualifying purchase over $40 when approved for a Debit or Credit</span> <span style=\"color: rgb(45, 194, 107);\" data-mce-style=\"color: rgb(45, 194, 107);\">RedCard™</span></p>",
+      "images": {
+        "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/235f846d-8182-45df-8e88-c72d1e08645d",
+        "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3c800e87-d78d-4179-b4b7-b8b309de3fbe"
+      },
+      "cta": {
+        "label": "Apply Now",
+        "href": "#"
+      }
+    },
+    {
+      "__resolveType": "site/sections/Product/ProductShelfTabbed.tsx",
+      "title": "Hottest Deals",
+      "tabs": [
+        {
+          "products": {
+            "__resolveType": "shopify/loaders/ProductList.ts",
+            "props": {
+              "sort": "",
+              "query": "Shirts",
+              "count": 10
+            },
+            "filters": {
+              "tags": [],
+              "productTypes": [],
+              "productVendors": [],
+              "variantOptions": []
+            }
+          },
+          "title": "Fashion"
+        },
+        {
+          "products": {
+            "__resolveType": "shopify/loaders/ProductList.ts",
+            "props": {
+              "sort": "",
+              "query": "hat and bag",
+              "count": 10
+            },
+            "filters": {
+              "tags": [],
+              "productTypes": [],
+              "productVendors": [],
+              "variantOptions": []
+            }
+          },
+          "title": "Accessories"
+        },
+        {
+          "products": {
+            "__resolveType": "shopify/loaders/ProductList.ts",
+            "props": {
+              "sort": "",
+              "query": "stickers",
+              "count": 10
+            },
+            "filters": {
+              "tags": [],
+              "productTypes": [],
+              "productVendors": [],
+              "variantOptions": []
+            }
+          },
+          "title": "Stickers"
+        }
+      ]
+    },
+    {
+      "__resolveType": "site/sections/Newsletter/Newsletter.tsx",
+      "label": "Sign up",
+      "placeholder": "Email address",
+      "empty": {
+        "title": "Get top deals, latest trends, and more.",
+        "description": "Receive our news and promotions in advance. Enjoy and get 10% off your first purchase. For more information click here."
+      },
+      "success": {
+        "title": "Thank you for subscribing!",
+        "description": "You’re now signed up to receive the latest news, trends, and exclusive promotions directly to your inbox. Stay tuned!"
+      },
+      "failed": {
+        "title": "Oops!. Something went wrong!",
+        "description": "Something went wrong. Please try again. If the problem persists, please contact us."
+      }
+    },
+    {
+      "__resolveType": "Footer"
     }
   ],
   "__resolveType": "website/pages/Page.tsx",

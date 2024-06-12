@@ -29,20 +29,20 @@ function Login() {
   return (
     <div id={id}>
       <a
-        class="btn btn-sm btn-ghost font-thin no-animation"
+        class="btn btn-square sm:btn-block btn-sm btn-ghost font-thin no-animation"
         href="/login"
         aria-label="Login"
       >
-        <Icon id="User" size={20} strokeWidth={0.4} />
-        <span>LOGIN</span>
+        <Icon id="account_circle" />
+        <span class="hidden sm:inline">LOGIN</span>
       </a>
       <a
-        class="btn btn-sm btn-ghost font-thin no-animation hidden"
+        class="btn btn-square sm:btn-block btn-sm btn-ghost font-thin no-animation hidden"
         href="/account"
         aria-label="Account"
       >
-        <Icon id="User" size={20} strokeWidth={0.4} />
-        <span>ACCOUNT</span>
+        <Icon id="account_circle" />
+        <span class="hidden sm:inline">ACCOUNT</span>
       </a>
       <script
         type="module"

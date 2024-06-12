@@ -46,7 +46,7 @@ function Menu({ navItems }: Props) {
             class="flex items-center gap-4 px-4 py-2"
             href="/wishlist"
           >
-            <Icon id="Heart" size={24} strokeWidth={2} />
+            <Icon id="favorite" />
             <span class="text-sm">Lista de desejos</span>
           </a>
         </li>
@@ -55,7 +55,7 @@ function Menu({ navItems }: Props) {
             class="flex items-center gap-4 px-4 py-2"
             href="https://www.deco.cx"
           >
-            <Icon id="MapPin" size={24} strokeWidth={2} />
+            <Icon id="home_pin" />
             <span class="text-sm">Nossas lojas</span>
           </a>
         </li>
@@ -64,7 +64,7 @@ function Menu({ navItems }: Props) {
             class="flex items-center gap-4 px-4 py-2"
             href="https://www.deco.cx"
           >
-            <Icon id="Phone" size={24} strokeWidth={2} />
+            <Icon id="call" />
             <span class="text-sm">Fale conosco</span>
           </a>
         </li>
@@ -73,7 +73,7 @@ function Menu({ navItems }: Props) {
             class="flex items-center gap-4 px-4 py-2"
             href="https://www.deco.cx"
           >
-            <Icon id="User" size={24} strokeWidth={2} />
+            <Icon id="account_circle" />
             <span class="text-sm">Minha conta</span>
           </a>
         </li>

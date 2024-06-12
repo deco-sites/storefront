@@ -16,7 +16,7 @@ export const cartFrom = (cart: Cart): Minicart => {
   const coupon = cart?.Basket?.Coupons?.[0]?.Code ?? "";
 
   return {
-    original: cart as unknown as Record<string, unknown>,
+    platformCart: cart as unknown as Record<string, unknown>,
     storefront: {
       items: items.map((item, index) => ({
         image: item.ImagePath,

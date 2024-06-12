@@ -6,7 +6,7 @@ import * as $$$$$$$$$0 from "./actions/minicart/submit.ts";
 import * as $$$$$$$$$1 from "./actions/wishlist/submit.ts";
 import * as $$$$$$$$$$$0 from "./apps/deco/analytics.ts";
 import * as $$$$$$$$$$$1 from "./apps/deco/htmx.ts";
-import * as $$$$$$$$$$$2 from "./apps/deco/vtex.ts";
+import * as $$$$$$$$$$$2 from "./apps/deco/shopify.ts";
 import * as $$$$$$$$$$$3 from "./apps/site.ts";
 import * as $$$0 from "./loaders/availableIcons.ts";
 import * as $$$1 from "./loaders/icons.ts";
@@ -23,16 +23,16 @@ import * as $$$$$$6 from "./sections/Content/BlogPosts.tsx";
 import * as $$$$$$7 from "./sections/Content/CallToAction.tsx";
 import * as $$$$$$8 from "./sections/Content/Faq.tsx";
 import * as $$$$$$9 from "./sections/Content/Hero.tsx";
-import * as $$$$$$10 from "./sections/Content/ImageSection.tsx";
-import * as $$$$$$11 from "./sections/Content/Intro.tsx";
-import * as $$$$$$12 from "./sections/Content/Logos.tsx";
-import * as $$$$$$13 from "./sections/Content/Partners.tsx";
-import * as $$$$$$14 from "./sections/Content/RichText.tsx";
-import * as $$$$$$15 from "./sections/Content/Table.tsx";
-import * as $$$$$$16 from "./sections/Content/Testimonials.tsx";
-import * as $$$$$$17 from "./sections/Content/TextWithImage.tsx";
-import * as $$$$$$18 from "./sections/Footer/Footer.tsx";
-import * as $$$$$$19 from "./sections/Header/Header.tsx";
+import * as $$$$$$10 from "./sections/Content/Intro.tsx";
+import * as $$$$$$11 from "./sections/Content/Logos.tsx";
+import * as $$$$$$12 from "./sections/Content/Partners.tsx";
+import * as $$$$$$13 from "./sections/Content/RichText.tsx";
+import * as $$$$$$14 from "./sections/Content/Table.tsx";
+import * as $$$$$$15 from "./sections/Content/Testimonials.tsx";
+import * as $$$$$$16 from "./sections/Content/TextWithImage.tsx";
+import * as $$$$$$17 from "./sections/Footer/Footer.tsx";
+import * as $$$$$$18 from "./sections/Header/Header.tsx";
+import * as $$$$$$19 from "./sections/Images/Banner.tsx";
 import * as $$$$$$20 from "./sections/Images/BannerGrid.tsx";
 import * as $$$$$$21 from "./sections/Images/Carousel.tsx";
 import * as $$$$$$22 from "./sections/Images/ImageGallery.tsx";
@@ -76,16 +76,16 @@ const manifest = {
     "site/sections/Content/CallToAction.tsx": $$$$$$7,
     "site/sections/Content/Faq.tsx": $$$$$$8,
     "site/sections/Content/Hero.tsx": $$$$$$9,
-    "site/sections/Content/ImageSection.tsx": $$$$$$10,
-    "site/sections/Content/Intro.tsx": $$$$$$11,
-    "site/sections/Content/Logos.tsx": $$$$$$12,
-    "site/sections/Content/Partners.tsx": $$$$$$13,
-    "site/sections/Content/RichText.tsx": $$$$$$14,
-    "site/sections/Content/Table.tsx": $$$$$$15,
-    "site/sections/Content/Testimonials.tsx": $$$$$$16,
-    "site/sections/Content/TextWithImage.tsx": $$$$$$17,
-    "site/sections/Footer/Footer.tsx": $$$$$$18,
-    "site/sections/Header/Header.tsx": $$$$$$19,
+    "site/sections/Content/Intro.tsx": $$$$$$10,
+    "site/sections/Content/Logos.tsx": $$$$$$11,
+    "site/sections/Content/Partners.tsx": $$$$$$12,
+    "site/sections/Content/RichText.tsx": $$$$$$13,
+    "site/sections/Content/Table.tsx": $$$$$$14,
+    "site/sections/Content/Testimonials.tsx": $$$$$$15,
+    "site/sections/Content/TextWithImage.tsx": $$$$$$16,
+    "site/sections/Footer/Footer.tsx": $$$$$$17,
+    "site/sections/Header/Header.tsx": $$$$$$18,
+    "site/sections/Images/Banner.tsx": $$$$$$19,
     "site/sections/Images/BannerGrid.tsx": $$$$$$20,
     "site/sections/Images/Carousel.tsx": $$$$$$21,
     "site/sections/Images/ImageGallery.tsx": $$$$$$22,
@@ -117,7 +117,7 @@ const manifest = {
   "apps": {
     "site/apps/deco/analytics.ts": $$$$$$$$$$$0,
     "site/apps/deco/htmx.ts": $$$$$$$$$$$1,
-    "site/apps/deco/vtex.ts": $$$$$$$$$$$2,
+    "site/apps/deco/shopify.ts": $$$$$$$$$$$2,
     "site/apps/site.ts": $$$$$$$$$$$3,
   },
   "name": "site",

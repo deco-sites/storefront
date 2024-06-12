@@ -27,7 +27,7 @@ function SearchControls({ url, filters, breadcrumb, sortOptions }: Props) {
                 <span class="font-medium text-2xl">Filtrar</span>
               </h1>
               <label class="btn btn-ghost" for={id}>
-                <Icon id="XMark" size={24} strokeWidth={2} />
+                <Icon id="close" />
               </label>
             </div>
             <div class="flex-grow overflow-auto">
@@ -45,7 +45,6 @@ function SearchControls({ url, filters, breadcrumb, sortOptions }: Props) {
         <div class="flex flex-row items-center justify-between border-b border-base-200 sm:gap-4 sm:border-none">
           <label class="btn btn-ghost sm:hidden" for={id}>
             Filtrar
-            <Icon id="FilterList" width={16} height={16} />
           </label>
           {sortOptions.length > 0 && (
             <Sort sortOptions={sortOptions} url={url} />

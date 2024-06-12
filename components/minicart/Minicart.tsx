@@ -10,7 +10,7 @@ import CartItem, { Item } from "./Item.tsx";
 
 export interface Minicart {
   /** Cart from the ecommerce platform */
-  original: Record<string, unknown>;
+  platformCart: Record<string, unknown>;
   /** Cart from storefront. This can be changed at your will */
   storefront: {
     items: Item[];
@@ -108,7 +108,7 @@ export function ErrorFallback() {
 
 export default function Cart({
   cart: {
-    original,
+    platformCart,
     storefront: {
       items,
       total,
@@ -154,11 +154,11 @@ export default function Cart({
           )}
         />
 
-        {/* This contains the original cart from the commerce platform. Integrations usually use this value, like GTM, pixels etc */}
+        {/* This contains the platformCart cart from the commerce platform. Integrations usually use this value, like GTM, pixels etc */}
         <input
           type="hidden"
           name="platform-cart"
-          value={encodeURIComponent(JSON.stringify(original))}
+          value={encodeURIComponent(JSON.stringify(platformCart))}
         />
 
         <div

@@ -9,10 +9,11 @@ interface Props {
 }
 
 const ringClass = clx(
-  "h-6 w-6",
+  "h-5 w-5 block",
   "rounded-full text-center",
-  "ring-1 ring-offset-4",
-  "ring-base-300 peer-checked:ring-base-content",
+  "ring-2 ring-offset-2",
+  "ring-transparent peer-checked:ring-primary",
+  "border border-base-300",
 );
 
 const colors: Record<string, string | undefined> = {
@@ -53,7 +54,7 @@ function VariantSelector({ product }: Props) {
               const relativeLink = relative(link);
 
               return (
-                <li class="h-6 w-6">
+                <li class="h-7 w-7">
                   <label
                     class="avatar cursor-pointer"
                     hx-get={useSection({ href: relativeLink })}

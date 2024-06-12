@@ -165,7 +165,6 @@ function Links(props: Props) {
                   <Icon
                     size={20}
                     id={link.icon!}
-                    strokeWidth={2.5}
                   />
                 )}
 
@@ -176,7 +175,6 @@ function Links(props: Props) {
                 <Icon
                   size={20}
                   id="share"
-                  strokeWidth={2}
                   class="opacity-0 group-hover:opacity-100"
                 />
               </a>
@@ -197,7 +195,7 @@ function Links(props: Props) {
               >
                 <Icon
                   size={20}
-                  id={link.label}
+                  id={link.label as AvailableIcons}
                   strokeWidth={link.strokeWidth || 2}
                   fill={link.iconColor}
                   style={{ color: link.iconColor }}

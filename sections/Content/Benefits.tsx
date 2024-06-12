@@ -1,5 +1,5 @@
 import Icon, { AvailableIcons } from "../../components/ui/Icon.tsx";
-import Header from "../../components/ui/SectionHeader.tsx";
+import SectionHeader from "../../components/ui/Section.tsx";
 
 interface Benefit {
   label: string;
@@ -34,17 +34,13 @@ export default function Benefits(
     title = "Benefits",
     description = "Check out the benefits",
     benefits = [{
-      icon: "Truck",
+      icon: "local_shipping",
       label: "Entrega em todo Brasil",
       description: "Consulte o prazo no fechamento da compra.",
     }, {
-      icon: "Discount",
+      icon: "sell",
       label: "15% na primeira compra",
       description: "Aplicado direto na sacola de compras.",
-    }, {
-      icon: "ArrowsPointingOut",
-      label: "Devolução grátis",
-      description: "Veja as condições para devolver seu produto.",
     }],
     layout,
   } = props;
@@ -74,10 +70,7 @@ export default function Benefits(
           <Icon
             id={benefit.icon}
             class={"text-base-content"}
-            width={36}
-            height={36}
-            strokeWidth={0.01}
-            fill="currentColor"
+            size={36}
           />
         </div>
         <div class="flex-auto flex flex-col gap-1 lg:gap-2">
@@ -105,7 +98,7 @@ export default function Benefits(
       {!layout?.variation || layout?.variation === "Simple"
         ? (
           <div class="w-full container px-4 py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 lg:px-0">
-            <Header
+            <SectionHeader
               title={title}
               description={description}
               alignment={layout?.headerAlignment || "center"}
@@ -120,7 +113,7 @@ export default function Benefits(
         : ""}
       {layout?.variation === "With border" && (
         <div class="w-full container flex flex-col px-4 py-8 gap-8 lg:gap-10 lg:py-10 lg:px-0">
-          <Header
+          <SectionHeader
             title={title}
             description={description}
             alignment={layout?.headerAlignment || "center"}
@@ -134,7 +127,7 @@ export default function Benefits(
       )}
       {layout?.variation === "Color reverse" && (
         <div class="w-full container flex flex-col px-4 py-8 gap-8 lg:gap-10 lg:py-10 lg:px-0">
-          <Header
+          <SectionHeader
             title={title}
             description={description}
             alignment={layout?.headerAlignment || "center"}

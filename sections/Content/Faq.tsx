@@ -1,4 +1,4 @@
-import Header from "../../components/ui/SectionHeader.tsx";
+import SectionHeader from "../../components/ui/Section.tsx";
 
 export interface Question {
   question: string;
@@ -98,7 +98,7 @@ export default function FAQ(props: Props) {
       {(!layout?.variation || layout?.variation === "Compact") && (
         <div class="w-full container px-4 py-8 flex flex-col gap-4 lg:gap-8 lg:py-10 lg:px-40">
           <div class="flex flex-col gap-8 lg:gap-10">
-            <Header
+            <SectionHeader
               title={title || ""}
               description={description || ""}
               alignment={layout?.headerAlignment || "center"}
@@ -115,7 +115,7 @@ export default function FAQ(props: Props) {
       {layout?.variation === "Full" && (
         <div class="w-full container px-4 py-8 flex flex-col gap-4 lg:gap-8 lg:py-10 lg:px-0">
           <div class="flex flex-col gap-8 lg:gap-10">
-            <Header
+            <SectionHeader
               title={title || ""}
               description={description || ""}
               alignment={layout?.headerAlignment || "center"}
@@ -132,7 +132,7 @@ export default function FAQ(props: Props) {
       {layout?.variation === "Side to side" && (
         <div class="w-full container px-4 py-8 grid gap-8 grid-flow-row grid-cols-1 lg:grid-flow-col lg:grid-cols-2 lg:grid-rows-2 lg:py-10 lg:px-0">
           <div class="order-1 lg:order-1">
-            <Header
+            <SectionHeader
               title={title || ""}
               description={description || ""}
               alignment={layout?.headerAlignment || "center"}

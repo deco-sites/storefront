@@ -70,19 +70,19 @@ export default function GallerySlider(props: Props) {
             class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline"
             disabled
           >
-            <Icon size={24} id="ChevronLeft" strokeWidth={3} />
+            <Icon id="chevron-right" class="rotate-180" />
           </Slider.PrevButton>
 
           <Slider.NextButton
             class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline"
             disabled={images.length < 2}
           >
-            <Icon size={24} id="ChevronRight" strokeWidth={3} />
+            <Icon id="chevron-right" />
           </Slider.NextButton>
 
           <div class="absolute top-2 right-2 bg-base-100 rounded-full">
             <label class="btn btn-ghost hidden sm:inline-flex" for={zoomId}>
-              <Icon id="Zoom" size={24} />
+              <Icon id="pan_zoom" />
             </label>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import Image from "apps/website/components/Image.tsx";
-import Header from "../../components/ui/SectionHeader.tsx";
+import SectionHeader from "../../components/ui/Section.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
 export interface Image {
@@ -42,7 +42,7 @@ function Logos(props: Props) {
 
   return (
     <div class="w-full container px-4 py-8 flex flex-col gap-8 lg:gap-12 lg:py-10 lg:px-0">
-      <Header
+      <SectionHeader
         title={title}
         description={description}
         alignment={layout?.headerAlignment || "center"}

@@ -20,7 +20,7 @@ export const cartFrom = (cart: Cart): Minicart => {
   const token = cart?.orderForm?.token;
 
   return {
-    original: cart,
+    platformCart: cart,
     storefront: {
       items: items.map((item, index) => ({
         image: normalizeUrl(item.image_url ?? ""),

@@ -7,20 +7,12 @@
     },
     {
       "title": "Oh no! You are offline!",
-      "products": {
-        "props": {
-          "ids": [],
-          "sort": "price:desc",
-          "count": 4,
-          "collection": "139"
-        },
-        "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
-      },
+      "products": null,
       "description": "Maybe take some time to explore",
       "__resolveType": "site/sections/Product/ProductShelf.tsx"
     },
     {
-      "__resolveType": "Footer - 01"
+      "__resolveType": "Footer"
     }
   ],
   "__resolveType": "website/pages/Page.tsx"

@@ -1,7 +1,7 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import Icon from "../../components/ui/Icon.tsx";
-import Header from "../../components/ui/SectionHeader.tsx";
+import SectionHeader from "../../components/ui/Section.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import { useId } from "../../sdk/useId.ts";
 
@@ -123,7 +123,7 @@ function BlogPosts({
   return (
     <div class="w-full container py-8 flex flex-col gap-6 pb-16">
       <div class="px-9">
-        <Header
+        <SectionHeader
           title={title || "BlogPosts"}
           fontSize={layout?.headerfontSize || "Normal"}
           alignment={layout?.headerAlignment || "center"}
@@ -152,12 +152,12 @@ function BlogPosts({
           <>
             <div class="relative block z-10 col-start-1 row-start-3">
               <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
-                <Icon size={24} id="ChevronLeft" strokeWidth={3} class="w-5" />
+                <Icon id="chevron-right" class="rotate-180" />
               </Slider.PrevButton>
             </div>
             <div class="relative block z-10 col-start-3 row-start-3">
               <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center">
-                <Icon size={24} id="ChevronRight" strokeWidth={3} />
+                <Icon id="chevron-right" />
               </Slider.NextButton>
             </div>
           </>

@@ -1,0 +1,167 @@
+{
+  "__resolveType": "site/sections/Footer/Footer.tsx",
+  "links": [
+    {
+      "title": "Our Company",
+      "children": [
+        {
+          "title": "About us",
+          "href": "#"
+        },
+        {
+          "title": "Our blog",
+          "href": "#"
+        },
+        {
+          "title": "Stores",
+          "href": "#"
+        },
+        {
+          "title": "Work with us",
+          "href": "#"
+        }
+      ],
+      "href": "#"
+    },
+    {
+      "title": "Orders & Purchases",
+      "href": "#",
+      "children": [
+        {
+          "title": "Check order status",
+          "href": "#"
+        },
+        {
+          "title": "Return and exchanges",
+          "href": "#"
+        },
+        {
+          "title": "Product retail",
+          "href": "#"
+        },
+        {
+          "title": "Gift cards",
+          "href": "#"
+        }
+      ]
+    },
+    {
+      "title": "Support & Services",
+      "href": "#",
+      "children": [
+        {
+          "title": "Support Center",
+          "href": "#"
+        },
+        {
+          "title": "Schedule a service",
+          "href": "#"
+        },
+        {
+          "title": "Contact us",
+          "href": "#"
+        }
+      ]
+    },
+    {
+      "title": "Support & Services",
+      "children": [
+        {
+          "title": "Support Center",
+          "href": "#"
+        },
+        {
+          "title": "Schedule a service",
+          "href": "#"
+        },
+        {
+          "title": "Contact us",
+          "href": "#"
+        }
+      ],
+      "href": "#"
+    }
+  ],
+  "social": [
+    {
+      "alt": "facebook",
+      "href": "#",
+      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/66137259-6bdb-4322-bed1-a2593560934c"
+    },
+    {
+      "alt": "Instagram",
+      "href": "#",
+      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/e71ae7f3-0f51-4185-af0a-fca08ebe4451"
+    },
+    {
+      "alt": "Pinterest",
+      "href": "#",
+      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/4becba39-fc08-4df2-bb5d-5e843f375deb"
+    },
+    {
+      "alt": "X",
+      "href": "#",
+      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/179a9ee9-3813-47b8-96eb-11e0c5558ede"
+    }
+  ],
+  "paymentMethods": [
+    {
+      "alt": "Paypal",
+      "href": "#",
+      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/7d858621-469e-4528-91b5-8c79fc413162"
+    },
+    {
+      "alt": "Mastercard",
+      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/88ab870c-4256-44b4-8da3-3cefe0436e87"
+    },
+    {
+      "alt": "Maestro",
+      "href": "#",
+      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/e94aaf80-25f5-4e23-8708-14d78ffdebbb"
+    },
+    {
+      "alt": "Google Pay",
+      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/ccddc66e-baa8-4b44-a52c-ea48d8e111b5"
+    },
+    {
+      "alt": "Elo",
+      "href": "#",
+      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/11f90dd4-91b5-4b60-9304-f8a7a9be84eb"
+    },
+    {
+      "alt": "Diners",
+      "href": "#",
+      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/20bb8e66-5495-4f92-a6d0-4967a66f3a44"
+    },
+    {
+      "alt": "Apple Pay",
+      "href": "#",
+      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/d4227ed7-333d-49b8-b3e2-35719f606640"
+    },
+    {
+      "alt": "Amex",
+      "href": "#",
+      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/023472cf-782d-4a22-82d9-ecdf18466d96"
+    },
+    {
+      "alt": "Visa",
+      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/2d213fd6-2754-4e92-a6f1-03825f71c7af"
+    }
+  ],
+  "policies": [
+    {
+      "title": "Privacy Policy",
+      "href": "#"
+    },
+    {
+      "title": "Terms and Conditions",
+      "href": "#"
+    },
+    {
+      "title": "Cookies Policy",
+      "href": "#"
+    }
+  ],
+  "logo": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f1faab73-e4ff-4037-b7c4-5d02bd0b1209",
+  "trademark": "TM & © 2023 Deco Storefront, Inc."
+}

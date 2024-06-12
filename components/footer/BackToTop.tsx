@@ -5,8 +5,8 @@ export default function BackToTop({ content }: { content?: string }) {
     <>
       {content && (
         <div class="w-full flex items-center justify-center">
-          <a href="#top" class="btn">
-            {content} <Icon id="ChevronUp" width={24} height={24} />
+          <a href="#top" class="btn no-animation">
+            {content} <Icon id="chevron-right" class="-rotate-90" />
           </a>
         </div>
       )}

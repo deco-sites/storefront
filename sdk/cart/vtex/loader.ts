@@ -15,7 +15,7 @@ export const cartFrom = (form: Cart, url: string): Minicart => {
   const coupon = form?.marketingData?.coupon ?? undefined;
 
   return {
-    original: form as unknown as Record<string, unknown>,
+    platformCart: form as unknown as Record<string, unknown>,
     storefront: {
       items: items.map((item, index) => {
         const detailUrl = new URL(item.detailUrl, url).href;

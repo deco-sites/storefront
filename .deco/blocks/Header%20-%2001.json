@@ -6,24 +6,18 @@
     "height": 16
   },
   "alerts": [
-    "Use this template to create your store at deco.cx"
+    "Get 10% off today: NEW10"
   ],
-  "navItems": {
-    "__resolveType": "navbar"
-  },
   "__resolveType": "site/sections/Header/Header.tsx",
   "searchbar": {
     "placeholder": "What are you looking for?",
     "loader": {
-      "data": {
-        "searches": [],
-        "products": [],
-        "__resolveType": "vtex/loaders/intelligentSearch/suggestions.ts",
-        "count": 6
-      },
-      "__resolveType": "resolved"
+      "__resolveType": "resolved",
+      "data": null
     }
   },
-  "mode": "private",
-  "variant": "full"
+  "navItems": {
+    "__resolveType": "navbar"
+  },
+  "variant": "initial"
 }

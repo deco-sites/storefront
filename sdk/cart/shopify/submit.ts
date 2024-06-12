@@ -12,8 +12,8 @@ const actions: CartSubmitActions<AppContext> = {
 
     return cartFrom(response);
   },
-  setQuantity: async ({ items, original }, _req, ctx) => {
-    const cart = original as Cart;
+  setQuantity: async ({ items, platformCart }, _req, ctx) => {
+    const cart = platformCart as Cart;
 
     if (!cart) {
       throw new Error(

@@ -145,7 +145,7 @@ function PageResult(props: SectionProps<typeof loader>) {
                 disabled={!prevPageUrl}
                 class="btn btn-ghost join-item"
               >
-                <Icon id="ChevronLeft" size={24} strokeWidth={2} />
+                <Icon id="chevron-right" class="rotate-180" />
               </a>
               <span class="btn btn-ghost join-item">
                 Page {zeroIndexedOffsetPage + 1}
@@ -157,7 +157,7 @@ function PageResult(props: SectionProps<typeof loader>) {
                 disabled={!nextPageUrl}
                 class="btn btn-ghost join-item"
               >
-                <Icon id="ChevronRight" size={24} strokeWidth={2} />
+                <Icon id="chevron-right" />
               </a>
             </div>
           )}

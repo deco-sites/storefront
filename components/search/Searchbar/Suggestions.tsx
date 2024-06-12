@@ -74,11 +74,7 @@ function Suggestions(
                   class="flex gap-4 items-center"
                 >
                   <span>
-                    <Icon
-                      id="MagnifyingGlass"
-                      size={24}
-                      strokeWidth={0.01}
-                    />
+                    <Icon id="search" />
                   </span>
                   <span dangerouslySetInnerHTML={{ __html: term }} />
                 </a>

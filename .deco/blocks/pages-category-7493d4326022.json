@@ -30,7 +30,7 @@
       "startingPage": 1
     },
     {
-      "__resolveType": "Footer - 01"
+      "__resolveType": "Footer"
     }
   ],
   "__resolveType": "website/pages/Page.tsx"
