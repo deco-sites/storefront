@@ -41,3 +41,22 @@
     --dot-progress: 100%
   }
 }
+
+@keyframes fade-out {
+  to {opacity:0;}
+}
+
+@keyframes fade-in {
+  from {opacity:0;}
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(fallback) {
+  animation: 1s ease both fade-out;
+}
+::view-transition-new(fallback) {
+  animation: 1s ease both fade-in;
+}
