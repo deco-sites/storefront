@@ -246,7 +246,11 @@ function Result(props: SectionProps<typeof loader>) {
 
   return (
     <>
-      <div id={container} {...viewItemListEvent} class="w-full">
+      <div
+        id={container}
+        {...viewItemListEvent}
+        class="w-full [view-transition-name:fallback]"
+      >
         {partial
           ? <PageResult {...props} />
           : (

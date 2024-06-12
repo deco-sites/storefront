@@ -15,13 +15,6 @@ export default defineApp(async (_req, ctx) => {
     <>
       {/* Include Icons and manifest */}
       <Head>
-        {/* Enable View Transitions API */}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `@view-transition { navigation: auto; }`,
-          }}
-        />
-
         {/* Tailwind v3 CSS file */}
         <link
           href={asset(`/styles.css?revision=${revision}`)}
