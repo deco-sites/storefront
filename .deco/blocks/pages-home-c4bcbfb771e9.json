@@ -35,6 +35,9 @@
       ]
     },
     {
+      "__resolveType": "site/sections/Hints.tsx"
+    },
+    {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
       "title": "Make Mom's day",
       "cta": "/mono",
