@@ -16,7 +16,8 @@ export type AvailableIcons =
   | "share"
   | "sell"
   | "check-circle"
-  | "error";
+  | "error"
+  | "trash";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**

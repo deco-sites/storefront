@@ -41,7 +41,7 @@ function Sort({ sortOptions, url }: Props) {
       <label for="sort" class="sr-only">Sort by</label>
       <select
         name="sort"
-        class="select select-bordered w-full max-w-sm rounded-lg"
+        class="select w-full max-w-sm rounded-lg"
         hx-on:change={useScript(() => {
           const select = event!.currentTarget as HTMLSelectElement;
           window.location.href = select.value;

@@ -1,0 +1,23 @@
+{
+  "__resolveType": "site/sections/Header/Header.tsx",
+  "navItems": {
+    "__resolveType": "navbar"
+  },
+  "searchbar": {
+    "placeholder": "What are you looking for?",
+    "loader": {
+      "__resolveType": "resolved",
+      "data": null
+    }
+  },
+  "alerts": [
+    "<p>Get 10% off today: <strong>NEW10</strong></p>"
+  ],
+  "variant": "initial",
+  "logo": {
+    "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f1faab73-e4ff-4037-b7c4-5d02bd0b1209",
+    "alt": "Deco Storefront",
+    "width": 160,
+    "height": 40
+  }
+}

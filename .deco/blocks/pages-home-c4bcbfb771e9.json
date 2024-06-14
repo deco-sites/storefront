@@ -5,7 +5,7 @@
       "__resolveType": "website/sections/Seo/SeoV2.tsx"
     },
     {
-      "__resolveType": "Header - 01"
+      "__resolveType": "Header"
     },
     {
       "__resolveType": "site/sections/Images/Carousel.tsx",

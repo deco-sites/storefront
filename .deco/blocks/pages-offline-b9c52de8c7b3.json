@@ -3,7 +3,7 @@
   "path": "/offline",
   "sections": [
     {
-      "__resolveType": "Header - 01"
+      "__resolveType": "Header"
     },
     {
       "title": "Oh no! You are offline!",

@@ -1,4 +1,5 @@
 import { useScript } from "apps/utils/useScript.ts";
+import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import Icon from "../ui/Icon.tsx";
 
@@ -23,26 +24,33 @@ const onLoad = (containerID: string) => {
   });
 };
 
-function Login() {
+function SignIn({ variant }: { variant: "mobile" | "desktop" }) {
   const id = useId();
 
   return (
     <div id={id}>
       <a
-        class="btn btn-square sm:btn-block btn-sm btn-ghost font-thin no-animation"
+        class={clx(
+          "btn btn-sm font-thin btn-ghost no-animation",
+          variant === "mobile" && "btn-square",
+        )}
         href="/login"
         aria-label="Login"
       >
         <Icon id="account_circle" />
-        <span class="hidden sm:inline">LOGIN</span>
+        {variant === "desktop" && <span>Sign in</span>}
       </a>
       <a
-        class="btn btn-square sm:btn-block btn-sm btn-ghost font-thin no-animation hidden"
+        class={clx(
+          "hidden",
+          "btn btn-sm font-thin btn-ghost no-animation",
+          variant === "mobile" && "btn-square",
+        )}
         href="/account"
         aria-label="Account"
       >
         <Icon id="account_circle" />
-        <span class="hidden sm:inline">ACCOUNT</span>
+        {variant === "desktop" && <span>My account</span>}
       </a>
       <script
         type="module"
@@ -52,4 +60,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SignIn;

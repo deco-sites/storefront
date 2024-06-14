@@ -90,7 +90,7 @@ function BannerItem(
             {action.subTitle}
           </span>
           <button
-            class="btn btn-primary btn-outline bg-base-100 rounded-full w-fit"
+            class="btn btn-primary btn-outline bg-base-100"
             aria-label={action.label}
           >
             {action.label}
@@ -102,8 +102,8 @@ function BannerItem(
           media="(max-width: 767px)"
           fetchPriority={lcp ? "high" : "auto"}
           src={mobile}
-          width={430}
-          height={590}
+          width={412}
+          height={660}
         />
         <Source
           media="(min-width: 768px)"

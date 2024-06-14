@@ -1,20 +1,19 @@
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
-import ProductImageZoom from "../../../components/product/ProductImageZoom.tsx";
-import Icon from "../../../components/ui/Icon.tsx";
-import Slider from "../../../components/ui/Slider.tsx";
-import { clx } from "../../../sdk/clx.ts";
-import { useId } from "../../../sdk/useId.ts";
+import ProductImageZoom from "./ProductImageZoom.tsx";
+import Icon from "../ui/Icon.tsx";
+import Slider from "../ui/Slider.tsx";
+import { clx } from "../../sdk/clx.ts";
+import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
-
-  layout?: {
-    width: number;
-    height: number;
-  };
 }
+
+const WIDTH = 820;
+const HEIGHT = 615;
+const ASPECT_RATIO = `${WIDTH} / ${HEIGHT}`;
 
 /**
  * @title Product Image Slider
@@ -31,19 +30,14 @@ export default function GallerySlider(props: Props) {
   }
 
   const {
-    layout,
     page: { product: { image: images = [] } },
   } = props;
 
-  const { width, height } = layout || { width: 300, height: 370 };
-
-  const aspectRatio = `${width} / ${height}`;
-
   return (
     <>
-      <div id={id} class="grid grid-flow-row sm:grid-flow-col gap-2">
+      <div id={id} class="flex flex-col sm:flex-row-reverse gap-5">
         {/* Image Slider */}
-        <div class="relative order-1 sm:order-2 h-min">
+        <div class="relative h-min flex-grow">
           <Slider class="carousel carousel-center gap-6 w-full">
             {images.map((img, index) => (
               <Slider.Item
@@ -53,11 +47,11 @@ export default function GallerySlider(props: Props) {
                 <Image
                   class="w-full"
                   sizes="(max-width: 640px) 100vw, 40vw"
-                  style={{ aspectRatio }}
+                  style={{ aspectRatio: ASPECT_RATIO }}
                   src={img.url!}
                   alt={img.alternateName}
-                  width={width}
-                  height={height}
+                  width={WIDTH}
+                  height={HEIGHT}
                   // Preload LCP image for better web vitals
                   preload={index === 0}
                   loading={index === 0 ? "eager" : "lazy"}
@@ -92,8 +86,8 @@ export default function GallerySlider(props: Props) {
           class={clx(
             "carousel carousel-center",
             "sm:carousel-vertical",
-            "gap-1 px-4 order-2",
-            "sm:gap-2 sm:px-0 sm:order-1",
+            "gap-1 px-4",
+            "sm:gap-2 sm:px-0",
           )}
           style={{ maxHeight: "600px" }}
         >
@@ -101,10 +95,10 @@ export default function GallerySlider(props: Props) {
             <li class="carousel-item">
               <Slider.Dot index={index}>
                 <Image
-                  style={{ aspectRatio }}
-                  class="group-disabled:border-base-300 border rounded "
-                  width={100}
-                  height={123}
+                  style={{ aspectRatio: "1 / 1" }}
+                  class="group-disabled:border-base-300 border rounded object-cover"
+                  width={60}
+                  height={60}
                   src={img.url!}
                   alt={img.alternateName}
                 />
@@ -119,7 +113,7 @@ export default function GallerySlider(props: Props) {
         id={zoomId}
         images={images}
         width={700}
-        height={Math.trunc(700 * height / width)}
+        height={Math.trunc(700 * HEIGHT / WIDTH)}
       />
     </>
   );

@@ -73,7 +73,7 @@ export interface Button {
    * @title Radius
    * @description Button and similar elements
    */
-  "--rounded-btn": "0" | "0.2rem" | "0.4rem" | "0.8rem" | "2rem";
+  "--rounded-btn": "0" | "0.2rem" | "0.4rem" | "0.8rem" | "2rem" | "99999px";
   /**
    * @default 0.95
    * @title Scale on click

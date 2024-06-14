@@ -1,6 +1,6 @@
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
+import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
@@ -23,7 +23,7 @@ function ProductInfo({ page }: Props) {
   }
 
   const { breadcrumbList, product } = page;
-  const { productID, offers, gtin, isVariantOf } = product;
+  const { productID, offers, isVariantOf } = product;
   const description = product.description || isVariantOf?.description;
   const title = isVariantOf?.name ?? product.name;
 
@@ -31,9 +31,12 @@ function ProductInfo({ page }: Props) {
     price = 0,
     listPrice,
     seller = "1",
-    installments,
     availability,
   } = useOffer(offers);
+
+  const percent = listPrice && price
+    ? Math.round(((listPrice - price) / listPrice) * 100)
+    : 0;
 
   const breadcrumb = {
     ...breadcrumbList,
@@ -61,36 +64,35 @@ function ProductInfo({ page }: Props) {
   });
 
   return (
-    <div {...viewItemEvent} class="flex flex-col px-4" id={id}>
-      <Breadcrumb itemListElement={breadcrumb.itemListElement} />
+    <div {...viewItemEvent} class="flex flex-col" id={id}>
+      {/* Price tag */}
+      <span
+        class={clx(
+          "text-sm/4 font-normal text-black bg-primary bg-opacity-15 text-center rounded-badge px-2 py-1",
+          percent < 1 && "opacity-0",
+          "w-fit",
+        )}
+      >
+        {percent} % off
+      </span>
 
-      {/* Code and name */}
-      <div class="mt-4 sm:mt-8">
-        <div>
-          {gtin && <span class="text-sm text-base-300">Cod. {gtin}</span>}
-        </div>
-        <h1>
-          <span class="font-medium text-xl capitalize">{title}</span>
-        </h1>
-      </div>
+      {/* Product Name */}
+      <span class={clx("text-3xl font-semibold", "pt-4")}>
+        {title}
+      </span>
 
       {/* Prices */}
-      <div class="mt-4">
-        <div class="flex flex-row gap-2 items-center">
-          {(listPrice ?? 0) > price && (
-            <span class="line-through text-base-300 text-xs">
-              {formatPrice(listPrice, offers?.priceCurrency)}
-            </span>
-          )}
-          <span class="font-medium text-xl text-secondary">
-            {formatPrice(price, offers?.priceCurrency)}
-          </span>
-        </div>
-        <span class="text-sm text-base-300">{installments}</span>
+      <div class="flex gap-3 pt-1">
+        <span class="text-3xl font-semibold text-base-300">
+          {formatPrice(price, offers?.priceCurrency)}
+        </span>
+        <span class="line-through text-sm font-medium text-gray-400">
+          {formatPrice(listPrice, offers?.priceCurrency)}
+        </span>
       </div>
 
       {/* Sku Selector */}
-      <div class="mt-4 sm:mt-6">
+      <div class="mt-4 sm:mt-8">
         <ProductSelector product={product} />
       </div>
 
@@ -103,7 +105,8 @@ function ProductInfo({ page }: Props) {
                 item={item}
                 seller={seller}
                 product={product}
-                class="btn-primary"
+                class="btn btn-primary no-animation"
+                disabled={false}
               />
               <WishlistButton item={item} />
             </>

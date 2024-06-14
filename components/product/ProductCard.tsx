@@ -10,6 +10,7 @@ import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
 import WishlistButton from "../wishlist/WishlistButton.tsx";
 import AddToCartButton from "./AddToCartButton.tsx";
 import { Ring } from "./ProductVariantSelector.tsx";
+import { useId } from "../../sdk/useId.ts";
 
 interface Props {
   product: Product;
@@ -21,6 +22,8 @@ interface Props {
 
   /** @description index of the product card in the list */
   index?: number;
+
+  class?: string;
 }
 
 const WIDTH = 287;
@@ -32,7 +35,10 @@ function ProductCard({
   preload,
   itemListName,
   index,
+  class: _class,
 }: Props) {
+  const id = useId();
+
   const { url, image: images, offers, isVariantOf } = product;
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const title = isVariantOf?.name ?? product.name;
@@ -65,8 +71,7 @@ function ProductCard({
   return (
     <div
       {...event}
-      class="card card-compact group text-sm"
-      style={{ minWidth: "287px", maxWidth: "300px" }}
+      class={clx("card card-compact group text-sm", _class)}
     >
       <figure
         class={clx(
@@ -137,7 +142,7 @@ function ProductCard({
           <span
             class={clx(
               "text-sm/4 font-normal text-black bg-primary bg-opacity-15 text-center rounded-badge px-2 py-1",
-              percent < 1 && "opacity-0",
+              (percent < 1 || !inStock) && "opacity-0",
             )}
           >
             {percent} % off
@@ -156,7 +161,7 @@ function ProductCard({
 
         <div class="flex gap-2 pt-2">
           {listPrice && (
-            <span class="line-through font-normal" style={{ color: "#858585" }}>
+            <span class="line-through font-normal text-gray-400">
               {formatPrice(listPrice, offers?.priceCurrency)}
             </span>
           )}
@@ -176,7 +181,7 @@ function ProductCard({
                   <input
                     class="hidden peer"
                     type="radio"
-                    name={firstSkuVariations[0]}
+                    name={`${id}-${firstSkuVariations[0]}`}
                     checked={link === relativeUrl}
                   />
                   <Ring value={value} />

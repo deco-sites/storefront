@@ -1,4 +1,4 @@
-import type { ImageWidget } from "apps/admin/widgets.ts";
+import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { useDevice } from "deco/hooks/useDevice.ts";
@@ -18,7 +18,7 @@ import Icon from "../ui/Icon.tsx";
 import Modal from "../ui/Modal.tsx";
 import Alert from "./Alert.tsx";
 import Bag from "./Bag.tsx";
-import Login from "./Login.tsx";
+import SignIn from "./SignIn.tsx";
 import Menu from "./Menu.tsx";
 import NavItem from "./NavItem.tsx";
 
@@ -30,7 +30,7 @@ export interface Logo {
 }
 
 export interface SectionProps {
-  alerts?: string[];
+  alerts?: HTMLWidget[];
 
   /**
    * @title Navigation items
@@ -45,10 +45,10 @@ export interface SectionProps {
   searchbar: SearchbarProps;
 
   /** @title Logo */
-  logo?: Logo;
+  logo: Logo;
 
   /** @hide true */
-  variant?: "menu";
+  variant?: "initial" | "menu";
 }
 
 type Props = Omit<SectionProps, "alert" | "variant">;
@@ -66,12 +66,9 @@ const Desktop = (
       </div>
     </Modal>
 
-    <div class="grid grid-cols-3 items-center border-b border-base-200 w-full px-6">
-      <ul class="flex gap-6 col-span-1 justify-start">
-        {navItems?.slice(0, 4).map((item) => <NavItem item={item} />)}
-      </ul>
-      <div class="flex justify-center">
-        {logo && (
+    <div class="flex flex-col gap-4 pt-5 container border-b border-gray-300">
+      <div class="grid grid-cols-3 place-items-center">
+        <div class="place-self-start">
           <a href="/" aria-label="Store logo">
             <Image
               src={logo.src}
@@ -80,31 +77,31 @@ const Desktop = (
               height={logo.height || 23}
             />
           </a>
-        )}
-      </div>
-      <div class="flex-none flex items-center justify-end gap-2 col-span-1">
+        </div>
+
         <label
           for={SEARCHBAR_POPUP_ID}
-          class="btn btn-sm btn-ghost font-thin no-animation"
+          class="input input-bordered flex items-center gap-2 w-full"
           aria-label="search icon button"
         >
           <Icon id="search" />
-          <span>SEARCH</span>
+          <span class="text-base-300 truncate">
+            Search products, brands...
+          </span>
         </label>
 
-        <Login />
-
-        <a
-          class="btn btn-sm btn-ghost font-thin no-animation"
-          href="/wishlist"
-          aria-label="Wishlist"
-        >
-          <Icon id="favorite" />
-          <span>WISHLIST</span>
-        </a>
-
-        <div class="flex items-center text-xs font-thin">
+        <div class="flex gap-4 place-self-end">
+          <SignIn variant="desktop" />
           <Bag />
+        </div>
+      </div>
+
+      <div class="flex justify-between items-center text-base-300">
+        <ul class="flex">
+          {navItems?.slice(0, 4).map((item) => <NavItem item={item} />)}
+        </ul>
+        <div>
+          {/* ship to */}
         </div>
       </div>
     </div>
@@ -182,7 +179,7 @@ const Mobile = ({ logo, searchbar }: Props) => (
         <Icon id="search" />
       </label>
 
-      <Login />
+      <SignIn variant="mobile" />
 
       <Bag />
     </div>

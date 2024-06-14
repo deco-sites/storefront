@@ -15,7 +15,7 @@
       "__resolveType": "commerce/sections/Seo/SeoPDP.tsx"
     },
     {
-      "__resolveType": "Header - 01"
+      "__resolveType": "Header"
     },
     {
       "page": {
@@ -40,6 +40,9 @@
           "variantOptions": []
         }
       }
+    },
+    {
+      "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
     },
     {
       "__resolveType": "Footer"

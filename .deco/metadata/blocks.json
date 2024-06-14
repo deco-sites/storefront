@@ -71,10 +71,6 @@
     "blockType": "sections",
     "__resolveType": "site/sections/Theme/Theme.tsx"
   },
-  "/.deco/blocks/Header%20-%2001.json": {
-    "blockType": "sections",
-    "__resolveType": "site/sections/Header/Header.tsx"
-  },
   "/.deco/blocks/Image%20Gallery%20-%2001.json": {
     "blockType": "sections",
     "__resolveType": "site/sections/Images/ImageGallery.tsx"
@@ -141,7 +137,7 @@
   },
   "/.deco/blocks/pages-category-7493d4326022.json": {
     "name": "Category",
-    "path": "/*",
+    "path": "/s",
     "blockType": "pages",
     "__resolveType": "website/pages/Page.tsx"
   },
@@ -218,5 +214,9 @@
   "/.deco/blocks/Footer.json": {
     "blockType": "sections",
     "__resolveType": "site/sections/Footer/Footer.tsx"
+  },
+  "/.deco/blocks/Header.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Header/Header.tsx"
   }
 }

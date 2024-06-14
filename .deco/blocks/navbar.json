@@ -3,32 +3,49 @@
     {
       "@type": "SiteNavigationElement",
       "url": "/deals",
-      "name": "Deals"
+      "name": "Deals",
+      "children": [
+        {
+          "image": [],
+          "children": [],
+          "name": "Hello"
+        },
+        {
+          "image": [],
+          "children": [],
+          "name": "World"
+        }
+      ]
     },
     {
       "@type": "SiteNavigationElement",
       "url": "/valentines-day",
-      "name": "Valentine's Day"
+      "name": "Valentine's Day",
+      "children": []
     },
     {
       "@type": "SiteNavigationElement",
       "url": "/woman",
-      "name": "Woman"
+      "name": "Woman",
+      "children": []
     },
     {
       "@type": "SiteNavigationElement",
       "url": "/men",
-      "name": "Men"
+      "name": "Men",
+      "children": []
     },
     {
       "@type": "SiteNavigationElement",
       "url": "/clearance",
-      "name": "Clearance"
+      "name": "Clearance",
+      "children": []
     },
     {
       "@type": "SiteNavigationElement",
       "url": "/activities",
-      "name": "Activities"
+      "name": "Activities",
+      "children": []
     }
   ],
   "__resolveType": "commerce/loaders/navbar.ts"
