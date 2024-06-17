@@ -111,7 +111,7 @@ and set your credentials. Then, open `/components/minicart/Cart.tsx` and
 account name.
 
 After this, your should be using the products provenient from your ecommerce
-account
+account.
 
 ### Adding fonts
 
