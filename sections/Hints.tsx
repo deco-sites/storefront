@@ -7,7 +7,7 @@ export function loader(_: null, __: Request, ctx: AppContext) {
   fonts.forEach((font) => {
     ctx.response.headers.append(
       "link",
-      `<${font}>; rel=preload; as=font; type=font/woff2`,
+      `<${font}>; rel=preload; as=font; type=font/woff2; crossorigin`,
     );
   });
 }
