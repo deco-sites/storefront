@@ -95,10 +95,6 @@
     "blockType": "sections",
     "__resolveType": "site/sections/Links/LinkTree.tsx"
   },
-  "/.deco/blocks/Logos%20-%2001.json": {
-    "blockType": "sections",
-    "__resolveType": "site/sections/Content/Logos.tsx"
-  },
   "/.deco/blocks/Mobile.json": {
     "blockType": "matchers",
     "__resolveType": "website/matchers/device.ts"
@@ -218,5 +214,17 @@
   "/.deco/blocks/Header.json": {
     "blockType": "sections",
     "__resolveType": "site/sections/Header/Header.tsx"
+  },
+  "/.deco/blocks/Preview%20site%2Fsections%2FSocial%2FInstagramPosts.tsx.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Social/InstagramPosts.tsx"
+  },
+  "/.deco/blocks/Preview%20site%2Fsections%2FSocial%2FWhatsApp.tsx.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Social/WhatsApp.tsx"
+  },
+  "/.deco/blocks/Preview%20site%2Fsections%2FContent%2FCallToAction.tsx.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Content/CallToAction.tsx"
   }
 }

@@ -1,68 +1,52 @@
+import { type ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
-import SectionHeader from "../../components/ui/Section.tsx";
-import type { ImageWidget } from "apps/admin/widgets.ts";
+import Section, {
+  type Props as SectionHeaderProps,
+} from "../../components/ui/Section.tsx";
 
 export interface Image {
   image: ImageWidget;
-  altText: string;
+  alt: string;
 }
 
-export interface Props {
-  title?: string;
-  description?: string;
+export interface Props extends SectionHeaderProps {
   images?: Image[];
-  layout?: {
-    headerAlignment?: "center" | "left";
-  };
 }
 
-const IMAGES = [
-  {
-    altText: "deco",
-    image:
-      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/fe7cd8ba-c954-45d6-9282-ee7d8ca8e3c7",
-  },
-  {
-    altText: "deco",
-    image:
-      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/637e8601-6b86-4979-aa97-68013a2a60fd",
-  },
-];
-
-function Logos(props: Props) {
-  const {
-    title,
-    description,
-    images,
-    layout,
-  } = props;
-  const list = images && images.length > 0
-    ? images
-    : Array(20).fill(null).map((_, i) => IMAGES[i % 2]);
-
+function Logos({
+  title,
+  cta,
+  images = [
+    {
+      alt: "deco",
+      image:
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/fe7cd8ba-c954-45d6-9282-ee7d8ca8e3c7",
+    },
+    {
+      alt: "deco",
+      image:
+        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/637e8601-6b86-4979-aa97-68013a2a60fd",
+    },
+  ],
+}: Props) {
   return (
-    <div class="w-full container px-4 py-8 flex flex-col gap-8 lg:gap-12 lg:py-10 lg:px-0">
-      <SectionHeader
-        title={title}
-        description={description}
-        alignment={layout?.headerAlignment || "center"}
-      />
-      <div class="w-full text-center items-center">
-        {list.map((element) => (
-          <div class="w-36 lg:w-40 h-17 lg:h-20 px-4 lg:px-6 py-6 lg:py-4 inline-block align-middle">
-            <div class="flex w-full h-full items-center justify-center">
-              <Image
-                width={300}
-                height={300}
-                src={element.image}
-                alt={element.altText || ""}
-                class="max-w-full max-h-full"
-              />
-            </div>
-          </div>
+    <Section.Container>
+      <Section.Header title={title} cta={cta} />
+
+      <ul class="flex flex-wrap items-center justify-center gap-2 sm:gap-4 px-5 sm:px-0">
+        {images.map((item) => (
+          <li>
+            <Image
+              width={300}
+              height={300}
+              src={item.image}
+              alt={item.alt}
+              class="w-full h-full object-cover"
+            />
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </Section.Container>
   );
 }
 

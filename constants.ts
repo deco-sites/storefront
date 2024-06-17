@@ -10,7 +10,6 @@ export const SEARCHBAR_INPUT_FORM_ID = "searchbar-form";
 
 export const USER_ID = "user-json";
 
-export const WISHLIST_ID = "wishlist-json";
 export const WISHLIST_FORM_ID = "wishlist-form";
 
 export const HEADER_HEIGHT_MOBILE = "104px";

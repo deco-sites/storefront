@@ -1,4 +1,4 @@
-import { ImageWidget } from "apps/admin/widgets.ts";
+import { type ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import PoweredByDeco from "apps/website/components/PoweredByDeco.tsx";
 

@@ -1,0 +1,18 @@
+{
+  "__resolveType": "site/sections/Content/CallToAction.tsx",
+  "cta": [
+    {
+      "variant": "Normal",
+      "id": "asd",
+      "href": "asd",
+      "text": "asd"
+    },
+    {
+      "variant": "Normal",
+      "href": "asd",
+      "text": "asd",
+      "id": "asd"
+    }
+  ],
+  "text": "asd"
+}
