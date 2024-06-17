@@ -156,7 +156,7 @@ Open `static` folder and replace `favicon.ico`, `robots.txt` and
 
 If you are missing a functionality or the changes in the design system were not
 enough for accomplishing your project, you can fully customize all HTML/CSS/JS
-generated on your store by changing the code.
+generated on your store by changing the code..
 
 ### Understanding project structure
 
