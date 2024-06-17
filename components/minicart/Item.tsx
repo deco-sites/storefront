@@ -59,10 +59,13 @@ function CartItem({ item, index, locale, currency }: Props) {
         <div class="flex justify-between items-center">
           <legend>{name}</legend>
           <button
-            class={clx(isGift && "hidden", "btn btn-ghost btn-square")}
+            class={clx(
+              isGift && "hidden",
+              "btn btn-ghost btn-square no-animation",
+            )}
             hx-on:click={useScript(removeItemHandler)}
           >
-            <Icon id="Trash" size={24} />
+            <Icon id="trash" size={24} />
           </button>
         </div>
 

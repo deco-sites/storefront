@@ -17,7 +17,7 @@ export const cartFrom = (cart: Cart | null): Minicart => {
   const checkoutHref = `/checkout/v3/start/${cart?.id}/${cart?.token}`;
 
   return {
-    original: cart as unknown as Record<string, unknown>,
+    platformCart: cart as unknown as Record<string, unknown>,
     storefront: {
       items: items?.map((item, index) => ({
         image: item.image.src,

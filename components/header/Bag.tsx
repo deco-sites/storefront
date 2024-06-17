@@ -1,26 +1,25 @@
 import { useScript } from "apps/utils/useScript.ts";
 import { MINICART_DRAWER_ID } from "../../constants.ts";
-import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import Icon from "../ui/Icon.tsx";
 
 const onLoad = (id: string) =>
   window.STOREFRONT.CART.subscribe((sdk) => {
-    const script = document.getElementById(id);
-    const counter = script?.closest("span");
+    const counter = document.getElementById(id);
     const count = sdk.getCart()?.items.length ?? 0;
+
+    if (!counter) {
+      return;
+    }
 
     // Set minicart items count on header
     if (count === 0) {
-      counter?.classList.add("after:hidden");
+      counter.classList.add("hidden");
     } else {
-      counter?.classList.remove("after:hidden");
+      counter.classList.remove("hidden");
     }
 
-    counter?.setAttribute(
-      "data-count",
-      count > 9 ? "9+" : count.toString(),
-    );
+    counter.innerText = count > 9 ? "9+" : count.toString();
   });
 
 function Bag() {
@@ -35,12 +34,11 @@ function Bag() {
       >
         <span
           id={id}
-          class={clx(
-            "btn btn-circle btn-sm btn-ghost no-animation",
-            "after:hidden after:indicator-item after:badge after:badge-secondary after:badge-sm after:content-[attr(data-count)] after:font-thin",
-          )}
-        >
-          <Icon id="ShoppingCart" size={24} strokeWidth={2} />
+          class="hidden indicator-item badge badge-primary badge-sm font-thin"
+        />
+
+        <span class="btn btn-square btn-sm btn-ghost no-animation">
+          <Icon id="shopping_bag" />
         </span>
       </label>
       <script

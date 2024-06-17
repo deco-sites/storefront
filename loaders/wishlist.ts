@@ -31,6 +31,11 @@ async function loader(
       productIDs: response.map((item) => item.productId),
     };
   }
+  if (platform === "shopify") {
+    return {
+      productIDs: [],
+    };
+  }
 
   throw new Error(`Unsupported platform: ${platform}`);
 }

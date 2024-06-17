@@ -9,10 +9,6 @@
     font-family: var(--font-family);
   }
 
-  mark {
-    @apply bg-accent text-accent-content;
-  }
-
   /** Remove default styles from input[type=number] */
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {

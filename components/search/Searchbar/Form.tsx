@@ -91,12 +91,7 @@ export default function Searchbar(
           tabIndex={-1}
         >
           <span class="loading loading-spinner loading-xs hidden [.htmx-request_&]:inline" />
-          <Icon
-            class="inline [.htmx-request_&]:hidden"
-            id="MagnifyingGlass"
-            size={24}
-            strokeWidth={0.01}
-          />
+          <Icon id="search" class="inline [.htmx-request_&]:hidden" />
         </button>
         <input
           autoFocus
@@ -115,11 +110,11 @@ export default function Searchbar(
         />
         <label
           type="button"
-          class="join-item btn btn-ghost btn-square hidden sm:inline-flex"
+          class="join-item btn btn-ghost btn-square hidden sm:inline-flex no-animation"
           for={SEARCHBAR_POPUP_ID}
           aria-label="Toggle searchbar"
         >
-          <Icon id="XMark" size={24} strokeWidth={2} />
+          <Icon id="close" />
         </label>
       </form>
 

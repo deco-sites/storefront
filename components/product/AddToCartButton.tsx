@@ -6,7 +6,7 @@ import { useId } from "../../sdk/useId.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import QuantitySelector from "../ui/QuantitySelector.tsx";
 
-export interface Props extends JSX.HTMLAttributes<HTMLLabelElement> {
+export interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
   product: Product;
   seller: string;
   item: AnalyticsItem;
@@ -39,8 +39,7 @@ const onChange = () => {
 // Copy cart form values into AddToCartButton
 const onLoad = (id: string) => {
   window.STOREFRONT.CART.subscribe((sdk) => {
-    const script = document.getElementById(id);
-    const container = script?.closest("div[data-cart-item]");
+    const container = document.getElementById(id);
     const checkbox = container?.querySelector<HTMLInputElement>(
       'input[type="checkbox"]',
     );
@@ -124,27 +123,27 @@ const useAddToCart = ({ product, seller }: Props) => {
 };
 
 function AddToCartButton(props: Props) {
-  const id = useId();
-  const { product, item } = props;
+  const { product, item, class: _class } = props;
   const platformProps = useAddToCart(props);
+  const id = useId();
 
   return (
     <div
       id={id}
+      class="flex"
       data-item-id={product.productID}
       data-cart-item={encodeURIComponent(
         JSON.stringify({ item, platformProps }),
       )}
-      class={clx("flex", props.class?.toString())}
     >
       <input type="checkbox" class="hidden peer" />
 
       <button
         disabled
-        class="flex-grow peer-checked:hidden btn no-animation"
+        class={clx("flex-grow peer-checked:hidden", _class?.toString())}
         hx-on:click={useScript(onClick)}
       >
-        Add to Bag
+        Add to Cart
       </button>
 
       {/* Quantity Input */}

@@ -1,0 +1,18 @@
+{
+  "__resolveType": "site/sections/Product/ProductShelf.tsx",
+  "products": {
+    "__resolveType": "shopify/loaders/ProductList.ts",
+    "props": {
+      "sort": "",
+      "query": "shirts",
+      "count": 10
+    },
+    "filters": {
+      "tags": [],
+      "productTypes": [],
+      "productVendors": [],
+      "variantOptions": []
+    }
+  },
+  "variant": "normal"
+}

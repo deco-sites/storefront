@@ -22,7 +22,7 @@ interface CartForm {
   items: number[];
   coupon: string | null;
   action: string | null;
-  original: unknown;
+  platformCart: unknown;
   addToCart: unknown;
 }
 
@@ -45,7 +45,7 @@ const cartFrom = (form: FormData) => {
   const cart: CartForm = {
     items: [],
     coupon: null,
-    original: null,
+    platformCart: null,
     action: null,
     addToCart: null,
   };
@@ -55,8 +55,8 @@ const cartFrom = (form: FormData) => {
       cart.coupon = value.toString();
     } else if (name === "action") {
       cart.action = value.toString();
-    } else if (name === "original") {
-      cart.original = safeParse(decodeURIComponent(value.toString()));
+    } else if (name === "platform-cart") {
+      cart.platformCart = safeParse(decodeURIComponent(value.toString()));
     } else if (name.startsWith("item::")) {
       const [_, it] = name.split("::");
       cart.items[Number(it)] = Number(value);

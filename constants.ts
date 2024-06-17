@@ -10,8 +10,9 @@ export const SEARCHBAR_INPUT_FORM_ID = "searchbar-form";
 
 export const USER_ID = "user-json";
 
-export const WISHLIST_ID = "wishlist-json";
 export const WISHLIST_FORM_ID = "wishlist-form";
 
-export const HEADER_HEIGHT = "110px";
-export const NAVBAR_HEIGHT = "75px";
+export const HEADER_HEIGHT_MOBILE = "104px";
+export const NAVBAR_HEIGHT_MOBILE = "56px";
+export const HEADER_HEIGHT_DESKTOP = "176px";
+export const NAVBAR_HEIGHT_DESKTOP = "44px";

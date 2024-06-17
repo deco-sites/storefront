@@ -90,7 +90,7 @@ function Aside(
           <span class="font-medium text-2xl">{title}</span>
         </h1>
         <label for={drawer} aria-label="X" class="btn btn-ghost">
-          <Icon id="XMark" size={24} strokeWidth={2} />
+          <Icon id="close" />
         </label>
       </div>
       {children}

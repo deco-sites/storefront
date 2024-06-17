@@ -10,7 +10,7 @@
     "descriptionTemplate": "%s | Deco.cx"
   },
   "theme": {
-    "__resolveType": "Fashion theme"
+    "__resolveType": "Deco"
   },
   "global": [
     {
@@ -34,17 +34,10 @@
   ],
   "routes": [
     {
-      "__resolveType": "vtex/loaders/proxy.ts",
-      "includeSiteMap": [],
+      "__resolveType": "shopify/loaders/proxy.ts",
       "extraPathsToProxy": [],
-      "includeScriptsToHead": {
-        "includes": [
-          {
-            "__resolveType": "analytics/loaders/DecoAnalyticsScript.ts"
-          }
-        ],
-        "includePlausible": true
-      }
+      "includeSiteMap": [],
+      "excludePathsFromDecoSiteMap": []
     },
     {
       "__resolveType": "website/loaders/pages.ts"
@@ -59,7 +52,7 @@
   "commerce": {
     "platform": "other"
   },
-  "platform": "vtex",
+  "platform": "shopify",
   "__resolveType": "site/apps/site.ts",
   "firstByteThresholdMS": true,
   "abTesting": {

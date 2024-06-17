@@ -1,0 +1,11 @@
+{
+  "__resolveType": "site/apps/deco/shopify.ts",
+  "adminAccessToken": {
+    "__resolveType": "website/loaders/secret.ts",
+    "encrypted": "6378c07c4148a36786a94dc9bf5f351f836991f9d17989e0cf3a0af449d4bc39a93c5b76674866aed1b1d4663bc01ee5",
+    "name": "SHOPIFY_ACCESS_TOKEN"
+  },
+  "platform": "shopify",
+  "storeName": "gimenesdevstore",
+  "storefrontAccessToken": "71f2c3da0dab3b4eee7dce35eb8c6113"
+}
