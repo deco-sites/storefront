@@ -184,7 +184,7 @@ function ProductCard({
                     name={`${id}-${firstSkuVariations[0]}`}
                     checked={link === relativeUrl}
                   />
-                  <Ring value={value} />
+                  <Ring value={value} checked={link === relativeUrl} />
                 </a>
               </li>
             ))}
