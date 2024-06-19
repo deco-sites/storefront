@@ -42,7 +42,7 @@
         "__resolveType": "shopify/loaders/ProductList.ts",
         "props": {
           "sort": "",
-          "query": "stickers",
+          "query": "accessories",
           "count": 12
         },
         "filters": {
