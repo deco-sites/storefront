@@ -61,14 +61,14 @@ export default function GallerySlider(props: Props) {
           </Slider>
 
           <Slider.PrevButton
-            class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline"
+            class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline disabled:hidden"
             disabled
           >
             <Icon id="chevron-right" class="rotate-180" />
           </Slider.PrevButton>
 
           <Slider.NextButton
-            class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline"
+            class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline disabled:hidden"
             disabled={images.length < 2}
           >
             <Icon id="chevron-right" />
