@@ -1,4 +1,4 @@
-import { useScript } from "apps/utils/useScript.ts";
+import { useScript } from "deco/hooks/useScript.ts";
 import { Section } from "deco/blocks/section.ts";
 import { useId } from "../../sdk/useId.ts";
 

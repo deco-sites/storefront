@@ -1,6 +1,6 @@
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import { useScript } from "apps/utils/useScript.ts";
+import { useScript } from "deco/hooks/useScript.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 import { SectionProps } from "deco/mod.ts";
 import ProductCard from "../../components/product/ProductCard.tsx";

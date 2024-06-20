@@ -1,4 +1,4 @@
-import { useScript } from "apps/utils/useScript.ts";
+import { useScript } from "deco/hooks/useScript.ts";
 import { useId } from "../../sdk/useId.ts";
 import { HTMLWidget } from "apps/admin/widgets.ts";
 import { clx } from "../../sdk/clx.ts";

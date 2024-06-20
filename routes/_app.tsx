@@ -1,6 +1,6 @@
 import { asset, Head } from "$fresh/runtime.ts";
 import { defineApp } from "$fresh/server.ts";
-import { useScript } from "apps/utils/useScript.ts";
+import { useScript } from "deco/hooks/useScript.ts";
 import { Context } from "deco/deco.ts";
 
 const serviceWorkerScript = () =>

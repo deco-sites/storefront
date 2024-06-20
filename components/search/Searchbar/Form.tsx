@@ -10,7 +10,7 @@
  */
 
 import { Suggestion } from "apps/commerce/types.ts";
-import { useScript } from "apps/utils/useScript.ts";
+import { useScript } from "deco/hooks/useScript.ts";
 import { asResolved, Resolved } from "deco/mod.ts";
 import {
   SEARCHBAR_INPUT_FORM_ID,
