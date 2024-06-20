@@ -59,64 +59,34 @@
       "cta": "/all",
       "items": [
         {
-          "label": "Grocery",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/9581289b-7ad3-462b-a680-47678f87c0fc",
+          "label": "Men",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/c7850e6d-6c6c-4e7a-8059-d1daaed05a16",
           "href": "/"
         },
         {
           "href": "/",
-          "label": "Home",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/ec749573-4bf4-45d7-ac20-fc66e15cad6e"
+          "label": "Woman",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/08569c1b-473a-41b8-9fd4-acb348c809f3"
         },
         {
           "href": "/",
-          "label": "Furniture",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/d1731f58-3fff-46e6-9165-d4d698c4e199"
+          "label": "Kids",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/a57f23f5-e6f1-4545-9919-8a200c663f66"
         },
         {
           "href": "/",
-          "label": "Toys",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3a0e5e41-0875-43b9-aaff-27b400c5274c"
+          "label": "Hats",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/2980a7bd-f87b-4f5c-aa56-e48b9c3aeec7"
         },
         {
           "href": "/",
-          "label": "Electronics",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/4e0b46e9-c5c3-4222-8c9e-4ce98f3d9ad9"
+          "label": "Accessories",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/8584a9ee-fdda-4ae6-acef-f2e0bac1aa10"
         },
         {
           "href": "/",
-          "label": "Pets",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/edd5d0e2-9e02-4730-bef7-1f1cd750d579"
-        },
-        {
-          "href": "/",
-          "label": "Clothing & Shoes",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/ccb8fefc-3197-45a5-a085-3b6f493d08a0"
-        },
-        {
-          "href": "/",
-          "label": "Baby",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/8afd4bc6-b568-4999-b80d-ef36c78f1153"
-        },
-        {
-          "href": "/",
-          "label": "Sports & Outdoors",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/b81a2f89-0d91-44b6-ac4c-f7f092cf3c46"
-        },
-        {
-          "href": "/",
-          "label": "Beauty",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/6bc77133-8f09-4301-b54e-e4924b51a5c5"
-        },
-        {
-          "href": "/",
-          "label": "Health",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/a9a21762-d617-4b44-8b4f-ec31d36d42f2"
-        },
-        {
-          "href": "/",
-          "label": "Luggage",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/253fc321-0d8c-4f33-8ae6-3ba1ff18c619"
+          "label": "Home & Living",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/d0433c00-cd26-4638-b519-0cb64b9f82e8"
         }
       ]
     },
