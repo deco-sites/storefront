@@ -11,39 +11,50 @@
       "__resolveType": "site/sections/Images/Carousel.tsx",
       "images": [
         {
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/e5b17750-7164-45a5-9d3a-68076ab407db",
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f50d5ec4-c329-44c0-b504-f74155260d41",
-          "alt": "valentines",
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/69ec3687-74ea-4087-a9c1-40cf90a4a53a",
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/c171753b-f415-4753-8914-0c5bf9a7f7ff",
+          "alt": "Spring",
           "action": {
-            "title": "Valentine's Day",
-            "subTitle": "Celebrate Love with Our Exclusive Offers",
+            "title": "Step into Spring with Stylish",
+            "subTitle": "Brighten your look with our latest collection.",
             "href": "#",
-            "label": "Enjoy!"
+            "label": "Shop Now!"
           }
         },
         {
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/e5b17750-7164-45a5-9d3a-68076ab407db",
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f50d5ec4-c329-44c0-b504-f74155260d41",
-          "alt": "Christmas",
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/494ca764-d5f8-4118-8cb8-47957d512295",
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/78a3019b-a31f-420a-9a40-1ddaa1126a2d",
+          "alt": "Special Sunglass",
           "action": {
-            "title": "Christmas",
-            "subTitle": "New deals for santa!",
+            "title": "Summer Shades Special",
+            "subTitle": "Find your perfect pair for sunny days.",
             "href": "#",
-            "label": "Enjoy!"
+            "label": "Grab Yours Now!"
           }
+        },
+        {
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3e000f89-5b09-4c9c-9625-9d457a571e34",
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/41620285-6915-4589-ab59-981b69c21270",
+          "action": {
+            "label": "Shop the Collection",
+            "href": "#",
+            "title": "Stride into Summer with Fresh Sneakers",
+            "subTitle": "Discover our latest collection for sunny days."
+          },
+          "alt": "Summer"
         }
       ]
     },
     {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "title": "Make Mom's day",
+      "title": "Featured Products",
       "cta": "/mono",
       "products": {
         "__resolveType": "shopify/loaders/ProductList.ts",
         "props": {
           "sort": "",
-          "query": "accessories",
-          "count": 12
+          "count": 12,
+          "query": "a"
         },
         "filters": {
           "tags": [],
@@ -55,33 +66,33 @@
     },
     {
       "__resolveType": "site/sections/Category/CategoryGrid.tsx",
-      "title": "Featured departments",
+      "title": "Departments",
       "cta": "/all",
       "items": [
         {
           "label": "Men",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/c7850e6d-6c6c-4e7a-8059-d1daaed05a16",
-          "href": "/"
+          "href": "/",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/38c33c9f-14a1-4048-973b-dc2a75caf1fa"
         },
         {
           "href": "/",
-          "label": "Woman",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/08569c1b-473a-41b8-9fd4-acb348c809f3"
+          "label": "Women",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f6bea2b8-b248-4b42-9246-6e924a0acc8b"
         },
         {
           "href": "/",
           "label": "Kids",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/a57f23f5-e6f1-4545-9919-8a200c663f66"
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/1b0ecaa2-9a13-4de2-bf17-5196948ed128"
         },
         {
           "href": "/",
           "label": "Hats",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/2980a7bd-f87b-4f5c-aa56-e48b9c3aeec7"
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/36e97897-5cf7-4271-a71c-683dc732ef8c"
         },
         {
           "href": "/",
           "label": "Accessories",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/8584a9ee-fdda-4ae6-acef-f2e0bac1aa10"
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/92129655-fe40-4b29-8fdb-e7f71e67a5d1"
         },
         {
           "href": "/",
@@ -92,14 +103,14 @@
     },
     {
       "__resolveType": "site/sections/Images/Banner.tsx",
-      "title": "Get 40$ off",
-      "description": "<p><span style=\"color: rgb(92, 92, 92);\" data-mce-style=\"color: rgb(92, 92, 92);\">a future qualifying purchase over $40 when approved for a Debit or Credit</span> <span style=\"color: rgb(45, 194, 107);\" data-mce-style=\"color: rgb(45, 194, 107);\">RedCard™</span></p>",
+      "title": "Register and Save Big!",
+      "description": "<p><span style=\"color: rgb(45, 194, 107);\" data-mce-style=\"color: rgb(45, 194, 107);\">Sign up now to get up to 50% off on your first order. Limited time offer!</span></p>",
       "images": {
-        "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/235f846d-8182-45df-8e88-c72d1e08645d",
-        "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3c800e87-d78d-4179-b4b7-b8b309de3fbe"
+        "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/cf96d47f-564f-40da-ad94-7acac5f39327",
+        "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/4d5c3212-3f75-4d50-89f3-970815748b43"
       },
       "cta": {
-        "label": "Apply Now",
+        "label": "Sign Up",
         "href": "#"
       }
     },
@@ -107,23 +118,6 @@
       "__resolveType": "site/sections/Product/ProductShelfTabbed.tsx",
       "title": "Hottest Deals",
       "tabs": [
-        {
-          "products": {
-            "__resolveType": "shopify/loaders/ProductList.ts",
-            "props": {
-              "sort": "",
-              "query": "Shirts",
-              "count": 10
-            },
-            "filters": {
-              "tags": [],
-              "productTypes": [],
-              "productVendors": [],
-              "variantOptions": []
-            }
-          },
-          "title": "Fashion"
-        },
         {
           "products": {
             "__resolveType": "shopify/loaders/ProductList.ts",
@@ -140,6 +134,23 @@
             }
           },
           "title": "Accessories"
+        },
+        {
+          "products": {
+            "__resolveType": "shopify/loaders/ProductList.ts",
+            "props": {
+              "sort": "",
+              "query": "Shirts",
+              "count": 10
+            },
+            "filters": {
+              "tags": [],
+              "productTypes": [],
+              "productVendors": [],
+              "variantOptions": []
+            }
+          },
+          "title": "Fashion"
         },
         {
           "products": {

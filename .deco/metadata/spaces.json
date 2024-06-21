@@ -467,7 +467,7 @@
             "content": [
               {
                 "type": "stack",
-                "width": 30,
+                "width": 41.66666666666667,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
@@ -489,7 +489,7 @@
               },
               {
                 "type": "stack",
-                "width": 70,
+                "width": 58.333333333333336,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
@@ -632,10 +632,10 @@
       }
     },
     {
-      "id": "/.deco/blocks/Campaign%20Timer%20-%2002.json",
-      "name": "Campaign Timer - 02",
+      "id": "/.deco/blocks/pages-category-7493d4326022.json",
+      "name": "Category",
       "pinned": false,
-      "icon": "package",
+      "icon": "file",
       "layout": {
         "settings": {
           "hasHeaders": true,
@@ -675,19 +675,19 @@
             "content": [
               {
                 "type": "stack",
-                "width": 41.66666666666667,
+                "width": 37.3134328358209,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
                 "activeItemIndex": 0,
                 "content": [
                   {
-                    "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Properties::list::Properties::%7B%7D",
-                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Properties::list::Properties::%7B%7D\" />",
+                    "id": "%2F.deco%2Fblocks%2Fpages-category-7493d4326022.json::Properties::list::Properties::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2Fpages-category-7493d4326022.json::Properties::list::Properties::%7B%7D\" />",
                     "type": "component",
                     "componentName": "component",
                     "componentState": {
-                      "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Properties::list::Properties::%7B%7D"
+                      "id": "%2F.deco%2Fblocks%2Fpages-category-7493d4326022.json::Properties::list::Properties::%7B%7D"
                     },
                     "width": 30,
                     "isClosable": true,
@@ -697,19 +697,19 @@
               },
               {
                 "type": "stack",
-                "width": 58.333333333333336,
+                "width": 62.686567164179095,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
                 "activeItemIndex": 0,
                 "content": [
                   {
-                    "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Preview::world::Preview::%7B%7D",
-                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Preview::world::Preview::%7B%7D\" />",
+                    "id": "%2F.deco%2Fblocks%2Fpages-category-7493d4326022.json::Preview::world::Preview::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2Fpages-category-7493d4326022.json::Preview::world::Preview::%7B%7D\" />",
                     "type": "component",
                     "componentName": "component",
                     "componentState": {
-                      "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Preview::world::Preview::%7B%7D"
+                      "id": "%2F.deco%2Fblocks%2Fpages-category-7493d4326022.json::Preview::world::Preview::%7B%7D"
                     },
                     "width": 70,
                     "isClosable": true,
@@ -727,26 +727,26 @@
         "maximisedItemId": null
       },
       "tabs": {
-        "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Properties::list::Properties::%7B%7D": {
+        "%2F.deco%2Fblocks%2Fpages-category-7493d4326022.json::Properties::list::Properties::%7B%7D": {
           "name": "Properties",
           "icon": "list",
           "accepts": "function",
           "render": "function",
           "viewId": "Properties",
           "width": 30,
-          "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Properties::list::Properties::%7B%7D",
+          "id": "%2F.deco%2Fblocks%2Fpages-category-7493d4326022.json::Properties::list::Properties::%7B%7D",
           "state": {
             "__signal": null
           }
         },
-        "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Preview::world::Preview::%7B%7D": {
+        "%2F.deco%2Fblocks%2Fpages-category-7493d4326022.json::Preview::world::Preview::%7B%7D": {
           "name": "Preview",
           "icon": "world",
           "accepts": "function",
           "render": "function",
           "viewId": "Preview",
           "width": 70,
-          "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Preview::world::Preview::%7B%7D",
+          "id": "%2F.deco%2Fblocks%2Fpages-category-7493d4326022.json::Preview::world::Preview::%7B%7D",
           "state": {
             "__signal": null
           }
@@ -754,8 +754,8 @@
       }
     },
     {
-      "id": "/.deco/blocks/PDP%20Loader.json",
-      "name": "PDP Loader",
+      "id": "/.deco/blocks/navbar.json",
+      "name": "navbar",
       "pinned": false,
       "icon": "packages",
       "layout": {
@@ -804,12 +804,12 @@
                 "activeItemIndex": 0,
                 "content": [
                   {
-                    "id": "%2F.deco%2Fblocks%2FPDP%2520Loader.json::Properties::list::Properties::%7B%7D",
-                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2FPDP%2520Loader.json::Properties::list::Properties::%7B%7D\" />",
+                    "id": "%2F.deco%2Fblocks%2Fnavbar.json::Properties::list::Properties::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2Fnavbar.json::Properties::list::Properties::%7B%7D\" />",
                     "type": "component",
                     "componentName": "component",
                     "componentState": {
-                      "id": "%2F.deco%2Fblocks%2FPDP%2520Loader.json::Properties::list::Properties::%7B%7D"
+                      "id": "%2F.deco%2Fblocks%2Fnavbar.json::Properties::list::Properties::%7B%7D"
                     },
                     "width": 30,
                     "isClosable": true,
@@ -826,12 +826,12 @@
                 "activeItemIndex": 0,
                 "content": [
                   {
-                    "id": "%2F.deco%2Fblocks%2FPDP%2520Loader.json::Preview::world::Preview::%7B%7D",
-                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2FPDP%2520Loader.json::Preview::world::Preview::%7B%7D\" />",
+                    "id": "%2F.deco%2Fblocks%2Fnavbar.json::Preview::world::Preview::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2Fnavbar.json::Preview::world::Preview::%7B%7D\" />",
                     "type": "component",
                     "componentName": "component",
                     "componentState": {
-                      "id": "%2F.deco%2Fblocks%2FPDP%2520Loader.json::Preview::world::Preview::%7B%7D"
+                      "id": "%2F.deco%2Fblocks%2Fnavbar.json::Preview::world::Preview::%7B%7D"
                     },
                     "width": 70,
                     "isClosable": true,
@@ -849,26 +849,27 @@
         "maximisedItemId": null
       },
       "tabs": {
-        "%2F.deco%2Fblocks%2FPDP%2520Loader.json::Properties::list::Properties::%7B%7D": {
+        "%2F.deco%2Fblocks%2Fnavbar.json::Properties::list::Properties::%7B%7D": {
           "name": "Properties",
           "icon": "list",
           "accepts": "function",
           "render": "function",
           "viewId": "Properties",
           "width": 30,
-          "id": "%2F.deco%2Fblocks%2FPDP%2520Loader.json::Properties::list::Properties::%7B%7D",
+          "id": "%2F.deco%2Fblocks%2Fnavbar.json::Properties::list::Properties::%7B%7D",
           "state": {
-            "__signal": null
+            "__signal": null,
+            "value": null
           }
         },
-        "%2F.deco%2Fblocks%2FPDP%2520Loader.json::Preview::world::Preview::%7B%7D": {
+        "%2F.deco%2Fblocks%2Fnavbar.json::Preview::world::Preview::%7B%7D": {
           "name": "Preview",
           "icon": "world",
           "accepts": "function",
           "render": "function",
           "viewId": "Preview",
           "width": 70,
-          "id": "%2F.deco%2Fblocks%2FPDP%2520Loader.json::Preview::world::Preview::%7B%7D",
+          "id": "%2F.deco%2Fblocks%2Fnavbar.json::Preview::world::Preview::%7B%7D",
           "state": {
             "__signal": null
           }
@@ -876,10 +877,10 @@
       }
     },
     {
-      "id": "{\"oid\":\"a96b21d3cddf2a10bcbbe2a8560fc0fbcf3f85b1\",\"short\":\"a96b21d\",\"commit\":{\"message\":\"use from deco\\n\",\"parent\":[\"81cf707f18dfaafbfbab935e7d6a34cbfe24ebda\"],\"tree\":\"351daf88c46c00e6661909e851aac7adcc1a1b92\",\"author\":{\"name\":\"gimenes\",\"email\":\"tlgimenes@gmail.com\",\"timestamp\":1718899962,\"timezoneOffset\":180},\"committer\":{\"name\":\"gimenes\",\"email\":\"tlgimenes@gmail.com\",\"timestamp\":1718900124,\"timezoneOffset\":180}}}",
-      "name": "Release a96b21d",
+      "id": "/.deco/blocks/pages-productpage-ce4850591828.json",
+      "name": "Product Page",
       "pinned": false,
-      "icon": "rocket",
+      "icon": "file",
       "layout": {
         "settings": {
           "hasHeaders": true,
@@ -919,20 +920,43 @@
             "content": [
               {
                 "type": "stack",
-                "width": 100,
+                "width": 37.3134328358209,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
                 "activeItemIndex": 0,
                 "content": [
                   {
-                    "id": "%7B%22oid%22%3A%22a96b21d3cddf2a10bcbbe2a8560fc0fbcf3f85b1%22%2C%22short%22%3A%22a96b21d%22%2C%22commit%22%3A%7B%22message%22%3A%22use%20from%20deco%5Cn%22%2C%22parent%22%3A%5B%2281cf707f18dfaafbfbab935e7d6a34cbfe24ebda%22%5D%2C%22tree%22%3A%22351daf88c46c00e6661909e851aac7adcc1a1b92%22%2C%22author%22%3A%7B%22name%22%3A%22gimenes%22%2C%22email%22%3A%22tlgimenes%40gmail.com%22%2C%22timestamp%22%3A1718899962%2C%22timezoneOffset%22%3A180%7D%2C%22committer%22%3A%7B%22name%22%3A%22gimenes%22%2C%22email%22%3A%22tlgimenes%40gmail.com%22%2C%22timestamp%22%3A1718900124%2C%22timezoneOffset%22%3A180%7D%7D%7D::Release::rocket::Release::%7B%7D",
-                    "title": "<div class=\"contents text-base-700\" id=\"header-%7B%22oid%22%3A%22a96b21d3cddf2a10bcbbe2a8560fc0fbcf3f85b1%22%2C%22short%22%3A%22a96b21d%22%2C%22commit%22%3A%7B%22message%22%3A%22use%20from%20deco%5Cn%22%2C%22parent%22%3A%5B%2281cf707f18dfaafbfbab935e7d6a34cbfe24ebda%22%5D%2C%22tree%22%3A%22351daf88c46c00e6661909e851aac7adcc1a1b92%22%2C%22author%22%3A%7B%22name%22%3A%22gimenes%22%2C%22email%22%3A%22tlgimenes%40gmail.com%22%2C%22timestamp%22%3A1718899962%2C%22timezoneOffset%22%3A180%7D%2C%22committer%22%3A%7B%22name%22%3A%22gimenes%22%2C%22email%22%3A%22tlgimenes%40gmail.com%22%2C%22timestamp%22%3A1718900124%2C%22timezoneOffset%22%3A180%7D%7D%7D::Release::rocket::Release::%7B%7D\" />",
+                    "id": "%2F.deco%2Fblocks%2Fpages-productpage-ce4850591828.json::Properties::list::Properties::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2Fpages-productpage-ce4850591828.json::Properties::list::Properties::%7B%7D\" />",
                     "type": "component",
                     "componentName": "component",
                     "componentState": {
-                      "id": "%7B%22oid%22%3A%22a96b21d3cddf2a10bcbbe2a8560fc0fbcf3f85b1%22%2C%22short%22%3A%22a96b21d%22%2C%22commit%22%3A%7B%22message%22%3A%22use%20from%20deco%5Cn%22%2C%22parent%22%3A%5B%2281cf707f18dfaafbfbab935e7d6a34cbfe24ebda%22%5D%2C%22tree%22%3A%22351daf88c46c00e6661909e851aac7adcc1a1b92%22%2C%22author%22%3A%7B%22name%22%3A%22gimenes%22%2C%22email%22%3A%22tlgimenes%40gmail.com%22%2C%22timestamp%22%3A1718899962%2C%22timezoneOffset%22%3A180%7D%2C%22committer%22%3A%7B%22name%22%3A%22gimenes%22%2C%22email%22%3A%22tlgimenes%40gmail.com%22%2C%22timestamp%22%3A1718900124%2C%22timezoneOffset%22%3A180%7D%7D%7D::Release::rocket::Release::%7B%7D"
+                      "id": "%2F.deco%2Fblocks%2Fpages-productpage-ce4850591828.json::Properties::list::Properties::%7B%7D"
                     },
+                    "width": 30,
+                    "isClosable": true,
+                    "reorderEnabled": true
+                  }
+                ]
+              },
+              {
+                "type": "stack",
+                "width": 62.686567164179095,
+                "isClosable": true,
+                "reorderEnabled": true,
+                "title": "",
+                "activeItemIndex": 0,
+                "content": [
+                  {
+                    "id": "%2F.deco%2Fblocks%2Fpages-productpage-ce4850591828.json::Preview::world::Preview::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2Fpages-productpage-ce4850591828.json::Preview::world::Preview::%7B%7D\" />",
+                    "type": "component",
+                    "componentName": "component",
+                    "componentState": {
+                      "id": "%2F.deco%2Fblocks%2Fpages-productpage-ce4850591828.json::Preview::world::Preview::%7B%7D"
+                    },
+                    "width": 70,
                     "isClosable": true,
                     "reorderEnabled": true
                   }
@@ -948,12 +972,26 @@
         "maximisedItemId": null
       },
       "tabs": {
-        "%7B%22oid%22%3A%22a96b21d3cddf2a10bcbbe2a8560fc0fbcf3f85b1%22%2C%22short%22%3A%22a96b21d%22%2C%22commit%22%3A%7B%22message%22%3A%22use%20from%20deco%5Cn%22%2C%22parent%22%3A%5B%2281cf707f18dfaafbfbab935e7d6a34cbfe24ebda%22%5D%2C%22tree%22%3A%22351daf88c46c00e6661909e851aac7adcc1a1b92%22%2C%22author%22%3A%7B%22name%22%3A%22gimenes%22%2C%22email%22%3A%22tlgimenes%40gmail.com%22%2C%22timestamp%22%3A1718899962%2C%22timezoneOffset%22%3A180%7D%2C%22committer%22%3A%7B%22name%22%3A%22gimenes%22%2C%22email%22%3A%22tlgimenes%40gmail.com%22%2C%22timestamp%22%3A1718900124%2C%22timezoneOffset%22%3A180%7D%7D%7D::Release::rocket::Release::%7B%7D": {
-          "name": "Release",
-          "icon": "rocket",
+        "%2F.deco%2Fblocks%2Fpages-productpage-ce4850591828.json::Properties::list::Properties::%7B%7D": {
+          "name": "Properties",
+          "icon": "list",
+          "accepts": "function",
           "render": "function",
-          "viewId": "Release",
-          "id": "%7B%22oid%22%3A%22a96b21d3cddf2a10bcbbe2a8560fc0fbcf3f85b1%22%2C%22short%22%3A%22a96b21d%22%2C%22commit%22%3A%7B%22message%22%3A%22use%20from%20deco%5Cn%22%2C%22parent%22%3A%5B%2281cf707f18dfaafbfbab935e7d6a34cbfe24ebda%22%5D%2C%22tree%22%3A%22351daf88c46c00e6661909e851aac7adcc1a1b92%22%2C%22author%22%3A%7B%22name%22%3A%22gimenes%22%2C%22email%22%3A%22tlgimenes%40gmail.com%22%2C%22timestamp%22%3A1718899962%2C%22timezoneOffset%22%3A180%7D%2C%22committer%22%3A%7B%22name%22%3A%22gimenes%22%2C%22email%22%3A%22tlgimenes%40gmail.com%22%2C%22timestamp%22%3A1718900124%2C%22timezoneOffset%22%3A180%7D%7D%7D::Release::rocket::Release::%7B%7D",
+          "viewId": "Properties",
+          "width": 30,
+          "id": "%2F.deco%2Fblocks%2Fpages-productpage-ce4850591828.json::Properties::list::Properties::%7B%7D",
+          "state": {
+            "__signal": null
+          }
+        },
+        "%2F.deco%2Fblocks%2Fpages-productpage-ce4850591828.json::Preview::world::Preview::%7B%7D": {
+          "name": "Preview",
+          "icon": "world",
+          "accepts": "function",
+          "render": "function",
+          "viewId": "Preview",
+          "width": 70,
+          "id": "%2F.deco%2Fblocks%2Fpages-productpage-ce4850591828.json::Preview::world::Preview::%7B%7D",
           "state": {
             "__signal": null
           }
