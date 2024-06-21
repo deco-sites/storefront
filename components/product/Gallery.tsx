@@ -45,7 +45,7 @@ export default function GallerySlider(props: Props) {
 
   return (
     <>
-      <div id={id} class="grid grid-flow-row sm:grid-flow-col gap-5">
+      <div id={id} class="grid grid-flow-row sm:grid-flow-col grid-cols-1 sm:grid-cols-[min-content_1fr] gap-5">
         {/* Image Slider */}
         <div class="col-start-1 col-span-1 sm:col-start-2">
           <div class="relative h-min flex-grow">
