@@ -84,11 +84,11 @@ const onLoad = ({ rootId, scroll, interval, infinite }: Props) => {
       typeof (x as any).offsetLeft === "number";
 
     const root = document.getElementById(rootId);
-    const slider = root?.querySelector("[data-slider]");
-    const items = root?.querySelectorAll("[data-slider-item]");
-    const prev = root?.querySelector('[data-slide="prev"]');
-    const next = root?.querySelector('[data-slide="next"]');
-    const dots = root?.querySelectorAll("[data-dot]");
+    const slider = root?.querySelector<HTMLElement>("[data-slider]");
+    const items = root?.querySelectorAll<HTMLElement>("[data-slider-item]");
+    const prev = root?.querySelector<HTMLElement>('[data-slide="prev"]');
+    const next = root?.querySelector<HTMLElement>('[data-slide="next"]');
+    const dots = root?.querySelectorAll<HTMLElement>("[data-dot]");
 
     if (!root || !slider || !items || items.length === 0) {
       console.warn(
@@ -120,12 +120,12 @@ const onLoad = ({ rootId, scroll, interval, infinite }: Props) => {
       return indices;
     };
 
-    const goToItem = (index: number) => {
-      const item = items.item(index);
+    const goToItem = (to: number) => {
+      const item = items.item(to);
 
       if (!isHTMLElement(item)) {
         console.warn(
-          `Element at index ${index} is not an html element. Skipping carousel`,
+          `Element at index ${to} is not an html element. Skipping carousel`,
         );
 
         return;
@@ -134,11 +134,13 @@ const onLoad = ({ rootId, scroll, interval, infinite }: Props) => {
       slider.scrollTo({
         top: 0,
         behavior: scroll,
-        left: item.offsetLeft - root.offsetLeft,
+        left: item.offsetLeft - slider.offsetLeft,
       });
     };
 
     const onClickPrev = () => {
+      event?.stopPropagation();
+
       const indices = getElementsInsideContainer();
       // Wow! items per page is how many elements are being displayed inside the container!!
       const itemsPerPage = indices.length;
@@ -152,6 +154,8 @@ const onLoad = ({ rootId, scroll, interval, infinite }: Props) => {
     };
 
     const onClickNext = () => {
+      event?.stopPropagation();
+
       const indices = getElementsInsideContainer();
       // Wow! items per page is how many elements are being displayed inside the container!!
       const itemsPerPage = indices.length;
