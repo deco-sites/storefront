@@ -45,13 +45,13 @@ function ProductSlider({ products, itemListName }: Props) {
         </div>
 
         <div class="col-start-1 col-span-1 row-start-1 row-span-1 z-10 self-center">
-          <Slider.PrevButton class="hidden sm:flex disabled:hidden btn btn-neutral btn-sm btn-circle no-animation">
+          <Slider.PrevButton class="hidden sm:flex disabled:invisible btn btn-neutral btn-sm btn-circle no-animation">
             <Icon id="chevron-right" class="rotate-180" />
           </Slider.PrevButton>
         </div>
 
         <div class="col-start-3 col-span-1 row-start-1 row-span-1 z-10 self-center">
-          <Slider.NextButton class="hidden sm:flex disabled:hidden btn btn-neutral btn-sm btn-circle no-animation">
+          <Slider.NextButton class="hidden sm:flex disabled:invisible btn btn-neutral btn-sm btn-circle no-animation">
             <Icon id="chevron-right" />
           </Slider.NextButton>
         </div>
