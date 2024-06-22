@@ -58,7 +58,7 @@ function Banner({ title, description, images, cta }: Props) {
             {cta && (
               <a
                 href={cta.href}
-                class="btn btn-primary no-animatio w-fit"
+                class="btn btn-primary no-animation w-fit"
               >
                 {cta.label}
               </a>

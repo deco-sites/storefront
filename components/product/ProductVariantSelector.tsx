@@ -26,7 +26,7 @@ const useStyles = (value: string, checked: boolean) => {
   }
 
   return clx(
-    "btn btn-ghost",
+    "btn btn-ghost no-animation",
     checked && "btn-outline",
   );
 };

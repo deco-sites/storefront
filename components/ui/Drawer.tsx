@@ -89,7 +89,7 @@ function Aside(
         <h1 class="px-4 py-3">
           <span class="font-medium text-2xl">{title}</span>
         </h1>
-        <label for={drawer} aria-label="X" class="btn btn-ghost">
+        <label for={drawer} aria-label="X" class="btn btn-ghost no-animation">
           <Icon id="close" />
         </label>
       </div>

@@ -47,7 +47,10 @@ export default function TabbedProductShelf(
   });
 
   return (
-    <Section.Container {...viewItemListEvent}>
+    <Section.Container
+      {...viewItemListEvent}
+      style={{ viewTransitionName: "loading-fallback-product-shelf-tabbed" }}
+    >
       <Section.Header title={title} cta={cta} />
 
       <Section.Tabbed tabs={tabs} current={ti}>
@@ -65,8 +68,14 @@ export default function TabbedProductShelf(
 
 export function LoadingFallback() {
   return (
-    <div style={{ height: "716px" }} class="flex justify-center items-center">
+    <Section.Container
+      class="flex justify-center items-center"
+      style={{
+        height: "624px",
+        viewTransitionName: "loading-fallback-product-shelf-tabbed",
+      }}
+    >
       <span class="loading loading-spinner" />
-    </div>
+    </Section.Container>
   );
 }

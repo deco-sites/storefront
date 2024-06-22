@@ -119,7 +119,7 @@ function Newsletter({
           />
 
           <button
-            class="btn btn-primary"
+            class="btn btn-primary no-animation"
             type="submit"
           >
             <span class="[.htmx-request_&]:hidden inline">

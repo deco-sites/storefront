@@ -1,5 +1,6 @@
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import { useDevice } from "deco/hooks/useDevice.ts";
 import { useScript } from "deco/hooks/useScript.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 import { SectionProps } from "deco/mod.ts";
@@ -13,7 +14,6 @@ import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import Breadcrumb from "../ui/Breadcrumb.tsx";
 import Drawer from "../ui/Drawer.tsx";
 import Sort from "./Sort.tsx";
-import { useDevice } from "deco/hooks/useDevice.ts";
 
 export interface Layout {
   /**
@@ -37,7 +37,10 @@ export interface Props {
 
 function NotFound() {
   return (
-    <div class="w-full flex justify-center items-center py-10">
+    <div
+      class="w-full flex justify-center items-center py-10"
+      style={{ viewTransitionName: "loading-fallback-search-result" }}
+    >
       <span>Not Found!</span>
     </div>
   );
@@ -246,7 +249,12 @@ function Result(props: SectionProps<typeof loader>) {
 
   return (
     <>
-      <div id={container} {...viewItemListEvent} class="w-full">
+      <div
+        id={container}
+        {...viewItemListEvent}
+        class="w-full"
+        style={{ viewTransitionName: "loading-fallback-search-result" }}
+      >
         {partial
           ? <PageResult {...props} />
           : (
@@ -343,5 +351,19 @@ export const loader = (props: Props, req: Request) => {
     url: req.url,
   };
 };
+
+export function LoadingFallback() {
+  return (
+    <div
+      class="flex justify-center items-center"
+      style={{
+        height: "100vh",
+        viewTransitionName: "loading-fallback-search-result",
+      }}
+    >
+      <span class="loading loading-spinner" />
+    </div>
+  );
+}
 
 export default SearchResult;

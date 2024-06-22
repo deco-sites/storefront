@@ -36,10 +36,9 @@ export default function ProductShelf({ products, title, cta }: Props) {
   return (
     <Section.Container
       {...viewItemListEvent}
-      class="[view-transition-name:loading-fallback-2]"
+      style={{ viewTransitionName: "loading-fallback-product-shelf" }}
     >
       <Section.Header title={title} cta={cta} />
-
       <ProductSlider products={products} itemListName={title} />
     </Section.Container>
   );
@@ -47,11 +46,14 @@ export default function ProductShelf({ products, title, cta }: Props) {
 
 export function LoadingFallback() {
   return (
-    <div
-      style={{ height: "716px" }}
-      class="flex justify-center items-center [view-transition-name:loading-fallback-2]"
+    <Section.Container
+      class="justify-center items-center"
+      style={{
+        height: "624px",
+        viewTransitionName: "loading-fallback-product-shelf",
+      }}
     >
       <span class="loading loading-spinner" />
-    </div>
+    </Section.Container>
   );
 }
