@@ -6,12 +6,17 @@ import Section, {
 } from "../../components/ui/Section.tsx";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
+import { useViewTransition } from "../../sdk/useViewTransition.ts";
+
+const TRANSITION_NAME = "product-shelf-fallback";
 
 export interface Props extends SectionHeaderProps {
   products: Product[] | null;
 }
 
 export default function ProductShelf({ products, title, cta }: Props) {
+  const { style } = useViewTransition(TRANSITION_NAME);
+
   if (!products || products.length === 0) {
     return null;
   }
@@ -34,24 +39,26 @@ export default function ProductShelf({ products, title, cta }: Props) {
   });
 
   return (
-    <Section.Container
-      {...viewItemListEvent}
-      class="[view-transition-name:loading-fallback-2]"
-    >
+    <Section.Container {...viewItemListEvent} style={style}>
       <Section.Header title={title} cta={cta} />
-
       <ProductSlider products={products} itemListName={title} />
     </Section.Container>
   );
 }
 
 export function LoadingFallback() {
+  const { style, css } = useViewTransition(TRANSITION_NAME);
+
   return (
-    <div
-      style={{ height: "716px" }}
-      class="flex justify-center items-center [view-transition-name:loading-fallback-2]"
-    >
-      <span class="loading loading-spinner" />
-    </div>
+    <>
+      <style dangerouslySetInnerHTML={{ __html: css }} />
+
+      <div
+        style={{ height: "716px", ...style }}
+        class="flex justify-center items-center"
+      >
+        <span class="loading loading-spinner" />
+      </div>
+    </>
   );
 }

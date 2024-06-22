@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @layer base {
+
   /* Enable View Transitions API */
   @view-transition {
     navigation: auto;
@@ -29,17 +30,14 @@
 
   /* Simple view transition API for deferred sections */
   @keyframes fade-out {
-    to {opacity:0;}
-  }
-  
-  @keyframes fade-in {
-    from {opacity:0;}
+    to {
+      opacity: 0;
+    }
   }
 
-  ::view-transition-old(fallback) {
-    animation: 1s ease both fade-out;
-  }
-  ::view-transition-new(fallback) {
-    animation: 1s ease both fade-in;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
   }
 }

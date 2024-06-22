@@ -6,6 +6,7 @@ import Section, {
 } from "../../components/ui/Section.tsx";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
+import { useViewTransition } from "../../sdk/useViewTransition.ts";
 
 /** @titleBy title */
 interface Tab {
@@ -20,9 +21,13 @@ export interface Props extends SectionHeaderProps {
   tabIndex?: number;
 }
 
+const TRANSITION_NAME = "product-tabbed-shelf-fallback";
+
 export default function TabbedProductShelf(
   { tabs, title, cta, tabIndex }: Props,
 ) {
+  const { style } = useViewTransition(TRANSITION_NAME);
+
   const ti = typeof tabIndex === "number"
     ? Math.min(Math.max(tabIndex, 0), tabs.length)
     : 0;
@@ -47,7 +52,7 @@ export default function TabbedProductShelf(
   });
 
   return (
-    <Section.Container {...viewItemListEvent}>
+    <Section.Container {...viewItemListEvent} style={style}>
       <Section.Header title={title} cta={cta} />
 
       <Section.Tabbed tabs={tabs} current={ti}>
@@ -64,9 +69,18 @@ export default function TabbedProductShelf(
 }
 
 export function LoadingFallback() {
+  const { style, css } = useViewTransition(TRANSITION_NAME);
+
   return (
-    <div style={{ height: "716px" }} class="flex justify-center items-center">
-      <span class="loading loading-spinner" />
-    </div>
+    <>
+      <style dangerouslySetInnerHTML={{ __html: css }} />
+
+      <div
+        style={{ height: "716px", ...style }}
+        class="flex justify-center items-center"
+      >
+        <span class="loading loading-spinner" />
+      </div>
+    </>
   );
 }

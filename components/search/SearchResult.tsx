@@ -1,5 +1,6 @@
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import { useDevice } from "deco/hooks/useDevice.ts";
 import { useScript } from "deco/hooks/useScript.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 import { SectionProps } from "deco/mod.ts";
@@ -13,7 +14,7 @@ import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import Breadcrumb from "../ui/Breadcrumb.tsx";
 import Drawer from "../ui/Drawer.tsx";
 import Sort from "./Sort.tsx";
-import { useDevice } from "deco/hooks/useDevice.ts";
+import { useViewTransition } from "../../sdk/useViewTransition.ts";
 
 export interface Layout {
   /**
@@ -35,9 +36,13 @@ export interface Props {
   partial?: "hideMore" | "hideLess";
 }
 
+const TRANSITION_NAME = "search-result-fallback";
+
 function NotFound() {
+  const { style } = useViewTransition(TRANSITION_NAME);
+
   return (
-    <div class="w-full flex justify-center items-center py-10">
+    <div style={style} class="w-full flex justify-center items-center py-10">
       <span>Not Found!</span>
     </div>
   );
@@ -203,6 +208,7 @@ const setPageQuerystring = (page: string, id: string) => {
 };
 
 function Result(props: SectionProps<typeof loader>) {
+  const { style } = useViewTransition(TRANSITION_NAME);
   const container = useId();
   const controls = useId();
   const device = useDevice();
@@ -249,7 +255,8 @@ function Result(props: SectionProps<typeof loader>) {
       <div
         id={container}
         {...viewItemListEvent}
-        class="w-full [view-transition-name:fallback]"
+        class="w-full"
+        style={style}
       >
         {partial
           ? <PageResult {...props} />
@@ -347,5 +354,22 @@ export const loader = (props: Props, req: Request) => {
     url: req.url,
   };
 };
+
+export function LoadingFallback() {
+  const { style, css } = useViewTransition(TRANSITION_NAME);
+
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: css }} />
+
+      <div
+        style={{ height: "100vh", ...style }}
+        class="flex justify-center items-center"
+      >
+        <span class="loading loading-spinner" />
+      </div>
+    </>
+  );
+}
 
 export default SearchResult;
