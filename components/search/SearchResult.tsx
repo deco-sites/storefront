@@ -14,7 +14,6 @@ import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import Breadcrumb from "../ui/Breadcrumb.tsx";
 import Drawer from "../ui/Drawer.tsx";
 import Sort from "./Sort.tsx";
-import { useViewTransition } from "../../sdk/useViewTransition.ts";
 
 export interface Layout {
   /**
@@ -36,13 +35,12 @@ export interface Props {
   partial?: "hideMore" | "hideLess";
 }
 
-const TRANSITION_NAME = "search-result-fallback";
-
 function NotFound() {
-  const { style } = useViewTransition(TRANSITION_NAME);
-
   return (
-    <div style={style} class="w-full flex justify-center items-center py-10">
+    <div
+      class="w-full flex justify-center items-center py-10"
+      style={{ viewTransitionName: "loading-fallback-search-result" }}
+    >
       <span>Not Found!</span>
     </div>
   );
@@ -208,7 +206,6 @@ const setPageQuerystring = (page: string, id: string) => {
 };
 
 function Result(props: SectionProps<typeof loader>) {
-  const { style } = useViewTransition(TRANSITION_NAME);
   const container = useId();
   const controls = useId();
   const device = useDevice();
@@ -256,7 +253,7 @@ function Result(props: SectionProps<typeof loader>) {
         id={container}
         {...viewItemListEvent}
         class="w-full"
-        style={style}
+        style={{ viewTransitionName: "loading-fallback-search-result" }}
       >
         {partial
           ? <PageResult {...props} />
@@ -356,19 +353,16 @@ export const loader = (props: Props, req: Request) => {
 };
 
 export function LoadingFallback() {
-  const { style, css } = useViewTransition(TRANSITION_NAME);
-
   return (
-    <>
-      <style dangerouslySetInnerHTML={{ __html: css }} />
-
-      <div
-        style={{ height: "100vh", ...style }}
-        class="flex justify-center items-center"
-      >
-        <span class="loading loading-spinner" />
-      </div>
-    </>
+    <div
+      class="flex justify-center items-center"
+      style={{
+        height: "100vh",
+        viewTransitionName: "loading-fallback-search-result",
+      }}
+    >
+      <span class="loading loading-spinner" />
+    </div>
   );
 }
 

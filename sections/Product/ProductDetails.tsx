@@ -2,10 +2,8 @@ import { ProductDetailsPage } from "apps/commerce/types.ts";
 import ImageGallerySlider from "../../components/product/Gallery.tsx";
 import ProductInfo from "../../components/product/ProductInfo.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
+import Section from "../../components/ui/Section.tsx";
 import { clx } from "../../sdk/clx.ts";
-import { useViewTransition } from "../../sdk/useViewTransition.ts";
-
-const TRANSITION_NAME = "product-details-fallback";
 
 export interface Props {
   /** @title Integration */
@@ -13,14 +11,15 @@ export interface Props {
 }
 
 export default function ProductDetails({ page }: Props) {
-  const { style } = useViewTransition(TRANSITION_NAME);
-
   /**
    * Rendered when a not found is returned by any of the loaders run on this page
    */
   if (!page) {
     return (
-      <div style={style} class="w-full flex justify-center items-center py-28">
+      <div
+        class="w-full flex justify-center items-center py-28"
+        style={{ viewTransitionName: "loading-fallback-product-details" }}
+      >
         <div class="flex flex-col items-center justify-center gap-6">
           <span class="font-medium text-2xl">Page not found</span>
           <a href="/" class="btn no-animation">
@@ -33,8 +32,8 @@ export default function ProductDetails({ page }: Props) {
 
   return (
     <div
-      style={style}
       class="container flex flex-col gap-4 sm:gap-5 w-full py-4 sm:py-5 px-5 sm:px-0"
+      style={{ viewTransitionName: "loading-fallback-product-details" }}
     >
       <Breadcrumb itemListElement={page.breadcrumbList.itemListElement} />
 
@@ -57,18 +56,15 @@ export default function ProductDetails({ page }: Props) {
 }
 
 export function LoadingFallback() {
-  const { style, css } = useViewTransition(TRANSITION_NAME);
-
   return (
-    <>
-      <style dangerouslySetInnerHTML={{ __html: css }} />
-
-      <div
-        style={{ height: "710px", ...style }}
-        class="w-full flex justify-center items-center"
-      >
-        <span class="loading loading-spinner" />
-      </div>
-    </>
+    <Section.Container
+      style={{
+        height: "710px",
+        viewTransitionName: "loading-fallback-product-details",
+      }}
+      class="justify-center items-center"
+    >
+      <span class="loading loading-spinner" />
+    </Section.Container>
   );
 }

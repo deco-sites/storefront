@@ -46,5 +46,11 @@
     animation: none;
   }
 
+  ::view-transition-old(*) {
+    animation: 1s ease-in fade-out;
+  }
 
+  ::view-transition-new(*) {
+    animation: 1s ease-out fade-in;
+  }
 }
