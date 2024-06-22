@@ -89,7 +89,7 @@ export default function GallerySlider(props: Props) {
             </Slider.NextButton>
 
             <div class="absolute top-2 right-2 bg-base-100 rounded-full">
-              <label class="btn btn-ghost hidden sm:inline-flex" for={zoomId}>
+              <label class="btn btn-ghost hidden sm:inline-flex no-animation" for={zoomId}>
                 <Icon id="pan_zoom" />
               </label>
             </div>
