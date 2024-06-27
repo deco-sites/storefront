@@ -208,13 +208,6 @@ function Header({
           ? HEADER_HEIGHT_DESKTOP
           : HEADER_HEIGHT_MOBILE,
       }}
-      // Refetch the header in two situations
-      // 1. When the window is resized so we have a gracefull Developer Experience
-      // 2. When the user changes tab, so we can update the minicart badge when the user comes back
-      hx-trigger="resize from:window, visibilitychange[document.visibilityState === 'visible'] from:document"
-      hx-get={useSection()}
-      hx-target="closest section"
-      hx-swap="outerHTML"
     >
       <div class="bg-base-100 fixed w-full z-40">
         {alerts.length > 0 && <Alert alerts={alerts} />}
