@@ -5,9 +5,9 @@
     "title": "Storefront",
     "jsonLDs": [],
     "noIndexing": false,
-    "description": "Improve your page performance with deco.cx ",
+    "description": "Build profitable websites with deco.cx",
     "titleTemplate": "%s | deco.cx",
-    "descriptionTemplate": "%s | Deco.cx"
+    "descriptionTemplate": "%s | deco.cx"
   },
   "theme": {
     "__resolveType": "Deco"
