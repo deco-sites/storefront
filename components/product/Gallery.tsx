@@ -29,19 +29,7 @@ export default function GallerySlider(props: Props) {
     throw new Error("Missing Product Details Page Info");
   }
 
-  const groupImages = props.page.product.isVariantOf?.image ?? [];
-  const variantImage = props.page.product.image ?? [];
-
-  // unique by url
-  const images = Array.from(
-    [...variantImage, ...groupImages]
-      .reduce((acc, curr) => {
-        acc.set(curr.url!, curr);
-
-        return acc;
-      }, new Map())
-      .values(),
-  );
+  const images = props.page.product.isVariantOf?.image ?? [];
 
   return (
     <>

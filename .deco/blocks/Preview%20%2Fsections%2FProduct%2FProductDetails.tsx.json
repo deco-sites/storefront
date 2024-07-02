@@ -1,0 +1,33 @@
+{
+  "__resolveType": "site/sections/Product/ProductDetails.tsx",
+  "page": {
+    "@type": "ProductDetailsPage",
+    "breadcrumbList": {
+      "@type": "BreadcrumbList"
+    },
+    "product": {
+      "@type": "Product",
+      "additionalProperty": [],
+      "aggregateRating": {
+        "@type": "AggregateRating"
+      },
+      "brand": {
+        "@type": "Brand"
+      },
+      "isRelatedTo": [],
+      "isSimilarTo": [],
+      "isVariantOf": {
+        "@type": "ProductGroup",
+        "hasVariant": [],
+        "additionalProperty": []
+      },
+      "offers": {
+        "@type": "AggregateOffer",
+        "offers": []
+      },
+      "review": [],
+      "isAccessoryOrSparePartFor": [],
+      "questions": []
+    }
+  }
+}

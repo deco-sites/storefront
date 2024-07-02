@@ -13,7 +13,7 @@ const colors: Record<string, string | undefined> = {
   "White": "white",
   "Black": "black",
   "Gray": "gray",
-  "Blue": "blue",
+  "Blue": "#99CCFF",
 };
 
 const useStyles = (value: string, checked: boolean) => {
