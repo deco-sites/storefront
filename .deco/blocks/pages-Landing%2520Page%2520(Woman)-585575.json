@@ -1,6 +1,6 @@
 {
-  "name": "Landing Page (Woman)",
-  "path": "/woman",
+  "name": "Landing Page (Women)",
+  "path": "/women",
   "sections": [
     {
       "__resolveType": "Header"
