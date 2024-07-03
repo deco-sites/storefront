@@ -150,5 +150,11 @@
   "/.deco/blocks/Preview%20%2Fsections%2FImages%2FImageGallery.tsx.json": {
     "blockType": "sections",
     "__resolveType": "site/sections/Images/ImageGallery.tsx"
+  },
+  "/.deco/blocks/pages-Landing%2520Page%2520(Woman)-470659.json": {
+    "name": "Landing Page (Woman)",
+    "path": "/woman",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
   }
 }
