@@ -173,7 +173,7 @@ function ProductCard({
 
       {/* SKU Selector */}
       {variants.length > 1 && (
-        <ul class="flex items-center justify-start gap-2 pt-4 pb-1 pl-1">
+        <ul class="flex items-center justify-start gap-2 pt-4 pb-1 pl-1 overflow-x-auto">
           {variants.map(([value, link]) => [value, relative(link)] as const)
             .map(([value, link]) => (
               <li>
