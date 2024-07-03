@@ -29,7 +29,13 @@ export default function GallerySlider(props: Props) {
     throw new Error("Missing Product Details Page Info");
   }
 
-  const images = props.page.product.isVariantOf?.image ?? [];
+  const { page: { product: { name, isVariantOf } } } = props
+
+  // Filter images when image's alt text matches product name
+  // More info at: https://community.shopify.com/c/shopify-discussions/i-can-not-add-multiple-pictures-for-my-variants/m-p/2416533
+  const groupImages = isVariantOf?.image ?? [];
+  const filtered = groupImages.filter((img) => img.alternateName === name)
+  const images = filtered.length > 0 ? filtered : groupImages;
 
   return (
     <>
