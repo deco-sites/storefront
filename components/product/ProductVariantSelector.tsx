@@ -14,12 +14,14 @@ const colors: Record<string, string | undefined> = {
   "Black": "black",
   "Gray": "gray",
   "Blue": "#99CCFF",
-  "AzulMarinho": "#4E6E95",
-  "AzulClaro": "#bedae4",
-  "VerdeEscuro": "#446746",
-  "VerdeClaro": "#aad1b5",
-  "AmareloEscuro": "#c6b343",
-  "AmareloClaro": "#F1E8B0 ",
+  "Green": "#aad1b5",
+  "Yellow": "#F1E8B0",
+  "DarkBlue": "#4E6E95",
+  "LightBlue": "#bedae4",
+  "DarkGreen": "#446746",
+  "LightGreen": "#aad1b5",
+  "DarkYellow": "#c6b343",
+  "LightYellow": "#F1E8B0",
 };
 
 const useStyles = (value: string, checked: boolean) => {
