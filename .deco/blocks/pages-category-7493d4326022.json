@@ -6,10 +6,10 @@
   },
   "sections": [
     {
+      "__resolveType": "commerce/sections/Seo/SeoPLP.tsx",
       "jsonLD": {
         "__resolveType": "PLP Loader"
-      },
-      "__resolveType": "commerce/sections/Seo/SeoPLP.tsx"
+      }
     },
     {
       "__resolveType": "Header"

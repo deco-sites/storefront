@@ -6,26 +6,26 @@
   },
   "sections": [
     {
+      "__resolveType": "commerce/sections/Seo/SeoPDP.tsx",
       "jsonLD": {
         "__resolveType": "PDP Loader"
       },
       "jsonLDs": [
         {}
-      ],
-      "__resolveType": "commerce/sections/Seo/SeoPDP.tsx"
+      ]
     },
     {
       "__resolveType": "Header"
     },
     {
+      "__resolveType": "site/sections/Product/ProductDetails.tsx",
       "page": {
         "__resolveType": "PDP Loader"
-      },
-      "__resolveType": "site/sections/Product/ProductDetails.tsx"
+      }
     },
     {
-      "title": "You may also like",
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
+      "title": "You may also like",
       "products": {
         "__resolveType": "shopify/loaders/ProductList.ts",
         "props": {
