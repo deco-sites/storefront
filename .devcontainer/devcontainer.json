@@ -1,0 +1,31 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.183.0/containers/deno
+{
+    "name": "Deno",
+    "dockerFile": "Dockerfile",
+    "appPort": [
+        8000
+    ], // Specify the ports you want to forward
+    "forwardPorts": [
+        8000
+    ],
+    // Set *default* container specific settings.json values on container create.
+    "settings": {},
+    // Add the IDs of extensions you want installed when the container is created.
+    "extensions": [
+        "denoland.vscode-deno",
+        "bradlc.vscode-tailwindcss",
+        "ecmel.vscode-html-css",
+        "Tobermory.es6-string-html"
+    ],
+    "postCreateCommand": "gh codespace ports visibility 8000:public -c $CODESPACE_NAME",
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+    // Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
+    // "mounts": [ "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind" ],
+    // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+    "remoteUser": "vscode",
+    "features": {
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    }
+}
