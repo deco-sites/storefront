@@ -8,25 +8,25 @@
       "__resolveType": "site/sections/Images/Carousel.tsx",
       "images": [
         {
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3398df58-a4d3-43ac-8f7f-6e873ceb95f4",
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/7ee8e7c8-6f06-4994-ae98-ab188ab3d5b6",
-          "alt": "Tenis",
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/40e0f10e-0fe1-4ec0-91a6-81202dfc6b71",
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/7da437bc-1acb-4713-ba9e-269c842b36c3",
+          "alt": "Shoes",
+          "action": {
+            "title": "Step into Spring with Style",
+            "subTitle": "Find your perfect pair of heels",
+            "href": "#",
+            "label": "Grab Yours Now!"
+          }
+        },
+        {
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/1226ef79-c7e0-403c-b716-b6b9af3f2936",
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f7ea4cbe-7498-4e64-9205-c741753edfcc",
+          "alt": "Woman",
           "action": {
             "title": "Step into Spring with Style",
             "subTitle": "Brighten your look with our latest collection.",
             "href": "#",
             "label": "Shop Now!"
-          }
-        },
-        {
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/40e0f10e-0fe1-4ec0-91a6-81202dfc6b71",
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/7da437bc-1acb-4713-ba9e-269c842b36c3",
-          "alt": "Shoes",
-          "action": {
-            "title": "High Heels Summer Shoes",
-            "subTitle": "Find your perfect pair of heels",
-            "href": "#",
-            "label": "Grab Yours Now!"
           }
         },
         {
@@ -38,7 +38,7 @@
             "title": "Stride into Summer with Fresh Sneakers",
             "subTitle": "Discover our latest collection for sunny days."
           },
-          "alt": "Summer"
+          "alt": "Men"
         }
       ]
     },
