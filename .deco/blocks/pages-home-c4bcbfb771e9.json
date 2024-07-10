@@ -12,7 +12,7 @@
           "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/7ee8e7c8-6f06-4994-ae98-ab188ab3d5b6",
           "alt": "Tenis",
           "action": {
-            "title": "Step into Spring with Stylish",
+            "title": "Step into Spring with Style",
             "subTitle": "Brighten your look with our latest collection.",
             "href": "#",
             "label": "Shop Now!"
@@ -21,17 +21,17 @@
         {
           "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/40e0f10e-0fe1-4ec0-91a6-81202dfc6b71",
           "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/7da437bc-1acb-4713-ba9e-269c842b36c3",
-          "alt": "Special Sunglass",
+          "alt": "Shoes",
           "action": {
-            "title": "Summer Shades Special",
-            "subTitle": "Find your perfect pair for sunny days.",
+            "title": "High Heels Summer Shoes",
+            "subTitle": "Find your perfect pair of heels",
             "href": "#",
             "label": "Grab Yours Now!"
           }
         },
         {
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3e000f89-5b09-4c9c-9625-9d457a571e34",
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/41620285-6915-4589-ab59-981b69c21270",
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/d26304f4-355b-48d0-b649-e24b9cbf0ded",
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/47a4d85a-1150-4e5d-abc2-5c642445ff12",
           "action": {
             "label": "Shop the Collection",
             "href": "#",
