@@ -1648,25 +1648,33 @@
         },
         "content": [
           {
-            "type": "stack",
+            "type": "row",
             "isClosable": true,
             "reorderEnabled": true,
             "title": "",
             "content": [
               {
-                "type": "component",
+                "type": "stack",
                 "isClosable": true,
                 "reorderEnabled": true,
-                "title": "<div class=\"contents text-base-700\" id=\"header-settings::settings::settings::settings::%7B%7D\" />",
-                "id": "settings::settings::settings::settings::%7B%7D",
-                "componentName": "component",
-                "componentState": {
-                  "id": "settings::settings::settings::settings::%7B%7D"
-                }
+                "title": "",
+                "width": 100,
+                "activeItemIndex": 0,
+                "content": [
+                  {
+                    "id": "settings::settings::settings::settings::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-settings::settings::settings::settings::%7B%7D\" />",
+                    "type": "component",
+                    "componentName": "component",
+                    "componentState": {
+                      "id": "settings::settings::settings::settings::%7B%7D"
+                    },
+                    "isClosable": true,
+                    "reorderEnabled": true
+                  }
+                ]
               }
-            ],
-            "width": 100,
-            "activeItemIndex": 0
+            ]
           }
         ],
         "isClosable": true,
@@ -1939,7 +1947,7 @@
             "content": [
               {
                 "type": "stack",
-                "width": 41.66666666666667,
+                "width": 32.62642740619902,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",
@@ -1961,7 +1969,7 @@
               },
               {
                 "type": "stack",
-                "width": 58.333333333333336,
+                "width": 67.37357259380097,
                 "isClosable": true,
                 "reorderEnabled": true,
                 "title": "",

@@ -2,18 +2,15 @@
   "name": "Home",
   "sections": [
     {
-      "__resolveType": "website/sections/Seo/SeoV2.tsx"
-    },
-    {
       "__resolveType": "Header"
     },
     {
       "__resolveType": "site/sections/Images/Carousel.tsx",
       "images": [
         {
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/69ec3687-74ea-4087-a9c1-40cf90a4a53a",
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/c171753b-f415-4753-8914-0c5bf9a7f7ff",
-          "alt": "Spring",
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3398df58-a4d3-43ac-8f7f-6e873ceb95f4",
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/7ee8e7c8-6f06-4994-ae98-ab188ab3d5b6",
+          "alt": "Tenis",
           "action": {
             "title": "Step into Spring with Stylish",
             "subTitle": "Brighten your look with our latest collection.",
@@ -22,8 +19,8 @@
           }
         },
         {
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/494ca764-d5f8-4118-8cb8-47957d512295",
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/78a3019b-a31f-420a-9a40-1ddaa1126a2d",
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/40e0f10e-0fe1-4ec0-91a6-81202dfc6b71",
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/7da437bc-1acb-4713-ba9e-269c842b36c3",
           "alt": "Special Sunglass",
           "action": {
             "title": "Summer Shades Special",
@@ -104,14 +101,14 @@
     {
       "__resolveType": "site/sections/Images/Banner.tsx",
       "title": "Register and Save Big!",
+      "cta": {
+        "label": "Sign Up",
+        "href": "#"
+      },
       "description": "<p><span style=\"color: rgb(45, 194, 107);\" data-mce-style=\"color: rgb(45, 194, 107);\">Sign up now to get up to 50% off on your first order. Limited time offer!</span></p>",
       "images": {
         "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/cf96d47f-564f-40da-ad94-7acac5f39327",
         "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/4d5c3212-3f75-4d50-89f3-970815748b43"
-      },
-      "cta": {
-        "label": "Sign Up",
-        "href": "#"
       }
     },
     {
@@ -193,5 +190,8 @@
     }
   ],
   "__resolveType": "website/pages/Page.tsx",
-  "path": "/"
+  "path": "/",
+  "seo": {
+    "__resolveType": "website/sections/Seo/SeoV2.tsx"
+  }
 }
