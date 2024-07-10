@@ -7,7 +7,8 @@
     "noIndexing": false,
     "description": "Build profitable websites with deco.cx",
     "titleTemplate": "%s | deco.cx",
-    "descriptionTemplate": "%s | deco.cx"
+    "descriptionTemplate": "%s | deco.cx",
+    "favicon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/4e3b9b36-2490-4403-89a4-f9567d2f3c1c"
   },
   "theme": {
     "__resolveType": "Deco"
