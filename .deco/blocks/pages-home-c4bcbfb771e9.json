@@ -12,35 +12,36 @@
           "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/88b2ad41-be6d-4640-b9fe-c58942362f0f",
           "alt": "Shoes",
           "action": {
-            "title": "Step into Spring with Style",
-            "subTitle": "Find your perfect pair of heels",
+            "title": "Skate into Adventure",
+            "subTitle": "Top-quality roller skate shoes for all levels. ",
             "href": "#",
             "label": "Grab Yours Now!"
           }
         },
         {
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/1226ef79-c7e0-403c-b716-b6b9af3f2936",
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f7ea4cbe-7498-4e64-9205-c741753edfcc",
-          "alt": "Woman",
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/d26304f4-355b-48d0-b649-e24b9cbf0ded",
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/47a4d85a-1150-4e5d-abc2-5c642445ff12",
+          "alt": "Men",
           "action": {
-            "title": "Step into Spring with Style",
-            "subTitle": "Brighten your look with our latest collection.",
+            "title": "Discover Fresh Looks",
+            "subTitle": "Modern men's clothing and accessories.",
             "href": "#",
-            "label": "Shop Now!"
+            "label": "Shop the Collection"
           }
         },
         {
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/d26304f4-355b-48d0-b649-e24b9cbf0ded",
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/47a4d85a-1150-4e5d-abc2-5c642445ff12",
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/1226ef79-c7e0-403c-b716-b6b9af3f2936",
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f7ea4cbe-7498-4e64-9205-c741753edfcc",
           "action": {
-            "label": "Shop the Collection",
+            "label": "Shop Now!",
             "href": "#",
-            "title": "Stride into Summer with Fresh Sneakers",
-            "subTitle": "Discover our latest collection for sunny days."
+            "title": "Embrace New Trends",
+            "subTitle": "Stylish clothes and accessories."
           },
-          "alt": "Men"
+          "alt": "Woman"
         }
-      ]
+      ],
+      "preload": true
     },
     {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
