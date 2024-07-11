@@ -1,14 +1,14 @@
 {
   "seo": {
     "type": "website",
-    "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/5c8044ee-7ba7-4078-9e8b-1b55925d4fe1",
+    "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/74d13a55-4c18-4a5c-8cb4-dcaa27aae923",
     "title": "Storefront",
     "jsonLDs": [],
     "noIndexing": false,
     "description": "Build profitable websites with deco.cx",
     "titleTemplate": "%s | deco.cx",
     "descriptionTemplate": "%s | deco.cx",
-    "favicon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/8c90f19c-82ca-42f3-8f80-de2c294a648d"
+    "favicon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/e4024f82-e88f-4cc6-94fe-4215fe8faef3"
   },
   "theme": {
     "__resolveType": "Deco"

@@ -2383,10 +2383,10 @@
       }
     },
     {
-      "id": "/.deco/metadata/blocks.json",
-      "name": "blocks.json",
+      "id": "/.deco/blocks/pages-offline-b9c52de8c7b3.json",
+      "name": "Offline",
       "pinned": false,
-      "icon": "data-object",
+      "icon": "file",
       "layout": {
         "settings": {
           "hasHeaders": true,
@@ -2419,25 +2419,56 @@
         },
         "content": [
           {
-            "type": "stack",
+            "type": "row",
             "isClosable": true,
             "reorderEnabled": true,
             "title": "",
             "content": [
               {
-                "type": "component",
+                "type": "stack",
+                "width": 41.66666666666667,
                 "isClosable": true,
                 "reorderEnabled": true,
-                "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fmetadata%2Fblocks.json::Code::code::Code::%7B%22spaceId%22%3A%22%2F.deco%2Fmetadata%2Fblocks.json%22%7D\" />",
-                "id": "%2F.deco%2Fmetadata%2Fblocks.json::Code::code::Code::%7B%22spaceId%22%3A%22%2F.deco%2Fmetadata%2Fblocks.json%22%7D",
-                "componentName": "component",
-                "componentState": {
-                  "id": "%2F.deco%2Fmetadata%2Fblocks.json::Code::code::Code::%7B%22spaceId%22%3A%22%2F.deco%2Fmetadata%2Fblocks.json%22%7D"
-                }
+                "title": "",
+                "activeItemIndex": 0,
+                "content": [
+                  {
+                    "id": "%2F.deco%2Fblocks%2Fpages-offline-b9c52de8c7b3.json::Properties::list::Properties::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2Fpages-offline-b9c52de8c7b3.json::Properties::list::Properties::%7B%7D\" />",
+                    "type": "component",
+                    "componentName": "component",
+                    "componentState": {
+                      "id": "%2F.deco%2Fblocks%2Fpages-offline-b9c52de8c7b3.json::Properties::list::Properties::%7B%7D"
+                    },
+                    "width": 30,
+                    "isClosable": true,
+                    "reorderEnabled": true
+                  }
+                ]
+              },
+              {
+                "type": "stack",
+                "width": 58.333333333333336,
+                "isClosable": true,
+                "reorderEnabled": true,
+                "title": "",
+                "activeItemIndex": 0,
+                "content": [
+                  {
+                    "id": "%2F.deco%2Fblocks%2Fpages-offline-b9c52de8c7b3.json::Preview::visibility::Preview::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2Fpages-offline-b9c52de8c7b3.json::Preview::visibility::Preview::%7B%7D\" />",
+                    "type": "component",
+                    "componentName": "component",
+                    "componentState": {
+                      "id": "%2F.deco%2Fblocks%2Fpages-offline-b9c52de8c7b3.json::Preview::visibility::Preview::%7B%7D"
+                    },
+                    "width": 70,
+                    "isClosable": true,
+                    "reorderEnabled": true
+                  }
+                ]
               }
-            ],
-            "width": 100,
-            "activeItemIndex": 0
+            ]
           }
         ],
         "isClosable": true,
@@ -2447,18 +2478,475 @@
         "maximisedItemId": null
       },
       "tabs": {
-        "%2F.deco%2Fmetadata%2Fblocks.json::Code::code::Code::%7B%22spaceId%22%3A%22%2F.deco%2Fmetadata%2Fblocks.json%22%7D": {
+        "%2F.deco%2Fblocks%2Fpages-offline-b9c52de8c7b3.json::Properties::list::Properties::%7B%7D": {
+          "name": "Properties",
+          "icon": "list",
+          "accepts": "function",
+          "render": "function",
+          "viewId": "Properties",
+          "width": 30,
+          "id": "%2F.deco%2Fblocks%2Fpages-offline-b9c52de8c7b3.json::Properties::list::Properties::%7B%7D",
+          "state": {
+            "__signal": null
+          }
+        },
+        "%2F.deco%2Fblocks%2Fpages-offline-b9c52de8c7b3.json::Preview::visibility::Preview::%7B%7D": {
+          "name": "Preview",
+          "icon": "visibility",
+          "accepts": "function",
+          "render": "function",
+          "viewId": "Preview",
+          "width": 70,
+          "id": "%2F.deco%2Fblocks%2Fpages-offline-b9c52de8c7b3.json::Preview::visibility::Preview::%7B%7D",
+          "state": {
+            "__signal": null
+          }
+        }
+      }
+    },
+    {
+      "id": "build-log-ac89e17c216611709fc01a5f668061e6a874836f",
+      "name": "Build Log ac89e17",
+      "pinned": false,
+      "icon": "manage-search",
+      "layout": {
+        "settings": {
+          "hasHeaders": true,
+          "constrainDragToContainer": true,
+          "reorderEnabled": true,
+          "selectionEnabled": false,
+          "popoutWholeStack": false,
+          "blockedPopoutsThrowError": true,
+          "closePopoutsOnUnload": true,
+          "showPopoutIcon": false,
+          "showMaximiseIcon": false,
+          "showCloseIcon": false,
+          "responsiveMode": "onload"
+        },
+        "dimensions": {
+          "borderWidth": 8,
+          "minItemHeight": 10,
+          "minItemWidth": 10,
+          "headerHeight": 40,
+          "dragProxyWidth": 300,
+          "dragProxyHeight": 200
+        },
+        "labels": {
+          "close": "close",
+          "maximise": "maximise",
+          "minimise": "minimise",
+          "popout": "open in new window",
+          "popin": "pop in",
+          "tabDropdown": "additional tabs"
+        },
+        "content": [
+          {
+            "type": "row",
+            "isClosable": true,
+            "reorderEnabled": true,
+            "title": "",
+            "content": [
+              {
+                "type": "stack",
+                "width": 100,
+                "isClosable": true,
+                "reorderEnabled": true,
+                "title": "",
+                "activeItemIndex": 0,
+                "content": [
+                  {
+                    "id": "build-log-ac89e17c216611709fc01a5f668061e6a874836f::Build%20Logs::manage-search::Build%20Logs::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-build-log-ac89e17c216611709fc01a5f668061e6a874836f::Build%20Logs::manage-search::Build%20Logs::%7B%7D\" />",
+                    "type": "component",
+                    "componentName": "component",
+                    "componentState": {
+                      "id": "build-log-ac89e17c216611709fc01a5f668061e6a874836f::Build%20Logs::manage-search::Build%20Logs::%7B%7D"
+                    },
+                    "isClosable": true,
+                    "reorderEnabled": true
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "isClosable": true,
+        "reorderEnabled": true,
+        "title": "",
+        "openPopouts": [],
+        "maximisedItemId": null
+      },
+      "tabs": {
+        "build-log-ac89e17c216611709fc01a5f668061e6a874836f::Build%20Logs::manage-search::Build%20Logs::%7B%7D": {
+          "name": "Build Logs",
+          "icon": "manage-search",
+          "render": "function",
+          "viewId": "Build Logs",
+          "id": "build-log-ac89e17c216611709fc01a5f668061e6a874836f::Build%20Logs::manage-search::Build%20Logs::%7B%7D",
+          "state": {
+            "__signal": null
+          }
+        }
+      }
+    },
+    {
+      "id": "/.deco/blocks/Preview%20%2Fsections%2FMiscellaneous%2FCampaignTimer.tsx.json",
+      "name": "Preview /sections/Miscellaneous/CampaignTimer.tsx",
+      "pinned": false,
+      "icon": "block",
+      "layout": {
+        "settings": {
+          "hasHeaders": true,
+          "constrainDragToContainer": true,
+          "reorderEnabled": true,
+          "selectionEnabled": false,
+          "popoutWholeStack": false,
+          "blockedPopoutsThrowError": true,
+          "closePopoutsOnUnload": true,
+          "showPopoutIcon": false,
+          "showMaximiseIcon": false,
+          "showCloseIcon": false,
+          "responsiveMode": "onload"
+        },
+        "dimensions": {
+          "borderWidth": 8,
+          "minItemHeight": 10,
+          "minItemWidth": 10,
+          "headerHeight": 40,
+          "dragProxyWidth": 300,
+          "dragProxyHeight": 200
+        },
+        "labels": {
+          "close": "close",
+          "maximise": "maximise",
+          "minimise": "minimise",
+          "popout": "open in new window",
+          "popin": "pop in",
+          "tabDropdown": "additional tabs"
+        },
+        "content": [
+          {
+            "type": "row",
+            "isClosable": true,
+            "reorderEnabled": true,
+            "title": "",
+            "content": [
+              {
+                "type": "stack",
+                "width": 50,
+                "isClosable": true,
+                "reorderEnabled": true,
+                "title": "",
+                "activeItemIndex": 0,
+                "content": [
+                  {
+                    "id": "%2F.deco%2Fblocks%2FPreview%2520%252Fsections%252FMiscellaneous%252FCampaignTimer.tsx.json::Preview::visibility::Preview::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2FPreview%2520%252Fsections%252FMiscellaneous%252FCampaignTimer.tsx.json::Preview::visibility::Preview::%7B%7D\" />",
+                    "type": "component",
+                    "componentName": "component",
+                    "componentState": {
+                      "id": "%2F.deco%2Fblocks%2FPreview%2520%252Fsections%252FMiscellaneous%252FCampaignTimer.tsx.json::Preview::visibility::Preview::%7B%7D"
+                    },
+                    "isClosable": true,
+                    "reorderEnabled": true
+                  }
+                ]
+              },
+              {
+                "type": "stack",
+                "width": 50,
+                "isClosable": true,
+                "reorderEnabled": true,
+                "title": "",
+                "activeItemIndex": 0,
+                "content": [
+                  {
+                    "id": "%2F.deco%2Fblocks%2FPreview%2520%252Fsections%252FMiscellaneous%252FCampaignTimer.tsx.json::Code::code::Code::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2FPreview%2520%252Fsections%252FMiscellaneous%252FCampaignTimer.tsx.json::Code::code::Code::%7B%7D\" />",
+                    "type": "component",
+                    "componentName": "component",
+                    "componentState": {
+                      "id": "%2F.deco%2Fblocks%2FPreview%2520%252Fsections%252FMiscellaneous%252FCampaignTimer.tsx.json::Code::code::Code::%7B%7D"
+                    },
+                    "isClosable": true,
+                    "reorderEnabled": true
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "isClosable": true,
+        "reorderEnabled": true,
+        "title": "",
+        "openPopouts": [],
+        "maximisedItemId": null
+      },
+      "tabs": {
+        "%2F.deco%2Fblocks%2FPreview%2520%252Fsections%252FMiscellaneous%252FCampaignTimer.tsx.json::Preview::visibility::Preview::%7B%7D": {
+          "name": "Preview",
+          "icon": "visibility",
+          "accepts": "function",
+          "render": "function",
+          "viewId": "Preview",
+          "id": "%2F.deco%2Fblocks%2FPreview%2520%252Fsections%252FMiscellaneous%252FCampaignTimer.tsx.json::Preview::visibility::Preview::%7B%7D",
+          "state": {
+            "__signal": null
+          }
+        },
+        "%2F.deco%2Fblocks%2FPreview%2520%252Fsections%252FMiscellaneous%252FCampaignTimer.tsx.json::Code::code::Code::%7B%7D": {
           "name": "Code",
           "icon": "code",
           "accepts": "function",
           "render": "function",
           "viewId": "Code",
-          "viewProps": {
-            "spaceId": "/.deco/metadata/blocks.json"
-          },
-          "id": "%2F.deco%2Fmetadata%2Fblocks.json::Code::code::Code::%7B%22spaceId%22%3A%22%2F.deco%2Fmetadata%2Fblocks.json%22%7D",
+          "id": "%2F.deco%2Fblocks%2FPreview%2520%252Fsections%252FMiscellaneous%252FCampaignTimer.tsx.json::Code::code::Code::%7B%7D",
           "state": {
-            "__signal": "error"
+            "__signal": null
+          }
+        }
+      }
+    },
+    {
+      "id": "/.deco/blocks/Campaign%20Timer%20-%2002.json",
+      "name": "Campaign Timer - 02",
+      "pinned": false,
+      "icon": "block",
+      "layout": {
+        "settings": {
+          "hasHeaders": true,
+          "constrainDragToContainer": true,
+          "reorderEnabled": true,
+          "selectionEnabled": false,
+          "popoutWholeStack": false,
+          "blockedPopoutsThrowError": true,
+          "closePopoutsOnUnload": true,
+          "showPopoutIcon": false,
+          "showMaximiseIcon": false,
+          "showCloseIcon": false,
+          "responsiveMode": "onload"
+        },
+        "dimensions": {
+          "borderWidth": 8,
+          "minItemHeight": 10,
+          "minItemWidth": 10,
+          "headerHeight": 40,
+          "dragProxyWidth": 300,
+          "dragProxyHeight": 200
+        },
+        "labels": {
+          "close": "close",
+          "maximise": "maximise",
+          "minimise": "minimise",
+          "popout": "open in new window",
+          "popin": "pop in",
+          "tabDropdown": "additional tabs"
+        },
+        "content": [
+          {
+            "type": "row",
+            "isClosable": true,
+            "reorderEnabled": true,
+            "title": "",
+            "content": [
+              {
+                "type": "stack",
+                "width": 41.66666666666667,
+                "isClosable": true,
+                "reorderEnabled": true,
+                "title": "",
+                "activeItemIndex": 0,
+                "content": [
+                  {
+                    "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Properties::list::Properties::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Properties::list::Properties::%7B%7D\" />",
+                    "type": "component",
+                    "componentName": "component",
+                    "componentState": {
+                      "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Properties::list::Properties::%7B%7D"
+                    },
+                    "width": 30,
+                    "isClosable": true,
+                    "reorderEnabled": true
+                  }
+                ]
+              },
+              {
+                "type": "stack",
+                "width": 58.333333333333336,
+                "isClosable": true,
+                "reorderEnabled": true,
+                "title": "",
+                "activeItemIndex": 0,
+                "content": [
+                  {
+                    "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Preview::visibility::Preview::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Preview::visibility::Preview::%7B%7D\" />",
+                    "type": "component",
+                    "componentName": "component",
+                    "componentState": {
+                      "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Preview::visibility::Preview::%7B%7D"
+                    },
+                    "width": 70,
+                    "isClosable": true,
+                    "reorderEnabled": true
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "isClosable": true,
+        "reorderEnabled": true,
+        "title": "",
+        "openPopouts": [],
+        "maximisedItemId": null
+      },
+      "tabs": {
+        "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Properties::list::Properties::%7B%7D": {
+          "name": "Properties",
+          "icon": "list",
+          "accepts": "function",
+          "render": "function",
+          "viewId": "Properties",
+          "width": 30,
+          "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Properties::list::Properties::%7B%7D",
+          "state": {
+            "__signal": null
+          }
+        },
+        "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Preview::visibility::Preview::%7B%7D": {
+          "name": "Preview",
+          "icon": "visibility",
+          "accepts": "function",
+          "render": "function",
+          "viewId": "Preview",
+          "width": 70,
+          "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252002.json::Preview::visibility::Preview::%7B%7D",
+          "state": {
+            "__signal": null
+          }
+        }
+      }
+    },
+    {
+      "id": "/.deco/blocks/Campaign%20Timer%20-%2001.json",
+      "name": "Campaign Timer - 01",
+      "pinned": false,
+      "icon": "block",
+      "layout": {
+        "settings": {
+          "hasHeaders": true,
+          "constrainDragToContainer": true,
+          "reorderEnabled": true,
+          "selectionEnabled": false,
+          "popoutWholeStack": false,
+          "blockedPopoutsThrowError": true,
+          "closePopoutsOnUnload": true,
+          "showPopoutIcon": false,
+          "showMaximiseIcon": false,
+          "showCloseIcon": false,
+          "responsiveMode": "onload"
+        },
+        "dimensions": {
+          "borderWidth": 8,
+          "minItemHeight": 10,
+          "minItemWidth": 10,
+          "headerHeight": 40,
+          "dragProxyWidth": 300,
+          "dragProxyHeight": 200
+        },
+        "labels": {
+          "close": "close",
+          "maximise": "maximise",
+          "minimise": "minimise",
+          "popout": "open in new window",
+          "popin": "pop in",
+          "tabDropdown": "additional tabs"
+        },
+        "content": [
+          {
+            "type": "row",
+            "isClosable": true,
+            "reorderEnabled": true,
+            "title": "",
+            "content": [
+              {
+                "type": "stack",
+                "width": 41.66666666666667,
+                "isClosable": true,
+                "reorderEnabled": true,
+                "title": "",
+                "activeItemIndex": 0,
+                "content": [
+                  {
+                    "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252001.json::Properties::list::Properties::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252001.json::Properties::list::Properties::%7B%7D\" />",
+                    "type": "component",
+                    "componentName": "component",
+                    "componentState": {
+                      "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252001.json::Properties::list::Properties::%7B%7D"
+                    },
+                    "width": 30,
+                    "isClosable": true,
+                    "reorderEnabled": true
+                  }
+                ]
+              },
+              {
+                "type": "stack",
+                "width": 58.333333333333336,
+                "isClosable": true,
+                "reorderEnabled": true,
+                "title": "",
+                "activeItemIndex": 0,
+                "content": [
+                  {
+                    "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252001.json::Preview::visibility::Preview::%7B%7D",
+                    "title": "<div class=\"contents text-base-700\" id=\"header-%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252001.json::Preview::visibility::Preview::%7B%7D\" />",
+                    "type": "component",
+                    "componentName": "component",
+                    "componentState": {
+                      "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252001.json::Preview::visibility::Preview::%7B%7D"
+                    },
+                    "width": 70,
+                    "isClosable": true,
+                    "reorderEnabled": true
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "isClosable": true,
+        "reorderEnabled": true,
+        "title": "",
+        "openPopouts": [],
+        "maximisedItemId": null
+      },
+      "tabs": {
+        "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252001.json::Properties::list::Properties::%7B%7D": {
+          "name": "Properties",
+          "icon": "list",
+          "accepts": "function",
+          "render": "function",
+          "viewId": "Properties",
+          "width": 30,
+          "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252001.json::Properties::list::Properties::%7B%7D",
+          "state": {
+            "__signal": null
+          }
+        },
+        "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252001.json::Preview::visibility::Preview::%7B%7D": {
+          "name": "Preview",
+          "icon": "visibility",
+          "accepts": "function",
+          "render": "function",
+          "viewId": "Preview",
+          "width": 70,
+          "id": "%2F.deco%2Fblocks%2FCampaign%2520Timer%2520-%252001.json::Preview::visibility::Preview::%7B%7D",
+          "state": {
+            "__signal": null
           }
         }
       }
