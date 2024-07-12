@@ -1,7 +1,5 @@
-import { useSection } from "deco/hooks/useSection.ts";
 import { JSX } from "preact";
 import { clx } from "../../sdk/clx.ts";
-import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
   /** @description Section title */
@@ -38,15 +36,10 @@ interface Tab {
 }
 
 function Tabbed(
-  { tabs, current = 0, children }: {
-    tabs: Tab[];
-    /** @description Current tab index. Defaults to 0 */
-    current?: number;
+  { children }: {
     children: JSX.Element;
   },
 ) {
-  const id = useId();
-
   return (
     <>
       {children}
