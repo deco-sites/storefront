@@ -14,7 +14,7 @@
           "action": {
             "title": "Skate into Adventure",
             "subTitle": "Top-quality roller skate shoes for all levels. ",
-            "href": "#",
+            "href": "/s?q=shoes&page=0",
             "label": "Grab Yours Now!"
           }
         },
@@ -25,7 +25,7 @@
           "action": {
             "title": "Discover Fresh Looks",
             "subTitle": "Modern men's clothing and accessories.",
-            "href": "#",
+            "href": "/men",
             "label": "Shop the Collection"
           }
         },
@@ -34,7 +34,7 @@
           "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f7ea4cbe-7498-4e64-9205-c741753edfcc",
           "action": {
             "label": "Shop Now!",
-            "href": "#",
+            "href": "/women",
             "title": "Embrace New Trends",
             "subTitle": "Stylish clothes and accessories."
           },
