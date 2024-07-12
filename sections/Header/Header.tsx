@@ -87,7 +87,7 @@ const Desktop = (
           aria-label="search icon button"
         >
           <Icon id="search" />
-          <span class="text-base-300 truncate">
+          <span class="text-base-400 truncate">
             Search products, brands...
           </span>
         </label>
@@ -98,7 +98,7 @@ const Desktop = (
         </div>
       </div>
 
-      <div class="flex justify-between items-center text-base-300">
+      <div class="flex justify-between items-center text-base-400">
         <ul class="flex">
           {navItems?.slice(0, 4).map((item) => <NavItem item={item} />)}
         </ul>
