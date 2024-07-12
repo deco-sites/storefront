@@ -78,28 +78,27 @@ export default function Searchbar(
   const slot = useId();
 
   return (
-    <div
-      class="w-full grid gap-8 px-4 py-6"
-      style={{ gridTemplateRows: "min-content auto" }}
-    >
-      <form id={SEARCHBAR_INPUT_FORM_ID} action={ACTION} class="join">
+    <>
+      <form
+        id={SEARCHBAR_INPUT_FORM_ID}
+        action={ACTION}
+        class="join w-full relative"
+      >
         <button
           type="submit"
-          class="btn join-item btn-square no-animation"
           aria-label="Search"
           for={SEARCHBAR_INPUT_FORM_ID}
           tabIndex={-1}
+          class="absolute left-2 top-1/2 transform -translate-y-1/2"
         >
           <span class="loading loading-spinner loading-xs hidden [.htmx-request_&]:inline" />
           <Icon id="search" class="inline [.htmx-request_&]:hidden" />
         </button>
         <input
-          autoFocus
           tabIndex={0}
-          class="input input-bordered join-item flex-grow"
+          class="input input-bordered pl-10 pr-10 w-full"
           name={NAME}
           placeholder={placeholder}
-          autocomplete="off"
           hx-target={`#${slot}`}
           hx-post={loader && useComponent<SuggestionProps>(Suggestions, {
             loader: asResolved(loader),
@@ -110,11 +109,11 @@ export default function Searchbar(
         />
         <label
           type="button"
-          class="join-item btn btn-ghost btn-square hidden sm:inline-flex no-animation"
+          class="absolute right-2 top-1/2 transform -translate-y-1/2 hover:cursor-pointer mr-4"
           for={SEARCHBAR_POPUP_ID}
           aria-label="Toggle searchbar"
         >
-          <Icon id="close" />
+          <Icon id="close" size={16} />
         </label>
       </form>
 
@@ -133,6 +132,6 @@ export default function Searchbar(
           ),
         }}
       />
-    </div>
+    </>
   );
 }

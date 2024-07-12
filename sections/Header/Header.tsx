@@ -12,13 +12,11 @@ import Searchbar, {
 } from "../../components/search/Searchbar/Form.tsx";
 import Drawer from "../../components/ui/Drawer.tsx";
 import Icon from "../../components/ui/Icon.tsx";
-import Modal from "../../components/ui/Modal.tsx";
 import {
   HEADER_HEIGHT_DESKTOP,
   HEADER_HEIGHT_MOBILE,
   NAVBAR_HEIGHT_MOBILE,
   SEARCHBAR_DRAWER_ID,
-  SEARCHBAR_POPUP_ID,
   SIDEMENU_CONTAINER_ID,
   SIDEMENU_DRAWER_ID,
 } from "../../constants.ts";
@@ -49,26 +47,17 @@ export interface SectionProps {
   logo: Logo;
 
   /** @hide true */
-  variant?: "initial" | "menu";
+  variant?: "initial" | "menu" | "search";
 }
 
 type Props = Omit<SectionProps, "alert" | "variant">;
 
 const Desktop = (
-  { navItems, logo, searchbar }: Props,
-) => (
-  <>
-    <Modal id={SEARCHBAR_POPUP_ID}>
-      <div
-        class="absolute top-0 bg-base-100 container"
-        style={{ marginTop: HEADER_HEIGHT_MOBILE }}
-      >
-        <Searchbar {...searchbar} />
-      </div>
-    </Modal>
-
+  { navItems, logo, searchbar, variant }: Props & { variant?: string },
+) => {
+  return (
     <div class="flex flex-col gap-4 pt-5 container border-b border-gray-300">
-      <div class="grid grid-cols-3 place-items-center">
+      <div class="flex flex-row justify-between">
         <div class="place-self-start">
           <a href="/" aria-label="Store logo">
             <Image
@@ -80,18 +69,28 @@ const Desktop = (
           </a>
         </div>
 
-        <label
-          for={SEARCHBAR_POPUP_ID}
-          class="input input-bordered flex items-center gap-2 w-full"
-          aria-label="search icon button"
+        <div
+          class={`flex gap-4 items-center ${
+            variant === "search" ? "grow" : "shrink"
+          }`}
         >
-          <Icon id="search" />
-          <span class="text-base-400 truncate">
-            Search products, brands...
-          </span>
-        </label>
-
-        <div class="flex gap-4 place-self-end">
+          {variant === "search"
+            ? (
+              <div class="w-full">
+                <Searchbar {...searchbar} />
+              </div>
+            )
+            : (
+              <a
+                hx-get={useSection({ props: { variant: "search", searchbar } })}
+                hx-target="closest section"
+                hx-swap="outerHTML"
+                class="flex rounded-full text-sm hover:bg-base-400 transition duration-200 ease-in-out gap-2 items-center lg:py-2.5 lg:px-4 cursor-pointer"
+              >
+                <Icon id="search" />
+                <span class="text-base-400 truncate">Search</span>
+              </a>
+            )}
           <Bag />
         </div>
       </div>
@@ -105,8 +104,8 @@ const Desktop = (
         </div>
       </div>
     </div>
-  </>
-);
+  );
+};
 
 const Mobile = ({ logo, searchbar }: Props) => (
   <>
@@ -114,7 +113,7 @@ const Mobile = ({ logo, searchbar }: Props) => (
       id={SEARCHBAR_DRAWER_ID}
       aside={
         <Drawer.Aside title="Search" drawer={SEARCHBAR_DRAWER_ID}>
-          <div class="w-screen overflow-y-auto">
+          <div class="w-screen overflow-y-auto p-4">
             <Searchbar {...searchbar} />
           </div>
         </Drawer.Aside>
@@ -192,8 +191,9 @@ function Header({
     height: 16,
     alt: "Logo",
   },
+  variant,
   ...props
-}: Props) {
+}: Props & { variant?: string }) {
   const device = useDevice();
 
   return (
@@ -207,7 +207,7 @@ function Header({
       <div class="bg-base-100 fixed w-full z-40">
         {alerts.length > 0 && <Alert alerts={alerts} />}
         {device === "desktop"
-          ? <Desktop logo={logo} {...props} />
+          ? <Desktop logo={logo} variant={variant} {...props} />
           : <Mobile logo={logo} {...props} />}
       </div>
     </header>
@@ -219,5 +219,5 @@ export default function Section({ variant, ...props }: SectionProps) {
     return <Menu navItems={props.navItems ?? []} />;
   }
 
-  return <Header {...props} />;
+  return <Header variant={variant} {...props} />;
 }
