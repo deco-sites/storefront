@@ -49,34 +49,6 @@ function Tabbed(
 
   return (
     <>
-      <div class="flex px-5 sm:px-0 gap-3">
-        <div role="tablist" class="tabs gap-3">
-          {tabs.map((tab, index) => (
-            <button
-              role="tab"
-              class={clx(
-                "tab tab-lg rounded-full",
-                index === current
-                  ? "tab-active bg-primary bg-opacity-15"
-                  : "bg-base-200",
-                "gap-2",
-              )}
-              hx-get={useSection({ props: { tabIndex: index } })}
-              hx-swap="outerHTML"
-              hx-target="closest section"
-              hx-indicator={`#${id}`}
-            >
-              <span>{tab.title}</span>
-            </button>
-          ))}
-        </div>
-
-        <span
-          id={id}
-          class="[.htmx-request&]:inline hidden loading loading-spinner loading-xs"
-        />
-      </div>
-
       {children}
     </>
   );
