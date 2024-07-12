@@ -97,6 +97,9 @@ export default function GallerySlider(props: Props) {
               "carousel carousel-center",
               "sm:carousel-vertical",
               "gap-2",
+              "max-w-full",
+              "overflow-x-auto",
+              "sm:overflow-y-auto",
             )}
             style={{ maxHeight: "600px" }}
           >
