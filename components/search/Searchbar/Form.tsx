@@ -20,6 +20,7 @@ import { useId } from "../../../sdk/useId.ts";
 import { useComponent } from "../../../sections/Component.tsx";
 import Icon from "../../ui/Icon.tsx";
 import { Props as SuggestionProps } from "./Suggestions.tsx";
+import { useSection } from "deco/hooks/useSection.ts";
 
 // When user clicks on the search button, navigate it to
 export const ACTION = "/s";
@@ -96,7 +97,7 @@ export default function Searchbar(
         </button>
         <input
           tabIndex={0}
-          class="input input-bordered pl-10 pr-10 w-full"
+          class="input input-bordered pl-10 pr-10 w-full h-11"
           name={NAME}
           placeholder={placeholder}
           hx-target={`#${slot}`}
@@ -110,7 +111,9 @@ export default function Searchbar(
         <label
           type="button"
           class="absolute right-2 top-1/2 transform -translate-y-1/2 hover:cursor-pointer mr-4"
-          for={SEARCHBAR_POPUP_ID}
+          hx-get={useSection({ props: { variant: "initial" } })}
+          hx-target="closest section"
+          hx-swap="outerHTML"
           aria-label="Toggle searchbar"
         >
           <Icon id="close" size={16} />
