@@ -69,28 +69,22 @@ const Desktop = (
           </a>
         </div>
 
-        <div
-          class={`flex gap-4 items-center ${
-            variant === "search" ? "grow" : "shrink"
-          }`}
-        >
-          {variant === "search"
-            ? (
-              <div class="w-full">
-                <Searchbar {...searchbar} />
-              </div>
-            )
-            : (
-              <a
-                hx-get={useSection({ props: { variant: "search", searchbar } })}
-                hx-target="closest section"
-                hx-swap="outerHTML"
-                class="flex rounded-full text-sm hover:bg-base-400 transition duration-200 ease-in-out gap-2 items-center lg:py-2.5 lg:px-4 cursor-pointer"
-              >
-                <Icon id="search" />
-                <span class="text-base-400 truncate">Search</span>
-              </a>
-            )}
+        <div class={`flex gap-4 items-center ${variant === "search" ? "grow" : "shrink" }`}>
+          {variant === "search" ? (
+          <div class="w-full">
+            <Searchbar {...searchbar} />
+          </div>
+        ) : (
+          <a
+            hx-get={useSection({ props: { variant: "search", searchbar } })}
+            hx-target="closest section"
+            hx-swap="outerHTML"
+            class="flex rounded-full text-sm hover:bg-base-400 transition duration-200 ease-in-out gap-2 items-center lg:py-2.5 lg:px-4 cursor-pointer"
+          >
+            <Icon id="search" />
+            <span class="text-base-400 truncate">Search</span>
+          </a>
+        )}
           <Bag />
         </div>
       </div>
