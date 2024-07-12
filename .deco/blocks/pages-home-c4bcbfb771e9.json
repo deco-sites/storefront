@@ -69,31 +69,26 @@
       "items": [
         {
           "label": "Men",
-          "href": "/",
+          "href": "/men",
           "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/38c33c9f-14a1-4048-973b-dc2a75caf1fa"
         },
         {
-          "href": "/",
+          "href": "/women",
           "label": "Women",
           "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f6bea2b8-b248-4b42-9246-6e924a0acc8b"
         },
         {
-          "href": "/",
+          "href": "/kids",
           "label": "Kids",
           "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/1b0ecaa2-9a13-4de2-bf17-5196948ed128"
         },
         {
-          "href": "/",
-          "label": "Hats",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/36e97897-5cf7-4271-a71c-683dc732ef8c"
-        },
-        {
-          "href": "/",
+          "href": "/accessories",
           "label": "Accessories",
           "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/92129655-fe40-4b29-8fdb-e7f71e67a5d1"
         },
         {
-          "href": "/",
+          "href": "/home-and-living",
           "label": "Home & Living",
           "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/d0433c00-cd26-4638-b519-0cb64b9f82e8"
         }

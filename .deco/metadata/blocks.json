@@ -180,5 +180,33 @@
   "/.deco/blocks/Preview%20%2Fsections%2FImages%2FCarousel.tsx.json": {
     "blockType": "sections",
     "__resolveType": "site/sections/Images/Carousel.tsx"
+  },
+  "/.deco/blocks/pages-Landing%2520Page%2520(Men)-177306.json": {
+    "name": "Landing Page (Men)",
+    "path": "/men",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "/.deco/blocks/pages-Landing%2520Page%2520(Kids)-181633.json": {
+    "name": "Landing Page (Kids)",
+    "path": "/kids",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "/.deco/blocks/pages-Landing%2520Page%2520(Accessories)-260333.json": {
+    "name": "Landing Page (Accessories)",
+    "path": "/accessories",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "/.deco/blocks/pages-Landing%2520Page%2520(Home%2520%2526%2520Living)-726977.json": {
+    "name": "Landing Page (Home & Living)",
+    "path": "/home-and-living",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "/.deco/blocks/023.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Header/Header.tsx"
   }
 }

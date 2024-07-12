@@ -1,7 +1,39 @@
 {
   "__resolveType": "site/sections/Header/Header.tsx",
   "navItems": {
-    "__resolveType": "navbar"
+    "__resolveType": "commerce/loaders/navbar.ts",
+    "items": [
+      {
+        "@type": "SiteNavigationElement",
+        "url": "/women",
+        "name": "Women",
+        "children": []
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "url": "/men",
+        "name": "Men",
+        "children": []
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "url": "/kids",
+        "name": "Kids",
+        "children": []
+      },
+      {
+        "children": [],
+        "image": [],
+        "name": "Accessories",
+        "url": "/accessories"
+      },
+      {
+        "children": [],
+        "image": [],
+        "name": "Home & Living",
+        "url": "/home-and-living"
+      }
+    ]
   },
   "searchbar": {
     "placeholder": "What are you looking for?",

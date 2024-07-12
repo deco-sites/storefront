@@ -24,7 +24,7 @@
             "weight": "700"
           }
         ],
-        "family": "Inter Tight"
+        "family": "Inter"
       }
     ]
   },
@@ -50,8 +50,9 @@
   "complementaryColors": {
     "primary-content": "#ffffff",
     "base-200": "#FAFAFA",
-    "base-300": "#EFF0F0",
-    "base-content": "#000000",
-    "base-400": "#5C5C5C"
+    "base-300": "#5C5C5C",
+    "base-400": "#C9CFCF",
+    "base-500": "#616B6B",
+    "base-content": "#000000"
   }
 }
