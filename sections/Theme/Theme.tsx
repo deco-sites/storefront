@@ -41,6 +41,8 @@ export interface ComplementaryColors {
   /** @format color-input */
   "base-300"?: string;
   /** @format color-input */
+  "base-400"?: string;
+  /** @format color-input */
   "base-content"?: string;
   /** @format color-input */
   "primary-content"?: string;
