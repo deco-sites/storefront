@@ -165,7 +165,7 @@ function ProductCard({
               {formatPrice(listPrice, offers?.priceCurrency)}
             </span>
           )}
-          <span class="font-medium text-base-300">
+          <span class="font-medium text-base-400">
             {formatPrice(price, offers?.priceCurrency)}
           </span>
         </div>

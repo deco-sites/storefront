@@ -56,7 +56,7 @@ function Notice(
       <span class="text-3xl font-semibold text-center sm:text-start">
         {title}
       </span>
-      <span class="text-sm font-normal text-base-300 text-center sm:text-start">
+      <span class="text-sm font-normal text-base-400 text-center sm:text-start">
         {description}
       </span>
     </div>

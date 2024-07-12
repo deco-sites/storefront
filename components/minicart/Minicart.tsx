@@ -240,7 +240,7 @@ export default function Cart({
                         {formatPrice(total, currency, locale)}
                       </output>
                     </div>
-                    <span class="text-sm text-base-300">
+                    <span class="text-sm text-base-400">
                       Taxas e fretes serão calculados no checkout
                     </span>
                   </div>

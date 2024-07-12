@@ -83,7 +83,7 @@ function ProductInfo({ page }: Props) {
 
       {/* Prices */}
       <div class="flex gap-3 pt-1">
-        <span class="text-3xl font-semibold text-base-300">
+        <span class="text-3xl font-semibold text-base-400">
           {formatPrice(price, offers?.priceCurrency)}
         </span>
         <span class="line-through text-sm font-medium text-gray-400">

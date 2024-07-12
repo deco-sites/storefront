@@ -50,7 +50,7 @@ function Footer({
               <ul class="flex flex-col gap-2">
                 {children.map(({ title, href }) => (
                   <li>
-                    <a class="text-sm font-medium text-base-300" href={href}>
+                    <a class="text-sm font-medium text-base-400" href={href}>
                       {title}
                     </a>
                   </li>
@@ -91,7 +91,7 @@ function Footer({
           </ul>
         </div>
 
-        <hr class="w-full text-base-300" />
+        <hr class="w-full text-base-400" />
 
         <div class="grid grid-flow-row sm:grid-flow-col gap-8">
           <ul class="flex flex-col sm:flex-row gap-2 sm:gap-4 sm:items-center">
@@ -108,11 +108,11 @@ function Footer({
             <div>
               <img loading="lazy" src={logo} />
             </div>
-            <span class="text-xs font-normal text-base-300">{trademark}</span>
+            <span class="text-xs font-normal text-base-400">{trademark}</span>
           </div>
 
           <div class="flex flex-nowrap items-center justify-center gap-4">
-            <span class="text-sm font-normal text-base-300">Powered by</span>
+            <span class="text-sm font-normal text-base-400">Powered by</span>
             <PoweredByDeco />
           </div>
         </div>

@@ -28,7 +28,7 @@ const useStyles = (value: string, checked: boolean) => {
   if (colors[value]) {
     return clx(
       "h-8 w-8 block",
-      "border border-base-300 rounded-full",
+      "border border-base-400 rounded-full",
       "ring-2 ring-offset-2",
       checked ? "ring-primary" : "ring-transparent",
     );

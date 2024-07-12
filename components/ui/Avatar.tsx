@@ -25,7 +25,7 @@ const colors: Record<string, Record<string, string>> = {
 const variants = {
   active: "ring-base-content",
   disabled: "line-through",
-  default: "ring-base-300",
+  default: "ring-base-400",
 };
 
 function Avatar({ content, variant = "default" }: Props) {
