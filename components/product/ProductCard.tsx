@@ -68,6 +68,10 @@ function ProductCard({
     },
   });
 
+  //Added it to check the variant name in the SKU Selector later, so it doesn't render the SKU to "shoes size" in the Product Card
+  const firstVariantName = firstSkuVariations[0]?.toLowerCase();
+  const shoeSizeVariant = "shoe size";
+
   return (
     <div
       {...event}
@@ -172,7 +176,7 @@ function ProductCard({
       </a>
 
       {/* SKU Selector */}
-      {variants.length > 1 && (
+      {variants.length > 1 && firstVariantName !== shoeSizeVariant && (
         <ul class="flex items-center justify-start gap-2 pt-4 pb-1 pl-1 overflow-x-auto">
           {variants.map(([value, link]) => [value, relative(link)] as const)
             .map(([value, link]) => (
@@ -190,8 +194,6 @@ function ProductCard({
             ))}
         </ul>
       )}
-
-      <div class="flex-grow" />
 
       <div>
         {inStock

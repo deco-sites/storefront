@@ -1,6 +1,6 @@
 {
-  "name": "Landing Page (Women)",
-  "path": "/women",
+  "name": "Landing Page (Home & Living)",
+  "path": "/home-and-living",
   "sections": [
     {
       "__resolveType": "Header"
@@ -10,7 +10,8 @@
       "page": {
         "__resolveType": "shopify/loaders/ProductListingPage.ts",
         "count": 12,
-        "query": "women"
+        "collectionName": "Home & Living",
+        "query": "home & living"
       },
       "layout": {
         "columns": {

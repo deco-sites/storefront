@@ -63,6 +63,13 @@ function ProductInfo({ page }: Props) {
     },
   });
 
+  //Checks if the variant name is "title"/"default title" and if so, the SKU Selector div doesn't render
+  const hasValidVariants = isVariantOf?.hasVariant?.some(
+    (variant) =>
+      variant?.name?.toLowerCase() !== "title" &&
+      variant?.name?.toLowerCase() !== "default title",
+  ) ?? false;
+
   return (
     <div {...viewItemEvent} class="flex flex-col" id={id}>
       {/* Price tag */}
@@ -92,9 +99,11 @@ function ProductInfo({ page }: Props) {
       </div>
 
       {/* Sku Selector */}
-      <div class="mt-4 sm:mt-8">
-        <ProductSelector product={product} />
-      </div>
+      {hasValidVariants && (
+        <div className="mt-4 sm:mt-8">
+          <ProductSelector product={product} />
+        </div>
+      )}
 
       {/* Add to Cart and Favorites button */}
       <div class="mt-4 sm:mt-10 flex flex-col gap-2">

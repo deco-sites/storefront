@@ -44,14 +44,14 @@ function ProductSlider({ products, itemListName }: Props) {
           </Slider>
         </div>
 
-        <div class="col-start-1 col-span-1 row-start-1 row-span-1 z-10 self-center">
-          <Slider.PrevButton class="hidden sm:flex disabled:invisible btn btn-neutral btn-sm btn-circle no-animation">
+        <div class="col-start-1 col-span-1 row-start-1 row-span-1 z-10 self-center p-2 relative bottom-[15%]">
+          <Slider.PrevButton class="hidden sm:flex disabled:invisible btn btn-outline btn-sm btn-circle no-animation">
             <Icon id="chevron-right" class="rotate-180" />
           </Slider.PrevButton>
         </div>
 
-        <div class="col-start-3 col-span-1 row-start-1 row-span-1 z-10 self-center">
-          <Slider.NextButton class="hidden sm:flex disabled:invisible btn btn-neutral btn-sm btn-circle no-animation">
+        <div class="col-start-3 col-span-1 row-start-1 row-span-1 z-10 self-center p-2 relative bottom-[15%]">
+          <Slider.NextButton class="hidden sm:flex disabled:invisible btn btn-outline btn-sm btn-circle no-animation">
             <Icon id="chevron-right" />
           </Slider.NextButton>
         </div>

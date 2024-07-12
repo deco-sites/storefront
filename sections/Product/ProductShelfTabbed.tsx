@@ -50,7 +50,7 @@ export default function TabbedProductShelf(
     <Section.Container {...viewItemListEvent}>
       <Section.Header title={title} cta={cta} />
 
-      <Section.Tabbed tabs={tabs} current={ti}>
+      <Section.Tabbed>
         {!products?.length
           ? (
             <div class="flex justify-center items-center">

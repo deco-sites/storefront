@@ -7,7 +7,6 @@ import Alert from "../../components/header/Alert.tsx";
 import Bag from "../../components/header/Bag.tsx";
 import Menu from "../../components/header/Menu.tsx";
 import NavItem from "../../components/header/NavItem.tsx";
-import SignIn from "../../components/header/SignIn.tsx";
 import Searchbar, {
   type SearchbarProps,
 } from "../../components/search/Searchbar/Form.tsx";
@@ -93,14 +92,13 @@ const Desktop = (
         </label>
 
         <div class="flex gap-4 place-self-end">
-          <SignIn variant="desktop" />
           <Bag />
         </div>
       </div>
 
-      <div class="flex justify-between items-center text-base-400">
+      <div class="flex justify-between items-center">
         <ul class="flex">
-          {navItems?.slice(0, 4).map((item) => <NavItem item={item} />)}
+          {navItems?.slice(0, 10).map((item) => <NavItem item={item} />)}
         </ul>
         <div>
           {/* ship to */}
@@ -180,9 +178,6 @@ const Mobile = ({ logo, searchbar }: Props) => (
       >
         <Icon id="search" />
       </label>
-
-      <SignIn variant="mobile" />
-
       <Bag />
     </div>
   </>
