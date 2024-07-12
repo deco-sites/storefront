@@ -70,7 +70,7 @@ function ProductCard({
 
   //Added it to check the variant name in the SKU Selector later, so it doesn't render the SKU to "shoes size" in the Product Card
   const firstVariantName = firstSkuVariations[0]?.toLowerCase();
-  const shoeSizeVariant = "shoe size"
+  const shoeSizeVariant = "shoe size";
 
   return (
     <div
