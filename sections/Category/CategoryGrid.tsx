@@ -21,7 +21,7 @@ export interface Props extends SectionHeaderProps {
 function Card({ image, href, label }: Item) {
   return (
     <a href={href} class="flex flex-col items-center justify-center gap-4">
-      <div class="w-44 h-44 rounded-full bg-base-200 flex justify-center items-center">
+      <div class="w-44 h-44 rounded-full bg-base-200 flex justify-center items-center border border-transparent hover:border-primary">
         <Image
           src={image}
           alt={label}
