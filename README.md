@@ -42,7 +42,6 @@ deno task update
 - 👥 [Discord](https://deco.cx/discord)
 
 ## Contributing
-
 We are working on the instructions, for now feel free to contribute to this project.
 
 Take a look on this ones:
