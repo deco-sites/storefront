@@ -170,12 +170,12 @@ export default function Cart({
           {count === 0
             ? (
               <div class="flex flex-col gap-6">
-                <span class="font-medium text-2xl">Sua sacola está vazia</span>
+                <span class="font-medium text-2xl">Your bag is empty</span>
                 <label
                   for={MINICART_DRAWER_ID}
                   class="btn btn-outline no-animation"
                 >
-                  Escolher produtos
+                  Choose products
                 </label>
               </div>
             )
@@ -214,7 +214,7 @@ export default function Cart({
                   <div class="border-t border-base-200 py-2 flex flex-col">
                     {discounts > 0 && (
                       <div class="flex justify-between items-center px-4">
-                        <span class="text-sm">Descontos</span>
+                        <span class="text-sm">Discounts</span>
                         <span class="text-sm">
                           {formatPrice(discounts, currency, locale)}
                         </span>
@@ -240,8 +240,8 @@ export default function Cart({
                         {formatPrice(total, currency, locale)}
                       </output>
                     </div>
-                    <span class="text-sm text-base-400">
-                      Taxas e fretes serão calculados no checkout
+                    <span class="text-sm text-base-300">
+                      Fees and shipping will be calculated at checkout
                     </span>
                   </div>
 
