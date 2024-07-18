@@ -79,3 +79,6 @@ _docker_deps.ts
 .metadata/changeset.json
 
 .env
+
+# Deno files
+deno.*.tmp
