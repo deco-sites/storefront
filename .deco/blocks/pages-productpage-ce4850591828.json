@@ -6,46 +6,58 @@
   },
   "sections": [
     {
-      "__resolveType": "commerce/sections/Seo/SeoPDP.tsx",
-      "jsonLD": {
-        "__resolveType": "PDP Loader"
-      },
-      "jsonLDs": [
-        {}
-      ]
+      "__resolveType": "website/sections/Rendering/SingleDeferred.tsx",
+      "section": {
+        "__resolveType": "commerce/sections/Seo/SeoPDPV2.tsx",
+        "jsonLD": {
+          "__resolveType": "PDP Loader"
+        }
+      }
     },
     {
       "__resolveType": "Header"
     },
     {
-      "__resolveType": "site/sections/Product/ProductDetails.tsx",
-      "page": {
-        "__resolveType": "PDP Loader"
-      }
-    },
-    {
-      "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "title": "You may also like",
-      "products": {
-        "__resolveType": "shopify/loaders/ProductList.ts",
-        "props": {
-          "sort": "",
-          "query": "a",
-          "count": 9
-        },
-        "filters": {
-          "tags": [],
-          "productTypes": [],
-          "productVendors": [],
-          "variantOptions": []
+      "__resolveType": "website/sections/Rendering/SingleDeferred.tsx",
+      "section": {
+        "__resolveType": "site/sections/Product/ProductDetails.tsx",
+        "page": {
+          "__resolveType": "PDP Loader"
         }
       }
     },
     {
-      "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
+      "__resolveType": "website/sections/Rendering/SingleDeferred.tsx",
+      "section": {
+        "__resolveType": "site/sections/Product/ProductShelf.tsx",
+        "title": "You may also like",
+        "products": {
+          "__resolveType": "shopify/loaders/ProductList.ts",
+          "props": {
+            "sort": "",
+            "query": "a",
+            "count": 9
+          },
+          "filters": {
+            "tags": [],
+            "productTypes": [],
+            "productVendors": [],
+            "variantOptions": []
+          }
+        }
+      }
     },
     {
-      "__resolveType": "Footer"
+      "__resolveType": "website/sections/Rendering/SingleDeferred.tsx",
+      "section": {
+        "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
+      }
+    },
+    {
+      "__resolveType": "website/sections/Rendering/SingleDeferred.tsx",
+      "section": {
+        "__resolveType": "Footer"
+      }
     }
   ],
   "__resolveType": "website/pages/Page.tsx"
