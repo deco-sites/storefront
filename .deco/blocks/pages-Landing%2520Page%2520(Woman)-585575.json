@@ -6,27 +6,36 @@
       "__resolveType": "Header"
     },
     {
-      "__resolveType": "site/sections/Product/SearchResult.tsx",
-      "page": {
-        "__resolveType": "shopify/loaders/ProductListingPage.ts",
-        "count": 12,
-        "query": "women"
-      },
-      "layout": {
-        "columns": {
-          "mobile": 2,
-          "desktop": 4
+      "__resolveType": "website/sections/Rendering/SingleDeferred.tsx",
+      "section": {
+        "__resolveType": "site/sections/Product/SearchResult.tsx",
+        "page": {
+          "__resolveType": "shopify/loaders/ProductListingPage.ts",
+          "count": 12,
+          "query": "women"
         },
-        "variant": "aside",
-        "pagination": "show-more"
-      },
-      "startingPage": 1
+        "layout": {
+          "columns": {
+            "mobile": 2,
+            "desktop": 4
+          },
+          "variant": "aside",
+          "pagination": "show-more"
+        },
+        "startingPage": 1
+      }
     },
     {
-      "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
+      "__resolveType": "website/sections/Rendering/SingleDeferred.tsx",
+      "section": {
+        "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
+      }
     },
     {
-      "__resolveType": "Footer"
+      "__resolveType": "website/sections/Rendering/SingleDeferred.tsx",
+      "section": {
+        "__resolveType": "Footer"
+      }
     }
   ],
   "seo": {
