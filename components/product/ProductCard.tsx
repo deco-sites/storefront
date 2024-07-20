@@ -195,6 +195,8 @@ function ProductCard({
         </ul>
       )}
 
+      <div class="flex-grow" />
+
       <div>
         {inStock
           ? (
