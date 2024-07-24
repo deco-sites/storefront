@@ -24,7 +24,9 @@
     },
     {
       "__resolveType": "analytics/sections/Analytics/DecoAnalytics.tsx"
-    },
+    }
+  ],
+  "pageSections": [
     {
       "__resolveType": "site/sections/Session.tsx",
       "minicart": null,
