@@ -3,6 +3,7 @@ import { Picture, Source } from "apps/website/components/Picture.tsx";
 import Section, {
   type Props as SectionHeaderProps,
 } from "../../components/ui/Section.tsx";
+import { LoadingFallbackProps } from "deco/mod.ts";
 
 /**
  * @titleBy alt
@@ -55,7 +56,7 @@ function Banner({ mobile, desktop, alt, href }: Banner) {
   );
 }
 
-export default function Gallery({
+function Gallery({
   title,
   cta,
   banners = [
@@ -107,3 +108,15 @@ export default function Gallery({
     </Section.Container>
   );
 }
+
+export const LoadingFallback = (
+  { title, cta }: LoadingFallbackProps<Props>,
+) => (
+  <Section.Container>
+    <Section.Header title={title} cta={cta} />
+
+    <Section.Placeholder height="635px" />;
+  </Section.Container>
+);
+
+export default Gallery;

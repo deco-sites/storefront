@@ -70,4 +70,6 @@ function Banner({ title, description, images, cta }: Props) {
   );
 }
 
+export const LoadingFallback = () => <Section.Placeholder height="635px" />;
+
 export default Banner;

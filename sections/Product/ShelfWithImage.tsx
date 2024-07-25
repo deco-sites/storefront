@@ -1,6 +1,7 @@
 import { Section } from "deco/blocks/section.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import S from "../../components/ui/Section.tsx";
 
 export interface Props {
   section: Section;
@@ -11,7 +12,7 @@ export interface Props {
   };
 }
 
-export default function ShelfWithImage({ section, image }: Props) {
+function ShelfWithImage({ section, image }: Props) {
   return (
     <div class="container">
       <div class="grid md:grid-cols-2 grid-cols-1">
@@ -31,3 +32,7 @@ export default function ShelfWithImage({ section, image }: Props) {
     </div>
   );
 }
+
+export const LoadingFallback = () => <S.Placeholder height="640px" />;
+
+export default ShelfWithImage;

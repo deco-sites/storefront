@@ -41,4 +41,6 @@ function WhatsApp({ phone }: Props) {
   );
 }
 
+export const LoadingFallback = () => null;
+
 export default WhatsApp;

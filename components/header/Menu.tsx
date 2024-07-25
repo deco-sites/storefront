@@ -2,7 +2,7 @@ import Icon from "../../components/ui/Icon.tsx";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 
 export interface Props {
-  navItems: SiteNavigationElement[];
+  navItems?: SiteNavigationElement[];
 }
 
 function MenuItem({ item }: { item: SiteNavigationElement }) {
@@ -26,7 +26,7 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
   );
 }
 
-function Menu({ navItems }: Props) {
+function Menu({ navItems = [] }: Props) {
   return (
     <div
       class="flex flex-col h-full overflow-y-auto"

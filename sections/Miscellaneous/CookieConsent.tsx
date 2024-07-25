@@ -1,7 +1,7 @@
-import { useScript } from "deco/hooks/useScript.ts";
-import { useId } from "../../sdk/useId.ts";
 import { HTMLWidget } from "apps/admin/widgets.ts";
+import { useScript } from "deco/hooks/useScript.ts";
 import { clx } from "../../sdk/clx.ts";
+import { useId } from "../../sdk/useId.ts";
 
 const script = (id: string) => {
   const handleScroll = () => {
@@ -108,5 +108,7 @@ function CookieConsent(
     </>
   );
 }
+
+export const LoadingFallback = () => null;
 
 export default CookieConsent;

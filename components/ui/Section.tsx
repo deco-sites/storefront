@@ -59,10 +59,28 @@ function Container({ class: _class, ...props }: JSX.IntrinsicElements["div"]) {
   );
 }
 
+function Placeholder(
+  { height, class: _class }: { height: string; class?: string },
+) {
+  return (
+    <div
+      style={{
+        height,
+        containIntrinsicSize: height,
+        contentVisibility: "auto",
+      }}
+      class={clx("flex justify-center items-center", _class)}
+    >
+      <span class="loading loading-spinner" />
+    </div>
+  );
+}
+
 function Section() {}
 
 Section.Container = Container;
 Section.Header = Header;
 Section.Tabbed = Tabbed;
+Section.Placeholder = Placeholder;
 
 export default Section;

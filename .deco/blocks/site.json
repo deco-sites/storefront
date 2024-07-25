@@ -57,7 +57,7 @@
   },
   "platform": "shopify",
   "__resolveType": "site/apps/site.ts",
-  "firstByteThresholdMS": true,
+  "firstByteThresholdMS": false,
   "abTesting": {
     "replaces": [],
     "includeScriptsToHead": {

@@ -2,6 +2,7 @@ import { ProductDetailsPage } from "apps/commerce/types.ts";
 import ImageGallerySlider from "../../components/product/Gallery.tsx";
 import ProductInfo from "../../components/product/ProductInfo.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
+import Section from "../../components/ui/Section.tsx";
 import { clx } from "../../sdk/clx.ts";
 
 export interface Props {
@@ -48,13 +49,4 @@ export default function ProductDetails({ page }: Props) {
   );
 }
 
-export function LoadingFallback() {
-  return (
-    <div
-      style={{ height: "710px" }}
-      class="w-full flex justify-center items-center"
-    >
-      <span class="loading loading-spinner" />
-    </div>
-  );
-}
+export const LoadingFallback = () => <Section.Placeholder height="635px" />;

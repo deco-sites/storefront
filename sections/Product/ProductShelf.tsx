@@ -1,5 +1,6 @@
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import type { LoadingFallbackProps } from "deco/mod.ts";
 import ProductSlider from "../../components/product/ProductSlider.tsx";
 import Section, {
   Props as SectionHeaderProps,
@@ -34,10 +35,7 @@ export default function ProductShelf({ products, title, cta }: Props) {
   });
 
   return (
-    <Section.Container
-      {...viewItemListEvent}
-      class="[view-transition-name:loading-fallback-2]"
-    >
+    <Section.Container {...viewItemListEvent}>
       <Section.Header title={title} cta={cta} />
 
       <ProductSlider products={products} itemListName={title} />
@@ -45,13 +43,11 @@ export default function ProductShelf({ products, title, cta }: Props) {
   );
 }
 
-export function LoadingFallback() {
-  return (
-    <div
-      style={{ height: "716px" }}
-      class="flex justify-center items-center [view-transition-name:loading-fallback-2]"
-    >
-      <span class="loading loading-spinner" />
-    </div>
-  );
-}
+export const LoadingFallback = (
+  { title, cta }: LoadingFallbackProps<Props>,
+) => (
+  <Section.Container>
+    <Section.Header title={title} cta={cta} />
+    <Section.Placeholder height="471px" />;
+  </Section.Container>
+);

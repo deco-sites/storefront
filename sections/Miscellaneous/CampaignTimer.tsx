@@ -1,5 +1,6 @@
 import type { HTMLWidget } from "apps/admin/widgets.ts";
 import { useScript } from "deco/hooks/useScript.ts";
+import Section from "../../components/ui/Section.tsx";
 import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
@@ -138,5 +139,7 @@ function CampaignTimer({
     </>
   );
 }
+
+export const LoadingFallback = () => <Section.Placeholder height="635px" />;
 
 export default CampaignTimer;

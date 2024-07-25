@@ -2,6 +2,7 @@ import { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { JSX } from "preact";
 import Icon, { AvailableIcons } from "../../components/ui/Icon.tsx";
+import Section from "../../components/ui/Section.tsx";
 
 export interface Props {
   header: Header;
@@ -261,5 +262,7 @@ function BaseContainer(props: {
     </div>
   );
 }
+
+export const LoadingFallback = () => <Section.Placeholder height="635px" />;
 
 export default Links;
