@@ -656,4 +656,8 @@ const snippets = {
   <button class="btn btn-xs btn-accent">Tiny</button>`,
 };
 
+export const LoadingFallback = () => {
+  throw new Error("Cannot defer theme section");
+};
+
 export default Section;

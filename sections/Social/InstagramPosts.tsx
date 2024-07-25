@@ -1,5 +1,5 @@
 import Image from "apps/website/components/Image.tsx";
-import type { SectionProps } from "deco/mod.ts";
+import type { LoadingFallbackProps, SectionProps } from "deco/mod.ts";
 import Section, {
   type Props as SectionHeaderProps,
 } from "../../components/ui/Section.tsx";
@@ -81,7 +81,7 @@ export async function loader(
   };
 }
 
-export default function InstagramPosts({
+function InstagramPosts({
   title,
   posts = [
     {
@@ -145,3 +145,14 @@ export default function InstagramPosts({
     </Section.Container>
   );
 }
+
+export const LoadingFallback = (
+  { title }: LoadingFallbackProps<Props>,
+) => (
+  <Section.Container>
+    <Section.Header title={title} />
+    <Section.Placeholder height="635px" />
+  </Section.Container>
+);
+
+export default InstagramPosts;

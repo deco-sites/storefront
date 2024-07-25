@@ -1,40 +1,5 @@
 {
   "__resolveType": "site/sections/Header/Header.tsx",
-  "navItems": {
-    "__resolveType": "commerce/loaders/navbar.ts",
-    "items": [
-      {
-        "@type": "SiteNavigationElement",
-        "url": "/women",
-        "name": "Women",
-        "children": []
-      },
-      {
-        "@type": "SiteNavigationElement",
-        "url": "/men",
-        "name": "Men",
-        "children": []
-      },
-      {
-        "@type": "SiteNavigationElement",
-        "url": "/kids",
-        "name": "Kids",
-        "children": []
-      },
-      {
-        "children": [],
-        "image": [],
-        "name": "Accessories",
-        "url": "/accessories"
-      },
-      {
-        "children": [],
-        "image": [],
-        "name": "Home & Living",
-        "url": "/home-and-living"
-      }
-    ]
-  },
   "searchbar": {
     "placeholder": "What are you looking for?",
     "loader": {
@@ -45,11 +10,60 @@
   "alerts": [
     "<p>Get 10% off today: <strong>NEW10</strong></p>"
   ],
-  "variant": "initial",
   "logo": {
     "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/ed9f7e80-86a8-4b72-9809-2e4e2e5f0e53",
     "alt": "Deco Storefront",
     "width": 160,
     "height": 40
-  }
+  },
+  "navItems": [
+    {
+      "children": [
+        {
+          "image": [],
+          "children": [],
+          "name": "Hello"
+        },
+        {
+          "image": [],
+          "children": [],
+          "name": "World"
+        }
+      ],
+      "@type": "SiteNavigationElement",
+      "url": "/deals",
+      "name": "Deals"
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/valentines-day",
+      "name": "Valentine's Day",
+      "children": []
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/women",
+      "name": "Women",
+      "children": []
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/men",
+      "name": "Men",
+      "children": []
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/clearance",
+      "name": "Clearance",
+      "children": []
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "url": "/activities",
+      "name": "Activities",
+      "children": []
+    }
+  ],
+  "loading": "eager"
 }

@@ -1,5 +1,6 @@
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import { LoadingFallbackProps } from "deco/types.ts";
 import ProductSlider from "../../components/product/ProductSlider.tsx";
 import Section, {
   Props as SectionHeaderProps,
@@ -63,10 +64,16 @@ export default function TabbedProductShelf(
   );
 }
 
-export function LoadingFallback() {
-  return (
-    <div style={{ height: "716px" }} class="flex justify-center items-center">
-      <span class="loading loading-spinner" />
-    </div>
-  );
-}
+export const LoadingFallback = (
+  { title, cta }: LoadingFallbackProps<Props>,
+) => (
+  <Section.Container>
+    <Section.Header title={title} cta={cta} />
+
+    <Section.Tabbed>
+      <>
+        <Section.Placeholder height="471px" />;
+      </>
+    </Section.Tabbed>
+  </Section.Container>
+);

@@ -133,4 +133,6 @@ function Newsletter({
   );
 }
 
+export const LoadingFallback = () => <Section.Placeholder height="412px" />;
+
 export default Newsletter;

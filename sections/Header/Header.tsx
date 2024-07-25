@@ -2,7 +2,7 @@ import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { useDevice } from "deco/hooks/useDevice.ts";
-import { useSection } from "deco/hooks/useSection.ts";
+import { LoadingFallbackProps } from "deco/mod.ts";
 import Alert from "../../components/header/Alert.tsx";
 import Bag from "../../components/header/Bag.tsx";
 import Menu from "../../components/header/Menu.tsx";
@@ -48,14 +48,16 @@ export interface SectionProps {
   /** @title Logo */
   logo: Logo;
 
-  /** @hide true */
-  variant?: "initial" | "menu";
+  /**
+   * @description Usefull for lazy loading hidden elements, like hamburguer menus etc
+   * @hide true */
+  loading?: "eager" | "lazy";
 }
 
-type Props = Omit<SectionProps, "alert" | "variant">;
+type Props = Omit<SectionProps, "alert">;
 
 const Desktop = (
-  { navItems, logo, searchbar }: Props,
+  { navItems, logo, searchbar, loading }: Props,
 ) => (
   <>
     <Modal id={SEARCHBAR_POPUP_ID}>
@@ -63,7 +65,13 @@ const Desktop = (
         class="absolute top-0 bg-base-100 container"
         style={{ marginTop: HEADER_HEIGHT_MOBILE }}
       >
-        <Searchbar {...searchbar} />
+        {loading === "lazy"
+          ? (
+            <div class="flex justify-center items-center">
+              <span class="loading loading-spinner" />
+            </div>
+          )
+          : <Searchbar {...searchbar} />}
       </div>
     </Modal>
 
@@ -108,14 +116,22 @@ const Desktop = (
   </>
 );
 
-const Mobile = ({ logo, searchbar }: Props) => (
+const Mobile = (
+  { logo, searchbar, navItems, loading }: Props,
+) => (
   <>
     <Drawer
       id={SEARCHBAR_DRAWER_ID}
       aside={
         <Drawer.Aside title="Search" drawer={SEARCHBAR_DRAWER_ID}>
           <div class="w-screen overflow-y-auto">
-            <Searchbar {...searchbar} />
+            {loading === "lazy"
+              ? (
+                <div class="h-full w-full flex items-center justify-center">
+                  <span class="loading loading-spinner" />
+                </div>
+              )
+              : <Searchbar {...searchbar} />}
           </div>
         </Drawer.Aside>
       }
@@ -124,13 +140,17 @@ const Mobile = ({ logo, searchbar }: Props) => (
       id={SIDEMENU_DRAWER_ID}
       aside={
         <Drawer.Aside title="Menu" drawer={SIDEMENU_DRAWER_ID}>
-          <div
-            id={SIDEMENU_CONTAINER_ID}
-            class="h-full flex items-center justify-center"
-            style={{ minWidth: "100vw" }}
-          >
-            <span class="loading loading-spinner" />
-          </div>
+          {loading === "lazy"
+            ? (
+              <div
+                id={SIDEMENU_CONTAINER_ID}
+                class="h-full flex items-center justify-center"
+                style={{ minWidth: "100vw" }}
+              >
+                <span class="loading loading-spinner" />
+              </div>
+            )
+            : <Menu navItems={navItems ?? []} />}
         </Drawer.Aside>
       }
     />
@@ -147,10 +167,6 @@ const Mobile = ({ logo, searchbar }: Props) => (
         for={SIDEMENU_DRAWER_ID}
         class="btn btn-square btn-sm btn-ghost"
         aria-label="open menu"
-        hx-target={`#${SIDEMENU_CONTAINER_ID}`}
-        hx-swap="outerHTML"
-        hx-trigger="click once"
-        hx-get={useSection({ props: { variant: "menu" } })}
       >
         <Icon id="menu" />
       </label>
@@ -214,10 +230,9 @@ function Header({
   );
 }
 
-export default function Section({ variant, ...props }: SectionProps) {
-  if (variant === "menu") {
-    return <Menu navItems={props.navItems ?? []} />;
-  }
+export const LoadingFallback = (props: LoadingFallbackProps<Props>) => (
+  // deno-lint-ignore no-explicit-any
+  <Header {...props as any} loading="lazy" />
+);
 
-  return <Header {...props} />;
-}
+export default Header;

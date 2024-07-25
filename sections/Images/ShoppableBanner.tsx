@@ -1,5 +1,6 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
+import Section from "../../components/ui/Section.tsx";
 
 export interface Props {
   image: {
@@ -72,7 +73,7 @@ const DEFAULT_PROPS: Props = {
   },
 };
 
-export default function ShoppableBanner(props: Props) {
+function ShoppableBanner(props: Props) {
   const { link, text, title, image, pins } = { ...DEFAULT_PROPS, ...props };
 
   return (
@@ -141,3 +142,7 @@ export default function ShoppableBanner(props: Props) {
     </div>
   );
 }
+
+export const LoadingFallback = () => <Section.Placeholder height="635px" />;
+
+export default ShoppableBanner;

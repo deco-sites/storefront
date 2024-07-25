@@ -1,9 +1,5 @@
+import Section from "../../components/ui/Section.tsx";
+
 export { default, loader } from "../../components/search/SearchResult.tsx";
 
-export function LoadingFallback() {
-  return (
-    <div style={{ height: "100vh" }} class="flex justify-center items-center">
-      <span class="loading loading-spinner" />
-    </div>
-  );
-}
+export const LoadingFallback = () => <Section.Placeholder height="635px" />;
