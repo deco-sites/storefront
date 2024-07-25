@@ -63,10 +63,19 @@ export default function TabbedProductShelf(
   );
 }
 
-export function LoadingFallback() {
+export function LoadingFallback({ title, cta }: Partial<Props>) {
   return (
-    <div style={{ height: "716px" }} class="flex justify-center items-center">
-      <span class="loading loading-spinner" />
-    </div>
+    <Section.Container>
+      <Section.Header title={title} cta={cta} />
+
+      <Section.Tabbed>
+        <div
+          style={{ height: "648px" }}
+          class="flex justify-center items-center"
+        >
+          <span class="loading loading-spinner" />
+        </div>
+      </Section.Tabbed>
+    </Section.Container>
   );
 }
