@@ -26,19 +26,26 @@ export default function Form({ items }: Props) {
           items,
         })}
       >
-        <input
-          as="input"
-          type="text"
-          class="input input-bordered join-item w-48"
-          placeholder="00000000"
-          name="postalCode"
-          maxLength={8}
-          size={8}
-        />
-        <button type="submit" class="btn join-item no-animation">
-          <span class="[.htmx-request_&]:hidden inline">Calculate</span>
-          <span class="[.htmx-request_&]:inline hidden loading loading-spinner loading-xs" />
-        </button>
+        <div className="input input-bordered flex items-center focus-within:outline-2 focus-within:outline-black focus-within:outline rounded-[4px] p-0">
+          <input
+            as="input"
+            type="text"
+            class="input input-bordered border-x-0 join-item w-[122px] focus:outline-0"
+            placeholder="0000000"
+            name="postalCode"
+            maxLength={8}
+            size={8}
+          />
+          <button
+            type="submit"
+            class="input input-bordered border-x-0 join-item no-animation focus:outline-0"
+          >
+            <span class="[.htmx-request_&]:hidden inline hover:text-primary text-sm">
+              Calculate
+            </span>
+            <span class="[.htmx-request_&]:inline hidden loading loading-spinner loading-xs" />
+          </button>
+        </div>
       </form>
 
       {/* Results Slot */}

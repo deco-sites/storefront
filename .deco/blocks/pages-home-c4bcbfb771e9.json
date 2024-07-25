@@ -96,12 +96,12 @@
     },
     {
       "__resolveType": "site/sections/Images/Banner.tsx",
-      "title": "Register and Save Big!",
+      "title": "Shop and Save Big!",
       "cta": {
-        "label": "Sign Up",
-        "href": "#"
+        "label": "Shop now",
+        "href": "/accessories"
       },
-      "description": "<p><span style=\"color: rgb(45, 194, 107);\" data-mce-style=\"color: rgb(45, 194, 107);\">Sign up now to get up to 50% off on your first order. Limited time offer!</span></p>",
+      "description": "<p><span style=\"color: rgb(45, 194, 107);\" data-mce-style=\"color: rgb(45, 194, 107);\">Enjoy up to 50% off on your first order. Hurry, offer ends soon!</span></p><p><br data-mce-bogus=\"1\"></p>",
       "images": {
         "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/cf96d47f-564f-40da-ad94-7acac5f39327",
         "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/4d5c3212-3f75-4d50-89f3-970815748b43"
