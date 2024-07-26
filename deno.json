@@ -6,7 +6,7 @@
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1",
     "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@e25c559ae36444796ce6011966820ddf7eafcd77/",
     "daisyui": "npm:daisyui@4.6.0",
-    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@c8c2919745023bc44988f978a198e04bcc27f410/",
+    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@753ef45931e1f8bc1cbacf77763ad892169179c2/",
     "preact": "https://esm.sh/preact@10.19.6",
     "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.4.0",
     "preact/": "https://esm.sh/preact@10.19.6/",
