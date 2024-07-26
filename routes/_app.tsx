@@ -1,7 +1,8 @@
-import { asset, Head } from "$fresh/runtime.ts";
+import { asset } from "$fresh/runtime.ts";
 import { defineApp } from "$fresh/server.ts";
-import { useScript } from "deco/hooks/useScript.ts";
 import { Context } from "deco/deco.ts";
+import { useScript } from "deco/hooks/useScript.ts";
+import { Head } from "deco/mod.ts";
 
 const serviceWorkerScript = () =>
   addEventListener("load", () =>
