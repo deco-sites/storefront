@@ -1,0 +1,14 @@
+{
+  "__resolveType": "shopify/loaders/ProductList.ts",
+  "props": {
+    "sort": "",
+    "query": "a",
+    "count": 6
+  },
+  "filters": {
+    "tags": [],
+    "productTypes": [],
+    "productVendors": [],
+    "variantOptions": []
+  }
+}

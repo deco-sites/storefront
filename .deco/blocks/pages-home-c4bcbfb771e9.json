@@ -53,18 +53,7 @@
         "title": "Featured Products",
         "cta": "/mono",
         "products": {
-          "__resolveType": "shopify/loaders/ProductList.ts",
-          "props": {
-            "sort": "",
-            "count": 12,
-            "query": "a"
-          },
-          "filters": {
-            "tags": [],
-            "productTypes": [],
-            "productVendors": [],
-            "variantOptions": []
-          }
+          "__resolveType": "Product List Loader"
         }
       }
     },
