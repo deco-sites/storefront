@@ -1,9 +1,12 @@
-import { DecoRouteState, setup } from "deco/mod.ts";
+import { Deco } from "deco/mod.ts";
 
-import { Hono } from "@hono/hono";
-import type { Manifest } from "./manifest.gen.ts";
+import { bindings as HTMX } from "deco/runtime/htmx/mod.ts";
+import { Layout } from "./_app.tsx";
 
-const honoApp = new Hono<DecoRouteState<Manifest>>();
-await setup(honoApp);
-const port = Deno.env.get("PORT") ? +Deno.env.get("PORT")! : 8000;
-Deno.serve({ port, handler: honoApp.fetch });
+const deco = await Deco.init({
+    bindings: HTMX({
+        Layout,
+    }),
+});
+
+Deno.serve(deco.handler);
