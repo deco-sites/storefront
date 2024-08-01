@@ -48,7 +48,7 @@ function ProductCard({
   const inStock = availability === "https://schema.org/InStock";
   const possibilities = useVariantPossibilities(hasVariant, product);
   const firstSkuVariations = Object.entries(possibilities)[0];
-  const variants = Object.entries(firstSkuVariations[1] ?? {});
+  const variants = Object.entries(firstSkuVariations?.[1] ?? {});
   const relativeUrl = relative(url);
   const percent = listPrice && price
     ? Math.round(((listPrice - price) / listPrice) * 100)
