@@ -47,7 +47,7 @@ function ProductCard({
   const { listPrice, price, seller = "1", availability } = useOffer(offers);
   const inStock = availability === "https://schema.org/InStock";
   const possibilities = useVariantPossibilities(hasVariant, product);
-  const firstSkuVariations = Object.entries(possibilities)[0];
+  const firstSkuVariations = Object.entries(possibilities)?.[0];
   const variants = Object.entries(firstSkuVariations?.[1] ?? {});
   const relativeUrl = relative(url);
   const percent = listPrice && price
@@ -69,7 +69,7 @@ function ProductCard({
   });
 
   //Added it to check the variant name in the SKU Selector later, so it doesn't render the SKU to "shoes size" in the Product Card
-  const firstVariantName = firstSkuVariations[0]?.toLowerCase();
+  const firstVariantName = firstSkuVariations?.[0]?.toLowerCase();
   const shoeSizeVariant = "shoe size";
 
   return (
@@ -185,7 +185,7 @@ function ProductCard({
                   <input
                     class="hidden peer"
                     type="radio"
-                    name={`${id}-${firstSkuVariations[0]}`}
+                    name={`${id}-${firstSkuVariations?.[0]}`}
                     checked={link === relativeUrl}
                   />
                   <Ring value={value} checked={link === relativeUrl} />
