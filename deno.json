@@ -3,11 +3,6 @@
     "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.83.5/",
     "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.54.0/",
     "$fresh/": "https://deno.land/x/fresh@1.6.8/",
-    "@hono/hono": "jsr:@hono/hono@^4.5.1",
-    "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",
-    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1",
-    "apps/": "../apps/",
-    "daisyui": "npm:daisyui@4.6.0",
     "@std/assert": "jsr:@std/assert@^1.0.2",
     "@std/async": "jsr:@std/async@^0.224.1",
     "@std/crypto": "jsr:@std/crypto@1.0.0-rc.1",
@@ -41,8 +36,7 @@
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
     "generate-icons": "deno run -A --unstable static/generate-icons.ts",
-    "dev": "deno run -A --env --unstable --unstable-hmr dev.ts",
-    "honodev": "deno run -A --env --unstable --unstable-hmr hono.ts"
+    "dev": "deno run -A --env --unstable --unstable-hmr dev.ts"
   },
   "githooks": {
     "pre-commit": "check"

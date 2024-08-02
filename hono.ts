@@ -4,9 +4,10 @@ import { bindings as HTMX } from "deco/runtime/htmx/mod.ts";
 import { Layout } from "./_app.tsx";
 
 const deco = await Deco.init({
-    bindings: HTMX({
-        Layout,
-    }),
+  bindings: HTMX({
+    Layout,
+  }),
 });
 
-Deno.serve(deco.handler);
+const envPort = Deno.env.get("PORT");
+Deno.serve({ handler: deco.handler, port: envPort ? +envPort : 8000 });
