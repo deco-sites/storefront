@@ -57,7 +57,7 @@ export interface SectionProps {
 type Props = Omit<SectionProps, "alert">;
 
 const Desktop = (
-  { navItems, logo, searchbar, loading }: Props,
+  { navItems, logo, searchbar, loading, name }: Props,
 ) => (
   <>
     <Modal id={SEARCHBAR_POPUP_ID}>
