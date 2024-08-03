@@ -6,8 +6,6 @@ import tailwind from "./tailwind.config.ts";
 export default defineConfig({
   plugins: plugins({
     manifest,
-    htmx: true,
-    // @ts-expect-error somehow this typing doesnt work
     tailwind,
   }),
 });
