@@ -1,7 +1,7 @@
 {
   "imports": {
-    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@81c0641a2734b51f97dc48d00f701182e71362dc/",
-    "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@abeb6a3c2b4392fd2ce47bf387f316c040b1b3c5/",
+    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@efadad31cc29da38098b4b4ba3397eaa52359d38/",
+    "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@57cdf24231cce23d83f23a7f1fc139b229149a8b/",
     "$fresh/": "https://deno.land/x/fresh@1.6.8/",
     "preact": "https://esm.sh/preact@10.19.6",
     "preact/": "https://esm.sh/preact@10.19.6/",
