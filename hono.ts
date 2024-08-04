@@ -10,4 +10,4 @@ const deco = await Deco.init({
 });
 
 const envPort = Deno.env.get("PORT");
-Deno.serve({ handler: deco.handler, port: envPort ? +envPort : 8000 });
+Deno.serve({ handler: deco.fetch.bind(deco), port: envPort ? +envPort : 8000 });
