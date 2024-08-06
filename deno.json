@@ -1,6 +1,6 @@
 {
   "imports": {
-    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.83.0/",
+    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@d79d438ac7bd1cd1d2a6a09b0b5d1adee393841c/",
     "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.53.9/",
     "$fresh/": "https://deno.land/x/fresh@1.6.8/",
     "preact": "https://esm.sh/preact@10.19.6",
