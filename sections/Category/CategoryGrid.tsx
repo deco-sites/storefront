@@ -1,12 +1,12 @@
+import { LoadingFallbackProps } from "@deco/deco";
+import { useDevice } from "@deco/deco/hooks";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
-import { useDevice } from "deco/hooks/useDevice.ts";
 import Section, {
   type Props as SectionHeaderProps,
 } from "../../components/ui/Section.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import { clx } from "../../sdk/clx.ts";
-import { LoadingFallbackProps } from "deco/mod.ts";
 
 /** @titleBy label */
 export interface Item {

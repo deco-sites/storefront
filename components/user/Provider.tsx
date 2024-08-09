@@ -1,5 +1,5 @@
+import { useScript } from "@deco/deco/hooks";
 import { Person } from "apps/commerce/types.ts";
-import { useScript } from "deco/hooks/useScript.ts";
 import { USER_ID } from "../../constants.ts";
 
 const onLoad = (jsonID: string) => {

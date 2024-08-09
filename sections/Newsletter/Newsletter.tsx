@@ -1,4 +1,4 @@
-import { SectionProps } from "deco/mod.ts";
+import { SectionProps } from "@deco/deco";
 import { AppContext } from "../../apps/site.ts";
 import Icon from "../../components/ui/Icon.tsx";
 import Section from "../../components/ui/Section.tsx";

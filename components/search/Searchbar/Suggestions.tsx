@@ -1,5 +1,5 @@
+import { Resolved } from "@deco/deco";
 import { Suggestion } from "apps/commerce/types.ts";
-import { Resolved } from "deco/mod.ts";
 import type { AppContext } from "../../../apps/site.ts";
 import { clx } from "../../../sdk/clx.ts";
 import { ComponentProps } from "../../../sections/Component.tsx";

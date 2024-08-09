@@ -1,6 +1,6 @@
 import { asset } from "$fresh/runtime.ts";
-import { useScript } from "deco/hooks/useScript.ts";
-import { Head } from "deco/runtime/htmx/Renderer.tsx";
+import { useScript } from "@deco/deco/hooks";
+import { Head } from "@deco/deco/htmx";
 import { ComponentChildren } from "preact";
 
 const serviceWorkerScript = () =>

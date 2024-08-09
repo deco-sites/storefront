@@ -9,12 +9,12 @@
  * no JavaScript is shipped to the browser!
  */
 
+import { asResolved, Resolved } from "@deco/deco";
+import { useScript } from "@deco/deco/hooks";
 import { Suggestion } from "apps/commerce/types.ts";
-import { useScript } from "deco/hooks/useScript.ts";
-import { asResolved, Resolved } from "deco/mod.ts";
 import {
-  SEARCHBAR_INPUT_FORM_ID,
-  SEARCHBAR_POPUP_ID,
+    SEARCHBAR_INPUT_FORM_ID,
+    SEARCHBAR_POPUP_ID,
 } from "../../../constants.ts";
 import { useId } from "../../../sdk/useId.ts";
 import { useComponent } from "../../../sections/Component.tsx";

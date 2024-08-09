@@ -1,5 +1,5 @@
+import { useScript } from "@deco/deco/hooks";
 import { AnalyticsItem, Product } from "apps/commerce/types.ts";
-import { useScript } from "deco/hooks/useScript.ts";
 import { JSX } from "preact";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";

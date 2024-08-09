@@ -1,4 +1,4 @@
-import { allowCorsFor, FnContext } from "deco/mod.ts";
+import { allowCorsFor, FnContext } from "@deco/deco";
 import { AvailableIcons } from "../static/adminIcons.ts";
 
 const icons = Object.keys(AvailableIcons).map((iconName) => ({

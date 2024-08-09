@@ -1,3 +1,5 @@
+import type { App as A, AppContext as AC } from "@deco/deco";
+import { Section } from "@deco/deco/blocks";
 import commerce from "apps/commerce/mod.ts";
 import { color as linx } from "apps/linx/mod.ts";
 import { color as nuvemshop } from "apps/nuvemshop/mod.ts";
@@ -6,8 +8,6 @@ import { color as vnda } from "apps/vnda/mod.ts";
 import { color as vtex } from "apps/vtex/mod.ts";
 import { color as wake } from "apps/wake/mod.ts";
 import { Props as WebsiteProps } from "apps/website/mod.ts";
-import { Section } from "deco/blocks/section.ts";
-import type { App as A, AppContext as AC } from "deco/mod.ts";
 import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { Manifest } from "../manifest.gen.ts";
 

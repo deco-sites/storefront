@@ -1,5 +1,5 @@
+import { useSection } from "@deco/deco/hooks";
 import type { Product } from "apps/commerce/types.ts";
-import { useSection } from "deco/hooks/useSection.ts";
 import { clx } from "../../sdk/clx.ts";
 import { relative } from "../../sdk/url.ts";
 import { useId } from "../../sdk/useId.ts";

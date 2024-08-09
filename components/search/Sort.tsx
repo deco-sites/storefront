@@ -1,5 +1,5 @@
+import { useScript } from "@deco/deco/hooks";
 import { ProductListingPage } from "apps/commerce/types.ts";
-import { useScript } from "deco/hooks/useScript.ts";
 
 const SORT_QUERY_PARAM = "sort";
 const PAGE_QUERY_PARAM = "page";

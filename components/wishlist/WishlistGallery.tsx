@@ -1,6 +1,6 @@
-import { SectionProps } from "deco/mod.ts";
+import { SectionProps } from "@deco/deco";
 import SearchResult, {
-  Props as SearchResultProps,
+    Props as SearchResultProps,
 } from "../search/SearchResult.tsx";
 
 export type Props = SearchResultProps;

@@ -1,5 +1,5 @@
+import { useScript } from "@deco/deco/hooks";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
-import { useScript } from "deco/hooks/useScript.ts";
 import Section from "../../components/ui/Section.tsx";
 import { useId } from "../../sdk/useId.ts";
 

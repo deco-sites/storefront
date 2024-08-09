@@ -1,9 +1,9 @@
+import { LoadingFallbackProps } from "@deco/deco";
 import { type ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import Section, {
-  type Props as SectionHeaderProps,
+    type Props as SectionHeaderProps,
 } from "../../components/ui/Section.tsx";
-import { LoadingFallbackProps } from "deco/mod.ts";
 
 /**
  * @titleBy alt

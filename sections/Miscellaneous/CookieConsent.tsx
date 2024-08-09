@@ -1,5 +1,5 @@
+import { useScript } from "@deco/deco/hooks";
 import { HTMLWidget } from "apps/admin/widgets.ts";
-import { useScript } from "deco/hooks/useScript.ts";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 

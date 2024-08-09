@@ -1,6 +1,6 @@
+import { LoadingFallbackProps } from "@deco/deco";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import { LoadingFallbackProps } from "deco/types.ts";
 import ProductSlider from "../../components/product/ProductSlider.tsx";
 import Section, {
   Props as SectionHeaderProps,

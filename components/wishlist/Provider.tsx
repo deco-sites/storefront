@@ -1,4 +1,4 @@
-import { useScript } from "deco/hooks/useScript.ts";
+import { useScript } from "@deco/deco/hooks";
 import { AppContext } from "../../apps/site.ts";
 import { WISHLIST_FORM_ID } from "../../constants.ts";
 import { useComponent } from "../../sections/Component.tsx";

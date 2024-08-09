@@ -1,4 +1,4 @@
-import { useScript } from "deco/hooks/useScript.ts";
+import { useScript } from "@deco/deco/hooks";
 import { ComponentChildren } from "preact";
 import { useId } from "../../sdk/useId.ts";
 
