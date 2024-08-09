@@ -28,7 +28,7 @@
     "check": "deno fmt && deno lint && deno check dev.ts main.ts",
     "install": "deno eval 'import \"deco/scripts/apps/install.ts\"'",
     "uninstall": "deno eval 'import \"deco/scripts/apps/uninstall.ts\"'",
-    "update": "deno run -A jsr:@deco/deco/scripts/update",
+    "update": "deno run -Ar jsr:@deco/scripts/update",
     "bundle": "deno run -A jsr:@deco/deco/scripts/bundle site",
     "cache_clean": "rm deno.lock; deno cache -r main.ts",
     "decodev": "deno run -A jsr:@deco/deco/scripts/dev",
