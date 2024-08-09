@@ -24,12 +24,15 @@
     "@std/semver": "jsr:@std/semver@^0.224.3",
     "@std/streams": "jsr:@std/streams@^1.0.0",
     "@std/testing": "jsr:@std/testing@^1.0.0",
-    "apps/": "../apps/",
     "daisyui": "npm:daisyui@4.6.0",
-    "deco/": "../deco/",
     "preact": "npm:preact@10.23.1",
     "preact-render-to-string": "https://esm.sh/*preact-render-to-string@6.4.0",
-    "std/": "https://deno.land/std@0.203.0/"
+    "std/": "https://deno.land/std@0.203.0/",
+    "@cliffy/prompt": "jsr:@cliffy/prompt@^1.0.0-rc.5",
+    "@core/asyncutil": "jsr:@core/asyncutil@^1.0.0",
+    "@deco/durable": "jsr:@deco/durable@^0.5.3",
+    "@deco/warp": "jsr:@deco/warp@0.3.3",
+    "@zaubrik/djwt": "jsr:@zaubrik/djwt@^3.0.2"
   },
   "tasks": {
     "start": "deno task bundle && deno run -A --unstable-http --env --config=deno.json https://deco.cx/run --build-cmd 'deno task build' -- deno task dev",
