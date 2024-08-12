@@ -1,19 +1,24 @@
-import { asset, Head } from "$fresh/runtime.ts";
-import { defineApp } from "$fresh/server.ts";
+import { asset } from "$fresh/runtime.ts";
 import { useScript } from "deco/hooks/useScript.ts";
-import { Context } from "deco/deco.ts";
+import { Head } from "deco/runtime/htmx/Renderer.tsx";
+import { ComponentChildren } from "preact";
 
 const serviceWorkerScript = () =>
   addEventListener("load", () =>
     navigator && navigator.serviceWorker &&
-    navigator.serviceWorker.register("/sw.js"));
+    navigator.serviceWorker.register("/sw.js?__frsh_c"));
 
-export default defineApp(async (_req, ctx) => {
-  const revision = await Context.active().release?.revision();
-
+export const Layout = (
+  { children, revision, hmrUniqueId }: {
+    children: ComponentChildren;
+    revision: string;
+    hmrUniqueId: string;
+  },
+) => {
   return (
     <>
       {/* Include Icons and manifest */}
+      {/** @ts-ignore: ignore error */}
       <Head>
         {/* Enable View Transitions API */}
         <style
@@ -24,7 +29,7 @@ export default defineApp(async (_req, ctx) => {
 
         {/* Tailwind v3 CSS file */}
         <link
-          href={asset(`/styles.css?revision=${revision}`)}
+          href={`/styles.css?revision=${revision}${hmrUniqueId}`}
           rel="stylesheet"
         />
 
@@ -33,12 +38,14 @@ export default defineApp(async (_req, ctx) => {
       </Head>
 
       {/* Rest of Preact tree */}
-      <ctx.Component />
+      {children}
 
       <script
         type="module"
-        dangerouslySetInnerHTML={{ __html: useScript(serviceWorkerScript) }}
+        dangerouslySetInnerHTML={{
+          __html: useScript(serviceWorkerScript),
+        }}
       />
     </>
   );
-});
+};
