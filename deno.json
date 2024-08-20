@@ -1,7 +1,7 @@
 {
   "imports": {
-    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.83.5/",
-    "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.54.0/",
+    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.89.2/",
+    "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.55.8/",
     "$fresh/": "https://deno.land/x/fresh@1.6.8/",
     "preact": "https://esm.sh/preact@10.19.6",
     "preact/": "https://esm.sh/preact@10.19.6/",
@@ -26,7 +26,16 @@
     "@std/semver": "jsr:@std/semver@^0.224.3",
     "@std/streams": "jsr:@std/streams@^1.0.0",
     "@std/testing": "jsr:@std/testing@^1.0.0",
-    "partytown/": "https://deno.land/x/partytown@0.3.0/"
+    "partytown/": "https://deno.land/x/partytown@0.4.8/",
+    "@cliffy/prompt": "jsr:@cliffy/prompt@^1.0.0-rc.5",
+    "@core/asyncutil": "jsr:@core/asyncutil@^1.0.2",
+    "@deco/durable": "jsr:@deco/durable@^0.5.3",
+    "@deco/warp": "jsr:@deco/warp@^0.3.4",
+    "@hono/hono": "jsr:@hono/hono@^4.5.4",
+    "@std/cli": "jsr:@std/cli@^1.0.3",
+    "@zaubrik/djwt": "jsr:@zaubrik/djwt@^3.0.2",
+    "fast-json-patch": "npm:fast-json-patch@^3.1.1",
+    "simple-git": "npm:simple-git@^3.25.0"
   },
   "tasks": {
     "start": "deno run -A --unstable-http --env https://deco.cx/run -- deno task dev",

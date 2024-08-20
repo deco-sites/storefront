@@ -66,7 +66,7 @@ let firstRun = true;
  * @logo https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/1/0ac02239-61e6-4289-8a36-e78c0975bcc8
  */
 export default function Site(
-  { theme, ...state }: Props,
+  { ...state }: Props,
 ): A<Manifest, Props, [ReturnType<typeof commerce>]> {
   _platform = state.platform || "custom";
 
@@ -84,10 +84,7 @@ export default function Site(
     state,
     manifest,
     dependencies: [
-      commerce({
-        ...state,
-        global: theme ? [...(state.global ?? []), theme] : state.global,
-      }),
+      commerce(state),
     ],
   };
 }
