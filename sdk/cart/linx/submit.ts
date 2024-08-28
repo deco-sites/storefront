@@ -16,11 +16,11 @@ const actions: CartSubmitActions<AppContext> = {
     const cart = platformCart as Cart;
 
     const index =
-      cart?.Basket?.Items?.findIndex((product, index) =>
+      cart?.Shopper?.Basket?.Items?.findIndex((product, index) =>
         product?.Quantity !== items[index]
       ) ?? -1;
 
-    const BasketItemID = cart?.Basket?.Items?.[index]?.BasketItemID;
+    const BasketItemID = cart?.Shopper?.Basket?.Items?.[index]?.BasketItemID;
     const Quantity = items[index];
 
     if (
