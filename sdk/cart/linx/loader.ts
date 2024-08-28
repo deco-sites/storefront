@@ -9,11 +9,11 @@ const locale = "pt-BR";
 const currency = "BRL";
 
 export const cartFrom = (cart: Cart): Minicart => {
-  const items = cart?.Basket?.Items ?? [];
+  const items = cart?.Shopper?.Basket?.Items ?? [];
 
-  const total = cart?.Basket?.Total ?? 0;
-  const subtotal = cart?.Basket?.SubTotal ?? 0;
-  const coupon = cart?.Basket?.Coupons?.[0]?.Code ?? "";
+  const total = cart?.Shopper?.Basket?.Total ?? 0;
+  const subtotal = cart?.Shopper?.Basket?.SubTotal ?? 0;
+  const coupon = cart?.Shopper?.Basket?.Coupons?.[0]?.Code ?? "";
 
   return {
     platformCart: cart as unknown as Record<string, unknown>,
