@@ -181,30 +181,32 @@ const sdk = () => {
         })
         : null;
 
+      const listener = (node: Element) => {
+        const maybeTrigger = node.getAttribute("data-event-trigger");
+        const on = maybeTrigger === "click" ? "click" : "view";
+
+        if (on === "click") {
+          node.addEventListener("click", handleClick, {
+            passive: true,
+          });
+
+          return;
+        }
+
+        if (on === "view") {
+          handleView?.observe(node);
+
+          return;
+        }
+      };
+
+      document.body.querySelectorAll("[data-event]").forEach(listener);
+
       document.body.addEventListener(
         "htmx:load",
         (e) =>
           (e as unknown as { detail: { elt: HTMLElement } })
-            .detail.elt.querySelectorAll("[data-event]").forEach(
-              (node) => {
-                const maybeTrigger = node.getAttribute("data-event-trigger");
-                const on = maybeTrigger === "click" ? "click" : "view";
-
-                if (on === "click") {
-                  node.addEventListener("click", handleClick, {
-                    passive: true,
-                  });
-
-                  return;
-                }
-
-                if (on === "view") {
-                  handleView?.observe(node);
-
-                  return;
-                }
-              },
-            ),
+            .detail.elt.querySelectorAll("[data-event]").forEach(listener),
       );
     });
   };
