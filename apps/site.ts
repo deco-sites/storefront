@@ -80,11 +80,16 @@ export default function Site(
     );
   }
 
+  const newState = {
+    ...state,
+    global: state.theme ? [state.theme, ...state.global ?? []] : state.global,
+  };
+
   return {
-    state,
+    state: newState,
     manifest,
     dependencies: [
-      commerce(state),
+      commerce(newState),
     ],
   };
 }
