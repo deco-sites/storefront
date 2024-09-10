@@ -1,73 +1,46 @@
-import { useScript } from "deco/hooks/useScript.ts";
-import { Section } from "deco/blocks/section.ts";
 import { useId } from "../../sdk/useId.ts";
-
+import { useScript } from "@deco/deco/hooks";
+import { type Section } from "@deco/deco/blocks";
 interface Children {
-  section: Section;
+    section: Section;
 }
-
 interface Props {
-  animationType?:
-    | "fade-in"
-    | "fade-in-bottom"
-    | "slide-left"
-    | "slide-right"
-    | "zoom-in";
-  /**
-   * @default 0.3
-   */
-  duration?: string;
-  children: Children;
+    animationType?: "fade-in" | "fade-in-bottom" | "slide-left" | "slide-right" | "zoom-in";
+    /**
+     * @default 0.3
+     */
+    duration?: string;
+    children: Children;
 }
-
 const snippet = (id: string) => {
-  const observer = new IntersectionObserver(function (entries) {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("${animationClass}");
-        entry.target.classList.remove("opacity-0");
-        observer.disconnect();
-      }
-    });
-  }, { threshold: 0.50 });
-
-  const element = document.getElementById(id);
-  element && observer.observe(element);
+    const observer = new IntersectionObserver(function (entries) {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("${animationClass}");
+                entry.target.classList.remove("opacity-0");
+                observer.disconnect();
+            }
+        });
+    }, { threshold: 0.50 });
+    const element = document.getElementById(id);
+    element && observer.observe(element);
 };
-
-function Animation(
-  { children, animationType = "fade-in", duration = "0.3" }: Props,
-) {
-  const { section } = children;
-
-  const { Component, props } = section;
-  const id = useId();
-
-  return (
-    <>
-      <style
-        dangerouslySetInnerHTML={{ __html: animationByType[animationType] }}
-      >
+function Animation({ children, animationType = "fade-in", duration = "0.3" }: Props) {
+    const { section } = children;
+    const { Component, props } = section;
+    const id = useId();
+    return (<>
+      <style dangerouslySetInnerHTML={{ __html: animationByType[animationType] }}>
       </style>
-      <div
-        id={id}
-        class="opacity-0"
-        style={{ animationDuration: duration + "s" }}
-      >
-        <Component {...props} />
+      <div id={id} class="opacity-0" style={{ animationDuration: duration + "s" }}>
+        <Component {...props}/>
       </div>
-      <script
-        type="module"
-        dangerouslySetInnerHTML={{ __html: useScript(snippet, id) }}
-      />
-    </>
-  );
+      <script type="module" dangerouslySetInnerHTML={{ __html: useScript(snippet, id) }}/>
+    </>);
 }
-
 export default Animation;
-
 const animationByType = {
-  "fade-in": `    
+    "fade-in": `    
         @keyframes fade-in {
             from {
                 opacity: 0;
@@ -80,7 +53,7 @@ const animationByType = {
             animation: fade-in 1s ease-out;
         }
     `,
-  "fade-in-bottom": `
+    "fade-in-bottom": `
         @keyframes fade-in-bottom {
             from {
                 opacity: 0;
@@ -98,7 +71,7 @@ const animationByType = {
             animation: fade-in-bottom 1s ease-out;
         }
     `,
-  "slide-left": `
+    "slide-left": `
         @keyframes slide-left {
             from {
                 transform: translateX(100%);
@@ -112,7 +85,7 @@ const animationByType = {
             animation: slide-left 1s ease-out;
         }
     `,
-  "slide-right": `
+    "slide-right": `
         @keyframes slide-right {
             from {
                 transform: translateX(-100%);
@@ -126,7 +99,7 @@ const animationByType = {
             animation: slide-right 1s ease-out;
         }
     `,
-  "zoom-in": `
+    "zoom-in": `
         @keyframes zoom-in {
             from {
                 transform: scale(0);
@@ -143,23 +116,13 @@ const animationByType = {
         }
     `,
 };
-
 export function Preview() {
-  const id = useId();
-
-  return (
-    <div>
-      <style
-        dangerouslySetInnerHTML={{ __html: animationByType["slide-left"] }}
-      >
+    const id = useId();
+    return (<div>
+      <style dangerouslySetInnerHTML={{ __html: animationByType["slide-left"] }}>
       </style>
-      <div
-        id={id}
-        class="flex justify-center items-center"
-        style={{ animationDuration: "2s" }}
-      >
+      <div id={id} class="flex justify-center items-center" style={{ animationDuration: "2s" }}>
         <h1 class="text-9xl text-base-content font-semibold my-8">Animation</h1>
       </div>
-    </div>
-  );
+    </div>);
 }
