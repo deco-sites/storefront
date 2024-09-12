@@ -1,8 +1,7 @@
-import { useScript } from "deco/hooks/useScript.ts";
 import { type JSX } from "preact";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
-
+import { useScript } from "@deco/deco/hooks";
 const onClick = (delta: number) => {
   // doidera!
   event!.stopPropagation();
@@ -14,7 +13,6 @@ const onClick = (delta: number) => {
   input.value = `${Math.min(Math.max(input.valueAsNumber + delta, min), max)}`;
   input.dispatchEvent(new Event("change", { bubbles: true }));
 };
-
 function QuantitySelector(
   { id = useId(), disabled, ...props }: JSX.IntrinsicElements["input"],
 ) {
@@ -59,5 +57,4 @@ function QuantitySelector(
     </div>
   );
 }
-
 export default QuantitySelector;

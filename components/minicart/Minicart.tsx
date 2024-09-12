@@ -1,4 +1,3 @@
-import { useScript } from "deco/hooks/useScript.ts";
 import { AppContext } from "../../apps/site.ts";
 import { MINICART_DRAWER_ID, MINICART_FORM_ID } from "../../constants.ts";
 import { clx } from "../../sdk/clx.ts";
@@ -7,7 +6,7 @@ import { useComponent } from "../../sections/Component.tsx";
 import Coupon from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
 import CartItem, { Item } from "./Item.tsx";
-
+import { useScript } from "@deco/deco/hooks";
 export interface Minicart {
   /** Cart from the ecommerce platform */
   platformCart: Record<string, unknown>;
@@ -25,12 +24,9 @@ export interface Minicart {
     checkoutHref: string;
   };
 }
-
 const onLoad = (formID: string) => {
   const form = document.getElementById(formID) as HTMLFormElement;
-
   window.STOREFRONT.CART.dispatch(form);
-
   // view_cart event
   if (typeof IntersectionObserver !== "undefined") {
     new IntersectionObserver((items, observer) => {
@@ -45,16 +41,13 @@ const onLoad = (formID: string) => {
       }
     }).observe(form);
   }
-
   // Disable form interactivity while cart is being submitted
   document.body.addEventListener(
-    "htmx:before-send",
-    // deno-lint-ignore no-explicit-any
+    "htmx:before-send", // deno-lint-ignore no-explicit-any
     ({ detail: { elt } }: any) => {
       if (elt !== form) {
         return;
       }
-
       // Disable addToCart button interactivity
       document.querySelectorAll("div[data-cart-item]").forEach((container) => {
         container?.querySelectorAll("button")
@@ -65,23 +58,16 @@ const onLoad = (formID: string) => {
     },
   );
 };
-
 const sendBeginCheckoutEvent = () => {
   window.DECO.events.dispatch({
     name: "being_checkout",
     params: window.STOREFRONT.CART.getCart(),
   });
 };
-
-export const action = async (
-  _props: unknown,
-  req: Request,
-  ctx: AppContext,
-) =>
+export const action = async (_props: unknown, req: Request, ctx: AppContext) =>
   req.method === "PATCH"
     ? ({ cart: await ctx.invoke("site/loaders/minicart.ts") }) // error fallback
     : ({ cart: await ctx.invoke("site/actions/minicart/submit.ts") });
-
 export function ErrorFallback() {
   return (
     <div class="flex flex-col flex-grow justify-center items-center overflow-hidden w-full gap-2">
@@ -105,26 +91,28 @@ export function ErrorFallback() {
     </div>
   );
 }
-
-export default function Cart({
-  cart: {
-    platformCart,
-    storefront: {
-      items,
-      total,
-      subtotal,
-      coupon,
-      discounts,
-      locale,
-      currency,
-      enableCoupon = true,
-      freeShippingTarget,
-      checkoutHref,
+export default function Cart(
+  {
+    cart: {
+      platformCart,
+      storefront: {
+        items,
+        total,
+        subtotal,
+        coupon,
+        discounts,
+        locale,
+        currency,
+        enableCoupon = true,
+        freeShippingTarget,
+        checkoutHref,
+      },
     },
+  }: {
+    cart: Minicart;
   },
-}: { cart: Minicart }) {
+) {
   const count = items.length;
-
   return (
     <>
       <form

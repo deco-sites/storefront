@@ -1,37 +1,31 @@
 import { AnalyticsItem } from "apps/commerce/types.ts";
-import { useScript } from "deco/hooks/useScript.ts";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import Icon from "../ui/Icon.tsx";
-
+import { useScript } from "@deco/deco/hooks";
 interface Props {
   variant?: "full" | "icon";
   item: AnalyticsItem;
 }
-
 const onLoad = (id: string, productID: string) =>
   window.STOREFRONT.WISHLIST.subscribe((sdk) => {
     const button = document.getElementById(id) as HTMLButtonElement;
     const inWishlist = sdk.inWishlist(productID);
-
     button.disabled = false;
     button.classList.remove("htmx-request");
     button.querySelector("svg")?.setAttribute(
       "fill",
       inWishlist ? "black" : "none",
     );
-
     const span = button.querySelector("span");
     if (span) {
       span.innerHTML = inWishlist ? "Remove from wishlist" : "Add to wishlist";
     }
   });
-
 const onClick = (productID: string, productGroupID: string) => {
   const button = event?.currentTarget as HTMLButtonElement;
   const user = window.STOREFRONT.USER.getUser();
-
   if (user?.email) {
     button.classList.add("htmx-request");
     window.STOREFRONT.WISHLIST.toggle(productID, productGroupID);
@@ -39,7 +33,6 @@ const onClick = (productID: string, productGroupID: string) => {
     window.alert(`Please login to add the product to your wishlist`);
   }
 };
-
 function WishlistButton({ item, variant = "full" }: Props) {
   // deno-lint-ignore no-explicit-any
   const productID = (item as any).item_id;
@@ -52,7 +45,6 @@ function WishlistButton({ item, variant = "full" }: Props) {
       params: { items: [item] },
     },
   });
-
   return (
     <>
       <button
@@ -82,5 +74,4 @@ function WishlistButton({ item, variant = "full" }: Props) {
     </>
   );
 }
-
 export default WishlistButton;

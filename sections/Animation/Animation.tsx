@@ -1,11 +1,9 @@
-import { useScript } from "deco/hooks/useScript.ts";
-import { Section } from "deco/blocks/section.ts";
 import { useId } from "../../sdk/useId.ts";
-
+import { useScript } from "@deco/deco/hooks";
+import { type Section } from "@deco/deco/blocks";
 interface Children {
   section: Section;
 }
-
 interface Props {
   animationType?:
     | "fade-in"
@@ -19,7 +17,6 @@ interface Props {
   duration?: string;
   children: Children;
 }
-
 const snippet = (id: string) => {
   const observer = new IntersectionObserver(function (entries) {
     entries.forEach((entry) => {
@@ -30,19 +27,15 @@ const snippet = (id: string) => {
       }
     });
   }, { threshold: 0.50 });
-
   const element = document.getElementById(id);
   element && observer.observe(element);
 };
-
 function Animation(
   { children, animationType = "fade-in", duration = "0.3" }: Props,
 ) {
   const { section } = children;
-
   const { Component, props } = section;
   const id = useId();
-
   return (
     <>
       <style
@@ -63,9 +56,7 @@ function Animation(
     </>
   );
 }
-
 export default Animation;
-
 const animationByType = {
   "fade-in": `    
         @keyframes fade-in {
@@ -143,10 +134,8 @@ const animationByType = {
         }
     `,
 };
-
 export function Preview() {
   const id = useId();
-
   return (
     <div>
       <style

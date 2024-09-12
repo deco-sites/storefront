@@ -1,13 +1,13 @@
 import { Person } from "apps/commerce/types.ts";
-import { useScript } from "deco/hooks/useScript.ts";
 import { USER_ID } from "../../constants.ts";
-
+import { useScript } from "@deco/deco/hooks";
 const onLoad = (jsonID: string) => {
   const script = document.getElementById(jsonID) as HTMLScriptElement;
   window.STOREFRONT.USER.dispatch(JSON.parse(script.innerText));
 };
-
-function UserProvider({ user }: { user: Person | null }) {
+function UserProvider({ user }: {
+  user: Person | null;
+}) {
   return (
     <>
       <script
@@ -22,5 +22,4 @@ function UserProvider({ user }: { user: Person | null }) {
     </>
   );
 }
-
 export default UserProvider;

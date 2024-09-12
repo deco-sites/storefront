@@ -1,9 +1,8 @@
-import { useScript } from "deco/hooks/useScript.ts";
 import { type ComponentChildren } from "preact";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import Icon from "./Icon.tsx";
-
+import { useScript } from "@deco/deco/hooks";
 export interface Props {
   open?: boolean;
   class?: string;
@@ -11,32 +10,22 @@ export interface Props {
   aside: ComponentChildren;
   id?: string;
 }
-
 const script = (id: string) => {
   const handler = (e: KeyboardEvent) => {
     if (e.key !== "Escape" && e.keyCode !== 27) {
       return;
     }
-
     const input = document.getElementById(id) as HTMLInputElement | null;
-
     if (!input) {
       return;
     }
-
     input.checked = false;
   };
-
   addEventListener("keydown", handler);
 };
-
-function Drawer({
-  children,
-  aside,
-  open,
-  class: _class = "",
-  id = useId(),
-}: Props) {
+function Drawer(
+  { children, aside, open, class: _class = "", id = useId() }: Props,
+) {
   return (
     <>
       <div class={clx("drawer", _class)}>
@@ -57,7 +46,7 @@ function Drawer({
           data-aside
           class={clx(
             "drawer-side h-full z-40 overflow-hidden",
-            "[[data-aside]&_section]:contents", // lazy-loading via useSection
+            "[[data-aside]&_section]:contents",
           )}
         >
           <label for={id} class="drawer-overlay" />
@@ -71,14 +60,11 @@ function Drawer({
     </>
   );
 }
-
-function Aside(
-  { title, drawer, children }: {
-    title: string;
-    drawer: string;
-    children: ComponentChildren;
-  },
-) {
+function Aside({ title, drawer, children }: {
+  title: string;
+  drawer: string;
+  children: ComponentChildren;
+}) {
   return (
     <div
       data-aside
@@ -97,7 +83,5 @@ function Aside(
     </div>
   );
 }
-
 Drawer.Aside = Aside;
-
 export default Drawer;

@@ -1,10 +1,8 @@
 import { MINICART_FORM_ID } from "../../constants.ts";
-import { useScript } from "deco/hooks/useScript.ts";
-
+import { useScript } from "@deco/deco/hooks";
 export interface Props {
   coupon?: string;
 }
-
 function Coupon({ coupon }: Props) {
   return (
     <div class="flex justify-between items-center px-4">
@@ -45,5 +43,4 @@ function Coupon({ coupon }: Props) {
     </div>
   );
 }
-
 export default Coupon;

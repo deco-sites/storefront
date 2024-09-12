@@ -1,7 +1,6 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
-import type { SectionProps } from "deco/types.ts";
-
+import { type SectionProps } from "@deco/deco";
 /**
  * @titleBy matcher
  */
@@ -21,7 +20,6 @@ export interface Banner {
     alt?: string;
   };
 }
-
 const DEFAULT_PROPS = {
   banners: [
     {
@@ -38,16 +36,12 @@ const DEFAULT_PROPS = {
     },
   ],
 };
-
 function Banner(props: SectionProps<ReturnType<typeof loader>>) {
   const { banner } = props;
-
   if (!banner) {
     return null;
   }
-
   const { title, subtitle, image } = banner;
-
   return (
     <div class="grid grid-cols-1 grid-rows-1">
       <Picture preload class="col-start-1 col-span-1 row-start-1 row-span-1">
@@ -81,19 +75,14 @@ function Banner(props: SectionProps<ReturnType<typeof loader>>) {
     </div>
   );
 }
-
 export interface Props {
   banners?: Banner[];
 }
-
 export const loader = (props: Props, req: Request) => {
   const { banners } = { ...DEFAULT_PROPS, ...props };
-
   const banner = banners.find(({ matcher }) =>
     new URLPattern({ pathname: matcher }).test(req.url)
   );
-
   return { banner };
 };
-
 export default Banner;

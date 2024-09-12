@@ -1,7 +1,6 @@
 import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
-import { useDevice } from "deco/hooks/useDevice.ts";
 import { LoadingFallbackProps } from "deco/mod.ts";
 import Alert from "../../components/header/Alert.tsx";
 import Bag from "../../components/header/Bag.tsx";
@@ -22,43 +21,34 @@ import {
   SIDEMENU_CONTAINER_ID,
   SIDEMENU_DRAWER_ID,
 } from "../../constants.ts";
-
+import { useDevice } from "@deco/deco/hooks";
 export interface Logo {
   src: ImageWidget;
   alt: string;
   width?: number;
   height?: number;
 }
-
 export interface SectionProps {
   alerts?: HTMLWidget[];
-
   /**
    * @title Navigation items
    * @description Navigation items used both on mobile and desktop menus
    */
   navItems?: SiteNavigationElement[] | null;
-
   /**
    * @title Searchbar
    * @description Searchbar configuration
    */
   searchbar: SearchbarProps;
-
   /** @title Logo */
   logo: Logo;
-
   /**
    * @description Usefull for lazy loading hidden elements, like hamburguer menus etc
    * @hide true */
   loading?: "eager" | "lazy";
 }
-
 type Props = Omit<SectionProps, "alert">;
-
-const Desktop = (
-  { navItems, logo, searchbar, loading }: Props,
-) => (
+const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
   <>
     <Modal id={SEARCHBAR_POPUP_ID}>
       <div
@@ -115,10 +105,7 @@ const Desktop = (
     </div>
   </>
 );
-
-const Mobile = (
-  { logo, searchbar, navItems, loading }: Props,
-) => (
+const Mobile = ({ logo, searchbar, navItems, loading }: Props) => (
   <>
     <Drawer
       id={SEARCHBAR_DRAWER_ID}
@@ -198,7 +185,6 @@ const Mobile = (
     </div>
   </>
 );
-
 function Header({
   alerts = [],
   logo = {
@@ -211,7 +197,6 @@ function Header({
   ...props
 }: Props) {
   const device = useDevice();
-
   return (
     <header
       style={{
@@ -229,10 +214,8 @@ function Header({
     </header>
   );
 }
-
 export const LoadingFallback = (props: LoadingFallbackProps<Props>) => (
   // deno-lint-ignore no-explicit-any
   <Header {...props as any} loading="lazy" />
 );
-
 export default Header;

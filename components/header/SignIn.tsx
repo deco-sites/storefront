@@ -1,19 +1,14 @@
-import { useScript } from "deco/hooks/useScript.ts";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import Icon from "../ui/Icon.tsx";
-
+import { useScript } from "@deco/deco/hooks";
 const onLoad = (containerID: string) => {
   window.STOREFRONT.USER.subscribe((sdk) => {
     const container = document.getElementById(containerID) as HTMLDivElement;
-
     const nodes = container.querySelectorAll<HTMLAnchorElement>("a");
-
     const login = nodes.item(0);
     const account = nodes.item(1);
-
     const user = sdk.getUser();
-
     if (user?.email) {
       login.classList.add("hidden");
       account.classList.remove("hidden");
@@ -23,10 +18,10 @@ const onLoad = (containerID: string) => {
     }
   });
 };
-
-function SignIn({ variant }: { variant: "mobile" | "desktop" }) {
+function SignIn({ variant }: {
+  variant: "mobile" | "desktop";
+}) {
   const id = useId();
-
   return (
     <div id={id}>
       <a
@@ -59,5 +54,4 @@ function SignIn({ variant }: { variant: "mobile" | "desktop" }) {
     </div>
   );
 }
-
 export default SignIn;

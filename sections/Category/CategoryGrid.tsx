@@ -1,24 +1,21 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
-import { useDevice } from "deco/hooks/useDevice.ts";
 import Section, {
   type Props as SectionHeaderProps,
 } from "../../components/ui/Section.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { LoadingFallbackProps } from "deco/mod.ts";
-
+import { useDevice } from "@deco/deco/hooks";
 /** @titleBy label */
 export interface Item {
   image: ImageWidget;
   href: string;
   label: string;
 }
-
 export interface Props extends SectionHeaderProps {
   items: Item[];
 }
-
 function Card({ image, href, label }: Item) {
   return (
     <a href={href} class="flex flex-col items-center justify-center gap-4">
@@ -35,10 +32,8 @@ function Card({ image, href, label }: Item) {
     </a>
   );
 }
-
 function CategoryGrid({ title, cta, items }: Props) {
   const device = useDevice();
-
   return (
     <Section.Container>
       <Section.Header title={title} cta={cta} />
@@ -68,7 +63,6 @@ function CategoryGrid({ title, cta, items }: Props) {
     </Section.Container>
   );
 }
-
 export const LoadingFallback = (
   { title, cta }: LoadingFallbackProps<Props>,
 ) => (
@@ -77,5 +71,4 @@ export const LoadingFallback = (
     <Section.Placeholder height="212px" />;
   </Section.Container>
 );
-
 export default CategoryGrid;

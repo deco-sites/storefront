@@ -1,4 +1,3 @@
-import { allowCorsFor, FnContext } from "deco/mod.ts";
 import {
   AlignCenter,
   AlignLeft,
@@ -11,7 +10,7 @@ import {
   Right,
   Uppercase,
 } from "../static/adminIcons.ts";
-
+import { allowCorsFor, type FnContext } from "@deco/deco";
 const icons = [
   { component: Left, label: "Left", prop: "alignment" },
   { component: Center, label: "Center", prop: "alignment" },
@@ -27,7 +26,6 @@ const icons = [
   { component: "M", label: "Normal", prop: "fontSize" },
   { component: "L", label: "Large", prop: "fontSize" },
 ];
-
 // Used to load icons that will be used for ButtonGroup widgets.
 // The file adminIcons.ts contains all available icons in a string format, and this loader maps them to the format expected by the button-group widget.
 export default function IconsLoader(
@@ -39,13 +37,11 @@ export default function IconsLoader(
   Object.entries(allowCorsFor(req)).map(([name, value]) => {
     ctx.response.headers.set(name, value);
   });
-
   // Mapping icons to { value, label }
   const iconsMap = icons.map((icon) => ({
     value: icon.component,
     label: icon.label,
     prop: icon.prop,
   }));
-
   return iconsMap;
 }

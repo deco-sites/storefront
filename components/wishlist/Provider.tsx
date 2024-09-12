@@ -1,31 +1,27 @@
-import { useScript } from "deco/hooks/useScript.ts";
 import { AppContext } from "../../apps/site.ts";
 import { WISHLIST_FORM_ID } from "../../constants.ts";
 import { useComponent } from "../../sections/Component.tsx";
-
+import { useScript } from "@deco/deco/hooks";
 export interface Wishlist {
   productIDs: string[];
 }
-
 export const action = async (_: unknown, req: Request, ctx: AppContext) => {
   const form = await req.formData();
   const productID = form.get("product-id")?.toString();
   const productGroupID = form.get("product-group-id")?.toString();
-
-  const wishlist = await ctx.invoke(
-    "site/actions/wishlist/submit.ts",
-    { productID, productGroupID },
-  );
-
+  const wishlist = await ctx.invoke("site/actions/wishlist/submit.ts", {
+    productID,
+    productGroupID,
+  });
   return { wishlist };
 };
-
 const onLoad = (formID: string) => {
   const form = document.getElementById(formID) as HTMLFormElement;
   window.STOREFRONT.WISHLIST.dispatch(form);
 };
-
-function WishlistProvider({ wishlist }: { wishlist: Wishlist | null }) {
+function WishlistProvider({ wishlist }: {
+  wishlist: Wishlist | null;
+}) {
   return (
     <form
       id={WISHLIST_FORM_ID}
@@ -50,5 +46,4 @@ function WishlistProvider({ wishlist }: { wishlist: Wishlist | null }) {
     </form>
   );
 }
-
 export default WishlistProvider;

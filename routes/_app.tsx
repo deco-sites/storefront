@@ -1,16 +1,13 @@
 import { asset, Head } from "$fresh/runtime.ts";
 import { defineApp } from "$fresh/server.ts";
-import { useScript } from "deco/hooks/useScript.ts";
-import { Context } from "deco/deco.ts";
-
+import { useScript } from "@deco/deco/hooks";
+import { Context } from "@deco/deco";
 const serviceWorkerScript = () =>
   addEventListener("load", () =>
     navigator && navigator.serviceWorker &&
     navigator.serviceWorker.register("/sw.js"));
-
 export default defineApp(async (_req, ctx) => {
   const revision = await Context.active().release?.revision();
-
   return (
     <>
       {/* Include Icons and manifest */}

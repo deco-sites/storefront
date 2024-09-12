@@ -1,17 +1,15 @@
 import { AnalyticsItem, Product } from "apps/commerce/types.ts";
-import { useScript } from "deco/hooks/useScript.ts";
 import { JSX } from "preact";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import QuantitySelector from "../ui/QuantitySelector.tsx";
-
+import { useScript } from "@deco/deco/hooks";
 export interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
   product: Product;
   seller: string;
   item: AnalyticsItem;
 }
-
 const onClick = () => {
   event?.stopPropagation();
   const button = event?.currentTarget as HTMLButtonElement | null;
@@ -21,21 +19,17 @@ const onClick = () => {
   );
   window.STOREFRONT.CART.addToCart(item, platformProps);
 };
-
 const onChange = () => {
   const input = event!.currentTarget as HTMLInputElement;
   const productID = input!
     .closest("div[data-cart-item]")!
     .getAttribute("data-item-id")!;
   const quantity = Number(input.value);
-
   if (!input.validity.valid) {
     return;
   }
-
   window.STOREFRONT.CART.setQuantity(productID, quantity);
 };
-
 // Copy cart form values into AddToCartButton
 const onLoad = (id: string) => {
   window.STOREFRONT.CART.subscribe((sdk) => {
@@ -47,16 +41,12 @@ const onLoad = (id: string) => {
       'input[type="number"]',
     );
     const itemID = container?.getAttribute("data-item-id")!;
-
     const quantity = sdk.getQuantity(itemID) || 0;
-
     if (!input || !checkbox) {
       return;
     }
-
     input.value = quantity.toString();
     checkbox.checked = quantity > 0;
-
     // enable interactivity
     container?.querySelectorAll<HTMLButtonElement>("button").forEach((node) =>
       node.disabled = false
@@ -66,23 +56,19 @@ const onLoad = (id: string) => {
     );
   });
 };
-
 const useAddToCart = ({ product, seller }: Props) => {
   const platform = usePlatform();
   const { additionalProperty = [], isVariantOf, productID } = product;
   const productGroupID = isVariantOf?.productGroupID;
-
   if (platform === "vtex") {
     return {
       allowedOutdatedData: ["paymentData"],
       orderItems: [{ quantity: 1, seller: seller, id: productID }],
     };
   }
-
   if (platform === "shopify") {
     return { lines: { merchandiseId: productID } };
   }
-
   if (platform === "vnda") {
     return {
       quantity: 1,
@@ -92,14 +78,12 @@ const useAddToCart = ({ product, seller }: Props) => {
       ),
     };
   }
-
   if (platform === "wake") {
     return {
       productVariantId: Number(productID),
       quantity: 1,
     };
   }
-
   if (platform === "nuvemshop") {
     return {
       quantity: 1,
@@ -110,7 +94,6 @@ const useAddToCart = ({ product, seller }: Props) => {
       ),
     };
   }
-
   if (platform === "linx") {
     return {
       ProductID: productGroupID,
@@ -118,15 +101,12 @@ const useAddToCart = ({ product, seller }: Props) => {
       Quantity: 1,
     };
   }
-
   return null;
 };
-
 function AddToCartButton(props: Props) {
   const { product, item, class: _class } = props;
   const platformProps = useAddToCart(props);
   const id = useId();
-
   return (
     <div
       id={id}
@@ -163,5 +143,4 @@ function AddToCartButton(props: Props) {
     </div>
   );
 }
-
 export default AddToCartButton;

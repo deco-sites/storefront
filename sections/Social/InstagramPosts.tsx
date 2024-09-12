@@ -1,48 +1,42 @@
 import Image from "apps/website/components/Image.tsx";
-import type { LoadingFallbackProps, SectionProps } from "deco/mod.ts";
+import type { LoadingFallbackProps } from "deco/mod.ts";
 import Section, {
   type Props as SectionHeaderProps,
 } from "../../components/ui/Section.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import { clx } from "../../sdk/clx.ts";
-
+import { type SectionProps } from "@deco/deco";
 export interface Data {
   id: string;
   permalink: string;
   media_type: string;
   media_url: string;
 }
-
 export interface Props extends SectionHeaderProps {
   /**
    * @description Get it in Facebook app. Expires every 90 days.
    */
   facebookToken: string;
-
   /**
    * @title Number of posts
    */
   nposts: number;
 }
-
 const FIELDS = "media_url,media_type,permalink";
-
 const fetchPosts = async (token: string): Promise<Data[]> => {
   try {
     const response = await fetch(
       `https://graph.instagram.com/me/media?access_token=${token}&fields=${FIELDS}`,
     );
-
     if (!response.ok) {
       throw new Error(await response.text());
     }
-
-    const json = await response.json() as { data: Data[] };
-
+    const json = await response.json() as {
+      data: Data[];
+    };
     return json.data;
   } catch (error) {
     console.error("Instagram API returned the following error:", error);
-
     return [
       {
         id: "placeholderInsta",
@@ -68,19 +62,16 @@ const fetchPosts = async (token: string): Promise<Data[]> => {
     ];
   }
 };
-
 export async function loader(
   { facebookToken, nposts, ...rest }: Props,
   _req: Request,
 ) {
   const posts = await fetchPosts(facebookToken);
-
   return {
     ...rest,
     posts: posts.slice(0, nposts ?? 12),
   };
 }
-
 function InstagramPosts({
   title,
   posts = [
@@ -145,14 +136,10 @@ function InstagramPosts({
     </Section.Container>
   );
 }
-
-export const LoadingFallback = (
-  { title }: LoadingFallbackProps<Props>,
-) => (
+export const LoadingFallback = ({ title }: LoadingFallbackProps<Props>) => (
   <Section.Container>
     <Section.Header title={title} />
     <Section.Placeholder height="635px" />
   </Section.Container>
 );
-
 export default InstagramPosts;
