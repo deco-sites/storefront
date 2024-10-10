@@ -9,9 +9,52 @@ import Drawer from "./ui/Drawer.tsx";
 import UserProvider from "./user/Provider.tsx";
 import WishlistProvider, { type Wishlist } from "./wishlist/Provider.tsx";
 import { useScript } from "@deco/deco/hooks";
+import type { Manifest } from "../manifest.gen.ts";
+
+export type FetchKeys = keyof Manifest["loaders"] | keyof Manifest["actions"];
+
+type AppsManifest = {
+  [K in keyof Manifest["apps"]]: ReturnType<Manifest["apps"][K]["default"]>["manifest"];
+};
+type LoaderProps<T> = {
+  [K in keyof T]: {
+    // @ts-ignore Because I know we have loaders
+    [Loader in keyof T[K]["loaders"]]: Parameters<T[K]["loaders"][Loader]["default"]>[0];
+  } & {
+    // @ts-ignore Because I know we have actions
+    [Action in keyof T[K]["actions"]]: Parameters<T[K]["actions"][Action]["default"]>[0];
+  };
+};
+
+type MergeLoaderProps<T> = {
+  [K in keyof T]: LoaderProps<T>[K];
+};
+
+// Now flatten the merged loader props into a single object
+type FlattenLoaderProps<T> = MergeLoaderProps<T>[keyof T] extends infer U
+  ? { [K in keyof U]: U[K] }
+  : never;
+
+type InvokableProps = FlattenLoaderProps<AppsManifest>;
+
+// deno-lint-ignore no-explicit-any
+type ExtractKeys<T> = T extends { [key: string]: any } ? keyof T : never;
+type InvokableKeys = ExtractKeys<InvokableProps>
+
+type InvokablePropType<K extends InvokableKeys> =
+  // deno-lint-ignore no-explicit-any
+  K extends keyof (Extract<InvokableProps, { [key in K]: any }>)
+  // deno-lint-ignore no-explicit-any
+  ? Extract<InvokableProps, { [key in K]: any }>[K]
+  : never;
+
 declare global {
   interface Window {
     STOREFRONT: SDK;
+    invoke: <T extends InvokableKeys>(
+      key: T,
+      props: InvokablePropType<T>,
+    ) => Promise<unknown>;
   }
 }
 export interface Cart {
@@ -222,11 +265,38 @@ const sdk = () => {
     return sdk;
   };
   createAnalyticsSDK();
+
+  const createInvoke = () =>
+    async <K extends InvokableKeys>(
+      key: K,
+      props: InvokablePropType<K>
+    ) => {
+      const response = await fetch("/live/invoke", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          key,
+          props,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Failed to invoke function ${key}: ${response.statusText}`,
+        );
+      }
+
+      return response.json();
+    };
+
   window.STOREFRONT = {
     CART: createCartSDK(),
     USER: createUserSDK(),
     WISHLIST: createWishlistSDK(),
   };
+  window.invoke = createInvoke()
 };
 export const action = async (
   _props: unknown,
