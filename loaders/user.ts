@@ -20,7 +20,7 @@ async function loader(
     return null;
   }
 
-  throw new Error(`Unsupported platform: ${platform}`);
+  throw new Error(`User loader is not supported for platform ${platform}.`);
 }
 
 export default loader;

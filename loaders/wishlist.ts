@@ -37,7 +37,7 @@ async function loader(
     };
   }
 
-  throw new Error(`Unsupported platform: ${platform}`);
+  throw new Error(`Wishlist loader is not supported for platform ${platform}.`);
 }
 
 export default loader;

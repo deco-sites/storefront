@@ -44,7 +44,7 @@ async function action(
     }
   }
 
-  throw new Error(`Unsupported platform: ${platform}`);
+  throw new Error(`Wishlist not supported on platform ${platform}.`);
 }
 
 export default action;
