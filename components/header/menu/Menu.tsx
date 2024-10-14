@@ -1,29 +1,9 @@
-import Icon from "../../components/ui/Icon.tsx";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
+import Icon from "../../ui/Icon.tsx";
+import MenuItem from "./Item.tsx";
 
 export interface Props {
   navItems?: SiteNavigationElement[];
-}
-
-function MenuItem({ item }: { item: SiteNavigationElement }) {
-  return (
-    <div class="collapse collapse-plus">
-      <input type="checkbox" />
-      <div class="collapse-title">{item.name}</div>
-      <div class="collapse-content">
-        <ul>
-          <li>
-            <a class="underline text-sm" href={item.url}>Ver todos</a>
-          </li>
-          {item.children?.map((node) => (
-            <li>
-              <MenuItem item={node} />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
 }
 
 function Menu({ navItems = [] }: Props) {
