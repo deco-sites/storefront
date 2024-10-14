@@ -1,22 +1,14 @@
 /**
  * TODO: support other platforms. Currently only for VTEX
  */
-import { AppContext } from "apps/vtex/mod.ts";
+import type { AppContext } from "apps/vtex/mod.ts";
 import type { SimulationOrderForm, SKU, Sla } from "apps/vtex/utils/types.ts";
-import { formatPrice } from "../../sdk/format.ts";
-import { ComponentProps } from "../../sections/Component.tsx";
+import { formatPrice, formatShippingEstimate } from "../../sdk/format.ts";
+import type { ComponentProps } from "../../sections/Component.tsx";
 
 export interface Props {
   items: SKU[];
 }
-
-const formatShippingEstimate = (estimate: string) => {
-  const [, time, type] = estimate.split(/(\d+)/);
-
-  if (type === "bd") return `${time} dias úteis`;
-  if (type === "d") return `${time} dias`;
-  if (type === "h") return `${time} horas`;
-};
 
 export async function action(props: Props, req: Request, ctx: AppContext) {
   const form = await req.formData();
