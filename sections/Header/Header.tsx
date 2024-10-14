@@ -7,7 +7,7 @@ import Menu from "../../components/header/menu/Menu.tsx";
 import NavItem from "../../components/header/NavItem.tsx";
 import Searchbar, {
   type SearchbarProps,
-} from "../../components/search/Searchbar/Form.tsx";
+} from "../../components/search/bar/Form.tsx";
 import Drawer from "../../components/ui/Drawer.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Modal from "../../components/ui/Modal.tsx";

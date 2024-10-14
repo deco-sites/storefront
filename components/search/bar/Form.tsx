@@ -2,7 +2,7 @@
  * We use a custom route at /s?q= to perform the search. This component
  * redirects the user to /s?q={term} when the user either clicks on the
  * button or submits the form. Make sure this page exists in deco.cx/admin
- * of yout site. If not, create a new page on this route and add the appropriate
+ * of your site. If not, create a new page on this route and add the appropriate
  * loader.
  *
  * Note that this is the most performatic way to perform a search, since
