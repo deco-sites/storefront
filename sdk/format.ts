@@ -21,3 +21,11 @@ export const formatPrice = (
   currency = "BRL",
   locale = "pt-BR",
 ) => price ? formatter(currency, locale).format(price) : null;
+
+export const formatShippingEstimate = (estimate: string) => {
+  const [, time, type] = estimate.split(/(\d+)/);
+
+  if (type === "bd") return `${time} dias úteis`;
+  if (type === "d") return `${time} dias`;
+  if (type === "h") return `${time} horas`;
+};
