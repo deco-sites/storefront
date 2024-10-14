@@ -29,7 +29,7 @@ function loader(
   const loader = loaders[platform];
 
   if (!loader) {
-    throw new Error(`Unsupported platform: ${platform}`);
+    throw new Error(`Minicart loader is not supported for platform ${platform}.`);
   }
 
   return loader(props, req, ctx);
