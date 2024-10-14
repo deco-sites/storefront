@@ -6,5 +6,5 @@ export default defineConfig({
   plugins: plugins({
     manifest,
     htmx: true,
-          }),
+  }),
 });
