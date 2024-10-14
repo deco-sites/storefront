@@ -1,6 +1,6 @@
-import SearchResult, {
+import SearchResultPage, {
   Props as SearchResultProps,
-} from "../search/SearchResult.tsx";
+} from "../search/page/Page.tsx";
 import { type SectionProps } from "@deco/deco";
 export type Props = SearchResultProps;
 function WishlistGallery(props: SectionProps<typeof loader>) {
@@ -18,7 +18,7 @@ function WishlistGallery(props: SectionProps<typeof loader>) {
       </div>
     );
   }
-  return <SearchResult {...props} />;
+  return <SearchResultPage {...props} />;
 }
 export const loader = (props: Props, req: Request) => {
   return {
