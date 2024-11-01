@@ -1,62 +1,78 @@
 import { Head } from "$fresh/runtime.ts";
-import { type Person } from "apps/commerce/types.ts";
-import { type AppContext } from "../apps/site.ts";
+import { useScript } from "@deco/deco/hooks";
+import type { Person } from "apps/commerce/types.ts";
+import type { AppContext } from "../apps/site.ts";
 import { MINICART_DRAWER_ID } from "../constants.ts";
+import type { Manifest } from "../manifest.gen.ts";
 import { useComponent } from "../sections/Component.tsx";
-import { type Item } from "./minicart/Item.tsx";
+import type { Item } from "./minicart/Item.tsx";
 import CartProvider, { type Minicart } from "./minicart/Minicart.tsx";
 import Drawer from "./ui/Drawer.tsx";
 import UserProvider from "./user/Provider.tsx";
 import WishlistProvider, { type Wishlist } from "./wishlist/Provider.tsx";
-import { useScript } from "@deco/deco/hooks";
-import type { Manifest } from "../manifest.gen.ts";
-
-export type FetchKeys = keyof Manifest["loaders"] | keyof Manifest["actions"];
 
 type AppsManifest = {
-  [K in keyof Manifest["apps"]]: ReturnType<Manifest["apps"][K]["default"]>["manifest"];
+  [K in keyof Manifest["apps"]]: ReturnType<
+    Manifest["apps"][K]["default"]
+  >["manifest"];
 };
+
+/*
+    When refered to 'loader', it means 'loader' and 'action'
+*/
+
+type HasLoader<T> = T extends { loaders: unknown } | { actions: unknown } ? true
+  : false;
+
 type LoaderProps<T> = {
-  [K in keyof T]: {
-    // @ts-ignore Because I know we have loaders
-    [Loader in keyof T[K]["loaders"]]: Parameters<T[K]["loaders"][Loader]["default"]>[0];
-  } & {
-    // @ts-ignore Because I know we have actions
-    [Action in keyof T[K]["actions"]]: Parameters<T[K]["actions"][Action]["default"]>[0];
-  };
+  [K in keyof T]: HasLoader<T[K]> extends true ?
+      & {
+        // @ts-ignore - Trust me
+        [L in keyof T[K]["loaders"]]: T[K]["loaders"][L]["default"];
+      }
+      & {
+        // @ts-ignore - Trust me
+        [A in keyof T[K]["actions"]]: T[K]["actions"][A]["default"];
+      }
+    : never;
 };
 
-type MergeLoaderProps<T> = {
-  [K in keyof T]: LoaderProps<T>[K];
+type RemoveAppWithoutLoader<T> = {
+  [K in keyof T as T[K] extends never ? never : K]: T[K];
 };
 
-// Now flatten the merged loader props into a single object
-type FlattenLoaderProps<T> = MergeLoaderProps<T>[keyof T] extends infer U
-  ? { [K in keyof U]: U[K] }
+type AppsWithLoaders = RemoveAppWithoutLoader<LoaderProps<AppsManifest>>;
+type Loaders = AppsWithLoaders[keyof AppsWithLoaders];
+type GetParametersReturnType<T> = T extends object ? {
+    [K in keyof T]: {
+      // @ts-ignore - Trust me
+      returnType: ReturnType<T[K]>;
+      // @ts-ignore - Trust me
+      parameters: Parameters<T[K]>[0];
+    };
+  }
   : never;
 
-type InvokableProps = FlattenLoaderProps<AppsManifest>;
+type ParametersReturnType = GetParametersReturnType<Loaders>;
 
-// deno-lint-ignore no-explicit-any
-type ExtractKeys<T> = T extends { [key: string]: any } ? keyof T : never;
-type InvokableKeys = ExtractKeys<InvokableProps>
+type Keys<T> = T extends object ? keyof T : never;
+type LoadersKeys = Keys<ParametersReturnType>;
 
-type InvokablePropType<K extends InvokableKeys> =
-  // deno-lint-ignore no-explicit-any
-  K extends keyof (Extract<InvokableProps, { [key in K]: any }>)
-  // deno-lint-ignore no-explicit-any
-  ? Extract<InvokableProps, { [key in K]: any }>[K]
+type GetLoadersByKey<T extends LoadersKeys> = T extends
+  keyof Extract<ParametersReturnType, { [key in T]: unknown }>
+  ? Extract<ParametersReturnType, { [key in T]: unknown }>[T]
   : never;
 
 declare global {
   interface Window {
     STOREFRONT: SDK;
-    invoke: <T extends InvokableKeys>(
-      key: T,
-      props: InvokablePropType<T>,
-    ) => Promise<unknown>;
+    invoke: <K extends LoadersKeys>(
+      key: K,
+      props: GetLoadersByKey<K>["parameters"],
+    ) => GetLoadersByKey<K>["returnType"];
   }
 }
+
 export interface Cart {
   currency: string;
   coupon: string;
@@ -115,9 +131,10 @@ const sdk = () => {
         const input = form?.querySelector<HTMLInputElement>(
           `[data-item-id="${itemId}"] input[type="number"]`,
         );
-        const item = getCart()?.items.find((item) =>
-          // deno-lint-ignore no-explicit-any
-          (item as any).item_id === itemId
+        const item = getCart()?.items.find(
+          (item) =>
+            // deno-lint-ignore no-explicit-any
+            (item as any).item_id === itemId,
         );
         if (!input || !item) {
           return false;
@@ -193,12 +210,15 @@ const sdk = () => {
         })
         : null;
       document.body.addEventListener("htmx:load", (e) =>
-        (e as unknown as {
-          detail: {
-            elt: HTMLElement;
-          };
-        })
-          .detail.elt.querySelectorAll("[data-event]").forEach((node) => {
+        (
+          e as unknown as {
+            detail: {
+              elt: HTMLElement;
+            };
+          }
+        ).detail.elt
+          .querySelectorAll("[data-event]")
+          .forEach((node) => {
             const maybeTrigger = node.getAttribute("data-event-trigger");
             const on = maybeTrigger === "click" ? "click" : "view";
             if (on === "click") {
@@ -267,36 +287,36 @@ const sdk = () => {
   createAnalyticsSDK();
 
   const createInvoke = () =>
-    async <K extends InvokableKeys>(
-      key: K,
-      props: InvokablePropType<K>
-    ) => {
-      const response = await fetch("/live/invoke", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          key,
-          props,
-        }),
-      });
+  async <K extends LoadersKeys>(
+    key: K,
+    props: GetLoadersByKey<K>["parameters"],
+  ): Promise<Awaited<GetLoadersByKey<K>["returnType"]>> => {
+    const response = await fetch("/live/invoke", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        key,
+        props,
+      }),
+    });
 
-      if (!response.ok) {
-        throw new Error(
-          `Failed to invoke function ${key}: ${response.statusText}`,
-        );
-      }
+    if (!response.ok) {
+      throw new Error(
+        `Failed to invoke function ${key}: ${response.statusText}`,
+      );
+    }
 
-      return response.json();
-    };
+    return await response.json();
+  };
 
   window.STOREFRONT = {
     CART: createCartSDK(),
     USER: createUserSDK(),
     WISHLIST: createWishlistSDK(),
   };
-  window.invoke = createInvoke()
+  window.invoke = createInvoke();
 };
 export const action = async (
   _props: unknown,
