@@ -130,24 +130,22 @@ function Carousel({ images = [], preload, interval }: Props) {
     <div
       id={id}
       class={clx(
-        "grid",
+        "relative",
         "grid-rows-[1fr_32px_1fr_64px]",
         "grid-cols-[32px_1fr_32px] min-h-[660px]",
         "sm:grid-cols-[112px_1fr_112px] sm:min-h-min",
-        "w-screen",
+        "w-full",
       )}
     >
-      <div class="col-span-full row-span-full">
-        <Slider class="carousel carousel-center w-full gap-6">
-          {images.map((image, index) => (
-            <Slider.Item index={index} class="carousel-item w-full">
-              <BannerItem image={image} lcp={index === 0 && preload} />
-            </Slider.Item>
-          ))}
-        </Slider>
-      </div>
+      <Slider class="carousel carousel-center w-full gap-6">
+        {images.map((image, index) => (
+          <Slider.Item index={index} class="carousel-item w-full">
+            <BannerItem image={image} lcp={index === 0 && preload} />
+          </Slider.Item>
+        ))}
+      </Slider>
 
-      <div class="hidden sm:flex items-center justify-center z-10 col-start-1 row-start-2">
+      <div class="hidden sm:flex items-center justify-center z-10 absolute left-8 top-1/2 -translate-y-1/2">
         <Slider.PrevButton
           class="btn btn-neutral btn-outline btn-circle no-animation btn-sm"
           disabled={false}
@@ -156,7 +154,7 @@ function Carousel({ images = [], preload, interval }: Props) {
         </Slider.PrevButton>
       </div>
 
-      <div class="hidden sm:flex items-center justify-center z-10 col-start-3 row-start-2">
+      <div class="hidden sm:flex items-center justify-center z-10 absolute right-8 top-1/2 -translate-y-1/2">
         <Slider.NextButton
           class="btn btn-neutral btn-outline btn-circle no-animation btn-sm"
           disabled={false}
@@ -167,7 +165,7 @@ function Carousel({ images = [], preload, interval }: Props) {
 
       <ul
         class={clx(
-          "col-span-full row-start-4 z-10",
+          "absolute bottom-8 left-1/2 -translate-x-1/2 z-10",
           "carousel justify-center gap-3",
         )}
       >
