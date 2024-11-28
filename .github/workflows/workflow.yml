@@ -15,5 +15,13 @@ jobs:
         with:
           deno-version: v2.x
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install Cypress
+        run: npm install -g cypress
+
       - name: Run tests
         run: deno task test-terminal
