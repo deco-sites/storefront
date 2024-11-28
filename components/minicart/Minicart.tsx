@@ -135,6 +135,7 @@ export default function Cart(
 
         {/* This contains the STOREFRONT cart. */}
         <input
+          data-test-name="cart-json"
           type="hidden"
           name="storefront-cart"
           value={encodeURIComponent(
