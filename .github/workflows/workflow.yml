@@ -23,6 +23,9 @@ jobs:
       - name: Install Cypress
         run: npm install -g cypress
 
+      - name: Add global npm bin to PATH
+        run: echo "/opt/hostedtoolcache/node/18.20.5/x64/bin" >> $GITHUB_PATH # Adiciona o caminho ao PATH
+
       - name: Verify Cypress installation
         run: |
           echo "Cypress Path: $(which cypress)" # Verifica o caminho onde o Cypress está instalado
