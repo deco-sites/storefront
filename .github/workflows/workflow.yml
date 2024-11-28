@@ -32,4 +32,4 @@ jobs:
           echo "Cypress version: $(cypress --version)" # Verifica a versão do Cypress
 
       - name: Run tests
-        run: cypress run
+        run: cypress run --e2e
