@@ -1,9 +1,6 @@
 name: CI Pipeline
 
-on:
-  push:
-    branches:
-      - main
+on: pull_request
 
 jobs:
   build:
