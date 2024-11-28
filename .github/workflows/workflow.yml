@@ -23,5 +23,10 @@ jobs:
       - name: Install Cypress
         run: npm install -g cypress
 
+      - name: Verify Cypress installation
+        run: |
+          echo "Cypress Path: $(which cypress)" # Verifica o caminho onde o Cypress está instalado
+          echo "Cypress version: $(cypress --version)" # Verifica a versão do Cypress
+
       - name: Run tests
         run: deno task test-terminal
