@@ -10,5 +10,7 @@ describe("My First Test", () => {
     cy.get('input[data-test-name="cart-json"]').invoke("val").should(
       "not.be.empty",
     );
+
+    cy.visit("http://localhost:8000/checkout");
   });
 });
