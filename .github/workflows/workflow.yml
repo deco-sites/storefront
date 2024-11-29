@@ -32,4 +32,4 @@ jobs:
           echo "Cypress version: $(cypress --version)" # Verifica a versão do Cypress
 
       - name: Run tests
-        run: cypress run --e2e --spec "cypress/e2e/buy-product.cy.js"
+        run: npx cypress run
