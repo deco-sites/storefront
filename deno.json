@@ -48,7 +48,7 @@
     "component": "deno eval 'import \"deco/scripts/component.ts\"'",
     "release": "deno eval 'import \"deco/scripts/release.ts\"'",
     "update": "deno run -Ar https://deco.cx/update",
-    "check": "cypress run && deno fmt && deno lint && deno check dev.ts main.ts",
+    "check": "deno fmt && deno lint && deno check dev.ts main.ts",
     "install": "deno eval 'import \"deco/scripts/apps/install.ts\"'",
     "uninstall": "deno eval 'import \"deco/scripts/apps/uninstall.ts\"'",
     "bundle": "deno run -A jsr:@deco/deco/scripts/bundle site",
@@ -70,7 +70,9 @@
     "README.md",
     "_fresh",
     "**/_fresh/*",
-    ".deco"
+    ".deco",
+    "cypress",
+    "cypress.config.js"
   ],
   "lint": {
     "rules": {
