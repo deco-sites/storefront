@@ -24,7 +24,7 @@ jobs:
         run: npm install -g cypress
 
       - name: Install Cypress
-        run: deno install npm:cypress@13.16.0
+        run: deno install
 
       - name: Add global npm bin to PATH
         run: echo "/opt/hostedtoolcache/node/18.20.5/x64/bin" >> $GITHUB_PATH # Adiciona o caminho ao PATH
