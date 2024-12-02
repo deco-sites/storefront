@@ -34,5 +34,8 @@ jobs:
           echo "Cypress Path: $(which cypress)" # Verifica o caminho onde o Cypress está instalado
           echo "Cypress version: $(cypress --version)" # Verifica a versão do Cypress
 
+      - name: Init localhost
+        run: deno task start
+
       - name: Run tests
         run: deno task test-terminal
