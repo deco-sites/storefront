@@ -1,0 +1,33 @@
+name: CI Pipeline
+
+on: pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v4
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@61fe2df320078202e33d7d5ad347e7dcfa0e8f31 # v1.1.2
+        with:
+          deno-version: v2.x
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install Cypress Binary
+        run: npm install -g cypress
+
+      - name: Install Deno dependencies
+        run: deno install
+
+      - name: Add global npm bin to PATH
+        run: echo "/opt/hostedtoolcache/node/18.20.5/x64/bin" >> $GITHUB_PATH # Adiciona o caminho ao PATH
+
+      - name: Run tests
+        run: deno task start & deno task test-terminal

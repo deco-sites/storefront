@@ -1,6 +1,8 @@
 {
   "imports": {
-    "$fresh/": "https://deno.land/x/fresh@1.6.8/",
+    "$fresh/": "https://deno.land/x/fresh@1.7.3/",
+    "cypress": "npm:cypress@13.16.0",
+    "deno-cypress-runner": "npm:deno-cypress-runner@^1.0.0",
     "preact": "npm:preact@10.23.1",
     "preact-render-to-string": "npm:preact-render-to-string@6.4.2",
     "@cliffy/prompt": "jsr:@cliffy/prompt@^1.0.0-rc.5",
@@ -29,15 +31,15 @@
     "@zaubrik/djwt": "jsr:@zaubrik/djwt@^3.0.2",
     "fast-json-patch": "npm:fast-json-patch@^3.1.1",
     "https://esm.sh/*preact-render-to-string@6.3.1": "npm:preact-render-to-string@6.4.2",
-    "@deco/deco": "jsr:@deco/deco@1.102.3",
+    "@deco/deco": "jsr:@deco/deco@1.107.0",
     "simple-git": "npm:simple-git@^3.25.0",
     "std/": "https://deno.land/std@0.190.0/",
-    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.102.3/",
-    "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.59.16/",
+    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.107.1/",
+    "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.64.2/",
     "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1",
     "daisyui": "npm:daisyui@4.6.0",
-    "@deco/dev": "jsr:@deco/dev@1.102.0"
+    "@deco/dev": "jsr:@deco/dev@1.107.0"
   },
   "tasks": {
     "start": "deno run -A --unstable-http --env https://deco.cx/run -- deno task dev",
@@ -54,8 +56,10 @@
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
     "generate-icons": "deno run -A --unstable static/generate-icons.ts",
-    "dev": "deno run -A --env --unstable --unstable-hmr dev.ts",
-    "reload": "deno cache -r https://deco.cx/run"
+    "dev": "deno run -A --env --unstable-kv --unstable-hmr dev.ts",
+    "reload": "deno cache -r https://deco.cx/run",
+    "test": "cypress open",
+    "test-terminal": "cypress run"
   },
   "githooks": {
     "pre-commit": "check"
@@ -66,20 +70,17 @@
     "README.md",
     "_fresh",
     "**/_fresh/*",
-    ".deco"
+    ".deco",
+    "cypress",
+    "cypress.config.js"
   ],
   "lint": {
     "rules": {
-      "exclude": [
-        "no-window"
-      ],
-      "tags": [
-        "fresh",
-        "recommended"
-      ]
+      "exclude": ["no-window"],
+      "tags": ["fresh", "recommended"]
     }
   },
-  "nodeModulesDir": false,
+  "nodeModulesDir": true,
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
