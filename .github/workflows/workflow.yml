@@ -15,7 +15,15 @@ jobs:
         with:
           deno-version: v2.x
 
-      - name: Install Cypress
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install Cypress Binary
+        run: npm install -g cypress
+
+      - name: Install Deno dependencies
         run: deno install
 
       - name: Add global npm bin to PATH
