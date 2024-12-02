@@ -32,4 +32,4 @@ jobs:
           echo "Cypress version: $(cypress --version)" # Verifica a versão do Cypress
 
       - name: Run tests
-        run: npx cypress run
+        run: deno task test-terminal
