@@ -54,7 +54,7 @@
     "build": "deno run -A dev.ts build",
     "preview": "deno run -A main.ts",
     "generate-icons": "deno run -A --unstable static/generate-icons.ts",
-    "dev": "deno run -A --env --unstable --unstable-hmr dev.ts",
+    "dev": "deno run -A --env --unstable-kv --unstable-hmr dev.ts",
     "reload": "deno cache -r https://deco.cx/run"
   },
   "githooks": {
