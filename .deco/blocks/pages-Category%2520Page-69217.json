@@ -5,16 +5,16 @@
     {
       "__resolveType": "website/sections/Rendering/Lazy.tsx",
       "section": {
-        "__resolveType": "commerce/sections/Seo/SeoPLPV2.tsx",
-        "jsonLD": {
-          "__resolveType": "PLP Loader"
-        }
+        "__resolveType": "Header"
       }
     },
     {
       "__resolveType": "website/sections/Rendering/Lazy.tsx",
       "section": {
-        "__resolveType": "Header"
+        "__resolveType": "commerce/sections/Seo/SeoPLPV2.tsx",
+        "jsonLD": {
+          "__resolveType": "PLP Loader"
+        }
       }
     },
     {
