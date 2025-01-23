@@ -23,7 +23,8 @@
       "trackingIds": []
     },
     {
-      "__resolveType": "analytics/sections/Analytics/DecoAnalytics.tsx"
+      "__resolveType": "analytics/sections/Analytics/DecoAnalytics.tsx",
+      "domain": "storefront.deco.site"
     },
     {
       "__resolveType": "site/sections/Session.tsx",
@@ -59,6 +60,9 @@
   "abTesting": {
     "replaces": [],
     "includeScriptsToHead": {
+      "includes": []
+    },
+    "includeScriptsToBody": {
       "includes": []
     }
   },

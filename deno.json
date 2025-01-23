@@ -34,8 +34,8 @@
     "std/": "https://deno.land/std@0.190.0/",
     "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.108.3/",
     "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.64.14/",
-    "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2",
-    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1",
+    "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2?external=preact&target=es2020",
+    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1?external=preact&target=es2020",
     "daisyui": "npm:daisyui@4.6.0",
     "@deco/dev": "jsr:@deco/dev@1.108.3"
   },
