@@ -1611,19 +1611,6 @@ html {
 .range:focus {
   outline: none;
 }
-.rating {
-  position: relative;
-  display: inline-flex;
-}
-.rating :where(input) {
-  cursor: pointer;
-  border-radius: 0px;
-  animation: rating-pop var(--animation-input, 0.25s) ease-out;
-  height: 1.5rem;
-  width: 1.5rem;
-  background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity)));
-  --tw-bg-opacity: 1;
-}
 .select {
   display: inline-flex;
   cursor: pointer;
@@ -2937,33 +2924,6 @@ details.collapse summary::-webkit-details-marker {
   box-shadow: 0 0 0 3px var(--range-shdw) inset,
       var(--focus-shadow, 0 0),
       calc(var(--filler-size) * -1 - var(--filler-offset)) 0 0 var(--filler-size);
-}
-.rating input {
-  -moz-appearance: none;
-       appearance: none;
-  -webkit-appearance: none;
-}
-.rating .rating-hidden {
-  width: 0.5rem;
-  background-color: transparent;
-}
-.rating input[type="radio"]:checked {
-  background-image: none;
-}
-.rating input:checked ~ input,
-  .rating input[aria-checked="true"] ~ input {
-  --tw-bg-opacity: 0.2;
-}
-.rating input:focus-visible {
-  transition-property: transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  transition-duration: 300ms;
-  transform: translateY(-0.125em);
-}
-.rating input:active:focus {
-  animation: none;
-  transform: translateY(-0.125em);
 }
 @keyframes rating-pop {
 
