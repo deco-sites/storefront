@@ -198,6 +198,29 @@ const toVariables = (
     "--inc": t["info-content"] ?? contrasted(t["info"]),
   }).map(([key, color]) => [key, toValue(color)] as [string, string]);
 
+  const fallbackVariables = Object.entries({
+    "--fallback-p": t["primary"],
+    "--fallback-pc": t["primary-content"],
+    "--fallback-s": t["secondary"],
+    "--fallback-sc": t["secondary-content"],
+    "--fallback-a": t["tertiary"],
+    "--fallback-ac": t["tertiary-content"],
+    "--fallback-n": t["neutral"],
+    "--fallback-nc": t["neutral-content"],
+    "--fallback-b1": t["base-100"],
+    "--fallback-b2": t["base-200"],
+    "--fallback-b3": t["base-300"],
+    "--fallback-bc": t["base-content"],
+    "--fallback-in": t["info"],
+    "--fallback-inc": t["info-content"],
+    "--fallback-su": t["success"],
+    "--fallback-suc": t["success-content"],
+    "--fallback-wa": t["warning"],
+    "--fallback-wac": t["warning-content"],
+    "--fallback-er": t["error"],
+    "--fallback-erc": t["error-content"],
+  }).filter((entries): entries is [string, string] => !!entries[1]);
+
   const miscellaneousVariables = Object.entries({
     "--rounded-box": t["--rounded-box"],
     "--rounded-btn": t["--rounded-btn"],
@@ -209,8 +232,8 @@ const toVariables = (
     "--tab-border": t["--tab-border"],
     "--tab-radius": t["--tab-radius"],
   });
-
-  return [...colorVariables, ...miscellaneousVariables];
+  
+  return [...colorVariables, ...fallbackVariables, ...miscellaneousVariables];
 };
 
 const defaultTheme = {
