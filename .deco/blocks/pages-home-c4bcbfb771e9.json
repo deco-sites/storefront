@@ -11,8 +11,8 @@
       "__resolveType": "site/sections/Images/Carousel.tsx",
       "images": [
         {
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/5b022a01-ba88-46fe-86ae-93ae644605b7",
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/88b2ad41-be6d-4640-b9fe-c58942362f0f",
+          "desktop": "https://assets.decocache.com/storefront/cda73525-1147-4616-8ff1-65b566b7ed75/1742560195835-5b022a01-ba88-46fe-86ae-93ae644605b7",
+          "mobile": "https://assets.decocache.com/storefront/9c8c0ce3-4ffb-49d6-a8d1-fe17a3db7e86/1742560203848-88b2ad41-be6d-4640-b9fe-c58942362f0f",
           "alt": "Shoes",
           "action": {
             "title": "Skate into Adventure",
@@ -22,8 +22,8 @@
           }
         },
         {
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/d26304f4-355b-48d0-b649-e24b9cbf0ded",
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/47a4d85a-1150-4e5d-abc2-5c642445ff12",
+          "desktop": "https://assets.decocache.com/storefront/98a22637-60b2-41f7-9d49-dbbf99f50472/1742560212519-d26304f4-355b-48d0-b649-e24b9cbf0ded",
+          "mobile": "https://assets.decocache.com/storefront/05748b9f-6c37-4845-aa57-1d2338ece0b8/1742560215958-47a4d85a-1150-4e5d-abc2-5c642445ff12",
           "alt": "Men",
           "action": {
             "title": "Discover Fresh Looks",
@@ -33,8 +33,8 @@
           }
         },
         {
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/1226ef79-c7e0-403c-b716-b6b9af3f2936",
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f7ea4cbe-7498-4e64-9205-c741753edfcc",
+          "desktop": "https://assets.decocache.com/storefront/6ee525fa-fcd1-4cbe-be78-eaaa312c0471/1742560219550-1226ef79-c7e0-403c-b716-b6b9af3f2936",
+          "mobile": "https://assets.decocache.com/storefront/9f6167b5-887a-4401-9ac6-1888a9fc32e9/1742560222938-f7ea4cbe-7498-4e64-9205-c741753edfcc",
           "action": {
             "label": "Shop Now!",
             "href": "/women",
@@ -67,27 +67,27 @@
           {
             "label": "Men",
             "href": "/men",
-            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/38c33c9f-14a1-4048-973b-dc2a75caf1fa"
+            "image": "https://assets.decocache.com/storefront/a1e905ee-e680-41f1-93aa-7e2525214e40/1742560225714-38c33c9f-14a1-4048-973b-dc2a75caf1fa"
           },
           {
             "href": "/women",
             "label": "Women",
-            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f6bea2b8-b248-4b42-9246-6e924a0acc8b"
+            "image": "https://assets.decocache.com/storefront/327048d1-e1d9-4f60-9057-71f823ba2d72/1742560227121-f6bea2b8-b248-4b42-9246-6e924a0acc8b"
           },
           {
             "href": "/kids",
             "label": "Kids",
-            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/1b0ecaa2-9a13-4de2-bf17-5196948ed128"
+            "image": "https://assets.decocache.com/storefront/c1d9c142-478f-4ada-912b-1ca918365e72/1742560228502-1b0ecaa2-9a13-4de2-bf17-5196948ed128"
           },
           {
             "href": "/accessories",
             "label": "Accessories",
-            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/92129655-fe40-4b29-8fdb-e7f71e67a5d1"
+            "image": "https://assets.decocache.com/storefront/38a0d82a-e443-4e7c-aea9-3b8eeb26e40b/1742560230067-92129655-fe40-4b29-8fdb-e7f71e67a5d1"
           },
           {
             "href": "/home-and-living",
             "label": "Home & Living",
-            "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/d0433c00-cd26-4638-b519-0cb64b9f82e8"
+            "image": "https://assets.decocache.com/storefront/648ef60d-c193-4fb3-9a36-1929d0676f28/1742560231577-d0433c00-cd26-4638-b519-0cb64b9f82e8"
           }
         ]
       }
@@ -103,8 +103,8 @@
         },
         "description": "<p><span style=\"color: rgb(45, 194, 107);\" data-mce-style=\"color: rgb(45, 194, 107);\">Sign up now to get up to 50% off on your first order. Limited time offer!</span></p>",
         "images": {
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/cf96d47f-564f-40da-ad94-7acac5f39327",
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/4d5c3212-3f75-4d50-89f3-970815748b43"
+          "desktop": "https://assets.decocache.com/storefront/d4ba070d-c3ba-4a9c-b75f-e01f859063f1/1742560233015-cf96d47f-564f-40da-ad94-7acac5f39327",
+          "mobile": "https://assets.decocache.com/storefront/c023f1c2-74b9-4b3a-a947-ff5de9d02347/1742560234608-4d5c3212-3f75-4d50-89f3-970815748b43"
         }
       }
     },
