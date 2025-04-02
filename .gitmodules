@@ -1,0 +1,3 @@
+[submodule "private-app"]
+	path = private-app
+	url = git@github.com:IncognitaDev/private-app-template.git
