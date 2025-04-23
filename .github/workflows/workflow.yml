@@ -21,7 +21,7 @@ jobs:
           node-version: "18.20.5" # Node 18.x estava sendo largamente usado em 2024
 
       - name: Install Cypress Binary
-        run: npm install -g cypress
+        run: npm install -g cypress@13.16.0
 
       - name: Install Deno dependencies
         run: deno install # Ajuste conforme necessário para o seu projeto
