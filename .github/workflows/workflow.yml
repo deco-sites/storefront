@@ -31,3 +31,4 @@ jobs:
 
       - name: Run tests
         run: deno task start & deno task test-terminal
+
