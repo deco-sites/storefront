@@ -13,7 +13,7 @@ jobs:
       - name: Setup Deno
         uses: denoland/setup-deno@61fe2df320078202e33d7d5ad347e7dcfa0e8f31 # Usando a versão de setup do Deno de dezembro de 2024
         with:
-          deno-version: v2.20.0 # Deno 2.x.x que estava estável nessa época
+          deno-version: v2.1.2 # Deno 2.x.x que estava estável nessa época
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
