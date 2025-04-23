@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18" # Node 18.x estava sendo largamente usado em 2024
+          node-version: "18.20.5" # Node 18.x estava sendo largamente usado em 2024
 
       - name: Install Cypress Binary
         run: npm install -g cypress

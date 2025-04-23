@@ -42,7 +42,7 @@
     "@deco/dev": "jsr:@deco/dev@1.107.0"
   },
   "tasks": {
-    "start": "deno run -A --unstable-http --env https://deco.cx/run -- deno task dev",
+    "start": "deno run -A --unstable-http --env https://raw.githubusercontent.com/deco-cx/deco/refs/heads/main/scripts/run.ts -- deno task dev",
     "gen": "deno run -A dev.ts --gen-only",
     "play": "USE_LOCAL_STORAGE_ONLY=true deno task start",
     "component": "deno eval 'import \"deco/scripts/component.ts\"'",
