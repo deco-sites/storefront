@@ -24,7 +24,7 @@ jobs:
         run: npm install -g cypress
 
       - name: Install Deno dependencies
-        run: deno run --unstable --import-map=import_map.json install.ts # Ajuste conforme necessário para o seu projeto
+        run: deno install # Ajuste conforme necessário para o seu projeto
 
       - name: Add global npm bin to PATH
         run: echo "/opt/hostedtoolcache/node/18.20.5/x64/bin" >> $GITHUB_PATH # Adiciona o caminho ao PATH (verifique a versão correta)
