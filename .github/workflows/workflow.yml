@@ -4,7 +4,7 @@ on: push
 
 jobs:
   build:
-    runs-on: ubuntu-20.04 # Ubuntu 20.04 foi uma das versões estáveis disponíveis em 2024
+    runs-on: ubuntu-latest # Ubuntu 20.04 foi uma das versões estáveis disponíveis em 2024
 
     steps:
       - name: Setup repo
