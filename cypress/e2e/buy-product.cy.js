@@ -1,5 +1,5 @@
 describe("My First Test", () => {
-  it('finds the content "type"', () => {
+  it('Add to minicart and go to checkout"', () => {
     cy.visit("http://localhost:8000/");
 
     const SIX_SECONDS = 6000;
