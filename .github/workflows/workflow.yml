@@ -4,30 +4,32 @@ on: push
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04 # Ubuntu 20.04 foi uma das versões estáveis disponíveis em 2024
 
     steps:
       - name: Setup repo
         uses: actions/checkout@v4
 
       - name: Setup Deno
-        uses: denoland/setup-deno@61fe2df320078202e33d7d5ad347e7dcfa0e8f31 # v1.1.2
+        uses: denoland/setup-deno@61fe2df320078202e33d7d5ad347e7dcfa0e8f31 # Usando a versão de setup do Deno de dezembro de 2024
         with:
-          deno-version: v2.x
+          deno-version: v2.20.0 # Deno 2.x.x que estava estável nessa época
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: "18" # Node 18.x estava sendo largamente usado em 2024
 
       - name: Install Cypress Binary
         run: npm install -g cypress
 
       - name: Install Deno dependencies
-        run: deno install
+        run: deno run --unstable --import-map=import_map.json install.ts # Ajuste conforme necessário para o seu projeto
 
       - name: Add global npm bin to PATH
-        run: echo "/opt/hostedtoolcache/node/18.20.5/x64/bin" >> $GITHUB_PATH # Adiciona o caminho ao PATH
+        run: echo "/opt/hostedtoolcache/node/18.20.5/x64/bin" >> $GITHUB_PATH # Adiciona o caminho ao PATH (verifique a versão correta)
 
       - name: Run tests
-        run: deno task start & deno task test-terminal
+        run: |
+          deno task start &
+          deno task test-terminal
