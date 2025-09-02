@@ -1,9 +1,7 @@
 /// <reference no-default-lib="true"/>
-/// <reference lib="dom" />
-/// <reference lib="deno.ns" />
 /// <reference lib="esnext" />
 
-import { start } from "$fresh/server.ts";
+import { start } from "fresh";
 import config from "./fresh.config.ts";
 import manifest from "./fresh.gen.ts";
 

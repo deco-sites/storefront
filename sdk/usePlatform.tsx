@@ -1,4 +1,4 @@
-import { IS_BROWSER } from "$fresh/runtime.ts";
+import { IS_BROWSER } from "fresh/runtime";
 import { _platform } from "../apps/site.ts";
 
 if (IS_BROWSER) {

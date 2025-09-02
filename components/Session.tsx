@@ -1,4 +1,4 @@
-import { Head } from "$fresh/runtime.ts";
+import { Head } from "fresh/runtime";
 import { type Person } from "apps/commerce/types.ts";
 import { type AppContext } from "../apps/site.ts";
 import { MINICART_DRAWER_ID } from "../constants.ts";

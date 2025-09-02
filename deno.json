@@ -1,8 +1,5 @@
 {
   "imports": {
-    "$fresh/": "https://deno.land/x/fresh@1.7.3/",
-    "preact": "npm:preact@10.23.1",
-    "preact-render-to-string": "npm:preact-render-to-string@6.4.2",
     "@cliffy/prompt": "jsr:@cliffy/prompt@^1.0.0-rc.5",
     "@core/asyncutil": "jsr:@core/asyncutil@^1.0.2",
     "@deco/codemod-toolkit": "jsr:@deco/codemod-toolkit@0.3.4",
@@ -34,13 +31,19 @@
     "std/": "https://deno.land/std@0.190.0/",
     "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.110.5/",
     "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.64.49/",
-    "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2?external=preact&target=es2020",
-    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1?external=preact&target=es2020",
+    "@preact/signals": "npm:@preact/signals@^2.3.1",
     "daisyui": "npm:daisyui@4.6.0",
-    "@deco/dev": "jsr:@deco/dev@1.110.4"
+    "@deco/dev": "jsr:@deco/dev@1.110.4",
+    "$fresh/": "https://deno.land/x/fresh@1.7.3/",
+    "fresh": "jsr:@fresh/core@^2.0.0-beta.3",
+    "vite": "npm:vite@^7.1.4",
+    "preact": "npm:preact@^10.27.1",
+    "@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^0.9.10",
+    "tailwindcss": "npm:tailwindcss@^4.1.10",
+    "@tailwindcss/vite": "npm:@tailwindcss/vite@^4.1.12"
   },
   "tasks": {
-    "start": "deno run -A --unstable-http --env https://deco.cx/run -- deno task dev",
+    "start": "deno run -A --unstable-http --env https://deco.cx/run -- deno task dev:fresh",
     "gen": "deno run -A dev.ts --gen-only",
     "play": "USE_LOCAL_STORAGE_ONLY=true deno task start",
     "component": "deno eval 'import \"deco/scripts/component.ts\"'",
@@ -52,14 +55,13 @@
     "bundle": "deno run -A jsr:@deco/deco/scripts/bundle site",
     "cache_clean": "rm deno.lock; deno cache -r main.ts",
     "build": "deno run -A dev.ts build",
-    "preview": "deno run -A main.ts",
+    "preview": "deno serve -A _fresh/server.js",
     "generate-icons": "deno run -A --unstable static/generate-icons.ts",
     "dev": "deno run -A --env --unstable-kv --unstable-hmr dev.ts",
+    "dev:fresh": "vite",
     "reload": "deno cache -r https://deco.cx/run"
   },
-  "githooks": {
-    "pre-commit": "check"
-  },
+  "githooks": { "pre-commit": "check" },
   "exclude": [
     "node_modules",
     "static/",
@@ -69,21 +71,28 @@
     ".deco"
   ],
   "lint": {
-    "rules": {
-      "exclude": [
-        "no-window"
-      ],
-      "tags": [
-        "fresh",
-        "recommended"
-      ]
-    }
+    "rules": { "exclude": ["no-window"], "tags": ["fresh", "recommended"] }
   },
-  "nodeModulesDir": false,
+  "nodeModulesDir": true,
   "compilerOptions": {
-    "jsx": "react-jsx",
+    "experimentalDecorators": true,
+    "jsx": "precompile",
     "jsxImportSource": "preact",
-    "experimentalDecorators": true
-  },
-  "lock": false
+    "jsxPrecompileSkipElements": [
+      "a",
+      "img",
+      "source",
+      "body",
+      "html",
+      "head",
+      "title",
+      "meta",
+      "script",
+      "link",
+      "style",
+      "base",
+      "noscript",
+      "template"
+    ]
+  }
 }
