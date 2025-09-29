@@ -1,10 +1,10 @@
 /// <reference no-default-lib="true"/>
-/// <reference lib="dom" />
-/// <reference lib="deno.ns" />
 /// <reference lib="esnext" />
 
-import { start } from "$fresh/server.ts";
-import config from "./fresh.config.ts";
-import manifest from "./fresh.gen.ts";
+import { App, staticFiles } from "fresh";
 
-await start(manifest, config);
+export const app = new App()
+  // Add static file serving middleware
+  .use(staticFiles())
+  // Enable file-system based routing
+  .fsRoutes();

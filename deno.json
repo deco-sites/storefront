@@ -1,12 +1,11 @@
 {
   "imports": {
-    "$fresh/": "https://deno.land/x/fresh@1.7.3/",
-    "preact": "npm:preact@10.23.1",
-    "preact-render-to-string": "npm:preact-render-to-string@6.4.2",
+    "@deco/deno-ast-wasm": "jsr:@deco/deno-ast-wasm@^0.5.5",
+    "@fresh/plugin-vite": "jsr:@fresh/plugin-vite@^1.0.4",
+    "preact": "npm:preact@^10.27.2",
     "@cliffy/prompt": "jsr:@cliffy/prompt@^1.0.0-rc.5",
     "@core/asyncutil": "jsr:@core/asyncutil@^1.0.2",
     "@deco/codemod-toolkit": "jsr:@deco/codemod-toolkit@0.3.4",
-    "@deco/durable": "jsr:@deco/durable@0.5.3",
     "@deco/warp": "jsr:@deco/warp@0.3.10",
     "@hono/hono": "jsr:@hono/hono@^4.5.4",
     "@std/assert": "jsr:@std/assert@^1.0.2",
@@ -29,19 +28,32 @@
     "@zaubrik/djwt": "jsr:@zaubrik/djwt@^3.0.2",
     "fast-json-patch": "npm:fast-json-patch@^3.1.1",
     "https://esm.sh/*preact-render-to-string@6.3.1": "npm:preact-render-to-string@6.4.2",
-    "@deco/deco": "jsr:@deco/deco@1.120.11",
+    "@deco/deco": "../live/mod.ts",
     "simple-git": "npm:simple-git@^3.25.0",
     "std/": "https://deno.land/std@0.190.0/",
-    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.120.11/",
-    "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.115.9/",
-    "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2?external=preact&target=es2020",
-    "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1?external=preact&target=es2020",
+    "deco/": "../live/",
+    "apps/": "../apps/",
+    "@preact/signals": "npm:@preact/signals@^2.3.1",
     "daisyui": "npm:daisyui@4.6.0",
     "@deco/dev": "jsr:@deco/dev@1.120.11",
-    "@deco/mcp": "jsr:@deco/mcp@0.7.3"
+    "@deco/mcp": "jsr:@deco/mcp@0.7.3",
+    "fresh": "jsr:@fresh/core@^2.1.1",
+    "vite": "npm:vite@^7.1.7",
+    "@deco/deco/web": "../live/mod.web.ts",
+    "@deco/deco/htmx": "../live/runtime/htmx/mod.ts",
+    "@deco/deco/o11y": "../live/observability/mod.ts",
+    "@deco/deco/utils": "../live/utils/mod.ts",
+    "@deco/deco/blocks": "../live/blocks/mod.ts",
+    "@deco/deco/hooks": "../live/hooks/mod.ts",
+    "@deco/deco/scripts/run": "../live/daemon/main.ts",
+    "@deco/deco/daemon": "../live/daemon/mod.ts",
+    "@deco/deco/jwt": "../live/commons/jwt/mod.ts",
+    "@deco/deco/scripts/bundle": "../live/scripts/apps/bundle.ts",
+    "@deco/deco/scripts/dev": "../live/scripts/dev.ts",
+    "@deco/deco/engine": "../live/engine/mod.ts"
   },
   "tasks": {
-    "start": "deno run -A --unstable-http --env https://deco.cx/run -- deno task dev",
+    "start": "deno run -A --unstable-http --env https://deco.cx/run -- deno run -A main.ts",
     "gen": "deno run -A dev.ts --gen-only",
     "play": "USE_LOCAL_STORAGE_ONLY=true deno task start",
     "component": "deno eval 'import \"deco/scripts/component.ts\"'",
@@ -53,9 +65,11 @@
     "bundle": "deno run -A jsr:@deco/deco/scripts/bundle site",
     "cache_clean": "rm deno.lock; deno cache -r main.ts",
     "build": "deno run -A dev.ts build",
-    "preview": "deno run -A main.ts",
+    "build:vite": "vite build",
+    "preview": "deno serve -A _fresh/server.js",
     "generate-icons": "deno run -A --unstable static/generate-icons.ts",
     "dev": "deno run -A --env --unstable-kv --unstable-hmr dev.ts",
+    "dev:vite": "vite",
     "reload": "deno cache -r https://deco.cx/run"
   },
   "githooks": {
@@ -80,11 +94,10 @@
       ]
     }
   },
-  "nodeModulesDir": false,
+  "nodeModulesDir": "auto",
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
     "experimentalDecorators": true
-  },
-  "lock": false
+  }
 }
