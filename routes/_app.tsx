@@ -6,8 +6,9 @@ const serviceWorkerScript = () =>
   addEventListener("load", () =>
     navigator && navigator.serviceWorker &&
     navigator.serviceWorker.register("/sw.js"));
+export let revision: string | undefined;
 export default defineApp(async (_req, ctx) => {
-  const revision = await Context.active().release?.revision();
+  revision ??= await Context.active().release?.revision();
   return (
     <>
       {/* Include Icons and manifest */}
