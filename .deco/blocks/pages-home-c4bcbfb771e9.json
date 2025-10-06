@@ -1,7 +1,6 @@
 {
   "name": "Home Page",
   "sections": [
-    {"__resolveType": "Deco"},
     {
       "__resolveType": "website/sections/Rendering/Lazy.tsx",
       "section": {
