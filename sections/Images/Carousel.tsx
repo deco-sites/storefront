@@ -5,6 +5,7 @@ import Slider from "../../components/ui/Slider.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
+import { useSetEarlyHints } from "@deco/deco/hooks";
 
 /**
  * @titleBy alt
@@ -56,6 +57,7 @@ function BannerItem(
     action,
   } = image;
   const params = { promotion_name: image.alt };
+  const setEarlyHint = useSetEarlyHints();
 
   const selectPromotionEvent = useSendEvent({
     on: "click",
@@ -90,6 +92,7 @@ function BannerItem(
             {action.subTitle}
           </span>
           <button
+            type="button"
             class="btn btn-primary btn-outline border-0 bg-base-100 min-w-[180px]"
             aria-label={action.label}
           >
@@ -104,6 +107,7 @@ function BannerItem(
           src={mobile}
           width={412}
           height={660}
+          setEarlyHint={setEarlyHint}
         />
         <Source
           media="(min-width: 768px)"
@@ -111,10 +115,12 @@ function BannerItem(
           src={desktop}
           width={1440}
           height={600}
+          setEarlyHint={setEarlyHint}
         />
         <img
           class="object-cover w-full h-full"
           loading={lcp ? "eager" : "lazy"}
+          fetchpriority={lcp ? "high" : "auto"}
           src={desktop}
           alt={alt}
         />
