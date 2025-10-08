@@ -107,7 +107,7 @@ function BannerItem(
           src={mobile}
           width={412}
           height={660}
-          // setEarlyHint={setEarlyHint}
+          setEarlyHint={setEarlyHint}
         />
         <Source
           media="(min-width: 768px)"
@@ -115,7 +115,7 @@ function BannerItem(
           src={desktop}
           width={1440}
           height={600}
-          // setEarlyHint={setEarlyHint}
+          setEarlyHint={setEarlyHint}
         />
         <img
           class="object-cover w-full h-full"
