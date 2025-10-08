@@ -59,7 +59,6 @@ function BannerItem(
   const params = { promotion_name: image.alt };
   const setEarlyHint = useSetEarlyHints();
   const device = useDevice();
-  // lcp && setEarlyHint(`<${desktop}>; rel=preload; as=image`);
 
   const selectPromotionEvent = useSendEvent({
     on: "click",
