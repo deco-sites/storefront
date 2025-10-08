@@ -8,6 +8,9 @@ import SiteTheme, { Font } from "apps/website/components/Theme.tsx";
 import Color from "npm:colorjs.io@0.5.2";
 import type { ComponentChildren } from "preact";
 import { clx } from "../../sdk/clx.ts";
+import { useSetEarlyHints } from "@deco/deco/hooks";
+import { asset } from "$fresh/runtime.ts";
+import { revision } from "../../routes/_app.tsx";
 
 export interface ThemeColors {
   /**
@@ -252,6 +255,9 @@ function Section({
   font,
   colorScheme,
 }: Props) {
+  const setEarlyHint = useSetEarlyHints();
+  const styleUrl = asset(`/styles.css?revision=${revision}`);
+  setEarlyHint(`<${styleUrl}>; rel=preload; as=style`);
   const theme = {
     ...defaultTheme,
     ...complementaryColors,
