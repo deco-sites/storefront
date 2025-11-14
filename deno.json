@@ -37,7 +37,7 @@
     "@preact/signals": "https://esm.sh/*@preact/signals@1.2.2?external=preact&target=es2020",
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.1?external=preact&target=es2020",
     "daisyui": "npm:daisyui@4.6.0",
-    "@deco/dev": "jsr:@deco/dev@1.129.1",
+    "@deco/dev": "jsr:@deco/dev@1.129.2",
     "@deco/mcp": "jsr:@deco/mcp@0.7.7"
   },
   "tasks": {
