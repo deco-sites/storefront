@@ -2,6 +2,16 @@
 
 Welcome to your [deco.cx](https://deco.cx) site!
 
+## Features
+
+### Enhanced Search
+- **Smart Suggestions**: Get instant search suggestions powered by VTEX Intelligent Search or Algolia
+- **Keyboard Shortcuts**: Press ⌘K (Mac) or Ctrl+K (Windows/Linux) to quickly open search from anywhere
+- **Product Previews**: See relevant product suggestions as you type
+- **Multi-Platform**: Easily switch between VTEX, Algolia, or custom search providers
+
+See [components/search/README.md](components/search/README.md) for detailed documentation.
+
 ## Usage
 
 1 - [Install deno](https://docs.deno.com/runtime/manual/getting_started/installation/)

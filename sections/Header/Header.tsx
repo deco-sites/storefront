@@ -80,13 +80,14 @@ const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
 
         <label
           for={SEARCHBAR_POPUP_ID}
-          class="input input-bordered flex items-center gap-2 w-full"
+          class="input input-bordered flex items-center gap-2 w-full cursor-pointer"
           aria-label="search icon button"
         >
           <Icon id="search" />
-          <span class="text-base-400 truncate">
+          <span class="text-base-400 truncate flex-1">
             Search products, brands...
           </span>
+          <kbd class="kbd kbd-sm hidden lg:inline-flex">⌘K</kbd>
         </label>
 
         <div class="flex gap-4 place-self-end">

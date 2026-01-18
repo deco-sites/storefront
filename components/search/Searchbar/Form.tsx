@@ -49,12 +49,17 @@ const script = (formId: string, name: string, popupId: string) => {
   // Keyboard event listeners
   addEventListener("keydown", (e: KeyboardEvent) => {
     const isK = e.key === "k" || e.key === "K" || e.keyCode === 75;
-    // Open Searchbar on meta+k
-    if (e.metaKey === true && isK) {
-      const input = document.getElementById(popupId) as HTMLInputElement | null;
-      if (input) {
-        input.checked = true;
-        document.getElementById(formId)?.focus();
+    // Open Searchbar on meta+k (Cmd+K on Mac) or ctrl+k (Ctrl+K on Windows/Linux)
+    if ((e.metaKey === true || e.ctrlKey === true) && isK) {
+      e.preventDefault();
+      const checkbox = document.getElementById(popupId) as HTMLInputElement | null;
+      if (checkbox) {
+        checkbox.checked = true;
+        // Focus the search input after a small delay to ensure modal is open
+        setTimeout(() => {
+          const searchInput = form?.elements.namedItem(name) as HTMLInputElement | null;
+          searchInput?.focus();
+        }, 100);
       }
     }
   });
