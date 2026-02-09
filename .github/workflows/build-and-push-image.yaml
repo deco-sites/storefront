@@ -122,7 +122,6 @@ jobs:
           push: true
           tags: |
             ${{ steps.login-ecr.outputs.registry }}/${{ steps.ecr-repo.outputs.name }}:${{ steps.version.outputs.version }}
-            ${{ steps.login-ecr.outputs.registry }}/${{ steps.ecr-repo.outputs.name }}:latest
           build-args: |
             GIT_REVISION=${{ steps.meta.outputs.full_sha }}
           platforms: linux/amd64,linux/arm64
