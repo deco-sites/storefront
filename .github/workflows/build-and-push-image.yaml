@@ -1,0 +1,154 @@
+name: Build and Push Storefront Image to ECR
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Dockerfile"
+      - "main.ts"
+      - "dev.ts"
+      - "deno.json"
+      - "fresh.config.ts"
+      - "fresh.gen.ts"
+      - "manifest.gen.ts"
+      - "constants.ts"
+      - "runtime.ts"
+      - "tailwind.config.ts"
+      - "tailwind.css"
+      - "browserslist"
+      - "_deno.serve.ts"
+      - "actions/**"
+      - "apps/**"
+      - "components/**"
+      - "loaders/**"
+      - "routes/**"
+      - "sections/**"
+      - "sdk/**"
+      - "static/**"
+  workflow_dispatch:
+
+env:
+  AWS_REGION: ${{ vars.AWS_REGION || 'us-west-2' }}
+
+concurrency:
+  group: build-${{ github.repository }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-push:
+    name: Build and Push to ECR
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Get ECR repository name from Dockerfile
+        id: ecr-repo
+        run: |
+          ECR_REPO=$(grep "ENV DECO_SITE_NAME=" Dockerfile | sed 's/.*=//' | tr -d '\r"')
+          if [ -z "$ECR_REPO" ]; then
+            echo "::error::DECO_SITE_NAME não encontrado no Dockerfile"
+            exit 1
+          fi
+          echo "name=${ECR_REPO}" >> $GITHUB_OUTPUT
+          echo "ECR repository: ${ECR_REPO}"
+
+      - name: Calculate next semantic version
+        id: version
+        run: |
+          LATEST_TAG=$(git tag -l 'v[0-9]*.[0-9]*.[0-9]*' --sort=-v:refname | head -1)
+          if [ -z "$LATEST_TAG" ]; then
+            NEXT_VERSION="1.0.0"
+          else
+            SEMVER=$(echo "$LATEST_TAG" | sed 's/^v//')
+            MAJOR=$(echo "$SEMVER" | cut -d. -f1)
+            MINOR=$(echo "$SEMVER" | cut -d. -f2)
+            PATCH=$(echo "$SEMVER" | cut -d. -f3)
+            PATCH=$((PATCH + 1))
+            NEXT_VERSION="${MAJOR}.${MINOR}.${PATCH}"
+          fi
+          echo "version=${NEXT_VERSION}" >> $GITHUB_OUTPUT
+          echo "tag=v${NEXT_VERSION}" >> $GITHUB_OUTPUT
+          echo "Next version: $NEXT_VERSION"
+
+      - name: Set metadata
+        id: meta
+        run: |
+          echo "full_sha=${GITHUB_SHA}" >> $GITHUB_OUTPUT
+
+      # - name: Configure AWS credentials (OIDC)
+      #   uses: aws-actions/configure-aws-credentials@v4
+      #   with:
+      #     role-to-assume: ${{ secrets.ECR_ACCESS_ROLE_ARN }}
+      #     aws-region: ${{ env.AWS_REGION }}
+      
+      - name: Configure AWS credentials (Access Keys)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.ECR_CI_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.ECR_CI_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Ensure ECR repository exists
+        run: |
+          if aws ecr describe-repositories --repository-names ${{ steps.ecr-repo.outputs.name }} --region ${{ env.AWS_REGION }} 2>/dev/null; then
+            echo "Repository ${{ steps.ecr-repo.outputs.name }} already exists"
+          else
+            echo "Creating ECR repository ${{ steps.ecr-repo.outputs.name }} (first pipeline run)"
+            aws ecr create-repository --repository-name ${{ steps.ecr-repo.outputs.name }} --region ${{ env.AWS_REGION }}
+          fi
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+        with:
+          registries: ${{ vars.AWS_ACCOUNT_ID }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ${{ steps.login-ecr.outputs.registry }}/${{ steps.ecr-repo.outputs.name }}:${{ steps.version.outputs.version }}
+            ${{ steps.login-ecr.outputs.registry }}/${{ steps.ecr-repo.outputs.name }}:latest
+          build-args: |
+            GIT_REVISION=${{ steps.meta.outputs.full_sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64,linux/arm64
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: ${{ steps.ecr-repo.outputs.name }} v${{ steps.version.outputs.version }}
+          body: |
+            ## v${{ steps.version.outputs.version }}
+
+            **Imagem Docker (multi-arch: amd64, arm64)**
+            ```
+            ${{ steps.login-ecr.outputs.registry }}/${{ steps.ecr-repo.outputs.name }}:${{ steps.version.outputs.version }}
+            ```
+          draft: false
+          generate_release_notes: true
+
+      - name: Output summary
+        run: |
+          echo "## Release v${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Imagem Docker (ECR)**" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.login-ecr.outputs.registry }}/${{ steps.ecr-repo.outputs.name }}:${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
