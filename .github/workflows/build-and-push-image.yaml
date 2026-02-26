@@ -37,6 +37,7 @@ concurrency:
 jobs:
   build-and-push:
     name: Build and Push to ECR
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -106,10 +107,13 @@ jobs:
           fi
 
       - name: Set ECR repository policy (cross-account pull)
-        if: secrets.ECR_REPOSITORY_POLICY_JSON != ''
         env:
           ECR_REPOSITORY_POLICY_JSON: ${{ secrets.ECR_REPOSITORY_POLICY_JSON }}
         run: |
+          if [ -z "$ECR_REPOSITORY_POLICY_JSON" ]; then
+            echo "ECR_REPOSITORY_POLICY_JSON not set, skipping repository policy."
+            exit 0
+          fi
           echo "$ECR_REPOSITORY_POLICY_JSON" > /tmp/ecr-policy.json
           aws ecr set-repository-policy \
             --repository-name ${{ steps.ecr-repo.outputs.name }} \
