@@ -105,6 +105,19 @@ jobs:
             aws ecr create-repository --repository-name ${{ steps.ecr-repo.outputs.name }} --region ${{ env.AWS_REGION }}
           fi
 
+      - name: Set ECR repository policy (cross-account pull)
+        if: secrets.ECR_REPOSITORY_POLICY_JSON != ''
+        env:
+          ECR_REPOSITORY_POLICY_JSON: ${{ secrets.ECR_REPOSITORY_POLICY_JSON }}
+        run: |
+          echo "$ECR_REPOSITORY_POLICY_JSON" > /tmp/ecr-policy.json
+          aws ecr set-repository-policy \
+            --repository-name ${{ steps.ecr-repo.outputs.name }} \
+            --policy-text file:///tmp/ecr-policy.json \
+            --region ${{ env.AWS_REGION }}
+          echo "Repository policy updated (cross-account pull/write preserved)."
+          rm -f /tmp/ecr-policy.json
+
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2

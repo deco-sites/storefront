@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: storefront-site
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+spec:
+  project: default
+  
+  # Multiple sources: Chart from one repo, values from another repo
+  # Requires ArgoCD 2.6+ (check version with: kubectl get deployment argocd-repo-server -n argocd)
+  sources:
+    # Source 1: Helm chart from chart repository
+    - repoURL: https://github.com/deco-sites/helm-chart-sites-app.git
+      targetRevision: main
+      path: .  # Path to chart directory
+      helm:
+        valueFiles:
+          # Reference values from source 2 (deploy repo) using $source-name
+          - $deploy-repo/deploy/values-custom.yaml
+    
+    # Source 2: Deploy repository (where values-custom.yaml lives)
+    - repoURL: https://github.com/deco-sites/storefront.git
+      targetRevision: feature/deploy-storefront-argocd
+      ref: deploy-repo  # Reference name for use in valueFiles
+  
+  # Destination: Kubernetes cluster and namespace
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: sites-storefront
+  
+  # Sync policy
+  syncPolicy:
+    automated:
+      prune: true      # Delete resources when removed from Git
+      selfHeal: true   # Automatically sync when cluster state drifts
+      allowEmpty: false
+    
+    syncOptions:
+      - CreateNamespace=true           # Create namespace if it doesn't exist
+      - PrunePropagationPolicy=foreground
+      - PruneLast=true                 # Prune resources last
+    
+    # Retry configuration
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m

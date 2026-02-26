@@ -1,0 +1,252 @@
+# -- Application name: used in labels and as base for resource names (ingress, certificate, service account, etc.)
+nameOverride: "storefront-site"
+# -- Full name: if set, all resources (Deployment, Service, Ingress, Certificate, ServiceAccount, ...) use this name
+fullnameOverride: "storefront-site"
+
+# -- Workload type: "deployment" (default) or "argorollout" (Argo Rollouts Blue Green)
+workload:
+  #type: deployment
+  type: deployment
+  # Only for type: argorollout
+  blueGreen:
+    autoPromotionEnabled: false
+  # Hosts for preview Ingress (Blue Green); e.g. ["preview.mysite.com"]. For TLS, also add to certificate.dnsNames.
+  previewHosts: []
+
+# -- Deployment / Rollout replicas
+replicaCount: 3
+
+# -- Container image
+image:
+  repository: 990280917377.dkr.ecr.us-west-2.amazonaws.com/storefront-site
+  pullPolicy: IfNotPresent
+  tag: "1.0.3"
+
+# -- Image pull secrets
+imagePullSecrets: []
+
+# -- Service Account (name inherited from chart: fullnameOverride or release + nameOverride)
+serviceAccount:
+  create: true
+  annotations: {}
+  # eks.amazonaws.com/role-arn: arn:aws:iam::ACCOUNT:role/ROLE_NAME
+  name: "storefront-site"  # if empty, uses chart name
+
+# -- Pod annotations
+podAnnotations: {}
+
+# -- Additional pod labels (required for topologySpreadConstraints labelSelector)
+extraPodLabels:
+  app.deco/site: storefront-site
+
+# -- Pod security context
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  fsGroup: 1000
+
+# -- Container security context
+securityContext:
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 1000
+
+# -- Optional envs: from Secret or ConfigMap
+# envFrom: loads entire Secret/ConfigMap content as env (used by External Secret storefront-site-externalsecret)
+# env: loads specific keys
+env:
+  # Enable env usage (required for envFrom from External Secret)
+  enabled: true
+  # Full refs (envFrom) - entire secret/configmap content
+  fromSecretRef: []
+  # - name: my-secret
+  fromConfigMapRef: []
+  # Sensitive keys come from Secret synced by External Secret (prod/storefront-site/general)
+  secretKeyRefs: []
+  configMapKeyRefs: []
+  # Literal envs (value) — no sensitive values; sensitive ones come from secret storefront-site-externalsecret
+  literals:
+    - name: OTEL_DENO
+      value: "true"
+    - name: OTEL_SERVICE_NAME
+      value: storefront-site
+    - name: OTEL_RESOURCE_ATTRIBUTES
+      value: site=storefront-site,deploymentId=hash_commit
+    - name: MAX_MEMORY_MB
+      value: "1280"
+    - name: DENO_V8_FLAGS
+      value: --max-heap-size=1024
+    - name: DECO_ACTORS_SERVER_URL
+      value: https://decocluster.com
+    - name: DECO_SITE_NAME
+      value: storefront-site
+    - name: DENO_DEPLOYMENT_ID
+      value: hash_commit
+    - name: CLOUD_PROVIDER
+      value: aws
+    - name: ENABLE_IMAGE_OPTIMIZATION
+      value: "false"
+    - name: OTEL_EXPORTER_OTLP_ENDPOINT
+      value: https://in-otel.hyperdx.io
+    - name: NODE_ENV
+      value: production
+    - name: STALE_TTL_PERIOD
+      value: "300000"
+    - name: PROBE_MAX_MEMORY_RATIO_THRESHOLD
+      value: "0.8"
+    - name: PROBE_MAX_REQUEST_COUNT_THRESHOLD
+      value: "500000"
+    - name: PROBE_MAX_REQUEST_INFLIGHT_THRESHOLD
+      value: "50"
+    - name: PROBE_MAX_OPENED_RESOURCES_THRESHOLD
+      value: "200"
+    - name: PROBE_MAX_UPTIME_SECONDS_THRESHOLD
+      value: "21600"
+    - name: PROBE_MAX_MEDIAN_LATENCY_THRESHOLD
+      value: "1500"
+    # OTEL_EXPORTER_OTLP_HEADERS, OTEL_SAMPLING_CONFIG and DECO_CRYPTO_KEY come from Secret prod/storefront-site/general (External Secret)
+    - name: ENABLE_LOADER_CACHE
+      value: "true"
+    - name: FILE_SYSTEM_CACHE_DIRECTORY
+      value: /home/deno/.cache
+    - name: LOADER_CACHE_SIZE
+      value: "10000"
+    - name: LOADER_CACHE_START_TRESHOLD
+      value: "0"
+    - name: WEB_CACHE_ENGINE
+      value: FILE_SYSTEM
+    - name: MAX_CACHE_SIZE
+      value: "3221225472"
+    - name: PORT
+      value: "8000"
+
+# -- Container resources (optional)
+resources:
+  requests:
+    cpu: 200m
+    memory: 768Mi
+    ephemeral-storage: 3Gi
+  limits:
+    memory: 1280Mi
+    ephemeral-storage: 3Gi
+
+# -- Container port
+containerPort: 8000
+
+# -- Service
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8000
+  # nodePort: 30080  # for NodePort
+
+# -- HPA (Horizontal Pod Autoscaler)
+hpa:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80
+
+# -- PDB (Pod Disruption Budget)
+pdb:
+  enabled: true
+  minAvailable: 3
+  # or use maxUnavailable (do not use both)
+  # maxUnavailable: 1
+
+# -- Service Monitor (Prometheus Operator)
+serviceMonitor:
+  enabled: false
+  interval: 30s
+  scrapeTimeout: 10s
+  path: /metrics
+  scheme: http
+  labels: {}
+  relabelings: []
+
+# -- External Secrets: uses ClusterSecretStore "aws-secrets-manager" (created by Terraform) for AWS Secrets Manager sync
+externalSecrets:
+  enabled: true
+  # Do not create own SecretStore; use cluster's ClusterSecretStore
+  secretStoreRef:
+    name: aws-secrets-manager
+    kind: ClusterSecretStore
+  externalSecret:
+    refreshInterval: 1h
+    data:
+      - secretKey: OTEL_EXPORTER_OTLP_HEADERS
+        remoteRef:
+          key: prod/storefront-site/general
+          property: OTEL_EXPORTER_OTLP_HEADERS
+      - secretKey: OTEL_SAMPLING_CONFIG
+        remoteRef:
+          key: prod/storefront-site/general
+          property: OTEL_SAMPLING_CONFIG
+      - secretKey: DECO_CRYPTO_KEY
+        remoteRef:
+          key: prod/storefront-site/general
+          property: DECO_CRYPTO_KEY
+  # envFrom in Deployment: all keys from Secret storefront-site-externalsecret become environment variables
+  useInDeployment: true
+
+# -- Certificate (cert-manager); name and secretName inherited from chart (nameOverride). dnsNames = Certificate + Ingress
+certificate:
+  issuerRef:
+    name: "decocms-ca-issuer"
+    kind: ClusterIssuer
+  dnsNames:
+    - storefront-site.prod.deco.cx
+    # - storefront-site-preview.prod.deco.cx
+  # - "*.example.com"
+
+# -- Ingress (Traefik; name and tls.secretName inherited from chart; hosts = certificate.dnsNames)
+ingress:
+  extraAnnotations: {}
+  tls: {}
+
+# -- NetworkPolicy (denies all traffic; exceptions: egress kube-dns, ingress from listed namespaces)
+networkPolicy:
+  enabled: true
+  # List of namespaces that can send traffic to pods (e.g. traefik for Ingress, monitoring for Prometheus)
+  allowedIngressNamespaces:
+    - traefik
+    - monitoring
+
+# -- Node selector
+nodeSelector: 
+  appstype: sites-cms
+
+# -- Tolerations
+tolerations:
+  - effect: NoSchedule
+    key: appstype
+    operator: Equal
+    value: sites-cms
+
+# -- Affinity
+affinity: {}
+
+# -- Topology spread constraints
+topologySpreadConstraints:
+  - labelSelector:
+      matchLabels:
+        app.deco/site: storefront-site
+    maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: ScheduleAnyway
