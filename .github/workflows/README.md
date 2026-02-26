@@ -33,8 +33,10 @@ The `build-and-push-image.yaml` workflow builds the storefront Docker image and 
 **Option B - Access Keys:**
 
 1. Create an IAM user with ECR access policy
-2. Add secrets: `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`
-3. Edit the workflow: comment out the OIDC step and uncomment the Access Keys step
+2. In **Settings > Secrets and variables > Actions > Secrets**, add:
+   - `ECR_CI_AWS_ACCESS_KEY_ID`
+   - `ECR_CI_AWS_SECRET_ACCESS_KEY`
+3. The workflow uses Access Keys by default; for OIDC, comment out the Access Keys step and uncomment the OIDC step
 
 ### 3. ECR repository
 
@@ -44,12 +46,12 @@ The IAM role/user must have: `ecr:CreateRepository`, `ecr:DescribeRepositories`,
 
 ### 4. Cross-account policy (optional, no account IDs in repo)
 
-To allow **cross-account pull** (and write/Lambda per your policy) **without putting account IDs in the public repo**, use a secret:
+To allow **cross-account pull** (and write/Lambda per your policy) **without putting account IDs in the public repo**, use a variable:
 
-1. In **Settings > Secrets and variables > Actions**, create the secret **`ECR_REPOSITORY_POLICY_JSON`**.
+1. In **Settings > Secrets and variables > Actions > Variables**, create the variable **`ECR_REPOSITORY_POLICY_JSON`**.
 2. Paste as value the full ECR repository policy JSON (including ARNs with account IDs and, if used, the `LambdaECRImageCrossAccountRetrievalPolicy` condition).
 
-The workflow applies this policy after ensuring the repository exists. If the secret is not set, the step is skipped and no custom policy is applied.
+The workflow applies this policy **only on the first run**, when the ECR repository is created. On subsequent runs the step is skipped. If the variable is not set, the step is skipped and no custom policy is applied.
 
 ## Resulting image
 
