@@ -98,33 +98,24 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Ensure ECR repository exists
-        id: ensure-ecr
-        run: |
-          if aws ecr describe-repositories --repository-names ${{ steps.ecr-repo.outputs.name }} --region ${{ env.AWS_REGION }} 2>/dev/null; then
-            echo "Repository ${{ steps.ecr-repo.outputs.name }} already exists"
-            echo "repository_created=false" >> $GITHUB_OUTPUT
-          else
-            echo "Creating ECR repository ${{ steps.ecr-repo.outputs.name }} (first pipeline run)"
-            aws ecr create-repository --repository-name ${{ steps.ecr-repo.outputs.name }} --region ${{ env.AWS_REGION }}
-            echo "repository_created=true" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Set ECR repository policy (cross-account pull)
-        if: steps.ensure-ecr.outputs.repository_created == 'true'
         env:
           ECR_REPOSITORY_POLICY_JSON: ${{ vars.ECR_REPOSITORY_POLICY_JSON }}
         run: |
-          if [ -z "$ECR_REPOSITORY_POLICY_JSON" ]; then
-            echo "ECR_REPOSITORY_POLICY_JSON not set, skipping repository policy."
-            exit 0
+          if aws ecr describe-repositories --repository-names ${{ steps.ecr-repo.outputs.name }} --region ${{ env.AWS_REGION }} 2>/dev/null; then
+            echo "Repository ${{ steps.ecr-repo.outputs.name }} already exists"
+          else
+            echo "Creating ECR repository ${{ steps.ecr-repo.outputs.name }} (first pipeline run)"
+            aws ecr create-repository --repository-name ${{ steps.ecr-repo.outputs.name }} --region ${{ env.AWS_REGION }}
+            if [ -n "$ECR_REPOSITORY_POLICY_JSON" ]; then
+              echo "$ECR_REPOSITORY_POLICY_JSON" > /tmp/ecr-policy.json
+              aws ecr set-repository-policy \
+                --repository-name ${{ steps.ecr-repo.outputs.name }} \
+                --policy-text file:///tmp/ecr-policy.json \
+                --region ${{ env.AWS_REGION }}
+              echo "Repository policy applied."
+              rm -f /tmp/ecr-policy.json
+            fi
           fi
-          echo "$ECR_REPOSITORY_POLICY_JSON" > /tmp/ecr-policy.json
-          aws ecr set-repository-policy \
-            --repository-name ${{ steps.ecr-repo.outputs.name }} \
-            --policy-text file:///tmp/ecr-policy.json \
-            --region ${{ env.AWS_REGION }}
-          echo "Repository policy updated (cross-account pull/write preserved)."
-          rm -f /tmp/ecr-policy.json
 
       - name: Login to Amazon ECR
         id: login-ecr
