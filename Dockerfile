@@ -21,7 +21,7 @@ RUN deno cache --allow-scripts --frozen main.ts dev.ts _docker_deps.ts
 
 ARG GIT_REVISION=1
 
-ENV DECO_SITE_NAME=storefront
+ENV DECO_SITE_NAME=storefront-site
 
 ENV DENO_DEPLOYMENT_ID=$GIT_REVISION
 

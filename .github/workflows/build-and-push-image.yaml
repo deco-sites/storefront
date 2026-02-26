@@ -37,6 +37,7 @@ concurrency:
 jobs:
   build-and-push:
     name: Build and Push to ECR
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -104,6 +105,22 @@ jobs:
             echo "Creating ECR repository ${{ steps.ecr-repo.outputs.name }} (first pipeline run)"
             aws ecr create-repository --repository-name ${{ steps.ecr-repo.outputs.name }} --region ${{ env.AWS_REGION }}
           fi
+
+      - name: Set ECR repository policy (cross-account pull)
+        env:
+          ECR_REPOSITORY_POLICY_JSON: ${{ vars.ECR_REPOSITORY_POLICY_JSON }}
+        run: |
+          if [ -z "$ECR_REPOSITORY_POLICY_JSON" ]; then
+            echo "ECR_REPOSITORY_POLICY_JSON not set, skipping repository policy."
+            exit 0
+          fi
+          echo "$ECR_REPOSITORY_POLICY_JSON" > /tmp/ecr-policy.json
+          aws ecr set-repository-policy \
+            --repository-name ${{ steps.ecr-repo.outputs.name }} \
+            --policy-text file:///tmp/ecr-policy.json \
+            --region ${{ env.AWS_REGION }}
+          echo "Repository policy updated (cross-account pull/write preserved)."
+          rm -f /tmp/ecr-policy.json
 
       - name: Login to Amazon ECR
         id: login-ecr
