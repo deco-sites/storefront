@@ -20,7 +20,7 @@ replicaCount: 3
 image:
   repository: 990280917377.dkr.ecr.us-west-2.amazonaws.com/storefront-site
   pullPolicy: IfNotPresent
-  tag: "1.0.3"
+  tag: "1.0.4"
 
 # -- Image pull secrets
 imagePullSecrets: []
