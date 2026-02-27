@@ -6,7 +6,7 @@ fullnameOverride: "storefront-site"
 # -- Workload type: "deployment" (default) or "argorollout" (Argo Rollouts Blue Green)
 workload:
   #type: deployment
-  type: deployment
+  type: argorollout
   # Only for type: argorollout
   blueGreen:
     autoPromotionEnabled: false
