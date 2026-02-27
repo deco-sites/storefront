@@ -11,7 +11,7 @@ workload:
   blueGreen:
     autoPromotionEnabled: false
   # Hosts for preview Ingress (Blue Green); e.g. ["preview.mysite.com"]. For TLS, also add to certificate.dnsNames.
-  previewHosts: []
+  previewHosts: ["storefront-site-preview.prod.deco.cx"]
 
 # -- Deployment / Rollout replicas
 replicaCount: 3
@@ -212,7 +212,7 @@ certificate:
     kind: ClusterIssuer
   dnsNames:
     - storefront-site.prod.deco.cx
-    # - storefront-site-preview.prod.deco.cx
+    - storefront-site-preview.prod.deco.cx
   # - "*.example.com"
 
 # -- Ingress (Traefik; name and tls.secretName inherited from chart; hosts = certificate.dnsNames)
