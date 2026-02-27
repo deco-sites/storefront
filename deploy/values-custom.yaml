@@ -69,6 +69,8 @@ env:
   configMapKeyRefs: []
   # Literal envs (value) — no sensitive values; sensitive ones come from secret storefront-site-externalsecret
   literals:
+    - name: DECO_TEST
+      value: test-with-argorollout
     - name: OTEL_DENO
       value: "true"
     - name: OTEL_SERVICE_NAME
