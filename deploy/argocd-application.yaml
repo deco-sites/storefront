@@ -22,7 +22,7 @@ spec:
     
     # Source 2: Deploy repository (where values-custom.yaml lives)
     - repoURL: https://github.com/deco-sites/storefront.git
-      targetRevision: feature/deploy-storefront-argocd
+      targetRevision: main
       ref: deploy-repo  # Reference name for use in valueFiles
   
   # Destination: Kubernetes cluster and namespace
