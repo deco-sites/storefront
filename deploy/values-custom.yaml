@@ -146,8 +146,8 @@ service:
 # -- HPA (Horizontal Pod Autoscaler)
 hpa:
   enabled: true
-  minReplicas: 1
-  maxReplicas: 10
+  minReplicas: 3
+  maxReplicas: 6
   targetCPUUtilizationPercentage: 80
   metrics:
     - type: Resource
