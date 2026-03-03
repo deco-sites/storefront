@@ -11,6 +11,12 @@ on:
       - ".gitignore"
   workflow_dispatch:
 
+env:
+  AWS_REGION: ${{ vars.AWS_REGION || 'us-west-2' }}
+
+permissions:
+  contents: write
+
 concurrency:
   group: build-${{ github.repository }}-${{ github.ref }}
   cancel-in-progress: true
