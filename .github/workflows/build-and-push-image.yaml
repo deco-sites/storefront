@@ -22,4 +22,7 @@ jobs:
     with:
       aws-region: ${{ vars.AWS_REGION || 'us-west-2' }}
       aws-account-id: ${{ vars.AWS_ACCOUNT_ID }}
-    secrets: inherit
+    secrets:
+      ECR_CI_AWS_ACCESS_KEY_ID: ${{ secrets.ECR_CI_AWS_ACCESS_KEY_ID }}
+      ECR_CI_AWS_SECRET_ACCESS_KEY: ${{ secrets.ECR_CI_AWS_SECRET_ACCESS_KEY }}
+      ECR_REPOSITORY_POLICY_JSON: ${{ secrets.ECR_REPOSITORY_POLICY_JSON || '{}' }}
