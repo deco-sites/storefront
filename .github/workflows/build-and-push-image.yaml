@@ -61,28 +61,11 @@ jobs:
           echo "name=${ECR_REPO}" >> $GITHUB_OUTPUT
           echo "ECR repository: ${ECR_REPO}"
 
-      - name: Calculate next semantic version
-        id: version
-        run: |
-          LATEST_TAG=$(git tag -l 'v[0-9]*.[0-9]*.[0-9]*' --sort=-v:refname | head -1)
-          if [ -z "$LATEST_TAG" ]; then
-            NEXT_VERSION="1.0.0"
-          else
-            SEMVER=$(echo "$LATEST_TAG" | sed 's/^v//')
-            MAJOR=$(echo "$SEMVER" | cut -d. -f1)
-            MINOR=$(echo "$SEMVER" | cut -d. -f2)
-            PATCH=$(echo "$SEMVER" | cut -d. -f3)
-            PATCH=$((PATCH + 1))
-            NEXT_VERSION="${MAJOR}.${MINOR}.${PATCH}"
-          fi
-          echo "version=${NEXT_VERSION}" >> $GITHUB_OUTPUT
-          echo "tag=v${NEXT_VERSION}" >> $GITHUB_OUTPUT
-          echo "Next version: $NEXT_VERSION"
-
       - name: Set metadata
         id: meta
         run: |
           echo "full_sha=${GITHUB_SHA}" >> $GITHUB_OUTPUT
+          echo "short_sha=$(echo "${GITHUB_SHA}" | cut -c1-7)" >> $GITHUB_OUTPUT
 
       # - name: Configure AWS credentials (OIDC)
       #   uses: aws-actions/configure-aws-credentials@v4
@@ -133,7 +116,7 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ${{ steps.login-ecr.outputs.registry }}/${{ steps.ecr-repo.outputs.name }}:${{ steps.version.outputs.version }}
+            ${{ steps.login-ecr.outputs.registry }}/${{ steps.ecr-repo.outputs.name }}:${{ steps.meta.outputs.short_sha }}
           build-args: |
             GIT_REVISION=${{ steps.meta.outputs.full_sha }}
           platforms: linux/amd64,linux/arm64
@@ -143,23 +126,23 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.version.outputs.tag }}
-          name: ${{ steps.ecr-repo.outputs.name }} v${{ steps.version.outputs.version }}
+          tag_name: ${{ steps.meta.outputs.short_sha }}
+          name: ${{ steps.ecr-repo.outputs.name }} ${{ steps.meta.outputs.short_sha }}
           body: |
-            ## v${{ steps.version.outputs.version }}
+            ## Commit ${{ steps.meta.outputs.short_sha }}
 
             **Imagem Docker (multi-arch: amd64, arm64)**
             ```
-            ${{ steps.login-ecr.outputs.registry }}/${{ steps.ecr-repo.outputs.name }}:${{ steps.version.outputs.version }}
+            ${{ steps.login-ecr.outputs.registry }}/${{ steps.ecr-repo.outputs.name }}:${{ steps.meta.outputs.short_sha }}
             ```
           draft: false
           generate_release_notes: true
 
       - name: Output summary
         run: |
-          echo "## Release v${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "## Release commit ${{ steps.meta.outputs.short_sha }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Imagem Docker (ECR)**" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "${{ steps.login-ecr.outputs.registry }}/${{ steps.ecr-repo.outputs.name }}:${{ steps.version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.login-ecr.outputs.registry }}/${{ steps.ecr-repo.outputs.name }}:${{ steps.meta.outputs.short_sha }}" >> $GITHUB_STEP_SUMMARY
           echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
