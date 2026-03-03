@@ -11,9 +11,6 @@ on:
       - ".gitignore"
   workflow_dispatch:
 
-env:
-  AWS_REGION: ${{ vars.AWS_REGION || 'us-west-2' }}
-
 concurrency:
   group: build-${{ github.repository }}-${{ github.ref }}
   cancel-in-progress: true
@@ -23,6 +20,6 @@ jobs:
     if: github.ref == 'refs/heads/main'
     uses: deco-sites/deploy-deco-apps/.github/workflows/build_and_setup.yaml@1.0.0
     with:
-      aws-region: ${{ env.AWS_REGION }}
+      aws-region: ${{ vars.AWS_REGION || 'us-west-2' }}
       aws-account-id: ${{ vars.AWS_ACCOUNT_ID }}
     secrets: inherit
