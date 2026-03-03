@@ -26,6 +26,9 @@ jobs:
     if: github.ref == 'refs/heads/main'
     uses: deco-sites/deploy-deco-apps/.github/workflows/build_and_setup.yaml@1.0.0
     with:
-      aws-region: ${{ env.AWS_REGION }}
+      aws-region: ${{ vars.AWS_REGION || 'us-west-2' }}
       aws-account-id: ${{ vars.AWS_ACCOUNT_ID }}
-    secrets: inherit
+    secrets:
+      ECR_CI_AWS_ACCESS_KEY_ID: ${{ secrets.ECR_CI_AWS_ACCESS_KEY_ID }}
+      ECR_CI_AWS_SECRET_ACCESS_KEY: ${{ secrets.ECR_CI_AWS_SECRET_ACCESS_KEY }}
+      ECR_REPOSITORY_POLICY_JSON: ${{ secrets.ECR_REPOSITORY_POLICY_JSON || '{}' }}
