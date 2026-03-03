@@ -3,28 +3,12 @@ name: Build and Push Storefront Image to ECR
 on:
   push:
     branches: [main]
-    paths:
-      - "Dockerfile"
-      - "main.ts"
-      - "dev.ts"
-      - "deno.json"
-      - "fresh.config.ts"
-      - "fresh.gen.ts"
-      - "manifest.gen.ts"
-      - "constants.ts"
-      - "runtime.ts"
-      - "tailwind.config.ts"
-      - "tailwind.css"
-      - "browserslist"
-      - "_deno.serve.ts"
-      - "actions/**"
-      - "apps/**"
-      - "components/**"
-      - "loaders/**"
-      - "routes/**"
-      - "sections/**"
-      - "sdk/**"
-      - "static/**"
+    paths-ignore:
+      - "deploy/**"
+      - ".github/**"
+      - "claude/**"
+      - ".devcontainer/**"
+      - ".gitignore"
   workflow_dispatch:
 
 env:
@@ -36,113 +20,9 @@ concurrency:
 
 jobs:
   build-and-push:
-    name: Build and Push to ECR
     if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      id-token: write
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          fetch-tags: true
-
-      - name: Get ECR repository name from Dockerfile
-        id: ecr-repo
-        run: |
-          ECR_REPO=$(grep "ENV DECO_SITE_NAME=" Dockerfile | sed 's/.*=//' | tr -d '\r"')
-          if [ -z "$ECR_REPO" ]; then
-            echo "::error::DECO_SITE_NAME não encontrado no Dockerfile"
-            exit 1
-          fi
-          echo "name=${ECR_REPO}" >> $GITHUB_OUTPUT
-          echo "ECR repository: ${ECR_REPO}"
-
-      - name: Set metadata
-        id: meta
-        run: |
-          echo "full_sha=${GITHUB_SHA}" >> $GITHUB_OUTPUT
-          echo "short_sha=$(echo "${GITHUB_SHA}" | cut -c1-7)" >> $GITHUB_OUTPUT
-
-      # - name: Configure AWS credentials (OIDC)
-      #   uses: aws-actions/configure-aws-credentials@v4
-      #   with:
-      #     role-to-assume: ${{ secrets.ECR_ACCESS_ROLE_ARN }}
-      #     aws-region: ${{ env.AWS_REGION }}
-      
-      - name: Configure AWS credentials (Access Keys)
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.ECR_CI_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.ECR_CI_AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
-
-      - name: Ensure ECR repository exists
-        env:
-          ECR_REPOSITORY_POLICY_JSON: ${{ vars.ECR_REPOSITORY_POLICY_JSON }}
-        run: |
-          if aws ecr describe-repositories --repository-names ${{ steps.ecr-repo.outputs.name }} --region ${{ env.AWS_REGION }} 2>/dev/null; then
-            echo "Repository ${{ steps.ecr-repo.outputs.name }} already exists"
-          else
-            echo "Creating ECR repository ${{ steps.ecr-repo.outputs.name }} (first pipeline run)"
-            aws ecr create-repository --repository-name ${{ steps.ecr-repo.outputs.name }} --region ${{ env.AWS_REGION }}
-            if [ -n "$ECR_REPOSITORY_POLICY_JSON" ]; then
-              echo "$ECR_REPOSITORY_POLICY_JSON" > /tmp/ecr-policy.json
-              aws ecr set-repository-policy \
-                --repository-name ${{ steps.ecr-repo.outputs.name }} \
-                --policy-text file:///tmp/ecr-policy.json \
-                --region ${{ env.AWS_REGION }}
-              echo "Repository policy applied."
-              rm -f /tmp/ecr-policy.json
-            fi
-          fi
-
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
-        with:
-          registries: ${{ vars.AWS_ACCOUNT_ID }}
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: |
-            ${{ steps.login-ecr.outputs.registry }}/${{ steps.ecr-repo.outputs.name }}:${{ steps.meta.outputs.short_sha }}
-          build-args: |
-            GIT_REVISION=${{ steps.meta.outputs.full_sha }}
-          platforms: linux/amd64,linux/arm64
-          provenance: false
-          sbom: false
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ steps.meta.outputs.short_sha }}
-          name: ${{ steps.ecr-repo.outputs.name }} ${{ steps.meta.outputs.short_sha }}
-          body: |
-            ## Commit ${{ steps.meta.outputs.short_sha }}
-
-            **Imagem Docker (multi-arch: amd64, arm64)**
-            ```
-            ${{ steps.login-ecr.outputs.registry }}/${{ steps.ecr-repo.outputs.name }}:${{ steps.meta.outputs.short_sha }}
-            ```
-          draft: false
-          generate_release_notes: true
-
-      - name: Output summary
-        run: |
-          echo "## Release commit ${{ steps.meta.outputs.short_sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Imagem Docker (ECR)**" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          echo "${{ steps.login-ecr.outputs.registry }}/${{ steps.ecr-repo.outputs.name }}:${{ steps.meta.outputs.short_sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+    uses: deco-sites/deploy-deco-apps/.github/workflows/build_and_setup.yaml@1.0.0
+    with:
+      aws-region: ${{ env.AWS_REGION }}
+      aws-account-id: ${{ vars.AWS_ACCOUNT_ID }}
+    secrets: inherit
