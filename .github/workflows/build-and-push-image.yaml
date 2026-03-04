@@ -25,10 +25,8 @@ concurrency:
 jobs:
   build-and-push:
     if: github.ref == 'refs/heads/main'
-    uses: deco-sites/deploy-deco-apps/.github/workflows/build_and_setup.yaml@1.1.0
+    uses: deco-sites/deploy-deco-apps/.github/workflows/build_and_setup.yaml@1.0.0
     with:
       aws-region: ${{ vars.AWS_REGION || 'us-west-2' }}
-      aws-account-id: ${{ vars.AWS_ACCOUNT_ID }}
       role-to-assume: ${{ vars.AWS_OIDC_ROLE_ARN }}
-    secrets:
-      ECR_REPOSITORY_POLICY_JSON: ${{ secrets.ECR_REPOSITORY_POLICY_JSON || '{}' }}
+      ecr-repository-policy-json: ${{ vars.ECR_REPOSITORY_POLICY_JSON }}
