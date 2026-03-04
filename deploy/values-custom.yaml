@@ -10,6 +10,7 @@ workload:
   # Only for type: argorollout
   blueGreen:
     autoPromotionEnabled: true
+    scaleDownDelaySeconds: 120
   # To enable auto-promotion with health check, uncomment below and set autoPromotionEnabled: true
   analysisTemplate:
     enabled: true
