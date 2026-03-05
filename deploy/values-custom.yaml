@@ -75,8 +75,6 @@ env:
   configMapKeyRefs: []
   # Literal envs (value) — no sensitive values; sensitive ones come from secret storefront-site-externalsecret
   literals:
-    - name: DECO_TEST
-      value: test-final
     - name: OTEL_DENO
       value: "true"
     - name: OTEL_SERVICE_NAME
@@ -174,7 +172,7 @@ hpa:
 # -- PDB (Pod Disruption Budget)
 pdb:
   enabled: true
-  minAvailable: 3
+  minAvailable: 6
   # or use maxUnavailable (do not use both)
   # maxUnavailable: 1
 
