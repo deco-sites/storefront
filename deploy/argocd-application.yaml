@@ -13,7 +13,7 @@ spec:
   sources:
     # Source 1: Helm chart from chart repository
     - repoURL: https://github.com/deco-sites/helm-chart-sites-app.git
-      targetRevision: v1.0.1  # pin to a release tag: v0.1.0, v0.2.0, etc.
+      targetRevision: v1.0.2  # pin to a release tag: v0.1.0, v0.2.0, etc.
       path: .  # Path to chart directory
       helm:
         valueFiles:
