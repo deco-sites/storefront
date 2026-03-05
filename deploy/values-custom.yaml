@@ -10,12 +10,12 @@ workload:
   # Only for type: argorollout
   blueGreen:
     autoPromotionEnabled: true
-    scaleDownDelaySeconds: 120
+    scaleDownDelaySeconds: 60
   # To enable auto-promotion with health check, uncomment below and set autoPromotionEnabled: true
   analysisTemplate:
     enabled: true
     path: /deco/_liveness
-    timeoutSeconds: 60
+    timeoutSeconds: 30
   # Hosts for preview Ingress (Blue Green); e.g. ["preview.mysite.com"]. For TLS, also add to certificate.dnsNames.
   previewHosts: ["storefront-site-preview.prod.deco.cx"]
 
@@ -76,7 +76,7 @@ env:
   # Literal envs (value) — no sensitive values; sensitive ones come from secret storefront-site-externalsecret
   literals:
     - name: DECO_TEST
-      value: test-with-argorollout
+      value: test-final
     - name: OTEL_DENO
       value: "true"
     - name: OTEL_SERVICE_NAME
