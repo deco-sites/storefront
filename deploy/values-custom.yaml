@@ -172,7 +172,7 @@ hpa:
 # -- PDB (Pod Disruption Budget)
 pdb:
   enabled: true
-  minAvailable: 6
+  minAvailable: 3
   # or use maxUnavailable (do not use both)
   # maxUnavailable: 1
 
