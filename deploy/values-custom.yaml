@@ -200,11 +200,11 @@ externalSecrets:
     data:
       - secretKey: OTEL_EXPORTER_OTLP_HEADERS
         remoteRef:
-          key: prod/storefront-site/general
+          key: prod/otel-config/general
           property: OTEL_EXPORTER_OTLP_HEADERS
       - secretKey: OTEL_SAMPLING_CONFIG
         remoteRef:
-          key: prod/storefront-site/general
+          key: prod/otel-config/general
           property: OTEL_SAMPLING_CONFIG
       - secretKey: DECO_CRYPTO_KEY
         remoteRef:
