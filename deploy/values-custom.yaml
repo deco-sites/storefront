@@ -75,14 +75,12 @@ env:
   configMapKeyRefs: []
   # Literal envs (value) — no sensitive values; sensitive ones come from secret storefront-site-externalsecret
   literals:
-    - name: DECO_TEST
-      value: no-public-preview
     - name: OTEL_DENO
       value: "true"
     - name: OTEL_SERVICE_NAME
       value: storefront-site
     - name: OTEL_RESOURCE_ATTRIBUTES
-      value: site=storefront-site,deploymentId=045b0d2
+      value: site=storefront-site,cluster=prod-apps,region=us-west-2,deploymentId=045b0d2
     - name: MAX_MEMORY_MB
       value: "1280"
     - name: DENO_V8_FLAGS
@@ -220,6 +218,7 @@ certificate:
     kind: ClusterIssuer
   dnsNames:
     - storefront-site.prod.deco.cx
+    - storefront.deco.site
   # - "*.example.com"
 
 # -- Ingress (Traefik; name and tls.secretName inherited from chart; hosts = certificate.dnsNames)
