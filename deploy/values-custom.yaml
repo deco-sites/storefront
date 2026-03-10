@@ -220,6 +220,7 @@ certificate:
     - storefront-site.prod.deco.cx
     - storefront.deco.site
     - htmx.store
+    - www.htmx.store
   # - "*.example.com"
 
 # -- Ingress (Traefik; name and tls.secretName inherited from chart; hosts = certificate.dnsNames)
