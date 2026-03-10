@@ -17,7 +17,9 @@ WORKDIR /app/deco
 
 RUN echo -e 'import "$fresh/src/build/deps.ts";\nimport "$fresh/src/runtime/entrypoints/main.ts";\nimport "$fresh/src/runtime/entrypoints/deserializer.ts";\nimport "$fresh/src/runtime/entrypoints/signals.ts";' >> _docker_deps.ts
 
-RUN deno cache --allow-scripts --frozen main.ts dev.ts _docker_deps.ts
+RUN deno cache --allow-scripts --frozen main.ts
+RUN deno cache --allow-scripts --frozen dev.ts
+RUN deno cache --allow-scripts --frozen _docker_deps.ts
 
 ARG GIT_REVISION=1
 
