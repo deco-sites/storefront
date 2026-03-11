@@ -75,6 +75,8 @@ env:
   configMapKeyRefs: []
   # Literal envs (value) — no sensitive values; sensitive ones come from secret storefront-site-externalsecret
   literals:
+    - name: K_SERVICE
+      value: storefront-site
     - name: OTEL_DENO
       value: "true"
     - name: OTEL_SERVICE_NAME
