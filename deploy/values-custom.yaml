@@ -225,6 +225,10 @@ tolerations:
     key: karpenter.sh/nodepool
     operator: Equal
     value: workloads-spot
+  - effect: NoSchedule
+    key: karpenter.sh/capacity-type
+    operator: Equal
+    value: spot
 
 # -- Affinity
 affinity: {}
