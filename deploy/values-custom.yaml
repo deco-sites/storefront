@@ -181,6 +181,9 @@ pdb:
 # cluster defaults (enabled, secretStoreRef, useInDeployment) come from the chart's values.yaml;
 # only data is overridden here to resolve the app-specific DECO_CRYPTO_KEY path.
 externalSecrets:
+  secretStore:
+    name: aws-secrets-manager
+    kind: ClusterSecretStore
   externalSecret:
     data:
       - secretKey: OTEL_EXPORTER_OTLP_HEADERS
