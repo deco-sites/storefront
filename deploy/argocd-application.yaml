@@ -6,7 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
 spec:
-  project: default
+  project: sites
   
   # Multiple sources: Chart from one repo, values from another repo
   # Requires ArgoCD 2.6+ (check version with: kubectl get deployment argocd-repo-server -n argocd)
