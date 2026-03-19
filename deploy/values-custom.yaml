@@ -32,10 +32,10 @@ image:
 imagePullSecrets: []
 
 # -- Service Account (name inherited from chart: fullnameOverride or release + nameOverride)
+# AWS permissions are managed via EKS Pod Identity (aws_eks_pod_identity_association in Terraform).
 serviceAccount:
   create: true
   annotations: {}
-  # eks.amazonaws.com/role-arn: arn:aws:iam::ACCOUNT:role/ROLE_NAME
   name: "storefront-site"  # if empty, uses chart name
 
 # -- Pod annotations
@@ -68,9 +68,9 @@ env:
   enabled: true
   # Full refs (envFrom) - entire secret/configmap content
   fromSecretRef: []
-  # - name: my-secret
+  # - my-secret
   fromConfigMapRef: []
-  # Sensitive keys come from Secret synced by External Secret (prod/storefront-site/general)
+  # Sensitive keys come from Secret synced by External Secret (nonprod/storefront-site/general)
   secretKeyRefs: []
   configMapKeyRefs: []
   # Literal envs (value) — no sensitive values; sensitive ones come from secret storefront-site-externalsecret
@@ -115,7 +115,7 @@ env:
       value: "21600"
     - name: PROBE_MAX_MEDIAN_LATENCY_THRESHOLD
       value: "1500"
-    # OTEL_EXPORTER_OTLP_HEADERS, OTEL_SAMPLING_CONFIG and DECO_CRYPTO_KEY come from Secret prod/storefront-site/general (External Secret)
+    # OTEL_EXPORTER_OTLP_HEADERS, OTEL_SAMPLING_CONFIG and DECO_CRYPTO_KEY come from Secret nonprod/storefront-site/general (External Secret)
     - name: ENABLE_LOADER_CACHE
       value: "true"
     - name: FILE_SYSTEM_CACHE_DIRECTORY
@@ -156,7 +156,6 @@ hpa:
   enabled: true
   minReplicas: 3
   maxReplicas: 6
-  targetCPUUtilizationPercentage: 80
   metrics:
     - type: Resource
       resource:
@@ -178,77 +177,51 @@ pdb:
   # or use maxUnavailable (do not use both)
   maxUnavailable: 1
 
-# -- Service Monitor (Prometheus Operator)
-serviceMonitor:
-  enabled: false
-  interval: 30s
-  scrapeTimeout: 10s
-  path: /metrics
-  scheme: http
-  labels: {}
-  relabelings: []
-
 # -- External Secrets: uses ClusterSecretStore "aws-secrets-manager" (created by Terraform) for AWS Secrets Manager sync
+# cluster defaults (enabled, secretStoreRef, useInDeployment) come from the chart's values.yaml;
+# only data is overridden here to resolve the app-specific DECO_CRYPTO_KEY path.
 externalSecrets:
-  enabled: true
-  # Do not create own SecretStore; use cluster's ClusterSecretStore
-  secretStoreRef:
-    name: aws-secrets-manager
-    kind: ClusterSecretStore
   externalSecret:
-    refreshInterval: 1h
     data:
       - secretKey: OTEL_EXPORTER_OTLP_HEADERS
         remoteRef:
-          key: prod/otel-config/general
+          key: nonprod/otel-config/general
           property: OTEL_EXPORTER_OTLP_HEADERS
       - secretKey: OTEL_SAMPLING_CONFIG
         remoteRef:
-          key: prod/otel-config/general
+          key: nonprod/otel-config/general
           property: OTEL_SAMPLING_CONFIG
       - secretKey: DECO_CRYPTO_KEY
         remoteRef:
-          key: prod/storefront-site/general
+          key: nonprod/storefront-site/general
           property: DECO_CRYPTO_KEY
-  # envFrom in Deployment: all keys from Secret storefront-site-externalsecret become environment variables
-  useInDeployment: true
 
 # -- Certificate (cert-manager); name and secretName inherited from chart (nameOverride). dnsNames = Certificate + Ingress
+# External DNS manages only *.nonprod.deco.site (Zone: Z1014755BCS1NFI9M0NE)
 certificate:
   issuerRef:
     name: "decocms-ca-issuer"
     kind: ClusterIssuer
   dnsNames:
-    - storefront-site.prod.deco.cx
-    - storefront.deco.site
-    - htmx.store
-    - www.htmx.store
-  # - "*.example.com"
+    - storefront-site.nonprod.deco.site
 
-# -- Ingress (Traefik; name and tls.secretName inherited from chart; hosts = certificate.dnsNames)
+# -- Ingress via ingress-nginx (NLB internet-facing)
 ingress:
-  extraAnnotations: {}
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
   tls: {}
 
-# -- NetworkPolicy (denies all traffic; exceptions: egress kube-dns, ingress from listed namespaces)
-networkPolicy:
-  enabled: true
-  # List of namespaces that can send traffic to pods (e.g. traefik for Ingress, monitoring for Prometheus)
-  allowedIngressNamespaces:
-    - traefik
-    - monitoring
-    - argocd
-
-# -- Node selector
-nodeSelector: 
-  appstype: sites-cms-arm64
+# -- Node selector: workloads-spot (arm64). For amd64 use workloads-spot-amd64.
+nodeSelector:
+  karpenter.sh/nodepool: workloads-spot
 
 # -- Tolerations
 tolerations:
   - effect: NoSchedule
-    key: appstype
+    key: karpenter.sh/nodepool
     operator: Equal
-    value: sites-cms-arm64
+    value: workloads-spot
 
 # -- Affinity
 affinity: {}
