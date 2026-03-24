@@ -6,7 +6,6 @@ Welcome to your [deco.cx](https://deco.cx) site!
 
 1 - [Install deno](https://docs.deno.com/runtime/manual/getting_started/installation/)
 
-
 2 - Run the command
 
 ```sh
