@@ -215,16 +215,13 @@ ingress:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
   tls: {}
 
-# -- Node selector: workloads-spot (arm64). For amd64 use workloads-spot-amd64.
+# -- Node selector: use node.deco labels instead of karpenter internals
 nodeSelector:
-  karpenter.sh/nodepool: workloads-spot
+  node.deco/capacity-type: spot
+  node.deco/arch: arm64
 
 # -- Tolerations
 tolerations:
-  - effect: NoSchedule
-    key: karpenter.sh/nodepool
-    operator: Equal
-    value: workloads-spot
   - effect: NoSchedule
     key: karpenter.sh/capacity-type
     operator: Equal
