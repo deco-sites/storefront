@@ -9,7 +9,7 @@ Welcome to your [deco.cx](https://deco.cx) site!
 2 - Run the command
 
 ```sh
-deno task start
+deno task start 
 ```
 
 This will install all dependencies and start your project.
