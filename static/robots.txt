@@ -1,5 +1,122 @@
-User-agent: *
-Disallow: /
+# =============================================================
+# Deco Commerce — robots.txt (VTEX)
+# Includes Deco universal rules + VTEX-specific rules.
+# =============================================================
 
-User-agent: Googlebot
+User-agent: *
+
+# --- Deco framework internals ---
+Disallow: /deco/render
+Disallow: /live/invoke
+Disallow: /live/invoke/
+
+# --- Backend API proxies ---
+Disallow: /api/
+Disallow: /no-cache/
+Disallow: /proxy/
+Disallow: /graphql/
+
+# --- Authentication / checkout / account ---
+Disallow: /checkout
+Disallow: /checkout/
+Disallow: /login
+Disallow: /login/
+Disallow: /account
+Disallow: /account/
+Disallow: /_secure/
+Disallow: /admin/
+
+# --- Tracking / click ID params (duplicate content) ---
+Disallow: /*?utm_source=
+Disallow: /*?utm_medium=
+Disallow: /*?utm_campaign=
+Disallow: /*?utm_content=
+Disallow: /*?utm_term=
+Disallow: /*?utmi_cp=
+Disallow: /*?utmi_p=
+Disallow: /*?utmi_pc=
+Disallow: /*?gclid=
+Disallow: /*?fbclid=
+Disallow: /*?srsltid=
+Disallow: /*?gbraid=
+Disallow: /*?wbraid=
+Disallow: /*?msclkid=
+Disallow: /*?li_fat_id=
+
+# --- Cloudflare infra ---
+Disallow: /cdn-cgi/
+
+# =============================================
+# VTEX-SPECIFIC RULES
+# =============================================
+
+# --- VTEX legacy system pages ---
+Disallow: /Sistema/
+Disallow: /buscavazia
+Disallow: /buscapagina/
+
+# --- VTEX search results ---
+Disallow: /busca
+Disallow: /buscar
+Disallow: /search
+Disallow: /s?
+Disallow: /s/
+Disallow: /*?q=
+Disallow: /*?_q=
+Disallow: /*?s=
+Disallow: /*?ft=
+
+# --- VTEX Intelligent Search — filter explosion ---
+Disallow: /*?filter.
+Disallow: /*&filter.
+Disallow: /*?filtro=
+Disallow: /*&filtro=
+Disallow: /*?facets=
+Disallow: /*&facets=
+Disallow: /*?fuzzy=
+Disallow: /*?initialMap=
+
+# --- VTEX Legacy — filter/search params ---
+Disallow: /*?fq=
+Disallow: /*&fq=
+Disallow: /*?map=
+Disallow: /*&map=
+Disallow: /*specificationFilter_
+Disallow: /*?productClusterIds=
+Disallow: /*&productClusterIds=
+Disallow: /*?priceRange=
+Disallow: /*?precoPor=
+Disallow: /*&precoPor=
+
+# --- VTEX sorting ---
+Disallow: /*?sort=
+Disallow: /*&sort=
+Disallow: /*?order=
+Disallow: /*&order=
+Disallow: /*?O=
+Disallow: /*&O=
+Disallow: /*?orderby=
+Disallow: /*O=OrderBy
+
+# --- VTEX pagination / display params ---
+Disallow: /*?page=
+Disallow: /*&page=
+Disallow: /*?PS=
+Disallow: /*&PS=
+Disallow: /*?sc=
+Disallow: /*&sc=
+Disallow: /*?skuId=
+Disallow: /*?workspace=
+
+# --- VTEX commerce paths ---
+Disallow: /quick-view/
+Disallow: /espiar/
+Disallow: /wishlist
+Disallow: /carrinho
+Disallow: /frete/
+Disallow: /recompra/
+Disallow: /arquivos/
+Disallow: /prodimages/
+Disallow: /private/
+
 Allow: /
