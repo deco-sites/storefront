@@ -81,6 +81,7 @@ export function ErrorFallback() {
       </div>
 
       <button
+        type="button"
         class="btn btn-primary"
         hx-patch={useComponent(import.meta.url)}
         hx-swap="outerHTML"
@@ -127,11 +128,11 @@ export default function Cart(
         hx-swap="outerHTML"
       >
         {/* Button to submit the form */}
-        <button hidden autofocus />
+        <button type="submit" hidden autofocus />
 
         {/* Add to cart controllers */}
         <input name="add-to-cart" type="hidden" />
-        <button hidden name="action" value="add-to-cart" />
+        <button type="submit" hidden name="action" value="add-to-cart" />
 
         {/* This contains the STOREFRONT cart. */}
         <input

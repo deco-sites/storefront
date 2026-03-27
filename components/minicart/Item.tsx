@@ -51,6 +51,7 @@ function CartItem({ item, index, locale, currency }: Props) {
         <div class="flex justify-between items-center">
           <legend>{name}</legend>
           <button
+            type="button"
             class={clx(
               isGift && "hidden",
               "btn btn-ghost btn-square no-animation",

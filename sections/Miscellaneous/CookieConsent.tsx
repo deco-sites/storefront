@@ -85,10 +85,10 @@ function CookieConsent(
           </div>
 
           <div class="flex flex-col gap-2">
-            <button class="btn" data-button-cc-accept>
+            <button type="button" class="btn" data-button-cc-accept>
               {buttons.allowText}
             </button>
-            <button class="btn btn-outline" data-button-cc-close>
+            <button type="button" class="btn btn-outline" data-button-cc-close>
               {buttons.cancelText}
             </button>
           </div>

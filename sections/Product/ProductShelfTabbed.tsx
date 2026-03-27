@@ -63,9 +63,7 @@ export const LoadingFallback = (
     <Section.Header title={title} cta={cta} />
 
     <Section.Tabbed>
-      <>
-        <Section.Placeholder height="471px" />;
-      </>
+      <Section.Placeholder height="471px" />
     </Section.Tabbed>
   </Section.Container>
 );

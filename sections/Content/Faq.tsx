@@ -23,7 +23,9 @@ export interface Props extends SectionHeaderProps {
   contact?: Contact;
 }
 
-function Question({ question, answer }: Question) {
+function QuestionItem(
+  { question, answer }: { question: string; answer: HTMLWidget },
+) {
   return (
     <details class="collapse collapse-arrow border-t border-base-200">
       <summary class="collapse-title text-lg font-medium">
@@ -84,9 +86,14 @@ export default function FAQ({
       <Section.Header title={title} cta={cta} />
 
       <ul class="w-full">
-        <li>
-          {questions.map((question) => <Question {...question} />)}
-        </li>
+        {questions.map((question) => (
+          <li key={question.question}>
+            <QuestionItem
+              question={question.question}
+              answer={question.answer}
+            />
+          </li>
+        ))}
       </ul>
 
       <Contact {...contact} />

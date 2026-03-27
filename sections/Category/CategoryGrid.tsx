@@ -41,7 +41,7 @@ function CategoryGrid({ title, cta, items }: Props) {
       {device === "desktop"
         ? (
           <div class="grid grid-cols-6 gap-10">
-            {items.map((i) => <Card {...i} />)}
+            {items.map((i) => <Card key={i.label} {...i} />)}
           </div>
         )
         : (

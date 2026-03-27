@@ -96,7 +96,9 @@ const Desktop = ({ navItems, logo, searchbar, loading }: Props) => (
 
       <div class="flex justify-between items-center">
         <ul class="flex">
-          {navItems?.slice(0, 10).map((item) => <NavItem item={item} />)}
+          {navItems?.slice(0, 10).map((item, index) => (
+            <NavItem key={index} item={item} />
+          ))}
         </ul>
         <div>
           {/* ship to */}

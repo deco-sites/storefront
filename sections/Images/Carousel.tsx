@@ -122,6 +122,7 @@ function BannerItem(
         <img
           class="object-cover w-full h-full"
           loading={lcp ? "eager" : "lazy"}
+          // @ts-ignore: fetchpriority is a valid HTML attribute not yet typed in preact
           fetchpriority={lcp ? "high" : "auto"}
           src={desktop}
           alt={alt}

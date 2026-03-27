@@ -39,7 +39,7 @@ function FilterValues({ key, values }: FilterToggle) {
 
         if (avatars) {
           return (
-            <a href={url} rel="nofollow">
+            <a key={url} href={url} rel="nofollow">
               <Avatar
                 content={value}
                 variant={selected ? "active" : "default"}
@@ -53,13 +53,14 @@ function FilterValues({ key, values }: FilterToggle) {
 
           return range && (
             <ValueItem
+              key={item.value}
               {...item}
               label={`${formatPrice(range.from)} - ${formatPrice(range.to)}`}
             />
           );
         }
 
-        return <ValueItem {...item} />;
+        return <ValueItem key={item.url} {...item} />;
       })}
     </ul>
   );

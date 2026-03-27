@@ -29,9 +29,10 @@ function Coupon({ coupon }: Props) {
           class="input join-item"
           type="text"
           value={coupon ?? ""}
-          placeholder={"Cupom"}
+          placeholder="Cupom"
         />
         <button
+          type="submit"
           form={MINICART_FORM_ID}
           class="btn join-item"
           name="action"

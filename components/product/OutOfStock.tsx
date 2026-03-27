@@ -37,7 +37,7 @@ export default function Notify({ productID }: Props) {
       <input placeholder="Nome" class="input input-bordered" name="name" />
       <input placeholder="Email" class="input input-bordered" name="email" />
 
-      <button class="btn btn-primary no-animation">
+      <button type="button" class="btn btn-primary no-animation">
         <span class="[.htmx-request_&]:hidden inline">Enviar</span>
         <span class="[.htmx-request_&]:inline hidden loading loading-spinner loading-xs" />
       </button>

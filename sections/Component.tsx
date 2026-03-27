@@ -20,8 +20,8 @@ export class ErrorBoundary extends Component<{
 }, {
   error: Error | null;
 }> {
-  state = { error: null };
-  static getDerivedStateFromError(error: Error) {
+  override state = { error: null };
+  static override getDerivedStateFromError(error: Error) {
     return { error };
   }
   render() {

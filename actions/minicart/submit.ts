@@ -50,7 +50,7 @@ const cartFrom = (form: FormData) => {
     addToCart: null,
   };
 
-  for (const [name, value] of form.entries()) {
+  form.forEach((value, name) => {
     if (name === "coupon") {
       cart.coupon = value.toString();
     } else if (name === "action") {
@@ -63,7 +63,7 @@ const cartFrom = (form: FormData) => {
     } else if (name === "add-to-cart") {
       cart.addToCart = safeParse(decodeURIComponent(value.toString()));
     }
-  }
+  });
 
   return cart;
 };

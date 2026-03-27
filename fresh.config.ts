@@ -8,6 +8,7 @@ export default defineConfig({
     manifest,
     htmx: true,
     useServer: (deco, hono) => {
+      // @ts-ignore: deco/ (CDN) and @deco/mcp (JSR) resolve to the same Deco type at runtime
       hono.use("/*", mcpServer(deco));
     },
   }),

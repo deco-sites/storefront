@@ -38,7 +38,8 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
 function Suggestions(
   { suggestion }: ComponentProps<typeof loader, typeof action>,
 ) {
-  const { products = [], searches = [] } = suggestion ?? {};
+  const { products, searches = [] } = suggestion ?? {};
+  if (!products) return null;
   const hasProducts = Boolean(products.length);
   const hasTerms = Boolean(searches.length);
   return (
