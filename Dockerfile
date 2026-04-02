@@ -1,4 +1,4 @@
-FROM denoland/deno:alpine-1.46.3
+FROM denoland/deno:alpine-2.2.8
 
 # The port that your application listens to.
 EXPOSE 8000
@@ -17,10 +17,10 @@ WORKDIR /app/deco
 
 RUN echo -e 'import "$fresh/src/build/deps.ts";\nimport "$fresh/src/runtime/entrypoints/main.ts";\nimport "$fresh/src/runtime/entrypoints/deserializer.ts";\nimport "$fresh/src/runtime/entrypoints/signals.ts";' >> _docker_deps.ts
 
-RUN deno cache --allow-scripts --frozen --node-modules-dir=false main.ts
-RUN deno cache --allow-scripts --frozen --node-modules-dir=false dev.ts
-RUN deno cache --allow-scripts --frozen --node-modules-dir=false _docker_deps.ts
+RUN deno cache --allow-scripts --frozen --node-modules-dir=none main.ts
+RUN deno cache --allow-scripts --frozen --node-modules-dir=none dev.ts
+RUN deno cache --allow-scripts --frozen --node-modules-dir=none _docker_deps.ts
 
 ARG GIT_REVISION=1
 
-CMD ["run", "--cached-only", "--node-modules-dir=false", "-A", "--unstable-kv", "main.ts"]
+CMD ["run", "--cached-only", "--node-modules-dir=none", "-A", "--unstable-kv", "main.ts"]
