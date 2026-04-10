@@ -26,7 +26,7 @@ replicaCount: 3
 image:
   repository: 990280917377.dkr.ecr.us-west-2.amazonaws.com/storefront-site
   pullPolicy: IfNotPresent
-  tag: "2868bdd"
+  tag: "1d16467"
 
 # -- Image pull secrets
 imagePullSecrets: []
@@ -82,7 +82,7 @@ env:
     - name: OTEL_SERVICE_NAME
       value: storefront-site
     - name: OTEL_RESOURCE_ATTRIBUTES
-      value: site=storefront-site,cluster=prod-apps,region=us-west-2,deploymentId=2868bdd
+      value: site=storefront-site,cluster=prod-apps,region=us-west-2,deploymentId=1d16467
     - name: MAX_MEMORY_MB
       value: "1280"
     - name: DENO_V8_FLAGS
@@ -92,7 +92,7 @@ env:
     - name: DECO_SITE_NAME
       value: storefront-site
     - name: DENO_DEPLOYMENT_ID
-      value: 2868bdd
+      value: 1d16467
     - name: CLOUD_PROVIDER
       value: aws
     - name: ENABLE_IMAGE_OPTIMIZATION
