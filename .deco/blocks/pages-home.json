@@ -53,7 +53,7 @@
       "__resolveType": "website/sections/Rendering/Lazy.tsx",
       "section": {
         "__resolveType": "site/sections/Product/ProductShelf.tsx",
-        "title": "Featured Products",
+        "title": "Featured Productss",
         "cta": "/mono",
         "products": {
           "__resolveType": "Product List Loader"
@@ -121,7 +121,6 @@
             "products": {
               "__resolveType": "shopify/loaders/ProductList.ts",
               "props": {
-                "sort": "",
                 "query": "hat and bag",
                 "count": 10
               },
@@ -138,7 +137,6 @@
             "products": {
               "__resolveType": "shopify/loaders/ProductList.ts",
               "props": {
-                "sort": "",
                 "query": "Shirts",
                 "count": 10
               },
@@ -155,7 +153,6 @@
             "products": {
               "__resolveType": "shopify/loaders/ProductList.ts",
               "props": {
-                "sort": "",
                 "query": "stickers",
                 "count": 10
               },
