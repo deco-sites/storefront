@@ -53,7 +53,7 @@
       "__resolveType": "website/sections/Rendering/Lazy.tsx",
       "section": {
         "__resolveType": "site/sections/Product/ProductShelf.tsx",
-        "title": "Featured Productswww",
+        "title": "Featured Products",
         "cta": "/mono",
         "products": {
           "__resolveType": "Product List Loader"
