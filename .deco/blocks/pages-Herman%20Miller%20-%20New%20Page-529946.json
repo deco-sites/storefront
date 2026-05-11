@@ -1,0 +1,450 @@
+{
+  "name": "Herman Miller - New Page",
+  "path": "/hermanmiller/new-page",
+  "sections": [
+    {
+      "__resolveType": "Deco"
+    },
+    {
+      "__resolveType": "site/sections/HermanMiller/HMHeader.tsx",
+      "alerts": [
+        {
+          "text": "Confira a seleção de produtos em nosso Outlet! Aproveite e pague em 12x sem juros",
+          "badge": "12 anos de garantia",
+          "href": "https://store.hermanmiller.com.br/outlet"
+        }
+      ],
+      "navItems": [
+        {
+          "label": "Assentos",
+          "href": "https://store.hermanmiller.com.br/Assentos"
+        },
+        {
+          "label": "Decor & Lifestyle",
+          "href": "https://store.hermanmiller.com.br/decor-lifestyle"
+        },
+        {
+          "label": "Acessórios",
+          "href": "https://store.hermanmiller.com.br/acessorios"
+        },
+        {
+          "label": "Iluminação",
+          "href": "https://store.hermanmiller.com.br/iluminacao"
+        },
+        {
+          "label": "Mesas",
+          "href": "https://store.hermanmiller.com.br/mesas"
+        },
+        {
+          "label": "Gaming",
+          "href": "https://store.hermanmiller.com.br/gaming"
+        },
+        {
+          "label": "Home Office",
+          "href": "https://store.hermanmiller.com.br/home-office"
+        },
+        {
+          "label": "Até 50%",
+          "href": "https://store.hermanmiller.com.br/outlet",
+          "highlight": true
+        },
+        {
+          "label": "Blog",
+          "href": "https://blog.hermanmiller.com.br"
+        }
+      ],
+      "logo": {
+        "src": "https://hermanmiller.vtexassets.com/assets/vtex.file-manager-graphql/images/9659faa3-87c7-4c9b-8bdf-68bc3c3fd559___304e766f834cba1faf42132093350c81.svg",
+        "alt": "Herman Miller",
+        "width": 160,
+        "height": 32
+      },
+      "searchPlaceholder": "Buscar",
+      "searchHref": "https://store.hermanmiller.com.br/busca",
+      "loginHref": "https://store.hermanmiller.com.br/login",
+      "cartHref": "https://store.hermanmiller.com.br/checkout"
+    },
+    {
+      "__resolveType": "site/sections/HermanMiller/HeroSitYourBest.tsx",
+      "title": "Sit Your Best",
+      "description": "Independentemente de quem você seja ou de como se senta, você se sentirá mais feliz em uma cadeira Herman Miller. Desde a Aeron até a Zeph, somente as nossas cadeiras se adaptam a cada ângulo, curva, músculo e movimento do seu corpo.",
+      "cta": {
+        "label": "Compre agora",
+        "href": "https://store.hermanmiller.com.br/Assentos"
+      },
+      "image": "https://decoims.com/storefront/0068568f-8bfa-4b0f-96c2-791de6543e01/Screenshot-2026-05-11-at-13.47.58.png",
+      "imageAlt": "Herman Miller chairs collection"
+    },
+    {
+      "__resolveType": "site/sections/HermanMiller/QuizBanner.tsx",
+      "title": "Descubra a cadeira ideal para você.",
+      "description": "Encontre a cadeira ideal para o seu corpo e estilo de uso.",
+      "cta": {
+        "label": "Faça o quiz agora",
+        "href": "https://store.hermanmiller.com.br/quiz"
+      }
+    },
+    {
+      "__resolveType": "site/sections/HermanMiller/HMProductShelf.tsx",
+      "title": "Mais Vendidos",
+      "products": [
+        {
+          "image": "https://hermanmiller.vtexassets.com/arquivos/ids/158847-300-300?width=300&height=300&aspect=true",
+          "name": "Cadeira Aeron",
+          "price": "R$ 16.689,00",
+          "href": "https://store.hermanmiller.com.br/cadeira-aeron/p",
+          "rating": 5,
+          "swatches": [
+            {
+              "image": "https://hermanmiller.vtexassets.com/arquivos/ids/158847-48-48?width=48&height=48&aspect=true",
+              "label": "Grafite"
+            },
+            {
+              "image": "https://hermanmiller.vtexassets.com/arquivos/ids/163851-48-48?width=48&height=48&aspect=true",
+              "label": "Preto"
+            },
+            {
+              "image": "https://hermanmiller.vtexassets.com/arquivos/ids/163814-48-48?width=48&height=48&aspect=true",
+              "label": "Mineral"
+            }
+          ]
+        },
+        {
+          "image": "https://hermanmiller.vtexassets.com/arquivos/ids/158889-300-300?width=300&height=300&aspect=true",
+          "name": "Cadeira Sayl",
+          "price": "R$ 9.108,00",
+          "href": "https://store.hermanmiller.com.br/cadeira-sayl/p",
+          "rating": 4.5,
+          "swatches": [
+            {
+              "image": "https://hermanmiller.vtexassets.com/arquivos/ids/158889-48-48?width=48&height=48&aspect=true",
+              "label": "Preto"
+            },
+            {
+              "image": "https://hermanmiller.vtexassets.com/arquivos/ids/160660-48-48?width=48&height=48&aspect=true",
+              "label": "Branco"
+            },
+            {
+              "image": "https://hermanmiller.vtexassets.com/arquivos/ids/158894-48-48?width=48&height=48&aspect=true",
+              "label": "Coral"
+            }
+          ]
+        },
+        {
+          "image": "https://hermanmiller.vtexassets.com/arquivos/ids/164548-300-300?width=300&height=300&aspect=true",
+          "name": "Herman Miller x Logitech G Cadeira Embody Gaming",
+          "price": "R$ 19.753,00",
+          "href": "https://store.hermanmiller.com.br/cadeira-embody-gaming-cn1g22awaahlg1g1c73sy12_azul/p",
+          "rating": 4.5,
+          "swatches": [
+            {
+              "image": "https://hermanmiller.vtexassets.com/arquivos/ids/164548-48-48?width=48&height=48&aspect=true",
+              "label": "Preto"
+            },
+            {
+              "image": "https://hermanmiller.vtexassets.com/arquivos/ids/164556-48-48?width=48&height=48&aspect=true",
+              "label": "Azul"
+            },
+            {
+              "image": "https://hermanmiller.vtexassets.com/arquivos/ids/164567-48-48?width=48&height=48&aspect=true",
+              "label": "Verde"
+            }
+          ]
+        },
+        {
+          "image": "https://hermanmiller.vtexassets.com/arquivos/ids/161714-300-300?width=300&height=300&aspect=true",
+          "name": "Cadeira Verus",
+          "price": "R$ 7.025,00",
+          "href": "https://store.hermanmiller.com.br/cadeira-verus/p",
+          "rating": 4.5,
+          "swatches": [
+            {
+              "image": "https://hermanmiller.vtexassets.com/arquivos/ids/161714-48-48?width=48&height=48&aspect=true",
+              "label": "Preto"
+            },
+            {
+              "image": "https://hermanmiller.vtexassets.com/arquivos/ids/161527-48-48?width=48&height=48&aspect=true",
+              "label": "Cinza"
+            },
+            {
+              "image": "https://hermanmiller.vtexassets.com/arquivos/ids/165394-48-48?width=48&height=48&aspect=true",
+              "label": "Branco"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "__resolveType": "site/sections/HermanMiller/CategoryBannerRow.tsx",
+      "title": "Visualize por Categoria",
+      "items": [
+        {
+          "image": "https://hermanmiller.vtexassets.com/assets/vtex.file-manager-graphql/images/c11f002d-b7a3-439d-9e87-a379e8be105d___78a50c2d8bc4b91cc8805c60f9a29510.png",
+          "label": "Cadeiras para trabalho",
+          "href": "https://store.hermanmiller.com.br/cadeiras-de-trabalho"
+        },
+        {
+          "image": "https://hermanmiller.vtexassets.com/assets/vtex.file-manager-graphql/images/7eeac031-3c3c-4c57-a440-ff334e100a86___a783127a8869a65dd69c75b192daaf8d.png",
+          "label": "Mesas",
+          "href": "https://store.hermanmiller.com.br/mesas"
+        },
+        {
+          "image": "https://hermanmiller.vtexassets.com/assets/vtex.file-manager-graphql/images/931c5cdc-c325-49d7-b869-46407ee68dbf___c76f8bc5f154cd81861b8330eeb743fa.png",
+          "label": "Iluminação",
+          "href": "https://store.hermanmiller.com.br/iluminacao"
+        },
+        {
+          "image": "https://hermanmiller.vtexassets.com/assets/vtex.file-manager-graphql/images/908165b7-ec5d-46bc-8bb6-5e8017429731___9ab582af6548dbd0cde559dee87eb738.png",
+          "label": "Gaming",
+          "href": "https://store.hermanmiller.com.br/gaming"
+        }
+      ]
+    },
+    {
+      "__resolveType": "site/sections/HermanMiller/OutletSplitBanner.tsx",
+      "title": "Seleção Outlet",
+      "badge": "ATÉ 50% OFF",
+      "description": "Descubra uma seleção de cadeiras, mesas e acessórios com até 50% de desconto. Últimas unidades disponíveis. Enquanto durarem os estoques.",
+      "cta": {
+        "label": "Compre agora",
+        "href": "https://store.hermanmiller.com.br/outlet"
+      },
+      "image": {
+        "desktop": "https://decoims.com/storefront/9cd2c9ba-9855-45da-ab42-4419dbb77b23/Screenshot-2026-05-11-at-13.42.32.png",
+        "mobile": "https://decoims.com/storefront/cb04a520-9c87-49d1-be0a-eeb6745c3334/outlet-banner-hermanmiller.webp",
+        "alt": "Seleção Outlet Herman Miller"
+      }
+    },
+    {
+      "__resolveType": "site/sections/HermanMiller/EditorialTiles.tsx",
+      "tiles": [
+        {
+          "image": "https://hermanmiller.vtexassets.com/assets/vtex.file-manager-graphql/images/5f25cf21-7aaf-4572-8d19-30e3c2ef0238___c52600c76760b6dee80debbfd50b101c.png",
+          "alt": "Estilo de decoração",
+          "caption": "Descubra qual o seu estilo de decoração com a Herman Miller",
+          "href": "https://blog.hermanmiller.com.br/descubra-seu-estilo-de-decoracao/"
+        },
+        {
+          "image": "https://hermanmiller.vtexassets.com/assets/vtex.file-manager-graphql/images/9f5f7771-48d6-4174-8965-7eaa2eda07f4___39c709605bfee8539302f8dfd57876e5.png",
+          "alt": "Designer Herman Miller",
+          "caption": "Qual designer Herman Miller você é?",
+          "href": "https://blog.hermanmiller.com.br/quiz-designers/"
+        },
+        {
+          "image": "https://hermanmiller.vtexassets.com/assets/vtex.file-manager-graphql/images/e6293492-6c9c-4c82-ad00-a1e2ac608058___32f81908ff05e783cbabaf436b1e786e.png",
+          "alt": "Quarto gamer",
+          "caption": "Inspirações para você montar um quarto gamer com LED",
+          "href": "https://blog.hermanmiller.com.br/quarto-gamer-com-led/"
+        }
+      ]
+    },
+    {
+      "__resolveType": "site/sections/HermanMiller/SeatYourBest.tsx",
+      "title": "SEAT YOUR BEST",
+      "lifestyleImage": "https://hermanmiller.vtexassets.com/assets/vtex.file-manager-graphql/images/5c0b538f-11f9-4773-bc3b-329a752b556b___8cd1a22cb96fe48643ca761442dc8195.png",
+      "lifestyleImageAlt": "Herman Miller lifestyle",
+      "cta": {
+        "label": "Ver todos os produtos",
+        "href": "https://store.hermanmiller.com.br/cadeiras-de-trabalho"
+      },
+      "products": [
+        {
+          "image": "https://hermanmiller.vtexassets.com/arquivos/ids/158847-300-300?width=300&height=300&aspect=true",
+          "name": "Cadeira Aeron",
+          "price": "R$ 16.689,00",
+          "href": "https://store.hermanmiller.com.br/cadeira-aeron/p"
+        },
+        {
+          "image": "https://hermanmiller.vteximg.com.br/arquivos/ids/165500/Mirra-Triflex_MRFN123AWAP-0001_grgr_01.png?v=638712528847970000",
+          "name": "Cadeira Mirra 2 Triflex",
+          "price": "R$ 12.870,00",
+          "href": "https://store.hermanmiller.com.br/cadeira-mirra-2/p"
+        },
+        {
+          "image": "https://hermanmiller.vteximg.com.br/arquivos/ids/159222/Carbono.jpg?v=636972545011330000",
+          "name": "Cadeira Cosm Média",
+          "price": "R$ 13.578,75",
+          "originalPrice": "R$ 15.975,00",
+          "discount": "-15%",
+          "href": "https://store.hermanmiller.com.br/cadeira-cosm/p"
+        },
+        {
+          "image": "https://hermanmiller.vtexassets.com/arquivos/ids/158889-300-300?width=300&height=300&aspect=true",
+          "name": "Cadeira Sayl",
+          "price": "R$ 9.108,00",
+          "href": "https://store.hermanmiller.com.br/cadeira-sayl/p"
+        },
+        {
+          "image": "https://hermanmiller.vteximg.com.br/arquivos/ids/165048/PIA1YB325HA-0002_01.jpg?v=638349024953130000",
+          "name": "Cadeira Verus Interweave",
+          "price": "R$ 6.867,00",
+          "href": "https://store.hermanmiller.com.br/cadeira-verus/p"
+        },
+        {
+          "image": "https://hermanmiller.vteximg.com.br/arquivos/ids/165896/cadeira-Setu-Grafite_CQ51MA-0150_1.jpg?v=638987519344300000",
+          "name": "Cadeira Setu",
+          "price": "R$ 7.463,00",
+          "href": "https://store.hermanmiller.com.br/cadeira-setu/p"
+        }
+      ]
+    },
+    {
+      "__resolveType": "site/sections/HermanMiller/BlogGrid.tsx",
+      "heading": "Confira os conteúdos do nosso blog:",
+      "posts": [
+        {
+          "image": "https://hermanmiller.vtexassets.com/assets/vtex.file-manager-graphql/images/affe70d1-b86c-4906-9315-10fcdfcd5892___8677b930c25f9c9d3be5e3f7fb4461d3.png",
+          "alt": "Cadeiras ergonômicas",
+          "title": "Modelos de cadeiras ergonômicas da Herman Miller: 6 opções inovadoras",
+          "href": "https://blog.hermanmiller.com.br/melhores-cadeiras-ergonomicas/"
+        },
+        {
+          "image": "https://hermanmiller.vtexassets.com/assets/vtex.file-manager-graphql/images/b419915f-9956-48de-80e5-64d0343ea0ee___91d392adc31a6befdec1bde078a77c40.png",
+          "alt": "Cadeiras para pessoas altas",
+          "title": "As melhores cadeiras ergonômicas para pessoas altas",
+          "href": "https://blog.hermanmiller.com.br/cadeira-para-pessoas-altas/"
+        },
+        {
+          "image": "https://hermanmiller.vtexassets.com/assets/vtex.file-manager-graphql/images/f2572425-2f75-4671-b3d8-7e0934dbbf8b___32f81908ff05e783cbabaf436b1e786e.png",
+          "alt": "Cadeiras gaming",
+          "title": "Conheça as melhores cadeiras gaming Herman Miller",
+          "href": "https://blog.hermanmiller.com.br/melhores-cadeiras-gamer/"
+        }
+      ]
+    },
+    {
+      "__resolveType": "site/sections/HermanMiller/HMFooter.tsx",
+      "columns": [
+        {
+          "title": "Serviços ao consumidor",
+          "links": [
+            {
+              "title": "Contato",
+              "href": "https://store.hermanmiller.com.br/contato"
+            },
+            {
+              "title": "Condições de venda",
+              "href": "https://store.hermanmiller.com.br/condicoes-de-venda"
+            },
+            {
+              "title": "Acompanhe seu pedido",
+              "href": "https://store.hermanmiller.com.br/minha-conta/pedidos"
+            },
+            {
+              "title": "Envios e Entregas",
+              "href": "https://store.hermanmiller.com.br/envios-e-entregas"
+            },
+            {
+              "title": "Pagamento",
+              "href": "https://store.hermanmiller.com.br/pagamento"
+            },
+            {
+              "title": "Trocas e Devoluções",
+              "href": "https://store.hermanmiller.com.br/trocas-e-devolucoes"
+            },
+            {
+              "title": "Garantia e Serviços",
+              "href": "https://store.hermanmiller.com.br/garantia"
+            },
+            {
+              "title": "Instruções de Montagem",
+              "href": "https://store.hermanmiller.com.br/montagem"
+            },
+            {
+              "title": "Perguntas Frequentes",
+              "href": "https://store.hermanmiller.com.br/faq"
+            },
+            {
+              "title": "Mapa do site",
+              "href": "https://store.hermanmiller.com.br/mapa-do-site"
+            }
+          ]
+        },
+        {
+          "title": "Legal e Privacidade",
+          "links": [
+            {
+              "title": "Aviso de Privacidade",
+              "href": "https://store.hermanmiller.com.br/privacidade"
+            },
+            {
+              "title": "Aviso de Cookies",
+              "href": "https://store.hermanmiller.com.br/cookies"
+            },
+            {
+              "title": "Definições de cookies",
+              "href": "#"
+            }
+          ]
+        },
+        {
+          "title": "Localização",
+          "links": [
+            {
+              "title": "Showroom",
+              "href": "https://store.hermanmiller.com.br/showroom"
+            },
+            {
+              "title": "Encontre um Distribuidor",
+              "href": "https://store.hermanmiller.com.br/distribuidores"
+            }
+          ]
+        },
+        {
+          "title": "Sobre Herman Miller",
+          "links": [
+            {
+              "title": "Quem somos",
+              "href": "https://store.hermanmiller.com.br/quem-somos"
+            },
+            {
+              "title": "Nossos designers",
+              "href": "https://store.hermanmiller.com.br/designers"
+            },
+            {
+              "title": "HermanMiller.com.br",
+              "href": "https://www.hermanmiller.com.br"
+            }
+          ]
+        }
+      ],
+      "socialLinks": [
+        {
+          "alt": "Facebook",
+          "href": "https://www.facebook.com/hermanmillerbrasil",
+          "src": "https://store.hermanmiller.com.br/arquivos/facebook-logo-v2.svg"
+        },
+        {
+          "alt": "Instagram",
+          "href": "https://www.instagram.com/hermanmillerbrasil",
+          "src": "https://store.hermanmiller.com.br/arquivos/instagram-logo-v2.svg"
+        },
+        {
+          "alt": "X",
+          "href": "https://twitter.com/hermanmiller",
+          "src": "https://store.hermanmiller.com.br/arquivos/x-logo-v2.svg"
+        },
+        {
+          "alt": "YouTube",
+          "href": "https://www.youtube.com/hermanmiller",
+          "src": "https://store.hermanmiller.com.br/arquivos/youtube-logo-v2.svg"
+        },
+        {
+          "alt": "LinkedIn",
+          "href": "https://www.linkedin.com/company/herman-miller",
+          "src": "https://store.hermanmiller.com.br/arquivos/linkedin-logo-v2.svg"
+        }
+      ],
+      "logo": "https://hermanmiller.vtexassets.com/arquivos/logo-herman-miller-footer.png",
+      "copyright": "© 2025 Herman Miller, Inc. Todos os direitos reservados.",
+      "copyrightSub": "Parte do Coletivo Millerknoll",
+      "legalText": "A Loja Online é operada pela Infracommerce Negócios e Soluções em Internet LTDA. CNPJ 15.427.207/0001-14"
+    }
+  ],
+  "seo": {
+    "__resolveType": "website/sections/Seo/SeoV2.tsx",
+    "title": "Herman Miller | Cadeiras Ergonômicas e Móveis de Design",
+    "description": "Sit Your Best — Cadeiras ergonômicas, mesas e acessórios de design premiado. Descubra a Herman Miller: Aeron, Sayl, Embody e muito mais."
+  },
+  "__resolveType": "website/pages/Page.tsx"
+}
