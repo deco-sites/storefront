@@ -23,24 +23,34 @@ import * as $$$$$$6 from "./sections/Content/Intro.tsx";
 import * as $$$$$$7 from "./sections/Content/Logos.tsx";
 import * as $$$$$$8 from "./sections/Footer/Footer.tsx";
 import * as $$$$$$9 from "./sections/Header/Header.tsx";
-import * as $$$$$$10 from "./sections/Images/Banner.tsx";
-import * as $$$$$$11 from "./sections/Images/Carousel.tsx";
-import * as $$$$$$12 from "./sections/Images/ImageGallery.tsx";
-import * as $$$$$$13 from "./sections/Images/ShoppableBanner.tsx";
-import * as $$$$$$14 from "./sections/Links/LinkTree.tsx";
-import * as $$$$$$15 from "./sections/Miscellaneous/CampaignTimer.tsx";
-import * as $$$$$$16 from "./sections/Miscellaneous/CookieConsent.tsx";
-import * as $$$$$$17 from "./sections/Newsletter/Newsletter.tsx";
-import * as $$$$$$18 from "./sections/Product/ProductDetails.tsx";
-import * as $$$$$$19 from "./sections/Product/ProductShelf.tsx";
-import * as $$$$$$20 from "./sections/Product/ProductShelfTabbed.tsx";
-import * as $$$$$$21 from "./sections/Product/SearchResult.tsx";
-import * as $$$$$$22 from "./sections/Product/ShelfWithImage.tsx";
-import * as $$$$$$23 from "./sections/Product/Wishlist.tsx";
-import * as $$$$$$24 from "./sections/Session.tsx";
-import * as $$$$$$25 from "./sections/Social/InstagramPosts.tsx";
-import * as $$$$$$26 from "./sections/Social/WhatsApp.tsx";
-import * as $$$$$$27 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$10 from "./sections/HermanMiller/BlogGrid.tsx";
+import * as $$$$$$11 from "./sections/HermanMiller/CategoryBannerRow.tsx";
+import * as $$$$$$12 from "./sections/HermanMiller/EditorialTiles.tsx";
+import * as $$$$$$16 from "./sections/HermanMiller/HeroSitYourBest.tsx";
+import * as $$$$$$13 from "./sections/HermanMiller/HMFooter.tsx";
+import * as $$$$$$14 from "./sections/HermanMiller/HMHeader.tsx";
+import * as $$$$$$15 from "./sections/HermanMiller/HMProductShelf.tsx";
+import * as $$$$$$17 from "./sections/HermanMiller/OutletSplitBanner.tsx";
+import * as $$$$$$18 from "./sections/HermanMiller/QuizBanner.tsx";
+import * as $$$$$$19 from "./sections/HermanMiller/SeatYourBest.tsx";
+import * as $$$$$$20 from "./sections/Images/Banner.tsx";
+import * as $$$$$$21 from "./sections/Images/Carousel.tsx";
+import * as $$$$$$22 from "./sections/Images/ImageGallery.tsx";
+import * as $$$$$$23 from "./sections/Images/ShoppableBanner.tsx";
+import * as $$$$$$24 from "./sections/Links/LinkTree.tsx";
+import * as $$$$$$25 from "./sections/Miscellaneous/CampaignTimer.tsx";
+import * as $$$$$$26 from "./sections/Miscellaneous/CookieConsent.tsx";
+import * as $$$$$$27 from "./sections/Newsletter/Newsletter.tsx";
+import * as $$$$$$28 from "./sections/Product/ProductDetails.tsx";
+import * as $$$$$$29 from "./sections/Product/ProductShelf.tsx";
+import * as $$$$$$30 from "./sections/Product/ProductShelfTabbed.tsx";
+import * as $$$$$$31 from "./sections/Product/SearchResult.tsx";
+import * as $$$$$$32 from "./sections/Product/ShelfWithImage.tsx";
+import * as $$$$$$33 from "./sections/Product/Wishlist.tsx";
+import * as $$$$$$34 from "./sections/Session.tsx";
+import * as $$$$$$35 from "./sections/Social/InstagramPosts.tsx";
+import * as $$$$$$36 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$37 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "loaders": {
@@ -61,24 +71,34 @@ const manifest = {
     "site/sections/Content/Logos.tsx": $$$$$$7,
     "site/sections/Footer/Footer.tsx": $$$$$$8,
     "site/sections/Header/Header.tsx": $$$$$$9,
-    "site/sections/Images/Banner.tsx": $$$$$$10,
-    "site/sections/Images/Carousel.tsx": $$$$$$11,
-    "site/sections/Images/ImageGallery.tsx": $$$$$$12,
-    "site/sections/Images/ShoppableBanner.tsx": $$$$$$13,
-    "site/sections/Links/LinkTree.tsx": $$$$$$14,
-    "site/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$15,
-    "site/sections/Miscellaneous/CookieConsent.tsx": $$$$$$16,
-    "site/sections/Newsletter/Newsletter.tsx": $$$$$$17,
-    "site/sections/Product/ProductDetails.tsx": $$$$$$18,
-    "site/sections/Product/ProductShelf.tsx": $$$$$$19,
-    "site/sections/Product/ProductShelfTabbed.tsx": $$$$$$20,
-    "site/sections/Product/SearchResult.tsx": $$$$$$21,
-    "site/sections/Product/ShelfWithImage.tsx": $$$$$$22,
-    "site/sections/Product/Wishlist.tsx": $$$$$$23,
-    "site/sections/Session.tsx": $$$$$$24,
-    "site/sections/Social/InstagramPosts.tsx": $$$$$$25,
-    "site/sections/Social/WhatsApp.tsx": $$$$$$26,
-    "site/sections/Theme/Theme.tsx": $$$$$$27,
+    "site/sections/HermanMiller/BlogGrid.tsx": $$$$$$10,
+    "site/sections/HermanMiller/CategoryBannerRow.tsx": $$$$$$11,
+    "site/sections/HermanMiller/EditorialTiles.tsx": $$$$$$12,
+    "site/sections/HermanMiller/HeroSitYourBest.tsx": $$$$$$16,
+    "site/sections/HermanMiller/HMFooter.tsx": $$$$$$13,
+    "site/sections/HermanMiller/HMHeader.tsx": $$$$$$14,
+    "site/sections/HermanMiller/HMProductShelf.tsx": $$$$$$15,
+    "site/sections/HermanMiller/OutletSplitBanner.tsx": $$$$$$17,
+    "site/sections/HermanMiller/QuizBanner.tsx": $$$$$$18,
+    "site/sections/HermanMiller/SeatYourBest.tsx": $$$$$$19,
+    "site/sections/Images/Banner.tsx": $$$$$$20,
+    "site/sections/Images/Carousel.tsx": $$$$$$21,
+    "site/sections/Images/ImageGallery.tsx": $$$$$$22,
+    "site/sections/Images/ShoppableBanner.tsx": $$$$$$23,
+    "site/sections/Links/LinkTree.tsx": $$$$$$24,
+    "site/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$25,
+    "site/sections/Miscellaneous/CookieConsent.tsx": $$$$$$26,
+    "site/sections/Newsletter/Newsletter.tsx": $$$$$$27,
+    "site/sections/Product/ProductDetails.tsx": $$$$$$28,
+    "site/sections/Product/ProductShelf.tsx": $$$$$$29,
+    "site/sections/Product/ProductShelfTabbed.tsx": $$$$$$30,
+    "site/sections/Product/SearchResult.tsx": $$$$$$31,
+    "site/sections/Product/ShelfWithImage.tsx": $$$$$$32,
+    "site/sections/Product/Wishlist.tsx": $$$$$$33,
+    "site/sections/Session.tsx": $$$$$$34,
+    "site/sections/Social/InstagramPosts.tsx": $$$$$$35,
+    "site/sections/Social/WhatsApp.tsx": $$$$$$36,
+    "site/sections/Theme/Theme.tsx": $$$$$$37,
   },
   "actions": {
     "site/actions/minicart/submit.ts": $$$$$$$$$0,
