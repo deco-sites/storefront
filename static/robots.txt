@@ -105,7 +105,6 @@ Disallow: /*?PS=
 Disallow: /*&PS=
 Disallow: /*?sc=
 Disallow: /*&sc=
-Disallow: /*?skuId=
 Disallow: /*?workspace=
 
 # --- VTEX commerce paths ---
