@@ -25,9 +25,9 @@ const DEFAULT_PROPS = {
     {
       image: {
         mobile:
-          "https://decoims.com/fila-store/848a208c-317d-486f-b37e-03fb2c94df00/91102b71-4832-486a-b683-5f7b06f649af.png",
+          "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/91102b71-4832-486a-b683-5f7b06f649af",
         desktop:
-          "https://decoims.com/fila-store/25dcd5d1-70a9-4c3b-b663-c1a81f8ea2ac/ec597b6a-dcf1-48ca-a99d-95b3c6304f96.png",
+          "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/ec597b6a-dcf1-48ca-a99d-95b3c6304f96",
         alt: "a",
       },
       title: "Woman",
