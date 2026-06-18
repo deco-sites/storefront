@@ -36,8 +36,8 @@
           }
         },
         {
-          "desktop": "https://assets.decocache.com/storefront/6ee525fa-fcd1-4cbe-be78-eaaa312c0471/1742560219550-1226ef79-c7e0-403c-b716-b6b9af3f2936",
-          "mobile": "https://assets.decocache.com/storefront/9f6167b5-887a-4401-9ac6-1888a9fc32e9/1742560222938-f7ea4cbe-7498-4e64-9205-c741753edfcc",
+          "desktop": "https://decoims.com/storefront/f8546af8-8a10-40e4-99d6-b45adcc53c0b/1742560219550-1226ef79-c7e0-403c-b716-b6b9af3f2936.png",
+          "mobile": "https://decoims.com/storefront/75eabe72-b878-4c7b-9c11-b73f8c427b8f/1742560222938-f7ea4cbe-7498-4e64-9205-c741753edfcc.png",
           "action": {
             "label": "Shop Now!",
             "href": "/women",
@@ -90,7 +90,7 @@
           {
             "href": "/home-and-living",
             "label": "Home & Living",
-            "image": "https://assets.decocache.com/storefront/648ef60d-c193-4fb3-9a36-1929d0676f28/1742560231577-d0433c00-cd26-4638-b519-0cb64b9f82e8"
+            "image": "https://decoims.com/storefront/d7667d81-05d8-4b42-90e1-69da4d8627ab/1742560231577-d0433c00-cd26-4638-b519-0cb64b9f82e8.png"
           }
         ]
       }
@@ -106,8 +106,8 @@
         },
         "description": "<p><span style=\"color: rgb(45, 194, 107);\" data-mce-style=\"color: rgb(45, 194, 107);\">Sign up now to get up to 50% off on your first order. Limited time offer!</span></p>",
         "images": {
-          "desktop": "https://assets.decocache.com/storefront/d4ba070d-c3ba-4a9c-b75f-e01f859063f1/1742560233015-cf96d47f-564f-40da-ad94-7acac5f39327",
-          "mobile": "https://assets.decocache.com/storefront/c023f1c2-74b9-4b3a-a947-ff5de9d02347/1742560234608-4d5c3212-3f75-4d50-89f3-970815748b43"
+          "desktop": "https://decoims.com/storefront/4f4dbcfb-d011-4026-9ce6-b1bf9a2b5d73/1742560233015-cf96d47f-564f-40da-ad94-7acac5f39327.png",
+          "mobile": "https://decoims.com/storefront/983a790e-d0bc-4e1a-97c1-733aeee9e8e3/1742560234608-4d5c3212-3f75-4d50-89f3-970815748b43.png"
         }
       }
     },

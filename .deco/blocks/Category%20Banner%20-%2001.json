@@ -2,8 +2,8 @@
   "banners": [
     {
       "image": {
-        "mobile": "https://assets.decocache.com/storefront/b79aa236-d06d-481f-adf7-2f1076ea6210/1742560270734-91102b71-4832-486a-b683-5f7b06f649af",
-        "desktop": "https://assets.decocache.com/storefront/ca7dd51a-e5ae-491a-b72a-08c07aa4a70d/1742560272355-ec597b6a-dcf1-48ca-a99d-95b3c6304f96"
+        "mobile": "https://decoims.com/storefront/4430197a-bee1-4993-8947-0dbc752f254e/1742560270734-91102b71-4832-486a-b683-5f7b06f649af",
+        "desktop": "https://decoims.com/storefront/853da6d3-d671-42f8-8ead-a0e61eb11f6b/1742560272355-ec597b6a-dcf1-48ca-a99d-95b3c6304f96"
       },
       "title": "Woman",
       "matcher": "/feminino/*",
@@ -11,8 +11,8 @@
     },
     {
       "image": {
-        "mobile": "https://assets.decocache.com/storefront/b79aa236-d06d-481f-adf7-2f1076ea6210/1742560270734-91102b71-4832-486a-b683-5f7b06f649af",
-        "desktop": "https://assets.decocache.com/storefront/ca7dd51a-e5ae-491a-b72a-08c07aa4a70d/1742560272355-ec597b6a-dcf1-48ca-a99d-95b3c6304f96"
+        "mobile": "https://decoims.com/storefront/4430197a-bee1-4993-8947-0dbc752f254e/1742560270734-91102b71-4832-486a-b683-5f7b06f649af",
+        "desktop": "https://decoims.com/storefront/853da6d3-d671-42f8-8ead-a0e61eb11f6b/1742560272355-ec597b6a-dcf1-48ca-a99d-95b3c6304f96"
       },
       "title": "Woman",
       "matcher": "/*",
