@@ -56,9 +56,9 @@ function Gallery({
   banners = [
     {
       mobile:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/b531631b-8523-4feb-ac37-5112873abad2",
+        "https://decoims.com/fila-store/86bdf938-7292-426d-9ba0-876315814e82/b531631b-8523-4feb-ac37-5112873abad2.jpg",
       desktop:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/b531631b-8523-4feb-ac37-5112873abad2",
+        "https://decoims.com/fila-store/86bdf938-7292-426d-9ba0-876315814e82/b531631b-8523-4feb-ac37-5112873abad2.jpg",
       alt: "Fashion",
       href: "/",
     },
@@ -66,23 +66,23 @@ function Gallery({
       alt: "Fashion",
       href: "/",
       mobile:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/1125d938-89ff-4aae-a354-63d4241394a6",
+        "https://decoims.com/fila-store/191a02da-feb6-43bf-a74d-7a0b975e605c/1125d938-89ff-4aae-a354-63d4241394a6.jpg",
       desktop:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/1125d938-89ff-4aae-a354-63d4241394a6",
+        "https://decoims.com/fila-store/191a02da-feb6-43bf-a74d-7a0b975e605c/1125d938-89ff-4aae-a354-63d4241394a6.jpg",
     },
     {
       mobile:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/dd1e2acb-ff80-49f9-8f56-1deac3b7a42d",
+        "https://decoims.com/fila-store/5d8b31bc-5f20-4562-ae4c-63388ab86051/dd1e2acb-ff80-49f9-8f56-1deac3b7a42d.jpg",
       desktop:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/dd1e2acb-ff80-49f9-8f56-1deac3b7a42d",
+        "https://decoims.com/fila-store/5d8b31bc-5f20-4562-ae4c-63388ab86051/dd1e2acb-ff80-49f9-8f56-1deac3b7a42d.jpg",
       href: "/",
       alt: "Fashion",
     },
     {
       mobile:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/0b85ba2d-48b1-4f5b-b619-7f4a7f50b455",
+        "https://decoims.com/fila-store/2bd2c369-910f-4610-935a-29ade1ef7c91/0b85ba2d-48b1-4f5b-b619-7f4a7f50b455.jpg",
       desktop:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/239/0b85ba2d-48b1-4f5b-b619-7f4a7f50b455",
+        "https://decoims.com/fila-store/2bd2c369-910f-4610-935a-29ade1ef7c91/0b85ba2d-48b1-4f5b-b619-7f4a7f50b455.jpg",
       alt: "Fashion",
       href: "/",
     },

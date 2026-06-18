@@ -191,7 +191,7 @@ function Header({
   alerts = [],
   logo = {
     src:
-      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/986b61d4-3847-4867-93c8-b550cb459cc7",
+      "https://decoims.com/lojabagaggio/cfb92c62-d2aa-4d22-a634-8925d17a0586/986b61d4-3847-4867-93c8-b550cb459cc7.png",
     width: 100,
     height: 16,
     alt: "Logo",
