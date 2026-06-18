@@ -1,14 +1,14 @@
 {
   "seo": {
     "type": "website",
-    "image": "https://decoims.com/demo-linkedin/1c5aff02-ecfc-4155-bc09-63463c10d020/1742560188441-74d13a55-4c18-4a5c-8cb4-dcaa27aae923.png",
+    "image": "https://decoims.com/storefront/12136d1d-3d80-4e7c-b9f7-aacf57e7866c/1742560188441-74d13a55-4c18-4a5c-8cb4-dcaa27aae923.png",
     "title": "Storefront",
     "jsonLDs": [],
     "noIndexing": false,
     "description": "Build profitable websites with deco.cx",
     "titleTemplate": "%s | deco.cx",
     "descriptionTemplate": "%s | deco.cx",
-    "favicon": "https://decoims.com/demo-linkedin/1dbb84c6-2768-45d2-9f8b-f49b9cbb6b91/1742560192150-e4024f82-e88f-4cc6-94fe-4215fe8faef3.png"
+    "favicon": "https://decoims.com/storefront/547bb61a-84aa-4bea-95c7-870c748bb8af/1742560192150-e4024f82-e88f-4cc6-94fe-4215fe8faef3.png"
   },
   "theme": {
     "__resolveType": "Deco"

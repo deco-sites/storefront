@@ -36,8 +36,8 @@
           }
         },
         {
-          "desktop": "https://decoims.com/bauducco/1bcbd894-dd0a-4b6b-8825-c0209c630efc/1742560219550-1226ef79-c7e0-403c-b716-b6b9af3f2936.png",
-          "mobile": "https://decoims.com/bauducco/82a5c6f2-d0c4-4b25-b436-de3a16c6fb2b/1742560222938-f7ea4cbe-7498-4e64-9205-c741753edfcc.png",
+          "desktop": "https://decoims.com/storefront/f8546af8-8a10-40e4-99d6-b45adcc53c0b/1742560219550-1226ef79-c7e0-403c-b716-b6b9af3f2936.png",
+          "mobile": "https://decoims.com/storefront/75eabe72-b878-4c7b-9c11-b73f8c427b8f/1742560222938-f7ea4cbe-7498-4e64-9205-c741753edfcc.png",
           "action": {
             "label": "Shop Now!",
             "href": "/women",
@@ -90,7 +90,7 @@
           {
             "href": "/home-and-living",
             "label": "Home & Living",
-            "image": "https://decoims.com/demo-stone/562a780b-824d-4c60-a814-c19f574ab6d1/1742560231577-d0433c00-cd26-4638-b519-0cb64b9f82e8.png"
+            "image": "https://decoims.com/storefront/d7667d81-05d8-4b42-90e1-69da4d8627ab/1742560231577-d0433c00-cd26-4638-b519-0cb64b9f82e8.png"
           }
         ]
       }
@@ -106,8 +106,8 @@
         },
         "description": "<p><span style=\"color: rgb(45, 194, 107);\" data-mce-style=\"color: rgb(45, 194, 107);\">Sign up now to get up to 50% off on your first order. Limited time offer!</span></p>",
         "images": {
-          "desktop": "https://decoims.com/medicinal-store/b6778678-e11e-4451-baa2-eb55a482dcca/1742560233015-cf96d47f-564f-40da-ad94-7acac5f39327.png",
-          "mobile": "https://decoims.com/medicinal-store/3bd9c084-1e53-46e9-8181-35beac39aad0/1742560234608-4d5c3212-3f75-4d50-89f3-970815748b43.png"
+          "desktop": "https://decoims.com/storefront/4f4dbcfb-d011-4026-9ce6-b1bf9a2b5d73/1742560233015-cf96d47f-564f-40da-ad94-7acac5f39327.png",
+          "mobile": "https://decoims.com/storefront/983a790e-d0bc-4e1a-97c1-733aeee9e8e3/1742560234608-4d5c3212-3f75-4d50-89f3-970815748b43.png"
         }
       }
     },

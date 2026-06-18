@@ -2,8 +2,8 @@
   "banners": [
     {
       "image": {
-        "mobile": "https://decoims.com/vicbeaute/791c6d30-5d2e-4785-8102-3025b9f1a782/1742560270734-91102b71-4832-486a-b683-5f7b06f649af",
-        "desktop": "https://decoims.com/vicbeaute/c30cb99a-ebbd-46f9-b012-bcc8e46ce9fb/1742560272355-ec597b6a-dcf1-48ca-a99d-95b3c6304f96"
+        "mobile": "https://decoims.com/storefront/4430197a-bee1-4993-8947-0dbc752f254e/1742560270734-91102b71-4832-486a-b683-5f7b06f649af",
+        "desktop": "https://decoims.com/storefront/853da6d3-d671-42f8-8ead-a0e61eb11f6b/1742560272355-ec597b6a-dcf1-48ca-a99d-95b3c6304f96"
       },
       "title": "Woman",
       "matcher": "/feminino/*",
@@ -11,8 +11,8 @@
     },
     {
       "image": {
-        "mobile": "https://decoims.com/vicbeaute/791c6d30-5d2e-4785-8102-3025b9f1a782/1742560270734-91102b71-4832-486a-b683-5f7b06f649af",
-        "desktop": "https://decoims.com/vicbeaute/c30cb99a-ebbd-46f9-b012-bcc8e46ce9fb/1742560272355-ec597b6a-dcf1-48ca-a99d-95b3c6304f96"
+        "mobile": "https://decoims.com/storefront/4430197a-bee1-4993-8947-0dbc752f254e/1742560270734-91102b71-4832-486a-b683-5f7b06f649af",
+        "desktop": "https://decoims.com/storefront/853da6d3-d671-42f8-8ead-a0e61eb11f6b/1742560272355-ec597b6a-dcf1-48ca-a99d-95b3c6304f96"
       },
       "title": "Woman",
       "matcher": "/*",
