@@ -80,7 +80,7 @@ function ProductInfo({ page }: Props) {
           "w-fit",
         )}
       >
-        {percent} % off
+        {percent}% off
       </span>
 
       {/* Product Name */}
